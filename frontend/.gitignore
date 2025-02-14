@@ -1,0 +1,106 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+turbo.log
+bun.lockb
+
+# Dependency directories
+node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+dist/
+dist-ssr/
+out/
+*.local
+.cache/
+.vite/
+.next/
+.nuxt/
+.svelte-kit/
+.serverless/
+storybook-static/
+coverage/
+build/
+tmp/
+tmp/**
+
+# Environment variables
+.env
+.env.*
+.env.*.local
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# MacOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Linux specific
+*.swp
+*.swo
+*.swn
+.fuse_hidden*
+.nfs*
+.trash/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript
+*.tsbuildinfo
+*.d.ts.map
+
+# Lint & Format
+.eslintcache
+.prettier-cache
+
+# Firebase & Serverless
+.firebase/
+.firebaserc
+.serverless/
+
+# Monorepo & Package Manager
+.yarn/
+.pnp.*
+.yarn-integrity
+.yarn-metadata.json
+.yarn-cache/
+.yarnrc.yml
+node_modules/.cache/
+
+# Lock files
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Docker
+.dockerignore
+docker-compose.yml
+Dockerfile
+.docker/
+
+# CI/CD
+.github/
+.gitlab/
+.circleci/
+.vercel/
+.netlify/

@@ -1,0 +1,102 @@
+[
+    {
+        "uid":"4f46b201-0310-4eea-98f4-152f573b539e",
+        "name":"강정남",
+        "kakao_email":"gimminjae@ju.org",
+        "phone_number":"011-268-6696",
+        "birth_date":"1973-09-17",
+        "full_address":"인천광역시 송파구 반포대길 (광수이김마을)",
+        "address_detail":"optio 79",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"1d3fdd8d-dfe4-4878-bba8-3bcf867ce614",
+        "name":"최영수",
+        "kakao_email":"lgim@live.com",
+        "phone_number":"041-047-4405",
+        "birth_date":"2004-05-16",
+        "full_address":"충청남도 보령시 백제고분거리",
+        "address_detail":"eligendi 5",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"69030934-3169-4da6-a7e9-2a410e66b40a",
+        "name":"신하은",
+        "kakao_email":"sunjai@hanmail.net",
+        "phone_number":"061-438-3085",
+        "birth_date":"1967-08-18",
+        "full_address":"대구광역시 용산구 서초대로 (예진하이리)",
+        "address_detail":"sit 49",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"bf002247-a5c2-4fad-8228-4878b927e22a",
+        "name":"이성민",
+        "kakao_email":"ii@gimyuni.org",
+        "phone_number":"055-682-2350",
+        "birth_date":"1970-06-04",
+        "full_address":"경기도 수원시 서초중앙길",
+        "address_detail":"quae 48",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"ea5d1f7a-d3e0-44a8-9c55-f0d28d782dfc",
+        "name":"김진호",
+        "kakao_email":"minjunsim@ii.org",
+        "phone_number":"019-754-7182",
+        "birth_date":"1973-08-03",
+        "full_address":"전라북도 용인시 선릉7가",
+        "address_detail":"vel 64",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"0a28b172-be03-425a-8f26-d5445be391ef",
+        "name":"이시우",
+        "kakao_email":"yeongho19@daum.net",
+        "phone_number":"063-285-0516",
+        "birth_date":"2005-07-19",
+        "full_address":"경상북도 수원시 학동거리 (민재박면)",
+        "address_detail":"voluptates 49",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"434fcad7-4dc3-4eba-a556-887b77c8507c",
+        "name":"김예준",
+        "kakao_email":"doyun50@gmail.com",
+        "phone_number":"043-625-1558",
+        "birth_date":"2003-11-26",
+        "full_address":"대구광역시 서대문구 논현로 (정수송읍)",
+        "address_detail":"nostrum 58",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"9f6ab5d7-9455-4aa9-a336-3a82d0b93b44",
+        "name":"류지현",
+        "kakao_email":"osubin@gmail.com",
+        "phone_number":"053-172-8594",
+        "birth_date":"1995-09-02",
+        "full_address":"서울특별시 서구 개포99가",
+        "address_detail":"quam 2",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"90497380-0fe0-4bb2-911d-4c4cd3ff51f0",
+        "name":"김광수",
+        "kakao_email":"minseoson@hotmail.com",
+        "phone_number":"041-171-0658",
+        "birth_date":"1985-12-21",
+        "full_address":"울산광역시 성동구 가락703가 (영일이동)",
+        "address_detail":"natus 72",
+        "create_date":"2025-02-09 04:06:30"
+    },
+    {
+        "uid":"a79b30bb-2c85-40e8-a2f1-607877c42b91",
+        "name":"이정숙",
+        "kakao_email":"jeongho68@hanmail.net",
+        "phone_number":"053-418-9249",
+        "birth_date":"1969-06-08",
+        "full_address":"강원도 안산시 상록구 언주316로 (정식김리)",
+        "address_detail":"id 25",
+        "create_date":"2025-02-09 04:06:30"
+    }
+]

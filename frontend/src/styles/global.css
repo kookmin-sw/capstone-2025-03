@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-Thin.woff') format('woff');
+    font-weight: 100; /* Thin */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-ExtraLight.woff') format('woff');
+    font-weight: 200; /* ExtraLight */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-Light.woff') format('woff');
+    font-weight: 300; /* Light */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-Regular.woff') format('woff');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-Medium.woff') format('woff');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-SemiBold.woff') format('woff');
+    font-weight: 600; /* SemiBold */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-Bold.woff') format('woff');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-ExtraBold.woff') format('woff');
+    font-weight: 800; /* ExtraBold */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('./assets/fonts/pretendard/Pretendard-Black.woff') format('woff');
+    font-weight: 900; /* Black */
+    font-style: normal;
+  }
+  
+  /* Body 스타일 */
+  body {
+    font-family: 'Pretendard', sans-serif;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+}
+
+/* 1280px 기준으로 설정: 1rem = 10px */
+html {
+    font-size: 10px;
+    /* 1rem = 10px */
+}
+
+/* 더 작은 데스크탑 (~ 1280px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    html {
+        font-size: 6px;
+        /* 1rem = 9px */
+    }
+}
+
+/* 작은 데스크탑 (~ 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    html {
+        font-size: 8px;
+        /* 1rem = 10px */
+    }
+}
+
+/* 보통 데스크탑 (1281px ~ 1440px) */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    html {
+        font-size: 10px;
+        /* 1rem = 11px */
+    }
+}
+
+/* 큰 데스크탑 (1441px ~ 1920px, Full HD) */
+@media (min-width: 1441px) and (max-width: 1920px) {
+    html {
+        font-size: 11px;
+        /* 1rem = 12px */
+    }
+}
+
+/* 초대형 데스크탑 (1921px ~ 2560px, QHD/UHD) */
+@media (min-width: 1921px) and (max-width: 2560px) {
+    html {
+        font-size: 12px;
+        /* 1rem = 13px */
+    }
+}
+
+/* 초고해상도 (2561px 이상, 4K/UHD 이상) */
+@media (min-width: 2561px) {
+    html {
+        font-size: 13px;
+        /* 1rem = 14px */
+    }
+}

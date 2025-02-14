@@ -1,0 +1,12 @@
+.page{
+    background-color: #18171D;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    color: #ffffff;
+    font-size: 3rem;
+}
