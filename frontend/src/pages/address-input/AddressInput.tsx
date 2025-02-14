@@ -1,12 +1,15 @@
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AddressInput() {
   const navigate = useNavigate();
   const location = useLocation();
   const [address] = useState(location.state?.address || "");
-  const [detailAddress, setDetailAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState<string>("");
+  const [visibleHeight, setVisibleHeight] = useState<number>(
+    window.innerHeight
+  );
 
   const handleOpenSearch = () => {
     navigate("/address-search");
@@ -14,6 +17,18 @@ export default function AddressInput() {
 
   // 버튼 비활성화 조건
   const isButtonDisabled = !address || !detailAddress;
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.visualViewport) {
+        setVisibleHeight(window.visualViewport.height);
+      }
+    };
+    window.visualViewport?.addEventListener("resize", handleResize);
+    return () => {
+      window.visualViewport?.addEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Flex
@@ -43,12 +58,7 @@ export default function AddressInput() {
 
       {/* 상세 주소 */}
       {address && (
-        <Flex
-          direction="column"
-          width="100%"
-          mt="1rem"
-          pb="4rem"
-        >
+        <Flex direction="column" width="100%" mt="1rem" pb="4rem">
           <Text color="#747477" fontSize="1.4rem" mb="0.5rem">
             상세 주소
           </Text>
@@ -100,7 +110,8 @@ export default function AddressInput() {
 
       {/* 확인 */}
       <Button
-        width="100%"
+        position="fixed"
+        width="calc(100% - 4rem)"
         height="6rem"
         bg="#00A36C"
         color="white"
@@ -109,6 +120,7 @@ export default function AddressInput() {
         fontWeight="bold"
         bottom="9rem"
         paddingX="2rem"
+        top={`calc(${visibleHeight}px - 6rem - 2rem)`}
         _active={{ bg: "#154d3a" }}
         disabled={isButtonDisabled}
       >

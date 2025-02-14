@@ -2,6 +2,8 @@ import axios from "axios";
 import { UserModel } from "../models/UserModel";
 
 const API_BASE_URL = "https://api.example.com/users";
+const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
 /**
  * 사용자를 생성하고 서버에 저장합니다.
@@ -22,7 +24,9 @@ export const createUserInService = async (user: UserModel): Promise<void> => {
  * @param {string} userId - 가져올 사용자의 ID
  * @returns {Promise<UserModel | null>}
  */
-export const getUserInService = async (userId: string): Promise<UserModel | null> => {
+export const getUserInService = async (
+  userId: string
+): Promise<UserModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${userId}`);
     return UserModel.fromJson(response.data);
@@ -38,7 +42,10 @@ export const getUserInService = async (userId: string): Promise<UserModel | null
  * @param {Partial<UserModel>} updatedData - 업데이트할 데이터 객체
  * @returns {Promise<void>}
  */
-export const updateUserInService = async (userId: string, updatedData: Partial<UserModel>): Promise<void> => {
+export const updateUserInService = async (
+  userId: string,
+  updatedData: Partial<UserModel>
+): Promise<void> => {
   try {
     await axios.put(`${API_BASE_URL}/${userId}`, updatedData);
   } catch (error) {
@@ -67,12 +74,62 @@ export const deleteUserInService = async (userId: string): Promise<void> => {
  * @param {string} kakaoEmail - 카카오 이메일
  * @returns {Promise<UserModel | null>}
  */
-export const loginUserInService = async (uid: string, kakaoEmail: string): Promise<UserModel | null> => {
+export const loginUserInService = async (
+  uid: string,
+  kakaoEmail: string
+): Promise<UserModel | null> => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/login`, { uid, kakaoEmail });
+    const response = await axios.post(`${API_BASE_URL}/login`, {
+      uid,
+      kakaoEmail,
+    });
     return UserModel.fromJson(response.data);
   } catch (error) {
     console.error("Error logging in user:", error);
     return null;
+  }
+};
+
+// 액세스 토큰 요청 함수
+export const getKakaoAccessToken = async (code: string) => {
+  try {
+    const response = await axios.post(
+      "https://kauth.kakao.com/oauth/token",
+      null,
+      {
+        params: {
+          grant_type: "authorization_code",
+          client_id: KAKAO_REST_API_KEY,
+          redirect_uri: REDIRECT_URI,
+          code: code,
+        },
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+      }
+    );
+    return response.data.access_token;
+  } catch (error) {
+    console.log("액세스 토큰 요청 오류: ", error);
+    throw error;
+  }
+};
+
+// 사용자 정보 요청 함수
+export const getKakaoUserInfo = async (accessToken: string) => {
+  try {
+    const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return {
+      nickname: response.data.properties.nickname,
+      email: response.data.kakao_account_email || "이메일 없음",
+    };
+  } catch (error) {
+    console.error("카카오 사용자 정보 요청 오류:", error);
+    throw error;
   }
 };

@@ -11,7 +11,7 @@ const routes = Object.keys(pages).map((path) => {
     .replace(/\[(.*?)\]/g, ":$1"); // 동적 라우팅 처리
 
   return {
-    path: routePath === "/main" ? "/" : routePath, // /main은 루트(/)로 설정
+    path: routePath === "/home" ? "/" : routePath, // /main은 루트(/)로 설정
     Component: lazy(pages[path] as any), // Lazy loading 적용
   };
 });

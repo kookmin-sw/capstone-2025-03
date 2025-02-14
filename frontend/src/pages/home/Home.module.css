@@ -1,0 +1,85 @@
+.page {
+    height: 100vh;
+    background-color: #101012;
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    flex-grow: 1;
+    padding: 0 2rem;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.section::-webkit-scrollbar {
+    display: none;
+}
+
+.contentContainer {
+    background-color: #18171D;
+    border-radius: 1.2rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.blank {
+    flex-grow: 1;
+}
+
+.findPackageButton {
+    padding: 0.8rem 1.2rem;
+    background-color: #00A36C;
+    font-size: 1.4rem;
+    border-radius: 0.8rem;
+}
+
+.bottomContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.icon {
+    width: 2.4rem;
+    margin-right: 0.8rem;
+}
+
+.description {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.descriptionSpan {
+    font-size: 1.2rem;
+}
+
+.packageListView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 10rem;
+}
+
+.listViewTitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}

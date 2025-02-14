@@ -1,42 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button, Flex, Text } from "@chakra-ui/react";
+import {
+  getKakaoAccessToken,
+  getKakaoUserInfo,
+} from "@/src/services/userService";
+import InputField from "./components/InputField";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function NameAndBirthDayInput() {
+  const [searchParams] = useSearchParams();
+  // const [email, setEmail] = useState<string>();
   const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
   const [name, setName] = useState<string>("");
   const [phoneNum, setPhoneNum] = useState<string>("");
   const [birth, setBirth] = useState<string>("");
+  const [visibleHeight, setVisibleHeight] = useState<number>(
+    window.innerHeight
+  );
+  const code = searchParams.get("code");
+  const navigate = useNavigate();
 
-  // 키보드 높이 측정
-  const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
+  // 버튼 비활성화 조건
+  const whenNameisNull = !name;
 
-    const navigate = useNavigate();
-
+  // 액세스 토큰으로 사용자 정보 가져옴
   useEffect(() => {
+    if (code) {
+      getKakaoAccessToken(code)
+        .then((accessToken) => {
+          console.log("액세스 토큰: ", accessToken);
+
+          return getKakaoUserInfo(accessToken);
+        })
+        .then((response) => {
+          console.log("사용자 정보: ", response);
+          setName(response.nickname);
+          // setEmail(response.email);
+        })
+        .catch((error) => console.error("카카오 로그인 오류:", error));
+    }
     const handleResize = () => {
       if (window.visualViewport) {
-        const viewportHeight = window.visualViewport.height;
-        const keyboardVisible = viewportHeight < window.innerHeight;
-        const newKeyboardHeight = window.innerHeight - viewportHeight;
-
-        if (keyboardVisible) {
-          setKeyboardHeight(newKeyboardHeight);
-        } else {
-          setKeyboardHeight(0);
-        }
+        setVisibleHeight(window.visualViewport.height);
       }
     };
-
     window.visualViewport?.addEventListener("resize", handleResize);
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
-  }, []);
+  }, [code]);
 
-  // 버튼 비활성화 조건
-  const whenNameisNull = !name;
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -86,114 +100,58 @@ export default function NameAndBirthDayInput() {
       </Text>
 
       {/* 입력 필드 */}
-
-      <Flex direction="column" width="100%">
-        {/* 생년월일 입력 (step 3) */}
-        {step === 3 && (
-          <>
-            {birth && (
-              <Text color="#747477" fontSize="1.4rem" mb="0.5rem">
-                생년월일
-              </Text>
-            )}
-            <Input
-              height="auto"
-              placeholder="생년월일"
-              variant="flushed"
-              color="white"
-              _placeholder={{ color: "#46454a" }}
-              width="100%"
-              fontSize="2.2rem"
-              pb="1rem"
-              _focus={{ borderColor: "#00A36C" }}
-              value={birth}
-              onChange={handleBirthChange}
-              maxLength={10}
-            />
-          </>
-        )}
-      </Flex>
-      <Flex direction="column" width="100%" mt={step === 3 ? "4rem" : "0rem"}>
-        {/* 휴대폰 입력 (step 2) */}
-        {(step === 2 || step === 3) && (
-          <>
-            {phoneNum && (
-              <Text color="#747477" fontSize="1.4rem" mb="0.5rem">
-                휴대폰 번호
-              </Text>
-            )}
-            <Input
-              height="auto"
-              placeholder="휴대폰 번호"
-              variant="flushed"
-              color="white"
-              _placeholder={{ color: "#46454a" }}
-              width="100%"
-              fontSize="2.2rem"
-              pb="1rem"
-              _focus={{
-                borderColor: "#00A36C",
-              }}
-              value={phoneNum}
-              onChange={(e) => {
-                const newValue = e.target.value.replace(/[^0-9]/g, "");
-                setPhoneNum(newValue);
-                if (newValue.length === 11) {
-                  setStep(3);
-                }
-              }}
-              maxLength={11}
-            />
-          </>
-        )}
-      </Flex>
-      <Flex direction="column" width="100%" mt={step >= 2 ? "4rem" : "0rem"}>
-        {/* 이름 입력 (step 1) */}
-        {step === 2 ||
-          (step === 3 && (
-            <Text color="#747477" fontSize="1.4rem" mb="0.5rem">
-              이름
-            </Text>
-          ))}
-        <Input
-          height="auto"
-          placeholder="이름"
-          variant="flushed"
-          color="white"
-          _placeholder={{ color: "#46454a" }}
-          width="100%"
-          fontSize="2.2rem"
-          pb="1rem"
-          _focus={{
-            borderColor: "#00A36C",
-          }}
-          value={name}
-          //   onFocus={handleFocus}
-          //   onBlur={handleBlur}
-          onChange={(e) => setName(e.target.value)}
+      {step === 3 && (
+        <InputField
+          label="생년월일"
+          placeholder="생년월일"
+          value={birth}
+          onChange={handleBirthChange}
+          maxLength={10}
         />
-      </Flex>
+      )}
+
+      {(step === 2 || step === 3) && (
+        <InputField
+          label="휴대폰 번호"
+          placeholder="휴대폰 번호"
+          value={phoneNum}
+          onChange={(e) => {
+            const newValue = e.target.value.replace(/[^0-9]/g, "");
+            setPhoneNum(newValue);
+            if (newValue.length === 11) setStep(3);
+          }}
+          maxLength={11}
+        />
+      )}
+
+      <InputField
+        label="이름"
+        placeholder="이름"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
       <Flex flexGrow="1" />
 
       {step === 1 || (step !== 2 && birth.length >= 10) ? (
         <Button
-          width="100%"
+          position="fixed"
+          width="calc(100% - 4rem)"
           height="6rem"
           bg="#00A36C"
           color="white"
           borderRadius="1rem"
           fontSize="1.8rem"
           fontWeight="bold"
-          bottom={`${keyboardHeight + 90}px`} // 맞겠지
-          paddingX="2rem"
+          top={`calc(${visibleHeight}px - 6rem - 2rem)`} // 맞겠지
+
           _active={{ bg: "#154d3a" }}
           disabled={whenNameisNull}
           onClick={() => {
             if (step === 1) {
               setStep(2);
             } else if (step === 3) {
-                navigate("/address-input")
+              navigate("/address-input");
             }
           }}
         >
