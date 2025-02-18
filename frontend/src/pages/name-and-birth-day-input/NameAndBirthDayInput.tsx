@@ -4,7 +4,9 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import {
   getKakaoAccessToken,
   getKakaoUserInfo,
+  registerUser,
 } from "@/src/services/userService";
+
 import InputField from "./components/InputField";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -50,7 +52,7 @@ export default function NameAndBirthDayInput() {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
   }, [code]);
-
+  console.log(name);
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -68,6 +70,20 @@ export default function NameAndBirthDayInput() {
     }
 
     setBirth(formattedValue);
+  };
+
+  const handleRegister = async () => {
+    try {
+      const requestData = {
+        username: name,
+        email: null,
+        password: "1234",
+      };
+      const responseData = registerUser(requestData);
+      console.log(responseData)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -144,13 +160,13 @@ export default function NameAndBirthDayInput() {
           fontSize="1.8rem"
           fontWeight="bold"
           top={`calc(${visibleHeight}px - 6rem - 2rem)`} // 맞겠지
-
           _active={{ bg: "#154d3a" }}
           disabled={whenNameisNull}
           onClick={() => {
             if (step === 1) {
               setStep(2);
             } else if (step === 3) {
+              handleRegister();
               navigate("/address-input");
             }
           }}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UserModel } from "../models/UserModel";
 
-const API_BASE_URL = "https://api.example.com/users";
+const API_BASE_URL = "https://restart-s4b8.onrender.com";
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
@@ -104,7 +104,7 @@ export const getKakaoAccessToken = async (code: string) => {
           code: code,
         },
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
       }
     );
@@ -130,6 +130,17 @@ export const getKakaoUserInfo = async (accessToken: string) => {
     };
   } catch (error) {
     console.error("카카오 사용자 정보 요청 오류:", error);
+    throw error;
+  }
+};
+
+export const registerUser = async (requestData: any) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/users/register/`, requestData);
+
+    return response.data;
+  } catch (error) {
+    console.error("회원가입 오류 : ", error);
     throw error;
   }
 };

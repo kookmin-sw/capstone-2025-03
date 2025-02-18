@@ -15,6 +15,10 @@ export default function AddressInput() {
     navigate("/address-search");
   };
 
+  const handleConfirm = () => {
+    navigate("/home")
+  }
+
   // 버튼 비활성화 조건
   const isButtonDisabled = !address || !detailAddress;
 
@@ -29,6 +33,8 @@ export default function AddressInput() {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
   }, []);
+
+
 
   return (
     <Flex
@@ -123,6 +129,7 @@ export default function AddressInput() {
         top={`calc(${visibleHeight}px - 6rem - 2rem)`}
         _active={{ bg: "#154d3a" }}
         disabled={isButtonDisabled}
+        onClick={handleConfirm}
       >
         확인
       </Button>

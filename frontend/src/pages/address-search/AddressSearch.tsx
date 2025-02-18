@@ -27,7 +27,6 @@ export default function AddressSearch() {
       if (postcodeRef.current) {
         const postcode = new window.daum.Postcode({
           oncomplete: (data: { address: string }) => {
-            console.log("선택한 주소:", data.address);
             navigate("/address-input", { state: { address: data.address } });
           },
           width: "100%",
@@ -52,22 +51,6 @@ export default function AddressSearch() {
       left="0"
       overflow="hidden"
     >
-      {/* <Box>
-      <Button
-        position="absolute"
-        top="3.3rem"
-        left="0rem"
-        size="lg"
-        color="white"
-        bg="white"
-        onClick={() => navigate(-1)}
-      >
-        <Image src="src/assets/images/chevron-left.svg" boxSize="30px" />
-      </Button>
-      </Box>
-      <Text position="absolute" fontWeight="bold" fontSize="24px" top="3.3rem">
-        주소 검색
-      </Text> */}
       <Flex
         direction="row"
         align="center"
