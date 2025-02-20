@@ -125,7 +125,9 @@ export const getKakaoUserInfo = async (accessToken: string) => {
     });
 
     return {
+      kakaoId: response.data.id,
       nickname: response.data.properties.nickname,
+      profileImage: response.data.properties.profile_image,
       email: response.data.kakao_account_email || "이메일 없음",
     };
   } catch (error) {

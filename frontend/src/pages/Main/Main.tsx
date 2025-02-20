@@ -25,7 +25,7 @@ export default function Main() {
   return (
     <Flex
       backgroundColor="#18171D"
-      height="125vh"
+      height="100vh"
       width="100vw"
       direction="column"
     >

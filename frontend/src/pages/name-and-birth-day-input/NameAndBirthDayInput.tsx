@@ -32,7 +32,7 @@ export default function NameAndBirthDayInput() {
       getKakaoAccessToken(code)
         .then((accessToken) => {
           console.log("액세스 토큰: ", accessToken);
-
+          
           return getKakaoUserInfo(accessToken);
         })
         .then((response) => {
@@ -81,6 +81,7 @@ export default function NameAndBirthDayInput() {
       };
       const responseData = registerUser(requestData);
       console.log(responseData)
+      console.log("dddd")
     } catch (error) {
       console.log(error);
     }
