@@ -1,9 +1,10 @@
 import { ProductModel } from "./ProductModel";
+import { CategoryModel } from "./CategoryModel";
 
 export class PackageModel {
     id: string | null;
     industryId: string | null;
-    categoryIds: string[];
+    categories: CategoryModel[];
     products: ProductModel[];
     name: string | null;
     thumbnail: string | null;
@@ -11,21 +12,21 @@ export class PackageModel {
     constructor({
         id = null,
         industryId = null,
-        categoryIds = [],
+        categories = [],
         products = [],
         name = null,
         thumbnail = null,
     }: {
         id?: string | null;
         industryId?: string | null;
-        categoryIds?: string[];
+        categories?: CategoryModel[];
         products?: ProductModel[];
         name?: string | null;
         thumbnail?: string | null;
     }) {
         this.id = id;
         this.industryId = industryId;
-        this.categoryIds = categoryIds;
+        this.categories = categories;
         this.products = products;
         this.name = name;
         this.thumbnail = thumbnail;
@@ -35,7 +36,7 @@ export class PackageModel {
         return new PackageModel({
             id: jsonData.id,
             industryId: jsonData.industryId,
-            categoryIds: jsonData.categoryIds || [],
+            categories: (jsonData.categories || []).map((c: any) => CategoryModel.fromJson(c)),
             products: (jsonData.products || []).map((p: any) => ProductModel.fromJson(p)),
             name: jsonData.name,
             thumbnail: jsonData.thumbnail,
@@ -46,7 +47,7 @@ export class PackageModel {
         return {
             id: this.id,
             industryId: this.industryId,
-            categoryIds: this.categoryIds,
+            categories: this.categories.map(c => c.toJson()),
             products: this.products.map(p => p.toJson()),
             name: this.name,
             thumbnail: this.thumbnail,
