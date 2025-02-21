@@ -16,13 +16,11 @@ def read_item(item_id: int):
 def create_item(item: Item):
     return {"name": item.name, "price": item.price, "industry": item.industry}
 
-# AI 모델 호출을 위한 엔드포인트
 class AIRequest(BaseModel):
     input_data: str
 
 @app.post("/predict")
 def predict(request: AIRequest):
-    # 입력 문자열을 쉼표로 분리하고, 각 항목을 공백 제거하여 할당
     parts = [part.strip() for part in request.input_data.split(",")]
     if len(parts) < 5:
         return {"error": "입력 데이터 형식이 올바르지 않습니다."}
