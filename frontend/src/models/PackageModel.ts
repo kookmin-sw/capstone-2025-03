@@ -1,4 +1,4 @@
-export class PackageModel {
+export default class PackageModel {
     id: number | null;
     industryId: number | null;
     categoryIds: number[];

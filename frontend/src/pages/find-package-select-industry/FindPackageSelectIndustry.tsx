@@ -1,29 +1,24 @@
 import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./FindPackageSelectIndustry.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
-import BreadImage from "../../assets/images/industry/bread.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import IndustryModel from "@/src/models/IndustryModel";
+import { getIndustryData } from "@/src/utils/getIndustryData";
+import business from "../../assets/images/industry_icons/business.png";
 
 export default function FindPackageSelectIndustry() {
     const navigate = useNavigate();
-    const [currentId, setCurrentId] = useState('');
-    const industries: { id: string, icon: string, name: string }[] = [
-        { id: '0', icon: BreadImage, name: "제과" },
-        { id: '1', icon: BreadImage, name: "제과" },
-        { id: '2', icon: BreadImage, name: "제과" },
-        { id: '3', icon: BreadImage, name: "제과" },
-        { id: '4', icon: BreadImage, name: "제과" },
-        { id: '5', icon: BreadImage, name: "제과" },
-        { id: '6', icon: BreadImage, name: "제과" },
-        { id: '7', icon: BreadImage, name: "제과" },
-    ];
-    const handleItemClick = (id: string) => {
+    const [currentId, setCurrentId] = useState<number | null>(0);
+    const industries: IndustryModel[] = getIndustryData();
+    const handleItemClick = (id: number | null) => {
         setCurrentId(id);
     }
     const handleConfirmButtonClick = () => {
+        if (currentId === null) return;
+
         const selectedIndustry = industries.find((item) => item.id === currentId);
-        navigate('/find-package-recommend', { state: { industry: selectedIndustry} });
+        navigate('/find-package-recommend', { state: { industry: selectedIndustry } });
     }
 
     return (
@@ -40,7 +35,7 @@ export default function FindPackageSelectIndustry() {
                     {industries.map((industry, index) => {
                         return (
                             <div key={index} className={styles.industryItem} onClick={() => { handleItemClick(industry.id) }} style={{ border: `solid 1px ${(industry.id === currentId) ? '#00A36C' : '#7F7F89'}` }}>
-                                <img className={styles.industryItemIcon} src={industry.icon} />
+                                <img className={styles.industryItemIcon} src={industry.icon ?? business} />
                                 <p className={styles.industryItemText} style={{ color: industry.id === currentId ? '#00A36C' : '#ffffff' }}>
                                     {industry.name}
                                 </p>
@@ -51,7 +46,7 @@ export default function FindPackageSelectIndustry() {
 
             </div>
             <div className={styles.buttonContainer}>
-                <DefaultButton event={handleConfirmButtonClick} isActive={currentId !== ''} />
+                <DefaultButton event={handleConfirmButtonClick} isActive={currentId !== 0} />
             </div>
         </div >
     );

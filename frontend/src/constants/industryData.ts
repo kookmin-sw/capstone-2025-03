@@ -1,32 +1,60 @@
-import { IndustryModel } from "../models/IndustryModel";
+import IndustryModel from "../models/IndustryModel";
+import food from "../assets/images/industry_icons/food.png";
+import beauty from "../assets/images/industry_icons/beauty.png";
+import overseasTrade from "../assets/images/industry_icons/overseas_trade.png";
+import lessonShop from "../assets/images/industry_icons/lesson_shop.png";
+import cafe from "../assets/images/industry_icons/cafe.png";
+import streetVendor from "../assets/images/industry_icons/street_vendor.png";
+import entertainment from "../assets/images/industry_icons/entertainment.png";
+import academy from "../assets/images/industry_icons/academy.png";
+import convenienceStore from "../assets/images/industry_icons/convenience_store.png";
+import delivery from "../assets/images/industry_icons/delivery.png";
+import hotel from "../assets/images/industry_icons/hotel.png";
+import dessert from "../assets/images/industry_icons/dessert.png";
+import hair from "../assets/images/industry_icons/hair.png";
+import business from "../assets/images/industry_icons/business.png";
+import techStartup from "../assets/images/industry_icons/tech_startup.png";
+import study from "../assets/images/industry_icons/study.png";
+import bakery from "../assets/images/industry_icons/bakery.png";
+import distribution from "../assets/images/industry_icons/distribution.png";
+import unmannedStartup from "../assets/images/industry_icons/unmanned_startup.png";
+import foodTruck from "../assets/images/industry_icons/food_truck.png";
+import nail from "../assets/images/industry_icons/nail.png";
+import professionalService from "../assets/images/industry_icons/professional_service.png";
+import startup from "../assets/images/industry_icons/startup.png";
+import shoppingMall from "../assets/images/industry_icons/shopping_mall.png";
+import petBusiness from "../assets/images/industry_icons/pet_business.png";
+import health from "../assets/images/industry_icons/health.png";
+import leisure from "../assets/images/industry_icons/leisure.png";
+import screen from "../assets/images/industry_icons/screen.png";
 
 export const industryData: IndustryModel[] = [
-    new IndustryModel({ id: "1", icon: "icon-food.png", name: "음식" }),
-    new IndustryModel({ id: "2", icon: "icon-beauty.png", name: "뷰티" }),
-    new IndustryModel({ id: "3", icon: "icon-overseas.png", name: "해외장사" }),
-    new IndustryModel({ id: "4", icon: "icon-lesson.png", name: "레슨샵" }),
-    new IndustryModel({ id: "5", icon: "icon-cafe.png", name: "카페" }),
-    new IndustryModel({ id: "6", icon: "icon-street.png", name: "노점" }),
-    new IndustryModel({ id: "7", icon: "icon-entertainment.png", name: "오락" }),
-    new IndustryModel({ id: "8", icon: "icon-education.png", name: "학원/교육" }),
-    new IndustryModel({ id: "9", icon: "icon-convenience.png", name: "편의점" }),
-    new IndustryModel({ id: "10", icon: "icon-delivery.png", name: "배달" }),
-    new IndustryModel({ id: "11", icon: "icon-lodging.png", name: "숙박업" }),
-    new IndustryModel({ id: "12", icon: "icon-dessert.png", name: "디저트" }),
-    new IndustryModel({ id: "13", icon: "icon-hair.png", name: "미용" }),
-    new IndustryModel({ id: "14", icon: "icon-business.png", name: "사업" }),
-    new IndustryModel({ id: "15", icon: "icon-tech.png", name: "기술창업" }),
-    new IndustryModel({ id: "16", icon: "icon-study.png", name: "스터디" }),
-    new IndustryModel({ id: "17", icon: "icon-baking.png", name: "제과" }),
-    new IndustryModel({ id: "18", icon: "icon-distribution.png", name: "유통업" }),
-    new IndustryModel({ id: "19", icon: "icon-unmanned.png", name: "무인 창업" }),
-    new IndustryModel({ id: "20", icon: "icon-foodtruck.png", name: "푸드트럭" }),
-    new IndustryModel({ id: "21", icon: "icon-nail.png", name: "네일" }),
-    new IndustryModel({ id: "22", icon: "icon-service.png", name: "전문서비스" }),
-    new IndustryModel({ id: "23", icon: "icon-startup.png", name: "스타트업/1인기업" }),
-    new IndustryModel({ id: "24", icon: "icon-shopping.png", name: "스마트스토어/쇼핑몰" }),
-    new IndustryModel({ id: "25", icon: "icon-pet.png", name: "애견샵/반려동물" }),
-    new IndustryModel({ id: "26", icon: "icon-gym.png", name: "헬스장" }),
-    new IndustryModel({ id: "27", icon: "icon-leisure.png", name: "레저" }),
-    new IndustryModel({ id: "28", icon: "icon-screen.png", name: "스크린" })
+    new IndustryModel({ id: 1, icon: food, name: "음식" }),
+    new IndustryModel({ id: 2, icon: beauty, name: "뷰티" }),
+    new IndustryModel({ id: 3, icon: overseasTrade, name: "해외장사" }),
+    new IndustryModel({ id: 4, icon: lessonShop, name: "레슨샵" }),
+    new IndustryModel({ id: 5, icon: cafe, name: "카페" }),
+    new IndustryModel({ id: 6, icon: streetVendor, name: "노점" }),
+    new IndustryModel({ id: 7, icon: entertainment, name: "오락" }),
+    new IndustryModel({ id: 8, icon: academy, name: "학원/교육" }),
+    new IndustryModel({ id: 9, icon: convenienceStore, name: "편의점" }),
+    new IndustryModel({ id: 10, icon: delivery, name: "배달" }),
+    new IndustryModel({ id: 11, icon: hotel, name: "숙박업" }),
+    new IndustryModel({ id: 12, icon: dessert, name: "디저트" }),
+    new IndustryModel({ id: 13, icon: hair, name: "미용" }),
+    new IndustryModel({ id: 14, icon: business, name: "사업" }),
+    new IndustryModel({ id: 15, icon: techStartup, name: "기술창업" }),
+    new IndustryModel({ id: 16, icon: study, name: "스터디" }),
+    new IndustryModel({ id: 17, icon: bakery, name: "제과" }),
+    new IndustryModel({ id: 18, icon: distribution, name: "유통업" }),
+    new IndustryModel({ id: 19, icon: unmannedStartup, name: "무인 창업" }),
+    new IndustryModel({ id: 20, icon: foodTruck, name: "푸드트럭" }),
+    new IndustryModel({ id: 21, icon: nail, name: "네일" }),
+    new IndustryModel({ id: 22, icon: professionalService, name: "전문서비스" }),
+    new IndustryModel({ id: 23, icon: startup, name: "스타트업/1인기업" }),
+    new IndustryModel({ id: 24, icon: shoppingMall, name: "스마트스토어/쇼핑몰" }),
+    new IndustryModel({ id: 25, icon: petBusiness, name: "애견샵/반려동물" }),
+    new IndustryModel({ id: 26, icon: health, name: "헬스장" }),
+    new IndustryModel({ id: 27, icon: leisure, name: "레저" }),
+    new IndustryModel({ id: 28, icon: screen, name: "스크린" })
 ];

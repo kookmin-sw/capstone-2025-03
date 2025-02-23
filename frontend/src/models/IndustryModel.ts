@@ -1,4 +1,4 @@
-export class IndustryModel {
+export default class IndustryModel {
     id: number | null;
     icon: string | null;
     name: string | null;

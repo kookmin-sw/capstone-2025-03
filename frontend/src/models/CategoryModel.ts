@@ -1,5 +1,4 @@
-
-export class CategoryModel {
+export default class CategoryModel {
     id: number | null;
     industryIds: number[];
     thumbnail: string | null;

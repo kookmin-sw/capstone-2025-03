@@ -1,4 +1,4 @@
-export class ProductModel {
+export default class ProductModel {
     id: number | null;
     images: string[];
     categoryId: number | null;
