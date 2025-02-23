@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CompleteIconImage from "../../assets/images/section/check.png";
 
 const Section = styled.div`
+    background-color: #18171D;
     width: 100%;
     height: 100vh;
     display: flex;

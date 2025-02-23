@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Spinner } from "@chakra-ui/react"
 
 const Section = styled.div`
+    background-color: #18171D;
     width: 100%;
     height: 100vh;
     display: flex;
