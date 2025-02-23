@@ -1,15 +1,15 @@
 export class ProductModel {
-    id: string | null;
+    id: number | null;
     images: string[];
-    categoryId: string | null;
+    categoryId: number | null;
     name: string | null;
     grade: string | null;
     quantity: number;
     price: number;
-    sellerId: string | null;
+    sellerId: number | null;
     uploadDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
     saleStatus: string | null;
-    buyerId: string | null;
+    buyerId: number | null;
     purchaseDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
 
     constructor({
@@ -26,17 +26,17 @@ export class ProductModel {
         buyerId = null,
         purchaseDate = null,
     }: {
-        id?: string | null;
+        id?: number | null;
         images?: string[];
-        categoryId?: string | null;
+        categoryId?: number | null;
         name?: string | null;
         grade?: string | null;
         quantity?: number;
         price?: number;
-        sellerId?: string | null;
+        sellerId?: number | null;
         uploadDate?: string | null;
         saleStatus?: string | null;
-        buyerId?: string | null;
+        buyerId?: number | null;
         purchaseDate?: string | null;
     }) {
         this.id = id;

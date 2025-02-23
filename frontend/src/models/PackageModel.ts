@@ -1,8 +1,8 @@
 export class PackageModel {
-    id: string | null;
-    industryId: string | null;
-    categoryIds: string[];
-    productIds: string[];
+    id: number | null;
+    industryId: number | null;
+    categoryIds: number[];
+    productIds: number[];
     name: string | null;
     thumbnail: string | null;
 
@@ -14,10 +14,10 @@ export class PackageModel {
         name = null,
         thumbnail = null,
     }: {
-        id?: string | null;
-        industryId?: string | null;
-        categoryIds?: string[];
-        productIds?: string[];
+        id?: number | null;
+        industryId?: number | null;
+        categoryIds?: number[];
+        productIds?: number[];
         name?: string | null;
         thumbnail?: string | null;
     }) {
