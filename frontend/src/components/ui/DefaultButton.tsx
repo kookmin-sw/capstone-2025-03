@@ -14,6 +14,7 @@ const Button = styled.button<{ isActive: boolean }>`
 const Text = styled.p`
     font-size: 1.8rem;
     font-weight: bold;
+    color: white;
 `;
 
 type DefaultButtonProps = {

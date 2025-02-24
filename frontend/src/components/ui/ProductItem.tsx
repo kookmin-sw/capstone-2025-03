@@ -13,6 +13,7 @@ const Thumbnail = styled.img`
   height: 12rem;
   border-radius: 2rem;
   margin-right: 1rem;
+  color: white;
 `;
 
 const ContentContainer = styled.div`
@@ -26,6 +27,7 @@ const ContentContainer = styled.div`
 const Title = styled.p`
   font-size: 1.6rem;
   font-weight: bold;
+  color: white;
 `;
 
 const GradeAndAmount = styled.p`
@@ -36,6 +38,7 @@ const GradeAndAmount = styled.p`
 const Price = styled.p`
   font-size: 1.8rem;
   font-weight: bold;
+  color: white;
 `;
 
 

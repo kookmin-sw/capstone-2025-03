@@ -23,6 +23,7 @@ const Title = styled.p`
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: white;
 `;
 
 const Description = styled.p`
@@ -35,6 +36,7 @@ const Price = styled.p`
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: white;
 `;
 
 const CategoryContainer = styled.div`

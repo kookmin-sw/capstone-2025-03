@@ -1,7 +1,7 @@
 import styles from "./SellerSalesListAddProduct.module.css";
 import BackHeader from "@/src/components/layout/BackHeader";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 export default function SellerSalesListAddProduct() {
   const navigate = useNavigate();
@@ -26,6 +26,10 @@ export default function SellerSalesListAddProduct() {
       const fileUrl = URL.createObjectURL(file);
       setImageUrl(fileUrl);
     }
+  };
+
+  const handleClickConfirmButton = () => {
+    navigate("/seller-saleslist-productdetail");
   };
 
   return (
@@ -86,7 +90,11 @@ export default function SellerSalesListAddProduct() {
             }}
           />
         </form>
-        <button className={styles.submitButton} disabled={!isButtonValid}>
+        <button
+          className={styles.submitButton}
+          disabled={!isButtonValid}
+          onClick={handleClickConfirmButton}
+        >
           확인
         </button>
       </div>
