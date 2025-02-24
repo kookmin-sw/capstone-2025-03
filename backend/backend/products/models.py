@@ -10,7 +10,7 @@ class Product(models.Model):
     id = models.AutoField(primary_key=True)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
     images = ArrayField(
-        base_field=models.CharField(max_length=255),
+        base_field=models.URLField(max_length=255),
         blank=True,
         default=list
     )

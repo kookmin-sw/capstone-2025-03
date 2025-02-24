@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import industry_list, industry_create, industry_update, industry_delete
+from industries.views import IndustryCreateView, IndustryDetailView
 
 urlpatterns = [
-    path('', industry_list, name='industry_list'),
-    path('create/', industry_create, name='industry_create'),
-    path('<int:industry_id>/update/', industry_update, name='industry_update'),
-    path('<int:industry_id>/delete/', industry_delete, name='industry_delete'),
+    path("industries/create/", IndustryCreateView.as_view(), name="industry-create"),  
+    path("industries/<int:pk>/", IndustryDetailView.as_view(), name="industry-detail"), 
 ]
