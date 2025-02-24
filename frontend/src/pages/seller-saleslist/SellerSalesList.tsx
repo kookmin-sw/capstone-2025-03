@@ -1,5 +1,4 @@
 import styles from "./SellerSalesList.module.css";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainHeader from "@/src/components/layout/MainHeader";
 import Footer from "@/src/components/layout/MenuFooter";
@@ -8,9 +7,6 @@ import SellerProductItem from "@/src/components/ui/SellerProductItem";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();
-  const [visibleHeight, setVisibleHeight] = useState<number>(
-    window.innerHeight
-  );
   const currentMenuIndex = 0;
 
   type Product = {
@@ -129,9 +125,9 @@ export default function SellerSalesList() {
 
 
   const handleClickAddProductButton = () => {
-    navigate("/seller-saleslist-add-product");
+    navigate("/seller-saleslist-addproduct");
   };
-  
+
   return (
     <div className={styles.page}>
       <MainHeader />
@@ -143,7 +139,7 @@ export default function SellerSalesList() {
           })}
         </div>
       </div>
-      <button className={styles.addProductButton}>+</button>
+      <button className={styles.addProductButton} onClick={handleClickAddProductButton}>+</button>
       <div className={styles.footerBar}>
         <Footer currentMenuIndex={currentMenuIndex} />
       </div>
