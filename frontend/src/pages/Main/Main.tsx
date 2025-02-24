@@ -1,20 +1,10 @@
-import { Flex, Button, Image, Text, Box } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Button, Image, Text, Box } from "@chakra-ui/react";
 import styles from "./Main.module.css";
 
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const REDIRECT_URI = `${window.location.origin}/name-and-birth-day-input`;
 
 export default function Main() {
-  const [visibleHeight, setVisibleHeight] = useState<number>(
-    window.innerHeight
-  );
-
-  useEffect(() => {
-    const handleResize = () => setVisibleHeight(window.innerHeight);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   console.log(KAKAO_REST_API_KEY);
   const handleKakaoLogin = () => {
