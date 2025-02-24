@@ -46,6 +46,7 @@ export default function AddressSearch() {
       display="flex"
       alignItems="center"
       justifyContent="center"
+      
       flexDirection="column"
       top="0"
       left="0"

@@ -16,7 +16,7 @@ export default function AddressInput() {
   };
 
   const handleConfirm = () => {
-    navigate("/home")
+    navigate("/")
   }
 
   // 버튼 비활성화 조건

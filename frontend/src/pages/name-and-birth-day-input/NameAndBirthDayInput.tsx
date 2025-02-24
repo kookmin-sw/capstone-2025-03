@@ -32,12 +32,13 @@ export default function NameAndBirthDayInput() {
       getKakaoAccessToken(code)
         .then((accessToken) => {
           console.log("액세스 토큰: ", accessToken);
-          
+
           return getKakaoUserInfo(accessToken);
         })
         .then((response) => {
           console.log("사용자 정보: ", response);
           setName(response.nickname);
+          
           // setEmail(response.email);
         })
         .catch((error) => console.error("카카오 로그인 오류:", error));
