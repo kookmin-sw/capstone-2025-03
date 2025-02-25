@@ -44,7 +44,6 @@ type MenuItem = {
 }
 
 export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
-
     const menus: MenuItem[] = [
         {
             text: '홈',

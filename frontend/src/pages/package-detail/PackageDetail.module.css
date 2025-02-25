@@ -95,14 +95,12 @@
 .categoryAndAmount {
     font-size: 1.6rem;
     font-weight: 600;
-    color: white;
 }
 
 .price {
     font-size: 1.6rem;
     font-weight: bold;
     margin-right: 1rem;
-    color: white;
 }
 
 .searchOtherProductsButtonIcon {
