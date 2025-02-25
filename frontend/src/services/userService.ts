@@ -3,7 +3,7 @@ import { UserModel } from "../models/UserModel";
 
 const API_BASE_URL = "https://restart-s4b8.onrender.com";
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
-const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+const REDIRECT_URI =  `${window.location.origin}/name-and-birth-day-input`;
 
 /**
  * 사용자를 생성하고 서버에 저장합니다.

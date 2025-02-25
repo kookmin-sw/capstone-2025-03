@@ -4,13 +4,15 @@ import styles from "./Main.module.css";
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const REDIRECT_URI = `${window.location.origin}/name-and-birth-day-input`;
 
-export default function Main() {
 
+export default function Main() {
+  console.log(REDIRECT_URI);
   console.log(KAKAO_REST_API_KEY);
   const handleKakaoLogin = () => {
     const kakoLoginUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
     window.location.href = kakoLoginUrl;
   };
+
 
   return (
     <div className={styles.mainContainer}>
