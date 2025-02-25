@@ -44,7 +44,7 @@ export default function CompleteSection({ text }: CompleteSectionProps) {
   return (
     <Section>
       <Icon src={CompleteIconImage} />
-      <Text>패키지 구매 신청 완료!</Text>
+      <Text>{text}</Text>
       <ButtonContainer>
         <DefaultButton event={handleButtonClick} isActive={true} />
       </ButtonContainer>
