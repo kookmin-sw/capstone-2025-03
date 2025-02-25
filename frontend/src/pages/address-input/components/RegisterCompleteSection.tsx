@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
 
 const Section = styled.div`
   width: 100%;
@@ -29,7 +28,6 @@ interface CompleteSectionProps {
 }
 
 export default function RegisterCompleteSection({ text }: CompleteSectionProps) {
-  const navigate = useNavigate();
   return (
     <Section>
       <HeadText>회원가입 완료!</HeadText>
