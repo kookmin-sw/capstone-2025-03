@@ -11,7 +11,7 @@ export default function SellerSalesListAddProduct() {
   const [name, setName] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [number, setNumber] = useState<number | null>(null);
-
+  
   const isButtonValid = imageUrl && category && name && grade && number;
 
   const handleAddImage = () => {
