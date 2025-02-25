@@ -99,7 +99,7 @@ export default function NameAndBirthDayInput() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.page}>
       {/* 문구 */}
       <p className={styles.heading}>{stepText}</p>
 
