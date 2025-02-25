@@ -1,15 +1,14 @@
 import styles from "./NameAndBirthDayInput.module.css";
+import InputField from "./components/InputField";
+import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Button, Flex, Text } from "@chakra-ui/react";
 import {
   getKakaoAccessToken,
   getKakaoUserInfo,
   registerUser,
 } from "@/src/services/userService";
 
-import InputField from "./components/InputField";
-import "react-datepicker/dist/react-datepicker.css";
 
 export default function NameAndBirthDayInput() {
   const navigate = useNavigate();

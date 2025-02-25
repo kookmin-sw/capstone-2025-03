@@ -1,9 +1,9 @@
 import styles from "./SellerSalesList.module.css";
-import { useNavigate } from "react-router-dom";
 import MainHeader from "@/src/components/layout/MainHeader";
 import Footer from "@/src/components/layout/MenuFooter";
 import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
 import SellerProductItem from "@/src/components/ui/SellerProductItem";
+import { useNavigate } from "react-router-dom";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();

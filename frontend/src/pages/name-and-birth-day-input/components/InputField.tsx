@@ -1,5 +1,5 @@
 import styles from "./InputField.module.css";
-import { Input, Text, Flex } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 interface InputFieldProps {
   label?: string;
