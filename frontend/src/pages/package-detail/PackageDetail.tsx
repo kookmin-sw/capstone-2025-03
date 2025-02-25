@@ -125,7 +125,7 @@ export default function PackageDetail() {
     }
 
     return (
-        isLoading ? (isComplete ? <CompleteSection /> : <LoadingSection />) : <div className={styles.page}>
+        isLoading ? (isComplete ? <CompleteSection text="패키지 구매 신청 완료!"/> : <LoadingSection text="잠시만 기다려주세요"/>) : <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
