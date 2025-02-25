@@ -1,0 +1,32 @@
+import { IndustryModel } from "../models/IndustryModel";
+
+export const industryData: IndustryModel[] = [
+    new IndustryModel({ id: "1", icon: "icon-food.png", name: "음식" }),
+    new IndustryModel({ id: "2", icon: "icon-beauty.png", name: "뷰티" }),
+    new IndustryModel({ id: "3", icon: "icon-overseas.png", name: "해외장사" }),
+    new IndustryModel({ id: "4", icon: "icon-lesson.png", name: "레슨샵" }),
+    new IndustryModel({ id: "5", icon: "icon-cafe.png", name: "카페" }),
+    new IndustryModel({ id: "6", icon: "icon-street.png", name: "노점" }),
+    new IndustryModel({ id: "7", icon: "icon-entertainment.png", name: "오락" }),
+    new IndustryModel({ id: "8", icon: "icon-education.png", name: "학원/교육" }),
+    new IndustryModel({ id: "9", icon: "icon-convenience.png", name: "편의점" }),
+    new IndustryModel({ id: "10", icon: "icon-delivery.png", name: "배달" }),
+    new IndustryModel({ id: "11", icon: "icon-lodging.png", name: "숙박업" }),
+    new IndustryModel({ id: "12", icon: "icon-dessert.png", name: "디저트" }),
+    new IndustryModel({ id: "13", icon: "icon-hair.png", name: "미용" }),
+    new IndustryModel({ id: "14", icon: "icon-business.png", name: "사업" }),
+    new IndustryModel({ id: "15", icon: "icon-tech.png", name: "기술창업" }),
+    new IndustryModel({ id: "16", icon: "icon-study.png", name: "스터디" }),
+    new IndustryModel({ id: "17", icon: "icon-baking.png", name: "제과" }),
+    new IndustryModel({ id: "18", icon: "icon-distribution.png", name: "유통업" }),
+    new IndustryModel({ id: "19", icon: "icon-unmanned.png", name: "무인 창업" }),
+    new IndustryModel({ id: "20", icon: "icon-foodtruck.png", name: "푸드트럭" }),
+    new IndustryModel({ id: "21", icon: "icon-nail.png", name: "네일" }),
+    new IndustryModel({ id: "22", icon: "icon-service.png", name: "전문서비스" }),
+    new IndustryModel({ id: "23", icon: "icon-startup.png", name: "스타트업/1인기업" }),
+    new IndustryModel({ id: "24", icon: "icon-shopping.png", name: "스마트스토어/쇼핑몰" }),
+    new IndustryModel({ id: "25", icon: "icon-pet.png", name: "애견샵/반려동물" }),
+    new IndustryModel({ id: "26", icon: "icon-gym.png", name: "헬스장" }),
+    new IndustryModel({ id: "27", icon: "icon-leisure.png", name: "레저" }),
+    new IndustryModel({ id: "28", icon: "icon-screen.png", name: "스크린" })
+];
