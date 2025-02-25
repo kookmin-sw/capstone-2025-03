@@ -19,7 +19,7 @@ export default function BottomModal(){
             <Description>
                 결제와 배송은 카카오톡으로 진행됩니다.
             </Description>
-            <DefaultButton/>
+            <DefaultButton event={() => {}} isActive={true}/>
         </Modal>
     )
 }

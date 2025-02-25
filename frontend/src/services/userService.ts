@@ -1,9 +1,9 @@
 import axios from "axios";
 import { UserModel } from "../models/UserModel";
 
-const API_BASE_URL = "https://api.example.com/users";
+const API_BASE_URL = "https://restart-s4b8.onrender.com";
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
-const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+const REDIRECT_URI =  `${window.location.origin}/name-and-birth-day-input`;
 
 /**
  * 사용자를 생성하고 서버에 저장합니다.
@@ -104,7 +104,7 @@ export const getKakaoAccessToken = async (code: string) => {
           code: code,
         },
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
       }
     );
@@ -125,7 +125,9 @@ export const getKakaoUserInfo = async (accessToken: string) => {
     });
 
     return {
+      kakaoId: response.data.id,
       nickname: response.data.properties.nickname,
+      profileImage: response.data.properties.profile_image,
       email: response.data.kakao_account_email || "이메일 없음",
     };
   } catch (error) {
@@ -133,3 +135,15 @@ export const getKakaoUserInfo = async (accessToken: string) => {
     throw error;
   }
 };
+
+export const registerUser = async (requestData: any) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/users/register/`, requestData);
+
+    return response.data;
+  } catch (error) {
+    console.error("회원가입 오류 : ", error);
+    throw error;
+  }
+};
+
