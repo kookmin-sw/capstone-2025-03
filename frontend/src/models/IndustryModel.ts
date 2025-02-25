@@ -1,5 +1,5 @@
-export class IndustryModel {
-    id: string | null;
+export default class IndustryModel {
+    id: number | null;
     icon: string | null;
     name: string | null;
 
@@ -8,7 +8,7 @@ export class IndustryModel {
         icon = null,
         name = null,
     }: {
-        id?: string | null;
+        id?: number | null;
         icon?: string | null;
         name?: string | null;
     }) {

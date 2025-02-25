@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 import { Spinner } from "@chakra-ui/react";
 
 const Section = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: #18171e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 5rem;
+    background-color: #18171D;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5rem;
 `;
 
 const Text = styled.p`

@@ -1,7 +1,6 @@
-
-export class CategoryModel {
-    id: string | null;
-    industryIds: string[];
+export default class CategoryModel {
+    id: number | null;
+    industryIds: number[];
     thumbnail: string | null;
     name: string | null;
 
@@ -11,8 +10,8 @@ export class CategoryModel {
         thumbnail = null,
         name = null,
     }: {
-        id?: string | null;
-        industryIds?: string[];
+        id?: number | null;
+        industryIds?: number[];
         thumbnail?: string | null;
         name?: string | null;
     }) {
