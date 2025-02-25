@@ -1,3 +1,4 @@
+import styles from "./NameAndBirthDayInput.module.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button, Flex, Text } from "@chakra-ui/react";
@@ -23,13 +24,23 @@ export default function NameAndBirthDayInput() {
   );
   const code = searchParams.get("code");
 
-  // 세션스토리지에 이름 저장
-  sessionStorage.setItem("name", name);
   // 버튼 비활성화 조건
   const whenNameisNull = !name;
 
+  // 단계별 텍스트
+  const stepText = {
+    1: "이름을 입력해주세요",
+    2: "휴대폰 번호를 입력해주세요",
+    3: "생년월일을 입력해주세요",
+  }[step];
+
   // 액세스 토큰으로 사용자 정보 가져옴
   useEffect(() => {
+    // 세션스토리지에 이름 저장
+    if (name) {
+      sessionStorage.setItem("name", name);
+    }
+
     if (code) {
       getKakaoAccessToken(code)
         .then((accessToken) => {
@@ -53,8 +64,7 @@ export default function NameAndBirthDayInput() {
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
-  }, [code]);
-  console.log(name);
+  }, [code, name]);
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -70,7 +80,6 @@ export default function NameAndBirthDayInput() {
         8
       )}`;
     }
-
     setBirth(formattedValue);
   };
 
@@ -90,80 +99,47 @@ export default function NameAndBirthDayInput() {
   };
 
   return (
-    <Flex
-      height="100vh"
-      width="100vw"
-      paddingX="2rem"
-      align="center"
-      bg="#18171D"
-      direction="column"
-      justify="space-between"
-      overflow="hidden"
-      overflowY="hidden"
-    >
+    <div className={styles.container}>
       {/* 문구 */}
-      <Text
-        color="white"
-        fontSize="2.4rem"
-        fontWeight="bold"
-        textAlign="left"
-        width="100%"
-        mt="10rem"
-        mb="4rem"
-      >
-        {step === 1
-          ? "이름을 입력해주세요"
-          : step === 2
-          ? "휴대폰 번호를 입력해주세요"
-          : "생년월일을 입력해주세요"}
-      </Text>
+      <p className={styles.heading}>{stepText}</p>
 
       {/* 입력 필드 */}
-      {step === 3 && (
+      <div className={styles.inputWrapper}>
+        {step === 3 && (
+          <InputField
+            label="생년월일"
+            placeholder="생년월일"
+            value={birth}
+            onChange={handleBirthChange}
+            maxLength={10}
+          />
+        )}
+        {(step === 2 || step === 3) && (
+          <InputField
+            label="휴대폰 번호"
+            placeholder="휴대폰 번호"
+            value={phoneNum}
+            onChange={(e) => {
+              const newValue = e.target.value.replace(/[^0-9]/g, "");
+              setPhoneNum(newValue);
+              if (newValue.length === 11) setStep(3);
+            }}
+            maxLength={11}
+          />
+        )}
         <InputField
-          label="생년월일"
-          placeholder="생년월일"
-          value={birth}
-          onChange={handleBirthChange}
-          maxLength={10}
+          label="이름"
+          placeholder="이름"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-      )}
+      </div>
 
-      {(step === 2 || step === 3) && (
-        <InputField
-          label="휴대폰 번호"
-          placeholder="휴대폰 번호"
-          value={phoneNum}
-          onChange={(e) => {
-            const newValue = e.target.value.replace(/[^0-9]/g, "");
-            setPhoneNum(newValue);
-            if (newValue.length === 11) setStep(3);
-          }}
-          maxLength={11}
-        />
-      )}
-
-      <InputField
-        label="이름"
-        placeholder="이름"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-
-      <Flex flexGrow="1" />
+      <div className={styles.grow} />
 
       {step === 1 || (step !== 2 && birth.length >= 10) ? (
-        <Button
-          position="fixed"
-          width="calc(100% - 4rem)"
-          height="6rem"
-          bg="#00A36C"
-          color="white"
-          borderRadius="1rem"
-          fontSize="1.8rem"
-          fontWeight="bold"
-          top={`calc(${visibleHeight}px - 6rem - 2rem)`} // 맞겠지
-          _active={{ bg: "#154d3a" }}
+        <button
+          className={styles.button}
           disabled={whenNameisNull}
           onClick={() => {
             if (step === 1) {
@@ -175,8 +151,8 @@ export default function NameAndBirthDayInput() {
           }}
         >
           {step === 1 ? "다음" : "확인"}
-        </Button>
+        </button>
       ) : null}
-    </Flex>
+    </div>
   );
 }
