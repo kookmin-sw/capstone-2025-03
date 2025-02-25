@@ -11,6 +11,7 @@ import InputField from "./components/InputField";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function NameAndBirthDayInput() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   // const [email, setEmail] = useState<string>();
   const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
@@ -21,8 +22,9 @@ export default function NameAndBirthDayInput() {
     window.innerHeight
   );
   const code = searchParams.get("code");
-  const navigate = useNavigate();
 
+  // 세션스토리지에 이름 저장
+  sessionStorage.setItem("name", name);
   // 버튼 비활성화 조건
   const whenNameisNull = !name;
 
@@ -38,7 +40,6 @@ export default function NameAndBirthDayInput() {
         .then((response) => {
           console.log("사용자 정보: ", response);
           setName(response.nickname);
-          
           // setEmail(response.email);
         })
         .catch((error) => console.error("카카오 로그인 오류:", error));
@@ -81,8 +82,8 @@ export default function NameAndBirthDayInput() {
         password: "1234",
       };
       const responseData = registerUser(requestData);
-      console.log(responseData)
-      console.log("dddd")
+      console.log(responseData);
+      console.log("dddd");
     } catch (error) {
       console.log(error);
     }

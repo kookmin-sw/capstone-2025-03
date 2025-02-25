@@ -1,3 +1,5 @@
+import LoadingSection from "@/src/components/layout/LoadingSection";
+import RegisterCompleteSection from "./components/RegisterCompleteSection";
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -5,19 +7,31 @@ import { useNavigate, useLocation } from "react-router-dom";
 export default function AddressInput() {
   const navigate = useNavigate();
   const location = useLocation();
+  // const name = location.state.name;
   const [address] = useState(location.state?.address || "");
   const [detailAddress, setDetailAddress] = useState<string>("");
   const [visibleHeight, setVisibleHeight] = useState<number>(
     window.innerHeight
   );
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // name 불러오기
+  const name = location.state?.name || sessionStorage.getItem("name") || "";
 
   const handleOpenSearch = () => {
     navigate("/address-search");
   };
 
-  const handleConfirm = () => {
-    navigate("/")
-  }
+  const handleConfirmButtonClick = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsComplete(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }, 3000);
+  };
 
   // 버튼 비활성화 조건
   const isButtonDisabled = !address || !detailAddress;
@@ -34,9 +48,13 @@ export default function AddressInput() {
     };
   }, []);
 
-
-
-  return (
+  return isLoading ? (
+    isComplete ? (
+      <RegisterCompleteSection text={name} />
+    ) : (
+      <LoadingSection text="잠시만 기다려주세요" />
+    )
+  ) : (
     <Flex
       height="100vh"
       width="100vw"
@@ -129,7 +147,7 @@ export default function AddressInput() {
         top={`calc(${visibleHeight}px - 6rem - 2rem)`}
         _active={{ bg: "#154d3a" }}
         disabled={isButtonDisabled}
-        onClick={handleConfirm}
+        onClick={handleConfirmButtonClick}
       >
         확인
       </Button>
