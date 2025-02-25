@@ -1,5 +1,5 @@
+import styles from "./AddressSearch.module.css";
 import { useEffect, useRef } from "react";
-import { Flex, Box, Text, Button, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 declare global {
@@ -39,43 +39,20 @@ export default function AddressSearch() {
   }, []);
 
   return (
-    <Flex
-      height="100%"
-      width="100%"
-      bg="white"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      
-      flexDirection="column"
-      top="0"
-      left="0"
-      overflow="hidden"
-    >
-      <Flex
-        direction="row"
-        align="center"
-        justify="space-between"
-        pt="2rem"
-        pb="2rem"
-      >
-        <Button
-          color="white"
-          bg="white"
-          onClick={() => navigate(-1)}
-          padding="0rem"
-        >
-          <Image src="src/assets/images/chevron-left.svg" boxSize="3rem" />
-        </Button>
+    <div className={styles.page}>
+      <div className={styles.header}>
+        <button className={styles.backButton} onClick={() => navigate(-1)}>
+          <img
+            src="src/assets/images/chevron-left.svg"
+            alt="뒤로가기"
+            width="30"
+          />
+        </button>
+        <p className={styles.title}>주소 검색</p>
+        <div className={styles.emptyBox} />
+      </div>
 
-        <Text fontWeight="bold" fontSize="24px" whiteSpace="nowrap" pl="11rem" pr="11rem">
-          주소 검색
-        </Text>
-
-        <Box width="40px"/>
-      </Flex>
-
-      <Box ref={postcodeRef} width="100vw" height="100vh" />
-    </Flex>
+      <div className={styles.postcodeBox} ref={postcodeRef} />
+    </div>
   );
 }

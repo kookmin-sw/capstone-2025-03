@@ -22,6 +22,7 @@
 
 .inputWrapper {
   display: flex;
+  color: #747477;
   flex-direction: column;
   width: 100%;
 }

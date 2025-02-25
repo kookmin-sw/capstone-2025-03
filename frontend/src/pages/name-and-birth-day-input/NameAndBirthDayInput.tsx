@@ -19,6 +19,7 @@ export default function NameAndBirthDayInput() {
   const [name, setName] = useState<string>("");
   const [phoneNum, setPhoneNum] = useState<string>("");
   const [birth, setBirth] = useState<string>("");
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState<boolean>(false);
   const [visibleHeight, setVisibleHeight] = useState<number>(
     window.innerHeight
   );
@@ -58,6 +59,7 @@ export default function NameAndBirthDayInput() {
     const handleResize = () => {
       if (window.visualViewport) {
         setVisibleHeight(window.visualViewport.height);
+        setIsKeyboardOpen(window.innerHeight > window.visualViewport.height);
       }
     };
     window.visualViewport?.addEventListener("resize", handleResize);
@@ -141,6 +143,7 @@ export default function NameAndBirthDayInput() {
         <button
           className={styles.button}
           disabled={whenNameisNull}
+          style={{ top: `calc(${visibleHeight}px - 6rem - 2rem)` }}
           onClick={() => {
             if (step === 1) {
               setStep(2);
