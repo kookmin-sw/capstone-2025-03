@@ -1,41 +1,30 @@
-from django.http import JsonResponse, HttpResponseNotAllowed
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
-from .models import Category
-import json
+from rest_framework import generics
+from rest_framework.filters import OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
+from categories.models import Category
+from categories.serializers import CategorySerializer
 
+# ✅ [POST] 카테고리 생성 (Create)
+class CategoryCreateView(generics.CreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
-@csrf_exempt
-@require_http_methods(["POST"]) #create
-def category_create(request):
-    data = json.loads(request.body)
-    category = Category.objects.create(name=data['name'], industry_id=data['industry_id'])
-    return JsonResponse({"id": category.id, "name": category.name, "industry_id": category.industry_id})
+# ✅ [GET] 카테고리 목록 조회 (List)
+class CategoryListView(generics.ListAPIView):
+    serializer_class = CategorySerializer
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["name"]  # name 기준 정렬 (기본값: 오름차순)
 
-@require_http_methods(["GET"]) #read
-def category_list(request):
-    categories = list(Category.objects.values('id', 'name', 'industry_id'))
-    return JsonResponse({"categories": categories})
+    def get_queryset(self):
+        queryset = Category.objects.all()
+        industry_id = self.request.query_params.get("industry_id", None)
 
-@csrf_exempt
-@require_http_methods(["PUT"]) #update
-def category_update(request, category_id):
-    data = json.loads(request.body)
-    try:
-        category = Category.objects.get(id=category_id)
-        category.name = data['name']
-        category.industry_id = data['industry_id']
-        category.save()
-        return JsonResponse({"id": category.id, "name": category.name, "industry_id": category.industry_id})
-    except Category.DoesNotExist:
-        return JsonResponse({"error": "Category not found"}, status=404)
+        if industry_id:
+            queryset = queryset.filter(industry_ids__id=industry_id).distinct()  
 
-@csrf_exempt
-@require_http_methods(["DELETE"]) #delete
-def category_delete(request, category_id):
-    try:
-        category = Category.objects.get(id=category_id)
-        category.delete()
-        return JsonResponse({"message": "Category deleted"})
-    except Category.DoesNotExist:
-        return JsonResponse({"error": "Category not found"}, status=404)
+        return queryset
+
+# ✅ [GET, PUT, DELETE] 단일 카테고리 조회/수정/삭제 (Retrieve, Update, Delete)
+class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
