@@ -9,7 +9,7 @@ export default function AddressInput() {
   const location = useLocation();
   // const name = location.state.name;
   const [address] = useState(location.state?.address || "");
-  const [detailAddress, setDetailAddress] = useState<string>("");
+  const [addressDetail, setaddressDetail] = useState<string>("");
   const [visibleHeight, setVisibleHeight] = useState<number>(
     window.innerHeight
   );
@@ -34,7 +34,7 @@ export default function AddressInput() {
   };
 
   // 버튼 비활성화 조건
-  const isButtonDisabled = !address || !detailAddress;
+  const isButtonDisabled = !address || !addressDetail;
 
   useEffect(() => {
     const handleResize = () => {
@@ -68,8 +68,8 @@ export default function AddressInput() {
           <input
             className={styles.inputField}
             placeholder="주소"
-            value={detailAddress}
-            onChange={(e) => setDetailAddress(e.target.value)}
+            value={addressDetail}
+            onChange={(e) => setaddressDetail(e.target.value)}
           />
         </div>
       )}

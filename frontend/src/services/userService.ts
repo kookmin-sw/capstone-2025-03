@@ -135,15 +135,3 @@ export const getKakaoUserInfo = async (accessToken: string) => {
     throw error;
   }
 };
-
-export const registerUser = async (requestData: any) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/users/register/`, requestData);
-
-    return response.data;
-  } catch (error) {
-    console.error("회원가입 오류 : ", error);
-    throw error;
-  }
-};
-
