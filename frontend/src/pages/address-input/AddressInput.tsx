@@ -3,11 +3,14 @@ import LoadingSection from "@/src/components/layout/LoadingSection";
 import RegisterCompleteSection from "./components/RegisterCompleteSection";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useUser } from "@/src/contexts/UserContext";
+import { UserModel } from "@/src/models/UserModel";
 
 export default function AddressInput() {
   const navigate = useNavigate();
   const location = useLocation();
-  // const name = location.state.name;
+  const { user, setUser } = useUser();
+
   const [address] = useState(location.state?.address || "");
   const [addressDetail, setaddressDetail] = useState<string>("");
   const [visibleHeight, setVisibleHeight] = useState<number>(
@@ -37,6 +40,12 @@ export default function AddressInput() {
   const isButtonDisabled = !address || !addressDetail;
 
   useEffect(() => {
+    if (address || addressDetail) {
+      setUser(
+        (prevUser) => new UserModel({ ...prevUser, fullAddress: address, addressDetail: addressDetail })
+      );
+    }
+
     const handleResize = () => {
       if (window.visualViewport) {
         setVisibleHeight(window.visualViewport.height);
@@ -46,7 +55,7 @@ export default function AddressInput() {
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
-  }, []);
+  }, [address, addressDetail]);
 
   return isLoading ? (
     isComplete ? (
