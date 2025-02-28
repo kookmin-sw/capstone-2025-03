@@ -1,16 +1,17 @@
 export default class ProductModel {
     id: number | null;
-    images: string[];
     categoryId: number | null;
+    images: string[];
     name: string | null;
+    description: string | null;
     grade: string | null;
     quantity: number;
     price: number;
     sellerId: number | null;
     uploadDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
-    saleStatus: string | null;
     buyerId: number | null;
     purchaseDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
+    salesStatus: string | null;
 
     constructor({
         id = null,
@@ -22,9 +23,10 @@ export default class ProductModel {
         price = 0,
         sellerId = null,
         uploadDate = null,
-        saleStatus = null,
         buyerId = null,
         purchaseDate = null,
+        description = null,
+        salesStatus = null
     }: {
         id?: number | null;
         images?: string[];
@@ -35,9 +37,10 @@ export default class ProductModel {
         price?: number;
         sellerId?: number | null;
         uploadDate?: string | null;
-        saleStatus?: string | null;
         buyerId?: number | null;
         purchaseDate?: string | null;
+        description?: string | null;
+        salesStatus?: string | null;
     }) {
         this.id = id;
         this.images = images;
@@ -48,9 +51,10 @@ export default class ProductModel {
         this.price = price;
         this.sellerId = sellerId;
         this.uploadDate = uploadDate;
-        this.saleStatus = saleStatus;
         this.buyerId = buyerId;
         this.purchaseDate = purchaseDate;
+        this.description = description;
+        this.salesStatus = salesStatus;
     }
 
     static fromJson(jsonData: any): ProductModel {
@@ -64,9 +68,10 @@ export default class ProductModel {
             price: jsonData.price,
             sellerId: jsonData.sellerId,
             uploadDate: jsonData.uploadDate,
-            saleStatus: jsonData.saleStatus,
             buyerId: jsonData.buyerId,
             purchaseDate: jsonData.purchaseDate,
+            description: jsonData.description,
+            salesStatus: jsonData.salesStatus
         });
     }
 
@@ -81,9 +86,10 @@ export default class ProductModel {
             price: this.price,
             sellerId: this.sellerId,
             uploadDate: this.uploadDate,
-            saleStatus: this.saleStatus,
             buyerId: this.buyerId,
             purchaseDate: this.purchaseDate,
+            description: this.description,
+            salesStatus: this.salesStatus
         };
     }
 }

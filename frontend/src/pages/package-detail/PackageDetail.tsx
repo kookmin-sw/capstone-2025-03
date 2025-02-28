@@ -2,107 +2,127 @@ import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./PackageDetail.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
 import PackageItem from "@/src/components/ui/PackageItem";
-import CoffeePack from "../../assets/images/dummy/coffee_pack.png";
 import AddIconImage from "../../assets/images/page/package-detail/add_icon.png";
 import EditIconImage from "../../assets/images/page/package-detail/edit_icon.png";
 import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
 import ArrowRightIconImage from "../../assets/images/page/package-detail/arrow_right.png";
 import DeleteIconImage from "../../assets/images/page/package-detail/delete.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 import CompleteSection from "@/src/components/layout/CompleteSection";
+import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
+import PackageModel from "@/src/models/PackageModel";
+import ProductModel from "@/src/models/ProductModel";
+import CategoryModel from "@/src/models/CategoryModel";
 
 export default function PackageDetail() {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate();
-    const packages = [{
-        id: "1",
-        thumbnail: CoffeePack,
-        title: "프리미엄 여행 패키지",
-        description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-        price: 299000,
-        categories: ["호텔", "비행기", "렌터카"]
-    }];
-    const products = [{
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    },]
+    const [categories, setCategories] = useState<CategoryModel[]>([]);
+    const [products, setProducts] = useState<ProductModel[]>([])
+
+    const pkg: PackageModel = location.state?.pkg || PackageModel.fromJson({
+        "id": 1,
+        "industry_id": 1,
+        "category_ids": [1, 2],
+        "product_ids": [1, 2],
+        "thumbnail": CoffeePackImage,
+        "name": "Restaurant Starter Pack",
+        "description": "Basic tools and kitchenware for new restaurants.",
+        "price": 90000
+    });
+
+    useEffect(() => {
+        const productDataList = [
+            {
+                "id": 1,
+                "categoryId": 3,
+                "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
+                "name": "고급 원두 커피",
+                "description": "스페셜티 원두 100% 사용. 깊고 진한 향.",
+                "grade": "A+",
+                "quantity": 50,
+                "price": 25000,
+                "sellerId": 101,
+                "uploadDate": "2025-02-28T10:30:00.000Z",
+                "buyerId": null,
+                "purchaseDate": null,
+                "salesStatus": "판매 중"
+            },
+            {
+                "id": 2,
+                "categoryId": 5,
+                "images": ["https://example.com/image3.jpg"],
+                "name": "럭셔리 네일 아트 세트",
+                "description": "고급스러운 디자인과 튼튼한 내구성을 자랑하는 네일 세트.",
+                "grade": "B",
+                "quantity": 20,
+                "price": 50000,
+                "sellerId": 102,
+                "uploadDate": "2025-02-25T14:45:00.000Z",
+                "buyerId": 201,
+                "purchaseDate": "2025-02-27T09:20:00.000Z",
+                "salesStatus": "판매 완료"
+            },
+            {
+                "id": 3,
+                "categoryId": 7,
+                "images": ["https://example.com/image4.jpg", "https://example.com/image5.jpg"],
+                "name": "홈트레이닝 기구 세트",
+                "description": "헬스장 못지않은 운동을 집에서도! 필수 홈트 세트.",
+                "grade": "A",
+                "quantity": 10,
+                "price": 150000,
+                "sellerId": 103,
+                "uploadDate": "2025-02-22T08:10:00.000Z",
+                "buyerId": null,
+                "purchaseDate": null,
+                "salesStatus": "판매 중"
+            },
+            {
+                "id": 4,
+                "categoryId": 2,
+                "images": ["https://example.com/image6.jpg"],
+                "name": "기능성 베개",
+                "description": "숙면을 위한 인체공학적 설계. 목과 척추를 보호하는 디자인.",
+                "grade": "A+",
+                "quantity": 30,
+                "price": 32000,
+                "sellerId": 104,
+                "uploadDate": "2025-02-20T12:00:00.000Z",
+                "buyerId": 202,
+                "purchaseDate": "2025-02-26T18:40:00.000Z",
+                "salesStatus": "판매 완료"
+            },
+            {
+                "id": 5,
+                "categoryId": 9,
+                "images": ["https://example.com/image7.jpg"],
+                "name": "프리미엄 비즈니스 노트북",
+                "description": "고성능 프로세서와 장시간 배터리 수명을 갖춘 최신 노트북.",
+                "grade": "S",
+                "quantity": 5,
+                "price": 2500000,
+                "sellerId": 105,
+                "uploadDate": "2025-02-18T16:30:00.000Z",
+                "buyerId": 203,
+                "purchaseDate": "2025-02-24T11:15:00.000Z",
+                "salesStatus": "판매 완료"
+            }
+        ]
+        const categoryDataList = productDataList.map((product) => product.categoryId);
+
+        setCategories(categoryDataList.map((category) => CategoryModel.fromJson(category)));
+        setProducts(productDataList.map((product) => ProductModel.fromJson(product)))
+    }, [])
 
     const handleAddCategoryButtonClick = () => {
-        navigate('/package-detail-add-category', { state: {} })
+        navigate('/package-detail-add-category')
     }
 
     const handleDeleteButtonClick = () => {
@@ -120,16 +140,23 @@ export default function PackageDetail() {
         }, 3000);
     };
 
-    const handleProductItemClick = ({ product }: { product: {} }) => {
-        navigate('/package-detail-add-product', { state: { product: product } })
+    const handleProductItemClick = ({ product }: { product: ProductModel }) => {
+        navigate('/package-detail-add-product', { state: { product: product } });
+    }
+
+    const handleDeleteItemClick = ({ categoryId }: { categoryId: number }) => {
+        let tempCategories = [...categories].filter((category) => category.id != categoryId);
+        let tempProducts = [...products].filter((product) => product.categoryId != categoryId);
+        setCategories(tempCategories);
+        setProducts(tempProducts);
     }
 
     return (
-        isLoading ? (isComplete ? <CompleteSection text="패키지 구매 신청 완료!"/> : <LoadingSection text="잠시만 기다려주세요"/>) : <div className={styles.page}>
+        isLoading ? (isComplete ? <CompleteSection text="패키지 구매 신청 완료!" /> : <LoadingSection text="잠시만 기다려주세요" />) : <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    <PackageItem pkg={packages[0]} />
+                    <PackageItem pkg={pkg} />
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>
@@ -163,7 +190,7 @@ export default function PackageDetail() {
                                     {product.price}원
                                 </p>
                                 {
-                                    isEdit ? (<button className={styles.deleteProductButton}>
+                                    isEdit ? (<button className={styles.deleteProductButton} onClick={() => handleDeleteItemClick({ categoryId: product.categoryId! })}>
                                         <img className={styles.deleteProductButtonIcon} src={DeleteIconImage} />
                                     </button>) : (<button className={styles.searchOtherProductsButton}>
                                         <img className={styles.searchOtherProductsButtonIcon} src={ArrowRightIconImage} />

@@ -63,7 +63,7 @@ type PackageProps = {
 export default function PackageItem({ pkg }: PackageProps) {
   const navigate = useNavigate();
   const handlePackageItemClick = () => {
-    navigate('/package-detail');
+    navigate('/package-detail', {state:{pkg: pkg}});
   }
 
   return (
