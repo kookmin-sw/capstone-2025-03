@@ -1,7 +1,28 @@
 import axios from "axios";
-import { PackageModel } from "../models/PackageModel";
+import PackageModel from "../models/PackageModel";
 
-const API_BASE_URL = "https://api.example.com/packages";
+const API_BASE_URL = "https://restart-s4b8.onrender.com/packages";
+
+/**
+ * 서버에서 모든 패키지 데이터를 가져옵니다.
+ * @returns {Promise<PackageModel | null>}
+ */
+export const getPackageListInService = async (): Promise<PackageModel[] | null> => {
+  try {
+    const { data } = await axios.get(`${API_BASE_URL}/`);
+
+    const responses = data.results ?? []; // 'results'가 없을 경우 빈 배열 사용
+
+    const packages:PackageModel[] = responses.map((response:any) => {
+      return PackageModel.fromJson(response);
+    });
+
+    return packages;
+  } catch (error) {
+    console.error("Error fetching package:", error);
+    return null;
+  }
+};
 
 /**
  * 패키지를 생성하고 서버에 저장합니다.

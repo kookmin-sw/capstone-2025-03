@@ -1,7 +1,7 @@
 import axios from "axios";
-import { ProductModel } from "../models/ProductModel";
+import ProductModel from "../models/ProductModel";
 
-const API_BASE_URL = "https://api.example.com/products";
+const API_BASE_URL = "https://restart-s4b8.onrender.com";
 
 /**
  * 상품을 생성하고 서버에 저장합니다.

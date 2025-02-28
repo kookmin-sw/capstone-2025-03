@@ -1,7 +1,7 @@
 import axios from "axios";
-import { CategoryModel } from "../models/CategoryModel";
+import CategoryModel from "../models/CategoryModel";
 
-const API_BASE_URL = "https://api.example.com/categories";
+const API_BASE_URL = "https://restart-s4b8.onrender.com";
 
 /**
  * 카테고리를 생성하고 서버에 저장합니다.

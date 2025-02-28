@@ -5,82 +5,110 @@ import PackageItem from "@/src/components/ui/PackageItem";
 import SandClockImage from "../../assets/images/page/home/sand_clock.png";
 import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
 import { useNavigate } from "react-router-dom";
+import PackageModel from "@/src/models/PackageModel";
 
 export default function Home() {
   const navigate = useNavigate();
   const currentMenuIndex = 0;
-  const packages = [{
-    id: "1",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  }, {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  },
-  {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  },
-  {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  },
-  {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  },
-  {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  },
-  {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  },
-  {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  },
-  {
-    id: "2",
-    thumbnail: CoffeePackImage,
-    title: "프리미엄 여행 패키지",
-    description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-    price: 299000,
-    categories: ["호텔", "비행기", "렌터카"]
-  }
-  ];
+  const packages: PackageModel[] = [PackageModel.fromJson({
+    "id": 1,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }), PackageModel.fromJson({
+    "id": 2,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 3,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 4,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 5,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 6,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 7,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 8,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 9,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  }),
+  PackageModel.fromJson({
+    "id": 10,
+    "industry_id": 1,
+    "category_ids": [1, 2],
+    "product_ids": [1, 2],
+    "thumbnail": CoffeePackImage,
+    "name": "Restaurant Starter Pack",
+    "description": "Basic tools and kitchenware for new restaurants.",
+    "price": 90000
+  })];
 
   // Function
   const handleClickFindPackageButton = () => {

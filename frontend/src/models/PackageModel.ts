@@ -3,8 +3,10 @@ export default class PackageModel {
     industryId: number | null;
     categoryIds: number[];
     productIds: number[];
-    name: string | null;
     thumbnail: string | null;
+    name: string | null;
+    description: string | null;
+    price: number | 0;
 
     constructor({
         id = null,
@@ -13,6 +15,8 @@ export default class PackageModel {
         productIds = [],
         name = null,
         thumbnail = null,
+        description = null,
+        price = 0
     }: {
         id?: number | null;
         industryId?: number | null;
@@ -20,6 +24,8 @@ export default class PackageModel {
         productIds?: number[];
         name?: string | null;
         thumbnail?: string | null;
+        description: string | null;
+        price: number | 0;
     }) {
         this.id = id;
         this.industryId = industryId;
@@ -27,6 +33,8 @@ export default class PackageModel {
         this.productIds = productIds;
         this.name = name;
         this.thumbnail = thumbnail;
+        this.description = description;
+        this.price = price
     }
 
     static fromJson(jsonData: any): PackageModel {
@@ -37,6 +45,8 @@ export default class PackageModel {
             productIds: jsonData.productIds || [],
             name: jsonData.name,
             thumbnail: jsonData.thumbnail,
+            description: jsonData.description,
+            price: jsonData.price
         });
     }
 
@@ -48,6 +58,8 @@ export default class PackageModel {
             productIds: this.productIds,
             name: this.name,
             thumbnail: this.thumbnail,
+            description: this.description,
+            price: this.price
         };
     }
 }

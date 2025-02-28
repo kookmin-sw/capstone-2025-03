@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import WidgetImage from "../../assets/images/page/home/widget.png";
 import { useNavigate } from "react-router-dom";
+import PackageModel from "@/src/models/PackageModel";
 
 const Item = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ const CategoryText = styled.p`
 `;
 
 type PackageProps = {
-  pkg: { id: string, thumbnail: string, title: string, description: string, price: number, categories: string[] };
+  pkg: PackageModel;
 }
 
 export default function PackageItem({ pkg }: PackageProps) {
@@ -67,10 +68,10 @@ export default function PackageItem({ pkg }: PackageProps) {
 
   return (
     <Item onClick={handlePackageItemClick}>
-      <Thumbnail src={pkg.thumbnail} />
+      <Thumbnail src={pkg.thumbnail ?? undefined} />
       <ContentContainer>
         <Title>
-          {pkg.title}
+          {pkg.name}
         </Title>
         <Description>
           {pkg.description}
@@ -81,7 +82,7 @@ export default function PackageItem({ pkg }: PackageProps) {
         <CategoryContainer>
           <CategoryIcon src={WidgetImage} />
           <CategoryText>
-            {pkg.categories.map((category) => {
+            {pkg.categoryIds.map((category) => {
               return (category);
             })}로 구성
           </CategoryText>

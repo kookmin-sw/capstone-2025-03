@@ -1,8 +1,8 @@
 import axios from "axios";
-import { CategoryModel } from "../models/CategoryModel";
-import { ProductModel } from "../models/ProductModel";
+import CategoryModel from "../models/CategoryModel";
+import ProductModel from "../models/ProductModel";
 
-const API_BASE_URL = "https://api.example.com/batch";
+const API_BASE_URL = "https://restart-s4b8.onrender.com";
 
 /**
  * 배치 API: categoryIds와 productIds를 기반으로 카테고리 및 상품 데이터를 가져옴.
