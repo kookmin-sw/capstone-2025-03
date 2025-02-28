@@ -1,58 +1,50 @@
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import login, logout
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import logout
+from rest_framework.permissions import AllowAny
 from .models import User
+from .serializers import UserSerializer
 
-@csrf_exempt
-def register(request):
-    if request.method == "POST":
-        data = json.loads(request.body)
-        try:
-            user = User.objects.create(
-                uid=data["uid"],
-                name=data["name"],
-                kakao_email=data["kakao_email"],
-                phone_number=data["phone_number"],
-                birth_date=data["birth_date"],
-                full_address=data["full_address"],
-                address_detail=data["address_detail"],
-            )
-            return JsonResponse({"success": True, "message": "SUCCESS sign up"}, status=201)
-        except Exception as e:
-            return JsonResponse({"success": False, "message": str(e)}, status=400)
+# ✅ 1. 유저 회원가입 (POST)
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]  # 회원가입은 인증 불필요
 
-@csrf_exempt
-def login_view(request):
-    if request.method == "POST":
-        data = json.loads(request.body)
-        user = User.objects.filter(uid=data["uid"], kakao_email=data["kakao_email"]).first()
-        
+# ✅ 2. 특정 유저 정보 조회, 수정, 삭제
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+# ✅ 3. 로그인 (POST)
+class LoginView(APIView):
+    permission_classes = [AllowAny]  # 로그인은 인증 불필요
+
+    def post(self, request):
+        data = request.data
+        user = User.objects.filter(kakao_email=data.get("kakao_email")).first()
+
         if user:
-            request.session["user_id"] = user.id  # 세션에 유저 ID 저장
-            return JsonResponse({"success": True, "message": "SUCCESS login"}, status=200)
-        else:
-            return JsonResponse({"success": False, "message": "FAIL login"}, status=400)
+            request.session["user_id"] = user.id  # 세션 저장
+            return Response({"success": True, "message": "SUCCESS login"}, status=status.HTTP_200_OK)
 
-@csrf_exempt
-def user_info(request):
-    user_id = request.session.get("user_id")
-    if user_id:
+        return Response({"success": False, "message": "FAIL login"}, status=status.HTTP_400_BAD_REQUEST)
+
+# ✅ 4. 현재 로그인한 유저 정보 조회 (GET)
+class UserInfoView(APIView):
+    def get(self, request):
+        user_id = request.session.get("user_id")
+        if not user_id:
+            return Response({"success": False, "message": "FAIL need login"}, status=status.HTTP_401_UNAUTHORIZED)
+
         user = get_object_or_404(User, id=user_id)
-        return JsonResponse({
-            "success": True,
-            "user": {
-                "uid": user.uid,
-                "name": user.name,
-                "kakao_email": user.kakao_email,
-                "phone_number": user.phone_number,
-                "birth_date": str(user.birth_date),
-            }
-        })
-    return JsonResponse({"success": False, "message": "FAIL need login"}, status=401)
+        serializer = UserSerializer(user)
+        return Response({"success": True, "user": serializer.data})
 
-@csrf_exempt
-def logout_view(request):
-    logout(request)
-    return JsonResponse({"success": True, "message": "SUCCESS logout"})
+# ✅ 5. 로그아웃 (POST)
+class LogoutView(APIView):
+    def post(self, request):
+        logout(request)
+        return Response({"success": True, "message": "SUCCESS logout"}, status=status.HTTP_200_OK)

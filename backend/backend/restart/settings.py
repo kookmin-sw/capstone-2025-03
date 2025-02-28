@@ -47,7 +47,16 @@ INSTALLED_APPS = [
     'products', # 물품
     'orders', # 주문
     'corsheaders',
+    'django_filters',
+    'rest_framework',
+    'drf_yasg',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
