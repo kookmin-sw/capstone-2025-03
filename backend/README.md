@@ -1,127 +1,33 @@
-# backend
-## **1. 회원가입 (Register)**
+# Back-end
+Python, Django, Fastapi, Postgresql, Redis, Docker
 
-- **URL**: `POST /api/register/`
-- **설명**: 사용자가 회원가입을 진행
-- **요청 데이터 (JSON)**:
-  ```json
-  {
-    "uid": "1234567890",
-    "name": "홍길동",
-    "kakao_email": "test@example.com",
-    "phone_number": "010-1234-5678",
-    "birth_date": "1990-01-01",
-    "full_address": "서울특별시 강남구 테헤란로",
-    "address_detail": "101동 202호"
-  }
-  ```
-- **응답 데이터 (JSON)**:
-  - **성공 (201 Created)**
-    ```json
-    {
-      "success": true,
-      "message": "SUCCESS sign up"
-    }
-    ```
-  - **실패 (400 Bad Request)**
-    ```json
-    {
-      "success": false,
-      "message": "에러 메시지"
-    }
-    ```
+# Git commit 규칙
+[feat]: 새로운 기능 추가 (예: [feat] 사용자 로그인 기능 추가)
 
----
+[fix]: 버그 수정 (예: [fix] 잘못된 비밀번호 처리 수정)
 
-## **2. 로그인 (Login)**
+[docs]: 문서 변경 (예: [docs] README 사용법 업데이트)
 
-- **URL**: `POST /api/login/`
-- **설명**: 사용자가 로그인합니다.
-- **요청 데이터 (JSON)**:
-  ```json
-  {
-    "uid": "1234567890",
-    "kakao_email": "test@example.com"
-  }
-  ```
-- **응답 데이터 (JSON)**:
-  - **성공 (200 OK)**
-    ```json
-    {
-      "success": true,
-      "message": "SUCCESS login"
-    }
-    ```
-  - **실패 (400 Bad Request)**
-    ```json
-    {
-      "success": false,
-      "message": "FAIL login"
-    }
-    ```
+[merge]: 브랜치 병합 (예: [merge] feature/login -> develop)
 
----
+[refactor]: 코드 리팩토링 (예: [refactor] 중복 코드 제거)
 
-## **3. 사용자 정보 조회 (User Info)**
+[style]: 코드 스타일 변경 (포매팅 등) (예: [style] 변수 정렬 수정)
 
-- **URL**: `GET /api/user-info/`
-- **설명**: 로그인한 사용자의 정보를 조회
-- **요청 헤더**:
-  - 세션 기반 인증 (로그인 후 요청해야 함)
-- **응답 데이터 (JSON)**:
-  - **성공 (200 OK)**
-    ```json
-    {
-      "success": true,
-      "user": {
-        "uid": "1234567890",
-        "name": "홍길동",
-        "kakao_email": "test@example.com",
-        "phone_number": "010-1234-5678",
-        "birth_date": "1990-01-01"
-      }
-    }
-    ```
-  - **실패 (401 Unauthorized)**
-    ```json
-    {
-      "success": false,
-      "message": "FAIL need login"
-    }
-    ```
+[test]: 테스트 코드 추가/수정 (예: [test] 로그인 기능 테스트 추가)
 
----
+[chore]: 기타 작업 (패키지 업데이트, 설정 변경 등) (예: [chore] eslint 설정 업데이트)
 
-## **4. 로그아웃 (Logout)**
+# Git branch 규칙
+feature/: 기능 개발
 
-- **URL**: `POST /api/logout/`
-- **설명**: 사용자 로그아웃
-- **요청 데이터**: 없음
-- **응답 데이터 (JSON)**:
-  - **성공 (200 OK)**
-    ```json
-    {
-      "success": true,
-      "message": "SUCCESS logout"
-    }
-    ```
+fix/: 버그 수정
 
----
+hotfix/: 긴급 수정
 
-## **API 엔드포인트**
+release/: 출시 준비
 
-| HTTP Method | URL               | 설명             |
-| ----------- | ----------------- | -------------- |
-| `POST`      | `/api/register/`  | 회원가입           |
-| `POST`      | `/api/login/`     | 로그인            |
-| `GET`       | `/api/user-info/` | 로그인한 사용자 정보 조회 |
-| `POST`      | `/api/logout/`    | 로그아웃           |
+# 배포
+기본: Google Cloud
 
----
-
-## **인증 방식**
-
-- `session-based authentication`을 사용하여 로그인 상태를 유지
-- 로그인 후 요청 시 Django 세션을 활용하여 인증을 수행
-
----
+확장 필요: AWS
