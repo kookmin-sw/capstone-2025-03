@@ -8,9 +8,11 @@ import {
   getKakaoUserInfo,
 } from "@/src/services/userService";
 import { UserModel } from "@/src/models/UserModel";
+import { useUser } from "@/src/contexts/UserContext";
 
 export default function NameAndBirthDayInput() {
   const navigate = useNavigate();
+  const { user, setUser } = useUser();
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
   const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
@@ -18,20 +20,8 @@ export default function NameAndBirthDayInput() {
     window.innerHeight
   );
 
-  const [user, setUser] = useState<UserModel>(
-    new UserModel({
-      name: "",
-      kakaoEmail: "example@example.com",
-      phoneNumber: "",
-      birthDate: "",
-      fullAddress: "",
-      addressDetail: "",
-      createDate: new Date().toISOString(),
-    })
-  );
-
   // 버튼 비활성화 조건
-  const whenNameisNull = !user.name;
+  const whenNameisNull = !user?.name;
 
   // 단계별 텍스트
   const stepText = {
@@ -42,8 +32,16 @@ export default function NameAndBirthDayInput() {
 
   // 액세스 토큰으로 사용자 정보 가져옴
   useEffect(() => {
+    setUser(
+      (prevUser) =>
+        new UserModel({
+          ...prevUser,
+          kakaoEmail: "example@example.com",
+          createDate: new Date().toISOString(),
+        })
+    );
     // 세션스토리지에 이름 저장
-    if (user.name) {
+    if (user?.name) {
       sessionStorage.setItem("name", user.name);
     }
 
@@ -73,7 +71,7 @@ export default function NameAndBirthDayInput() {
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
-  }, [code, user.name]);
+  }, [code, user?.name]);
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -111,6 +109,8 @@ export default function NameAndBirthDayInput() {
     if (newValue.length === 13) setStep(3);
   };
 
+  console.log(user);
+
   return (
     <div className={styles.page}>
       {/* 문구 */}
@@ -122,7 +122,7 @@ export default function NameAndBirthDayInput() {
           <InputField
             label="생년월일"
             placeholder="생년월일"
-            value={user.birthDate || ""}
+            value={user?.birthDate || ""}
             onChange={handleBirthChange}
             maxLength={10}
           />
@@ -131,7 +131,7 @@ export default function NameAndBirthDayInput() {
           <InputField
             label="휴대폰 번호"
             placeholder="휴대폰 번호"
-            value={user.phoneNumber || ""}
+            value={user?.phoneNumber || ""}
             onChange={handlePhoneNumberChange}
             maxLength={13}
           />
@@ -139,7 +139,7 @@ export default function NameAndBirthDayInput() {
         <InputField
           label="이름"
           placeholder="이름"
-          value={user.name || ""}
+          value={user?.name || ""}
           onChange={(e) =>
             setUser(
               (prevUser) => new UserModel({ ...prevUser, name: e.target.value })
@@ -151,7 +151,7 @@ export default function NameAndBirthDayInput() {
       <div className={styles.grow} />
 
       {step === 1 ||
-      (step !== 2 && user.birthDate && user.birthDate.length >= 10) ? (
+      (step !== 2 && user?.birthDate && user.birthDate.length >= 10) ? (
         <button
           className={styles.button}
           disabled={whenNameisNull}

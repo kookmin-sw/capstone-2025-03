@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "@/src/contexts/UserContext";
 import { UserModel } from "@/src/models/UserModel";
+import { createUserInService } from "@/src/services/userService";
 
 export default function AddressInput() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, setUser } = useUser();
+  const { user, setUser, createUser } = useUser();
 
   const [address] = useState(location.state?.address || "");
   const [addressDetail, setaddressDetail] = useState<string>("");
@@ -25,15 +26,20 @@ export default function AddressInput() {
   const handleOpenSearch = () => {
     navigate("/address-search");
   };
-
-  const handleConfirmButtonClick = () => {
+  
+  const handleConfirmButtonClick = async () => {
+    if (!user) return;
     setIsLoading(true);
-    setTimeout(() => {
+    try {
+      await createUser(user);
       setIsComplete(true);
       setTimeout(() => {
         navigate("/");
       }, 3000);
-    }, 3000);
+    } catch (error) {
+      alert(`회원가입 실패 : ${error}`);
+      setIsLoading(false);
+    }
   };
 
   // 버튼 비활성화 조건
@@ -42,7 +48,12 @@ export default function AddressInput() {
   useEffect(() => {
     if (address || addressDetail) {
       setUser(
-        (prevUser) => new UserModel({ ...prevUser, fullAddress: address, addressDetail: addressDetail })
+        (prevUser) =>
+          new UserModel({
+            ...prevUser,
+            fullAddress: address,
+            addressDetail: addressDetail,
+          })
       );
     }
 
@@ -56,6 +67,8 @@ export default function AddressInput() {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
   }, [address, addressDetail]);
+
+  console.log(user);
 
   return isLoading ? (
     isComplete ? (
@@ -86,7 +99,7 @@ export default function AddressInput() {
       {/* 주소 입력 */}
       <div className={styles.inputWrapper}>
         {address && <p className={styles.label}>주소</p>}
-        <input
+        <input  
           className={styles.inputField}
           placeholder="주소"
           readOnly
