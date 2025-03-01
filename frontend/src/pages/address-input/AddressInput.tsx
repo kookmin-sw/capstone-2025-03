@@ -3,13 +3,17 @@ import LoadingSection from "@/src/components/layout/LoadingSection";
 import RegisterCompleteSection from "./components/RegisterCompleteSection";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useUser } from "@/src/contexts/UserContext";
+import { UserModel } from "@/src/models/UserModel";
+import { createUserInService } from "@/src/services/userService";
 
 export default function AddressInput() {
   const navigate = useNavigate();
   const location = useLocation();
-  // const name = location.state.name;
+  const { user, setUser, createUser } = useUser();
+
   const [address] = useState(location.state?.address || "");
-  const [detailAddress, setDetailAddress] = useState<string>("");
+  const [addressDetail, setaddressDetail] = useState<string>("");
   const [visibleHeight, setVisibleHeight] = useState<number>(
     window.innerHeight
   );
@@ -22,21 +26,37 @@ export default function AddressInput() {
   const handleOpenSearch = () => {
     navigate("/address-search");
   };
-
-  const handleConfirmButtonClick = () => {
+  
+  const handleConfirmButtonClick = async () => {
+    if (!user) return;
     setIsLoading(true);
-    setTimeout(() => {
+    try {
+      await createUser(user);
       setIsComplete(true);
       setTimeout(() => {
         navigate("/");
       }, 3000);
-    }, 3000);
+    } catch (error) {
+      alert(`회원가입 실패 : ${error}`);
+      setIsLoading(false);
+    }
   };
 
   // 버튼 비활성화 조건
-  const isButtonDisabled = !address || !detailAddress;
+  const isButtonDisabled = !address || !addressDetail;
 
   useEffect(() => {
+    if (address || addressDetail) {
+      setUser(
+        (prevUser) =>
+          new UserModel({
+            ...prevUser,
+            fullAddress: address,
+            addressDetail: addressDetail,
+          })
+      );
+    }
+
     const handleResize = () => {
       if (window.visualViewport) {
         setVisibleHeight(window.visualViewport.height);
@@ -46,7 +66,9 @@ export default function AddressInput() {
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
-  }, []);
+  }, [address, addressDetail]);
+
+  console.log(user);
 
   return isLoading ? (
     isComplete ? (
@@ -68,8 +90,8 @@ export default function AddressInput() {
           <input
             className={styles.inputField}
             placeholder="주소"
-            value={detailAddress}
-            onChange={(e) => setDetailAddress(e.target.value)}
+            value={addressDetail}
+            onChange={(e) => setaddressDetail(e.target.value)}
           />
         </div>
       )}
@@ -77,7 +99,7 @@ export default function AddressInput() {
       {/* 주소 입력 */}
       <div className={styles.inputWrapper}>
         {address && <p className={styles.label}>주소</p>}
-        <input
+        <input  
           className={styles.inputField}
           placeholder="주소"
           readOnly

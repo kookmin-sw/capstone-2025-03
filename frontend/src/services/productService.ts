@@ -8,11 +8,36 @@ const API_BASE_URL = "https://restart-s4b8.onrender.com";
  * @param {ProductModel} product - 생성할 상품 객체
  * @returns {Promise<void>}
  */
-export const createProductInService = async (product: ProductModel): Promise<void> => {
+export const createProductInService = async (
+  product: ProductModel
+): Promise<void> => {
   try {
     await axios.post(`${API_BASE_URL}`, product.toJson());
   } catch (error) {
     console.error("Error creating product:", error);
+    throw error;
+  }
+};
+
+/**
+ * 상품을 생성하고 서버에 저장합니다.
+ * @param {File} file - 생성할 상품 객체
+ * @returns {Promise<string>}
+ */
+export const uploadProductImageInService = async (
+  file: File
+): Promise<string | null> => {
+  const formData = new FormData();
+  formData.append("image", file);
+  try {
+    const response = await axios.post(`${API_BASE_URL}/upload/`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data.imageUrl;
+  } catch (error) {
+    console.error("Error uploading product image:", error);
     throw error;
   }
 };
@@ -57,7 +82,9 @@ export const updateProductInService = async (
  * @param {string} productId - 삭제할 상품의 ID
  * @returns {Promise<void>}
  */
-export const deleteProductInService = async (productId: string): Promise<void> => {
+export const deleteProductInService = async (
+  productId: string
+): Promise<void> => {
   try {
     await axios.delete(`${API_BASE_URL}/${productId}`);
   } catch (error) {

@@ -2,17 +2,21 @@ import styles from "./SellerSalesListAddProduct.module.css";
 import BackHeader from "@/src/components/layout/BackHeader";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
+import { useProduct } from "@/src/contexts/ProductContext";
+import ProductModel from "@/src/models/ProductModel";
 
 export default function SellerSalesListAddProduct() {
   const navigate = useNavigate();
+  const { createProduct, uploadProductImage } = useProduct();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [images, setImages] = useState<string[]>([]);
   const [category, setCategory] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [number, setNumber] = useState<number | null>(null);
-  
-  const isButtonValid = imageUrl && category && name && grade && number;
+
+  const isButtonValid =
+    images.length !== 0 && category && name && grade && number;
 
   const handleAddImage = () => {
     if (fileInputRef.current) {
@@ -20,13 +24,25 @@ export default function SellerSalesListAddProduct() {
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      const fileUrl = URL.createObjectURL(file);
-      setImageUrl(fileUrl);
+
+      try {
+        const uploadedImageUrl = await uploadProductImage(file);
+
+        if (uploadedImageUrl) {
+          setImages((prevImages) => [...prevImages, uploadedImageUrl]);
+        }
+      } catch (error) {
+        alert(`상품 이미지 업로드에 실패했습니다 : ${error}`);
+      }
     }
   };
+
+  console.log(images)
 
   const handleClickConfirmButton = () => {
     navigate("/seller-saleslist-productdetail");
@@ -46,10 +62,11 @@ export default function SellerSalesListAddProduct() {
             style={{ display: "none" }}
             onChange={handleFileChange}
           />
+          {/* 업로드 이미지 첫번째꺼만 보이게 하드코딩함. 나중에 여러개 보여주도록 수정해야함 */}
           <img
-            className={imageUrl ? styles.uploadedImage : styles.defaultImage}
+            className={images[0] ? styles.uploadedImage : styles.defaultImage}
             src={
-              imageUrl ||
+              images[0] ||
               "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
             }
             width={"30rem"}

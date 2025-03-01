@@ -6,25 +6,22 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   getKakaoAccessToken,
   getKakaoUserInfo,
-  registerUser,
 } from "@/src/services/userService";
-
+import { UserModel } from "@/src/models/UserModel";
+import { useUser } from "@/src/contexts/UserContext";
 
 export default function NameAndBirthDayInput() {
   const navigate = useNavigate();
+  const { user, setUser } = useUser();
   const [searchParams] = useSearchParams();
-  // const [email, setEmail] = useState<string>();
+  const code = searchParams.get("code");
   const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
-  const [name, setName] = useState<string>("");
-  const [phoneNum, setPhoneNum] = useState<string>("");
-  const [birth, setBirth] = useState<string>("");
   const [visibleHeight, setVisibleHeight] = useState<number>(
     window.innerHeight
   );
-  const code = searchParams.get("code");
 
   // 버튼 비활성화 조건
-  const whenNameisNull = !name;
+  const whenNameisNull = !user?.name;
 
   // 단계별 텍스트
   const stepText = {
@@ -35,9 +32,17 @@ export default function NameAndBirthDayInput() {
 
   // 액세스 토큰으로 사용자 정보 가져옴
   useEffect(() => {
+    setUser(
+      (prevUser) =>
+        new UserModel({
+          ...prevUser,
+          kakaoEmail: "example@example.com",
+          createDate: new Date().toISOString(),
+        })
+    );
     // 세션스토리지에 이름 저장
-    if (name) {
-      sessionStorage.setItem("name", name);
+    if (user?.name) {
+      sessionStorage.setItem("name", user.name);
     }
 
     if (code) {
@@ -49,8 +54,11 @@ export default function NameAndBirthDayInput() {
         })
         .then((response) => {
           console.log("사용자 정보: ", response);
-          setName(response.nickname);
-          // setEmail(response.email);
+          setUser(
+            (prevUser) =>
+              new UserModel({ ...prevUser, name: response.nickname })
+          );
+          // setKakaoEmail(response.email);
         })
         .catch((error) => console.error("카카오 로그인 오류:", error));
     }
@@ -63,7 +71,7 @@ export default function NameAndBirthDayInput() {
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
-  }, [code, name]);
+  }, [code, user?.name]);
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -79,23 +87,29 @@ export default function NameAndBirthDayInput() {
         8
       )}`;
     }
-    setBirth(formattedValue);
+    setUser(
+      (prevUser) => new UserModel({ ...prevUser, birthDate: formattedValue })
+    );
   };
 
-  const handleRegister = async () => {
-    try {
-      const requestData = {
-        username: name,
-        email: null,
-        password: "1234",
-      };
-      const responseData = registerUser(requestData);
-      console.log(responseData);
-      console.log("dddd");
-    } catch (error) {
-      console.log(error);
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = e.target.value.replace(/[^0-9]/g, "");
+
+    if (newValue.length >= 7) {
+      newValue = `${newValue.slice(0, 3)}-${newValue.slice(
+        3,
+        7
+      )}-${newValue.slice(7)}`;
+    } else if (newValue.length >= 4) {
+      newValue = `${newValue.slice(0, 3)}-${newValue.slice(3)}`;
     }
+    setUser(
+      (prevUser) => new UserModel({ ...prevUser, phoneNumber: newValue })
+    );
+    if (newValue.length === 13) setStep(3);
   };
+
+  console.log(user);
 
   return (
     <div className={styles.page}>
@@ -108,7 +122,7 @@ export default function NameAndBirthDayInput() {
           <InputField
             label="생년월일"
             placeholder="생년월일"
-            value={birth}
+            value={user?.birthDate || ""}
             onChange={handleBirthChange}
             maxLength={10}
           />
@@ -117,26 +131,27 @@ export default function NameAndBirthDayInput() {
           <InputField
             label="휴대폰 번호"
             placeholder="휴대폰 번호"
-            value={phoneNum}
-            onChange={(e) => {
-              const newValue = e.target.value.replace(/[^0-9]/g, "");
-              setPhoneNum(newValue);
-              if (newValue.length === 11) setStep(3);
-            }}
-            maxLength={11}
+            value={user?.phoneNumber || ""}
+            onChange={handlePhoneNumberChange}
+            maxLength={13}
           />
         )}
         <InputField
           label="이름"
           placeholder="이름"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={user?.name || ""}
+          onChange={(e) =>
+            setUser(
+              (prevUser) => new UserModel({ ...prevUser, name: e.target.value })
+            )
+          }
         />
       </div>
 
       <div className={styles.grow} />
 
-      {step === 1 || (step !== 2 && birth.length >= 10) ? (
+      {step === 1 ||
+      (step !== 2 && user?.birthDate && user.birthDate.length >= 10) ? (
         <button
           className={styles.button}
           disabled={whenNameisNull}
@@ -145,7 +160,7 @@ export default function NameAndBirthDayInput() {
             if (step === 1) {
               setStep(2);
             } else if (step === 3) {
-              handleRegister();
+              // handleRegister();
               navigate("/address-input");
             }
           }}

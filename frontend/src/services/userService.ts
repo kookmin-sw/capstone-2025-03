@@ -12,7 +12,7 @@ const REDIRECT_URI =  `${window.location.origin}/name-and-birth-day-input`;
  */
 export const createUserInService = async (user: UserModel): Promise<void> => {
   try {
-    await axios.post(`${API_BASE_URL}`, user.toJson());
+    await axios.post(`${API_BASE_URL}/users/register/`, user.toJson());
   } catch (error) {
     console.error("Error creating user:", error);
     throw error;
@@ -26,7 +26,7 @@ export const createUserInService = async (user: UserModel): Promise<void> => {
  */
 export const getUserInService = async (
   userId: string
-): Promise<UserModel | null> => {
+): Promise<UserModel | null> => { 
   try {
     const response = await axios.get(`${API_BASE_URL}/${userId}`);
     return UserModel.fromJson(response.data);
@@ -135,15 +135,3 @@ export const getKakaoUserInfo = async (accessToken: string) => {
     throw error;
   }
 };
-
-export const registerUser = async (requestData: any) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/users/register/`, requestData);
-
-    return response.data;
-  } catch (error) {
-    console.error("회원가입 오류 : ", error);
-    throw error;
-  }
-};
-
