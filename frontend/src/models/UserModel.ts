@@ -52,7 +52,6 @@ export class UserModel {
 
     toJson(): any {
         return {
-            userId: this.userId,
             name: this.name,
             kakaoEmail: this.kakaoEmail,
             phoneNumber: this.phoneNumber,
