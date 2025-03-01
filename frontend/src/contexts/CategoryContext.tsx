@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { CategoryModel } from "../models/CategoryModel";
+import CategoryModel from "../models/CategoryModel";
 import {
   createCategoryInService,
   getCategoryInService,
@@ -10,10 +10,10 @@ import {
 // Context에서 사용할 타입 정의
 interface CategoryContextType {
   categories: CategoryModel[];
-  fetchCategory: (categoryId: string) => Promise<CategoryModel | null>;
+  fetchCategory: (categoryId: number) => Promise<CategoryModel | null>;
   createCategory: (newCategory: CategoryModel) => Promise<void>;
-  updateCategory: (categoryId: string, updatedData: Partial<CategoryModel>) => Promise<void>;
-  deleteCategory: (categoryId: string) => Promise<void>;
+  updateCategory: (categoryId: number, updatedData: Partial<CategoryModel>) => Promise<void>;
+  deleteCategory: (categoryId: number) => Promise<void>;
   setCategories: React.Dispatch<React.SetStateAction<CategoryModel[]>>;
 }
 
@@ -36,7 +36,7 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // 특정 카테고리 가져오기
-  const fetchCategory = async (categoryId: string): Promise<CategoryModel | null> => {
+  const fetchCategory = async (categoryId: number): Promise<CategoryModel | null> => {
     try {
       const existingCategory = categories.find(category => category.id === categoryId);
       if (existingCategory) return existingCategory;
@@ -53,7 +53,7 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // 카테고리 업데이트
-  const updateCategory = async (categoryId: string, updatedData: Partial<CategoryModel>) => {
+  const updateCategory = async (categoryId: number, updatedData: Partial<CategoryModel>) => {
     try {
       await updateCategoryInService(categoryId, updatedData);
       setCategories(prev => prev.map(category => 
@@ -66,7 +66,7 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // 카테고리 삭제
-  const deleteCategory = async (categoryId: string) => {
+  const deleteCategory = async (categoryId: number) => {
     try {
       await deleteCategoryInService(categoryId);
       setCategories(prev => prev.filter(category => category.id !== categoryId));

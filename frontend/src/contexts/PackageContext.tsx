@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { PackageModel } from "../models/PackageModel";
+import PackageModel from "../models/PackageModel";
 import {
     createPackageInService,
     getPackageInService,
@@ -7,18 +7,18 @@ import {
     deletePackageInService,
 } from "../services/packageService";
 import { getCategoriesAndProductsInBatch } from "../services/batchService";
-import { CategoryModel } from "../models/CategoryModel";
-import { ProductModel } from "../models/ProductModel";
+import CategoryModel from "../models/CategoryModel";
+import ProductModel from "../models/ProductModel";
 import { useCategory } from "../contexts/CategoryContext";
 import { useProduct } from "../contexts/ProductContext";
 
 // Context에서 사용할 타입 정의
 interface PackageContextType {
     packages: PackageModel[];
-    fetchPackage: (packageId: string) => Promise<PackageModel | null>;
+    fetchPackage: (packageId: number) => Promise<PackageModel | null>;
     createPackage: (newPackage: PackageModel) => Promise<void>;
-    updatePackage: (packageId: string, updatedData: Partial<PackageModel>) => Promise<void>;
-    deletePackage: (packageId: string) => Promise<void>;
+    updatePackage: (packageId: number, updatedData: Partial<PackageModel>) => Promise<void>;
+    deletePackage: (packageId: number) => Promise<void>;
     setPackages: React.Dispatch<React.SetStateAction<PackageModel[]>>;
 }
 
@@ -43,7 +43,7 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
     };
 
     // 특정 패키지 가져오기 및 관련 데이터 불러오기
-    const fetchPackage = async (packageId: string): Promise<PackageModel | null> => {
+    const fetchPackage = async (packageId: number): Promise<PackageModel | null> => {
         try {
             const existingPackage = packages.find(pkg => pkg.id === packageId);
             if (existingPackage) return existingPackage;
@@ -74,7 +74,7 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
     };
 
     // 패키지 업데이트
-    const updatePackage = async (packageId: string, updatedData: Partial<PackageModel>) => {
+    const updatePackage = async (packageId: number, updatedData: Partial<PackageModel>) => {
         try {
             await updatePackageInService(packageId, updatedData);
             setPackages(prev => prev.map(pkg =>
@@ -87,7 +87,7 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
     };
 
     // 패키지 삭제
-    const deletePackage = async (packageId: string) => {
+    const deletePackage = async (packageId: number) => {
         try {
             await deletePackageInService(packageId);
             setPackages(prev => prev.filter(pkg => pkg.id !== packageId));

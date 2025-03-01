@@ -44,11 +44,11 @@ export const uploadProductImageInService = async (
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 가져옵니다.
- * @param {string} productId - 가져올 상품의 ID
+ * @param {number} productId - 가져올 상품의 ID
  * @returns {Promise<ProductModel | null>}
  */
 export const getProductInService = async (
-  productId: string
+  productId: number
 ): Promise<ProductModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${productId}`);
@@ -61,12 +61,12 @@ export const getProductInService = async (
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 업데이트합니다.
- * @param {string} productId - 업데이트할 상품의 ID
+ * @param {number} productId - 업데이트할 상품의 ID
  * @param {Partial<ProductModel>} updatedData - 업데이트할 데이터 객체
  * @returns {Promise<void>}
  */
 export const updateProductInService = async (
-  productId: string,
+  productId: number,
   updatedData: Partial<ProductModel>
 ): Promise<void> => {
   try {
@@ -79,11 +79,11 @@ export const updateProductInService = async (
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 삭제합니다.
- * @param {string} productId - 삭제할 상품의 ID
+ * @param {number} productId - 삭제할 상품의 ID
  * @returns {Promise<void>}
  */
 export const deleteProductInService = async (
-  productId: string
+  productId: number
 ): Promise<void> => {
   try {
     await axios.delete(`${API_BASE_URL}/${productId}`);

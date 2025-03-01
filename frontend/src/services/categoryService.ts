@@ -19,11 +19,11 @@ export const createCategoryInService = async (category: CategoryModel): Promise<
 
 /**
  * 특정 categoryId로 서버에서 카테고리 데이터를 가져옵니다.
- * @param {string} categoryId - 가져올 카테고리의 ID
+ * @param {number} categoryId - 가져올 카테고리의 ID
  * @returns {Promise<CategoryModel | null>}
  */
 export const getCategoryInService = async (
-  categoryId: string
+  categoryId: number
 ): Promise<CategoryModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${categoryId}`);
@@ -36,12 +36,12 @@ export const getCategoryInService = async (
 
 /**
  * 특정 categoryId로 서버에서 카테고리 데이터를 업데이트합니다.
- * @param {string} categoryId - 업데이트할 카테고리의 ID
+ * @param {number} categoryId - 업데이트할 카테고리의 ID
  * @param {Partial<CategoryModel>} updatedData - 업데이트할 데이터 객체
  * @returns {Promise<void>}
  */
 export const updateCategoryInService = async (
-  categoryId: string,
+  categoryId: number,
   updatedData: Partial<CategoryModel>
 ): Promise<void> => {
   try {
@@ -54,10 +54,10 @@ export const updateCategoryInService = async (
 
 /**
  * 특정 categoryId로 서버에서 카테고리 데이터를 삭제합니다.
- * @param {string} categoryId - 삭제할 카테고리의 ID
+ * @param {number} categoryId - 삭제할 카테고리의 ID
  * @returns {Promise<void>}
  */
-export const deleteCategoryInService = async (categoryId: string): Promise<void> => {
+export const deleteCategoryInService = async (categoryId: number): Promise<void> => {
   try {
     await axios.delete(`${API_BASE_URL}/${categoryId}`);
   } catch (error) {

@@ -40,11 +40,11 @@ export const createPackageInService = async (packageData: PackageModel): Promise
 
 /**
  * 특정 packageId로 서버에서 패키지 데이터를 가져옵니다.
- * @param {string} packageId - 가져올 패키지의 ID
+ * @param {number} packageId - 가져올 패키지의 ID
  * @returns {Promise<PackageModel | null>}
  */
 export const getPackageInService = async (
-  packageId: string
+  packageId: number
 ): Promise<PackageModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${packageId}`);
@@ -57,12 +57,12 @@ export const getPackageInService = async (
 
 /**
  * 특정 packageId로 서버에서 패키지 데이터를 업데이트합니다.
- * @param {string} packageId - 업데이트할 패키지의 ID
+ * @param {number} packageId - 업데이트할 패키지의 ID
  * @param {Partial<PackageModel>} updatedData - 업데이트할 데이터 객체
  * @returns {Promise<void>}
  */
 export const updatePackageInService = async (
-  packageId: string,
+  packageId: number,
   updatedData: Partial<PackageModel>
 ): Promise<void> => {
   try {
@@ -75,10 +75,10 @@ export const updatePackageInService = async (
 
 /**
  * 특정 packageId로 서버에서 패키지 데이터를 삭제합니다.
- * @param {string} packageId - 삭제할 패키지의 ID
+ * @param {number} packageId - 삭제할 패키지의 ID
  * @returns {Promise<void>}
  */
-export const deletePackageInService = async (packageId: string): Promise<void> => {
+export const deletePackageInService = async (packageId: number): Promise<void> => {
   try {
     await axios.delete(`${API_BASE_URL}/${packageId}`);
   } catch (error) {
