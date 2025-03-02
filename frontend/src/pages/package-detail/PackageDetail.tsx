@@ -190,7 +190,10 @@ export default function PackageDetail() {
                                     {product.price}원
                                 </p>
                                 {
-                                    isEdit ? (<button className={styles.deleteProductButton} onClick={() => handleDeleteItemClick({ categoryId: product.categoryId! })}>
+                                    isEdit ? (<button className={styles.deleteProductButton} onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteItemClick({ categoryId: product.categoryId! });
+                                    }}>
                                         <img className={styles.deleteProductButtonIcon} src={DeleteIconImage} />
                                     </button>) : (<button className={styles.searchOtherProductsButton}>
                                         <img className={styles.searchOtherProductsButtonIcon} src={ArrowRightIconImage} />
