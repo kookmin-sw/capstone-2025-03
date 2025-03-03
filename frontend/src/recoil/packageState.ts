@@ -1,4 +1,4 @@
-import { atom, selector, useRecoilState, useSetRecoilState } from "recoil";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
 import {
     getPackageListInService,
     getPackageInService,
@@ -92,13 +92,5 @@ export const useDeletePackage = () => {
             delete newCache[packageId];
             return newCache;
         });
-    };
-};
-
-// 패키지 편집 상태 관리 훅
-export const useSetEditingPackage = () => {
-    const setEditingPackage = useSetRecoilState(editingPackageState);
-    return (packageData: PackageModel | null) => {
-        setEditingPackage(packageData);
     };
 };
