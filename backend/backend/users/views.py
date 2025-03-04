@@ -48,3 +48,10 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({"success": True, "message": "SUCCESS logout"}, status=status.HTTP_200_OK)
+    
+
+# ✅ 6. 유저 전체 조회 (GET)
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+

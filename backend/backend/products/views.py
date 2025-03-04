@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Category, Product
+from .serializers import CategorySerializer, ProductSerializer
 from .pagination import LargeResultsSetPagination  # 100개씩 페이지네이션 적용
 
 # ✅ 1. 전체 상품 조회 및 생성 (ListCreateAPIView) + 필터링 & 정렬 + 페이지네이션 적용
@@ -69,3 +69,22 @@ class MarkProductAsSoldView(APIView):
         product.save()
 
         return Response({"message": "판매 완료 처리됨"}, status=status.HTTP_200_OK)
+    
+    
+class PackageDataView(APIView):
+    def post(self, request):
+        category_ids = request.data.get("categoryIds", [])
+        product_ids = request.data.get("productIds", [])
+
+        # 데이터베이스에서 해당 ID들의 데이터 조회
+        categories = Category.objects.filter(id__in=category_ids)
+        products = Product.objects.filter(id__in=product_ids)
+
+        # 직렬화 (JSON 변환)
+        category_serializer = CategorySerializer(categories, many=True)
+        product_serializer = ProductSerializer(products, many=True)
+
+        return Response({
+            "categories": category_serializer.data,
+            "products": product_serializer.data
+        }, status=status.HTTP_200_OK)
