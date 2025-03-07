@@ -27,11 +27,12 @@ export const getPackageListInService = async (): Promise<PackageModel[] | null> 
 /**
  * 패키지를 생성하고 서버에 저장합니다.
  * @param {PackageModel} packageData - 생성할 패키지 객체
- * @returns {Promise<void>}
+ * @returns {Promise<any>}
  */
-export const createPackageInService = async (packageData: PackageModel): Promise<void> => {
+export const createPackageInService = async (packageData: PackageModel): Promise<any> => {
   try {
-    await axios.post(`${API_BASE_URL}`, packageData.toJson());
+    const response = await axios.post(`${API_BASE_URL}`, packageData.toJson());
+    return response;
   } catch (error) {
     console.error("Error creating package:", error);
     throw error;

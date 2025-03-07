@@ -29,14 +29,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
+    gap: 2rem;
+    margin-bottom: 3rem;
 }
 
 .contentTextContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 }
 
 .contentTitle {

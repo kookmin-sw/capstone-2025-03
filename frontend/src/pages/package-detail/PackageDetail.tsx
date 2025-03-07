@@ -15,9 +15,10 @@ import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
 import PackageModel from "@/src/models/PackageModel";
 import ProductModel from "@/src/models/ProductModel";
 import CategoryModel from "@/src/models/CategoryModel";
+import { editingPackageState } from "@/src/recoil/packageState";
+import { useRecoilState } from "recoil";
 
 export default function PackageDetail() {
-    const location = useLocation();
     const navigate = useNavigate();
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -25,19 +26,27 @@ export default function PackageDetail() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [categories, setCategories] = useState<CategoryModel[]>([]);
     const [products, setProducts] = useState<ProductModel[]>([])
+    // Recoil
+    const [editingPackage, setEdigingPackage] = useRecoilState(editingPackageState);
 
-    const pkg: PackageModel = location.state?.pkg || PackageModel.fromJson({
-        "id": 1,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    });
-
+    // UseEffect
     useEffect(() => {
+        console.log(editingPackage);
+        
+        // Dummy
+        if (!editingPackage) {
+            setEdigingPackage(PackageModel.fromJson({
+                id: 0,
+                industryId: 0,
+                categoryIds: [2, 3, 5, 7, 9],
+                productIds: [1, 2, 3, 4, 5],
+                thumbnail: CoffeePackImage,
+                name: '커피 초보 사장 패키지',
+                description: '처음 카페를 창업한다면 무조건 이걸 사세요!!',
+                price: 300000
+            }));
+        }
+
         const productDataList = [
             {
                 "id": 1,
@@ -149,6 +158,10 @@ export default function PackageDetail() {
         let tempProducts = [...products].filter((product) => product.categoryId != categoryId);
         setCategories(tempCategories);
         setProducts(tempProducts);
+        setEdigingPackage((prev) => PackageModel.fromJson({
+            ...prev!,
+            categoryIds: prev?.categoryIds?.filter(id => id !== categoryId) || [],
+        }));
     }
 
     return (
@@ -156,7 +169,7 @@ export default function PackageDetail() {
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    <PackageItem pkg={pkg} />
+                    {editingPackage ? <PackageItem pkg={editingPackage} /> : null}
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>
@@ -190,7 +203,10 @@ export default function PackageDetail() {
                                     {product.price}원
                                 </p>
                                 {
-                                    isEdit ? (<button className={styles.deleteProductButton} onClick={() => handleDeleteItemClick({ categoryId: product.categoryId! })}>
+                                    isEdit ? (<button className={styles.deleteProductButton} onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteItemClick({ categoryId: product.categoryId! });
+                                    }}>
                                         <img className={styles.deleteProductButtonIcon} src={DeleteIconImage} />
                                     </button>) : (<button className={styles.searchOtherProductsButton}>
                                         <img className={styles.searchOtherProductsButtonIcon} src={ArrowRightIconImage} />
