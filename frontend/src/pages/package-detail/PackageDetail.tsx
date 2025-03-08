@@ -2,174 +2,96 @@ import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./PackageDetail.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
 import PackageItem from "@/src/components/ui/PackageItem";
-import AddIconImage from "../../assets/images/page/package-detail/add_icon.png";
-import EditIconImage from "../../assets/images/page/package-detail/edit_icon.png";
-import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
-import ArrowRightIconImage from "../../assets/images/page/package-detail/arrow_right.png";
-import DeleteIconImage from "../../assets/images/page/package-detail/delete.png";
+import AddIconImage from "@/src/assets/images/page/package-detail/add_icon.png";
+import EditIconImage from "@/src/assets/images/page/package-detail/edit_icon.png";
+import EspressoMachineImage from "@/src/assets/images/dummy/espresso_machine.png";
+import ArrowRightIconImage from "@/src/assets/images/page/package-detail/arrow_right.png";
+import DeleteIconImage from "@/src/assets/images/page/package-detail/delete.png";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 import CompleteSection from "@/src/components/layout/CompleteSection";
-import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
 import PackageModel from "@/src/models/PackageModel";
-import ProductModel from "@/src/models/ProductModel";
 import CategoryModel from "@/src/models/CategoryModel";
-import { editingPackageState } from "@/src/recoil/packageState";
 import { useRecoilState } from "recoil";
+import { edigingPackageState } from "@/src/recoil/packageState";
+import BuyerProductModel from "@/src/models/BuyerProductModel";
+import { useCategory } from "@/src/hooks/useCategory";
+import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
+import { industryData } from "@/src/constants/industryData";
 
 export default function PackageDetail() {
+    // page connection
     const navigate = useNavigate();
+    const location = useLocation();
+    const myPackage: PackageModel = PackageModel.fromJson(location.state?.pkg || {});
+    // hook
+    const { categories } = useCategory();
+    const { buyerProducts } = useBuyerProduct();
+    // recoil
+    const [editingPackage, setEdigingPackage] = useRecoilState(edigingPackageState);
+    // useState
+    const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
+    const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([])
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [categories, setCategories] = useState<CategoryModel[]>([]);
-    const [products, setProducts] = useState<ProductModel[]>([])
-    // Recoil
-    const [editingPackage, setEdigingPackage] = useRecoilState(editingPackageState);
 
     // UseEffect
     useEffect(() => {
-        console.log(editingPackage);
-        
-        // Dummy
         if (!editingPackage) {
-            setEdigingPackage(PackageModel.fromJson({
-                id: 0,
-                industryId: 0,
-                categoryIds: [2, 3, 5, 7, 9],
-                productIds: [1, 2, 3, 4, 5],
-                thumbnail: CoffeePackImage,
-                name: '커피 초보 사장 패키지',
-                description: '처음 카페를 창업한다면 무조건 이걸 사세요!!',
-                price: 300000
-            }));
+            setEdigingPackage(myPackage);
         }
-
-        const productDataList = [
-            {
-                "id": 1,
-                "categoryId": 3,
-                "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
-                "name": "고급 원두 커피",
-                "description": "스페셜티 원두 100% 사용. 깊고 진한 향.",
-                "grade": "A+",
-                "quantity": 50,
-                "price": 25000,
-                "sellerId": 101,
-                "uploadDate": "2025-02-28T10:30:00.000Z",
-                "buyerId": null,
-                "purchaseDate": null,
-                "salesStatus": "판매 중"
-            },
-            {
-                "id": 2,
-                "categoryId": 5,
-                "images": ["https://example.com/image3.jpg"],
-                "name": "럭셔리 네일 아트 세트",
-                "description": "고급스러운 디자인과 튼튼한 내구성을 자랑하는 네일 세트.",
-                "grade": "B",
-                "quantity": 20,
-                "price": 50000,
-                "sellerId": 102,
-                "uploadDate": "2025-02-25T14:45:00.000Z",
-                "buyerId": 201,
-                "purchaseDate": "2025-02-27T09:20:00.000Z",
-                "salesStatus": "판매 완료"
-            },
-            {
-                "id": 3,
-                "categoryId": 7,
-                "images": ["https://example.com/image4.jpg", "https://example.com/image5.jpg"],
-                "name": "홈트레이닝 기구 세트",
-                "description": "헬스장 못지않은 운동을 집에서도! 필수 홈트 세트.",
-                "grade": "A",
-                "quantity": 10,
-                "price": 150000,
-                "sellerId": 103,
-                "uploadDate": "2025-02-22T08:10:00.000Z",
-                "buyerId": null,
-                "purchaseDate": null,
-                "salesStatus": "판매 중"
-            },
-            {
-                "id": 4,
-                "categoryId": 2,
-                "images": ["https://example.com/image6.jpg"],
-                "name": "기능성 베개",
-                "description": "숙면을 위한 인체공학적 설계. 목과 척추를 보호하는 디자인.",
-                "grade": "A+",
-                "quantity": 30,
-                "price": 32000,
-                "sellerId": 104,
-                "uploadDate": "2025-02-20T12:00:00.000Z",
-                "buyerId": 202,
-                "purchaseDate": "2025-02-26T18:40:00.000Z",
-                "salesStatus": "판매 완료"
-            },
-            {
-                "id": 5,
-                "categoryId": 9,
-                "images": ["https://example.com/image7.jpg"],
-                "name": "프리미엄 비즈니스 노트북",
-                "description": "고성능 프로세서와 장시간 배터리 수명을 갖춘 최신 노트북.",
-                "grade": "S",
-                "quantity": 5,
-                "price": 2500000,
-                "sellerId": 105,
-                "uploadDate": "2025-02-18T16:30:00.000Z",
-                "buyerId": 203,
-                "purchaseDate": "2025-02-24T11:15:00.000Z",
-                "salesStatus": "판매 완료"
-            }
-        ]
-        const categoryDataList = productDataList.map((product) => product.categoryId);
-
-        setCategories(categoryDataList.map((category) => CategoryModel.fromJson(category)));
-        setProducts(productDataList.map((product) => ProductModel.fromJson(product)))
+        const newMyCategories: CategoryModel[] = myPackage.categoryIds
+            .map((categoryId) => categories.find((category) => category.id === categoryId))
+            .filter(Boolean) as CategoryModel[];
+        setMyCategories(newMyCategories);
+        const newMyProducts: BuyerProductModel[] = myPackage.productIds
+            .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
+            .filter(Boolean) as BuyerProductModel[];
+        setMyProducts(newMyProducts);
     }, [])
 
+    // Function
     const handleAddCategoryButtonClick = () => {
-        navigate('/package-detail-add-category')
+        navigate('/package-detail-add-category', { state: { industry: industryData.find((industry) => industry.id === myPackage.industryId) } })
     }
-
-    const handleDeleteButtonClick = () => {
+    const handleEditButtonClick = () => {
         setIsEdit(!isEdit);
     }
-
     const handleBuyButtonClick = () => {
         setIsModalOpen(!isModalOpen);
     };
-
     const handleBuyConfirmButtonClick = () => {
         setIsLoading(true);
         setTimeout(() => {
             setIsComplete(true);
         }, 3000);
     };
-
-    const handleProductItemClick = ({ product }: { product: ProductModel }) => {
-        navigate('/package-detail-add-product', { state: { product: product } });
+    const handleAddProductButtonClick = (category: CategoryModel) => {
+        navigate('/package-detail-add-product', { state: { category: category } });
+    }
+    const handleDeleteButtonClick = (categoryId: number) => {
+        setMyCategories((prev) => prev.filter((category) => category.id !== categoryId));
+        setMyProducts((prev) => prev.filter((product) => product.categoryId !== categoryId));
+        setEdigingPackage((prev) => {
+            if (!prev) return prev;
+            return PackageModel.fromJson({
+                ...prev,
+                categoryIds: prev.categoryIds.filter((id) => id !== categoryId),
+                productIds: prev.productIds.filter((id) => myProducts.some((product) => product.id === id))
+            });
+        });
     }
 
-    const handleDeleteItemClick = ({ categoryId }: { categoryId: number }) => {
-        let tempCategories = [...categories].filter((category) => category.id != categoryId);
-        let tempProducts = [...products].filter((product) => product.categoryId != categoryId);
-        setCategories(tempCategories);
-        setProducts(tempProducts);
-        setEdigingPackage((prev) => PackageModel.fromJson({
-            ...prev!,
-            categoryIds: prev?.categoryIds?.filter(id => id !== categoryId) || [],
-        }));
-    }
-
+    // return
     return (
         isLoading ? (isComplete ? <CompleteSection text="패키지 구매 신청 완료!" /> : <LoadingSection text="잠시만 기다려주세요" />) : <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    {editingPackage ? <PackageItem pkg={editingPackage} /> : null}
+                    <PackageItem pkg={editingPackage} />
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>
@@ -180,32 +102,33 @@ export default function PackageDetail() {
                         <button className={styles.iconButton} onClick={handleAddCategoryButtonClick}>
                             <img className={styles.iconButtonImage} src={AddIconImage} />
                         </button>
-                        <button className={styles.iconButton} onClick={handleDeleteButtonClick} style={{ backgroundColor: `${!isEdit ? '#00A36C' : '#7F7F89'}` }}>
+                        <button className={styles.iconButton} onClick={handleEditButtonClick} style={{ backgroundColor: `${!isEdit ? '#00A36C' : '#7F7F89'}` }}>
                             <img className={styles.iconButtonImage} src={EditIconImage} />
                         </button>
                     </div>
                 </div>
                 <div className={styles.listView}>
-                    {products.map((product, index) => {
+                    {myCategories.map((category, index) => {
+                        const myProduct = myProducts.find((product) => product.categoryId === category.id);
                         return (
-                            <div key={index} className={styles.productItem} onClick={() => { handleProductItemClick({ product: product }) }}>
-                                <img className={styles.productThumbnail} src={EspressoMachineImage} />
+                            <div key={index} className={styles.productItem} onClick={() => { handleAddProductButtonClick(category) }}>
+                                <img className={styles.productThumbnail} src={myProduct?.images[0]} />
                                 <div className={styles.productInfoContainer}>
                                     <p className={styles.productName}>
-                                        바디프렌즈 에스프레소
+                                        {myProduct?.name}
                                     </p>
                                     <p className={styles.categoryAndAmount}>
-                                        에스프레소 머신 3개
+                                        {category.name} {myProduct?.quantity}개
                                     </p>
                                 </div>
                                 <div className={styles.blank} />
                                 <p className={styles.price}>
-                                    {product.price}원
+                                    {myProduct?.price}원
                                 </p>
                                 {
                                     isEdit ? (<button className={styles.deleteProductButton} onClick={(e) => {
                                         e.stopPropagation();
-                                        handleDeleteItemClick({ categoryId: product.categoryId! });
+                                        handleDeleteButtonClick(category.id!);
                                     }}>
                                         <img className={styles.deleteProductButtonIcon} src={DeleteIconImage} />
                                     </button>) : (<button className={styles.searchOtherProductsButton}>
