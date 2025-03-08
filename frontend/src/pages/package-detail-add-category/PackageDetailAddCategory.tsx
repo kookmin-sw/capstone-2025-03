@@ -1,48 +1,78 @@
 import SearchHeader from "@/src/components/layout/SearchHeader";
 import styles from "./PackageDetailAddCategory.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
-import EspressoMachineIconImage from "../../assets/images/dummy/espresso_machine.png";
-import CheckIconImage from "../../assets/images/section/check.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import EspressoMachineIconImage from "@/src/assets/images/dummy/espresso_machine.png";
+import CheckIconImage from "@/src/assets/images/section/check.png";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import IndustryModel from "@/src/models/IndustryModel";
+import { useCategory } from "@/src/hooks/useCategory";
+import { useRecoilState } from "recoil";
+import { edigingPackageState } from "@/src/recoil/packageState";
+import PackageModel from "@/src/models/PackageModel";
+import LoadingSection from "@/src/components/layout/LoadingSection";
+import CategoryModel from "@/src/models/CategoryModel";
 
 export default function PackageDetailAddCategory() {
+    // page connection
     const navigate = useNavigate();
-    const [checkedIds, setCheckedIds] = useState<string[]>([]);
-    const categories: { id: string, thumbnail: string, name: string }[] = [
-        { id: '0', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '1', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '2', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '3', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '4', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '5', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-    ];
+    const location = useLocation();
+    const industry: IndustryModel = IndustryModel.fromJson(location.state.industry || {});
+    // hook
+    const { categories, getCategory } = useCategory();
+    // recoil
+    const [editingPackage, setEdigingPackage] = useRecoilState(edigingPackageState);
+    // usestate
+    const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
+    const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(editingPackage.categoryIds);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const handleItemClick = (id: string) => {
-        setCheckedIds((prev) =>
-            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    // useEffect
+    useEffect(() => {
+        const missingCategories: number[] = industry.categoryIds.filter(
+            (categoryId) => !categories.some((category) => category.id === categoryId)
+        );
+        missingCategories.forEach((categoryId) => getCategory(categoryId));
+    }, [])
+    useEffect(() => {
+        if (isLoading && industry.categoryIds.every((categoryId) => categories.some((category) => category.id === categoryId))) {
+            setMyCategories(
+                categories.filter((category) => industry.categoryIds.includes(category.id!))
+            );
+            setIsLoading(false);
+        }
+    }, [categories])
+
+    // Function
+    const handleItemClick = (categoryId: number) => {
+        setCheckedCategoryIds((prev) =>
+            prev.includes(categoryId) ? prev.filter((item) => item !== categoryId) : [...prev, categoryId]
         );
     }
-
     const handleConfirmButtonClick = () => {
+        setEdigingPackage((prev) => PackageModel.fromJson({
+            ...prev,
+            categoryIds: checkedCategoryIds
+        }))
         navigate(-1);
     }
 
+    // return
     return (
-        <div className={styles.page}>
+        isLoading ? <LoadingSection text="잠시만 기다려주세요" /> : <div className={styles.page}>
             <SearchHeader text="카페에 필요한 물품들" />
             <div className={styles.section}>
                 <div className={styles.listView}>
-                    {categories.map((category, index) => {
+                    {myCategories.map((category, index) => {
                         return (
-                            <div className={styles.categoryItemContainer}>
-                                <div key={index} className={styles.categoryItem} onClick={() => { handleItemClick(category.id) }}>
-                                    <img className={styles.thumbnail} src={category.thumbnail} />
+                            <div key={index} className={styles.categoryItemContainer}>
+                                <div className={styles.categoryItem} onClick={() => { handleItemClick(category.id!) }}>
+                                    <img className={styles.thumbnail} src={category.thumbnail!} />
                                     <p className={styles.name}>
                                         {category.name}
                                     </p>
                                     <div className={styles.blank} />
-                                    {checkedIds.includes(category.id) ? <img className={styles.checkIcon} src={CheckIconImage} /> : null}
+                                    {checkedCategoryIds.includes(category.id!) ? <img className={styles.checkIcon} src={CheckIconImage} /> : null}
                                 </div>
                             </div>
                         )
