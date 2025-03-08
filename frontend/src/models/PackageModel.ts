@@ -39,39 +39,39 @@ export default class PackageModel {
 
     static fromJson(jsonData: any): PackageModel {
         return new PackageModel({
-            id: jsonData.id,
-            industryId: jsonData.industry_id,
-            categoryIds: jsonData.category_ids || [],
-            productIds: jsonData.product_ids || [],
-            name: jsonData.name,
-            thumbnail: jsonData.thumbnail,
-            description: jsonData.description,
-            price: jsonData.price
+            id: jsonData["id"],
+            industryId: jsonData["industry_id"],
+            categoryIds: jsonData["category_ids"] || [],
+            productIds: jsonData["product_ids"] || [],
+            name: jsonData["name"],
+            thumbnail: jsonData["thumbnail"],
+            description: jsonData["description"],
+            price: jsonData["price"]
         });
     }
 
     toJson(): any {
         return {
-            id: this.id,
-            industry_id: this.industryId,
-            category_ids: this.categoryIds,
-            product_ids: this.productIds,
-            name: this.name,
-            thumbnail: this.thumbnail,
-            description: this.description,
-            price: this.price
+            "id": this.id,
+            "industry_id": this.industryId,
+            "category_ids": this.categoryIds,
+            "product_ids": this.productIds,
+            "name": this.name,
+            "thumbnail": this.thumbnail,
+            "description": this.description,
+            "price": this.price
         };
     }
 
     toJsonWithoutId(): any {
         return {
-            industry_id: this.industryId,
-            category_ids: this.categoryIds,
-            product_ids: this.productIds,
-            name: this.name,
-            thumbnail: this.thumbnail,
-            description: this.description,
-            price: this.price
+            "industry_id": this.industryId,
+            "category_ids": this.categoryIds,
+            "product_ids": this.productIds,
+            "name": this.name,
+            "thumbnail": this.thumbnail,
+            "description": this.description,
+            "price": this.price
         };
     }
 }

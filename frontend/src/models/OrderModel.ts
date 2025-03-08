@@ -19,24 +19,24 @@ export default class OrderModel {
 
     static fromJson(jsonData: any): OrderModel {
         return new OrderModel({
-            id: jsonData.id,
-            userId: jsonData.user_id,
-            packageId: jsonData.package_id,
+            id: jsonData["id"],
+            userId: jsonData["user_id"],
+            packageId: jsonData["package_id"],
         });
     }
 
     toJson(): any {
         return {
-            id: this.id,
-            user_id: this.userId,
-            package_id: this.packageId,
+            "id": this.id,
+            "user_id": this.userId,
+            "package_id": this.packageId,
         };
     }
 
     toJsonWithoutId(): any {
         return {
-            user_id: this.userId,
-            package_id: this.packageId,
+            "user_id": this.userId,
+            "package_id": this.packageId,
         };
     }
 }

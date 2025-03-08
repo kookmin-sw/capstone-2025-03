@@ -1,112 +1,77 @@
-export default class BuyerProductModel {
+export default class PackageModel {
     id: number | null;
-    categoryId: number | null;
-    images: string[];
+    industryId: number | null;
+    categoryIds: number[];
+    productIds: number[];
+    thumbnail: string | null;
     name: string | null;
     description: string | null;
-    grade: string | null;
-    quantity: number;
-    price: number;
-    sellerId: number | null;
-    uploadDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
-    buyerId: number | null;
-    purchaseDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
-    salesStatus: string | null;
+    price: number | 0;
 
     constructor({
         id = null,
-        images = [],
-        categoryId = null,
+        industryId = null,
+        categoryIds = [],
+        productIds = [],
         name = null,
-        grade = null,
-        quantity = 0,
-        price = 0,
-        sellerId = null,
-        uploadDate = null,
-        buyerId = null,
-        purchaseDate = null,
+        thumbnail = null,
         description = null,
-        salesStatus = null
+        price = 0
     }: {
         id?: number | null;
-        images?: string[];
-        categoryId?: number | null;
+        industryId?: number | null;
+        categoryIds?: number[];
+        productIds?: number[];
         name?: string | null;
-        grade?: string | null;
-        quantity?: number;
-        price?: number;
-        sellerId?: number | null;
-        uploadDate?: string | null;
-        buyerId?: number | null;
-        purchaseDate?: string | null;
-        description?: string | null;
-        salesStatus?: string | null;
+        thumbnail?: string | null;
+        description: string | null;
+        price: number | 0;
     }) {
         this.id = id;
-        this.images = images;
-        this.categoryId = categoryId;
+        this.industryId = industryId;
+        this.categoryIds = categoryIds;
+        this.productIds = productIds;
         this.name = name;
-        this.grade = grade;
-        this.quantity = quantity;
-        this.price = price;
-        this.sellerId = sellerId;
-        this.uploadDate = uploadDate;
-        this.buyerId = buyerId;
-        this.purchaseDate = purchaseDate;
+        this.thumbnail = thumbnail;
         this.description = description;
-        this.salesStatus = salesStatus;
+        this.price = price;
     }
 
-    static fromJson(jsonData: any): BuyerProductModel {
-        return new BuyerProductModel({
-            id: jsonData.id,
-            images: jsonData.images || [],
-            categoryId: jsonData.category_id,
-            name: jsonData.name,
-            grade: jsonData.grade,
-            quantity: jsonData.quantity,
-            price: jsonData.price,
-            sellerId: jsonData.seller_id,
-            uploadDate: jsonData.upload_date,
-            buyerId: jsonData.buyer_id,
-            purchaseDate: jsonData.purchase_date,
-            description: jsonData.description,
-            salesStatus: jsonData.sales_status
+    static fromJson(jsonData: any): PackageModel {
+        return new PackageModel({
+            id: jsonData["id"],
+            industryId: jsonData["industry_id"],
+            categoryIds: jsonData["category_ids"] || [],
+            productIds: jsonData["product_ids"] || [],
+            name: jsonData["name"],
+            thumbnail: jsonData["thumbnail"],
+            description: jsonData["description"],
+            price: jsonData["price"]
         });
     }
 
     toJson(): any {
         return {
-            id: this.id,
-            images: this.images,
-            category_id: this.categoryId,
-            name: this.name,
-            grade: this.grade,
-            quantity: this.quantity,
-            price: this.price,
-            seller_id: this.sellerId,
-            upload_date: this.uploadDate,
-            buyer_id: this.buyerId,
-            purchase_date: this.purchaseDate,
-            description: this.description,
-            sales_status: this.salesStatus
+            "id": this.id,
+            "industry_id": this.industryId,
+            "category_ids": this.categoryIds,
+            "product_ids": this.productIds,
+            "name": this.name,
+            "thumbnail": this.thumbnail,
+            "description": this.description,
+            "price": this.price
         };
     }
 
     toJsonWithoutId(): any {
         return {
-            images: this.images,
-            category_id: this.categoryId,
-            name: this.name,
-            grade: this.grade,
-            quantity: this.quantity,
-            price: this.price,
-            seller_id: this.sellerId,
-            upload_date: this.uploadDate,
-            buyer_id: this.buyerId,
-            purchase_date: this.purchaseDate,
-            description: this.description,
-            sales_status: this.salesStatus
+            "industry_id": this.industryId,
+            "category_ids": this.categoryIds,
+            "product_ids": this.productIds,
+            "name": this.name,
+            "thumbnail": this.thumbnail,
+            "description": this.description,
+            "price": this.price
         };
     }
 }
