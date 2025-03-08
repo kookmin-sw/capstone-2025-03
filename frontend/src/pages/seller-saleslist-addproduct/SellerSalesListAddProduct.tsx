@@ -3,12 +3,13 @@ import BackHeader from "@/src/components/layout/BackHeader";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useProduct } from "@/src/contexts/ProductContext";
-
-import ProductModel from "@/src/models/ProductModel";
+import { useLocation } from "react-router-dom";
 
 export default function SellerSalesListAddProduct() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { createProduct, uploadProductImage } = useProduct();
+  const { selectedCategoryId, selectedCategoryName } = location.state;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [category, setCategory] = useState<string>("");
@@ -17,7 +18,7 @@ export default function SellerSalesListAddProduct() {
   const [number, setNumber] = useState<number | null>(null);
 
   const isButtonValid =
-    images.length !== 0 && category && name && grade && number;
+    images.length !== 0 && selectedCategoryId && name && grade && number;
 
   const handleAddImage = () => {
     if (fileInputRef.current) {
@@ -34,7 +35,7 @@ export default function SellerSalesListAddProduct() {
       try {
         const uploadedImageUrl = await uploadProductImage(file);
 
-        if (uploadedImageUrl) { 
+        if (uploadedImageUrl) {
           setImages((prevImages) => [...prevImages, uploadedImageUrl]);
           console.log(uploadedImageUrl);
         }
@@ -43,14 +44,17 @@ export default function SellerSalesListAddProduct() {
       }
     }
   };
-
-  console.log(images);
+  console.log( images,
+    selectedCategoryId,
+    name,
+    grade,
+    number,)
 
   const handleClickConfirmButton = () => {
     navigate("/seller-saleslist-productdetail", {
       state: {
         images,
-        category,
+        selectedCategoryId,
         name,
         grade,
         number,
@@ -79,9 +83,13 @@ export default function SellerSalesListAddProduct() {
               images[0] ||
               "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
             }
-            width={"30rem"}
+            width={images[0] ? "100%" : "30px"}
           />
-          물품 이미지를 업로드해주세요
+          {!images[0] && (
+            <span>
+              물품 이미지를 업로드해주세요
+            </span>
+          )}{" "}
         </button>
         <p className={styles.subtitle}>물품 정보</p>
         <form
@@ -89,10 +97,11 @@ export default function SellerSalesListAddProduct() {
           onSubmit={(e) => e.preventDefault()}
         >
           <input
-            value={category}
+            value={selectedCategoryName}
             className={styles.input}
             placeholder="카테고리"
-            onChange={(e) => setCategory(e.target.value)}
+            readOnly
+            onClick={() => navigate("/seller-saleslist-addproduct-getcategory")}
           />
           <input
             value={name}

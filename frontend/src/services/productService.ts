@@ -35,7 +35,7 @@ export const uploadProductImageInService = async (
         "Content-Type": "multipart/form-data",
       },
     });
-    return response.data.imageUrl;
+    return response.data.image_url;
   } catch (error) {
     console.error("Error uploading product image:", error);
     throw error;

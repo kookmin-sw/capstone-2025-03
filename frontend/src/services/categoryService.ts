@@ -1,18 +1,34 @@
 import axios from "axios";
-import { CategoryModel } from "../models/CategoryModel";
+import CategoryModel from "../models/CategoryModel";
 
-const API_BASE_URL = "https://api.example.com/categories";
+const API_BASE_URL = "https://django-uxvt.onrender.com";
 
 /**
  * 카테고리를 생성하고 서버에 저장합니다.
  * @param {CategoryModel} category - 생성할 카테고리 객체
  * @returns {Promise<void>}
  */
-export const createCategoryInService = async (category: CategoryModel): Promise<void> => {
+export const createCategoryInService = async (
+  category: CategoryModel
+): Promise<void> => {
   try {
     await axios.post(`${API_BASE_URL}`, category.toJson());
   } catch (error) {
     console.error("Error creating category:", error);
+    throw error;
+  }
+};
+
+// 모든 카테고리 불러오기
+export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/categories/`);
+    console.log("response")
+    return response.data.map((category: any) =>
+      CategoryModel.fromJson(category)
+    );
+  } catch (error) {
+    console.error("Error fetching all categories:", error);
     throw error;
   }
 };
@@ -26,7 +42,7 @@ export const getCategoryInService = async (
   categoryId: string
 ): Promise<CategoryModel | null> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/${categoryId}`);
+    const response = await axios.get(`${API_BASE_URL}/${categoryId}/`);
     return CategoryModel.fromJson(response.data);
   } catch (error) {
     console.error("Error fetching category:", error);
@@ -57,7 +73,9 @@ export const updateCategoryInService = async (
  * @param {string} categoryId - 삭제할 카테고리의 ID
  * @returns {Promise<void>}
  */
-export const deleteCategoryInService = async (categoryId: string): Promise<void> => {
+export const deleteCategoryInService = async (
+  categoryId: string
+): Promise<void> => {
   try {
     await axios.delete(`${API_BASE_URL}/${categoryId}`);
   } catch (error) {

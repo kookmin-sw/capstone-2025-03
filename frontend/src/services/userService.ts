@@ -85,11 +85,11 @@ export const deleteUserInService = async (userId: string): Promise<void> => {
  * @returns {Promise<UserModel | null>}
  */
 export const loginUserInService = async (
-  kakaoId: number
+  kakao_id: number
 ): Promise<{ success: boolean; user?: UserModel; error?: string }> => {
   try {
     const response = await axios.post(`${API_BASE_URL}/users/login/`, {
-      kakaoId,
+      kakao_id,
     });
     console.log(response)
     return { success: true, user: UserModel.fromJson(response.data) };

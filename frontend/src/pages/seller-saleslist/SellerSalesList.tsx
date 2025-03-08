@@ -6,6 +6,7 @@ import SellerProductItem from "@/src/components/ui/SellerProductItem";
 import { useNavigate } from "react-router-dom";
 import { getMyInfoInService } from "@/src/services/userService";
 import { useEffect } from "react";
+import { useUser } from "@/src/contexts/UserContext";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();
@@ -125,11 +126,11 @@ export default function SellerSalesList() {
     },
   ];
 
-  // 
+  //
   useEffect(() => {
-    const responseData = getMyInfoInService()
-    console.log(responseData)
-  })
+    const responseData = getMyInfoInService();
+    console.log(responseData);
+  });
 
   const handleClickAddProductButton = () => {
     navigate("/seller-saleslist-addproduct");
@@ -146,7 +147,12 @@ export default function SellerSalesList() {
           })}
         </div>
       </div>
-      <button className={styles.addProductButton} onClick={handleClickAddProductButton}>+</button>
+      <button
+        className={styles.addProductButton}
+        onClick={handleClickAddProductButton}
+      >
+        +
+      </button>
       <div className={styles.footerBar}>
         <Footer currentMenuIndex={currentMenuIndex} />
       </div>
