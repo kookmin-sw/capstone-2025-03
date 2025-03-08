@@ -19,15 +19,23 @@ import BuyerProductModel from "@/src/models/BuyerProductModel";
 import { useCategory } from "@/src/hooks/useCategory";
 import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
 import { industryData } from "@/src/constants/industryData";
+import { useOrder } from "@/src/hooks/useOrder";
+import OrderModel from "@/src/models/OrderModel";
+import { useUser } from "@/src/contexts/UserContext";
+import { usePackage } from "@/src/hooks/usePackage";
 
 export default function PackageDetail() {
     // page connection
     const navigate = useNavigate();
     const location = useLocation();
     const myPackage: PackageModel = PackageModel.fromJson(location.state?.pkg || {});
+    // context
+    const { user } = useUser();
     // hook
+    const { createPackage } = usePackage();
     const { categories } = useCategory();
     const { buyerProducts } = useBuyerProduct();
+    const { createOrder } = useOrder();
     // recoil
     const [editingPackage, setEdigingPackage] = useRecoilState(edigingPackageState);
     // useState
@@ -63,11 +71,17 @@ export default function PackageDetail() {
     const handleBuyButtonClick = () => {
         setIsModalOpen(!isModalOpen);
     };
-    const handleBuyConfirmButtonClick = () => {
+    const handleBuyConfirmButtonClick = async () => {
         setIsLoading(true);
-        setTimeout(() => {
+        const newPackage: PackageModel | null = await createPackage(editingPackage);
+        if (newPackage) {
+            await createOrder(OrderModel
+                .fromJson({ userId: user?.userId, packageId: newPackage.id }));
             setIsComplete(true);
-        }, 3000);
+        } else {
+            setIsLoading(false);
+            window.alert('주문에 오류가 발생하였습니다. 다시 시도해주세요.');
+        }
     };
     const handleAddProductButtonClick = (category: CategoryModel) => {
         navigate('/package-detail-add-product', { state: { category: category } });

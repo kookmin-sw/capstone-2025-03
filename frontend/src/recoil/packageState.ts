@@ -1,6 +1,5 @@
 import { atom } from "recoil";
 import PackageModel from "../models/PackageModel";
-import ProductModel from "../models/ProductModel";
 
 // Package Atom
 export const packageState = atom<PackageModel[]>({
