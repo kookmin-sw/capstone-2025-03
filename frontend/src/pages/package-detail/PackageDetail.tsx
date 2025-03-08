@@ -8,7 +8,7 @@ import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png
 import ArrowRightIconImage from "../../assets/images/page/package-detail/arrow_right.png";
 import DeleteIconImage from "../../assets/images/page/package-detail/delete.png";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 import CompleteSection from "@/src/components/layout/CompleteSection";
 import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
