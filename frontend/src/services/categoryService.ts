@@ -4,13 +4,28 @@ import CategoryModel from "../models/CategoryModel";
 const API_BASE_URL = "https://restart-s4b8.onrender.com";
 
 /**
- * 카테고리를 생성하고 서버에 저장합니다.
- * @param {CategoryModel} category - 생성할 카테고리 객체
- * @returns {Promise<void>}
+ * 전체 카테고리 리스트를 가져옵니다.
+ * @returns {Promise<CategoryModel[]>}
  */
-export const createCategoryInService = async (category: CategoryModel): Promise<void> => {
+export const getAllCategoriesInService = async (): Promise<CategoryModel[]> => {
   try {
-    await axios.post(`${API_BASE_URL}`, category.toJson());
+    const response = await axios.get(`${API_BASE_URL}/categories/`);
+    return response.data.map((category: any) => CategoryModel.fromJson(category));
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
+};
+
+/**
+ * 카테고리를 생성하고 서버에 저장합니다. (`id` 제외)
+ * @param {CategoryModel} category - 생성할 카테고리 객체
+ * @returns {Promise<CategoryModel>}
+ */
+export const createCategoryInService = async (category: CategoryModel): Promise<CategoryModel> => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/categories/`, category.toJsonWithoutId()); // `id` 제외
+    return CategoryModel.fromJson(response.data); // 서버에서 생성된 id 포함된 객체 반환
   } catch (error) {
     console.error("Error creating category:", error);
     throw error;
@@ -22,11 +37,9 @@ export const createCategoryInService = async (category: CategoryModel): Promise<
  * @param {number} categoryId - 가져올 카테고리의 ID
  * @returns {Promise<CategoryModel | null>}
  */
-export const getCategoryInService = async (
-  categoryId: number
-): Promise<CategoryModel | null> => {
+export const getCategoryInService = async (categoryId: number): Promise<CategoryModel | null> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/${categoryId}`);
+    const response = await axios.get(`${API_BASE_URL}/categories/${categoryId}/`);
     return CategoryModel.fromJson(response.data);
   } catch (error) {
     console.error("Error fetching category:", error);
@@ -38,14 +51,15 @@ export const getCategoryInService = async (
  * 특정 categoryId로 서버에서 카테고리 데이터를 업데이트합니다.
  * @param {number} categoryId - 업데이트할 카테고리의 ID
  * @param {Partial<CategoryModel>} updatedData - 업데이트할 데이터 객체
- * @returns {Promise<void>}
+ * @returns {Promise<CategoryModel>}
  */
 export const updateCategoryInService = async (
   categoryId: number,
   updatedData: Partial<CategoryModel>
-): Promise<void> => {
+): Promise<CategoryModel> => {
   try {
-    await axios.put(`${API_BASE_URL}/${categoryId}`, updatedData);
+    const response = await axios.put(`${API_BASE_URL}/categories/${categoryId}/`, updatedData);
+    return CategoryModel.fromJson(response.data); // 업데이트된 카테고리 반환
   } catch (error) {
     console.error("Error updating category:", error);
     throw error;
@@ -59,7 +73,7 @@ export const updateCategoryInService = async (
  */
 export const deleteCategoryInService = async (categoryId: number): Promise<void> => {
   try {
-    await axios.delete(`${API_BASE_URL}/${categoryId}`);
+    await axios.delete(`${API_BASE_URL}/categories/${categoryId}/`);
   } catch (error) {
     console.error("Error deleting category:", error);
     throw error;

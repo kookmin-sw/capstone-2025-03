@@ -30,9 +30,23 @@ export default class CategoryModel {
         });
     }
 
+    /**
+     * 기본 JSON 변환 (id 포함)
+     */
     toJson(): any {
         return {
             id: this.id,
+            industryIds: this.industryIds,
+            thumbnail: this.thumbnail,
+            name: this.name,
+        };
+    }
+
+    /**
+     * `POST` 요청을 위한 JSON 변환 (id 제외)
+     */
+    toJsonWithoutId(): any {
+        return {
             industryIds: this.industryIds,
             thumbnail: this.thumbnail,
             name: this.name,
