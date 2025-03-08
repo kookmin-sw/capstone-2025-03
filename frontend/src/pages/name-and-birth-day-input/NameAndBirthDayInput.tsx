@@ -36,7 +36,7 @@ export default function NameAndBirthDayInput() {
       (prevUser) =>
         new UserModel({
           ...prevUser,
-          kakaoEmail: "example@example.com",
+          kakaoEmail: "examplexmaple@example.com",
           createDate: new Date().toISOString(),
         })
     );
@@ -56,9 +56,12 @@ export default function NameAndBirthDayInput() {
           console.log("사용자 정보: ", response);
           setUser(
             (prevUser) =>
-              new UserModel({ ...prevUser, name: response.nickname })
+              new UserModel({
+                ...prevUser,
+                name: response.nickname,
+                profileImage: response.profileImage,
+              })
           );
-          // setKakaoEmail(response.email);
         })
         .catch((error) => console.error("카카오 로그인 오류:", error));
     }

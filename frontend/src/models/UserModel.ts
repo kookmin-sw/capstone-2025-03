@@ -1,6 +1,7 @@
 export class UserModel {
     userId: string | null;
     name: string | null;
+    profileImage: string | null;
     kakaoEmail: string | null;
     phoneNumber: string;
     birthDate: string | null; // ISO 8601: YYYY-MM-DD
@@ -11,6 +12,7 @@ export class UserModel {
     constructor({
         userId = null,
         name = null,
+        profileImage = null,
         kakaoEmail = null,
         phoneNumber = "",
         birthDate = null,
@@ -20,6 +22,7 @@ export class UserModel {
     }: {
         userId?: string | null;
         name?: string | null;
+        profileImage?: string | null;
         kakaoEmail?: string | null;
         phoneNumber?: string;
         birthDate?: string | null;
@@ -29,6 +32,7 @@ export class UserModel {
     }) {
         this.userId = userId;
         this.name = name;
+        this.profileImage = profileImage;
         this.kakaoEmail = kakaoEmail;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
@@ -41,6 +45,7 @@ export class UserModel {
         return new UserModel({
             userId: jsonData.userId,
             name: jsonData.name,
+            profileImage: jsonData.profileImage,
             kakaoEmail: jsonData.kakaoEmail,
             phoneNumber: jsonData.phoneNumber,
             birthDate: jsonData.birthDate,
@@ -53,11 +58,12 @@ export class UserModel {
     toJson(): any {
         return {
             name: this.name,
-            kakaoEmail: this.kakaoEmail,
-            phoneNumber: this.phoneNumber,
-            birthDate: this.birthDate,
-            fullAddress: this.fullAddress,
-            addressDetail: this.addressDetail,
+            profile_image: this.profileImage,
+            kakao_email: this.kakaoEmail,
+            phone_number: this.phoneNumber,
+            birth_date: this.birthDate,
+            full_address: this.fullAddress,
+            address_detail: this.addressDetail,
             createDate: this.createDate,
         };
     }
