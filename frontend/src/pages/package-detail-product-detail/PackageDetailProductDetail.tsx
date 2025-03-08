@@ -2,35 +2,30 @@ import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./PackageDetailProductDetail.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
 import { useLocation, useNavigate } from "react-router-dom";
+import BuyerProductModel from "@/src/models/BuyerProductModel";
+import { useRecoilState } from "recoil";
+import { edigingPackageState } from "@/src/recoil/packageState";
+import PackageModel from "@/src/models/PackageModel";
+import { useCategory } from "@/src/hooks/useCategory";
 
 export default function PackageDetailProductDetail() {
+    // page connection
     const navitgate = useNavigate();
     const location = useLocation();
-    const product = location.state?.product || {
-        id: "",
-        category: "",
-        name: "",
-        grade: "",
-        amount: 0,
-        price: 0,
-        thumbnail: ""
-    };
+    const product: BuyerProductModel = BuyerProductModel.fromJson(location.state?.product || {});
+    // hook
+    const { categories } = useCategory();
+    // recoil
+    const [editingPackage, setEditingPackage] = useRecoilState(edigingPackageState);
 
+    // Function
     const handleButtonClick = () => {
-        // localStorage에서 리스트 가져오기
-        let selectedProductIds = JSON.parse(localStorage.getItem('selectedProductIds') || '[]');
-
-        // 값이 없으면 추가, 있으면 해당 값을 모두 제거
-        if (!selectedProductIds.includes(product.id)) {
-            selectedProductIds = [...selectedProductIds, product.id];
-        } else {
-            // 특정 ID를 모두 제거
-            selectedProductIds = selectedProductIds.filter((id: string) => id !== product.id);
+        if (!editingPackage.productIds.includes(product.id!)) {
+            setEditingPackage((prev) => PackageModel.fromJson({
+                ...prev,
+                productIds: [...prev.productIds, product.id]
+            }))
         }
-
-        // 변경된 배열을 다시 localStorage에 저장
-        localStorage.setItem('selectedProductIds', JSON.stringify(selectedProductIds));
-
         navitgate(-1)
     }
 
@@ -38,15 +33,15 @@ export default function PackageDetailProductDetail() {
         <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
-                <img className={styles.thumbnail} src={product.thumbnail} />
+                <img className={styles.thumbnail} src={product.images[0]} />
                 <p className={styles.category}>
-                    {product.category}
+                    {categories.find((category) => category.id === product.categoryId)?.name}
                 </p>
                 <p className={styles.product}>
                     {product.name}
                 </p>
                 <p className={styles.gradeAndAmount}>
-                    {product.grade}등급 ∙ {product.amount}개
+                    {product.grade}등급 ∙ {product.quantity}개
                 </p>
                 <p className={styles.price}>
                     {product.price}원
