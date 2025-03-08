@@ -24,7 +24,7 @@ export default class CategoryModel {
     static fromJson(jsonData: any): CategoryModel {
         return new CategoryModel({
             id: jsonData.id,
-            industryIds: jsonData.industryIds || [],
+            industryIds: jsonData.industry_ids || [],
             thumbnail: jsonData.thumbnail,
             name: jsonData.name,
         });
@@ -33,7 +33,7 @@ export default class CategoryModel {
     toJson(): any {
         return {
             id: this.id,
-            industryIds: this.industryIds,
+            industry_ids: this.industryIds,
             thumbnail: this.thumbnail,
             name: this.name,
         };
@@ -41,7 +41,7 @@ export default class CategoryModel {
 
     toJsonWithoutId(): any {
         return {
-            industryIds: this.industryIds,
+            industry_ids: this.industryIds,
             thumbnail: this.thumbnail,
             name: this.name,
         };

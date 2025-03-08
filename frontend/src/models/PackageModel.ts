@@ -34,15 +34,15 @@ export default class PackageModel {
         this.name = name;
         this.thumbnail = thumbnail;
         this.description = description;
-        this.price = price
+        this.price = price;
     }
 
     static fromJson(jsonData: any): PackageModel {
         return new PackageModel({
             id: jsonData.id,
-            industryId: jsonData.industryId,
-            categoryIds: jsonData.categoryIds || [],
-            productIds: jsonData.productIds || [],
+            industryId: jsonData.industry_id,
+            categoryIds: jsonData.category_ids || [],
+            productIds: jsonData.product_ids || [],
             name: jsonData.name,
             thumbnail: jsonData.thumbnail,
             description: jsonData.description,
@@ -53,9 +53,9 @@ export default class PackageModel {
     toJson(): any {
         return {
             id: this.id,
-            industryId: this.industryId,
-            categoryIds: this.categoryIds,
-            productIds: this.productIds,
+            industry_id: this.industryId,
+            category_ids: this.categoryIds,
+            product_ids: this.productIds,
             name: this.name,
             thumbnail: this.thumbnail,
             description: this.description,
@@ -65,9 +65,9 @@ export default class PackageModel {
 
     toJsonWithoutId(): any {
         return {
-            industryId: this.industryId,
-            categoryIds: this.categoryIds,
-            productIds: this.productIds,
+            industry_id: this.industryId,
+            category_ids: this.categoryIds,
+            product_ids: this.productIds,
             name: this.name,
             thumbnail: this.thumbnail,
             description: this.description,

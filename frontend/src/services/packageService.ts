@@ -1,7 +1,7 @@
 import axios from "axios";
 import PackageModel from "../models/PackageModel";
 
-const API_BASE_URL = "https://restart-s4b8.onrender.com/packages";
+const API_BASE_URL = "https://django-uxvt.onrender.com/packages";
 
 /**
  * 서버에서 모든 패키지 데이터를 가져옵니다.

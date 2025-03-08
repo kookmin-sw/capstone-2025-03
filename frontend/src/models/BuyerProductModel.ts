@@ -61,17 +61,17 @@ export default class BuyerProductModel {
         return new BuyerProductModel({
             id: jsonData.id,
             images: jsonData.images || [],
-            categoryId: jsonData.categoryId,
+            categoryId: jsonData.category_id,
             name: jsonData.name,
             grade: jsonData.grade,
             quantity: jsonData.quantity,
             price: jsonData.price,
-            sellerId: jsonData.sellerId,
-            uploadDate: jsonData.uploadDate,
-            buyerId: jsonData.buyerId,
-            purchaseDate: jsonData.purchaseDate,
+            sellerId: jsonData.seller_id,
+            uploadDate: jsonData.upload_date,
+            buyerId: jsonData.buyer_id,
+            purchaseDate: jsonData.purchase_date,
             description: jsonData.description,
-            salesStatus: jsonData.salesStatus
+            salesStatus: jsonData.sales_status
         });
     }
 
@@ -79,34 +79,34 @@ export default class BuyerProductModel {
         return {
             id: this.id,
             images: this.images,
-            categoryId: this.categoryId,
+            category_id: this.categoryId,
             name: this.name,
             grade: this.grade,
             quantity: this.quantity,
             price: this.price,
-            sellerId: this.sellerId,
-            uploadDate: this.uploadDate,
-            buyerId: this.buyerId,
-            purchaseDate: this.purchaseDate,
+            seller_id: this.sellerId,
+            upload_date: this.uploadDate,
+            buyer_id: this.buyerId,
+            purchase_date: this.purchaseDate,
             description: this.description,
-            salesStatus: this.salesStatus
+            sales_status: this.salesStatus
         };
     }
 
     toJsonWithoutId(): any {
         return {
             images: this.images,
-            categoryId: this.categoryId,
+            category_id: this.categoryId,
             name: this.name,
             grade: this.grade,
             quantity: this.quantity,
             price: this.price,
-            sellerId: this.sellerId,
-            uploadDate: this.uploadDate,
-            buyerId: this.buyerId,
-            purchaseDate: this.purchaseDate,
+            seller_id: this.sellerId,
+            upload_date: this.uploadDate,
+            buyer_id: this.buyerId,
+            purchase_date: this.purchaseDate,
             description: this.description,
-            salesStatus: this.salesStatus
+            sales_status: this.salesStatus
         };
     }
 }

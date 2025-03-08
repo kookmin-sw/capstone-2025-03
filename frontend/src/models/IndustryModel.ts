@@ -2,7 +2,7 @@ export default class IndustryModel {
     id: number | null;
     icon: string | null;
     name: string | null;
-    categoryIds: number[]; // 추가된 필드
+    categoryIds: number[];
 
     constructor({
         id = null,
@@ -26,7 +26,7 @@ export default class IndustryModel {
             id: jsonData.id,
             icon: jsonData.icon,
             name: jsonData.name,
-            categoryIds: jsonData.categoryIds ?? [], // JSON 데이터에서 categoryIds가 없을 경우 빈 배열
+            categoryIds: jsonData.category_ids ?? [],
         });
     }
 
@@ -35,7 +35,7 @@ export default class IndustryModel {
             id: this.id,
             icon: this.icon,
             name: this.name,
-            categoryIds: this.categoryIds,
+            category_ids: this.categoryIds,
         };
     }
 }
