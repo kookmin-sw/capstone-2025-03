@@ -1,7 +1,7 @@
 import axios from "axios";
 import OrderModel from "../models/OrderModel";
 
-const API_BASE_URL = "https://restart-s4b8.onrender.com";
+const API_BASE_URL = "https://django-uxvt.onrender.com/orders";
 
 /**
  * 전체 주문 리스트를 가져옵니다.

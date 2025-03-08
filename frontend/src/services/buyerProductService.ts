@@ -1,7 +1,7 @@
 import axios from "axios";
 import BuyerProductModel from "../models/BuyerProductModel";
 
-const API_BASE_URL = "https://restart-s4b8.onrender.com/products";
+const API_BASE_URL = "https://django-uxvt.onrender.com/products";
 
 /**
  * 전체 구매자 상품 리스트를 가져옵니다.

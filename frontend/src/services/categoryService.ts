@@ -1,7 +1,7 @@
 import axios from "axios";
 import CategoryModel from "../models/CategoryModel";
 
-const API_BASE_URL = "https://restart-s4b8.onrender.com";
+const API_BASE_URL = "https://django-uxvt.onrender.com/categories";
 
 /**
  * 전체 카테고리 리스트를 가져옵니다.
