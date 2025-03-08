@@ -60,7 +60,7 @@ export default function PackageDetailAddCategory() {
     // return
     return (
         isLoading ? <LoadingSection text="잠시만 기다려주세요" /> : <div className={styles.page}>
-            <SearchHeader text="카페에 필요한 물품들" />
+            <SearchHeader text={`${industry.name}에 필요한 물품들`} />
             <div className={styles.section}>
                 <div className={styles.listView}>
                     {myCategories.map((category, index) => {
