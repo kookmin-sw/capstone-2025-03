@@ -2,113 +2,20 @@ import styles from "./Home.module.css";
 import MainHeader from "@/src/components/layout/MainHeader";
 import Footer from "@/src/components/layout/MenuFooter";
 import PackageItem from "@/src/components/ui/PackageItem";
-import SandClockImage from "../../assets/images/page/home/sand_clock.png";
-import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
+import SandClockImage from "@/src/assets/images/page/home/sand_clock.png";
 import { useNavigate } from "react-router-dom";
-import PackageModel from "@/src/models/PackageModel";
+import { usePackage } from "@/src/hooks/usePackage";
+import { useEffect } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
   const currentMenuIndex = 0;
-  const packages: PackageModel[] = [PackageModel.fromJson({
-    "id": 1,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }), PackageModel.fromJson({
-    "id": 2,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 3,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 4,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 5,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 6,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 7,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 8,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 9,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  }),
-  PackageModel.fromJson({
-    "id": 10,
-    "industry_id": 1,
-    "category_ids": [1, 2],
-    "product_ids": [1, 2],
-    "thumbnail": CoffeePackImage,
-    "name": "Restaurant Starter Pack",
-    "description": "Basic tools and kitchenware for new restaurants.",
-    "price": 90000
-  })];
+  const { packages, getPackageList } = usePackage();
+
+  // useEffect
+  useEffect(()=>{
+    getPackageList();
+  }, [])
 
   // Function
   const handleClickFindPackageButton = () => {
