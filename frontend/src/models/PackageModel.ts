@@ -62,4 +62,16 @@ export default class PackageModel {
             price: this.price
         };
     }
+
+    toJsonWithoutId(): any {
+        return {
+            industryId: this.industryId,
+            categoryIds: this.categoryIds,
+            productIds: this.productIds,
+            name: this.name,
+            thumbnail: this.thumbnail,
+            description: this.description,
+            price: this.price
+        };
+    }
 }
