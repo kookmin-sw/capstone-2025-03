@@ -125,11 +125,11 @@ export default function SellerSalesList() {
     },
   ];
 
-  // // 테스트용 본인 데이터 불러오기
-  // useEffect(() => {
-  //   const responseData = getMyInfoInService()
-  //   console.log(responseData)
-  // })
+  // 
+  useEffect(() => {
+    const responseData = getMyInfoInService()
+    console.log(responseData)
+  })
 
   const handleClickAddProductButton = () => {
     navigate("/seller-saleslist-addproduct");
