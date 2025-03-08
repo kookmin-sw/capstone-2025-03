@@ -7,7 +7,7 @@ const API_BASE_URL = "https://restart-s4b8.onrender.com";
  * 전체 카테고리 리스트를 가져옵니다.
  * @returns {Promise<CategoryModel[]>}
  */
-export const getAllCategoriesInService = async (): Promise<CategoryModel[]> => {
+export const getCategoryListInService = async (): Promise<CategoryModel[]> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/categories/`);
     return response.data.map((category: any) => CategoryModel.fromJson(category));
