@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 import WidgetImage from "../../assets/images/page/home/widget.png";
 import { useNavigate } from "react-router-dom";
 import PackageModel from "@/src/models/PackageModel";
+import { useCategory } from "@/src/hooks/useCategory";
+import { useEffect, useState } from "react";
+import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
+import { Spinner } from "@chakra-ui/react";
 
 const Item = styled.div`
   display: flex;
@@ -61,33 +65,74 @@ type PackageProps = {
 }
 
 export default function PackageItem({ pkg }: PackageProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const { categories, getCategory } = useCategory();
+  const { buyerProducts, getBuyerProduct } = useBuyerProduct();
+  const [categoryPreview, setCategoryPreview] = useState("");
   const navigate = useNavigate();
+
+  // useEffect
+  useEffect(() => {
+    const missingCategories = pkg.categoryIds.filter(
+      (categoryId) => !categories.find((category) => category.id === categoryId)
+    );
+    for (let i = 0; i < missingCategories.length; i++) getCategory(missingCategories[i]);
+    const missingProducts = pkg.productIds.filter(
+      (productId) => !buyerProducts.find((buyerProduct) => buyerProduct.id === productId)
+    );
+    for (let i = 0; i < missingProducts.length; i++) getBuyerProduct(missingProducts[i]);
+  }, []);
+
+  useEffect(() => {
+    if (isLoading
+      && pkg.categoryIds.every((categoryId) => categories.some((category) => category.id === categoryId))
+      && pkg.productIds.every((productId) => buyerProducts.some((buyerProduct) => buyerProduct.id === productId))) {
+      setIsLoading(false);
+    }
+  }, [categories, buyerProducts])
+
+  useEffect(() => {
+    const categoryNames = [];
+    let count = 0;
+    for (let i = 0; i < pkg.categoryIds.length; i++) {
+      if (categoryNames.length >= 2) count += 1;
+      categoryNames.push(categories.find((category) => category.id === pkg.categoryIds[i])?.name);
+    }
+    setCategoryPreview(`${categoryNames.join(", ")} ${count > 0 ? `외 ${count}가지로 구성` : "로 구성"}`);
+  }, [isLoading])
+
+  // Function: 패키지 아이템 클릭
   const handlePackageItemClick = () => {
-    navigate('/package-detail', {state:{pkg: pkg}});
+    navigate('/package-detail', { state: { pkg: pkg } });
   }
 
   return (
     <Item onClick={handlePackageItemClick}>
-      <Thumbnail src={pkg.thumbnail ?? undefined} />
-      <ContentContainer>
-        <Title>
-          {pkg.name}
-        </Title>
-        <Description>
-          {pkg.description}
-        </Description>
-        <Price>
-          {pkg.price}원
-        </Price>
-        <CategoryContainer>
-          <CategoryIcon src={WidgetImage} />
-          <CategoryText>
-            {pkg.categoryIds.map((category) => {
-              return (category);
-            })}로 구성
-          </CategoryText>
-        </CategoryContainer>
-      </ContentContainer>
+      {isLoading ? <Spinner
+        color="#00A36C"
+        borderWidth="0.6rem"
+        animationDuration="0.8s"
+        style={{ width: "2rem", height: "2rem" }}
+      /> : (<div>
+        <Thumbnail src={pkg.thumbnail ?? undefined} />
+        <ContentContainer>
+          <Title>
+            {pkg.name}
+          </Title>
+          <Description>
+            {pkg.description}
+          </Description>
+          <Price>
+            {pkg.price}원
+          </Price>
+          <CategoryContainer>
+            <CategoryIcon src={WidgetImage} />
+            <CategoryText>
+              {categoryPreview}
+            </CategoryText>
+          </CategoryContainer>
+        </ContentContainer>
+      </div>)}
     </Item>
   )
 }
