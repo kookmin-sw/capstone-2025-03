@@ -6,110 +6,15 @@ import { useLocation } from "react-router-dom";
 import BreadInCircleImage from "../../assets/images/industry/bread_in_circle.png";
 import IndustryModel from "@/src/models/IndustryModel";
 import PackageModel from "@/src/models/PackageModel";
+import { usePackage } from "@/src/hooks/usePackage";
+import { useUser } from "@/src/contexts/UserContext";
+import { useEffect } from "react";
 
 export default function FindPackageRecommend() {
+    const { user } = useUser();
+    const { packages, getPackageList } = usePackage();
     const location = useLocation();
     const industry: IndustryModel = IndustryModel.fromJson(location.state?.industry || { id: "", icon: "", name: "" });
-    let name: string = '박길현';
-    const packages: PackageModel[] = [PackageModel.fromJson({
-        "id": 1,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }), PackageModel.fromJson({
-        "id": 2,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 3,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 4,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 5,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 6,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 7,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 8,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 9,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    }),
-    PackageModel.fromJson({
-        "id": 10,
-        "industry_id": 1,
-        "category_ids": [1, 2],
-        "product_ids": [1, 2],
-        "thumbnail": CoffeePackImage,
-        "name": "Restaurant Starter Pack",
-        "description": "Basic tools and kitchenware for new restaurants.",
-        "price": 90000
-    })];
     const comments: { id: number, comment: string }[] = [
         { "id": 1, "comment": "맛있는 음식으로 고객의 입맛을 사로잡아보세요!" },
         { "id": 2, "comment": "아름다움을 책임지는 뷰티 전문가를 위한 공간입니다." },
@@ -141,12 +46,18 @@ export default function FindPackageRecommend() {
         { "id": 28, "comment": "스크린 스포츠 및 게임으로 색다른 재미를 제공하세요." }
     ]
 
+    // useEffect
+    useEffect(() => {
+        if(packages.length<1) getPackageList();
+    }, [])
+
+    // return
     return (
         <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
                 <p className={styles.title}>
-                    {name}님이 선택한 업종에서<br />한번에 사면 좋은 물품들
+                    {user?.name}님이 선택한 업종에서<br />한번에 사면 좋은 물품들
                 </p>
                 <div className={styles.contentContainer}>
                     <div className={styles.contentTextContainer}>
@@ -154,7 +65,7 @@ export default function FindPackageRecommend() {
                             {industry.name} 패키지 추천
                         </p>
                         <p className={styles.description}>
-                            {comments[(industry.id||1)- 1].comment}
+                            {comments.find((comment) => comment.id === industry.id)?.comment}
                         </p>
                     </div>
                     <div className={styles.blank} />

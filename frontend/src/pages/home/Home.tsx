@@ -14,7 +14,7 @@ export default function Home() {
 
   // useEffect
   useEffect(()=>{
-    getPackageList();
+    if(packages.length<1) getPackageList();
   }, [])
 
   // Function
