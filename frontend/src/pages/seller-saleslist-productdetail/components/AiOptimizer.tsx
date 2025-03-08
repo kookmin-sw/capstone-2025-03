@@ -62,8 +62,11 @@ const Stat = styled.div`
 
 const StatTitle = styled.p`
   font-size: 1.4rem;
+  text-align: center;
   color: white;
   margin-bottom: 2rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
 `;
 
 const StatValue = styled.p`
@@ -93,12 +96,8 @@ export default function AiOptimizer() {
       <Divider />
       <StatsContainer>
         <Stat>
-          <StatTitle>추천 판매 가격</StatTitle>
+          <StatTitle>업로드한 제품과 함께 많이 찾는 에스프레소 머신은 중고로 아래 가격대에서 잘 판매될 것으로 예상됩니다.</StatTitle>
           <StatValue>48,000원</StatValue>
-        </Stat>
-        <Stat>
-          <StatTitle>판매 확률</StatTitle>
-          <StatValue>87%</StatValue>
         </Stat>
       </StatsContainer>
     </Card>

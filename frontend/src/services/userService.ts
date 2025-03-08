@@ -54,6 +54,16 @@ export const updateUserInService = async (
   }
 };
 
+// 로그인한 본인 정보 불러오기
+export const getMyInfoInService = async() => {
+  try {
+    await axios.get(`${API_BASE_URL}/users/info/`)
+  } catch (error) {
+    console.log("Error fetching my data:", error)
+    throw error;
+  }
+}
+
 /**
  * 특정 userId로 서버에서 사용자 데이터를 삭제합니다.
  * @param {string} userId - 삭제할 사용자의 ID

@@ -6,12 +6,16 @@ import AiOptimizer from "./components/AiOptimizer";
 import PriceInput from "./components/PriceInput";
 import CompleteSection from "@/src/components/layout/CompleteSection";
 import LoadingSection from "@/src/components/layout/LoadingSection";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 export default function SellerSalesListProductDetail() {
   const [price, setPrice] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
+  const location = useLocation();
+  const { images, category, name, grade, number } = location.state;
+  console.log(images, category, name, grade, number)
 
   const isButtonValid = price;
 

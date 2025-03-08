@@ -36,7 +36,7 @@ export default function NameAndBirthDayInput() {
       (prevUser) =>
         new UserModel({
           ...prevUser,
-          kakaoEmail: "examplexmaple@example.com",
+          kakaoEmail: "example@example.com",
           createDate: new Date().toISOString(),
         })
     );
@@ -59,6 +59,7 @@ export default function NameAndBirthDayInput() {
               new UserModel({
                 ...prevUser,
                 name: response.nickname,
+                kakaoId: response.kakaoId,
                 profileImage: response.profileImage,
               })
           );

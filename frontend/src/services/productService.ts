@@ -1,8 +1,8 @@
 import axios from "axios";
 import ProductModel from "../models/ProductModel";
 
-const API_BASE_URL = "https://api.example.com/products";
-
+const API_BASE_URL = "https://django-uxvt.onrender.com";
+const IMAGE_BASE_URL = "https://image-cgwm.onrender.com";
 /**
  * 상품을 생성하고 서버에 저장합니다.
  * @param {ProductModel} product - 생성할 상품 객체
@@ -30,7 +30,7 @@ export const uploadProductImageInService = async (
   const formData = new FormData();
   formData.append("image", file);
   try {
-    const response = await axios.post(`${API_BASE_URL}/upload/`, formData, {
+    const response = await axios.post(`${IMAGE_BASE_URL}/upload/`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

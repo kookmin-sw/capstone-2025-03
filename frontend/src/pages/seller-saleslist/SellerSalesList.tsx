@@ -4,6 +4,8 @@ import Footer from "@/src/components/layout/MenuFooter";
 import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
 import SellerProductItem from "@/src/components/ui/SellerProductItem";
 import { useNavigate } from "react-router-dom";
+import { getMyInfoInService } from "@/src/services/userService";
+import { useEffect } from "react";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();
@@ -123,6 +125,11 @@ export default function SellerSalesList() {
     },
   ];
 
+  // // 테스트용 본인 데이터 불러오기
+  // useEffect(() => {
+  //   const responseData = getMyInfoInService()
+  //   console.log(responseData)
+  // })
 
   const handleClickAddProductButton = () => {
     navigate("/seller-saleslist-addproduct");

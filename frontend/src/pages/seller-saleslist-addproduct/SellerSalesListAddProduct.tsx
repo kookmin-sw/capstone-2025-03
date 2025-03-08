@@ -3,6 +3,7 @@ import BackHeader from "@/src/components/layout/BackHeader";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useProduct } from "@/src/contexts/ProductContext";
+
 import ProductModel from "@/src/models/ProductModel";
 
 export default function SellerSalesListAddProduct() {
@@ -33,8 +34,9 @@ export default function SellerSalesListAddProduct() {
       try {
         const uploadedImageUrl = await uploadProductImage(file);
 
-        if (uploadedImageUrl) {
+        if (uploadedImageUrl) { 
           setImages((prevImages) => [...prevImages, uploadedImageUrl]);
+          console.log(uploadedImageUrl);
         }
       } catch (error) {
         alert(`상품 이미지 업로드에 실패했습니다 : ${error}`);
@@ -42,10 +44,18 @@ export default function SellerSalesListAddProduct() {
     }
   };
 
-  console.log(images)
+  console.log(images);
 
   const handleClickConfirmButton = () => {
-    navigate("/seller-saleslist-productdetail");
+    navigate("/seller-saleslist-productdetail", {
+      state: {
+        images,
+        category,
+        name,
+        grade,
+        number,
+      },
+    });
   };
 
   return (
@@ -93,7 +103,7 @@ export default function SellerSalesListAddProduct() {
           <input
             value={grade}
             className={styles.input}
-            placeholder="등급 (A 또는 B)"
+            placeholder="등급 (중고 또는 새상품)"
             onChange={(e) => setGrade(e.target.value)}
           />
           <input
