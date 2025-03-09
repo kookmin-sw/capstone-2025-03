@@ -5,7 +5,7 @@ import AiOptimizer from "./components/AiOptimizer";
 import PriceInput from "./components/PriceInput";
 import CompleteSection from "@/src/components/layout/CompleteSection";
 import LoadingSection from "@/src/components/layout/LoadingSection";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSellerProduct } from "@/src/contexts/SellerProductContext";
 import SellerProductModel from "@/src/models/SellerProductModel";
@@ -22,6 +22,7 @@ type Product = {
 };
 
 export default function SellerSalesListProductDetail() {
+  const navigate = useNavigate();
   const { sellerProduct, createSellerProduct, setSellerProduct } =
     useSellerProduct();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -90,6 +91,7 @@ export default function SellerSalesListProductDetail() {
     try {
       await createSellerProduct(sellerProduct);
       setIsComplete(true);
+      navigate("/seller-saleslist")
     } catch (error) {
       alert(`물건 등록 실패 : ${error}`);
     } finally {
