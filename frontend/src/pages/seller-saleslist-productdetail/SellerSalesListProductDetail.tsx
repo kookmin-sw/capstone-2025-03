@@ -1,47 +1,102 @@
 import styles from "./SellerSalesListProductDetail.module.css";
 import BackHeader from "@/src/components/layout/BackHeader";
-import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
 import ProductItem from "@/src/components/ui/ProductItem";
 import AiOptimizer from "./components/AiOptimizer";
 import PriceInput from "./components/PriceInput";
 import CompleteSection from "@/src/components/layout/CompleteSection";
 import LoadingSection from "@/src/components/layout/LoadingSection";
-import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSellerProduct } from "@/src/contexts/SellerProductContext";
+import SellerProductModel from "@/src/models/SellerProductModel";
+
+type Product = {
+  id: string;
+  category: string;
+  name: string;
+  grade: string;
+  amount: number;
+  price: number | null;
+  status: string;
+  thumbnail: string;
+};
 
 export default function SellerSalesListProductDetail() {
-  const [price, setPrice] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const { sellerProduct, createSellerProduct, setSellerProduct } =
+    useSellerProduct();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
+  const [sellerId, setSellerId] = useState<number>();
+  const location = useLocation();
+  const {
+    images,
+    selectedCategoryName,
+    selectedCategoryId,
+    name,
+    grade,
+    number,
+  } = location.state;
 
-  const isButtonValid = price;
+  const [product, setProduct] = useState<Product>({
+    id: selectedCategoryId,
+    category: selectedCategoryName,
+    name: name,
+    grade: grade,
+    amount: number,
+    price: null,
+    status: grade,
+    thumbnail: images[0],
+  });
 
-  // 더미데이터
-  type Product = {
-    id: string;
-    category: string;
-    name: string;
-    grade: string;
-    amount: number;
-    price: number;
-    status: string;
-    thumbnail: string;
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setSellerId(userData.id);
+    }
+
+    setSellerProduct(
+      new SellerProductModel({
+        categoryId: selectedCategoryId,
+        sellerId: sellerId,
+        buyerId: null,
+        images: images,
+        name: name,
+        discription: null,
+        grade: grade,
+        quantity: number,
+        uploadDate: new Date().toISOString(),
+        saleStatus: "available",
+        purchaseDate: null,
+        price: product.price,
+      })
+    );
+  }, [sellerId, product.price]);
+
+  console.log(sellerProduct);
+
+  const isButtonValid = product.price;
+
+  const handlePriceChange = (newPrice: number | null) => {
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      price: newPrice,
+    }));
   };
-  const product: Product = {
-    id: "0",
-    category: "에스프레소 머신",
-    name: "바디프렌즈 에스프레소 머신1",
-    grade: "A",
-    amount: 3,
-    price: 48000,
-    status: "판매 완료",
-    thumbnail: EspressoMachineImage,
-  };
 
-  const hanldeSellButtonClick = () => {
+  const hanldeSellButtonClick = async () => {
     setIsLoading(true);
-    setTimeout(() => {
+    
+    try {
+      await createSellerProduct(sellerProduct);
       setIsComplete(true);
-    }, 3000);
+      navigate("/seller-saleslist")
+    } catch (error) {
+      alert(`물건 등록 실패 : ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return isLoading ? (
@@ -58,7 +113,7 @@ export default function SellerSalesListProductDetail() {
 
         <ProductItem product={product} />
         <AiOptimizer />
-        <PriceInput price={price} setPrice={setPrice} />
+        <PriceInput price={product.price} setPrice={handlePriceChange} />
         <button
           className={styles.submitButton}
           disabled={!isButtonValid}
