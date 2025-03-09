@@ -6,7 +6,9 @@ import PriceInput from "./components/PriceInput";
 import CompleteSection from "@/src/components/layout/CompleteSection";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSellerProduct } from "@/src/contexts/SellerProductContext";
+import SellerProductModel from "@/src/models/SellerProductModel";
 
 type Product = {
   id: string;
@@ -20,8 +22,11 @@ type Product = {
 };
 
 export default function SellerSalesListProductDetail() {
+  const { sellerProduct, createSellerProduct, setSellerProduct } =
+    useSellerProduct();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
+  const [sellerId, setSellerId] = useState<number>();
   const location = useLocation();
   const {
     images,
@@ -43,6 +48,33 @@ export default function SellerSalesListProductDetail() {
     thumbnail: images[0],
   });
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setSellerId(userData.id);
+    }
+
+    setSellerProduct(
+      new SellerProductModel({
+        categoryId: selectedCategoryId,
+        sellerId: sellerId,
+        buyerId: null,
+        images: images,
+        name: name,
+        discription: null,
+        grade: grade,
+        quantity: number,
+        uploadDate: new Date().toISOString(),
+        saleStatus: "available",
+        purchaseDate: null,
+        price: product.price,
+      })
+    );
+  }, [sellerId, product.price]);
+
+  console.log(sellerProduct);
+
   const isButtonValid = product.price;
 
   const handlePriceChange = (newPrice: number | null) => {
@@ -52,11 +84,17 @@ export default function SellerSalesListProductDetail() {
     }));
   };
 
-  const hanldeSellButtonClick = () => {
+  const hanldeSellButtonClick = async () => {
     setIsLoading(true);
-    setTimeout(() => {
+    
+    try {
+      await createSellerProduct(sellerProduct);
       setIsComplete(true);
-    }, 3000);
+    } catch (error) {
+      alert(`물건 등록 실패 : ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return isLoading ? (

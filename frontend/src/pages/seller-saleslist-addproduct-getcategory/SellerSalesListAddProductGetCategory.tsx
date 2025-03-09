@@ -13,7 +13,7 @@ export default function SellerSalesListAddProductGetCategory() {
   const [selectedCategoryName, setSelectedCategoryName] = useState<string>("");
 
   useEffect(() => {
-    // getAllCategory();
+    getAllCategory();
     if (selectedCategoryId && selectedCategoryName) {
       navigate("/seller-saleslist-addproduct", {
         state: { selectedCategoryId, selectedCategoryName },

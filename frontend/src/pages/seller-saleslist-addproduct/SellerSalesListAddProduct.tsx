@@ -12,7 +12,6 @@ export default function SellerSalesListAddProduct() {
   const { selectedCategoryId, selectedCategoryName } = location.state || {};
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<string[]>([]);
-  const [category, setCategory] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [number, setNumber] = useState<number | null>(null);
