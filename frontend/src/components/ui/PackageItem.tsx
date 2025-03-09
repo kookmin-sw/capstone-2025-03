@@ -66,31 +66,9 @@ type PackageProps = {
 }
 
 export default function PackageItem({ pkg }: PackageProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const { categories, getCategory } = useCategory();
-  const { buyerProducts, getBuyerProduct } = useBuyerProduct();
+  const { categories } = useCategory();
   const [categoryPreview, setCategoryPreview] = useState("");
   const navigate = useNavigate();
-
-  // useEffect
-  useEffect(() => {
-    const missingCategories = pkg.categoryIds.filter(
-      (categoryId) => !categories.find((category) => category.id === categoryId)
-    );
-    for (let i = 0; i < missingCategories.length; i++) getCategory(missingCategories[i]);
-    const missingProducts = pkg.productIds.filter(
-      (productId) => !buyerProducts.find((buyerProduct) => buyerProduct.id === productId)
-    );
-    for (let i = 0; i < missingProducts.length; i++) getBuyerProduct(missingProducts[i]);
-  }, []);
-
-  useEffect(() => {
-    if (isLoading
-      && pkg.categoryIds.every((categoryId) => categories.some((category) => category.id === categoryId))
-      && pkg.productIds.every((productId) => buyerProducts.some((buyerProduct) => buyerProduct.id === productId))) {
-      setIsLoading(false);
-    }
-  }, [categories, buyerProducts])
 
   useEffect(() => {
     const categoryNames = [];
@@ -100,7 +78,7 @@ export default function PackageItem({ pkg }: PackageProps) {
       categoryNames.push(categories.find((category) => category.id === pkg.categoryIds[i])?.name);
     }
     setCategoryPreview(`${categoryNames.join(", ")} ${count > 0 ? `외 ${count}가지로 구성` : "로 구성"}`);
-  }, [isLoading])
+  }, [])
 
   // Function: 패키지 아이템 클릭
   const handlePackageItemClick = () => {
@@ -109,31 +87,24 @@ export default function PackageItem({ pkg }: PackageProps) {
 
   return (
     <Item onClick={handlePackageItemClick}>
-      {isLoading ? <Spinner
-        color="#00A36C"
-        borderWidth="0.6rem"
-        animationDuration="0.8s"
-        style={{ width: "2rem", height: "2rem" }}
-      /> : (<>
-        <Thumbnail src={pkg.thumbnail ?? undefined} />
-        <ContentContainer>
-          <Title>
-            {pkg.name}
-          </Title>
-          <Description>
-            {pkg.description}
-          </Description>
-          <Price>
-            {pkg.price}원
-          </Price>
-          <CategoryContainer>
-            <CategoryIcon src={WidgetImage} />
-            <CategoryText>
-              {categoryPreview}
-            </CategoryText>
-          </CategoryContainer>
-        </ContentContainer>
-      </>)}
+      <Thumbnail src={pkg.thumbnail ?? undefined} />
+      <ContentContainer>
+        <Title>
+          {pkg.name}
+        </Title>
+        <Description>
+          {pkg.description}
+        </Description>
+        <Price>
+          {pkg.price}원
+        </Price>
+        <CategoryContainer>
+          <CategoryIcon src={WidgetImage} />
+          <CategoryText>
+            {categoryPreview}
+          </CategoryText>
+        </CategoryContainer>
+      </ContentContainer>
     </Item>
   )
 }
