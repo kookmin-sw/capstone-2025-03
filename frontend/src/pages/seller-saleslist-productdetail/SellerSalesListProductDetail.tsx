@@ -1,6 +1,5 @@
 import styles from "./SellerSalesListProductDetail.module.css";
 import BackHeader from "@/src/components/layout/BackHeader";
-import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
 import ProductItem from "@/src/components/ui/ProductItem";
 import AiOptimizer from "./components/AiOptimizer";
 import PriceInput from "./components/PriceInput";
@@ -9,36 +8,48 @@ import LoadingSection from "@/src/components/layout/LoadingSection";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
+type Product = {
+  id: string;
+  category: string;
+  name: string;
+  grade: string;
+  amount: number;
+  price: number | null;
+  status: string;
+  thumbnail: string;
+};
+
 export default function SellerSalesListProductDetail() {
-  const [price, setPrice] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const location = useLocation();
-  const { images, category, name, grade, number } = location.state;
-  console.log(images, category, name, grade, number)
+  const {
+    images,
+    selectedCategoryName,
+    selectedCategoryId,
+    name,
+    grade,
+    number,
+  } = location.state;
 
-  const isButtonValid = price;
+  const [product, setProduct] = useState<Product>({
+    id: selectedCategoryId,
+    category: selectedCategoryName,
+    name: name,
+    grade: grade,
+    amount: number,
+    price: null,
+    status: grade,
+    thumbnail: images[0],
+  });
 
-  // 더미데이터
-  type Product = {
-    id: string;
-    category: string;
-    name: string;
-    grade: string;
-    amount: number;
-    price: number;
-    status: string;
-    thumbnail: string;
-  };
-  const product: Product = {
-    id: "0",
-    category: "에스프레소 머신",
-    name: "바디프렌즈 에스프레소 머신1",
-    grade: "A",
-    amount: 3,
-    price: 48000,
-    status: "판매 완료",
-    thumbnail: EspressoMachineImage,
+  const isButtonValid = product.price;
+
+  const handlePriceChange = (newPrice: number | null) => {
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      price: newPrice,
+    }));
   };
 
   const hanldeSellButtonClick = () => {
@@ -62,7 +73,7 @@ export default function SellerSalesListProductDetail() {
 
         <ProductItem product={product} />
         <AiOptimizer />
-        <PriceInput price={price} setPrice={setPrice} />
+        <PriceInput price={product.price} setPrice={handlePriceChange} />
         <button
           className={styles.submitButton}
           disabled={!isButtonValid}

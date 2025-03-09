@@ -9,7 +9,7 @@ export default function SellerSalesListAddProduct() {
   const navigate = useNavigate();
   const location = useLocation();
   const { createProduct, uploadProductImage } = useProduct();
-  const { selectedCategoryId, selectedCategoryName } = location.state;
+  const { selectedCategoryId, selectedCategoryName } = location.state || {};
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [category, setCategory] = useState<string>("");
@@ -44,16 +44,12 @@ export default function SellerSalesListAddProduct() {
       }
     }
   };
-  console.log( images,
-    selectedCategoryId,
-    name,
-    grade,
-    number,)
 
   const handleClickConfirmButton = () => {
     navigate("/seller-saleslist-productdetail", {
       state: {
         images,
+        selectedCategoryName,
         selectedCategoryId,
         name,
         grade,
