@@ -7,7 +7,6 @@ import {
   updateUserInService,
   deleteUserInService,
   loginUserInService,
-  getMyInfoInService,
 } from "../services/userService";
 
 // Context에서 사용할 타입 정의

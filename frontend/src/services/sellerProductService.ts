@@ -3,7 +3,7 @@ import SellerProductModel from "../models/SellerProductModel";
 
 const API_BASE_URL = "https://django-uxvt.onrender.com";
 const IMAGE_BASE_URL = "https://image-cgwm.onrender.com";
-const AI_BASE_URL = "https://fastapi-lokg.onrender.com";
+// const AI_BASE_URL = "https://fastapi-lokg.onrender.com";
 /**
  * 상품을 생성하고 서버에 저장합니다.
  * @param {ProductModel} product - 생성할 상품 객체
@@ -95,9 +95,9 @@ export const deleteProductInService = async (
 };
 
 // AI 가 예측한 적정 판매가격을 반환
-export const predictedPrice = async (industries: string, ) => {
+export const predictedPrice = async (_: string, ) => {
   try {
-    const response = await axios.get(`${AI_BASE_URL}/predict`);
+    // const response = await axios.get(`${AI_BASE_URL}/predict`);
   } catch (error) {
     console.log("Error predicting price: ", error);
     throw error;
