@@ -5,7 +5,7 @@
         "category_ids": [2, 5, 8],
         "product_ids": [101, 104, 107],
         "name": "프리미엄 베이킹 패키지",
-        "thumbnail": "https://example.com/images/baking_package.jpg",
+        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
         "description": "고급 베이킹 장비와 필수 도구들을 포함한 패키지.",
         "price": 350000
     },
@@ -15,7 +15,7 @@
         "category_ids": [3, 7, 9],
         "product_ids": [102, 106, 108],
         "name": "카페 디저트 세트",
-        "thumbnail": "https://example.com/images/cafe_dessert.jpg",
+        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
         "description": "카페에서 활용할 수 있는 디저트 제작 도구 모음.",
         "price": 280000
     },
@@ -25,7 +25,7 @@
         "category_ids": [4, 6, 10],
         "product_ids": [103, 105, 109],
         "name": "초콜릿 전문 패키지",
-        "thumbnail": "https://example.com/images/choco_package.jpg",
+        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webpg",
         "description": "초콜릿 템퍼링 기기와 몰드를 포함한 전문가용 패키지.",
         "price": 420000
     },
@@ -35,7 +35,7 @@
         "category_ids": [2, 4, 6],
         "product_ids": [101, 103, 105],
         "name": "디저트 창업 패키지",
-        "thumbnail": "https://example.com/images/startup_package.jpg",
+        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
         "description": "디저트 가게 창업을 위한 필수 장비 모음.",
         "price": 500000
     },
@@ -45,7 +45,7 @@
         "category_ids": [5, 7, 8],
         "product_ids": [104, 106, 107],
         "name": "아이스크림 제조 패키지",
-        "thumbnail": "https://example.com/images/icecream_package.jpg",
+        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
         "description": "아이스크림 제조에 필요한 전기오븐과 냉동 장비 패키지.",
         "price": 380000
     }
