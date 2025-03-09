@@ -16,12 +16,12 @@ export const useCategory = () => {
     const [categories, setCategories] = useRecoilState(categoryState);
 
     // List Read
-    const getCategoryList = async (): Promise<CategoryModel[] | null> => {
+    const getCategoryList = async (): Promise<CategoryModel[]> => {
         const newCategoryList = useLocalData
             ? categoryData.map(category => CategoryModel.fromJson(category))
-            : await getCategoryListInService();
+            : await getCategoryListInService() ?? [];
 
-        if (newCategoryList) setCategories(newCategoryList);
+        setCategories(newCategoryList);
         return newCategoryList;
     };
 
