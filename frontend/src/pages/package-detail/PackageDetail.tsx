@@ -23,6 +23,7 @@ import { useOrder } from "@/src/hooks/useOrder";
 import OrderModel from "@/src/models/OrderModel";
 import { useUser } from "@/src/contexts/UserContext";
 import { usePackage } from "@/src/hooks/usePackage";
+import { getCurrentTimeISO } from "@/src/utils/dateUtil";
 
 export default function PackageDetail() {
     // page connection
@@ -76,7 +77,7 @@ export default function PackageDetail() {
         const newPackage: PackageModel | null = await createPackage(editingPackage);
         if (newPackage) {
             await createOrder(OrderModel
-                .fromJson({ userId: user?.userId, packageId: newPackage.id }));
+                .fromJson({ userId: user?.userId, packageId: newPackage.id, createdAt: getCurrentTimeISO() }));
             setIsComplete(true);
         } else {
             setIsLoading(false);

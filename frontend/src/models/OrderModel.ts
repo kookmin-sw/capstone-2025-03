@@ -2,19 +2,23 @@ export default class OrderModel {
     id: number | null;
     userId: number | null;
     packageId: number | null;
+    createdAt: string | null;
 
     constructor({
         id = null,
         userId = null,
         packageId = null,
+        createdAt = null,
     }: {
         id?: number | null;
         userId?: number | null;
         packageId?: number | null;
+        createdAt?: string | null;
     }) {
         this.id = id;
         this.userId = userId;
         this.packageId = packageId;
+        this.createdAt = createdAt;
     }
 
     static fromJson(jsonData: any): OrderModel {
@@ -22,6 +26,7 @@ export default class OrderModel {
             id: jsonData["id"],
             userId: jsonData["user_id"],
             packageId: jsonData["package_id"],
+            createdAt: jsonData["created_at"],
         });
     }
 
@@ -30,6 +35,7 @@ export default class OrderModel {
             "id": this.id,
             "user_id": this.userId,
             "package_id": this.packageId,
+            "created_at": this.createdAt,
         };
     }
 
@@ -37,6 +43,7 @@ export default class OrderModel {
         return {
             "user_id": this.userId,
             "package_id": this.packageId,
+            "created_at": this.createdAt,
         };
     }
 }
