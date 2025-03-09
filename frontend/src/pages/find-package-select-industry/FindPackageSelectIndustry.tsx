@@ -20,7 +20,7 @@ export default function FindPackageSelectIndustry() {
     const handleConfirmButtonClick = () => {
         if (currentId === null) return;
         const selectedIndustry = industries.find((item) => item.id === currentId);
-        navigate('/find-package-recommend', { state: { industry: selectedIndustry } });
+        navigate('/find-package-recommend', { state: { selectedIndustry: selectedIndustry?.toJson() } });
     }
 
     // return

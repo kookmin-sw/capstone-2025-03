@@ -1,20 +1,17 @@
 import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./FindPackageRecommend.module.css";
 import PackageItem from "@/src/components/ui/PackageItem";
-import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
 import { useLocation } from "react-router-dom";
-import BreadInCircleImage from "../../assets/images/industry/bread_in_circle.png";
+import BreadInCircleImage from "@/src/assets/images/industry/bread_in_circle.png";
 import IndustryModel from "@/src/models/IndustryModel";
-import PackageModel from "@/src/models/PackageModel";
 import { usePackage } from "@/src/hooks/usePackage";
 import { useUser } from "@/src/contexts/UserContext";
-import { useEffect } from "react";
 
 export default function FindPackageRecommend() {
     const { user } = useUser();
-    const { packages, getPackageList } = usePackage();
+    const { packages } = usePackage();
     const location = useLocation();
-    const industry: IndustryModel = IndustryModel.fromJson(location.state?.industry || { id: "", icon: "", name: "" });
+    const industry: IndustryModel = IndustryModel.fromJson(location.state?.selectedIndustry || { id: "", icon: "", name: "" });
     const comments: { id: number, comment: string }[] = [
         { "id": 1, "comment": "맛있는 음식으로 고객의 입맛을 사로잡아보세요!" },
         { "id": 2, "comment": "아름다움을 책임지는 뷰티 전문가를 위한 공간입니다." },
@@ -45,11 +42,7 @@ export default function FindPackageRecommend() {
         { "id": 27, "comment": "레저 사업으로 여가를 즐기는 고객을 만족시켜보세요!" },
         { "id": 28, "comment": "스크린 스포츠 및 게임으로 색다른 재미를 제공하세요." }
     ]
-
-    // useEffect
-    useEffect(() => {
-        if(packages.length<1) getPackageList();
-    }, [])
+    const myPackages = packages.filter((pkg) => pkg.industryId === industry.id);
 
     // return
     return (
@@ -73,7 +66,7 @@ export default function FindPackageRecommend() {
                     </img>
                 </div>
                 <div className={styles.packageLitView}>
-                    {packages.map((pkg, index) => {
+                    {myPackages.map((pkg, index) => {
                         return (
                             <PackageItem key={index} pkg={pkg} />
                         )

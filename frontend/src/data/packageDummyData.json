@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "industry_id": 3,
+        "industry_id": 1,
         "category_ids": [2, 5, 8],
         "product_ids": [101, 104, 107],
         "name": "프리미엄 베이킹 패키지",
@@ -21,7 +21,7 @@
     },
     {
         "id": 3,
-        "industry_id": 4,
+        "industry_id": 1,
         "category_ids": [4, 6, 10],
         "product_ids": [103, 105, 109],
         "name": "초콜릿 전문 패키지",
@@ -31,7 +31,7 @@
     },
     {
         "id": 4,
-        "industry_id": 5,
+        "industry_id": 1,
         "category_ids": [2, 4, 6],
         "product_ids": [101, 103, 105],
         "name": "디저트 창업 패키지",
@@ -41,7 +41,7 @@
     },
     {
         "id": 5,
-        "industry_id": 5,
+        "industry_id": 1,
         "category_ids": [5, 7, 8],
         "product_ids": [104, 106, 107],
         "name": "아이스크림 제조 패키지",
