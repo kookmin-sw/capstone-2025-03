@@ -4,12 +4,12 @@ import DefaultButton from "@/src/components/ui/DefaultButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IndustryModel from "@/src/models/IndustryModel";
-import { getIndustryData } from "@/src/utils/getIndustryData";
+import industryData from "@/src/data/industryData.json";
 
 export default function FindPackageSelectIndustry() {
     const navigate = useNavigate();
     const [currentId, setCurrentId] = useState<number | null>(0);
-    const industries: IndustryModel[] = getIndustryData();
+    const industries: IndustryModel[] = industryData.map((industry) => IndustryModel.fromJson(industry));
 
     // Function: 아이템 클릭
     const handleItemClick = (id: number | null) => {
