@@ -40,14 +40,16 @@ export const useCategory = () => {
 
     // Read
     const getCategory = async (categoryId: number): Promise<CategoryModel | null> => {
-        if (useLocalData) {
-            return categories.find(category => category.id === categoryId) || null;
-        }
-
         const targetCategory = categories.find(category => category.id === categoryId);
         if (targetCategory) return targetCategory;
 
-        const newCategory = await getCategoryInService(categoryId);
+        let newCategory = null;
+        if (useLocalData) {
+            const targetData = categoryData.find((category) => category.id === categoryId);
+            if(targetData) newCategory = CategoryModel.fromJson(targetData);
+        }else{
+            newCategory = await getCategoryInService(categoryId);
+        }
         if (newCategory) setCategories(prevCategories => [...prevCategories, newCategory]);
         return newCategory;
     };

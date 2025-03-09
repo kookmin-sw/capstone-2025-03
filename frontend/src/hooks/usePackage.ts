@@ -30,23 +30,23 @@ export const usePackage = () => {
             const categoryIdSet = new Set(categories.map(category => category.id));
             const productIdSet = new Set(buyerProducts.map(product => product.id));
 
-            // 누락된 category 가져오기
-            const missingCategoryIds = newPackageList
-                .flatMap(pkg => pkg.categoryIds)
-                .filter(categoryId => !categoryIdSet.has(categoryId));
+            // 누락된 category 가져오기 (중복 제거)
+            const missingCategoryIds = Array.from(new Set(
+                newPackageList.flatMap(pkg => pkg.categoryIds).filter(categoryId => !categoryIdSet.has(categoryId))
+            ));
 
-            // 누락된 product 가져오기
-            const missingProductIds = newPackageList
-                .flatMap(pkg => pkg.productIds)
-                .filter(productId => !productIdSet.has(productId));
+            // 누락된 product 가져오기 (중복 제거)
+            const missingProductIds = Array.from(new Set(
+                newPackageList.flatMap(pkg => pkg.productIds).filter(productId => !productIdSet.has(productId))
+            ));
 
             // API 호출 (누락된 ID가 있을 경우에만 실행)
             if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
+
             if (missingProductIds.length) {
-                for (const productId of missingProductIds) {
-                    await getBuyerProduct(productId);
-                }
+                await Promise.all(missingProductIds.map(getBuyerProduct));
             }
+
             // 상태 업데이트
             setPackages(newPackageList);
         }
@@ -95,7 +95,7 @@ export const usePackage = () => {
                 await getBuyerProduct(productId);
             }
         }
-                
+
         // 패키지 상태 업데이트
         setPackages(prevPackages => [...prevPackages, newPackage]);
         return newPackage;

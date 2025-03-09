@@ -9,8 +9,9 @@ import {
 } from "../services/buyerProductService";
 import BuyerProductModel from "../models/BuyerProductModel";
 import productDummyData from "@/src/data/productDummyData.json";
+import ProductModel from "../models/ProductModel";
 
-const useDummyData = false;
+const useDummyData = true;
 
 export const useBuyerProduct = () => {
     const [buyerProducts, setBuyerProducts] = useRecoilState(buyerProductState);
@@ -40,14 +41,16 @@ export const useBuyerProduct = () => {
 
     // Read
     const getBuyerProduct = async (productId: number): Promise<BuyerProductModel | null> => {
-        if (useDummyData) {
-            return buyerProducts.find(product => product.id === productId) || null;
-        }
-
         const targetBuyerProduct = buyerProducts.find(product => product.id === productId);
         if (targetBuyerProduct) return targetBuyerProduct;
 
-        const newBuyerProduct = await getBuyerProductInService(productId);
+        let newBuyerProduct = null;
+        if (useDummyData) {
+            const targetData = productDummyData.find(product => product.id === productId);
+            if (targetData) newBuyerProduct = BuyerProductModel.fromJson(targetData);
+        } else {
+            newBuyerProduct = await getBuyerProductInService(productId);
+        }
         if (newBuyerProduct) setBuyerProducts(prevBuyerProducts => [...prevBuyerProducts, newBuyerProduct]);
         return newBuyerProduct;
     };
