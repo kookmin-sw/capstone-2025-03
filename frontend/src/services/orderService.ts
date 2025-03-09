@@ -9,7 +9,7 @@ const API_BASE_URL = "https://django-uxvt.onrender.com/orders";
  */
 export const getOrderListInService = async (): Promise<OrderModel[] | null> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/orders/`);
+    const response = await axios.get(`${API_BASE_URL}/`);
     return response.data.map((order: any) => OrderModel.fromJson(order));
   } catch (error) {
     console.error("Error fetching orders:", error);
@@ -24,7 +24,7 @@ export const getOrderListInService = async (): Promise<OrderModel[] | null> => {
  */
 export const createOrderInService = async (order: OrderModel): Promise<OrderModel | null> => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/orders/`, order.toJsonWithoutId());
+    const response = await axios.post(`${API_BASE_URL}/`, order.toJsonWithoutId());
     return OrderModel.fromJson(response.data);
   } catch (error) {
     console.error("Error creating order:", error);
@@ -39,7 +39,7 @@ export const createOrderInService = async (order: OrderModel): Promise<OrderMode
  */
 export const getOrderInService = async (orderId: number): Promise<OrderModel | null> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/orders/${orderId}/`);
+    const response = await axios.get(`${API_BASE_URL}/${orderId}/`);
     return OrderModel.fromJson(response.data);
   } catch (error) {
     console.error("Error fetching order:", error);
@@ -58,7 +58,7 @@ export const updateOrderInService = async (
   updatedData: Partial<OrderModel>
 ): Promise<OrderModel | null> => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/orders/${orderId}/`, updatedData);
+    const response = await axios.put(`${API_BASE_URL}/${orderId}/`, updatedData);
     return OrderModel.fromJson(response.data);
   } catch (error) {
     console.error("Error updating order:", error);
@@ -73,7 +73,7 @@ export const updateOrderInService = async (
  */
 export const deleteOrderInService = async (orderId: number): Promise<boolean> => {
   try {
-    await axios.delete(`${API_BASE_URL}/orders/${orderId}/`);
+    await axios.delete(`${API_BASE_URL}/${orderId}/`);
     return true;
   } catch (error) {
     console.error("Error deleting order:", error);

@@ -36,11 +36,10 @@
   margin-bottom: 1rem;
 }
 
-/* .uploadedImage {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-} */
+.uploadedImage {
+  height: 20rem;
+  object-fit: contain;
+}
 
 .subtitle {
   font-size: 1.6rem;

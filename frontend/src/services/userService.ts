@@ -1,9 +1,9 @@
 import axios from "axios";
 import { UserModel } from "../models/UserModel";
 
-const API_BASE_URL = "https://restart-s4b8.onrender.com";
+const API_BASE_URL = "https://django-uxvt.onrender.com";
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
-const REDIRECT_URI =  `${window.location.origin}/name-and-birth-day-input`;
+const REDIRECT_URI = `${window.location.origin}/name-and-birth-day-input`;
 
 /**
  * 사용자를 생성하고 서버에 저장합니다.
@@ -26,7 +26,7 @@ export const createUserInService = async (user: UserModel): Promise<void> => {
  */
 export const getUserInService = async (
   userId: string
-): Promise<UserModel | null> => { 
+): Promise<UserModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${userId}`);
     return UserModel.fromJson(response.data);
@@ -54,6 +54,16 @@ export const updateUserInService = async (
   }
 };
 
+// 로그인한 본인 정보 불러오기
+export const getMyInfoInService = async () => {
+  try {
+    await axios.get(`${API_BASE_URL}/users/info/`);
+  } catch (error) {
+    console.log("Error fetching my data:", error);
+    throw error;
+  }
+};
+
 /**
  * 특정 userId로 서버에서 사용자 데이터를 삭제합니다.
  * @param {string} userId - 삭제할 사용자의 ID
@@ -75,18 +85,16 @@ export const deleteUserInService = async (userId: string): Promise<void> => {
  * @returns {Promise<UserModel | null>}
  */
 export const loginUserInService = async (
-  uid: string,
-  kakaoEmail: string
-): Promise<UserModel | null> => {
+  kakao_id: number
+): Promise<{ success: boolean; user?: UserModel; error?: string }> => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/login`, {
-      uid,
-      kakaoEmail,
+    const response = await axios.post(`${API_BASE_URL}/users/login/`, {
+      kakao_id,
     });
-    return UserModel.fromJson(response.data);
+    return { success: true, user: UserModel.fromJson(response.data.user_info) };
   } catch (error) {
     console.error("Error logging in user:", error);
-    return null;
+    return { success: false };
   }
 };
 
@@ -128,7 +136,7 @@ export const getKakaoUserInfo = async (accessToken: string) => {
       kakaoId: response.data.id,
       nickname: response.data.properties.nickname,
       profileImage: response.data.properties.profile_image,
-      email: response.data.kakao_account_email || "이메일 없음",
+      email: response.data.kakao_account.email || "이메일 없음",
     };
   } catch (error) {
     console.error("카카오 사용자 정보 요청 오류:", error);

@@ -10,7 +10,7 @@ import { createUserInService } from "@/src/services/userService";
 export default function AddressInput() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, setUser, createUser } = useUser();
+  const { user, setUser, createUser, loginUser } = useUser();
 
   const [address] = useState(location.state?.address || "");
   const [addressDetail, setaddressDetail] = useState<string>("");
@@ -21,18 +21,29 @@ export default function AddressInput() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // name 불러오기
-  const name = location.state?.name || sessionStorage.getItem("name") || "";
+  const name = sessionStorage.getItem("name") || "";
 
   const handleOpenSearch = () => {
     navigate("/address-search");
   };
   
+  const tryLogin = async (kakaoId: number) => {
+    const responseData = await loginUser(kakaoId);
+    // if (responseData)
+    // console.log("로그인 시도 : ", responseData);
+    console.log("회원가입 여부", responseData);
+    if (responseData) navigate("/");
+  };
+
   const handleConfirmButtonClick = async () => {
     if (!user) return;
     setIsLoading(true);
     try {
       await createUser(user);
       setIsComplete(true);
+      if (user.kakaoId !== null) {
+        tryLogin(user.kakaoId);
+      }
       setTimeout(() => {
         navigate("/");
       }, 3000);
@@ -67,8 +78,6 @@ export default function AddressInput() {
       window.visualViewport?.addEventListener("resize", handleResize);
     };
   }, [address, addressDetail]);
-
-  console.log(user);
 
   return isLoading ? (
     isComplete ? (

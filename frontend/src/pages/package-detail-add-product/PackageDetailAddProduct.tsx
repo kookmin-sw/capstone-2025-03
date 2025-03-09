@@ -1,7 +1,7 @@
 import SearchHeader from "@/src/components/layout/SearchHeader";
 import styles from "./PackageDetailAddProduct.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
-import ProductItem from "@/src/components/ui/ProductItem";
+import ProductItem from "@/src/components/ui/BuyerProductItem";
 import { useLocation, useNavigate } from "react-router-dom";
 import CheckIconImage from "@/src/assets/images/section/check.png";
 import CategoryModel from "@/src/models/CategoryModel";

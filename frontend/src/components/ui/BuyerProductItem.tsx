@@ -31,7 +31,7 @@ const Title = styled.p`
 
 const GradeAndAmount = styled.p`
   font-size: 1.4rem;
-  color: #7f7f89;
+  color: #7F7F89;
 `;
 
 const Price = styled.p`
@@ -39,32 +39,21 @@ const Price = styled.p`
   font-weight: bold;
 `;
 
-type ProductItemProps = {
-  product: {
-    id: string;
-    name: string;
-    grade: string;
-    amount: number;
-    price: number | null;
-    thumbnail: string;
-  };
-};
-
-export default function ProductItem({ product }: ProductItemProps) {
-  return (
-    <Item>
-      <Thumbnail src={product.thumbnail} />
-      <ContentContainer>
-        <Title>{product.name}</Title>
+export default function ProductItem({ product }: { product: BuyerProductModel }) {
+    return (
+        <Item>
+        <Thumbnail src= { product.images[0] } />
+        <ContentContainer>
+        <Title>
+        { product.name }
+        </Title>
         <GradeAndAmount>
-          {product.grade} ∙ {product.amount}개
+    { product.grade } 등급 ∙ { product.quantity } 개
         </GradeAndAmount>
         <Price>
-          {product.price !== null
-            ? `${product.price.toLocaleString()}원`
-            : "가격 미정"}
+    { product.price } 원
         </Price>
-      </ContentContainer>
-    </Item>
-  );
+        </ContentContainer>
+        </Item>
+  )
 }

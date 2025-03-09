@@ -12,7 +12,7 @@ import { useUser } from "@/src/contexts/UserContext";
 
 export default function NameAndBirthDayInput() {
   const navigate = useNavigate();
-  const { user, setUser } = useUser();
+  const { user, setUser, loginUser } = useUser();
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
   const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
@@ -30,37 +30,45 @@ export default function NameAndBirthDayInput() {
     3: "생년월일을 입력해주세요",
   }[step];
 
+  // 이미 회원일 시 홈으로 이동
+  const tryLogin = async (kakaoId: number) => {
+    const responseData = await loginUser(kakaoId);
+    // if (responseData)
+    // console.log("로그인 시도 : ", responseData);
+    console.log("회원가입 여부", responseData);
+    if (responseData) navigate("/");
+  };
+
   // 액세스 토큰으로 사용자 정보 가져옴
   useEffect(() => {
-    setUser(
-      (prevUser) =>
-        new UserModel({
-          ...prevUser,
-          kakaoEmail: "example@example.com",
-          createDate: new Date().toISOString(),
-        })
-    );
+    if (!code) return;
+
+    let isMounted = true;
+
+    getKakaoAccessToken(code)
+      .then(async (accessToken) => {
+        console.log("액세스 토큰: ", accessToken);
+        const response = await getKakaoUserInfo(accessToken);
+
+        await tryLogin(response.kakaoId);
+
+        if (isMounted) {
+          setUser(
+            new UserModel({
+              name: response.nickname,
+              kakaoId: response.kakaoId,
+              profileImage: response.profileImage,
+              kakaoEmail: response.email,
+              createDate: new Date().toISOString(),
+            })
+          );
+        }
+      })
+      .catch((error) => console.error("카카오 로그인 오류:", error));
+
     // 세션스토리지에 이름 저장
     if (user?.name) {
       sessionStorage.setItem("name", user.name);
-    }
-
-    if (code) {
-      getKakaoAccessToken(code)
-        .then((accessToken) => {
-          console.log("액세스 토큰: ", accessToken);
-
-          return getKakaoUserInfo(accessToken);
-        })
-        .then((response) => {
-          console.log("사용자 정보: ", response);
-          setUser(
-            (prevUser) =>
-              new UserModel({ ...prevUser, name: response.nickname })
-          );
-          // setKakaoEmail(response.email);
-        })
-        .catch((error) => console.error("카카오 로그인 오류:", error));
     }
     const handleResize = () => {
       if (window.visualViewport) {
@@ -70,8 +78,9 @@ export default function NameAndBirthDayInput() {
     window.visualViewport?.addEventListener("resize", handleResize);
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
+      isMounted = false;
     };
-  }, [code, user?.name]);
+  }, [code]);
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -108,8 +117,6 @@ export default function NameAndBirthDayInput() {
     );
     if (newValue.length === 13) setStep(3);
   };
-
-  console.log(user);
 
   return (
     <div className={styles.page}>

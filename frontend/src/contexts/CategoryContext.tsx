@@ -5,6 +5,7 @@ import {
   getCategoryInService,
   updateCategoryInService,
   deleteCategoryInService,
+  getAllCategoryInService
 } from "../services/categoryService";
 
 // Context에서 사용할 타입 정의
@@ -15,10 +16,13 @@ interface CategoryContextType {
   updateCategory: (categoryId: number, updatedData: Partial<CategoryModel>) => Promise<void>;
   deleteCategory: (categoryId: number) => Promise<void>;
   setCategories: React.Dispatch<React.SetStateAction<CategoryModel[]>>;
+  getAllCategory: () => Promise<void>;
 }
 
 // Context 생성
-const CategoryContext = createContext<CategoryContextType | undefined>(undefined);
+const CategoryContext = createContext<CategoryContextType | undefined>(
+  undefined
+);
 
 // Provider 컴포넌트
 export const CategoryProvider = ({ children }: { children: ReactNode }) => {
@@ -28,22 +32,36 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   const createCategory = async (newCategory: CategoryModel) => {
     try {
       await createCategoryInService(newCategory);
-      setCategories(prev => [...prev, newCategory]);
+      setCategories((prev) => [...prev, newCategory]);
     } catch (error) {
       console.error("Error creating category in context:", error);
       throw error;
     }
   };
 
-  // 특정 카테고리 가져오기
-  const fetchCategory = async (categoryId: number): Promise<CategoryModel | null> => {
+  // 모든 카테고리 가져오기
+  const getAllCategory = async() => {
     try {
-      const existingCategory = categories.find(category => category.id === categoryId);
+      const allCategories = await getAllCategoryInService();
+      setCategories(allCategories);
+    } catch (error) {
+      console.error("Error fetching all categories:", error);
+    }
+  }
+
+  // 특정 카테고리 가져오기
+  const fetchCategory = async (
+    categoryId: number
+  ): Promise<CategoryModel | null> => {
+    try {
+      const existingCategory = categories.find(
+        (category) => category.id === Number(categoryId)
+      );
       if (existingCategory) return existingCategory;
-      
-      const fetchedCategory = await getCategoryInService(categoryId);
+
+      const fetchedCategory = await getCategoryInService(Number(categoryId));
       if (fetchedCategory) {
-        setCategories(prev => [...prev, fetchedCategory]);
+        setCategories((prev) => [...prev, fetchedCategory]);
       }
       return fetchedCategory;
     } catch (error) {
@@ -56,9 +74,13 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   const updateCategory = async (categoryId: number, updatedData: Partial<CategoryModel>) => {
     try {
       await updateCategoryInService(categoryId, updatedData);
-      setCategories(prev => prev.map(category => 
-        category.id === categoryId ? new CategoryModel({ ...category, ...updatedData }) : category
-      ));
+      setCategories((prev) =>
+        prev.map((category) =>
+          category.id === Number(categoryId)
+            ? new CategoryModel({ ...category, ...updatedData })
+            : category
+        )
+      );
     } catch (error) {
       console.error("Error updating category in context:", error);
       throw error;
@@ -69,7 +91,9 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   const deleteCategory = async (categoryId: number) => {
     try {
       await deleteCategoryInService(categoryId);
-      setCategories(prev => prev.filter(category => category.id !== categoryId));
+      setCategories((prev) =>
+        prev.filter((category) => category.id !== Number(categoryId))
+      );
     } catch (error) {
       console.error("Error deleting category in context:", error);
       throw error;
@@ -78,7 +102,15 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CategoryContext.Provider
-      value={{ categories, fetchCategory, createCategory, updateCategory, deleteCategory, setCategories }}
+      value={{
+        categories,
+        fetchCategory,
+        createCategory,
+        updateCategory,
+        deleteCategory,
+        setCategories,
+        getAllCategory,
+      }}
     >
       {children}
     </CategoryContext.Provider>

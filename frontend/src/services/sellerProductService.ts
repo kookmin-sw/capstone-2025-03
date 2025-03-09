@@ -1,19 +1,19 @@
 import axios from "axios";
-import ProductModel from "../models/ProductModel";
+import SellerProductModel from "../models/SellerProductModel";
 
 const API_BASE_URL = "https://django-uxvt.onrender.com";
 const IMAGE_BASE_URL = "https://image-cgwm.onrender.com";
-
+const AI_BASE_URL = "https://fastapi-lokg.onrender.com";
 /**
  * 상품을 생성하고 서버에 저장합니다.
  * @param {ProductModel} product - 생성할 상품 객체
  * @returns {Promise<void>}
  */
 export const createProductInService = async (
-  product: ProductModel
+  product: SellerProductModel
 ): Promise<void> => {
   try {
-    await axios.post(`${API_BASE_URL}`, product.toJson());
+    await axios.post(`${API_BASE_URL}/products/`, product.toJson());
   } catch (error) {
     console.error("Error creating product:", error);
     throw error;
@@ -45,15 +45,15 @@ export const uploadProductImageInService = async (
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 가져옵니다.
- * @param {number} productId - 가져올 상품의 ID
+ * @param {string} productId - 가져올 상품의 ID
  * @returns {Promise<ProductModel | null>}
  */
 export const getProductInService = async (
-  productId: number
-): Promise<ProductModel | null> => {
+  productId: string
+): Promise<SellerProductModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${productId}`);
-    return ProductModel.fromJson(response.data);
+    return SellerProductModel.fromJson(response.data);
   } catch (error) {
     console.error("Error fetching product:", error);
     return null;
@@ -62,13 +62,13 @@ export const getProductInService = async (
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 업데이트합니다.
- * @param {number} productId - 업데이트할 상품의 ID
+ * @param {string} productId - 업데이트할 상품의 ID
  * @param {Partial<ProductModel>} updatedData - 업데이트할 데이터 객체
  * @returns {Promise<void>}
  */
 export const updateProductInService = async (
-  productId: number,
-  updatedData: Partial<ProductModel>
+  productId: string,
+  updatedData: Partial<SellerProductModel>
 ): Promise<void> => {
   try {
     await axios.put(`${API_BASE_URL}/${productId}`, updatedData);
@@ -80,16 +80,26 @@ export const updateProductInService = async (
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 삭제합니다.
- * @param {number} productId - 삭제할 상품의 ID
+ * @param {string} productId - 삭제할 상품의 ID
  * @returns {Promise<void>}
  */
 export const deleteProductInService = async (
-  productId: number
+  productId: string
 ): Promise<void> => {
   try {
     await axios.delete(`${API_BASE_URL}/${productId}`);
   } catch (error) {
     console.error("Error deleting product:", error);
+    throw error;
+  }
+};
+
+// AI 가 예측한 적정 판매가격을 반환
+export const predictedPrice = async (industries: string, ) => {
+  try {
+    const response = await axios.get(`${AI_BASE_URL}/predict`);
+  } catch (error) {
+    console.log("Error predicting price: ", error);
     throw error;
   }
 };
