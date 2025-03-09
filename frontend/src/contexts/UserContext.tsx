@@ -47,7 +47,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   // 로그인 한 본인 정보 불러오기
   const fetchMyInfo = async () => {
     try {
-      const responseData = await getMyInfoInService();
+      // const responseData = await getMyInfoInService();
       // console.log(responseData);
     } catch (error) {
       console.log("Error getting my info in context", error);

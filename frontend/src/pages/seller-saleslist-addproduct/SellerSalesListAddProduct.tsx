@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 export default function SellerSalesListAddProduct() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { createProduct, uploadProductImage } = useProduct();
+  const { uploadProductImage } = useProduct();
   const { selectedCategoryId, selectedCategoryName } = location.state || {};
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<string[]>([]);

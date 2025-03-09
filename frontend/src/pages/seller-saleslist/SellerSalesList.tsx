@@ -6,7 +6,6 @@ import SellerProductItem from "@/src/components/ui/SellerProductItem";
 import { useNavigate } from "react-router-dom";
 import { getMyInfoInService } from "@/src/services/userService";
 import { useEffect } from "react";
-import { useUser } from "@/src/contexts/UserContext";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();

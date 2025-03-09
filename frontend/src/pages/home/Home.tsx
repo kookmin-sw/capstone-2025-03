@@ -6,7 +6,6 @@ import SandClockImage from "@/src/assets/images/page/home/sand_clock.png";
 import { useNavigate } from "react-router-dom";
 import { usePackage } from "@/src/hooks/usePackage";
 import { useEffect, useState } from "react";
-import { Spinner } from "@chakra-ui/react";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 
 export default function Home() {

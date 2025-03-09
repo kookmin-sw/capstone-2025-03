@@ -1,4 +1,3 @@
-import BuyerProductModel from "@/src/models/BuyerProductModel";
 import styled from "@emotion/styled";
 
 const Item = styled.div`

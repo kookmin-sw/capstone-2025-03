@@ -9,7 +9,6 @@ import {
 } from "../services/buyerProductService";
 import BuyerProductModel from "../models/BuyerProductModel";
 import productDummyData from "@/src/data/productDummyData.json";
-import ProductModel from "../models/ProductModel";
 
 const useDummyData = true;
 
