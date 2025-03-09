@@ -48,7 +48,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const fetchMyInfo = async () => {
     try {
       const responseData = await getMyInfoInService();
-      console.log(responseData);
+      // console.log(responseData);
     } catch (error) {
       console.log("Error getting my info in context", error);
       throw error;
@@ -100,8 +100,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const loginUser = async (kakaoId: number) => {
     try {
       const result = await loginUserInService(kakaoId);
-      if (result.success && result.user) {
+      // console.log(result.user, "결과 유저")
+      if (result.user && result.user?.userId !== null) {
         setUser(result.user);
+        console.log("로그인유저정보", result.user)
+        localStorage.setItem("user", JSON.stringify(result.user.toJson()));
         return true;
       } else {
         return false;

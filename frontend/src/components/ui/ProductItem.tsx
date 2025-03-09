@@ -56,7 +56,7 @@ export default function ProductItem({ product }: ProductItemProps) {
       <ContentContainer>
         <Title>{product.name}</Title>
         <GradeAndAmount>
-          {product.grade}등급 ∙ {product.amount}개
+          {product.grade} ∙ {product.amount}개
         </GradeAndAmount>
         <Price>
           {product.price !== null

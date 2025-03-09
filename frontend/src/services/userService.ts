@@ -91,8 +91,7 @@ export const loginUserInService = async (
     const response = await axios.post(`${API_BASE_URL}/users/login/`, {
       kakao_id,
     });
-    console.log(response)
-    return { success: true, user: UserModel.fromJson(response.data) };
+    return { success: true, user: UserModel.fromJson(response.data.user_info) };
   } catch (error) {
     console.error("Error logging in user:", error);
     return { success: false };

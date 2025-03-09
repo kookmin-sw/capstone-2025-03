@@ -12,7 +12,7 @@ import { useUser } from "@/src/contexts/UserContext";
 
 export default function NameAndBirthDayInput() {
   const navigate = useNavigate();
-  const { user, setUser, loginUser, fetchMyInfo } = useUser();
+  const { user, setUser, loginUser } = useUser();
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
   const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
@@ -35,8 +35,8 @@ export default function NameAndBirthDayInput() {
     const responseData = await loginUser(kakaoId);
     // if (responseData)
     // console.log("로그인 시도 : ", responseData);
+    console.log("회원가입 여부", responseData);
     if (responseData) navigate("/");
-    fetchMyInfo();
   };
 
   // 액세스 토큰으로 사용자 정보 가져옴
@@ -49,7 +49,7 @@ export default function NameAndBirthDayInput() {
       .then(async (accessToken) => {
         console.log("액세스 토큰: ", accessToken);
         const response = await getKakaoUserInfo(accessToken);
-        // ✅ 먼저 tryLogin 실행
+
         await tryLogin(response.kakaoId);
 
         if (isMounted) {
@@ -66,6 +66,10 @@ export default function NameAndBirthDayInput() {
       })
       .catch((error) => console.error("카카오 로그인 오류:", error));
 
+    // 세션스토리지에 이름 저장
+    if (user?.name) {
+      sessionStorage.setItem("name", user.name);
+    }
     const handleResize = () => {
       if (window.visualViewport) {
         setVisibleHeight(window.visualViewport.height);
@@ -113,8 +117,6 @@ export default function NameAndBirthDayInput() {
     );
     if (newValue.length === 13) setStep(3);
   };
-
-  console.log(user);
 
   return (
     <div className={styles.page}>
