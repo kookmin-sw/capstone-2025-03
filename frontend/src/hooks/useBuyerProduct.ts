@@ -8,44 +8,31 @@ import {
     deleteBuyerProductInService
 } from "../services/buyerProductService";
 import BuyerProductModel from "../models/BuyerProductModel";
-import { useEffect, useState } from "react";
+import productDummyData from "@/src/data/productDummyData.json";
+
+const useDummyData = true;
 
 export const useBuyerProduct = () => {
     const [buyerProducts, setBuyerProducts] = useRecoilState(buyerProductState);
-    const [isTest, setIsTest] = useState(true);
-
-    useEffect(() => {
-        if (!isTest) return;
-        // TODO: 지워야함
-        const dummy = {
-            "id": 1192,
-            "category_id": 2,
-            "images": [
-                "https://search.pstatic.net/common/?src=http%3A%2F%2Fshopping.phinf.naver.net%2Fmain_5219342%2F52193428036.20241230220850.jpg&type=sc960_832",
-            ],
-            "name": "전기오븐",
-            "description": "개좋은 전기 오븐입니다",
-            "grade": "A",
-            "quantity": 50,
-            "price": 12900,
-            "seller_id": 501,
-            "upload_date": "2025-03-09T14:30:00.000Z",
-            "buyer_id": null,
-            "purchase_date": null,
-            "sales_status": "available"
-        };
-        setBuyerProducts((prev) => [...prev, BuyerProductModel.fromJson(dummy)]);
-    }, []);
 
     // List Read
     const getBuyerProductList = async (): Promise<BuyerProductModel[] | null> => {
-        const newBuyerProductList = await getBuyerProductListInService();
-        // if (newBuyerProductList) setBuyerProducts(newBuyerProductList);
+        const newBuyerProductList = useDummyData
+            ? productDummyData.map(product => BuyerProductModel.fromJson(product))
+            : await getBuyerProductListInService();
+
+        if (newBuyerProductList) setBuyerProducts(newBuyerProductList);
         return newBuyerProductList;
     };
 
     // Create
     const createBuyerProduct = async (buyerProductData: BuyerProductModel): Promise<BuyerProductModel | null> => {
+        if (useDummyData) {
+            const newProduct = BuyerProductModel.fromJson({ ...buyerProductData, id: buyerProducts.length + 1 }); // 임시 ID 생성
+            setBuyerProducts(prevBuyerProducts => [...prevBuyerProducts, newProduct]);
+            return newProduct;
+        }
+
         const newBuyerProduct = await createBuyerProductInService(buyerProductData);
         if (newBuyerProduct) setBuyerProducts(prevBuyerProducts => [...prevBuyerProducts, newBuyerProduct]);
         return newBuyerProduct;
@@ -53,8 +40,13 @@ export const useBuyerProduct = () => {
 
     // Read
     const getBuyerProduct = async (productId: number): Promise<BuyerProductModel | null> => {
-        const targetBuyerProduct = buyerProducts.find((product) => product.id === productId);
+        if (useDummyData) {
+            return buyerProducts.find(product => product.id === productId) || null;
+        }
+
+        const targetBuyerProduct = buyerProducts.find(product => product.id === productId);
         if (targetBuyerProduct) return targetBuyerProduct;
+
         const newBuyerProduct = await getBuyerProductInService(productId);
         if (newBuyerProduct) setBuyerProducts(prevBuyerProducts => [...prevBuyerProducts, newBuyerProduct]);
         return newBuyerProduct;
@@ -62,17 +54,30 @@ export const useBuyerProduct = () => {
 
     // Update
     const updateBuyerProduct = async (productId: number, updatedData: Partial<BuyerProductModel>): Promise<BuyerProductModel | null> => {
+        if (useDummyData) {
+            const updatedProducts = buyerProducts.map(product =>
+                BuyerProductModel.fromJson(product.id === productId ? { ...product, ...updatedData } : product)
+            );
+            setBuyerProducts(updatedProducts);
+            return updatedProducts.find(product => product.id === productId) || null;
+        }
+
         const newBuyerProduct = await updateBuyerProductInService(productId, updatedData);
         if (newBuyerProduct) setBuyerProducts(prevBuyerProducts =>
-            prevBuyerProducts.map((product) => product.id === productId ? newBuyerProduct : product)
+            prevBuyerProducts.map(product => product.id === productId ? newBuyerProduct : product)
         );
         return newBuyerProduct;
     };
 
     // Delete
     const deleteBuyerProduct = async (productId: number): Promise<boolean> => {
+        if (useDummyData) {
+            setBuyerProducts(prevBuyerProducts => prevBuyerProducts.filter(product => product.id !== productId));
+            return true;
+        }
+
         const isSuccess = await deleteBuyerProductInService(productId);
-        if (isSuccess) setBuyerProducts(prevBuyerProducts => prevBuyerProducts.filter((product) => product.id !== productId));
+        if (isSuccess) setBuyerProducts(prevBuyerProducts => prevBuyerProducts.filter(product => product.id !== productId));
         return isSuccess;
     };
 
