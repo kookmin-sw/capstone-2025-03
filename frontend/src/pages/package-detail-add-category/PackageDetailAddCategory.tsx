@@ -1,17 +1,15 @@
 import SearchHeader from "@/src/components/layout/SearchHeader";
 import styles from "./PackageDetailAddCategory.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
-import EspressoMachineIconImage from "@/src/assets/images/dummy/espresso_machine.png";
 import CheckIconImage from "@/src/assets/images/section/check.png";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import IndustryModel from "@/src/models/IndustryModel";
 import { useCategory } from "@/src/hooks/useCategory";
 import { useRecoilState } from "recoil";
 import { editingPackageState } from "@/src/recoil/packageState";
 import PackageModel from "@/src/models/PackageModel";
-import LoadingSection from "@/src/components/layout/LoadingSection";
 import CategoryModel from "@/src/models/CategoryModel";
+import IndustryModel from "@/src/models/IndustryModel";
 
 export default function PackageDetailAddCategory() {
     // page connection
@@ -19,29 +17,17 @@ export default function PackageDetailAddCategory() {
     const location = useLocation();
     const industry: IndustryModel = IndustryModel.fromJson(location.state.industry || {});
     // hook
-    const { categories, getCategory } = useCategory();
+    const { categories } = useCategory();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
     const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(editingPackage?.categoryIds || []);
-    const [isLoading, setIsLoading] = useState(true);
 
     // useEffect
     useEffect(() => {
-        const missingCategories: number[] = industry.categoryIds.filter(
-            (categoryId) => !categories.some((category) => category.id === categoryId)
-        );
-        missingCategories.forEach((categoryId) => getCategory(categoryId));
+        setMyCategories(categories.filter((category) => category.industryIds.includes(industry.id!)));
     }, [])
-    useEffect(() => {
-        if (isLoading && industry.categoryIds.every((categoryId) => categories.some((category) => category.id === categoryId))) {
-            setMyCategories(
-                categories.filter((category) => industry.categoryIds.includes(category.id!))
-            );
-            setIsLoading(false);
-        }
-    }, [categories])
 
     // Function
     const handleItemClick = (categoryId: number) => {
@@ -50,16 +36,17 @@ export default function PackageDetailAddCategory() {
         );
     }
     const handleConfirmButtonClick = () => {
-        setEditingPackage((prev) => PackageModel.fromJson({
-            ...prev,
-            categoryIds: checkedCategoryIds
-        }))
+        const newEditingPackage = PackageModel.fromJson({
+            ...editingPackage?.toJson(),
+            "category_ids": checkedCategoryIds
+        });
+        setEditingPackage(newEditingPackage);
         navigate(-1);
     }
 
     // return
     return (
-        isLoading ? <LoadingSection text="잠시만 기다려주세요" /> : <div className={styles.page}>
+        <div className={styles.page}>
             <SearchHeader text={`${industry.name}에 필요한 물품들`} />
             <div className={styles.section}>
                 <div className={styles.listView}>
@@ -67,7 +54,7 @@ export default function PackageDetailAddCategory() {
                         return (
                             <div key={index} className={styles.categoryItemContainer}>
                                 <div className={styles.categoryItem} onClick={() => { handleItemClick(category.id!) }}>
-                                    <img className={styles.thumbnail} src={category.thumbnail!} />
+                                    <img className={styles.thumbnail} src={category.thumbnail || "https://static.cdn.kmong.com/gigs/F1zfb1718452618.jpg"} />
                                     <p className={styles.name}>
                                         {category.name}
                                     </p>

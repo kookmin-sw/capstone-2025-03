@@ -4,7 +4,6 @@ import DefaultButton from "@/src/components/ui/DefaultButton";
 import PackageItem from "@/src/components/ui/PackageItem";
 import AddIconImage from "@/src/assets/images/page/package-detail/add_icon.png";
 import EditIconImage from "@/src/assets/images/page/package-detail/edit_icon.png";
-import EspressoMachineImage from "@/src/assets/images/dummy/espresso_machine.png";
 import ArrowRightIconImage from "@/src/assets/images/page/package-detail/arrow_right.png";
 import DeleteIconImage from "@/src/assets/images/page/package-detail/delete.png";
 import { useEffect, useState } from "react";
@@ -18,7 +17,7 @@ import { editingPackageState } from "@/src/recoil/packageState";
 import BuyerProductModel from "@/src/models/BuyerProductModel";
 import { useCategory } from "@/src/hooks/useCategory";
 import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
-import { industryData } from "@/src/constants/industryData";
+import industryData from "@/src/data/industryData.json";
 import { useOrder } from "@/src/hooks/useOrder";
 import OrderModel from "@/src/models/OrderModel";
 import { useUser } from "@/src/contexts/UserContext";
@@ -49,14 +48,18 @@ export default function PackageDetail() {
 
     // UseEffect
     useEffect(() => {
+        let targetPackage = null;
         if (!editingPackage) {
+            targetPackage = myPackage;
             setEditingPackage(myPackage);
+        }else{
+            targetPackage = editingPackage
         }
-        const newMyCategories: CategoryModel[] = myPackage.categoryIds
+        const newMyCategories: CategoryModel[] = targetPackage.categoryIds
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
         setMyCategories(newMyCategories);
-        const newMyProducts: BuyerProductModel[] = myPackage.productIds
+        const newMyProducts: BuyerProductModel[] = targetPackage.productIds
             .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
             .filter(Boolean) as BuyerProductModel[];
         setMyProducts(newMyProducts);
@@ -64,7 +67,7 @@ export default function PackageDetail() {
 
     // Function
     const handleAddCategoryButtonClick = () => {
-        navigate('/package-detail-add-category', { state: { industry: industryData.find((industry) => industry.id === myPackage.industryId) } })
+        navigate('/package-detail-add-category', { state: { industry: (industryData.find((industry) => industry.id === myPackage.industryId)) } })
     }
     const handleEditButtonClick = () => {
         setIsEdit(!isEdit);
@@ -97,9 +100,9 @@ export default function PackageDetail() {
         setEditingPackage((prev) => {
             if (!prev) return prev;
             return PackageModel.fromJson({
-                ...prev,
-                categoryIds: prev.categoryIds.filter((id) => id !== categoryId),
-                productIds: prev.productIds.filter((id) => myProducts.some((product) => product.id === id))
+                ...prev.toJson(),
+                "category_ids": prev.categoryIds.filter((id) => id !== categoryId),
+                "product_ids": prev.productIds.filter((id) => myProducts.some((product) => product.id === id))
             });
         });
     }

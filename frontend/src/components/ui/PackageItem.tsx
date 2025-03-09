@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import PackageModel from "@/src/models/PackageModel";
 import { useCategory } from "@/src/hooks/useCategory";
 import { useEffect, useState } from "react";
-import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
-import { Spinner } from "@chakra-ui/react";
+import { useRecoilState } from "recoil";
+import { editingPackageState } from "@/src/recoil/packageState";
 
 const Item = styled.div`
   display: flex;
@@ -68,6 +68,7 @@ type PackageProps = {
 export default function PackageItem({ pkg }: PackageProps) {
   const { categories } = useCategory();
   const [categoryPreview, setCategoryPreview] = useState("");
+  const [, setEditingPackage] = useRecoilState(editingPackageState);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function PackageItem({ pkg }: PackageProps) {
 
   // Function: 패키지 아이템 클릭
   const handlePackageItemClick = () => {
+    setEditingPackage(null);
     navigate('/package-detail', { state: { pkg: pkg.toJson() } });
   }
 
