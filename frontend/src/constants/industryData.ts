@@ -29,7 +29,7 @@ import leisure from "../assets/images/industry_icons/leisure.png";
 import screen from "../assets/images/industry_icons/screen.png";
 
 export const industryData: IndustryModel[] = [
-    new IndustryModel({ id: 1, icon: food, name: "음식", categoryIds: [] }),
+    new IndustryModel({ id: 1, icon: food, name: "음식", categoryIds: [2] }),
     new IndustryModel({ id: 2, icon: beauty, name: "뷰티", categoryIds: [] }),
     new IndustryModel({ id: 3, icon: overseasTrade, name: "해외장사", categoryIds: [] }),
     new IndustryModel({ id: 4, icon: lessonShop, name: "레슨샵", categoryIds: [] }),

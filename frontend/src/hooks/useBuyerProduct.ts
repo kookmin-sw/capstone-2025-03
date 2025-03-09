@@ -16,6 +16,28 @@ export const useBuyerProduct = () => {
     const getBuyerProductList = async (): Promise<BuyerProductModel[] | null> => {
         const newBuyerProductList = await getBuyerProductListInService();
         if (newBuyerProductList) setBuyerProducts(newBuyerProductList);
+        // TODO: 지워야함
+        if(!newBuyerProductList){
+            const dummy = {
+                "id": 1192,
+                "categoryId": 2,
+                "images": [
+                    "https://search.pstatic.net/common/?src=http%3A%2F%2Fshopping.phinf.naver.net%2Fmain_5219342%2F52193428036.20241230220850.jpg&type=sc960_832",
+                ],
+                "name": "전기오븐",
+                "description": "개좋은 전기 오븐입니다",
+                "grade": "A",
+                "quantity": 50,
+                "price": 12900,
+                "sellerId": 501,
+                "uploadDate": "2025-03-09T14:30:00.000Z",
+                "buyerId": null,
+                "purchaseDate": null,
+                "salesStatus": "available"
+            }
+            
+            setBuyerProducts((prev) => [...prev, BuyerProductModel.fromJson(dummy)]);
+        }
         return newBuyerProductList;
     };
 

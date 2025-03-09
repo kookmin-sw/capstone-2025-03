@@ -16,6 +16,20 @@ export const usePackage = () => {
     const getPackageList = async (): Promise<PackageModel[] | null> => {
         const newPackageList = await getPackageListInService();
         if (newPackageList) setPackages(newPackageList);
+        // TODO: 지워야함
+        if(!newPackageList){
+            const dummy = {
+                "id": 9999999,
+                "industry_id": 1,
+                "category_ids": [2],
+                "product_ids": [1192],
+                "name": "프리미엄 카페 패키지",
+                "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/8f/28/63/inside-that-cafe.jpg?w=900&h=500&s=1",
+                "description": "이 패키지는 카페를 위한 마케팅 솔루션을 제공합니다.",
+                "price": 299000
+            }
+            setPackages((prev) => [...prev, PackageModel.fromJson(dummy)]);
+        }
         return newPackageList;
     };
 

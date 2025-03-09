@@ -16,6 +16,18 @@ export const useCategory = () => {
     const getCategoryList = async (): Promise<CategoryModel[] | null> => {
         const newCategoryList = await getCategoryListInService();
         if (newCategoryList) setCategories(newCategoryList);
+        // TODO: 지워야함
+        if (!newCategoryList) {
+            const dummy = {
+                "id": 2,
+                "name": "전기오븐",
+                "industry_ids": [
+                    1,
+                ],
+                "thumbnail": "https://qi-o.qoo10cdn.com/goods_image_big/9/4/8/5/9912309485_l.jpg"
+            }
+            setCategories((prev) => [...prev, CategoryModel.fromJson(dummy)]);
+        }
         return newCategoryList;
     }
 
@@ -49,5 +61,5 @@ export const useCategory = () => {
         return isSuccess;
     }
 
-    return {categories, getCategoryList, createCategory, getCategory, updateCategory, deleteCategory}
+    return { categories, getCategoryList, createCategory, getCategory, updateCategory, deleteCategory }
 }
