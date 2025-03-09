@@ -16,6 +16,7 @@ const Item = styled.div`
 
 const Thumbnail = styled.img`
   width: 12rem;
+  height: 12rem;
   border-radius: 1.2rem;
   margin-right: 1rem;
 `;
@@ -113,7 +114,7 @@ export default function PackageItem({ pkg }: PackageProps) {
         borderWidth="0.6rem"
         animationDuration="0.8s"
         style={{ width: "2rem", height: "2rem" }}
-      /> : (<div>
+      /> : (<>
         <Thumbnail src={pkg.thumbnail ?? undefined} />
         <ContentContainer>
           <Title>
@@ -132,7 +133,7 @@ export default function PackageItem({ pkg }: PackageProps) {
             </CategoryText>
           </CategoryContainer>
         </ContentContainer>
-      </div>)}
+      </>)}
     </Item>
   )
 }
