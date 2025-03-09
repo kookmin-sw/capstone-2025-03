@@ -1,14 +1,13 @@
-import styles from "./Home.module.css";
+import styles from "./HyeonTest.module.css";
 import MainHeader from "@/src/components/layout/MainHeader";
 import Footer from "@/src/components/layout/MenuFooter";
 import PackageItem from "@/src/components/ui/PackageItem";
 import SandClockImage from "../../assets/images/page/home/sand_clock.png";
 import CoffeePackImage from "../../assets/images/dummy/coffee_pack.png";
-import { useNavigate } from "react-router-dom";
+import { getPackageListInService } from "@/src/services/packageService";
 import PackageModel from "@/src/models/PackageModel";
 
-export default function Home() {
-  const navigate = useNavigate();
+export default function HyeonTest() {
   const currentMenuIndex = 0;
   const packages: PackageModel[] = [PackageModel.fromJson({
     "id": 1,
@@ -111,8 +110,9 @@ export default function Home() {
   })];
 
   // Function
-  const handleClickFindPackageButton = () => {
-    navigate('/find-package-select-industry');
+  const handleClickFindPackageButton = async () => {
+    const result = await getPackageListInService();
+    console.log(result);
   }
 
   return (

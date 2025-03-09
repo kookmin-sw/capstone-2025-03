@@ -11,13 +11,13 @@ import {
 // Context에서 사용할 타입 정의
 interface ProductContextType {
   products: ProductModel[];
-  fetchProduct: (productId: string) => Promise<ProductModel | null>;
+  fetchProduct: (productId: number) => Promise<ProductModel | null>;
   createProduct: (newProduct: ProductModel) => Promise<void>;
   updateProduct: (
-    productId: string,
+    productId: number,
     updatedData: Partial<ProductModel>
   ) => Promise<void>;
-  deleteProduct: (productId: string) => Promise<void>;
+  deleteProduct: (productId: number) => Promise<void>;
   setProducts: React.Dispatch<React.SetStateAction<ProductModel[]>>;
   uploadProductImage: (file: File) => Promise<string | null>;
 }
@@ -52,11 +52,11 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
 
   // 특정 상품 가져오기
   const fetchProduct = async (
-    productId: string
+    productId: number
   ): Promise<ProductModel | null> => {
     try {
       const existingProduct = products.find(
-        (product) => String(product.id) === productId
+        (product) => product.id === productId
       );
       if (existingProduct) return existingProduct;
 
@@ -73,14 +73,14 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
 
   // 상품 업데이트
   const updateProduct = async (
-    productId: string,
+    productId: number,
     updatedData: Partial<ProductModel>
   ) => {
     try {
       await updateProductInService(productId, updatedData);
       setProducts((prev) =>
         prev.map((product) =>
-          String(product.id) === productId
+          product.id === productId
             ? new ProductModel({ ...product, ...updatedData })
             : product
         )
@@ -92,10 +92,10 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // 상품 삭제
-  const deleteProduct = async (productId: string) => {
+  const deleteProduct = async (productId: number) => {
     try {
       await deleteProductInService(productId);
-      setProducts((prev) => prev.filter((product) => String(product.id) !== productId));
+      setProducts((prev) => prev.filter((product) => product.id !== productId));
     } catch (error) {
       console.error("Error deleting product in context:", error);
       throw error;
