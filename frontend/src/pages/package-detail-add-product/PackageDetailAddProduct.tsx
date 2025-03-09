@@ -3,7 +3,7 @@ import styles from "./PackageDetailAddProduct.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
 import ProductItem from "@/src/components/ui/ProductItem";
 import { useLocation, useNavigate } from "react-router-dom";
-import CheckIconImage from "../../assets/images/section/check.png";
+import CheckIconImage from "@/src/assets/images/section/check.png";
 import CategoryModel from "@/src/models/CategoryModel";
 import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
 import { useEffect, useState } from "react";
@@ -42,7 +42,7 @@ export default function PackageDetailAddProduct() {
     // Function
     const handleProductItemClick = (product: BuyerProductModel) => {
         navigate('/package-detail-product-detail', {
-            state: { product: product }
+            state: { product: product.toJson() }
         });
     }
     const handleCheckButtonClick = (productId: number) => {
@@ -52,8 +52,8 @@ export default function PackageDetailAddProduct() {
     }
     const handleConfirmButtonClick = () => {
         setEditingPackage((prev) => PackageModel.fromJson({
-            ...prev,
-            productIds: checkedProductIds
+            ...prev?.toJson(),
+            "product_ids": checkedProductIds
         }))
         navigate(-1);
     }
@@ -68,7 +68,10 @@ export default function PackageDetailAddProduct() {
                             <div key={index} className={styles.checkableProductItem} onClick={() => handleProductItemClick(product)}>
                                 <ProductItem product={product} />
                                 <div className={styles.blank} />
-                                <img onClick={() => handleCheckButtonClick(product.id!)} className={styles.checkIcon} src={CheckIconImage} style={{ opacity: checkedProductIds.includes(product.id!) ? '1' : '0.5' }} />
+                                <img onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleCheckButtonClick(product.id!)
+                                }} className={styles.checkIcon} src={CheckIconImage} style={{ opacity: checkedProductIds.includes(product.id!) ? '1' : '0.5' }} />
                             </div>
                         )
                     })}

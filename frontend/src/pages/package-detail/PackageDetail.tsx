@@ -52,7 +52,7 @@ export default function PackageDetail() {
         if (!editingPackage) {
             targetPackage = myPackage;
             setEditingPackage(myPackage);
-        }else{
+        } else {
             targetPackage = editingPackage
         }
         const newMyCategories: CategoryModel[] = targetPackage.categoryIds
@@ -92,7 +92,7 @@ export default function PackageDetail() {
         }
     };
     const handleAddProductButtonClick = (category: CategoryModel) => {
-        navigate('/package-detail-add-product', { state: { category: category } });
+        navigate('/package-detail-add-product', { state: { category: category.toJson() } });
     }
     const handleDeleteButtonClick = (categoryId: number) => {
         setMyCategories((prev) => prev.filter((category) => category.id !== categoryId));
@@ -131,21 +131,21 @@ export default function PackageDetail() {
                 </div>
                 <div className={styles.listView}>
                     {myCategories.map((category, index) => {
-                        const myProduct = myProducts.find((product) => product.categoryId === category.id);
+                        const myProduct = myProducts.find((product) => product.categoryId === category.id) || null;
                         return (
                             <div key={index} className={styles.productItem} onClick={() => { handleAddProductButtonClick(category) }}>
-                                <img className={styles.productThumbnail} src={myProduct?.images[0]} />
+                                <img className={styles.productThumbnail} src={myProduct?.images[0] || "https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg"} />
                                 <div className={styles.productInfoContainer}>
                                     <p className={styles.productName}>
                                         {myProduct?.name}
                                     </p>
                                     <p className={styles.categoryAndAmount}>
-                                        {category.name} {myProduct?.quantity}개
+                                        {myProduct ? `${category.name} ${myProduct?.quantity}개` : '제품을 골라주세요!'}
                                     </p>
                                 </div>
                                 <div className={styles.blank} />
                                 <p className={styles.price}>
-                                    {myProduct?.price}원
+                                    {myProduct && `${myProduct?.price}원`}
                                 </p>
                                 {
                                     isEdit ? (<button className={styles.deleteProductButton} onClick={(e) => {

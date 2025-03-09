@@ -3,9 +3,6 @@ import styles from "./PackageDetailProductDetail.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import BuyerProductModel from "@/src/models/BuyerProductModel";
-import { useRecoilState } from "recoil";
-import { editingPackageState } from "@/src/recoil/packageState";
-import PackageModel from "@/src/models/PackageModel";
 import { useCategory } from "@/src/hooks/useCategory";
 
 export default function PackageDetailProductDetail() {
@@ -15,17 +12,9 @@ export default function PackageDetailProductDetail() {
     const product: BuyerProductModel = BuyerProductModel.fromJson(location.state?.product || {});
     // hook
     const { categories } = useCategory();
-    // recoil
-    const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
 
     // Function
     const handleButtonClick = () => {
-        if (!(editingPackage?.productIds|| []).includes(product.id!)) {
-            setEditingPackage((prev) => PackageModel.fromJson({
-                ...prev,
-                productIds: [...prev?.productIds || [], product.id]
-            }))
-        }
         navitgate(-1)
     }
 
