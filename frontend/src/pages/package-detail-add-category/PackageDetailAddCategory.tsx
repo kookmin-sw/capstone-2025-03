@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import IndustryModel from "@/src/models/IndustryModel";
 import { useCategory } from "@/src/hooks/useCategory";
 import { useRecoilState } from "recoil";
-import { edigingPackageState } from "@/src/recoil/packageState";
+import { editingPackageState } from "@/src/recoil/packageState";
 import PackageModel from "@/src/models/PackageModel";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 import CategoryModel from "@/src/models/CategoryModel";
@@ -21,10 +21,10 @@ export default function PackageDetailAddCategory() {
     // hook
     const { categories, getCategory } = useCategory();
     // recoil
-    const [editingPackage, setEdigingPackage] = useRecoilState(edigingPackageState);
+    const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
-    const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(editingPackage.categoryIds);
+    const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(editingPackage?.categoryIds || []);
     const [isLoading, setIsLoading] = useState(true);
 
     // useEffect
@@ -50,7 +50,7 @@ export default function PackageDetailAddCategory() {
         );
     }
     const handleConfirmButtonClick = () => {
-        setEdigingPackage((prev) => PackageModel.fromJson({
+        setEditingPackage((prev) => PackageModel.fromJson({
             ...prev,
             categoryIds: checkedCategoryIds
         }))

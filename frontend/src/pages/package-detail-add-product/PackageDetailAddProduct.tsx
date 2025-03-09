@@ -9,7 +9,7 @@ import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
 import { useEffect, useState } from "react";
 import BuyerProductModel from "@/src/models/BuyerProductModel";
 import { useRecoilState } from "recoil";
-import { edigingPackageState } from "@/src/recoil/packageState";
+import { editingPackageState } from "@/src/recoil/packageState";
 import PackageModel from "@/src/models/PackageModel";
 
 export default function PackageDetailAddProduct() {
@@ -20,7 +20,7 @@ export default function PackageDetailAddProduct() {
     // hook
     const { buyerProducts, getBuyerProductList } = useBuyerProduct();
     // recoil
-    const [editingPackage, setEdigingPackage] = useRecoilState(edigingPackageState);
+    const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
     const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([]);
     const [checkedProductIds, setCheckedProductIds] = useState<number[]>([]);
@@ -30,7 +30,7 @@ export default function PackageDetailAddProduct() {
         setMyProducts(buyerProducts.filter((buyerProduct) => buyerProduct.categoryId === category.id));
         setCheckedProductIds(
             buyerProducts
-                .filter((buyerProduct) => editingPackage.productIds.includes(buyerProduct.id!))
+                .filter((buyerProduct) => (editingPackage?.productIds || []).includes(buyerProduct.id!))
                 .map((buyerProduct) => buyerProduct.id!)
         );
         getBuyerProductList();
@@ -51,7 +51,7 @@ export default function PackageDetailAddProduct() {
         );
     }
     const handleConfirmButtonClick = () => {
-        setEdigingPackage((prev) => PackageModel.fromJson({
+        setEditingPackage((prev) => PackageModel.fromJson({
             ...prev,
             productIds: checkedProductIds
         }))

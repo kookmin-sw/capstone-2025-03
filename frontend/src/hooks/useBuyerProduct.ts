@@ -19,7 +19,7 @@ export const useBuyerProduct = () => {
         // TODO: 지워야함
         const dummy = {
             "id": 1192,
-            "categoryId": 2,
+            "category_id": 2,
             "images": [
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fshopping.phinf.naver.net%2Fmain_5219342%2F52193428036.20241230220850.jpg&type=sc960_832",
             ],
@@ -28,11 +28,11 @@ export const useBuyerProduct = () => {
             "grade": "A",
             "quantity": 50,
             "price": 12900,
-            "sellerId": 501,
-            "uploadDate": "2025-03-09T14:30:00.000Z",
-            "buyerId": null,
-            "purchaseDate": null,
-            "salesStatus": "available"
+            "seller_id": 501,
+            "upload_date": "2025-03-09T14:30:00.000Z",
+            "buyer_id": null,
+            "purchase_date": null,
+            "sales_status": "available"
         };
         setBuyerProducts((prev) => [...prev, BuyerProductModel.fromJson(dummy)]);
     }, []);

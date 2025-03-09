@@ -7,7 +7,7 @@ export const packageState = atom<PackageModel[]>({
     default: []
 })
 
-export const edigingPackageState = atom<PackageModel>({
-    key: "edigingPackageState",
-    default: PackageModel.fromJson({})
+export const editingPackageState = atom<PackageModel|null>({
+    key: "editingPackageState",
+    default: null
 })

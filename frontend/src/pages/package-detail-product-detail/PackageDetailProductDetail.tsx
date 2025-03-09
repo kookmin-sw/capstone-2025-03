@@ -4,7 +4,7 @@ import DefaultButton from "@/src/components/ui/DefaultButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import BuyerProductModel from "@/src/models/BuyerProductModel";
 import { useRecoilState } from "recoil";
-import { edigingPackageState } from "@/src/recoil/packageState";
+import { editingPackageState } from "@/src/recoil/packageState";
 import PackageModel from "@/src/models/PackageModel";
 import { useCategory } from "@/src/hooks/useCategory";
 
@@ -16,14 +16,14 @@ export default function PackageDetailProductDetail() {
     // hook
     const { categories } = useCategory();
     // recoil
-    const [editingPackage, setEditingPackage] = useRecoilState(edigingPackageState);
+    const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
 
     // Function
     const handleButtonClick = () => {
-        if (!editingPackage.productIds.includes(product.id!)) {
+        if (!(editingPackage?.productIds|| []).includes(product.id!)) {
             setEditingPackage((prev) => PackageModel.fromJson({
                 ...prev,
-                productIds: [...prev.productIds, product.id]
+                productIds: [...prev?.productIds || [], product.id]
             }))
         }
         navitgate(-1)

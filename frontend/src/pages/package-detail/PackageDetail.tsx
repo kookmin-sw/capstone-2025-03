@@ -14,7 +14,7 @@ import CompleteSection from "@/src/components/layout/CompleteSection";
 import PackageModel from "@/src/models/PackageModel";
 import CategoryModel from "@/src/models/CategoryModel";
 import { useRecoilState } from "recoil";
-import { edigingPackageState } from "@/src/recoil/packageState";
+import { editingPackageState } from "@/src/recoil/packageState";
 import BuyerProductModel from "@/src/models/BuyerProductModel";
 import { useCategory } from "@/src/hooks/useCategory";
 import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
@@ -38,7 +38,7 @@ export default function PackageDetail() {
     const { buyerProducts } = useBuyerProduct();
     const { createOrder } = useOrder();
     // recoil
-    const [editingPackage, setEdigingPackage] = useRecoilState(edigingPackageState);
+    const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
     const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([])
@@ -50,7 +50,7 @@ export default function PackageDetail() {
     // UseEffect
     useEffect(() => {
         if (!editingPackage) {
-            setEdigingPackage(myPackage);
+            setEditingPackage(myPackage);
         }
         const newMyCategories: CategoryModel[] = myPackage.categoryIds
             .map((categoryId) => categories.find((category) => category.id === categoryId))
@@ -74,6 +74,10 @@ export default function PackageDetail() {
     };
     const handleBuyConfirmButtonClick = async () => {
         setIsLoading(true);
+        if (!editingPackage) {
+            setIsLoading(false);
+            return;
+        }
         const newPackage: PackageModel | null = await createPackage(editingPackage);
         if (newPackage) {
             await createOrder(OrderModel
@@ -90,7 +94,7 @@ export default function PackageDetail() {
     const handleDeleteButtonClick = (categoryId: number) => {
         setMyCategories((prev) => prev.filter((category) => category.id !== categoryId));
         setMyProducts((prev) => prev.filter((product) => product.categoryId !== categoryId));
-        setEdigingPackage((prev) => {
+        setEditingPackage((prev) => {
             if (!prev) return prev;
             return PackageModel.fromJson({
                 ...prev,
@@ -106,7 +110,7 @@ export default function PackageDetail() {
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    <PackageItem pkg={editingPackage} />
+                    {editingPackage && <PackageItem pkg={editingPackage} />}
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>
