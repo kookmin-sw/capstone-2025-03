@@ -107,42 +107,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'restart.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # .env 파일 로드
 load_dotenv()
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.getenv("DATABASE_URL"),
-#         conn_max_age=600,
-#     )
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'user_db_tc1e',  # 데이터베이스 이름
-#         'USER': 'user',  # PostgreSQL 사용자명
-#         'PASSWORD': 'TJagHsobjIs34JGtcbBYGTOVYeW6LwhS',  # 비밀번호
-#         'HOST': 'dpg-cugvi32j1k6c73b36fl0-a.oregon-postgres.render.com',  # Render에서 제공한 호스트
-#         'PORT': '5432',  # PostgreSQL 기본 포트
-#     }
-# }
-
-# backend/settings.py
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',             # 생성한 데이터베이스 이름
-        'USER': 'postgres',             # 생성한 사용자 이름
-        'PASSWORD': 'qwer1234!@#$',      # 사용자 비밀번호
-        'HOST': '34.64.249.105',
-        'PORT': '5432',
-    }
-}
 
 
 # Password validation
