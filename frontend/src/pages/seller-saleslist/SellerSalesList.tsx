@@ -9,14 +9,16 @@ import { useEffect, useState } from "react";
 import { useSellerProduct } from "@/src/contexts/SellerProductContext";
 import { useUser } from "@/src/contexts/UserContext";
 import SellerProductModel from "@/src/models/SellerProductModel";
+import LoadingSection from "@/src/components/layout/LoadingSection";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();
+  const { getProductList } = useSellerProduct();
   const [sellerId, setSellerId] = useState<number>();
   const [sellerProducts, setSellerProducts] = useState<SellerProductModel[]>(
     []
   );
-  const { getProductList } = useSellerProduct();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const currentMenuIndex = 0;
 
@@ -31,7 +33,6 @@ export default function SellerSalesList() {
     thumbnail: string;
   };
 
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -39,28 +40,34 @@ export default function SellerSalesList() {
       setSellerId(userData.id);
     }
 
-    const responseData = getMyInfoInService();
-    console.log(responseData);
-
-    if (sellerId) {
-      getProductList(sellerId).then((response) => {
-        if (response) {
-          const formattedProducts = response.map((item: any) =>
-            SellerProductModel.fromJson(item)
-          );
-          setSellerProducts(formattedProducts);
+    const fetchProducts = async () => {
+      if (sellerId) {
+        try {
+          const response = await getProductList(sellerId);
+          if (response) {
+            const formattedProducts = response.map((item: any) =>
+              SellerProductModel.fromJson(item)
+            );
+            setSellerProducts(formattedProducts);
+          }
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        } finally {
+          setIsLoading(false);
         }
-      });
-    }
-  }, [sellerId]);
+      }
+    };
 
-  console.log(sellerProducts)
+    fetchProducts();
+  }, [sellerId]);
 
   const handleClickAddProductButton = () => {
     navigate("/seller-saleslist-addproduct");
   };
 
-  return (
+  return isLoading ? (
+    <LoadingSection text="로딩 중" />
+  ) : (
     <div className={styles.page}>
       <MainHeader />
       <div className={styles.section}>
