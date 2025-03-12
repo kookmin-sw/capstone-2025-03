@@ -11,6 +11,7 @@ export default function SellerSalesListAddProductGetCategory() {
   const { categories, getAllCategory } = useCategory();
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
   const [selectedCategoryName, setSelectedCategoryName] = useState<string>("");
+  const [searchCategory, setSearchCategory] = useState<string>("");
 
   useEffect(() => {
     getAllCategory();
@@ -27,17 +28,26 @@ export default function SellerSalesListAddProductGetCategory() {
     setSelectedCategoryName(name);
   };
 
+  const filteredCategories = categories.filter((category) =>
+    category.name?.toLowerCase().includes(searchCategory.toLowerCase())
+  );
+
   return (
     <div className={styles.page}>
       <div className={styles.inputContainer}>
         <BackHeader />
         <div className={styles.inputMom}>
           <LuSearch className={styles.icon} />
-          <input className={styles.input} placeholder="전체 카테고리" />
+          <input
+            value={searchCategory}
+            className={styles.input}
+            placeholder="전체 카테고리"
+            onChange={(e) => setSearchCategory(e.target.value)}
+          />
         </div>
       </div>
       <div className={styles.container}>
-        {categories.map((category) => (
+        {filteredCategories.map((category) => (
           <button
             className={styles.button}
             onClick={() =>
