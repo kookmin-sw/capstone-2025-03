@@ -1,6 +1,7 @@
 import styles from "./NameAndBirthDayInput.module.css";
 import InputField from "./components/InputField";
 import LoadingSection from "@/src/components/layout/LoadingSection";
+import RegisterCompleteSection from "../address-input/components/RegisterCompleteSection";
 import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -21,6 +22,7 @@ export default function NameAndBirthDayInput() {
     window.innerHeight
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
 
   // 버튼 비활성화 조건
   const whenNameisNull = !user?.name;
@@ -37,12 +39,10 @@ export default function NameAndBirthDayInput() {
     try {
       const responseData = await loginUser(kakaoId);
       if (responseData) {
-        navigate("/"); 
-        setIsLoading(false)
+        setIsComplete(true)
       } else {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-        
     } catch (error) {
       console.log("회원가입 안 되어 있음", error);
     }
@@ -53,6 +53,14 @@ export default function NameAndBirthDayInput() {
     if (!code) return;
 
     let isMounted = true;
+
+    if (isComplete) {
+      const timer = setTimeout(() => {
+        navigate("/");
+      }, 1500); // ✅ 1초 후 이동
+  
+      return () => clearTimeout(timer); // ✅ 컴포넌트 언마운트 시 타이머 정리
+    }
 
     getKakaoAccessToken(code)
       .then(async (accessToken) => {
@@ -89,7 +97,10 @@ export default function NameAndBirthDayInput() {
       window.visualViewport?.addEventListener("resize", handleResize);
       isMounted = false;
     };
-  }, [code]);
+  }, [code, isComplete]);
+
+
+
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -128,7 +139,11 @@ export default function NameAndBirthDayInput() {
   };
 
   return isLoading ? (
-    <LoadingSection text="로딩 중" />
+    isComplete ? (
+      <RegisterCompleteSection text={user?.name || "unknown"}/>
+    ) : (
+      <LoadingSection text="잠시만 기다려주세요" />
+    )
   ) : (
     <div className={styles.page}>
       {/* 문구 */}
