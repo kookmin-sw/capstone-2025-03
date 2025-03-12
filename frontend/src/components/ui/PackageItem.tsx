@@ -48,7 +48,7 @@ const CategoryContainer = styled.div`
   flex-direction: row;
   gap: 0.5rem;
   justify-content: start;
-  align-items: center;
+  align-items: start;
 `;
 
 const CategoryIcon = styled.img`

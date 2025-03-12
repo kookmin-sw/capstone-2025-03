@@ -35,10 +35,9 @@ export default function PackageDetailProductDetail() {
                 <p className={styles.price}>
                     {product.price}원
                 </p>
+                <div style={{'height': '20rem'}}/>
             </div>
-            <div className={styles.buttonContainer}>
-                <DefaultButton event={handleButtonClick} isActive={true} />
-            </div>
+            <DefaultButton event={handleButtonClick} isActive={true} text="확인"/>
         </div>
     )
 }

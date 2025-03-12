@@ -161,10 +161,9 @@ export default function PackageDetail() {
                         )
                     })}
                 </div>
+                <div style={{'height': '20rem'}}/>
             </div>
-            <div className={styles.buttonContainer}>
-                <DefaultButton event={handleBuyButtonClick} isActive={true} />
-            </div>
+            <DefaultButton event={handleBuyButtonClick} isActive={true} text="한번에 구매하기"/>
 
             {/* Modal */}
             {isModalOpen && (
@@ -176,9 +175,9 @@ export default function PackageDetail() {
                         <p className={styles.description}>
                             결제와 배송은 카카오톡으로 진행됩니다.
                         </p>
-                        <div className={styles.modalButtonContainer}>
-                            <DefaultButton event={handleBuyConfirmButtonClick} isActive={true} />
-                        </div>
+                        <button className={styles.buttonInModal} onClick={handleBuyConfirmButtonClick}>
+                            <p>한번에 구매할게요</p>
+                        </button>
                     </div>
                 </div>
             )}

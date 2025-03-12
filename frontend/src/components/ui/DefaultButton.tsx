@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
 
+const ButtonContainer = styled.div`
+    position: fixed;
+    bottom: 0;
+    padding: 2rem;
+    background-color: #18171D;
+    width: 100%;
+`
 const Button = styled.button<{ isActive: boolean }>`
     background-color: #00A36C;
     border-radius: 1.2rem;
@@ -18,15 +25,18 @@ const Text = styled.p`
 
 type DefaultButtonProps = {
     event: () => void,
-    isActive: boolean
+    isActive: boolean,
+    text: string
 }
 
-export default function DefaultButton({ event, isActive }: DefaultButtonProps) {
+export default function DefaultButton({ event, isActive, text }: DefaultButtonProps) {
     return (
-        <Button onClick={isActive ? event : undefined} isActive={isActive}>
-            <Text>
-                확인
-            </Text>
-        </Button>
+        <ButtonContainer>
+            <Button onClick={isActive ? event : undefined} isActive={isActive}>
+                <Text>
+                    {text}
+                </Text>
+            </Button>
+        </ButtonContainer>
     )
 }

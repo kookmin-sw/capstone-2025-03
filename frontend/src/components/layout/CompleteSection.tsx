@@ -25,13 +25,6 @@ const Text = styled.p`
   color: white;
 `;
 
-const ButtonContainer = styled.div`
-  width: 100%;
-  padding: 2rem;
-  position: fixed;
-  bottom: 0;
-`;
-
 interface CompleteSectionProps {
   text: string;
 }
@@ -45,9 +38,7 @@ export default function CompleteSection({ text }: CompleteSectionProps) {
     <Section>
       <Icon src={CompleteIconImage} />
       <Text>{text}</Text>
-      <ButtonContainer>
-        <DefaultButton event={handleButtonClick} isActive={true} />
-      </ButtonContainer>
+      <DefaultButton event={handleButtonClick} isActive={true} text="확인"/>
     </Section>
   );
 }

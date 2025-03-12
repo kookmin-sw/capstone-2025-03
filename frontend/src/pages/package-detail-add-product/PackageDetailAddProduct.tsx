@@ -76,10 +76,9 @@ export default function PackageDetailAddProduct() {
                         )
                     })}
                 </div>
+                <div style={{'height': '20rem'}}/>
             </div>
-            <div className={styles.buttonContainer}>
-                <DefaultButton event={handleConfirmButtonClick} isActive={true} />
-            </div>
+            <DefaultButton event={handleConfirmButtonClick} isActive={true} text={`선택한 ${category.name} 넣기`}/>
         </div>
     )
 }

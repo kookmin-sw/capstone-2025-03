@@ -2,7 +2,6 @@ import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./FindPackageRecommend.module.css";
 import PackageItem from "@/src/components/ui/PackageItem";
 import { useLocation } from "react-router-dom";
-import BreadInCircleImage from "@/src/assets/images/industry/bread_in_circle.png";
 import IndustryModel from "@/src/models/IndustryModel";
 import { usePackage } from "@/src/hooks/usePackage";
 import { useUser } from "@/src/contexts/UserContext";
@@ -62,8 +61,9 @@ export default function FindPackageRecommend() {
                         </p>
                     </div>
                     <div className={styles.blank} />
-                    <img className={styles.contentIcon} src={BreadInCircleImage}>
-                    </img>
+                    <div className={styles.iconContainer}>
+                        <img className={styles.icon} src={industry.icon!}/>
+                    </div>
                 </div>
                 <div className={styles.packageLitView}>
                     {myPackages.map((pkg, index) => {
@@ -72,6 +72,7 @@ export default function FindPackageRecommend() {
                         )
                     })}
                 </div>
+                <div style={{'height': '10rem'}}/>
             </div>
         </div>
     )

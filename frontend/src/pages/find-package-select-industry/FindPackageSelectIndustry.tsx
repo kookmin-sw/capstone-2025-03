@@ -46,11 +46,9 @@ export default function FindPackageSelectIndustry() {
                         )
                     })}
                 </div>
-
+                <div style={{'height': '30rem'}}/>
             </div>
-            <div className={styles.buttonContainer}>
-                <DefaultButton event={handleConfirmButtonClick} isActive={currentId !== 0} />
-            </div>
+            <DefaultButton event={handleConfirmButtonClick} isActive={currentId !== 0} text="확인"/>
         </div >
     );
 }

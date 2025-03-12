@@ -1,5 +1,5 @@
 .page {
-    height: 100vh;
+    padding-top: 8rem;
     background-color: #18171D;
     display: flex;
     flex-direction: column;
@@ -66,4 +66,15 @@
     align-items: center;
     gap: 2rem;
     margin-bottom: 10rem;
+}
+
+.iconContainer{
+    padding: 1.5rem;
+    border-radius: 100rem;
+    background-color: rgb(0, 163, 108, 0.5)
+    ;
+}
+
+.icon{
+    width: 5.4rem;
 }

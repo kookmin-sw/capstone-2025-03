@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import SearchIconImage from "../../assets/images/header/search.png";
 
 const Header = styled.div`
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #18171D;
     padding: 2rem;
     display: flex;
     flex-direction: row;

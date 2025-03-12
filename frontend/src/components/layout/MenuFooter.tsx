@@ -6,6 +6,9 @@ import MenuSellIconSelectedImage from "../../assets/images/footer/menu_sell_icon
 import { useNavigate } from "react-router-dom";
 
 const Footer = styled.div`
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     height: 6rem;
     display: flex;
     flex-direction: row;

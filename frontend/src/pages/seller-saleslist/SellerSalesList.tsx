@@ -20,7 +20,7 @@ export default function SellerSalesList() {
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const currentMenuIndex = 0;
+  const currentMenuIndex = 1;
 
   type Product = {
     id: string;
@@ -55,6 +55,8 @@ export default function SellerSalesList() {
         } finally {
           setIsLoading(false);
         }
+      }else{
+        setIsLoading(false);
       }
     };
 
