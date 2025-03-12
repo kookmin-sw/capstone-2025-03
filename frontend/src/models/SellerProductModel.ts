@@ -1,10 +1,10 @@
 export default class SellerProductModel {
     categoryId: number | null;
-    sellerId: number | null;
-    buyerId: number | null;
+    seller: number | null;
+    buyer: number | null;
     images: string[];
     name: string | null;
-    discription: string | null;
+    description: string | null;
     grade: string | null;
     quantity: number;
     price: number | null;
@@ -16,56 +16,56 @@ export default class SellerProductModel {
         images = [],
         categoryId = null,
         name = null,
-        discription = null,
+        description = null,
         grade = null,
         quantity = 0,
         price = 0,
-        sellerId = null,
+        seller = null,
         uploadDate = null,
         saleStatus = null,
-        buyerId = null,
+        buyer = null,
         purchaseDate = null,
     }: {
         images?: string[];
         categoryId?: number | null;
         name?: string | null;
-        discription?: string | null;
+        description?: string | null;
         grade?: string | null;
         quantity?: number;
         price?: number | null;
-        sellerId?: number | null;
+        seller?: number | null;
         uploadDate?: string | null;
         saleStatus?: string | null;
-        buyerId?: number | null;
+        buyer?: number | null;
         purchaseDate?: string | null;
     }) {
         this.images = images;
         this.categoryId = categoryId;
         this.name = name;
-        this.discription = discription;
+        this.description = description;
         this.grade = grade;
         this.quantity = quantity;
         this.price = price;
-        this.sellerId = sellerId;
+        this.seller = seller;
         this.uploadDate = uploadDate;
         this.saleStatus = saleStatus;
-        this.buyerId = buyerId;
+        this.buyer = buyer;
         this.purchaseDate = purchaseDate;
     }
 
     static fromJson(jsonData: any): SellerProductModel {
         return new SellerProductModel({
             images: jsonData.images || [],
-            categoryId: jsonData.category_id,
+            categoryId: jsonData.category,
             name: jsonData.name,
-            discription: jsonData.discription,
+            description: jsonData.description,
             grade: jsonData.grade,
             quantity: jsonData.quantity,
             price: jsonData.price,
-            sellerId: jsonData.seller_id,
+            seller: jsonData.seller,
             uploadDate: jsonData.upload_date,
             saleStatus: jsonData.sale_status,
-            buyerId: jsonData.buyer_id,
+            buyer: jsonData.buyer,
             purchaseDate: jsonData.purchase_date,
         });
     }
@@ -75,14 +75,14 @@ export default class SellerProductModel {
             images: this.images,
             category_id: this.categoryId,
             name: this.name,
-            discription: this.discription,
+            description: this.description,
             grade: this.grade,
             quantity: this.quantity,
             price: this.price,
-            seller_id: this.sellerId,
+            seller: this.seller,
             upload_date: this.uploadDate,
             sale_status: this.saleStatus,
-            buyer_id: this.buyerId,
+            buyer: this.buyer,
             purchase_date: this.purchaseDate,
         };
     }

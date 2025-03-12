@@ -59,11 +59,11 @@ export default function SellerSalesListProductDetail() {
     setSellerProduct(
       new SellerProductModel({
         categoryId: selectedCategoryId,
-        sellerId: sellerId,
-        buyerId: null,
+        seller: sellerId,
+        buyer: null,
         images: images,
         name: name,
-        discription: null,
+        description: null,
         grade: grade,
         quantity: number,
         uploadDate: new Date().toISOString(),

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useLocation } from "react-router-dom";
 
 const Section = styled.div`
   width: 100%;
@@ -27,10 +28,16 @@ interface CompleteSectionProps {
   text: string;
 }
 
-export default function RegisterCompleteSection({ text }: CompleteSectionProps) {
+export default function RegisterCompleteSection({
+  text,
+}: CompleteSectionProps) {
+  const location = useLocation();
+
   return (
     <Section>
-      <HeadText>회원가입 완료!</HeadText>
+      {location.pathname === "/name-and-birth-day-input" ? (
+        <HeadText>로그인 완료!</HeadText>
+      ) : (  <HeadText>회원가입 완료!</HeadText>)} 
       <MainText>
         {text}님,
         <br />

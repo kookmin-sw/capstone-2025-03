@@ -48,36 +48,40 @@ const StatusTag = styled.span<{ status: string }>`
   font-weight: bold;
   color: white;
   background-color: ${(props) =>
-    props.status === "판매 중" ?  "#0d2d24" : "#7F7F89"};
-    color: ${(props) =>
-    props.status === "판매 중" ?  "#01a26c" : "white"};
+    props.status === "판매 중" ? "#0d2d24" : "#7F7F89"};
+  color: ${(props) => (props.status === "판매 중" ? "#01a26c" : "white")};
   padding: 0.5rem 1rem;
   border-radius: 1rem;
 `;
 
 type ProductItemProps = {
   product: {
-    id: string;
-    name: string;
-    grade: string;
-    amount: number;
-    price: number;
-    status: string;
-    thumbnail: string;
+    buyer: number | null;
+    categoryId: number | null;
+    description: string | null;
+    grade: string | null;
+    images: string[];
+    name: string | null;
+    price: number | null;
+    purchaseDate: string | null;
+    quantity: number;
+    saleStatus: string | null;
+    seller: number | null;
+    uploadDate: string | null;
   };
 };
 
 export default function SellerProductItem({ product }: ProductItemProps) {
   return (
     <Item>
-      <Thumbnail src={product.thumbnail} />
+      <Thumbnail src={product.images[0]} />
       <ContentContainer>
         <Title>{product.name}</Title>
         <GradeAndAmount>
-          {product.grade}등급 ∙ {product.amount}개
+          {product.grade} ∙ {product.quantity}개
         </GradeAndAmount>
         <Price>{product.price}원</Price>
-      <StatusTag status={product.status}>{product.status}</StatusTag>
+        <StatusTag status={product.grade ?? "null"}>{product.saleStatus}</StatusTag>
       </ContentContainer>
     </Item>
   );
