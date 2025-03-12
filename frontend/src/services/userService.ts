@@ -12,7 +12,7 @@ const REDIRECT_URI = `${window.location.origin}/name-and-birth-day-input`;
  */
 export const createUserInService = async (user: UserModel): Promise<void> => {
   try {
-    await axios.post(`${API_BASE_URL}/users/register/`, user.toJson());
+    await axios.post(`${API_BASE_URL}/users/`, user.toJson());
   } catch (error) {
     console.error("Error creating user:", error);
     throw error;

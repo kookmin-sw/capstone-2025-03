@@ -5,10 +5,21 @@ import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png
 import SellerProductItem from "@/src/components/ui/SellerProductItem";
 import { useNavigate } from "react-router-dom";
 import { getMyInfoInService } from "@/src/services/userService";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSellerProduct } from "@/src/contexts/SellerProductContext";
+import { useUser } from "@/src/contexts/UserContext";
+import SellerProductModel from "@/src/models/SellerProductModel";
+import LoadingSection from "@/src/components/layout/LoadingSection";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();
+  const { getProductList } = useSellerProduct();
+  const [sellerId, setSellerId] = useState<number>();
+  const [sellerProducts, setSellerProducts] = useState<SellerProductModel[]>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const currentMenuIndex = 0;
 
   type Product = {
@@ -22,127 +33,48 @@ export default function SellerSalesList() {
     thumbnail: string;
   };
 
-  const products: Product[] = [
-    {
-      id: "0",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신1",
-      grade: "A",
-      amount: 3,
-      price: 48000,
-      status: "판매 완료",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "1",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신2",
-      grade: "A",
-      amount: 3,
-      price: 58000,
-      status: "판매 중",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "2",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신3",
-      grade: "A",
-      amount: 3,
-      price: 41000,
-      status: "판매 완료",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "3",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신4",
-      grade: "A",
-      amount: 3,
-      price: 51000,
-      status: "판매 완료",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "4",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신5",
-      grade: "A",
-      amount: 3,
-      price: 43000,
-      status: "판매 중",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "5",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신6",
-      grade: "A",
-      amount: 3,
-      price: 49000,
-      status: "판매 중",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "6",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신7",
-      grade: "A",
-      amount: 3,
-      price: 34000,
-      status: "판매 중",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "7",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신8",
-      grade: "A",
-      amount: 3,
-      price: 34000,
-      status: "판매 중",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "8",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신9",
-      grade: "A",
-      amount: 3,
-      price: 34000,
-      status: "판매 중",
-      thumbnail: EspressoMachineImage,
-    },
-    {
-      id: "9",
-      category: "에스프레소 머신",
-      name: "바디프렌즈 에스프레소 머신10",
-      grade: "A",
-      amount: 3,
-      price: 34000,
-      status: "판매 중",
-      thumbnail: EspressoMachineImage,
-    },
-  ];
-
-  //
   useEffect(() => {
-    const responseData = getMyInfoInService();
-    console.log(responseData);
-  });
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setSellerId(userData.id);
+    }
+
+    const fetchProducts = async () => {
+      if (sellerId) {
+        try {
+          const response = await getProductList(sellerId);
+          if (response) {
+            const formattedProducts = response.map((item: any) =>
+              SellerProductModel.fromJson(item)
+            );
+            setSellerProducts(formattedProducts);
+          }
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchProducts();
+  }, [sellerId]);
 
   const handleClickAddProductButton = () => {
     navigate("/seller-saleslist-addproduct");
   };
 
-  return (
+  return isLoading ? (
+    <LoadingSection text="로딩 중" />
+  ) : (
     <div className={styles.page}>
       <MainHeader />
       <div className={styles.section}>
         <p className={styles.listViewTitle}>판매 중인 물품들</p>
         <div>
-          {products.map((prod, index) => {
-            return <SellerProductItem key={index} product={prod} />;
+          {sellerProducts.map((product, index) => {
+            return <SellerProductItem key={index} product={product} />;
           })}
         </div>
       </div>

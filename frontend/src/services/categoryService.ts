@@ -84,7 +84,7 @@ export const deleteCategoryInService = async (categoryId: number): Promise<boole
 // 모든 카테고리 불러오기
 export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/categories/`);
+    const response = await axios.get(`${API_BASE_URL}`);
     console.log("response")
     return response.data.map((category: any) =>
       CategoryModel.fromJson(category)
