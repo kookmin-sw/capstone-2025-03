@@ -3,8 +3,9 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import "./styles/global.css";
 import routes from "./routes";
 import { UserProvider } from "./contexts/UserContext";
@@ -15,21 +16,37 @@ import { PackageProvider } from "./contexts/PackageContext";
 
 export default function App() {
   return (
+    <Router>
+      <MainLayout />
+    </Router>
+  );
+}
+
+export function MainLayout() {
+  // const navigate = useNavigate();
+  // const isLogin = localStorage.getItem('user');
+
+  // useEffect(() => {
+  //   if (!isLogin) {
+  //     navigate('/main');
+  //   }
+  // }, [])
+
+
+  return (
     <UserProvider>
       <CategoryProvider>
         <SellerProductProvider>
           <ProductProvider>
             <PackageProvider>
-              <Router>
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Routes>
-                    {routes.map(({ path, Component }) => (
-                      <Route key={path} path={path} element={<Component />} />
-                    ))}
-                    <Route path="*" element={<Navigate to="/" />} />
-                  </Routes>
-                </Suspense>
-              </Router>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                  {routes.map(({ path, Component }) => (
+                    <Route key={path} path={path} element={<Component />} />
+                  ))}
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+              </Suspense>
             </PackageProvider>
           </ProductProvider>
         </SellerProductProvider>
