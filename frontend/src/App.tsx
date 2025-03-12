@@ -23,14 +23,14 @@ export default function App() {
 }
 
 export function MainLayout() {
-  // const navigate = useNavigate();
-  // const isLogin = localStorage.getItem('user');
+  const navigate = useNavigate();
+  const isLogin = localStorage.getItem('user');
 
-  // useEffect(() => {
-  //   if (!isLogin) {
-  //     navigate('/main');
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!isLogin) {
+      navigate('/main');
+    }
+  }, [])
 
 
   return (
