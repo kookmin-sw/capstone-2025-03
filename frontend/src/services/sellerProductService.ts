@@ -9,6 +9,7 @@ const IMAGE_BASE_URL = "https://image-cgwm.onrender.com";
  * @param {ProductModel} product - 생성할 상품 객체
  * @returns {Promise<void>}
  */
+
 export const createProductInService = async (
   product: SellerProductModel
 ): Promise<void> => {
@@ -21,8 +22,8 @@ export const createProductInService = async (
 };
 
 /**
- * 상품을 생성하고 서버에 저장합니다.
- * @param {File} file - 생성할 상품 객체
+ * 상품을 이미지를 서버에 저장합니다.
+ * @param {File} file
  * @returns {Promise<string>}
  */
 export const uploadProductImageInService = async (
@@ -42,6 +43,19 @@ export const uploadProductImageInService = async (
     throw error;
   }
 };
+
+// 특정 사용자의 판매 상품들 가져오기
+export const getUserProductListInService = async (id: number): Promise<SellerProductModel[]> => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/products/`, {params: {seller: id}})
+    return response.data.results;
+  } catch (error) {
+    console.error("Error getting selling products: ", error)
+    throw error
+  }
+}
+
+
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 가져옵니다.
@@ -95,11 +109,11 @@ export const deleteProductInService = async (
 };
 
 // AI 가 예측한 적정 판매가격을 반환
-export const predictedPrice = async (_: string, ) => {
-  try {
-    // const response = await axios.get(`${AI_BASE_URL}/predict`);
-  } catch (error) {
-    console.log("Error predicting price: ", error);
-    throw error;
-  }
-};
+// export const predictedPrice = async (: string, ) => {
+//   try {
+//     // const response = await axios.get(`${AI_BASE_URL}/predict`);
+//   } catch (error) {
+//     console.log("Error predicting price: ", error);
+//     throw error;
+//   }
+// };

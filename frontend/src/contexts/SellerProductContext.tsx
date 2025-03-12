@@ -3,6 +3,7 @@ import SellerProductModel from "../models/SellerProductModel";
 import {
   createProductInService,
   uploadProductImageInService,
+  getUserProductListInService,
 } from "../services/sellerProductService";
 
 // Context에서 사용할 타입 정의
@@ -11,6 +12,7 @@ interface SellerProductContextType {
   createSellerProduct: (newProduct: SellerProductModel) => Promise<void>;
   setSellerProduct: React.Dispatch<React.SetStateAction<SellerProductModel>>;
   uploadProductImage: (file: File) => Promise<string | null>;
+  getProductList: (id: number) => Promise<SellerProductModel[] | null>;
 }
 
 // Context 생성
@@ -24,7 +26,9 @@ export const SellerProductProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [sellerProduct, setSellerProduct] = useState<SellerProductModel>({} as SellerProductModel);
+  const [sellerProduct, setSellerProduct] = useState<SellerProductModel>(
+    {} as SellerProductModel
+  );
 
   // 상품 생성
   const createSellerProduct = async (newProduct: SellerProductModel) => {
@@ -46,6 +50,17 @@ export const SellerProductProvider = ({
     }
   };
 
+  const getProductList = async (id: number): Promise<SellerProductModel[] | null> => {
+    try {
+      const productList = await getUserProductListInService(id);
+      console.log(productList)
+      return productList;
+    } catch (error) {
+      console.error("Error getting productlist", error);
+      return null;
+    }
+  };
+
   return (
     <SellerProductContext.Provider
       value={{
@@ -53,6 +68,7 @@ export const SellerProductProvider = ({
         createSellerProduct,
         setSellerProduct,
         uploadProductImage,
+        getProductList
       }}
     >
       {children}

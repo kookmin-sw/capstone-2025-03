@@ -5,10 +5,19 @@ import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png
 import SellerProductItem from "@/src/components/ui/SellerProductItem";
 import { useNavigate } from "react-router-dom";
 import { getMyInfoInService } from "@/src/services/userService";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSellerProduct } from "@/src/contexts/SellerProductContext";
+import { useUser } from "@/src/contexts/UserContext";
+import SellerProductModel from "@/src/models/SellerProductModel";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();
+  const [sellerId, setSellerId] = useState<number>();
+  const [sellerProducts, setSellerProducts] = useState<SellerProductModel[]>(
+    []
+  );
+  const { getProductList } = useSellerProduct();
+
   const currentMenuIndex = 0;
 
   type Product = {
@@ -125,11 +134,29 @@ export default function SellerSalesList() {
     },
   ];
 
-  //
   useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      setSellerId(userData.id);
+    }
+
     const responseData = getMyInfoInService();
     console.log(responseData);
-  });
+
+    if (sellerId) {
+      getProductList(sellerId).then((response) => {
+        if (response) {
+          const formattedProducts = response.map((item: any) =>
+            SellerProductModel.fromJson(item)
+          );
+          setSellerProducts(formattedProducts);
+        }
+      });
+    }
+  }, [sellerId]);
+
+  console.log(sellerProducts)
 
   const handleClickAddProductButton = () => {
     navigate("/seller-saleslist-addproduct");
@@ -141,8 +168,8 @@ export default function SellerSalesList() {
       <div className={styles.section}>
         <p className={styles.listViewTitle}>판매 중인 물품들</p>
         <div>
-          {products.map((prod, index) => {
-            return <SellerProductItem key={index} product={prod} />;
+          {sellerProducts.map((product, index) => {
+            return <SellerProductItem key={index} product={product} />;
           })}
         </div>
       </div>
