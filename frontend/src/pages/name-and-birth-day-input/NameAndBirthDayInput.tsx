@@ -1,5 +1,6 @@
 import styles from "./NameAndBirthDayInput.module.css";
 import InputField from "./components/InputField";
+import LoadingSection from "@/src/components/layout/LoadingSection";
 import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -19,6 +20,7 @@ export default function NameAndBirthDayInput() {
   const [visibleHeight, setVisibleHeight] = useState<number>(
     window.innerHeight
   );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // 버튼 비활성화 조건
   const whenNameisNull = !user?.name;
@@ -32,11 +34,18 @@ export default function NameAndBirthDayInput() {
 
   // 이미 회원일 시 홈으로 이동
   const tryLogin = async (kakaoId: number) => {
-    const responseData = await loginUser(kakaoId);
-    // if (responseData)
-    // console.log("로그인 시도 : ", responseData);
-    console.log("회원가입 여부", responseData);
-    if (responseData) navigate("/");
+    // setIsLoading(true);
+    try {
+      const responseData = await loginUser(kakaoId);
+      if (responseData) {
+        navigate("/"); 
+      } else {
+        setIsLoading(false)
+      }
+        
+    } catch (error) {
+      console.log("회원가입 안 되어 있음", error);
+    }
   };
 
   // 액세스 토큰으로 사용자 정보 가져옴
@@ -118,7 +127,9 @@ export default function NameAndBirthDayInput() {
     if (newValue.length === 13) setStep(3);
   };
 
-  return (
+  return isLoading ? (
+    <LoadingSection text="로딩 중" />
+  ) : (
     <div className={styles.page}>
       {/* 문구 */}
       <p className={styles.heading}>{stepText}</p>
