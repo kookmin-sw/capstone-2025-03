@@ -5,23 +5,37 @@ import { useNavigate } from "react-router-dom";
 import { useCategory } from "@/src/contexts/CategoryContext";
 import { useEffect, useState } from "react";
 import { LuSearch } from "react-icons/lu";
+import LoadingSection from "@/src/components/layout/LoadingSection";
 
 export default function SellerSalesListAddProductGetCategory() {
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { categories, getAllCategory } = useCategory();
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
   const [selectedCategoryName, setSelectedCategoryName] = useState<string>("");
   const [searchCategory, setSearchCategory] = useState<string>("");
 
   useEffect(() => {
-    getAllCategory();
+    const fetchCatogories = async () => {
+      try {
+        setIsLoading(true);
+        await getAllCategory();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCatogories();
+    
     if (selectedCategoryId && selectedCategoryName) {
       navigate("/seller-saleslist-addproduct", {
         state: { selectedCategoryId, selectedCategoryName },
       });
     }
   }, [selectedCategoryId, selectedCategoryName]);
-  console.log(categories, "dfdf");
 
   const handleCategoryClick = (id: number, name: string) => {
     setSelectedCategoryId(id);
@@ -32,7 +46,11 @@ export default function SellerSalesListAddProductGetCategory() {
     category.name?.toLowerCase().includes(searchCategory.toLowerCase())
   );
 
-  return (
+  console.log(isLoading);
+
+  return isLoading ? (
+    <LoadingSection text="로딩 중" />
+  ) : (
     <div className={styles.page}>
       <div className={styles.inputContainer}>
         <BackHeader />

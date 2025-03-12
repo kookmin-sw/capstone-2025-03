@@ -78,7 +78,7 @@ export default function SellerProductItem({ product }: ProductItemProps) {
       <ContentContainer>
         <Title>{product.name}</Title>
         <GradeAndAmount>
-          {product.grade}등급 ∙ {product.quantity}개
+          {product.grade} ∙ {product.quantity}개
         </GradeAndAmount>
         <Price>{product.price}원</Price>
         <StatusTag status={product.grade ?? "null"}>{product.saleStatus}</StatusTag>

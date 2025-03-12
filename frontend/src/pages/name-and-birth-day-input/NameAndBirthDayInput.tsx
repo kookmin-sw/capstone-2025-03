@@ -34,11 +34,11 @@ export default function NameAndBirthDayInput() {
 
   // 이미 회원일 시 홈으로 이동
   const tryLogin = async (kakaoId: number) => {
-    // setIsLoading(true);
     try {
       const responseData = await loginUser(kakaoId);
       if (responseData) {
         navigate("/"); 
+        setIsLoading(false)
       } else {
         setIsLoading(false)
       }
