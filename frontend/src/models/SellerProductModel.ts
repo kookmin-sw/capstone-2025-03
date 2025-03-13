@@ -1,4 +1,5 @@
 export default class SellerProductModel {
+    id: number | null;
     categoryId: number | null;
     seller: number | null;
     buyer: number | null;
@@ -13,6 +14,7 @@ export default class SellerProductModel {
     purchaseDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
 
     constructor({
+        id = null,
         images = [],
         categoryId = null,
         name = null,
@@ -26,6 +28,7 @@ export default class SellerProductModel {
         buyer = null,
         purchaseDate = null,
     }: {
+        id?: number | null;
         images?: string[];
         categoryId?: number | null;
         name?: string | null;
@@ -39,6 +42,7 @@ export default class SellerProductModel {
         buyer?: number | null;
         purchaseDate?: string | null;
     }) {
+        this.id = id;
         this.images = images;
         this.categoryId = categoryId;
         this.name = name;
@@ -55,6 +59,7 @@ export default class SellerProductModel {
 
     static fromJson(jsonData: any): SellerProductModel {
         return new SellerProductModel({
+            id: jsonData.id,
             images: jsonData.images || [],
             categoryId: jsonData.category,
             name: jsonData.name,
@@ -64,7 +69,7 @@ export default class SellerProductModel {
             price: jsonData.price,
             seller: jsonData.seller,
             uploadDate: jsonData.upload_date,
-            saleStatus: jsonData.sale_status,
+            saleStatus: jsonData.sales_status,
             buyer: jsonData.buyer,
             purchaseDate: jsonData.purchase_date,
         });
@@ -73,7 +78,7 @@ export default class SellerProductModel {
     toJson(): any {
         return {
             images: this.images,
-            category_id: this.categoryId,
+            category: this.categoryId,
             name: this.name,
             description: this.description,
             grade: this.grade,
@@ -81,7 +86,7 @@ export default class SellerProductModel {
             price: this.price,
             seller: this.seller,
             upload_date: this.uploadDate,
-            sale_status: this.saleStatus,
+            sales_status: this.saleStatus,
             buyer: this.buyer,
             purchase_date: this.purchaseDate,
         };
