@@ -2,13 +2,14 @@ import styles from "./SellerSalesListAddProductGetCategory.module.css";
 import defaultImg from "@/src/assets/images/page/seller-saleslist-addproduct-getcategory/defaultimg.jpg";
 import BackButtonForGetCategory from "./components/BackButtonForGetCategory";
 import LoadingSection from "@/src/components/layout/LoadingSection";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCategory } from "@/src/contexts/CategoryContext";
 import { useEffect, useState } from "react";
 import { LuSearch } from "react-icons/lu";
 
 export default function SellerSalesListAddProductGetCategory() {
   const navigate = useNavigate();
+  const location = useLocation()
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { categories, getAllCategory } = useCategory();
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
@@ -31,7 +32,11 @@ export default function SellerSalesListAddProductGetCategory() {
 
     if (selectedCategoryId && selectedCategoryName) {
       navigate("/seller-saleslist-addproduct", {
-        state: { selectedCategoryId, selectedCategoryName },
+        state: {
+          selectedCategoryId,
+          selectedCategoryName,
+          prevPath: location.pathname,
+        },
       });
     }
   }, [selectedCategoryId, selectedCategoryName]);

@@ -1,5 +1,6 @@
 import styles from "./SellerSalesListAddProduct.module.css";
 import BackHeader from "@/src/components/layout/BackHeader";
+import BackButtonForAddProduct from "./components/BackButtonForAddProduct";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -11,7 +12,8 @@ export default function SellerSalesListAddProduct() {
   const location = useLocation();
   const { sellerProduct, uploadProductImage, setSellerProduct } =
     useSellerProduct();
-  const { selectedCategoryId, selectedCategoryName } = location.state || {};
+  const { selectedCategoryId, selectedCategoryName, prevPath } =
+    location.state || {};
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [name, setName] = useState<string>("");
@@ -25,7 +27,13 @@ export default function SellerSalesListAddProduct() {
     grade &&
     number;
 
-    useEffect(() => {
+  useEffect(() => {
+    if (prevPath === "/seller-saleslist") {
+      setSellerProduct(new SellerProductModel({}));
+    }
+  }, []);
+
+  useEffect(() => {
     setDefaultImageSrc(
       sellerProduct?.images?.[0] ||
         "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
@@ -84,8 +92,8 @@ export default function SellerSalesListAddProduct() {
 
   return (
     <div className={styles.page}>
-      <BackHeader />
       <div className={styles.section}>
+        <BackButtonForAddProduct />
         <p className={styles.title}>물품 판매하기</p>
         <button className={styles.imageButton} onClick={handleAddImage}>
           <input

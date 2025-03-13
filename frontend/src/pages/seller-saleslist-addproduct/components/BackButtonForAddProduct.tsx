@@ -4,15 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 const Button = styled.img`
   height: 2.4rem;
-  margin-left: 2rem;
   cursor: pointer;
 `;
 
-export default function BackButtonForGetCategory() {
+export default function BackButtonForAddProduct() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/seller-saleslist-addproduct", {state: {prevPath: "/seller-saleslist-addproduct-getcategory"}});
+    navigate("/seller-saleslist");
   };
 
   return <Button src={ArrowBack} onClick={handleClick} />;
