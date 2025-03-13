@@ -48,6 +48,11 @@ export default function NameAndBirthDayInput() {
     }
   };
 
+
+
+
+
+  
   // 액세스 토큰으로 사용자 정보 가져옴
   useEffect(() => {
     if (!code) return;
@@ -57,9 +62,9 @@ export default function NameAndBirthDayInput() {
     if (isComplete) {
       const timer = setTimeout(() => {
         navigate("/");
-      }, 1500); // ✅ 1초 후 이동
+      }, 1500);
   
-      return () => clearTimeout(timer); // ✅ 컴포넌트 언마운트 시 타이머 정리
+      return () => clearTimeout(timer);
     }
 
     getKakaoAccessToken(code)
