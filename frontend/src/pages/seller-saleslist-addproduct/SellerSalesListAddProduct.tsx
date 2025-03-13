@@ -1,23 +1,36 @@
 import styles from "./SellerSalesListAddProduct.module.css";
 import BackHeader from "@/src/components/layout/BackHeader";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
-import { useProduct } from "@/src/contexts/ProductContext";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useSellerProduct } from "@/src/contexts/SellerProductContext";
+import SellerProductModel from "@/src/models/SellerProductModel";
 
 export default function SellerSalesListAddProduct() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { uploadProductImage } = useProduct();
+  const { sellerProduct, uploadProductImage, setSellerProduct } =
+    useSellerProduct();
   const { selectedCategoryId, selectedCategoryName } = location.state || {};
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [name, setName] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [number, setNumber] = useState<number | null>(null);
-
+  const [defaultImageSrc, setDefaultImageSrc] = useState<string>("");
   const isButtonValid =
-    images.length !== 0 && selectedCategoryId && name && grade && number;
+    sellerProduct?.images?.[0] !== null &&
+    selectedCategoryId &&
+    name &&
+    grade &&
+    number;
+
+    useEffect(() => {
+    setDefaultImageSrc(
+      sellerProduct?.images?.[0] ||
+        "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+    );
+  }, [sellerProduct.images]);
 
   const handleAddImage = () => {
     if (fileInputRef.current) {
@@ -35,8 +48,20 @@ export default function SellerSalesListAddProduct() {
         const uploadedImageUrl = await uploadProductImage(file);
 
         if (uploadedImageUrl) {
-          setImages((prevImages) => [...prevImages, uploadedImageUrl]);
-          console.log(uploadedImageUrl);
+          setImages((prevImages) => {
+            const newImages = [...prevImages, uploadedImageUrl];
+
+            setSellerProduct((prev) => {
+              if (!prev) return new SellerProductModel({ images: newImages });
+
+              return new SellerProductModel({
+                ...prev,
+                images: newImages,
+              });
+            });
+
+            return newImages;
+          });
         }
       } catch (error) {
         alert(`상품 이미지 업로드에 실패했습니다 : ${error}`);
@@ -47,7 +72,7 @@ export default function SellerSalesListAddProduct() {
   const handleClickConfirmButton = () => {
     navigate("/seller-saleslist-productdetail", {
       state: {
-        images,
+        // images,
         selectedCategoryName,
         selectedCategoryId,
         name,
@@ -73,18 +98,24 @@ export default function SellerSalesListAddProduct() {
           />
           {/* 업로드 이미지 첫번째꺼만 보이게 하드코딩함. 나중에 여러개 보여주도록 수정해야함 */}
           <img
-            className={images[0] ? styles.uploadedImage : styles.defaultImage}
-            src={
-              images[0] ||
+            className={
+              defaultImageSrc !==
               "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+                ? styles.uploadedImage
+                : styles.defaultImage
             }
-            width={images[0] ? "100%" : "30px"}
+            src={defaultImageSrc}
+            width={
+              defaultImageSrc !==
+              "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+                ? "100%"
+                : "30px"
+            }
           />
-          {!images[0] && (
-            <span>
-              물품 이미지를 업로드해주세요
-            </span>
-          )}{" "}
+          {defaultImageSrc ===
+          "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png" ? (
+            <span>물품 이미지를 업로드해주세요</span>
+          ) : null}
         </button>
         <p className={styles.subtitle}>물품 정보</p>
         <form
@@ -111,7 +142,7 @@ export default function SellerSalesListAddProduct() {
             onChange={(e) => setGrade(e.target.value)}
           />
           <input
-            value={number === null ? "" : number}
+            value={number ?? ""}
             type="number"
             className={styles.input}
             placeholder="개수"

@@ -30,7 +30,6 @@ export default function SellerSalesListProductDetail() {
   const [sellerId, setSellerId] = useState<number>();
   const location = useLocation();
   const {
-    images,
     selectedCategoryName,
     selectedCategoryId,
     name,
@@ -46,7 +45,7 @@ export default function SellerSalesListProductDetail() {
     amount: number,
     price: null,
     status: grade,
-    thumbnail: images[0],
+    thumbnail: sellerProduct.images[0],
   });
 
   useEffect(() => {
@@ -56,12 +55,12 @@ export default function SellerSalesListProductDetail() {
       setSellerId(userData.id);
     }
 
-    setSellerProduct(
-      new SellerProductModel({
+    setSellerProduct((prev) => 
+      new SellerProductModel({...prev,
         categoryId: selectedCategoryId,
         seller: sellerId,
         buyer: null,
-        images: images,
+        // images: images,
         name: name,
         description: null,
         grade: grade,
@@ -73,6 +72,7 @@ export default function SellerSalesListProductDetail() {
       })
     );
   }, [sellerId, product.price]);
+
 
   console.log(sellerProduct);
 
@@ -92,6 +92,7 @@ export default function SellerSalesListProductDetail() {
       await createSellerProduct(sellerProduct);
       setIsComplete(true);
       navigate("/seller-saleslist")
+      setSellerProduct(new SellerProductModel({}))
     } catch (error) {
       alert(`물건 등록 실패 : ${error}`);
     } finally {

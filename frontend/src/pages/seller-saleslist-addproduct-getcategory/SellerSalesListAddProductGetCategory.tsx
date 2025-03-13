@@ -9,7 +9,6 @@ import { LuSearch } from "react-icons/lu";
 
 export default function SellerSalesListAddProductGetCategory() {
   const navigate = useNavigate();
-
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { categories, getAllCategory } = useCategory();
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
