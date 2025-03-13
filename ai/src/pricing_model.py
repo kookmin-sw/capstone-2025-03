@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from xgboost import XGBRegressor
 from konlpy.tag import Okt
@@ -21,12 +21,35 @@ def get_data_hash(file_path):
     with open(file_path, 'rb') as f:
         return hashlib.md5(f.read()).hexdigest()
     
-def multi_hot_encode_industry(df, industry_col="INDUSTRY"):
+def remove_outliers(df, column):
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    return df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
+    
+def multi_hot_encode_industry(df, industry_col="INDUSTRY", threshold=10):
+    frequency = {}
+    for inds in df[industry_col].dropna():
+        inds_list = [i.strip() for i in inds.split(',')]
+        for token in inds_list:
+            frequency[token] = frequency.get(token, 0) + 1
+    
+    def process_industries(x):
+        if pd.isna(x):
+            return ""
+        tokens = [i.strip() for i in x.split(',')]
+        processed_tokens = [i if frequency.get(i, 0) >= threshold else "Other" for i in tokens]
+        
+        return ",".join(sorted(set(processed_tokens)))
+    
+    df[industry_col] = df[industry_col].apply(process_industries)
+    
     all_industries = set()
     for inds in df[industry_col].dropna():
         inds_list = [i.strip() for i in inds.split(',')]
         all_industries.update(inds_list)
-        
     all_industries = sorted(list(all_industries))
     
     for ind in all_industries:
@@ -40,23 +63,26 @@ def preprocess_title(text):
         return ""
     okt = Okt()
     tokens = okt.morphs(text)
+    stopwords = ["의", "가", "이", "은", "들", "는", "좀", "잘", "걍", "과", "도", "를", "으로", "자", "에", "와", "한", "하다"]
+    tokens = [token for token in tokens if token not in stopwords]
     return " ".join(tokens)
 
 def train_new_model():
     current_hash_main = get_data_hash(CSV_FILE_PATH)
     current_hash_catpop = get_data_hash(CATEGORY_POP_FILE_PATH)
-    cat_pop_df = pd.read_csv(CATEGORY_POP_FILE_PATH, encoding='utf-8')
     
+    cat_pop_df = pd.read_csv(CATEGORY_POP_FILE_PATH, encoding='utf-8')
     if "CATEGORY_POPULARITY" in cat_pop_df.columns:
         cat_pop_df.rename(columns={"CATEGORY_POPULARITY": "CATEGORY_POPULARITY_SCORE"}, inplace=True)
     else:
         print("오류: 'CATEGORY_POPULARITY' 컬럼이 없습니다.")
-        
+    
     df = pd.read_csv(CSV_FILE_PATH, encoding='utf-8')
+    
+    df = remove_outliers(df, 'PRICE')
     
     if "CATEGORY_POPULARITY_SCORE" in df.columns:
         df.drop(columns=["CATEGORY_POPULARITY_SCORE"], inplace=True)
-        
     df = df.merge(cat_pop_df, on="CATEGORY", how="left")
     print("데이터프레임 컬럼:", df.columns.tolist())
     
@@ -68,14 +94,20 @@ def train_new_model():
     if 'POPULARITY_SCORE' not in df.columns:
         df['POPULARITY_SCORE'] = (df['VIEWS'] * 0.7 + df['LIKES'] * 0.3).astype(int)
         
-    if 'POST_MONTH' not in df.columns:
+    if 'POST_DATE' in df.columns:
         df['POST_DATE'] = pd.to_datetime(df['POST_DATE'], errors='coerce')
         df['POST_MONTH'] = df['POST_DATE'].dt.month
+        df['POST_DAY_OF_WEEK'] = df['POST_DATE'].dt.dayofweek
+        df['POST_QUARTER'] = df['POST_DATE'].dt.quarter
+    else:
+        df['POST_MONTH'] = 0
+        df['POST_DAY_OF_WEEK'] = 0
+        df['POST_QUARTER'] = 0
         
     if 'INDUSTRY_COUNT' not in df.columns:
         df['INDUSTRY_COUNT'] = df['INDUSTRY'].apply(lambda x: len(x.split(',')) if pd.notna(x) else 0)
     
-    df, all_industries = multi_hot_encode_industry(df, industry_col="INDUSTRY")
+    df, all_industries = multi_hot_encode_industry(df, industry_col="INDUSTRY", threshold=10)
     
     cat_encoder = LabelEncoder()
     cond_encoder = LabelEncoder()
@@ -88,7 +120,7 @@ def train_new_model():
     
     df['TITLE_processed'] = df['TITLE'].astype(str).apply(preprocess_title)
     
-    vectorizer = TfidfVectorizer(max_features=10000)
+    vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1, 2), min_df=2, max_df=0.8)
     tfidf_matrix = vectorizer.fit_transform(df['TITLE_processed'])
     
     pca = PCA(n_components=50)
@@ -104,16 +136,24 @@ def train_new_model():
         'POPULARITY_SCORE',
         'CATEGORY_POPULARITY_SCORE',
         'POST_MONTH',
+        'POST_DAY_OF_WEEK',
+        'POST_QUARTER',
         'PRICE_CATEGORY_enc',
         'INDUSTRY_COUNT'
     ] + pca_columns
     
     X = df[X_cols].copy()
     y = df['PRICE'].copy()
+    
     X = X.fillna(0)
-    y = y.fillna(y.mean())
+    y = y.fillna(y.median())
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    numeric_cols_to_scale = ['POPULARITY_SCORE', 'CATEGORY_POPULARITY_SCORE', 'INDUSTRY_COUNT'] + pca_columns
+    scaler = StandardScaler()
+    X_train[numeric_cols_to_scale] = scaler.fit_transform(X_train[numeric_cols_to_scale])
+    X_test[numeric_cols_to_scale] = scaler.transform(X_test[numeric_cols_to_scale])
     
     model = XGBRegressor(
         n_estimators=300,
@@ -156,7 +196,7 @@ def train_new_model():
     
     joblib.dump(vectorizer, os.path.join(save_path, 'title_vectorizer.joblib'))
     joblib.dump(pca, os.path.join(save_path, 'title_pca.joblib'))
-    
+    joblib.dump(scaler, os.path.join(save_path, 'scaler.joblib'))
     joblib.dump(X_cols, os.path.join(save_path, 'feature_columns.joblib'))
     
     with open(os.path.join(MODEL_DIR, 'LATEST'), 'w', encoding='utf-8') as f:

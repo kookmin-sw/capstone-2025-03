@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from konlpy.tag import Okt
+from sklearn.preprocessing import StandardScaler
 
 MODEL_DIR = "./ai_model/versions"
 MAIN_CSV_FILE_PATH = "./ai_model/output_with_price_category.csv"
@@ -29,6 +30,7 @@ try:
     title_vectorizer = joblib.load(os.path.join(latest_dir, 'title_vectorizer.joblib'))
     title_pca = joblib.load(os.path.join(latest_dir, 'title_pca.joblib'))
     feature_columns = joblib.load(os.path.join(latest_dir, 'feature_columns.joblib'))
+    scaler = joblib.load(os.path.join(latest_dir, 'scaler.joblib'))
 except Exception as e:
     print(f"모델 로딩 실패: {e}")
     sys.exit(1)
@@ -53,6 +55,8 @@ def preprocess_title(text):
         return ""
     okt = Okt()
     tokens = okt.morphs(text)
+    stopwords = ["의", "가", "이", "은", "들", "는", "좀", "잘", "걍", "과", "도", "를", "으로", "자", "에", "와", "한", "하다"]
+    tokens = [token for token in tokens if token not in stopwords]
     return " ".join(tokens)
 
 def prepare_input_from_product(product_json: dict) -> pd.DataFrame:
@@ -94,8 +98,12 @@ def prepare_input_from_product(product_json: dict) -> pd.DataFrame:
     try:
         dt = pd.to_datetime(upload_date_str)
         post_month = dt.month
+        post_day_of_week = dt.dayofweek
+        post_quarter = dt.quarter
     except Exception as e:
         post_month = 0
+        post_day_of_week = 0
+        post_quarter = 0
     
     title_processed = preprocess_title(full_title)
     tfidf_vec = title_vectorizer.transform([title_processed])
@@ -108,6 +116,8 @@ def prepare_input_from_product(product_json: dict) -> pd.DataFrame:
         "POPULARITY_SCORE": popularity_score,
         "CATEGORY_POPULARITY_SCORE": category_pop_score,
         "POST_MONTH": post_month,
+        "POST_DAY_OF_WEEK": post_day_of_week,
+        "POST_QUARTER": post_quarter,
         "PRICE_CATEGORY_enc": pricecat_enc_val
     }
     features_dict.update(industry_encoded)
@@ -115,6 +125,14 @@ def prepare_input_from_product(product_json: dict) -> pd.DataFrame:
     
     X_df = pd.DataFrame([features_dict])
     X_df = X_df.reindex(columns=feature_columns, fill_value=0)
+    
+    numeric_cols_to_scale = ['POPULARITY_SCORE', 'CATEGORY_POPULARITY_SCORE', 'INDUSTRY_COUNT'] + \
+                              [col for col in feature_columns if col.startswith("TITLE_PCA_")]
+    for col in numeric_cols_to_scale:
+        if col not in X_df.columns:
+            X_df[col] = 0
+    X_df[numeric_cols_to_scale] = scaler.transform(X_df[numeric_cols_to_scale])
+    
     return X_df
 
 def predict_price(product_json: dict) -> float:
