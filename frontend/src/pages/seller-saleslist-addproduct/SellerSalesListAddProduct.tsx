@@ -1,5 +1,4 @@
 import styles from "./SellerSalesListAddProduct.module.css";
-import BackHeader from "@/src/components/layout/BackHeader";
 import BackButtonForAddProduct from "./components/BackButtonForAddProduct";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
@@ -18,7 +17,7 @@ export default function SellerSalesListAddProduct() {
   const [images, setImages] = useState<string[]>([]);
   const [name, setName] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
-  const [number, setNumber] = useState<number | null>(null);
+  const [number, setNumber] = useState<number>();
   const [defaultImageSrc, setDefaultImageSrc] = useState<string>("");
   const isButtonValid =
     sellerProduct?.images?.[0] !== null &&
@@ -57,18 +56,18 @@ export default function SellerSalesListAddProduct() {
 
         if (uploadedImageUrl) {
           setImages((prevImages) => {
-            const newImages = [...prevImages, uploadedImageUrl];
+            const images = [...prevImages, uploadedImageUrl];
 
             setSellerProduct((prev) => {
-              if (!prev) return new SellerProductModel({ images: newImages });
+              if (!prev) return new SellerProductModel({ images: images });
 
               return new SellerProductModel({
                 ...prev,
-                images: newImages,
+                images: images,
               });
             });
 
-            return newImages;
+            return images;
           });
         }
       } catch (error) {
@@ -78,12 +77,20 @@ export default function SellerSalesListAddProduct() {
   };
 
   const handleClickConfirmButton = () => {
+    setSellerProduct(
+      (prev) =>
+        new SellerProductModel({
+          ...prev,
+          categoryId: selectedCategoryId,
+          name: name,
+          grade: grade,
+          quantity: number,
+        })
+    );
     navigate("/seller-saleslist-productdetail", {
       state: {
-        // images,
         selectedCategoryName,
         selectedCategoryId,
-        name,
         grade,
         number,
       },
@@ -104,7 +111,6 @@ export default function SellerSalesListAddProduct() {
             style={{ display: "none" }}
             onChange={handleFileChange}
           />
-          {/* 업로드 이미지 첫번째꺼만 보이게 하드코딩함. 나중에 여러개 보여주도록 수정해야함 */}
           <img
             className={
               defaultImageSrc !==
@@ -156,7 +162,7 @@ export default function SellerSalesListAddProduct() {
             placeholder="개수"
             onChange={(e) => {
               const value = e.target.value;
-              setNumber(value === "" ? null : Number(value));
+              setNumber(Number(value));
             }}
           />
         </form>
