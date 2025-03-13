@@ -1,160 +1,168 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import os
+import re
 import hashlib
 import joblib
 import pandas as pd
 import numpy as np
-import re
 from datetime import datetime
-from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from google.colab import drive
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from xgboost import XGBRegressor
+from konlpy.tag import Okt
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import PCA
 
-drive.mount('/content/drive', force_remount=True)
+MODEL_DIR = "./ai_model/versions"
+CSV_FILE_PATH = "./ai_model/output_with_price_category.csv"
+CATEGORY_POP_FILE_PATH = "./ai_model/category_popularity.csv"
 
-DRIVE_MODEL_DIR = "/content/drive/MyDrive/ai_model/versions"
-CSV_FILE_PATH = "/content/drive/MyDrive/ai_model/joongna_all_categories.csv"
-
-class EnhancedEncoder(LabelEncoder):
-    def fit_transform(self, data):
-        data = super().fit_transform([str(x).lower().strip() for x in data])
-        return data
-
-class ConditionEncoder:
-    def transform(self, data):
-        result = []
-        for x in data:
-            x_str = str(x).lower().strip()
-            if "중고" in x_str:
-                result.append(0)
-            elif "새" in x_str or "미개봉" in x_str:
-                result.append(1)
-            else:
-                result.append(0)
-        return result
-    def fit_transform(self, data):
-        return self.transform(data)
-
-def get_data_hash():
-    with open(CSV_FILE_PATH, 'rb') as f:
+def get_data_hash(file_path):
+    with open(file_path, 'rb') as f:
         return hashlib.md5(f.read()).hexdigest()
+    
+def multi_hot_encode_industry(df, industry_col="INDUSTRY"):
+    all_industries = set()
+    for inds in df[industry_col].dropna():
+        inds_list = [i.strip() for i in inds.split(',')]
+        all_industries.update(inds_list)
+        
+    all_industries = sorted(list(all_industries))
+    
+    for ind in all_industries:
+        col_name = "IND_" + re.sub(r"\W+", "", ind)
+        df[col_name] = df[industry_col].apply(lambda x: 1 if (pd.notna(x) and ind in [i.strip() for i in x.split(',')]) else 0)
+        
+    return df, all_industries
 
-def preprocess_text(x):
-    return str(x).lower().strip()
-
-def refine_model_name(model_name, keyword):
-    refined = re.sub(re.escape(keyword), '', model_name, flags=re.IGNORECASE).strip()
-    return refined if refined != "" else model_name
-
-def map_condition(x):
-    x_str = preprocess_text(x)
-    if x_str in ["새상품", "미개봉"]:
-        return 1
-    elif x_str == "중고":
-        return 0
-    else:
-        return 0
-
-def filter_rare_categories(df, cols, threshold=20):
-    for col in cols:
-        counts = df[col].value_counts()
-        rare = counts[counts < threshold].index
-        df.loc[:, col] = df[col].replace(rare, 'other')
-    return df
+def preprocess_title(text):
+    if pd.isna(text):
+        return ""
+    okt = Okt()
+    tokens = okt.morphs(text)
+    return " ".join(tokens)
 
 def train_new_model():
-    print("학습 코드 실행 시작...")
-    current_hash = get_data_hash()
-
-    df = pd.read_csv(CSV_FILE_PATH, dtype=str, encoding='utf-8').dropna()
-    print(f"CSV 파일 읽기 완료, 총 {len(df)}행")
+    current_hash_main = get_data_hash(CSV_FILE_PATH)
+    current_hash_catpop = get_data_hash(CATEGORY_POP_FILE_PATH)
+    cat_pop_df = pd.read_csv(CATEGORY_POP_FILE_PATH, encoding='utf-8')
     
-    print("가격 전처리 중...")
-    df.loc[:, '가격'] = pd.to_numeric(df['가격'].str.replace('[^\d]', '', regex=True), errors='coerce').astype(int)
-    
-    print("텍스트 전처리 중...")
-    for col in ['키워드', '업종', '모델명', '상품상태']:
-        df.loc[:, col] = df[col].apply(preprocess_text)
-        df.loc[:, col] = df[col].fillna('unknown').str.replace('[^a-z0-9가-힣 ]', '', regex=True)
-    
-    df.loc[:, '키워드'] = df['키워드'].replace('', np.nan).fillna(df['업종'])
-    print("모델명 정제 중...")
-    df.loc[:, '모델명'] = df.apply(lambda row: refine_model_name(row['모델명'], row['키워드']), axis=1)
-    df = df[~df['모델명'].str.contains("구매")]
-    
-    if '조회수' in df.columns:
-        print("조회수 전처리 중...")
-        df.loc[:, '조회수'] = pd.to_numeric(df['조회수'].str.replace('[^\d]', '', regex=True), errors='coerce').fillna(0).astype(int)
+    if "CATEGORY_POPULARITY" in cat_pop_df.columns:
+        cat_pop_df.rename(columns={"CATEGORY_POPULARITY": "CATEGORY_POPULARITY_SCORE"}, inplace=True)
     else:
-        df['조회수'] = 0
-
-    print("상품상태 매핑 중...")
-    encoders = {
-        'keyword': EnhancedEncoder(),
-        'upjong': EnhancedEncoder(),
-        'model': EnhancedEncoder(),
-        'condition': ConditionEncoder()
-    }
-    df['키워드_enc'] = encoders['keyword'].fit_transform(df['키워드'])
-    df['업종_enc'] = encoders['upjong'].fit_transform(df['업종'])
-    df['모델명_enc'] = encoders['model'].fit_transform(df['모델명'])
-    df['상품상태_enc'] = encoders['condition'].fit_transform(df['상품상태'])
+        print("오류: 'CATEGORY_POPULARITY' 컬럼이 없습니다.")
+        
+    df = pd.read_csv(CSV_FILE_PATH, encoding='utf-8')
     
-    print("추가 피처 생성 중...")
-    df['freq'] = df.groupby(['업종', '키워드', '모델명'])['모델명'].transform('count')
-    df['norm_freq'] = df.groupby('업종')['freq'].transform(lambda x: x / x.max())
-    df['norm_price'] = df.groupby('업종')['가격'].transform(lambda x: (x - x.min()) / (x.max() - x.min() + 1e-8))
-    df['norm_view'] = df.groupby('업종')['조회수'].transform(lambda x: (x - x.min()) / (x.max() - x.min() + 1e-8))
-    df['판매확률'] = (0.4 * df['norm_freq'] +
-                      0.2 * (1 - df['norm_price']) +
-                      0.2 * (1 - df['norm_view']) +
-                      0.2 * (1 - df['상품상태_enc']))
+    if "CATEGORY_POPULARITY_SCORE" in df.columns:
+        df.drop(columns=["CATEGORY_POPULARITY_SCORE"], inplace=True)
+        
+    df = df.merge(cat_pop_df, on="CATEGORY", how="left")
+    print("데이터프레임 컬럼:", df.columns.tolist())
     
-    median_view_dict = df.groupby('업종')['조회수'].median().to_dict()
-
-    df['가격'] = pd.to_numeric(df['가격'], errors='coerce').astype(int)
-    df['조회수'] = pd.to_numeric(df['조회수'], errors='coerce').astype(int)
-
-    X_price = df[['키워드_enc', '업종_enc', '모델명_enc', '상품상태_enc']]
-    y_price = df['가격']
-    X_train_p, X_test_p, y_train_p, y_test_p = train_test_split(X_price, y_price, test_size=0.2, random_state=42)
-    price_model = XGBRegressor(n_estimators=200, max_depth=10, random_state=42, n_jobs=-1)
-    price_model.fit(X_train_p, y_train_p)
-
-    X_sales = df[['키워드_enc', '업종_enc', '모델명_enc', '상품상태_enc', '가격', '조회수']]
-    y_sales = df['판매확률']
-    X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(X_sales, y_sales, test_size=0.2, random_state=42)
-    sales_model = XGBRegressor(n_estimators=200, max_depth=10, random_state=42, n_jobs=-1)
-    sales_model.fit(X_train_s, y_train_s)
-
-    group_cols = ['업종', '키워드', '모델명']
-    group_stats_df = df.groupby(group_cols)['가격'].agg(['mean', 'count']).reset_index()
-    group_stats = { (row['업종'], row['키워드'], row['모델명']): row['mean'] for idx, row in group_stats_df.iterrows() }
+    if "CATEGORY_POPULARITY_SCORE" not in df.columns:
+        df["CATEGORY_POPULARITY_SCORE"] = 0
+    else:
+        df["CATEGORY_POPULARITY_SCORE"] = df["CATEGORY_POPULARITY_SCORE"].fillna(0)
+        
+    if 'POPULARITY_SCORE' not in df.columns:
+        df['POPULARITY_SCORE'] = (df['VIEWS'] * 0.7 + df['LIKES'] * 0.3).astype(int)
+        
+    if 'POST_MONTH' not in df.columns:
+        df['POST_DATE'] = pd.to_datetime(df['POST_DATE'], errors='coerce')
+        df['POST_MONTH'] = df['POST_DATE'].dt.month
+        
+    if 'INDUSTRY_COUNT' not in df.columns:
+        df['INDUSTRY_COUNT'] = df['INDUSTRY'].apply(lambda x: len(x.split(',')) if pd.notna(x) else 0)
     
-    global_avg_price = df['가격'].mean()
+    df, all_industries = multi_hot_encode_industry(df, industry_col="INDUSTRY")
     
-    stats_model = {
-        'group_stats': group_stats,
-        'global_avg_price': global_avg_price,
-    }
+    cat_encoder = LabelEncoder()
+    cond_encoder = LabelEncoder()
+    pricecat_encoder = LabelEncoder()
+    
+    df['CATEGORY_enc'] = cat_encoder.fit_transform(df['CATEGORY'].astype(str))
+    df['PRODUCT_CONDITION_enc'] = cond_encoder.fit_transform(df['PRODUCT_CONDITION'].astype(str))
+    df['PRICE_CATEGORY_enc'] = pricecat_encoder.fit_transform(df['PRICE_CATEGORY'].astype(str))
+    industry_cols = ["IND_" + re.sub(r"\W+", "", ind) for ind in all_industries]
+    
+    df['TITLE_processed'] = df['TITLE'].astype(str).apply(preprocess_title)
+    
+    vectorizer = TfidfVectorizer(max_features=10000)
+    tfidf_matrix = vectorizer.fit_transform(df['TITLE_processed'])
+    
+    pca = PCA(n_components=50)
+    tfidf_reduced = pca.fit_transform(tfidf_matrix.toarray())
+    
+    pca_columns = [f"TITLE_PCA_{i}" for i in range(tfidf_reduced.shape[1])]
+    df_pca = pd.DataFrame(tfidf_reduced, columns=pca_columns, index=df.index)
+    df = pd.concat([df, df_pca], axis=1)
+    
+    X_cols = industry_cols + [
+        'CATEGORY_enc',
+        'PRODUCT_CONDITION_enc',
+        'POPULARITY_SCORE',
+        'CATEGORY_POPULARITY_SCORE',
+        'POST_MONTH',
+        'PRICE_CATEGORY_enc',
+        'INDUSTRY_COUNT'
+    ] + pca_columns
+    
+    X = df[X_cols].copy()
+    y = df['PRICE'].copy()
+    X = X.fillna(0)
+    y = y.fillna(y.mean())
+    
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    model = XGBRegressor(
+        n_estimators=300,
+        max_depth=8,
+        learning_rate=0.05,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        reg_alpha=0.2,
+        reg_lambda=1.5,
+        random_state=42,
+        n_jobs=-1
+    )
+    try:
+        model.fit(X_train, y_train, eval_set=[(X_test, y_test)], early_stopping_rounds=10, verbose=True)
+    except TypeError as e:
+        model.fit(X_train, y_train)
+        
+    y_pred = model.predict(X_test)
+    
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    
+    print("모델 평가 결과")
+    print(f"  - RMSE: {rmse:,.2f}")
+    print(f"  - MAE : {mae:,.2f}")
+    print(f"  - R2  : {r2:,.4f}")
     
     version_id = datetime.now().strftime("%Y%m%d-%H%M%S")
-    save_path = os.path.join(DRIVE_MODEL_DIR, f"v{version_id}")
+    save_path = os.path.join(MODEL_DIR, f"v{version_id}")
     os.makedirs(save_path, exist_ok=True)
     
-    joblib.dump(stats_model, os.path.join(save_path, 'stats_model.joblib'))
-    joblib.dump(sales_model, os.path.join(save_path, 'sales_model.joblib'))
-    joblib.dump(encoders, os.path.join(save_path, 'encoders.joblib'))
-    joblib.dump(median_view_dict, os.path.join(save_path, 'median_view_dict.joblib'))
-    joblib.dump(current_hash, os.path.join(save_path, 'data_hash.joblib'))
+    joblib.dump(model, os.path.join(save_path, 'price_model.joblib'))
+    joblib.dump(cat_encoder, os.path.join(save_path, 'category_encoder.joblib'))
+    joblib.dump(cond_encoder, os.path.join(save_path, 'condition_encoder.joblib'))
+    joblib.dump(pricecat_encoder, os.path.join(save_path, 'price_cat_encoder.joblib'))
+    joblib.dump(all_industries, os.path.join(save_path, 'industry_labels.joblib'))
+    joblib.dump({"main_csv_hash": current_hash_main, "catpop_csv_hash": current_hash_catpop}, os.path.join(save_path, 'data_hash.joblib'))
     
-    with open(os.path.join(DRIVE_MODEL_DIR, 'LATEST'), 'w') as f:
+    joblib.dump(vectorizer, os.path.join(save_path, 'title_vectorizer.joblib'))
+    joblib.dump(pca, os.path.join(save_path, 'title_pca.joblib'))
+    
+    joblib.dump(X_cols, os.path.join(save_path, 'feature_columns.joblib'))
+    
+    with open(os.path.join(MODEL_DIR, 'LATEST'), 'w', encoding='utf-8') as f:
         f.write(version_id)
-
-    print(f"새 모델 v{version_id} 저장 완료!")
+        
+    print(f"\n모델 버전 v{version_id} 저장 완료: {save_path}")
 
 if __name__ == "__main__":
     train_new_model()
