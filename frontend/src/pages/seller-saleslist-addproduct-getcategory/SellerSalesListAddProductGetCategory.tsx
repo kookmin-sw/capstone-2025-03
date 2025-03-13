@@ -1,11 +1,11 @@
 import styles from "./SellerSalesListAddProductGetCategory.module.css";
 import defaultImg from "@/src/assets/images/page/seller-saleslist-addproduct-getcategory/defaultimg.jpg";
-import BackHeader from "@/src/components/layout/BackHeader";
+import BackButtonForGetCategory from "./components/BackButtonForGetCategory";
+import LoadingSection from "@/src/components/layout/LoadingSection";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "@/src/contexts/CategoryContext";
 import { useEffect, useState } from "react";
 import { LuSearch } from "react-icons/lu";
-import LoadingSection from "@/src/components/layout/LoadingSection";
 
 export default function SellerSalesListAddProductGetCategory() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function SellerSalesListAddProductGetCategory() {
     };
 
     fetchCatogories();
-    
+
     if (selectedCategoryId && selectedCategoryName) {
       navigate("/seller-saleslist-addproduct", {
         state: { selectedCategoryId, selectedCategoryName },
@@ -46,14 +46,12 @@ export default function SellerSalesListAddProductGetCategory() {
     category.name?.toLowerCase().includes(searchCategory.toLowerCase())
   );
 
-  console.log(isLoading);
-
   return isLoading ? (
     <LoadingSection text="로딩 중" />
   ) : (
     <div className={styles.page}>
       <div className={styles.inputContainer}>
-        <BackHeader />
+        <BackButtonForGetCategory />
         <div className={styles.inputMom}>
           <LuSearch className={styles.icon} />
           <input
@@ -64,6 +62,7 @@ export default function SellerSalesListAddProductGetCategory() {
           />
         </div>
       </div>
+
       <div className={styles.container}>
         {filteredCategories.map((category) => (
           <button
