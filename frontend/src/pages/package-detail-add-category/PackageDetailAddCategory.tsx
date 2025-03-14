@@ -22,11 +22,11 @@ export default function PackageDetailAddCategory() {
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
-    const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(editingPackage?.categoryIds || []);
+    const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(editingPackage?.categories || []);
 
     // useEffect
     useEffect(() => {
-        setMyCategories(categories.filter((category) => category.industryIds.includes(industry.id!)));
+        setMyCategories(categories.filter((category) => category.industries.includes(industry.id!)));
     }, [])
 
     // Function
@@ -38,7 +38,7 @@ export default function PackageDetailAddCategory() {
     const handleConfirmButtonClick = () => {
         const newEditingPackage = PackageModel.fromJson({
             ...editingPackage?.toJson(),
-            "category_ids": checkedCategoryIds
+            "categories": checkedCategoryIds
         });
         setEditingPackage(newEditingPackage);
         navigate(-1);

@@ -24,7 +24,7 @@ export default function PackageDetailProductDetail() {
             <div className={styles.section}>
                 <img className={styles.thumbnail} src={product.images[0]} />
                 <p className={styles.category}>
-                    {categories.find((category) => category.id === product.categoryId)?.name}
+                    {categories.find((category) => category.id === product.category)?.name}
                 </p>
                 <p className={styles.product}>
                     {product.name}

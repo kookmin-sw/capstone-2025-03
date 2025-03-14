@@ -2,7 +2,7 @@
     {
         "id": 2,
         "name": "전기오븐",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -13,7 +13,7 @@
     {
         "id": 3,
         "name": "아이스크림 머신",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -24,7 +24,7 @@
     {
         "id": 4,
         "name": "초콜릿 템퍼링",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -35,7 +35,7 @@
     {
         "id": 5,
         "name": "디저트 몰드",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -46,7 +46,7 @@
     {
         "id": 6,
         "name": "아이스크림 스쿱",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -57,7 +57,7 @@
     {
         "id": 7,
         "name": "베이킹 팬",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -68,7 +68,7 @@
     {
         "id": 8,
         "name": "유산지",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -79,7 +79,7 @@
     {
         "id": 9,
         "name": "테프론 시트",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,
@@ -90,7 +90,7 @@
     {
         "id": 10,
         "name": "업소용 냉장고",
-        "industry_ids": [
+        "industries": [
             1,
             3,
             4,

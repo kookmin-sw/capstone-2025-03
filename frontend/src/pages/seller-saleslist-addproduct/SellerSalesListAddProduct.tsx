@@ -81,7 +81,7 @@ export default function SellerSalesListAddProduct() {
       (prev) =>
         new SellerProductModel({
           ...prev,
-          categoryId: selectedCategoryId,
+          category: selectedCategoryId,
           name: name,
           grade: grade,
           quantity: number,

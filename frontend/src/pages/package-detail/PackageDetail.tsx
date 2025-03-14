@@ -55,11 +55,11 @@ export default function PackageDetail() {
         } else {
             targetPackage = editingPackage
         }
-        const newMyCategories: CategoryModel[] = targetPackage.categoryIds
+        const newMyCategories: CategoryModel[] = targetPackage.categories
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
         setMyCategories(newMyCategories);
-        const newMyProducts: BuyerProductModel[] = targetPackage.productIds
+        const newMyProducts: BuyerProductModel[] = targetPackage.products
             .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
             .filter(Boolean) as BuyerProductModel[];
         setMyProducts(newMyProducts);
@@ -67,7 +67,7 @@ export default function PackageDetail() {
 
     // Function
     const handleAddCategoryButtonClick = () => {
-        navigate('/package-detail-add-category', { state: { industry: (industryData.find((industry) => industry.id === myPackage.industryId)) } })
+        navigate('/package-detail-add-category', { state: { industry: (industryData.find((industry) => industry.id === myPackage.industry)) } })
     }
     const handleEditButtonClick = () => {
         setIsEdit(!isEdit);
@@ -96,13 +96,13 @@ export default function PackageDetail() {
     }
     const handleDeleteButtonClick = (categoryId: number) => {
         setMyCategories((prev) => prev.filter((category) => category.id !== categoryId));
-        setMyProducts((prev) => prev.filter((product) => product.categoryId !== categoryId));
+        setMyProducts((prev) => prev.filter((product) => product.category !== categoryId));
         setEditingPackage((prev) => {
             if (!prev) return prev;
             return PackageModel.fromJson({
                 ...prev.toJson(),
-                "category_ids": prev.categoryIds.filter((id) => id !== categoryId),
-                "product_ids": prev.productIds.filter((id) => myProducts.some((product) => product.id === id))
+                "categories": prev.categories.filter((id) => id !== categoryId),
+                "products": prev.products.filter((id) => myProducts.some((product) => product.id === id))
             });
         });
     }
@@ -131,7 +131,7 @@ export default function PackageDetail() {
                 </div>
                 <div className={styles.listView}>
                     {myCategories.map((category, index) => {
-                        const myProduct = myProducts.find((product) => product.categoryId === category.id) || null;
+                        const myProduct = myProducts.find((product) => product.category === category.id) || null;
                         return (
                             <div key={index} className={styles.productItem} onClick={() => { handleAddProductButtonClick(category) }}>
                                 <img className={styles.productThumbnail} src={myProduct?.images[0] || "https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg"} />

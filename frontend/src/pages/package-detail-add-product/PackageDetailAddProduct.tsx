@@ -27,16 +27,16 @@ export default function PackageDetailAddProduct() {
 
     // useEffect
     useEffect(() => {
-        setMyProducts(buyerProducts.filter((buyerProduct) => buyerProduct.categoryId === category.id));
+        setMyProducts(buyerProducts.filter((buyerProduct) => buyerProduct.category === category.id));
         setCheckedProductIds(
             buyerProducts
-                .filter((buyerProduct) => (editingPackage?.productIds || []).includes(buyerProduct.id!))
+                .filter((buyerProduct) => (editingPackage?.products || []).includes(buyerProduct.id!))
                 .map((buyerProduct) => buyerProduct.id!)
         );
         getBuyerProductList();
     }, []);
     useEffect(() => {
-        setMyProducts(buyerProducts.filter((buyerProduct) => buyerProduct.categoryId === category.id));
+        setMyProducts(buyerProducts.filter((buyerProduct) => buyerProduct.category === category.id));
     }, [buyerProducts]);
 
     // Function
@@ -53,7 +53,7 @@ export default function PackageDetailAddProduct() {
     const handleConfirmButtonClick = () => {
         setEditingPackage((prev) => PackageModel.fromJson({
             ...prev?.toJson(),
-            "product_ids": checkedProductIds
+            "products": checkedProductIds
         }))
         navigate(-1);
     }

@@ -51,8 +51,8 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
             const fetchedPackage = await getPackageInService(packageId);
             if (fetchedPackage) {
                 // 이미 있는 데이터 필터링하여 요청할 목록 결정
-                const missingCategoryIds = fetchedPackage.categoryIds.filter(id => !categories.some(c => c.id === id));
-                const missingProductIds = fetchedPackage.productIds.filter(id => !products.some(p => p.id === id));
+                const missingCategoryIds = fetchedPackage.categories.filter(id => !categories.some(c => c.id === id));
+                const missingProductIds = fetchedPackage.products.filter(id => !products.some(p => p.id === id));
 
                 if (missingCategoryIds.length > 0 || missingProductIds.length > 0) {
                     const { categories: newCategories, products: newProducts } = await getCategoriesAndProductsInBatch(

@@ -32,12 +32,12 @@ export const usePackage = () => {
 
             // 누락된 category 가져오기 (중복 제거)
             const missingCategoryIds = Array.from(new Set(
-                newPackageList.flatMap(pkg => pkg.categoryIds).filter(categoryId => !categoryIdSet.has(categoryId))
+                newPackageList.flatMap(pkg => pkg.categories).filter(categoryId => !categoryIdSet.has(categoryId))
             ));
 
             // 누락된 product 가져오기 (중복 제거)
             const missingProductIds = Array.from(new Set(
-                newPackageList.flatMap(pkg => pkg.productIds).filter(productId => !productIdSet.has(productId))
+                newPackageList.flatMap(pkg => pkg.products).filter(productId => !productIdSet.has(productId))
             ));
 
             // API 호출 (누락된 ID가 있을 경우에만 실행)
@@ -85,8 +85,8 @@ export const usePackage = () => {
         const productIdSet = new Set(buyerProducts.map(product => product.id));
 
         // 누락된 category 및 product 가져오기
-        const missingCategoryIds = newPackage.categoryIds.filter(categoryId => !categoryIdSet.has(categoryId));
-        const missingProductIds = newPackage.productIds.filter(productId => !productIdSet.has(productId));
+        const missingCategoryIds = newPackage.categories.filter(categoryId => !categoryIdSet.has(categoryId));
+        const missingProductIds = newPackage.products.filter(productId => !productIdSet.has(productId));
 
         // API 호출 (누락된 경우에만 실행)
         if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);

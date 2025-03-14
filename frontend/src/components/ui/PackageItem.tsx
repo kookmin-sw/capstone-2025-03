@@ -74,9 +74,9 @@ export default function PackageItem({ pkg }: PackageProps) {
   useEffect(() => {
     const categoryNames = [];
     let count = 0;
-    for (let i = 0; i < pkg.categoryIds.length; i++) {
+    for (let i = 0; i < pkg.categories.length; i++) {
       if (categoryNames.length >= 2) count += 1;
-      categoryNames.push(categories.find((category) => category.id === pkg.categoryIds[i])?.name);
+      categoryNames.push(categories.find((category) => category.id === pkg.categories[i])?.name);
     }
     setCategoryPreview(`${categoryNames.join(", ")} ${count > 0 ? `외 ${count}가지로 구성` : "로 구성"}`);
   }, [])

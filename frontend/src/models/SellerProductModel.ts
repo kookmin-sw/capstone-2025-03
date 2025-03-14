@@ -1,6 +1,6 @@
 export default class SellerProductModel {
     id: number | null;
-    categoryId: number | null;
+    category: number | null;
     seller: number | null;
     buyer: number | null;
     images: string[];
@@ -16,12 +16,12 @@ export default class SellerProductModel {
     constructor({
         id = null,
         images = [],
-        categoryId = null,
+        category = null,
         name = null,
         description = null,
         grade = null,
         quantity = 0,
-        price = 0,
+        price = null,
         seller = null,
         uploadDate = null,
         saleStatus = null,
@@ -30,7 +30,7 @@ export default class SellerProductModel {
     }: {
         id?: number | null;
         images?: string[];
-        categoryId?: number | null;
+        category?: number | null;
         name?: string | null;
         description?: string | null;
         grade?: string | null;
@@ -44,7 +44,7 @@ export default class SellerProductModel {
     }) {
         this.id = id;
         this.images = images;
-        this.categoryId = categoryId;
+        this.category = category;
         this.name = name;
         this.description = description;
         this.grade = grade;
@@ -59,26 +59,27 @@ export default class SellerProductModel {
 
     static fromJson(jsonData: any): SellerProductModel {
         return new SellerProductModel({
-            id: jsonData.id,
-            images: jsonData.images || [],
-            categoryId: jsonData.category,
-            name: jsonData.name,
-            description: jsonData.description,
-            grade: jsonData.grade,
-            quantity: jsonData.quantity,
-            price: jsonData.price,
-            seller: jsonData.seller,
-            uploadDate: jsonData.upload_date,
-            saleStatus: jsonData.sales_status,
-            buyer: jsonData.buyer,
-            purchaseDate: jsonData.purchase_date,
+            id: jsonData.id ?? null,
+            images: jsonData.images ?? [],
+            category: jsonData.category ?? null,
+            name: jsonData.name ?? null,
+            description: jsonData.description ?? null,
+            grade: jsonData.grade ?? null,
+            quantity: jsonData.quantity ?? 0,
+            price: jsonData.price ?? null,
+            seller: jsonData.seller ?? null,
+            uploadDate: jsonData.upload_date ?? null,
+            saleStatus: jsonData.sales_status ?? null,
+            buyer: jsonData.buyer ?? null,
+            purchaseDate: jsonData.purchase_date ?? null,
         });
     }
 
     toJson(): any {
         return {
+            id: this.id,
             images: this.images,
-            category: this.categoryId,
+            category: this.category,
             name: this.name,
             description: this.description,
             grade: this.grade,

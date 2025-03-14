@@ -41,7 +41,7 @@ export default function FindPackageRecommend() {
         { "id": 27, "comment": "레저 사업으로 여가를 즐기는 고객을 만족시켜보세요!" },
         { "id": 28, "comment": "스크린 스포츠 및 게임으로 색다른 재미를 제공하세요." }
     ]
-    const myPackages = packages.filter((pkg) => pkg.industryId === industry.id);
+    const myPackages = packages.filter((pkg) => pkg.industry === industry.id);
 
     // return
     return (
