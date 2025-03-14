@@ -1,36 +1,36 @@
 export default class PackageModel {
-    id: number | null;
-    industryId: number | null;
-    categoryIds: number[];
-    productIds: number[];
+    id: number | null; // 유지
+    industry: number | null;
+    categories: number[];
+    products: number[];
     thumbnail: string | null;
     name: string | null;
     description: string | null;
-    price: number | 0;
+    price: number;
 
     constructor({
         id = null,
-        industryId = null,
-        categoryIds = [],
-        productIds = [],
+        industry = null,
+        categories = [],
+        products = [],
         name = null,
         thumbnail = null,
         description = null,
         price = 0
     }: {
         id?: number | null;
-        industryId?: number | null;
-        categoryIds?: number[];
-        productIds?: number[];
+        industry?: number | null;
+        categories?: number[];
+        products?: number[];
         name?: string | null;
         thumbnail?: string | null;
-        description: string | null;
-        price: number | 0;
+        description?: string | null;
+        price?: number;
     }) {
         this.id = id;
-        this.industryId = industryId;
-        this.categoryIds = categoryIds;
-        this.productIds = productIds;
+        this.industry = industry;
+        this.categories = categories;
+        this.products = products;
         this.name = name;
         this.thumbnail = thumbnail;
         this.description = description;
@@ -40,9 +40,9 @@ export default class PackageModel {
     static fromJson(jsonData: any): PackageModel {
         return new PackageModel({
             id: jsonData["id"],
-            industryId: jsonData["industry_id"],
-            categoryIds: jsonData["category_ids"] || [],
-            productIds: jsonData["product_ids"] || [],
+            industry: jsonData["industry"],
+            categories: jsonData["categories"] || [],
+            products: jsonData["products"] || [],
             name: jsonData["name"],
             thumbnail: jsonData["thumbnail"],
             description: jsonData["description"],
@@ -53,9 +53,9 @@ export default class PackageModel {
     toJson(): any {
         return {
             "id": this.id,
-            "industry_id": this.industryId,
-            "category_ids": this.categoryIds,
-            "product_ids": this.productIds,
+            "industry": this.industry,
+            "categories": this.categories,
+            "products": this.products,
             "name": this.name,
             "thumbnail": this.thumbnail,
             "description": this.description,
@@ -65,9 +65,9 @@ export default class PackageModel {
 
     toJsonWithoutId(): any {
         return {
-            "industry_id": this.industryId,
-            "category_ids": this.categoryIds,
-            "product_ids": this.productIds,
+            "industry": this.industry,
+            "categories": this.categories,
+            "products": this.products,
             "name": this.name,
             "thumbnail": this.thumbnail,
             "description": this.description,

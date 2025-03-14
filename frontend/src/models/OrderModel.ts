@@ -1,31 +1,31 @@
 export default class OrderModel {
-    id: number | null;
-    userId: number | null;
-    packageId: number | null;
+    id: number | null; // 유지
+    user: number | null;
+    package: number | null;
     createdAt: string | null;
 
     constructor({
         id = null,
-        userId = null,
-        packageId = null,
+        user = null,
+        package: _package = null, // package는 예약어라 _package로 받아서 처리
         createdAt = null,
     }: {
         id?: number | null;
-        userId?: number | null;
-        packageId?: number | null;
+        user?: number | null;
+        package?: number | null;
         createdAt?: string | null;
     }) {
         this.id = id;
-        this.userId = userId;
-        this.packageId = packageId;
+        this.user = user;
+        this.package = _package;
         this.createdAt = createdAt;
     }
 
     static fromJson(jsonData: any): OrderModel {
         return new OrderModel({
             id: jsonData["id"],
-            userId: jsonData["user_id"],
-            packageId: jsonData["package_id"],
+            user: jsonData["user"],
+            package: jsonData["package"],
             createdAt: jsonData["created_at"],
         });
     }
@@ -33,16 +33,16 @@ export default class OrderModel {
     toJson(): any {
         return {
             "id": this.id,
-            "user_id": this.userId,
-            "package_id": this.packageId,
+            "user": this.user,
+            "package": this.package,
             "created_at": this.createdAt,
         };
     }
 
     toJsonWithoutId(): any {
         return {
-            "user_id": this.userId,
-            "package_id": this.packageId,
+            "user": this.user,
+            "package": this.package,
             "created_at": this.createdAt,
         };
     }

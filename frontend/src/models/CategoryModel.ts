@@ -1,22 +1,22 @@
 export default class CategoryModel {
-    id: number | null;
-    industryIds: number[];
+    id: number | null; // 유지
+    industries: number[];
     thumbnail: string | null;
     name: string | null;
 
     constructor({
         id = null,
-        industryIds = [],
+        industries = [],
         thumbnail = null,
         name = null,
     }: {
         id?: number | null;
-        industryIds?: number[];
+        industries?: number[];
         thumbnail?: string | null;
         name?: string | null;
     }) {
         this.id = id;
-        this.industryIds = industryIds;
+        this.industries = industries;
         this.thumbnail = thumbnail;
         this.name = name;
     }
@@ -24,7 +24,7 @@ export default class CategoryModel {
     static fromJson(jsonData: any): CategoryModel {
         return new CategoryModel({
             id: jsonData["id"],
-            industryIds: jsonData["industry_ids"] || [],
+            industries: jsonData["industries"] || [],
             thumbnail: jsonData["thumbnail"],
             name: jsonData["name"],
         });
@@ -33,7 +33,7 @@ export default class CategoryModel {
     toJson(): any {
         return {
             "id": this.id,
-            "industry_ids": this.industryIds,
+            "industries": this.industries,
             "thumbnail": this.thumbnail,
             "name": this.name,
         };
@@ -41,7 +41,7 @@ export default class CategoryModel {
 
     toJsonWithoutId(): any {
         return {
-            "industry_ids": this.industryIds,
+            "industries": this.industries,
             "thumbnail": this.thumbnail,
             "name": this.name,
         };
