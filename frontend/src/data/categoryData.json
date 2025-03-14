@@ -1,272 +1,284 @@
 [
     {
-        "id": 2,
-        "name": "전기오븐",
+        "id": 1,
+        "name": "컨벤션 오븐",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
+    },
+    {
+        "id": 2,
+        "name": "전기오븐",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5
+        ]
     },
     {
         "id": 3,
         "name": "아이스크림 머신",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 4,
         "name": "초콜릿 템퍼링",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 5,
         "name": "디저트 몰드",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 6,
         "name": "아이스크림 스쿱",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 7,
         "name": "베이킹 팬",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 8,
         "name": "유산지",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 9,
         "name": "테프론 시트",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 10,
         "name": "업소용 냉장고",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 11,
         "name": "냉동고",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 12,
         "name": "쇼케이스 냉장고",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             8
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 13,
         "name": "포장 리본",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             4,
             5,
             6
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 14,
         "name": "스티커",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             4,
             5,
             6
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 15,
         "name": "미용 의자",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 16,
         "name": "미용 거울",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 17,
         "name": "컷트 가위",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 18,
         "name": "드라이기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 19,
         "name": "매직기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 20,
         "name": "고데기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 21,
         "name": "미용 타올",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 22,
         "name": "염색 도구 세트",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 23,
         "name": "헤어 제품",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 24,
         "name": "커트 연습용 가발",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 25,
         "name": "열펌기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 26,
         "name": "가운",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 27,
         "name": "앞치마",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
@@ -274,50 +286,50 @@
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 28,
         "name": "머리카락 털이용 스펀지",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
             11
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 29,
         "name": "태블릿",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             12,
             13
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 30,
         "name": "스터디책상 / 의자",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             12,
             13
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 31,
         "name": "스탠드 조명",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             12,
             13
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 32,
         "name": "타이머",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
@@ -325,260 +337,267 @@
             12,
             13,
             19
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 33,
         "name": "화이트보드",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             12,
             13
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 34,
         "name": "귀마개",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             12,
             13,
             19
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 35,
         "name": "침대 프레임",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 36,
         "name": "매트리스",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 37,
         "name": "배개",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 38,
         "name": "이불",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 39,
         "name": "침대커버",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 40,
         "name": "커튼",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 41,
         "name": "블라인드",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 42,
         "name": "옷장",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 43,
         "name": "책상",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             12,
-            13
-        ],
-        "thumbnail": null
+            13,
+            26
+        ]
     },
     {
         "id": 44,
         "name": "의자",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             12,
-            13
-        ],
-        "thumbnail": null
+            13,
+            26
+        ]
     },
     {
         "id": 45,
         "name": "소파",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             12,
             13,
-            15
-        ],
-        "thumbnail": null
+            15,
+            26
+        ]
     },
     {
         "id": 46,
         "name": "독서등",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             12,
             13,
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 47,
         "name": "무드등",
-        "industry_ids": [
-            26,
-            15
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            15,
+            26
+        ]
     },
     {
         "id": 48,
         "name": "TV",
-        "industry_ids": [
-            26,
-            15
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            15,
+            26
+        ]
     },
     {
         "id": 49,
         "name": "에어컨",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             12,
             13,
-            15
-        ],
-        "thumbnail": null
+            15,
+            26
+        ]
     },
     {
         "id": 50,
         "name": "공기청정기",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             12,
             13,
-            15
-        ],
-        "thumbnail": null
+            15,
+            26
+        ]
     },
     {
         "id": 51,
         "name": "업소용 청소기",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
-            5
-        ],
-        "thumbnail": null
+            5,
+            26
+        ]
     },
     {
         "id": 52,
         "name": "다기능 청소카트",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
-            5
-        ],
-        "thumbnail": null
+            5,
+            26
+        ]
     },
     {
         "id": 53,
         "name": "흔들의자",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15,
             16
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 54,
         "name": "해먹",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15,
             16
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 55,
         "name": "바베큐 그릴",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             16
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 56,
         "name": "조리대",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
+    },
+    {
+        "id": 57,
+        "name": "세탁기",
+        "thumbnail": "NULL",
+        "industries": [
+            15
+        ]
     },
     {
         "id": 58,
         "name": "건조기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 59,
         "name": "매장 조명",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
@@ -586,40 +605,40 @@
             6,
             9,
             10,
-            11
-        ],
-        "thumbnail": null
+            11,
+            26
+        ]
     },
     {
         "id": 60,
         "name": "대형 거울",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10,
-            11
-        ],
-        "thumbnail": null
+            11,
+            26
+        ]
     },
     {
         "id": 61,
         "name": "진열대",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             6,
-            8
-        ],
-        "thumbnail": null
+            8,
+            26
+        ]
     },
     {
         "id": 62,
         "name": "전자출입문 시스템",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
@@ -631,82 +650,82 @@
             11,
             12,
             13,
-            15
-        ],
-        "thumbnail": null
+            15,
+            26
+        ]
     },
     {
         "id": 63,
         "name": "현금 보관함",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             6,
-            8
-        ],
-        "thumbnail": null
+            8,
+            26
+        ]
     },
     {
         "id": 64,
         "name": "보안용 금고",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             6,
-            8
-        ],
-        "thumbnail": null
+            8,
+            26
+        ]
     },
     {
         "id": 65,
         "name": "고객 대기 의자",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
             12,
-            13
-        ],
-        "thumbnail": null
+            13,
+            26
+        ]
     },
     {
         "id": 66,
         "name": "상업용 청소기",
-        "industry_ids": [
-            26,
-            1,
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 67,
-        "name": "대형 유리창 청소 도구",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5,
-            15
-        ],
-        "thumbnail": null
+            26
+        ]
+    },
+    {
+        "id": 67,
+        "name": "대형 유리창 청소 도구",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            15,
+            26
+        ]
     },
     {
         "id": 68,
         "name": "방향제",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
@@ -714,2481 +733,2461 @@
             9,
             10,
             11,
-            15
-        ],
-        "thumbnail": null
+            15,
+            26
+        ]
     },
     {
         "id": 69,
         "name": "3D 프린터",
-        "industry_ids": [
-            29,
-            22
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            29
+        ]
     },
     {
         "id": 70,
         "name": "레이저 커터",
-        "industry_ids": [
-            29,
-            22
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            29
+        ]
     },
     {
         "id": 71,
         "name": "CNC 조각기",
-        "industry_ids": [
-            29,
-            22
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            29
+        ]
     },
     {
         "id": 72,
         "name": "전자 회로 제작 장비",
-        "industry_ids": [
-            29,
-            22
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            29
+        ]
     },
     {
         "id": 73,
         "name": "테스트 및 측정 기기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
+            22,
             28,
-            29,
-            22
-        ],
-        "thumbnail": null
+            29
+        ]
     },
     {
         "id": 74,
         "name": "작업대",
-        "industry_ids": [
-            29,
-            22
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            29
+        ]
     },
     {
         "id": 75,
         "name": "공업용 환풍기",
-        "industry_ids": [
-            29,
-            22
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            29
+        ]
     },
     {
         "id": 76,
         "name": "정밀공구",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
+            22,
             28,
-            29,
-            22
-        ],
-        "thumbnail": null
+            29
+        ]
     },
     {
         "id": 77,
         "name": "가스레인지",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 78,
         "name": "화구",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 79,
         "name": "튀김기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 80,
         "name": "냄비",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 81,
         "name": "프라이팬",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 82,
         "name": "칼",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 83,
         "name": "가위",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 84,
         "name": "도마",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 85,
         "name": "계량저울",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 86,
         "name": "믹서기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 87,
         "name": "주류 냉장고",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             17
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 89,
-        "name": "에스프레소 머신",
-        "industry_ids": [
-            26,
-            1,
-            3,
-            4,
-            12
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 88,
         "name": "보관용기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
+    },
+    {
+        "id": 89,
+        "name": "에스프레소 머신",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            12,
+            26
+        ]
     },
     {
         "id": 90,
         "name": "그라인더",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
-            12
-        ],
-        "thumbnail": null
+            12,
+            26
+        ]
     },
     {
         "id": 91,
         "name": "제빙기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             2,
             3,
             4,
             12
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 92,
         "name": "커피원두",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             4
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 93,
         "name": "시럽",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 94,
         "name": "티백",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             4,
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 95,
         "name": "캐리어",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             2,
             3,
             4
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 96,
         "name": "케잌 쇼케이스",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 97,
         "name": "쇼파",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
-            12
-        ],
-        "thumbnail": null
+            12,
+            26
+        ]
     },
     {
         "id": 98,
         "name": "CCTV",
-        "industry_ids": [
-            26,
-            28,
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4,
             6,
             8,
-            21
-        ],
-        "thumbnail": null
+            21,
+            26,
+            28
+        ]
     },
     {
         "id": 99,
         "name": "블렌더",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             3,
             4
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 100,
         "name": "냉장 쇼케이스",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             4,
             8
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 101,
         "name": "진열장",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             6,
             15,
             21
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 102,
         "name": "선반",
-        "industry_ids": [
-            26,
+        "thumbnail": "NULL",
+        "industries": [
             6,
             8,
-            21
-        ],
-        "thumbnail": null
+            21,
+            26
+        ]
     },
     {
         "id": 103,
         "name": "싱크대",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             2,
             3,
             4,
             9
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 104,
         "name": "포스기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             2,
             3,
             4,
             8
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 105,
         "name": "음식물 처리기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 106,
         "name": "고무장갑",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 107,
         "name": "행주",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 108,
         "name": "수건",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 109,
         "name": "대걸레",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 110,
         "name": "빗자루",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 111,
         "name": "쓰레받이",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 112,
         "name": "세제",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 113,
         "name": "수저통 테이블",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 114,
         "name": "숯불 테이블",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 115,
         "name": "불판 테이블",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 116,
         "name": "인덕션 테이블",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 117,
         "name": "숟가락",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 118,
         "name": "젓가락",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 119,
         "name": "포크",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 120,
         "name": "나이프",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 121,
         "name": "트레이",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 122,
         "name": "카트",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             2
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 123,
         "name": "앞접시",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 124,
         "name": "뚝배기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 125,
         "name": "냅킨",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 126,
         "name": "물병",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 127,
         "name": "물컵",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 128,
         "name": "쓰레기통",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 129,
         "name": "카드 결제기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 130,
         "name": "영수증 프린터",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 131,
         "name": "음악 스피커",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             17
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 132,
         "name": "현금함",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 133,
         "name": "이쑤시개",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 134,
         "name": "피부 기초 스킨 케어",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 135,
         "name": "립스틱",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 136,
         "name": "틴트",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 137,
         "name": "파운데이션",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 138,
         "name": "컨실러",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 139,
         "name": "메이크업 도구",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 140,
         "name": "메이크업 조명 도구",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 141,
         "name": "메이크업 의자",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 142,
         "name": "화장대",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 143,
         "name": "거울",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             9,
             10
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 144,
         "name": "대형 컨테이너 박스",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 145,
         "name": "화물용 래핑기",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 146,
         "name": "진공 포장기",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 147,
         "name": "수출입 서류 보관함",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 148,
         "name": "GPS 추적기",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 149,
         "name": "무선 송장 프린터",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 150,
         "name": "스캐너",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 151,
         "name": "핸드카트",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 152,
         "name": "컨테이너 개폐 도구",
-        "industry_ids": [
-            27,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            27
+        ]
     },
     {
         "id": 153,
         "name": "골프공 공급기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             20
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 154,
         "name": "트랙맨 스튜디오",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             20
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 155,
         "name": "골프클럽 거치대",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             20
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 156,
         "name": "골프채",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             20
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 1,
-        "name": "컨벤션 오븐",
-        "industry_ids": [
-            1,
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 57,
-        "name": "세탁기",
-        "industry_ids": [
-            15
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 157,
         "name": "이동식 접이식 테이블",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             24,
             25
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 158,
         "name": "대형 파라솔",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             24,
             25
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 159,
         "name": "캐노피 텐트",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             16,
             24
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 160,
         "name": "아이스박스",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             2,
             16,
             24,
             25
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 161,
         "name": "휴대용 POS기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             2,
             8,
             24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 163,
-        "name": "전기 튀김기",
-        "industry_ids": [
-            1,
-            8,
-            24,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 164,
-        "name": "보온통",
-        "industry_ids": [
-            28,
-            1,
-            2,
-            24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 165,
-        "name": "온장고",
-        "industry_ids": [
-            1,
-            2,
-            8,
-            24,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 166,
-        "name": "일회용 용기",
-        "industry_ids": [
-            1,
-            2,
-            8,
-            24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 167,
-        "name": "쓰레기통(대형)",
-        "industry_ids": [
-            1,
-            8,
-            24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 168,
-        "name": "손 소독제",
-        "industry_ids": [
-            28,
-            1,
-            8,
-            24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 169,
-        "name": "식기 세척제",
-        "industry_ids": [
-            1,
-            2,
-            3,
-            24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 170,
-        "name": "위생 앞치마",
-        "industry_ids": [
-            1,
-            2,
-            3,
-            4,
-            24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 171,
-        "name": "뽑기 기계",
-        "industry_ids": [
-            17
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 172,
-        "name": "지폐 교환기",
-        "industry_ids": [
-            12,
-            17,
-            18
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 173,
-        "name": "PC방 모니터",
-        "industry_ids": [
-            26,
-            12
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 174,
-        "name": "게이밍 의자",
-        "industry_ids": [
-            26,
-            12
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 175,
-        "name": "컴퓨터 데스크",
-        "industry_ids": [
-            26,
-            12,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 176,
-        "name": "헤드셋",
-        "industry_ids": [
-            26,
-            12,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 177,
-        "name": "라면 기계",
-        "industry_ids": [
-            1,
-            8,
-            12
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 178,
-        "name": "음료 냉장고",
-        "industry_ids": [
-            1,
-            3,
-            8,
-            12,
-            17
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 179,
-        "name": "식기세척기",
-        "industry_ids": [
-            1,
-            3,
-            4,
-            12
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 180,
-        "name": "업소용 튀김기",
-        "industry_ids": [
-            1,
-            2
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 181,
-        "name": "칠판",
-        "industry_ids": [
-            26,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 182,
-        "name": "빔 프로젝터",
-        "industry_ids": [
-            26,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 183,
-        "name": "마이크",
-        "industry_ids": [
-            28,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 184,
-        "name": "스피커",
-        "industry_ids": [
-            1,
-            3,
-            4,
-            12,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 185,
-        "name": "프린터 및 출력 용품",
-        "industry_ids": [
-            26,
-            12,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 186,
-        "name": "노트북",
-        "industry_ids": [
-            26,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 187,
-        "name": "무소음 마우스",
-        "industry_ids": [
-            26,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 188,
-        "name": "키보드",
-        "industry_ids": [
-            26,
-            12,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 189,
-        "name": "바코드 스캐너",
-        "industry_ids": [
-            26,
-            12,
-            13
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 190,
-        "name": "편의점 진열대",
-        "industry_ids": [
-            5,
-            8,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 191,
-        "name": "계산대",
-        "industry_ids": [
-            5,
-            6,
-            8,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 192,
-        "name": "상품 정리용 바구니",
-        "industry_ids": [
-            1,
-            3,
-            4,
-            5,
-            6,
-            8
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 193,
-        "name": "배달 용기",
-        "industry_ids": [
-            2,
-            5,
-            8,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 194,
-        "name": "포장 기계",
-        "industry_ids": [
-            1,
-            2,
-            24
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 195,
-        "name": "뚜껑",
-        "industry_ids": [
-            1,
-            2
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 196,
-        "name": "실링칼",
-        "industry_ids": [
-            1,
-            2,
-            3
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 197,
-        "name": "개인용 책상",
-        "industry_ids": [
-            26,
-            27,
-            28,
-            29,
-            6,
-            10,
-            12,
-            13,
-            14,
-            15,
-            18,
-            19,
-            20,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 198,
-        "name": "회의용 테이블",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            13,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 199,
-        "name": "사무용 의자",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            13,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 201,
-        "name": "복합기",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            13,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 202,
-        "name": "문서 세단기",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 203,
-        "name": "네트워크 공유기",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            6,
-            13,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 204,
-        "name": "랜 케이블",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            13,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 205,
-        "name": "PC 주변 기기",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            6,
-            13,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 206,
-        "name": "커피 머신",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            3,
-            15,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 207,
-        "name": "정수기",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            3,
-            13,
-            15,
-            19,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 208,
-        "name": "가습기",
-        "industry_ids": [
-            28,
-            3,
-            13,
-            15,
-            19,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 209,
-        "name": "웹캠",
-        "industry_ids": [
-            28,
-            13,
-            20,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 210,
-        "name": "USB마이크",
-        "industry_ids": [
-            28,
-            13,
-            20,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 211,
-        "name": "러그",
-        "industry_ids": [
-            28,
-            13,
-            17,
-            20,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 212,
-        "name": "미니 화분",
-        "industry_ids": [
-            28,
-            3,
-            15,
-            16,
-            19,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 213,
-        "name": "컴퓨터",
-        "industry_ids": [
-            28,
-            3,
-            9,
-            10,
-            15,
-            16,
-            19,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 214,
-        "name": "DSLR 카메라",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            6,
-            13,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 215,
-        "name": "촬영용 조명",
-        "industry_ids": [
-            28,
-            6,
-            9,
-            10,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 216,
-        "name": "촬영 배경지",
-        "industry_ids": [
-            28,
-            6,
-            9,
-            10,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 217,
-        "name": "무게 저울",
-        "industry_ids": [
-            28,
-            6,
-            9,
-            10,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 218,
-        "name": "수납 선반",
-        "industry_ids": [
-            27,
-            4,
-            6,
-            21,
-            24,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 219,
-        "name": "창고 정리함",
-        "industry_ids": [
-            26,
-            3,
-            6,
-            7,
-            8,
-            13,
-            21,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 220,
-        "name": "폴리백",
-        "industry_ids": [
-            27,
-            6,
-            8,
-            21,
-            24,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 221,
-        "name": "비닐백",
-        "industry_ids": [
-            27,
-            6,
-            7,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 222,
-        "name": "테이프",
-        "industry_ids": [
-            27,
-            6,
-            7,
-            21,
-            24,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 224,
-        "name": "송장 프린터기",
-        "industry_ids": [
-            27,
-            6,
-            7,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 225,
-        "name": "포장용 비닐",
-        "industry_ids": [
-            27,
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 226,
-        "name": "택배 박스",
-        "industry_ids": [
-            27,
-            6,
-            7,
-            21,
-            24,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 227,
-        "name": "뽁뽁이",
-        "industry_ids": [
-            27,
-            6,
-            7,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 228,
-        "name": "에어캡",
-        "industry_ids": [
-            27,
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 229,
-        "name": "포장재",
-        "industry_ids": [
-            27,
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 230,
-        "name": "애견 미용 테이블",
-        "industry_ids": [
-            27,
-            6,
-            7,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 231,
-        "name": "바리깡",
-        "industry_ids": [
-            9,
-            14
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 232,
-        "name": "강아지 샴푸",
-        "industry_ids": [
-            9,
-            14
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 233,
-        "name": "강아지 간식",
-        "industry_ids": [
-            14
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 234,
-        "name": "사료",
-        "industry_ids": [
-            6,
-            14,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 235,
-        "name": "강아지 용품",
-        "industry_ids": [
-            6,
-            14,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 236,
-        "name": "애견 드라이기",
-        "industry_ids": [
-            6,
-            14,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 237,
-        "name": "케이지",
-        "industry_ids": [
-            9,
-            14
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 238,
-        "name": "장난감",
-        "industry_ids": [
-            6,
-            14,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 239,
-        "name": "배변 패드",
-        "industry_ids": [
-            6,
-            14,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 240,
-        "name": "빗",
-        "industry_ids": [
-            6,
-            14,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 241,
-        "name": "쿠션",
-        "industry_ids": [
-            9,
-            14
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 242,
-        "name": "런닝머신",
-        "industry_ids": [
-            3,
-            14,
-            15,
-            16,
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 243,
-        "name": "천국의계단",
-        "industry_ids": [
-            16,
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 244,
-        "name": "사이클",
-        "industry_ids": [
-            16,
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 245,
-        "name": "웨이트 머신",
-        "industry_ids": [
-            16,
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 246,
-        "name": "파워랙",
-        "industry_ids": [
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 247,
-        "name": "바벨",
-        "industry_ids": [
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 248,
-        "name": "덤벨",
-        "industry_ids": [
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 249,
-        "name": "원판",
-        "industry_ids": [
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 250,
-        "name": "탈의실 락카 시설",
-        "industry_ids": [
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 251,
-        "name": "스키 부츠",
-        "industry_ids": [
-            15,
-            16,
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 252,
-        "name": "스키 플레이트",
-        "industry_ids": [
-            16
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 253,
-        "name": "보드 부츠",
-        "industry_ids": [
-            16
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 254,
-        "name": "보드",
-        "industry_ids": [
-            16
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 255,
-        "name": "헬멧",
-        "industry_ids": [
-            16
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 256,
-        "name": "고글",
-        "industry_ids": [
-            16
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 257,
-        "name": "스키복",
-        "industry_ids": [
-            16
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 258,
-        "name": "부츠 건조기",
-        "industry_ids": [
-            16
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 259,
-        "name": "비전플러스 소프트웨어",
-        "industry_ids": [
-            26,
-            28,
-            29,
-            18,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 260,
-        "name": "음료 자판기",
-        "industry_ids": [
-            7,
-            8,
-            13,
-            15,
-            16,
-            18,
-            19
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 162,
         "name": "이동식 버너",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             16,
             24,
             25
-        ],
-        "thumbnail": null
+        ]
+    },
+    {
+        "id": 163,
+        "name": "전기 튀김기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            8,
+            24,
+            25
+        ]
+    },
+    {
+        "id": 164,
+        "name": "보온통",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            24,
+            28
+        ]
+    },
+    {
+        "id": 165,
+        "name": "온장고",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            8,
+            24,
+            25
+        ]
+    },
+    {
+        "id": 166,
+        "name": "일회용 용기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            8,
+            24
+        ]
+    },
+    {
+        "id": 167,
+        "name": "쓰레기통(대형)",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            8,
+            24
+        ]
+    },
+    {
+        "id": 168,
+        "name": "손 소독제",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            8,
+            24,
+            28
+        ]
+    },
+    {
+        "id": 169,
+        "name": "식기 세척제",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            24
+        ]
+    },
+    {
+        "id": 170,
+        "name": "위생 앞치마",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            4,
+            24
+        ]
+    },
+    {
+        "id": 171,
+        "name": "뽑기 기계",
+        "thumbnail": "NULL",
+        "industries": [
+            17
+        ]
+    },
+    {
+        "id": 172,
+        "name": "지폐 교환기",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            17,
+            18
+        ]
+    },
+    {
+        "id": 173,
+        "name": "PC방 모니터",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            26
+        ]
+    },
+    {
+        "id": 174,
+        "name": "게이밍 의자",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            26
+        ]
+    },
+    {
+        "id": 175,
+        "name": "컴퓨터 데스크",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            13,
+            26
+        ]
+    },
+    {
+        "id": 176,
+        "name": "헤드셋",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            13,
+            26
+        ]
+    },
+    {
+        "id": 177,
+        "name": "라면 기계",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            8,
+            12
+        ]
+    },
+    {
+        "id": 178,
+        "name": "음료 냉장고",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            8,
+            12,
+            17
+        ]
+    },
+    {
+        "id": 179,
+        "name": "식기세척기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            12
+        ]
+    },
+    {
+        "id": 180,
+        "name": "업소용 튀김기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 181,
+        "name": "칠판",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            26
+        ]
+    },
+    {
+        "id": 182,
+        "name": "빔 프로젝터",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            26
+        ]
+    },
+    {
+        "id": 183,
+        "name": "마이크",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            28
+        ]
+    },
+    {
+        "id": 184,
+        "name": "스피커",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            12,
+            13
+        ]
+    },
+    {
+        "id": 185,
+        "name": "프린터 및 출력 용품",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            13,
+            26
+        ]
+    },
+    {
+        "id": 186,
+        "name": "노트북",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            26
+        ]
+    },
+    {
+        "id": 187,
+        "name": "무소음 마우스",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            26
+        ]
+    },
+    {
+        "id": 188,
+        "name": "키보드",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            13,
+            26
+        ]
+    },
+    {
+        "id": 189,
+        "name": "바코드 스캐너",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            13,
+            26
+        ]
+    },
+    {
+        "id": 190,
+        "name": "편의점 진열대",
+        "thumbnail": "NULL",
+        "industries": [
+            5,
+            8,
+            21
+        ]
+    },
+    {
+        "id": 191,
+        "name": "계산대",
+        "thumbnail": "NULL",
+        "industries": [
+            5,
+            6,
+            8,
+            21
+        ]
+    },
+    {
+        "id": 192,
+        "name": "상품 정리용 바구니",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            8
+        ]
+    },
+    {
+        "id": 193,
+        "name": "배달 용기",
+        "thumbnail": "NULL",
+        "industries": [
+            2,
+            5,
+            8,
+            21
+        ]
+    },
+    {
+        "id": 194,
+        "name": "포장 기계",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            24
+        ]
+    },
+    {
+        "id": 195,
+        "name": "뚜껑",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 196,
+        "name": "실링칼",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3
+        ]
+    },
+    {
+        "id": 197,
+        "name": "개인용 책상",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            10,
+            12,
+            13,
+            14,
+            15,
+            18,
+            19,
+            20,
+            21,
+            26,
+            27,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 198,
+        "name": "회의용 테이블",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 199,
+        "name": "사무용 의자",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            22,
+            26,
+            28,
+            29
+        ]
     },
     {
         "id": 200,
         "name": "수납함",
-        "industry_ids": [
-            26,
-            28,
-            29,
+        "thumbnail": "NULL",
+        "industries": [
             3,
             8,
             13,
             21,
-            22
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 261,
-        "name": "개인 락카 시설",
-        "industry_ids": [
-            15,
-            16,
-            18,
-            19
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 262,
-        "name": "산업용 청소기",
-        "industry_ids": [
+            22,
+            26,
             28,
+            29
+        ]
+    },
+    {
+        "id": 201,
+        "name": "복합기",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 202,
+        "name": "문서 세단기",
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 203,
+        "name": "네트워크 공유기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            13,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 204,
+        "name": "랜 케이블",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 205,
+        "name": "PC 주변 기기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            13,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 206,
+        "name": "커피 머신",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            15,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 207,
+        "name": "정수기",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            13,
+            15,
+            19,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 208,
+        "name": "가습기",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            13,
+            15,
+            19,
+            22,
+            28
+        ]
+    },
+    {
+        "id": 209,
+        "name": "웹캠",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            20,
+            22,
+            28
+        ]
+    },
+    {
+        "id": 210,
+        "name": "USB마이크",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            20,
+            22,
+            28
+        ]
+    },
+    {
+        "id": 211,
+        "name": "러그",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            17,
+            20,
+            22,
+            28
+        ]
+    },
+    {
+        "id": 212,
+        "name": "미니 화분",
+        "thumbnail": "NULL",
+        "industries": [
             3,
             15,
             16,
-            18,
             19,
-            21
-        ],
-        "thumbnail": null
+            22,
+            28
+        ]
     },
     {
-        "id": 263,
-        "name": "발효기",
-        "industry_ids": [
-            1,
-            2,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 264,
-        "name": "반죽기",
-        "industry_ids": [
-            1,
-            2,
+        "id": 213,
+        "name": "컴퓨터",
+        "thumbnail": "NULL",
+        "industries": [
             3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 265,
-        "name": "롤러",
-        "industry_ids": [
-            1,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 266,
-        "name": "밀대",
-        "industry_ids": [
-            1,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 267,
-        "name": "식힘망",
-        "industry_ids": [
-            1,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 268,
-        "name": "핸드믹서",
-        "industry_ids": [
-            1,
-            2,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 269,
-        "name": "거품기",
-        "industry_ids": [
-            1,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 270,
-        "name": "채",
-        "industry_ids": [
-            1,
-            2,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 271,
-        "name": "실리콘 주걱",
-        "industry_ids": [
-            1,
-            2,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 272,
-        "name": "베이킹 시트",
-        "industry_ids": [
-            1,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 273,
-        "name": "케이크 틀",
-        "industry_ids": [
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 274,
-        "name": "쿠키 커터",
-        "industry_ids": [
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 275,
-        "name": "짤주머니",
-        "industry_ids": [
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 276,
-        "name": "제빵용 냉동고",
-        "industry_ids": [
-            1,
-            2,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 277,
-        "name": "제빵용 쇼케이스",
-        "industry_ids": [
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 278,
-        "name": "케이크 박스",
-        "industry_ids": [
-            2,
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 279,
-        "name": "쿠키 포장",
-        "industry_ids": [
-            2,
-            3,
-            4,
-            5
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 280,
-        "name": "빵 봉투",
-        "industry_ids": [
-            2,
-            3,
-            4
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 281,
-        "name": "적재 랙",
-        "industry_ids": [
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 282,
-        "name": "이동식 컨베이어 벨트",
-        "industry_ids": [
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 283,
-        "name": "저온저장고",
-        "industry_ids": [
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 284,
-        "name": "PDA",
-        "industry_ids": [
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 285,
-        "name": "완충재",
-        "industry_ids": [
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 286,
-        "name": "박스 접착기",
-        "industry_ids": [
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 287,
-        "name": "래핑기",
-        "industry_ids": [
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 288,
-        "name": "물류카트",
-        "industry_ids": [
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 289,
-        "name": "물류용 트롤리",
-        "industry_ids": [
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 290,
-        "name": "무인 계산대",
-        "industry_ids": [
-            6,
-            7,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 291,
-        "name": "무인 매장 출입 관리 시스템",
-        "industry_ids": [
-            6,
-            7,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 292,
-        "name": "안면인식 출입기",
-        "industry_ids": [
-            6,
-            7,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 293,
-        "name": "UV 램프",
-        "industry_ids": [
             9,
             10,
-            11
-        ],
-        "thumbnail": null
+            15,
+            16,
+            19,
+            22,
+            28
+        ]
     },
     {
-        "id": 294,
-        "name": "네일 샵 의자",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 295,
-        "name": "네일 샵 책상",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 296,
-        "name": "손톱깎이",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 297,
-        "name": "네일 드릴",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 298,
-        "name": "큐티클 제거제",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 299,
-        "name": "네일 니퍼",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 300,
-        "name": "네일 폴리시 도구",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 301,
-        "name": "대형 철판",
-        "industry_ids": [
-            1,
-            2,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 302,
-        "name": "가스통 거치대",
-        "industry_ids": [
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 303,
-        "name": "배기 시스템",
-        "industry_ids": [
-            1,
-            2,
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 304,
-        "name": "이동식 네온사인",
-        "industry_ids": [
-            25
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 305,
-        "name": "스마트 도어락",
-        "industry_ids": [
+        "id": 214,
+        "name": "DSLR 카메라",
+        "thumbnail": "NULL",
+        "industries": [
             6,
-            7,
-            21
-        ],
-        "thumbnail": null
+            13,
+            22,
+            26,
+            28,
+            29
+        ]
     },
     {
-        "id": 306,
-        "name": "동전 교환기",
-        "industry_ids": [
+        "id": 215,
+        "name": "촬영용 조명",
+        "thumbnail": "NULL",
+        "industries": [
             6,
-            7,
-            21
-        ],
-        "thumbnail": null
+            9,
+            10,
+            22,
+            28
+        ]
     },
     {
-        "id": 307,
-        "name": "전자 저울",
-        "industry_ids": [
-            1,
-            3,
+        "id": 216,
+        "name": "촬영 배경지",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            9,
+            10,
+            22,
+            28
+        ]
+    },
+    {
+        "id": 217,
+        "name": "무게 저울",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            9,
+            10,
+            22,
+            28
+        ]
+    },
+    {
+        "id": 218,
+        "name": "수납 선반",
+        "thumbnail": "NULL",
+        "industries": [
             4,
             6,
-            21
-        ],
-        "thumbnail": null
+            21,
+            24,
+            25,
+            27
+        ]
     },
     {
-        "id": 308,
-        "name": "도난 방지 태그",
-        "industry_ids": [
-            6,
-            21
-        ],
-        "thumbnail": null
-    },
-    {
-        "id": 309,
-        "name": "키오스크",
-        "industry_ids": [
-            1,
+        "id": 219,
+        "name": "창고 정리함",
+        "thumbnail": "NULL",
+        "industries": [
             3,
             6,
             7,
-            21
-        ],
-        "thumbnail": null
+            8,
+            13,
+            21,
+            22,
+            26
+        ]
     },
     {
-        "id": 310,
-        "name": "자동커피머신",
-        "industry_ids": [
-            3
-        ],
-        "thumbnail": null
+        "id": 220,
+        "name": "폴리백",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            8,
+            21,
+            24,
+            25,
+            27
+        ]
     },
     {
-        "id": 311,
-        "name": "LED 램프",
-        "industry_ids": [
-            9,
-            10,
-            11
-        ],
-        "thumbnail": null
+        "id": 221,
+        "name": "비닐백",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 222,
+        "name": "테이프",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            24,
+            25,
+            27
+        ]
     },
     {
         "id": 223,
         "name": "테이프 디스펜서",
-        "industry_ids": [
-            27,
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 224,
+        "name": "송장 프린터기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 225,
+        "name": "포장용 비닐",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 226,
+        "name": "택배 박스",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            24,
+            25,
+            27
+        ]
+    },
+    {
+        "id": 227,
+        "name": "뽁뽁이",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 228,
+        "name": "에어캡",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 229,
+        "name": "포장재",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 230,
+        "name": "애견 미용 테이블",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            27
+        ]
+    },
+    {
+        "id": 231,
+        "name": "바리깡",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            14
+        ]
+    },
+    {
+        "id": 232,
+        "name": "강아지 샴푸",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            14
+        ]
+    },
+    {
+        "id": 233,
+        "name": "강아지 간식",
+        "thumbnail": "NULL",
+        "industries": [
+            14
+        ]
+    },
+    {
+        "id": 234,
+        "name": "사료",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
+        "id": 235,
+        "name": "강아지 용품",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
+        "id": 236,
+        "name": "애견 드라이기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
+        "id": 237,
+        "name": "케이지",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            14
+        ]
+    },
+    {
+        "id": 238,
+        "name": "장난감",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
+        "id": 239,
+        "name": "배변 패드",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
+        "id": 240,
+        "name": "빗",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
+        "id": 241,
+        "name": "쿠션",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            14
+        ]
+    },
+    {
+        "id": 242,
+        "name": "런닝머신",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            14,
+            15,
+            16,
+            19
+        ]
+    },
+    {
+        "id": 243,
+        "name": "천국의계단",
+        "thumbnail": "NULL",
+        "industries": [
+            16,
+            19
+        ]
+    },
+    {
+        "id": 244,
+        "name": "사이클",
+        "thumbnail": "NULL",
+        "industries": [
+            16,
+            19
+        ]
+    },
+    {
+        "id": 245,
+        "name": "웨이트 머신",
+        "thumbnail": "NULL",
+        "industries": [
+            16,
+            19
+        ]
+    },
+    {
+        "id": 246,
+        "name": "파워랙",
+        "thumbnail": "NULL",
+        "industries": [
+            19
+        ]
+    },
+    {
+        "id": 247,
+        "name": "바벨",
+        "thumbnail": "NULL",
+        "industries": [
+            19
+        ]
+    },
+    {
+        "id": 248,
+        "name": "덤벨",
+        "thumbnail": "NULL",
+        "industries": [
+            19
+        ]
+    },
+    {
+        "id": 249,
+        "name": "원판",
+        "thumbnail": "NULL",
+        "industries": [
+            19
+        ]
+    },
+    {
+        "id": 250,
+        "name": "탈의실 락카 시설",
+        "thumbnail": "NULL",
+        "industries": [
+            19
+        ]
+    },
+    {
+        "id": 251,
+        "name": "스키 부츠",
+        "thumbnail": "NULL",
+        "industries": [
+            15,
+            16,
+            19
+        ]
+    },
+    {
+        "id": 252,
+        "name": "스키 플레이트",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 253,
+        "name": "보드 부츠",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 254,
+        "name": "보드",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 255,
+        "name": "헬멧",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 256,
+        "name": "고글",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 257,
+        "name": "스키복",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 258,
+        "name": "부츠 건조기",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 259,
+        "name": "비전플러스 소프트웨어",
+        "thumbnail": "NULL",
+        "industries": [
+            18,
+            22,
+            26,
+            28,
+            29
+        ]
+    },
+    {
+        "id": 260,
+        "name": "음료 자판기",
+        "thumbnail": "NULL",
+        "industries": [
+            7,
+            8,
+            13,
+            15,
+            16,
+            18,
+            19
+        ]
+    },
+    {
+        "id": 261,
+        "name": "개인 락카 시설",
+        "thumbnail": "NULL",
+        "industries": [
+            15,
+            16,
+            18,
+            19
+        ]
+    },
+    {
+        "id": 262,
+        "name": "산업용 청소기",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            15,
+            16,
+            18,
+            19,
+            21,
+            28
+        ]
+    },
+    {
+        "id": 263,
+        "name": "발효기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            4
+        ]
+    },
+    {
+        "id": 264,
+        "name": "반죽기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 265,
+        "name": "롤러",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 266,
+        "name": "밀대",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 267,
+        "name": "식힘망",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 268,
+        "name": "핸드믹서",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 269,
+        "name": "거품기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 270,
+        "name": "채",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 271,
+        "name": "실리콘 주걱",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 272,
+        "name": "베이킹 시트",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 273,
+        "name": "케이크 틀",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 274,
+        "name": "쿠키 커터",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 275,
+        "name": "짤주머니",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 276,
+        "name": "제빵용 냉동고",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 277,
+        "name": "제빵용 쇼케이스",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 278,
+        "name": "케이크 박스",
+        "thumbnail": "NULL",
+        "industries": [
+            2,
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 279,
+        "name": "쿠키 포장",
+        "thumbnail": "NULL",
+        "industries": [
+            2,
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 280,
+        "name": "빵 봉투",
+        "thumbnail": "NULL",
+        "industries": [
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 281,
+        "name": "적재 랙",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 282,
+        "name": "이동식 컨베이어 벨트",
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
+    },
+    {
+        "id": 283,
+        "name": "저온저장고",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 284,
+        "name": "PDA",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 285,
+        "name": "완충재",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 286,
+        "name": "박스 접착기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 287,
+        "name": "래핑기",
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
+    },
+    {
+        "id": 288,
+        "name": "물류카트",
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
+    },
+    {
+        "id": 289,
+        "name": "물류용 트롤리",
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
+    },
+    {
+        "id": 290,
+        "name": "무인 계산대",
+        "thumbnail": "NULL",
+        "industries": [
             6,
             7,
             21
-        ],
-        "thumbnail": null
+        ]
+    },
+    {
+        "id": 291,
+        "name": "무인 매장 출입 관리 시스템",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21
+        ]
+    },
+    {
+        "id": 292,
+        "name": "안면인식 출입기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21
+        ]
+    },
+    {
+        "id": 293,
+        "name": "UV 램프",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 294,
+        "name": "네일 샵 의자",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 295,
+        "name": "네일 샵 책상",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 296,
+        "name": "손톱깎이",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 297,
+        "name": "네일 드릴",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 298,
+        "name": "큐티클 제거제",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 299,
+        "name": "네일 니퍼",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 300,
+        "name": "네일 폴리시 도구",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 301,
+        "name": "대형 철판",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            25
+        ]
+    },
+    {
+        "id": 302,
+        "name": "가스통 거치대",
+        "thumbnail": "NULL",
+        "industries": [
+            25
+        ]
+    },
+    {
+        "id": 303,
+        "name": "배기 시스템",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            25
+        ]
+    },
+    {
+        "id": 304,
+        "name": "이동식 네온사인",
+        "thumbnail": "NULL",
+        "industries": [
+            25
+        ]
+    },
+    {
+        "id": 305,
+        "name": "스마트 도어락",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21
+        ]
+    },
+    {
+        "id": 306,
+        "name": "동전 교환기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21
+        ]
+    },
+    {
+        "id": 307,
+        "name": "전자 저울",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            6,
+            21
+        ]
+    },
+    {
+        "id": 308,
+        "name": "도난 방지 태그",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 309,
+        "name": "키오스크",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            6,
+            7,
+            21
+        ]
+    },
+    {
+        "id": 310,
+        "name": "자동커피머신",
+        "thumbnail": "NULL",
+        "industries": [
+            3
+        ]
+    },
+    {
+        "id": 311,
+        "name": "LED 램프",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
     },
     {
         "id": 312,
         "name": "쇼파, 테이블",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             3,
             12,
             15,
             16,
             17,
             19,
-            20,
-            22,
-            23
-        ],
-        "thumbnail": null
+            20
+        ]
     },
     {
         "id": 313,
         "name": "냉동 쇼케이스",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             2,
             3,
@@ -3197,13 +3196,13 @@
             8,
             21,
             25
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 314,
         "name": "냉장고",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
             2,
             3,
@@ -3212,244 +3211,195 @@
             8,
             21,
             25
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 315,
         "name": "오븐",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
             4,
             5,
             8,
-            25
-        ],
-        "thumbnail": null
+            21
+        ]
     },
     {
         "id": 316,
         "name": "전자레인지",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
             4,
             5,
             8,
-            25
-        ],
-        "thumbnail": null
+            21
+        ]
     },
     {
         "id": 317,
         "name": "온도계",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
             4,
             5,
             8,
-            15,
-            19,
             21
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 318,
         "name": "빨대",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
+            4,
             5,
-            8
-        ],
-        "thumbnail": null
+            8,
+            21
+        ]
     },
     {
         "id": 319,
         "name": "마우스",
-        "industry_ids": [
-            12,
-            13,
-            21,
+        "thumbnail": "NULL",
+        "industries": [
+            6,
             22,
             23
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 320,
         "name": "팔레트",
-        "industry_ids": [
-            15,
-            19,
-            20
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
     },
     {
         "id": 321,
         "name": "지게차",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             21
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 322,
         "name": "라벨 프린터",
-        "industry_ids": [
-            1,
-            2,
-            3,
-            6,
-            8,
-            21
-        ],
-        "thumbnail": null
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            22,
+            23
+        ]
     },
     {
         "id": 323,
         "name": "푸드트럭",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
             25
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 324,
         "name": "인덕션",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
             4,
             5,
-            25
-        ],
-        "thumbnail": null
+            8
+        ]
     },
     {
         "id": 325,
         "name": "전기그릴",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
             4,
             5,
-            25
-        ],
-        "thumbnail": null
+            8
+        ]
     },
     {
         "id": 326,
         "name": "장갑",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
             4,
             5,
             8,
-            9,
-            10,
-            19,
-            21,
-            25
-        ],
-        "thumbnail": null
+            21
+        ]
     },
     {
         "id": 327,
         "name": "발전기",
-        "industry_ids": [
-            15,
+        "thumbnail": "NULL",
+        "industries": [
+            1,
             16,
             17,
-            21,
-            24,
-            25
-        ],
-        "thumbnail": null
+            21
+        ]
     },
     {
         "id": 328,
         "name": "환풍기",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
-            4,
-            5,
-            9,
-            10,
-            11,
-            15,
-            19,
-            25
-        ],
-        "thumbnail": null
+            16,
+            17,
+            21
+        ]
     },
     {
         "id": 329,
         "name": "공기 정화기",
-        "industry_ids": [
-            3,
-            9,
-            10,
-            11,
-            12,
-            13,
-            15,
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            16,
             17,
-            19,
             21
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 330,
         "name": "휘핑기",
-        "industry_ids": [
-            1,
-            3,
+        "thumbnail": "NULL",
+        "industries": [
             4,
             5
-        ],
-        "thumbnail": null
+        ]
     },
     {
         "id": 331,
         "name": "일회용 수저",
-        "industry_ids": [
+        "thumbnail": "NULL",
+        "industries": [
             1,
-            2,
-            3,
+            4,
             5,
-            8,
-            25
-        ],
-        "thumbnail": null
+            8
+        ]
     },
     {
         "id": 332,
         "name": "반죽 용기",
-        "industry_ids": [
-            1,
-            2,
+        "thumbnail": "NULL",
+        "industries": [
             4,
-            5,
-            25
-        ],
-        "thumbnail": null
+            5
+        ]
     }
 ]
