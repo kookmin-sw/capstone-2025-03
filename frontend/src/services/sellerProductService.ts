@@ -2,7 +2,7 @@ import axios from "axios";
 import SellerProductModel from "../models/SellerProductModel";
 
 const API_BASE_URL = "https://django-uxvt.onrender.com";
-const IMAGE_BASE_URL = "https://image-cgwm.onrender.com";
+const IMAGE_BASE_URL = "https://image-535482967924.asia-northeast1.run.app";
 // const AI_BASE_URL = "https://fastapi-lokg.onrender.com";
 /**
  * 상품을 생성하고 서버에 저장합니다.

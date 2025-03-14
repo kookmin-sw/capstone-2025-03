@@ -7,6 +7,8 @@
 
 .section {
   flex-grow: 1;
+  margin-top: 9.2rem;
+  margin-bottom: 6rem;
   padding: 0 2rem;
   overflow: auto;
   scrollbar-width: none;

@@ -3,7 +3,7 @@ import MainHeader from "@/src/components/layout/MainHeader";
 import Footer from "@/src/components/layout/MenuFooter";
 import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
 import SellerProductItem from "@/src/components/ui/SellerProductItem";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getMyInfoInService } from "@/src/services/userService";
 import { useEffect, useState } from "react";
 import { useSellerProduct } from "@/src/contexts/SellerProductContext";
@@ -13,6 +13,7 @@ import LoadingSection from "@/src/components/layout/LoadingSection";
 
 export default function SellerSalesList() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { getProductList } = useSellerProduct();
   const [sellerId, setSellerId] = useState<number>();
   const [sellerProducts, setSellerProducts] = useState<SellerProductModel[]>(
@@ -55,7 +56,7 @@ export default function SellerSalesList() {
         } finally {
           setIsLoading(false);
         }
-      }else{
+      } else {
         setIsLoading(false);
       }
     };
@@ -64,7 +65,9 @@ export default function SellerSalesList() {
   }, [sellerId]);
 
   const handleClickAddProductButton = () => {
-    navigate("/seller-saleslist-addproduct");
+    navigate("/seller-saleslist-addproduct", {
+      state: { prevPath: location.pathname },
+    });
   };
 
   return isLoading ? (

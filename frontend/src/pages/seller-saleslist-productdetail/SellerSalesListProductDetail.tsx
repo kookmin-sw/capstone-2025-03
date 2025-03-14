@@ -17,7 +17,6 @@ type Product = {
   grade: string;
   amount: number;
   price: number | null;
-  status: string;
   thumbnail: string;
 };
 
@@ -29,14 +28,8 @@ export default function SellerSalesListProductDetail() {
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [sellerId, setSellerId] = useState<number>();
   const location = useLocation();
-  const {
-    images,
-    selectedCategoryName,
-    selectedCategoryId,
-    name,
-    grade,
-    number,
-  } = location.state;
+  const { selectedCategoryName, selectedCategoryId, name, grade, number } =
+    location.state;
 
   const [product, setProduct] = useState<Product>({
     id: selectedCategoryId,
@@ -45,8 +38,7 @@ export default function SellerSalesListProductDetail() {
     grade: grade,
     amount: number,
     price: null,
-    status: grade,
-    thumbnail: images[0],
+    thumbnail: sellerProduct.images[0],
   });
 
   useEffect(() => {
@@ -57,20 +49,14 @@ export default function SellerSalesListProductDetail() {
     }
 
     setSellerProduct(
-      new SellerProductModel({
-        categoryId: selectedCategoryId,
-        seller: sellerId,
-        buyer: null,
-        images: images,
-        name: name,
-        description: null,
-        grade: grade,
-        quantity: number,
-        uploadDate: new Date().toISOString(),
-        saleStatus: "available",
-        purchaseDate: null,
-        price: product.price,
-      })
+      (prev) =>
+        new SellerProductModel({
+          ...prev,
+          seller: sellerId,
+          description: null,
+          uploadDate: new Date().toISOString(),
+          price: product.price,
+        })
     );
   }, [sellerId, product.price]);
 
@@ -87,11 +73,12 @@ export default function SellerSalesListProductDetail() {
 
   const hanldeSellButtonClick = async () => {
     setIsLoading(true);
-    
+
     try {
       await createSellerProduct(sellerProduct);
       setIsComplete(true);
-      navigate("/seller-saleslist")
+      navigate("/seller-saleslist");
+      setSellerProduct(new SellerProductModel({}));
     } catch (error) {
       alert(`물건 등록 실패 : ${error}`);
     } finally {

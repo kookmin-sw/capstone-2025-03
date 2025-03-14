@@ -72,6 +72,8 @@ type ProductItemProps = {
 };
 
 export default function SellerProductItem({ product }: ProductItemProps) {
+  const status = product.saleStatus === "available" ? "판매 중" : "판매 완료";
+
   return (
     <Item>
       <Thumbnail src={product.images[0]} />
@@ -81,7 +83,7 @@ export default function SellerProductItem({ product }: ProductItemProps) {
           {product.grade} ∙ {product.quantity}개
         </GradeAndAmount>
         <Price>{product.price}원</Price>
-        <StatusTag status={product.grade ?? "null"}>{product.saleStatus}</StatusTag>
+        <StatusTag status={status}>{status}</StatusTag>
       </ContentContainer>
     </Item>
   );
