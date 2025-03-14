@@ -10,7 +10,7 @@ const API_BASE_URL = "https://django-uxvt.onrender.com/categories";
 export const getCategoryListInService = async (): Promise<CategoryModel[] | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/`);
-    return response.data.map((category: any) => CategoryModel.fromJson(category));
+    return response.data.results.map((category: any) => CategoryModel.fromJson(category));
   } catch (error) {
     console.error("Error fetching categories:", error);
     return null;

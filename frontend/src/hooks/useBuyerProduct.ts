@@ -10,7 +10,7 @@ import {
 import BuyerProductModel from "../models/BuyerProductModel";
 import productDummyData from "@/src/data/productDummyData.json";
 
-const useDummyData = true;
+const useDummyData = false;
 
 export const useBuyerProduct = () => {
     const [buyerProducts, setBuyerProducts] = useRecoilState(buyerProductState);

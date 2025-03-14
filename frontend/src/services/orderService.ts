@@ -10,7 +10,7 @@ const API_BASE_URL = "https://django-uxvt.onrender.com/orders";
 export const getOrderListInService = async (): Promise<OrderModel[] | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/`);
-    return response.data.map((order: any) => OrderModel.fromJson(order));
+    return response.data.results.map((order: any) => OrderModel.fromJson(order));
   } catch (error) {
     console.error("Error fetching orders:", error);
     return null;

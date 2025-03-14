@@ -12,7 +12,7 @@ import packageDummyData from "@/src/data/packageDummyData.json";
 import { useCategory } from "./useCategory";
 import { useBuyerProduct } from "./useBuyerProduct";
 
-const useDummyData = true;
+const useDummyData = false;
 
 export const usePackage = () => {
     const [packages, setPackages] = useRecoilState(packageState);

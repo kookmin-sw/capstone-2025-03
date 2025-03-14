@@ -10,7 +10,7 @@ const API_BASE_URL = "https://django-uxvt.onrender.com/products";
 export const getBuyerProductListInService = async (): Promise<BuyerProductModel[] | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/`);
-    return response.data.map((product: any) => BuyerProductModel.fromJson(product));
+    return response.data.results.map((product: any) => BuyerProductModel.fromJson(product));
   } catch (error) {
     console.error("Error fetching buyer products:", error);
     return null;
