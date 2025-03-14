@@ -1,13 +1,10 @@
 import styles from "./SellerSalesList.module.css";
 import MainHeader from "@/src/components/layout/MainHeader";
 import Footer from "@/src/components/layout/MenuFooter";
-import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
 import SellerProductItem from "@/src/components/ui/SellerProductItem";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getMyInfoInService } from "@/src/services/userService";
 import { useEffect, useState } from "react";
 import { useSellerProduct } from "@/src/contexts/SellerProductContext";
-import { useUser } from "@/src/contexts/UserContext";
 import SellerProductModel from "@/src/models/SellerProductModel";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 
@@ -22,17 +19,6 @@ export default function SellerSalesList() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const currentMenuIndex = 1;
-
-  type Product = {
-    id: string;
-    category: string;
-    name: string;
-    grade: string;
-    amount: number;
-    price: number;
-    status: string;
-    thumbnail: string;
-  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

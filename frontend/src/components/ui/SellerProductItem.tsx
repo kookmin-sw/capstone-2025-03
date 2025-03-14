@@ -57,7 +57,7 @@ const StatusTag = styled.span<{ status: string }>`
 type ProductItemProps = {
   product: {
     buyer: number | null;
-    categoryId: number | null;
+    category: number | null;
     description: string | null;
     grade: string | null;
     images: string[];

@@ -14,7 +14,7 @@ export default function SellerSalesListAddProduct() {
   const { selectedCategoryId, selectedCategoryName, prevPath } =
     location.state || {};
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [images, setImages] = useState<string[]>([]);
+  const [, setImages] = useState<string[]>([]);
   const [name, setName] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [number, setNumber] = useState<number>();
@@ -35,7 +35,7 @@ export default function SellerSalesListAddProduct() {
   useEffect(() => {
     setDefaultImageSrc(
       sellerProduct?.images?.[0] ||
-        "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+      "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
     );
   }, [sellerProduct.images]);
 
@@ -114,20 +114,20 @@ export default function SellerSalesListAddProduct() {
           <img
             className={
               defaultImageSrc !==
-              "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+                "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
                 ? styles.uploadedImage
                 : styles.defaultImage
             }
             src={defaultImageSrc}
             width={
               defaultImageSrc !==
-              "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+                "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
                 ? "100%"
                 : "30px"
             }
           />
           {defaultImageSrc ===
-          "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png" ? (
+            "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png" ? (
             <span>물품 이미지를 업로드해주세요</span>
           ) : null}
         </button>
