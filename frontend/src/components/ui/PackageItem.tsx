@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 import WidgetImage from "../../assets/images/page/home/widget.png";
 import { useNavigate } from "react-router-dom";
+import PackageModel from "@/src/models/PackageModel";
+import { useCategory } from "@/src/hooks/useCategory";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { editingPackageState } from "@/src/recoil/packageState";
 
 const Item = styled.div`
   display: flex;
@@ -11,6 +16,7 @@ const Item = styled.div`
 
 const Thumbnail = styled.img`
   width: 12rem;
+  height: 12rem;
   border-radius: 1.2rem;
   margin-right: 1rem;
 `;
@@ -42,7 +48,7 @@ const CategoryContainer = styled.div`
   flex-direction: row;
   gap: 0.5rem;
   justify-content: start;
-  align-items: center;
+  align-items: start;
 `;
 
 const CategoryIcon = styled.img`
@@ -56,21 +62,37 @@ const CategoryText = styled.p`
 `;
 
 type PackageProps = {
-  pkg: { id: string, thumbnail: string, title: string, description: string, price: number, categories: string[] };
+  pkg: PackageModel;
 }
 
 export default function PackageItem({ pkg }: PackageProps) {
+  const { categories } = useCategory();
+  const [categoryPreview, setCategoryPreview] = useState("");
+  const [, setEditingPackage] = useRecoilState(editingPackageState);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const categoryNames = [];
+    let count = 0;
+    for (let i = 0; i < pkg.categories.length; i++) {
+      if (categoryNames.length >= 2) count += 1;
+      categoryNames.push(categories.find((category) => category.id === pkg.categories[i])?.name);
+    }
+    setCategoryPreview(`${categoryNames.join(", ")} ${count > 0 ? `외 ${count}가지로 구성` : "로 구성"}`);
+  }, [])
+
+  // Function: 패키지 아이템 클릭
   const handlePackageItemClick = () => {
-    navigate('/package-detail');
+    setEditingPackage(null);
+    navigate('/package-detail', { state: { pkg: pkg.toJson() } });
   }
 
   return (
     <Item onClick={handlePackageItemClick}>
-      <Thumbnail src={pkg.thumbnail} />
+      <Thumbnail src={pkg.thumbnail ?? undefined} />
       <ContentContainer>
         <Title>
-          {pkg.title}
+          {pkg.name}
         </Title>
         <Description>
           {pkg.description}
@@ -81,9 +103,7 @@ export default function PackageItem({ pkg }: PackageProps) {
         <CategoryContainer>
           <CategoryIcon src={WidgetImage} />
           <CategoryText>
-            {pkg.categories.map((category) => {
-              return (category);
-            })}로 구성
+            {categoryPreview}
           </CategoryText>
         </CategoryContainer>
       </ContentContainer>

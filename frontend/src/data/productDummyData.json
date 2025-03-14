@@ -1,0 +1,155 @@
+[
+    {
+        "id": 101,
+        "category": 2,
+        "images": [
+            "https://qi-o.qoo10cdn.com/goods_image_big/9/4/8/5/9912309485_l.jpg"
+        ],
+        "name": "전기오븐 PRO",
+        "description": "고출력 전기오븐으로 베이킹 및 요리에 최적화된 모델입니다.",
+        "grade": "A",
+        "quantity": 5,
+        "price": 2500000,
+        "seller": null,
+        "upload_date": "2025-03-09T14:30:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 102,
+        "category": 3,
+        "images": [
+            "https://thumbnail7.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/dd49/e4ab263584d5b3a668601b6a0894d0c53150d97c69e0bbb8944c0fe7b6a7.jpg"
+        ],
+        "name": "아이스크림 머신 3000",
+        "description": "빠르고 강력한 성능의 아이스크림 머신으로 매장에서 손쉽게 활용 가능.",
+        "grade": "A",
+        "quantity": 3,
+        "price": 1800000,
+        "seller": null,
+        "upload_date": "2025-03-08T12:00:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 103,
+        "category": 4,
+        "images": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVOlKgH_Iersr7cMfVbdyyLvq2KKpRcnZYg&s"
+        ],
+        "name": "초콜릿 템퍼링 기기",
+        "description": "정확한 온도 조절로 완벽한 템퍼링이 가능한 전문가용 장비.",
+        "grade": "B",
+        "quantity": 2,
+        "price": 2200000,
+        "seller": 503,
+        "upload_date": "2025-03-07T10:45:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 104,
+        "category": 5,
+        "images": [
+            "https://thumbnail6.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/165c/967e3ecaca0580d8442708f589c0ce453875a6ca4656d7f2e71af05d1d58.jpg"
+        ],
+        "name": "디저트 몰드 세트",
+        "description": "다양한 디자인의 몰드로 개성 있는 디저트 제작 가능.",
+        "grade": "A",
+        "quantity": 10,
+        "price": 70000,
+        "seller": 504,
+        "upload_date": "2025-03-06T16:20:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 105,
+        "category": 6,
+        "images": [
+            "https://www.nordicnest.kr/assets/blobs/heirol-heirol-20-cm/602671-01_1_KTProductImageMain-987d789710.jpeg?preset=tiny&dpr=2"
+        ],
+        "name": "프리미엄 아이스크림 스쿱",
+        "description": "손잡이 그립이 편안하고 내구성이 강한 아이스크림 스쿱.",
+        "grade": "A",
+        "quantity": 20,
+        "price": 35000,
+        "seller": 505,
+        "upload_date": "2025-03-05T14:00:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 106,
+        "category": 7,
+        "images": [
+            "https://image.made-in-china.com/202f0j00JiKVSpNtkdUW/2024-Wholesale-High-Grade-Enameled-Cast-Iron-Baking-Pan-Non-Stick-Frying-Pan-Grill.webp"
+        ],
+        "name": "고급 베이킹 팬",
+        "description": "균일한 열전도율을 제공하는 최고급 베이킹 팬.",
+        "grade": "A",
+        "quantity": 15,
+        "price": 55000,
+        "seller": 506,
+        "upload_date": "2025-03-04T09:30:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 107,
+        "category": 8,
+        "images": [
+            "https://contents.lotteon.com/itemimage/20250128144804/LO/24/31/36/92/28/_2/43/13/69/22/9/LO2431369228_2431369229_1.jpg/dims/optimize/dims/resizemc/400x400"
+        ],
+        "name": "유산지 롤팩",
+        "description": "다양한 크기로 절단 가능한 베이킹용 유산지.",
+        "grade": "B",
+        "quantity": 50,
+        "price": 15000,
+        "seller": 507,
+        "upload_date": "2025-03-03T08:20:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 108,
+        "category": 9,
+        "images": [
+            "https://m.ncrcomall.com/web/product/big/201510/31_shop1_603680.jpg"
+        ],
+        "name": "테프론 시트",
+        "description": "반복 사용이 가능한 테프론 코팅 시트, 청소가 쉬움.",
+        "grade": "B",
+        "quantity": 30,
+        "price": 20000,
+        "seller": 508,
+        "upload_date": "2025-03-02T07:15:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    },
+    {
+        "id": 109,
+        "category": 10,
+        "images": [
+            "https://www.jubangbank.co.kr/data/base/goods/big/1(6399).jpg"
+        ],
+        "name": "업소용 냉장고 500L",
+        "description": "대용량 스테인리스 냉장고로 업소에서 사용하기 적합.",
+        "grade": "A",
+        "quantity": 4,
+        "price": 3200000,
+        "seller": null,
+        "upload_date": "2025-03-01T12:00:00.000Z",
+        "buyer": null,
+        "purchase_date": null,
+        "sales_status": "available"
+    }
+]

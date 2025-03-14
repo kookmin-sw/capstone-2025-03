@@ -1,44 +1,96 @@
+import styles from "./NameAndBirthDayInput.module.css";
+import InputField from "./components/InputField";
+import LoadingSection from "@/src/components/layout/LoadingSection";
+import RegisterCompleteSection from "../address-input/components/RegisterCompleteSection";
+import "react-datepicker/dist/react-datepicker.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Button, Flex, Text } from "@chakra-ui/react";
 import {
   getKakaoAccessToken,
   getKakaoUserInfo,
 } from "@/src/services/userService";
-import InputField from "./components/InputField";
-import "react-datepicker/dist/react-datepicker.css";
+import { UserModel } from "@/src/models/UserModel";
+import { useUser } from "@/src/contexts/UserContext";
 
 export default function NameAndBirthDayInput() {
+  const navigate = useNavigate();
+  const { user, setUser, loginUser } = useUser();
   const [searchParams] = useSearchParams();
-  // const [email, setEmail] = useState<string>();
+  const code = searchParams.get("code");
   const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
-  const [name, setName] = useState<string>("");
-  const [phoneNum, setPhoneNum] = useState<string>("");
-  const [birth, setBirth] = useState<string>("");
   const [visibleHeight, setVisibleHeight] = useState<number>(
     window.innerHeight
   );
-  const code = searchParams.get("code");
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
 
   // 버튼 비활성화 조건
-  const whenNameisNull = !name;
+  const whenNameisNull = !user?.name;
 
+  // 단계별 텍스트
+  const stepText = {
+    1: "이름을 입력해주세요",
+    2: "휴대폰 번호를 입력해주세요",
+    3: "생년월일을 입력해주세요",
+  }[step];
+
+  // 이미 회원일 시 홈으로 이동
+  const tryLogin = async (kakaoId: number) => {
+    try {
+      const responseData = await loginUser(kakaoId);
+      if (responseData) {
+        setIsComplete(true)
+      } else {
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log("회원가입 안 되어 있음", error);
+    }
+  };
+
+
+
+
+
+  
   // 액세스 토큰으로 사용자 정보 가져옴
   useEffect(() => {
-    if (code) {
-      getKakaoAccessToken(code)
-        .then((accessToken) => {
-          console.log("액세스 토큰: ", accessToken);
+    if (!code) return;
 
-          return getKakaoUserInfo(accessToken);
-        })
-        .then((response) => {
-          console.log("사용자 정보: ", response);
-          setName(response.nickname);
-          // setEmail(response.email);
-        })
-        .catch((error) => console.error("카카오 로그인 오류:", error));
+    let isMounted = true;
+
+    if (isComplete) {
+      const timer = setTimeout(() => {
+        navigate("/");
+      }, 1500);
+  
+      return () => clearTimeout(timer);
+    }
+
+    getKakaoAccessToken(code)
+      .then(async (accessToken) => {
+        console.log("액세스 토큰: ", accessToken);
+        const response = await getKakaoUserInfo(accessToken);
+
+        await tryLogin(response.kakaoId);
+
+        if (isMounted) {
+          setUser(
+            new UserModel({
+              name: response.nickname,
+              kakaoId: response.kakaoId,
+              profileImage: response.profileImage,
+              kakaoEmail: response.email,
+              createDate: new Date().toISOString(),
+            })
+          );
+        }
+      })
+      .catch((error) => console.error("카카오 로그인 오류:", error));
+
+    // 세션스토리지에 이름 저장
+    if (user?.name) {
+      sessionStorage.setItem("name", user.name);
     }
     const handleResize = () => {
       if (window.visualViewport) {
@@ -48,8 +100,11 @@ export default function NameAndBirthDayInput() {
     window.visualViewport?.addEventListener("resize", handleResize);
     return () => {
       window.visualViewport?.addEventListener("resize", handleResize);
+      isMounted = false;
     };
-  }, [code]);
+  }, [code, isComplete]);
+
+
 
 
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,98 +121,91 @@ export default function NameAndBirthDayInput() {
         8
       )}`;
     }
-
-    setBirth(formattedValue);
+    setUser(
+      (prevUser) => new UserModel({ ...prevUser, birthDate: formattedValue })
+    );
   };
 
-  return (
-    <Flex
-      height="100vh"
-      width="100vw"
-      paddingX="2rem"
-      align="center"
-      bg="#18171D"
-      direction="column"
-      justify="space-between"
-      overflow="hidden"
-      overflowY="hidden"
-    >
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = e.target.value.replace(/[^0-9]/g, "");
+
+    if (newValue.length >= 7) {
+      newValue = `${newValue.slice(0, 3)}-${newValue.slice(
+        3,
+        7
+      )}-${newValue.slice(7)}`;
+    } else if (newValue.length >= 4) {
+      newValue = `${newValue.slice(0, 3)}-${newValue.slice(3)}`;
+    }
+    setUser(
+      (prevUser) => new UserModel({ ...prevUser, phoneNumber: newValue })
+    );
+    if (newValue.length === 13) setStep(3);
+  };
+
+  return isLoading ? (
+    isComplete ? (
+      <RegisterCompleteSection text={user?.name || "unknown"}/>
+    ) : (
+      <LoadingSection text="잠시만 기다려주세요" />
+    )
+  ) : (
+    <div className={styles.page}>
       {/* 문구 */}
-      <Text
-        color="white"
-        fontSize="2.4rem"
-        fontWeight="bold"
-        textAlign="left"
-        width="100%"
-        mt="10rem"
-        mb="4rem"
-      >
-        {step === 1
-          ? "이름을 입력해주세요"
-          : step === 2
-          ? "휴대폰 번호를 입력해주세요"
-          : "생년월일을 입력해주세요"}
-      </Text>
+      <p className={styles.heading}>{stepText}</p>
 
       {/* 입력 필드 */}
-      {step === 3 && (
+      <div className={styles.inputWrapper}>
+        {step === 3 && (
+          <InputField
+            label="생년월일"
+            placeholder="생년월일"
+            value={user?.birthDate || ""}
+            onChange={handleBirthChange}
+            maxLength={10}
+          />
+        )}
+        {(step === 2 || step === 3) && (
+          <InputField
+            label="휴대폰 번호"
+            placeholder="휴대폰 번호"
+            value={user?.phoneNumber || ""}
+            onChange={handlePhoneNumberChange}
+            maxLength={13}
+          />
+        )}
         <InputField
-          label="생년월일"
-          placeholder="생년월일"
-          value={birth}
-          onChange={handleBirthChange}
-          maxLength={10}
+          label="이름"
+          placeholder="이름"
+          value={user?.name || ""}
+          onChange={(e) =>
+            setUser(
+              (prevUser) => new UserModel({ ...prevUser, name: e.target.value })
+            )
+          }
         />
-      )}
+      </div>
 
-      {(step === 2 || step === 3) && (
-        <InputField
-          label="휴대폰 번호"
-          placeholder="휴대폰 번호"
-          value={phoneNum}
-          onChange={(e) => {
-            const newValue = e.target.value.replace(/[^0-9]/g, "");
-            setPhoneNum(newValue);
-            if (newValue.length === 11) setStep(3);
-          }}
-          maxLength={11}
-        />
-      )}
+      <div className={styles.grow} />
 
-      <InputField
-        label="이름"
-        placeholder="이름"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-
-      <Flex flexGrow="1" />
-
-      {step === 1 || (step !== 2 && birth.length >= 10) ? (
-        <Button
-          position="fixed"
-          width="calc(100% - 4rem)"
-          height="6rem"
-          bg="#00A36C"
-          color="white"
-          borderRadius="1rem"
-          fontSize="1.8rem"
-          fontWeight="bold"
-          top={`calc(${visibleHeight}px - 6rem - 2rem)`} // 맞겠지
-
-          _active={{ bg: "#154d3a" }}
+      {step === 1 ||
+      (step !== 2 && user?.birthDate && user.birthDate.length >= 10) ? (
+        <button
+          className={styles.button}
           disabled={whenNameisNull}
+          style={{ top: `calc(${visibleHeight}px - 6rem - 2rem)` }}
           onClick={() => {
             if (step === 1) {
               setStep(2);
             } else if (step === 3) {
+              // handleRegister();
               navigate("/address-input");
             }
           }}
         >
           {step === 1 ? "다음" : "확인"}
-        </Button>
+        </button>
       ) : null}
-    </Flex>
+    </div>
   );
 }

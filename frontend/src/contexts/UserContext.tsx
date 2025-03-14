@@ -13,10 +13,14 @@ import {
 interface UserContextType {
   user: UserModel | null;
   createUser: (newUser: UserModel) => Promise<void>;
+  fetchMyInfo: () => Promise<void>;
   fetchUser: (userId: string) => Promise<void>;
-  updateUser: (userId: string, updatedData: Partial<UserModel>) => Promise<void>;
+  updateUser: (
+    userId: string,
+    updatedData: Partial<UserModel>
+  ) => Promise<void>;
   deleteUser: (userId: string) => Promise<void>;
-  loginUser: (uid: string, kakaoEmail: string) => Promise<void>;
+  loginUser: (kakaoId: number) => Promise<boolean>;
   setUser: React.Dispatch<React.SetStateAction<UserModel | null>>;
 }
 
@@ -39,6 +43,17 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // 로그인 한 본인 정보 불러오기
+  const fetchMyInfo = async () => {
+    try {
+      // const responseData = await getMyInfoInService();
+      // console.log(responseData);
+    } catch (error) {
+      console.log("Error getting my info in context", error);
+      throw error;
+    }
+  };
+
   // 사용자 데이터 fetch (특정 userId로 가져오기)
   const fetchUser = async (userId: string) => {
     try {
@@ -51,7 +66,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // 사용자 데이터 업데이트
-  const updateUser = async (userId: string, updatedData: Partial<UserModel>) => {
+  const updateUser = async (
+    userId: string,
+    updatedData: Partial<UserModel>
+  ) => {
     try {
       await updateUserInService(userId, updatedData);
       // local state 업데이트: 단순 병합 객체 대신 새로운 UserModel 인스턴스로 생성
@@ -78,10 +96,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // 사용자 로그인
-  const loginUser = async (uid: string, kakaoEmail: string) => {
+  const loginUser = async (kakaoId: number) => {
     try {
-      const loggedInUser = await loginUserInService(uid, kakaoEmail);
-      setUser(loggedInUser);
+      const result = await loginUserInService(kakaoId);
+      // console.log(result.user, "결과 유저")
+      if (result.user && result.user?.userId !== null) {
+        setUser(result.user);
+        console.log("로그인유저정보", result.user)
+        localStorage.setItem("user", JSON.stringify(result.user.toJson()));
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       console.error("Error logging in user in context:", error);
       throw error;
@@ -93,6 +119,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       value={{
         user,
         createUser,
+        fetchMyInfo,
         fetchUser,
         updateUser,
         deleteUser,

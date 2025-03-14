@@ -2,134 +2,118 @@ import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./PackageDetail.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
 import PackageItem from "@/src/components/ui/PackageItem";
-import CoffeePack from "../../assets/images/dummy/coffee_pack.png";
-import AddIconImage from "../../assets/images/page/package-detail/add_icon.png";
-import EditIconImage from "../../assets/images/page/package-detail/edit_icon.png";
-import EspressoMachineImage from "../../assets/images/dummy/espresso_machine.png";
-import ArrowRightIconImage from "../../assets/images/page/package-detail/arrow_right.png";
-import DeleteIconImage from "../../assets/images/page/package-detail/delete.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import AddIconImage from "@/src/assets/images/page/package-detail/add_icon.png";
+import EditIconImage from "@/src/assets/images/page/package-detail/edit_icon.png";
+import ArrowRightIconImage from "@/src/assets/images/page/package-detail/arrow_right.png";
+import DeleteIconImage from "@/src/assets/images/page/package-detail/delete.png";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 import CompleteSection from "@/src/components/layout/CompleteSection";
+import PackageModel from "@/src/models/PackageModel";
+import CategoryModel from "@/src/models/CategoryModel";
+import { useRecoilState } from "recoil";
+import { editingPackageState } from "@/src/recoil/packageState";
+import BuyerProductModel from "@/src/models/BuyerProductModel";
+import { useCategory } from "@/src/hooks/useCategory";
+import { useBuyerProduct } from "@/src/hooks/useBuyerProduct";
+import industryData from "@/src/data/industryData.json";
+import { useOrder } from "@/src/hooks/useOrder";
+import OrderModel from "@/src/models/OrderModel";
+import { useUser } from "@/src/contexts/UserContext";
+import { usePackage } from "@/src/hooks/usePackage";
+import { getCurrentTimeISO } from "@/src/utils/dateUtil";
 
 export default function PackageDetail() {
+    // page connection
+    const navigate = useNavigate();
+    const location = useLocation();
+    const myPackage: PackageModel = PackageModel.fromJson(location.state?.pkg || {});
+    // context
+    const { user } = useUser();
+    // hook
+    const { createPackage } = usePackage();
+    const { categories } = useCategory();
+    const { buyerProducts } = useBuyerProduct();
+    const { createOrder } = useOrder();
+    // recoil
+    const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
+    // useState
+    const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
+    const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([])
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate();
-    const packages = [{
-        id: "1",
-        thumbnail: CoffeePack,
-        title: "프리미엄 여행 패키지",
-        description: "이 패키지는 최고의 여행 경험을 제공합니다.",
-        price: 299000,
-        categories: ["호텔", "비행기", "렌터카"]
-    }];
-    const products = [{
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    }, {
-        thumbnail: "",
-        category: "",
-        productName: "",
-        amount: 0,
-        price: 10000
-    },]
 
+    // UseEffect
+    useEffect(() => {
+        let targetPackage = null;
+        if (!editingPackage) {
+            targetPackage = myPackage;
+            setEditingPackage(myPackage);
+        } else {
+            targetPackage = editingPackage
+        }
+        const newMyCategories: CategoryModel[] = targetPackage.categories
+            .map((categoryId) => categories.find((category) => category.id === categoryId))
+            .filter(Boolean) as CategoryModel[];
+        setMyCategories(newMyCategories);
+        const newMyProducts: BuyerProductModel[] = targetPackage.products
+            .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
+            .filter(Boolean) as BuyerProductModel[];
+        setMyProducts(newMyProducts);
+    }, [])
+
+    // Function
     const handleAddCategoryButtonClick = () => {
-        navigate('/package-detail-add-category', { state: {} })
+        navigate('/package-detail-add-category', { state: { industry: (industryData.find((industry) => industry.id === myPackage.industry)) } })
     }
-
-    const handleDeleteButtonClick = () => {
+    const handleEditButtonClick = () => {
         setIsEdit(!isEdit);
     }
-
     const handleBuyButtonClick = () => {
         setIsModalOpen(!isModalOpen);
     };
-
-    const handleBuyConfirmButtonClick = () => {
+    const handleBuyConfirmButtonClick = async () => {
         setIsLoading(true);
-        setTimeout(() => {
+        if (!editingPackage) {
+            setIsLoading(false);
+            return;
+        }
+        const newPackage: PackageModel | null = await createPackage(editingPackage);
+        if (newPackage) {
+            await createOrder(OrderModel
+                .fromJson({ userId: user?.userId, packageId: newPackage.id, createdAt: getCurrentTimeISO() }));
             setIsComplete(true);
-        }, 3000);
+        } else {
+            setIsLoading(false);
+            window.alert('주문에 오류가 발생하였습니다. 다시 시도해주세요.');
+        }
     };
-
-    const handleProductItemClick = ({ product }: { product: {} }) => {
-        navigate('/package-detail-add-product', { state: { product: product } })
+    const handleAddProductButtonClick = (category: CategoryModel) => {
+        navigate('/package-detail-add-product', { state: { category: category.toJson() } });
+    }
+    const handleDeleteButtonClick = (categoryId: number) => {
+        setMyCategories((prev) => prev.filter((category) => category.id !== categoryId));
+        setMyProducts((prev) => prev.filter((product) => product.category !== categoryId));
+        setEditingPackage((prev) => {
+            if (!prev) return prev;
+            return PackageModel.fromJson({
+                ...prev.toJson(),
+                "categories": prev.categories.filter((id) => id !== categoryId),
+                "products": prev.products.filter((id) => myProducts.some((product) => product.id === id))
+            });
+        });
     }
 
+    // return
     return (
-        isLoading ? (isComplete ? <CompleteSection /> : <LoadingSection />) : <div className={styles.page}>
+        isLoading ? (isComplete ? <CompleteSection text="패키지 구매 신청 완료!" /> : <LoadingSection text="잠시만 기다려주세요" />) : <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    <PackageItem pkg={packages[0]} />
+                    {editingPackage && <PackageItem pkg={editingPackage} />}
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>
@@ -140,30 +124,34 @@ export default function PackageDetail() {
                         <button className={styles.iconButton} onClick={handleAddCategoryButtonClick}>
                             <img className={styles.iconButtonImage} src={AddIconImage} />
                         </button>
-                        <button className={styles.iconButton} onClick={handleDeleteButtonClick} style={{ backgroundColor: `${!isEdit ? '#00A36C' : '#7F7F89'}` }}>
+                        <button className={styles.iconButton} onClick={handleEditButtonClick} style={{ backgroundColor: `${!isEdit ? '#00A36C' : '#7F7F89'}` }}>
                             <img className={styles.iconButtonImage} src={EditIconImage} />
                         </button>
                     </div>
                 </div>
                 <div className={styles.listView}>
-                    {products.map((product, index) => {
+                    {myCategories.map((category, index) => {
+                        const myProduct = myProducts.find((product) => product.category === category.id) || null;
                         return (
-                            <div key={index} className={styles.productItem} onClick={() => { handleProductItemClick({ product: product }) }}>
-                                <img className={styles.productThumbnail} src={EspressoMachineImage} />
+                            <div key={index} className={styles.productItem} onClick={() => { handleAddProductButtonClick(category) }}>
+                                <img className={styles.productThumbnail} src={myProduct?.images[0] || "https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg"} />
                                 <div className={styles.productInfoContainer}>
                                     <p className={styles.productName}>
-                                        바디프렌즈 에스프레소
+                                        {myProduct?.name}
                                     </p>
                                     <p className={styles.categoryAndAmount}>
-                                        에스프레소 머신 3개
+                                        {myProduct ? `${category.name} ${myProduct?.quantity}개` : '제품을 골라주세요!'}
                                     </p>
                                 </div>
                                 <div className={styles.blank} />
                                 <p className={styles.price}>
-                                    {product.price}원
+                                    {myProduct && `${myProduct?.price}원`}
                                 </p>
                                 {
-                                    isEdit ? (<button className={styles.deleteProductButton}>
+                                    isEdit ? (<button className={styles.deleteProductButton} onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteButtonClick(category.id!);
+                                    }}>
                                         <img className={styles.deleteProductButtonIcon} src={DeleteIconImage} />
                                     </button>) : (<button className={styles.searchOtherProductsButton}>
                                         <img className={styles.searchOtherProductsButtonIcon} src={ArrowRightIconImage} />
@@ -173,10 +161,9 @@ export default function PackageDetail() {
                         )
                     })}
                 </div>
+                <div style={{'height': '20rem'}}/>
             </div>
-            <div className={styles.buttonContainer}>
-                <DefaultButton event={handleBuyButtonClick} isActive={true} />
-            </div>
+            <DefaultButton event={handleBuyButtonClick} isActive={true} text="한번에 구매하기"/>
 
             {/* Modal */}
             {isModalOpen && (
@@ -188,9 +175,9 @@ export default function PackageDetail() {
                         <p className={styles.description}>
                             결제와 배송은 카카오톡으로 진행됩니다.
                         </p>
-                        <div className={styles.modalButtonContainer}>
-                            <DefaultButton event={handleBuyConfirmButtonClick} isActive={true} />
-                        </div>
+                        <button className={styles.buttonInModal} onClick={handleBuyConfirmButtonClick}>
+                            <p>한번에 구매할게요</p>
+                        </button>
                     </div>
                 </div>
             )}

@@ -3,8 +3,12 @@ import MenuHomeIconImage from "../../assets/images/footer/menu_home_icon.png";
 import MenuHomeIconSelectedImage from "../../assets/images/footer/menu_home_icon_selected.png";
 import MenuSellIconImage from "../../assets/images/footer/menu_sell_icon.png";
 import MenuSellIconSelectedImage from "../../assets/images/footer/menu_sell_icon_selected.png";
+import { useNavigate } from "react-router-dom";
 
 const Footer = styled.div`
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     height: 6rem;
     display: flex;
     flex-direction: row;
@@ -44,6 +48,7 @@ type MenuItem = {
 }
 
 export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
+    const navigate = useNavigate();
     const menus: MenuItem[] = [
         {
             text: '홈',
@@ -57,11 +62,21 @@ export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
         }
     ]
 
+    const handleClick =  (currentIndex: number) => {
+        let path = '';
+        if(currentIndex === 0){
+            path = '/home';
+        }else if(currentIndex === 1){
+            path = '/seller-saleslist'
+        }
+        navigate(path);
+    }
+
     return (
         <Footer>
             {menus.map((menu, index) => {
                 return (
-                    <Menu key={index}>
+                    <Menu key={index} onClick={() => handleClick(index)}>
                         <Icon src={index == currentMenuIndex ? menu.iconSelected : menu.icon} />
                         <Text>
                             {menu.text}

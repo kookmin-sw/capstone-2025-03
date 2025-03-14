@@ -1,5 +1,6 @@
 .page {
-    height: 100vh;
+    padding-top: 8rem;
+    min-height: 100vh;
     background-color: #18171D;
     display: flex;
     flex-direction: column;
@@ -29,14 +30,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
+    gap: 2rem;
+    margin-bottom: 3rem;
 }
 
 .contentTextContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 }
 
 .contentTitle {
@@ -65,4 +67,15 @@
     align-items: center;
     gap: 2rem;
     margin-bottom: 10rem;
+}
+
+.iconContainer{
+    padding: 1.5rem;
+    border-radius: 100rem;
+    background-color: rgb(0, 163, 108, 0.5)
+    ;
+}
+
+.icon{
+    width: 5.4rem;
 }

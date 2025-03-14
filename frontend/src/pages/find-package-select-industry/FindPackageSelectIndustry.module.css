@@ -1,5 +1,6 @@
 .page {
-    height: 100vh;
+    padding-top: 8rem;
+    min-height: 100vh;
     background-color: #18171D;
     display: flex;
     flex-direction: column;
@@ -51,8 +52,4 @@
 
 .industryItemText{
     font-size: 1.6rem;
-}
-
-.buttonContainer{
-    padding: 2rem;
 }

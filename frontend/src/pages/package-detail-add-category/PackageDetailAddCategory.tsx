@@ -1,57 +1,73 @@
 import SearchHeader from "@/src/components/layout/SearchHeader";
 import styles from "./PackageDetailAddCategory.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
-import EspressoMachineIconImage from "../../assets/images/dummy/espresso_machine.png";
-import CheckIconImage from "../../assets/images/section/check.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import CheckIconImage from "@/src/assets/images/section/check.png";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useCategory } from "@/src/hooks/useCategory";
+import { useRecoilState } from "recoil";
+import { editingPackageState } from "@/src/recoil/packageState";
+import PackageModel from "@/src/models/PackageModel";
+import CategoryModel from "@/src/models/CategoryModel";
+import IndustryModel from "@/src/models/IndustryModel";
 
 export default function PackageDetailAddCategory() {
+    // page connection
     const navigate = useNavigate();
-    const [checkedIds, setCheckedIds] = useState<string[]>([]);
-    const categories: { id: string, thumbnail: string, name: string }[] = [
-        { id: '0', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '1', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '2', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '3', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '4', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-        { id: '5', thumbnail: EspressoMachineIconImage, name: '에스프레소머신' },
-    ];
+    const location = useLocation();
+    const industry: IndustryModel = IndustryModel.fromJson(location.state.industry || {});
+    // hook
+    const { categories } = useCategory();
+    // recoil
+    const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
+    // usestate
+    const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
+    const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(editingPackage?.categories || []);
 
-    const handleItemClick = (id: string) => {
-        setCheckedIds((prev) =>
-            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    // useEffect
+    useEffect(() => {
+        setMyCategories(categories.filter((category) => category.industries.includes(industry.id!)));
+    }, [])
+
+    // Function
+    const handleItemClick = (categoryId: number) => {
+        setCheckedCategoryIds((prev) =>
+            prev.includes(categoryId) ? prev.filter((item) => item !== categoryId) : [...prev, categoryId]
         );
     }
-
     const handleConfirmButtonClick = () => {
+        const newEditingPackage = PackageModel.fromJson({
+            ...editingPackage?.toJson(),
+            "categories": checkedCategoryIds
+        });
+        setEditingPackage(newEditingPackage);
         navigate(-1);
     }
 
+    // return
     return (
         <div className={styles.page}>
-            <SearchHeader text="카페에 필요한 물품들" />
+            <SearchHeader text={`${industry.name}에 필요한 물품들`} />
             <div className={styles.section}>
                 <div className={styles.listView}>
-                    {categories.map((category, index) => {
+                    {myCategories.map((category, index) => {
                         return (
-                            <div className={styles.categoryItemContainer}>
-                                <div key={index} className={styles.categoryItem} onClick={() => { handleItemClick(category.id) }}>
-                                    <img className={styles.thumbnail} src={category.thumbnail} />
+                            <div key={index} className={styles.categoryItemContainer}>
+                                <div className={styles.categoryItem} onClick={() => { handleItemClick(category.id!) }}>
+                                    <img className={styles.thumbnail} src={category.thumbnail || "https://static.cdn.kmong.com/gigs/F1zfb1718452618.jpg"} />
                                     <p className={styles.name}>
                                         {category.name}
                                     </p>
                                     <div className={styles.blank} />
-                                    {checkedIds.includes(category.id) ? <img className={styles.checkIcon} src={CheckIconImage} /> : null}
+                                    {checkedCategoryIds.includes(category.id!) ? <img className={styles.checkIcon} src={CheckIconImage} /> : null}
                                 </div>
                             </div>
                         )
                     })}
                 </div>
+                <div style={{'height': '20rem'}}/>
             </div>
-            <div className={styles.buttonContainer}>
-                <DefaultButton event={handleConfirmButtonClick} isActive={true} />
-            </div>
+            <DefaultButton event={handleConfirmButtonClick} isActive={true} text="선택한 물품들 넣기"/>
         </div>
     )
 }

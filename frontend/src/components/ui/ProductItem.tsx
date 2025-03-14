@@ -30,7 +30,7 @@ const Title = styled.p`
 
 const GradeAndAmount = styled.p`
   font-size: 1.4rem;
-  color: #7F7F89;
+  color: #7f7f89;
 `;
 
 const Price = styled.p`
@@ -40,30 +40,30 @@ const Price = styled.p`
 
 type ProductItemProps = {
   product: {
-    id: string,
-    name: string,
-    grade: string,
-    amount: number,
-    price: number,
-    thumbnail: string
-  }
-}
+    id: string;
+    name: string;
+    grade: string;
+    amount: number;
+    price: number | null;
+    thumbnail: string;
+  };
+};
 
 export default function ProductItem({ product }: ProductItemProps) {
   return (
     <Item>
       <Thumbnail src={product.thumbnail} />
       <ContentContainer>
-        <Title>
-          {product.name}
-        </Title>
+        <Title>{product.name}</Title>
         <GradeAndAmount>
-          {product.grade}등급 ∙ {product.amount}개
+          {product.grade} ∙ {product.amount}개
         </GradeAndAmount>
         <Price>
-          {product.price}원
+          {product.price !== null
+            ? `${product.price.toLocaleString()}원`
+            : "가격 미정"}
         </Price>
       </ContentContainer>
     </Item>
-  )
+  );
 }

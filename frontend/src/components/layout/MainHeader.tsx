@@ -3,6 +3,10 @@ import LogoImage from "../../assets/images/header/logo.png";
 import NotificationIconImage from "../../assets/images/header/notification_icon.png";
 
 const Header = styled.div`
+    background-color: #101012;
+    position: fixed;
+    top: 0;
+    width: 100%;
     padding: 2rem;
     display: flex;
     flex-direction: row;

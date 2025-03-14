@@ -1,5 +1,6 @@
 .page {
-    height: 100vh;
+    min-height: 100vh;
+    padding-top: 8rem;
     background-color: #18171D;
     display: flex;
     flex-direction: column;
@@ -37,4 +38,9 @@
 
 .buttonContainer {
     padding: 2rem;
+}
+
+.checkIcon {
+    width: 2.4rem;
+    height: 2.4rem;
 }

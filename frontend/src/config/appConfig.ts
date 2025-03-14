@@ -8,7 +8,7 @@ export interface AppConfig {
   }
   
   const config: AppConfig = {
-    API_BASE_URL: "https://api.example.com",
+    API_BASE_URL: "https://restart-s4b8.onrender.com",
     environment: "development",
     enableFeatureX: false,
   };

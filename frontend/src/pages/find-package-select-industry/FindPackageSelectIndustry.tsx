@@ -1,31 +1,29 @@
 import BackHeader from "@/src/components/layout/BackHeader";
 import styles from "./FindPackageSelectIndustry.module.css";
 import DefaultButton from "@/src/components/ui/DefaultButton";
-import BreadImage from "../../assets/images/industry/bread.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import IndustryModel from "@/src/models/IndustryModel";
+import industryData from "@/src/data/industryData.json";
 
 export default function FindPackageSelectIndustry() {
     const navigate = useNavigate();
-    const [currentId, setCurrentId] = useState('');
-    const industries: { id: string, icon: string, name: string }[] = [
-        { id: '0', icon: BreadImage, name: "제과" },
-        { id: '1', icon: BreadImage, name: "제과" },
-        { id: '2', icon: BreadImage, name: "제과" },
-        { id: '3', icon: BreadImage, name: "제과" },
-        { id: '4', icon: BreadImage, name: "제과" },
-        { id: '5', icon: BreadImage, name: "제과" },
-        { id: '6', icon: BreadImage, name: "제과" },
-        { id: '7', icon: BreadImage, name: "제과" },
-    ];
-    const handleItemClick = (id: string) => {
+    const [currentId, setCurrentId] = useState<number | null>(0);
+    const industries: IndustryModel[] = industryData.map((industry) => IndustryModel.fromJson(industry));
+
+    // Function: 아이템 클릭
+    const handleItemClick = (id: number | null) => {
         setCurrentId(id);
     }
+
+    // Function: 확인 버튼 클릭
     const handleConfirmButtonClick = () => {
+        if (currentId === null) return;
         const selectedIndustry = industries.find((item) => item.id === currentId);
-        navigate('/find-package-recommend', { state: { industry: selectedIndustry} });
+        navigate('/find-package-recommend', { state: { selectedIndustry: selectedIndustry?.toJson() } });
     }
 
+    // return
     return (
         <div className={styles.page}>
             <BackHeader />
@@ -40,7 +38,7 @@ export default function FindPackageSelectIndustry() {
                     {industries.map((industry, index) => {
                         return (
                             <div key={index} className={styles.industryItem} onClick={() => { handleItemClick(industry.id) }} style={{ border: `solid 1px ${(industry.id === currentId) ? '#00A36C' : '#7F7F89'}` }}>
-                                <img className={styles.industryItemIcon} src={industry.icon} />
+                                <img className={styles.industryItemIcon} src={industry.icon!} />
                                 <p className={styles.industryItemText} style={{ color: industry.id === currentId ? '#00A36C' : '#ffffff' }}>
                                     {industry.name}
                                 </p>
@@ -48,11 +46,9 @@ export default function FindPackageSelectIndustry() {
                         )
                     })}
                 </div>
-
+                <div style={{'height': '30rem'}}/>
             </div>
-            <div className={styles.buttonContainer}>
-                <DefaultButton event={handleConfirmButtonClick} isActive={currentId !== ''} />
-            </div>
+            <DefaultButton event={handleConfirmButtonClick} isActive={currentId !== 0} text="확인"/>
         </div >
     );
 }
