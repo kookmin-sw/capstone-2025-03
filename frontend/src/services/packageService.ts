@@ -7,9 +7,17 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
  * 서버에서 모든 패키지 데이터를 가져옵니다.
  * @returns {Promise<PackageModel[] | null>}
  */
-export const getPackageListInService = async (): Promise<PackageModel[] | null> => {
+export const getPackageListInService = async (
+  page: number,
+  pageSize: number
+): Promise<{
+  results: PackageModel[];
+  next: string | null;
+  previous: string | null;
+  count: number;
+} | null> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/`);
+    const response = await axios.get(`${API_BASE_URL}/`, {params: {page, page_size: pageSize}});
     const packages = response.data.results ?? []; // 'results'가 없을 경우 빈 배열 사용
     return packages.map((pkg: any) => PackageModel.fromJson(pkg));
   } catch (error) {
@@ -23,9 +31,14 @@ export const getPackageListInService = async (): Promise<PackageModel[] | null> 
  * @param {PackageModel} packageData - 생성할 패키지 객체
  * @returns {Promise<PackageModel | null>}
  */
-export const createPackageInService = async (packageData: PackageModel): Promise<PackageModel | null> => {
+export const createPackageInService = async (
+  packageData: PackageModel
+): Promise<PackageModel | null> => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutId());
+    const response = await axios.post(
+      `${API_BASE_URL}/`,
+      packageData.toJsonWithoutId()
+    );
     return PackageModel.fromJson(response.data);
   } catch (error) {
     console.error("Error creating package:", error);
@@ -38,7 +51,9 @@ export const createPackageInService = async (packageData: PackageModel): Promise
  * @param {number} packageId - 가져올 패키지의 ID
  * @returns {Promise<PackageModel | null>}
  */
-export const getPackageInService = async (packageId: number): Promise<PackageModel | null> => {
+export const getPackageInService = async (
+  packageId: number
+): Promise<PackageModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${packageId}/`);
     return PackageModel.fromJson(response.data);
@@ -59,7 +74,10 @@ export const updatePackageInService = async (
   updatedData: Partial<PackageModel>
 ): Promise<PackageModel | null> => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/${packageId}/`, updatedData);
+    const response = await axios.put(
+      `${API_BASE_URL}/${packageId}/`,
+      updatedData
+    );
     return PackageModel.fromJson(response.data);
   } catch (error) {
     console.error("Error updating package:", error);
@@ -72,7 +90,9 @@ export const updatePackageInService = async (
  * @param {number} packageId - 삭제할 패키지의 ID
  * @returns {Promise<boolean>}
  */
-export const deletePackageInService = async (packageId: number): Promise<boolean> => {
+export const deletePackageInService = async (
+  packageId: number
+): Promise<boolean> => {
   try {
     await axios.delete(`${API_BASE_URL}/${packageId}/`);
     return true;

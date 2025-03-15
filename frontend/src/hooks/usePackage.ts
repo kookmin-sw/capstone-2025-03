@@ -1,134 +1,192 @@
 import { useRecoilState } from "recoil";
 import { packageState } from "../recoil/packageState";
 import {
-    getPackageListInService,
-    createPackageInService,
-    getPackageInService,
-    updatePackageInService,
-    deletePackageInService
+  getPackageListInService,
+  createPackageInService,
+  getPackageInService,
+  updatePackageInService,
+  deletePackageInService,
 } from "../services/packageService";
 import PackageModel from "../models/PackageModel";
 import packageDummyData from "@/src/data/packageDummyData.json";
 import { useCategory } from "./useCategory";
 import { useBuyerProduct } from "./useBuyerProduct";
+import { useState } from "react";
 
 const useDummyData = true;
 
 export const usePackage = () => {
-    const [packages, setPackages] = useRecoilState(packageState);
-    const { categories, getCategory } = useCategory();
-    const { buyerProducts, getBuyerProduct } = useBuyerProduct();
+  const [packages, setPackages] = useRecoilState(packageState);
+  const { categories, getCategory } = useCategory();
+  const { buyerProducts, getBuyerProduct } = useBuyerProduct();
+  const [page, setPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const pageSize = 5;
 
-    // List Read
-    const getPackageList = async (): Promise<PackageModel[]> => {
-        let newPackageList = useDummyData
-            ? packageDummyData.map(pkg => PackageModel.fromJson(pkg))
-            : await getPackageListInService() ?? [];
+  // List Read
+  const getPackageList = async (): Promise<PackageModel[]> => {
+    // if (!hasMore) return packages;
 
-        if (newPackageList.length) {
-            // 중복 확인을 위한 Set 생성 (O(1) 조회)
-            const categoryIdSet = new Set(categories.map(category => category.id));
-            const productIdSet = new Set(buyerProducts.map(product => product.id));
+    const response = useDummyData
+      ? packageDummyData.map((pkg) => PackageModel.fromJson(pkg))
+      : await getPackageListInService(page, pageSize);
 
-            // 누락된 category 가져오기 (중복 제거)
-            const missingCategoryIds = Array.from(new Set(
-                newPackageList.flatMap(pkg => pkg.categoryIds).filter(categoryId => !categoryIdSet.has(categoryId))
-            ));
+    const newPackageList = Array.isArray(response)
+      ? response
+      : response?.results ?? [];
 
-            // 누락된 product 가져오기 (중복 제거)
-            const missingProductIds = Array.from(new Set(
-                newPackageList.flatMap(pkg => pkg.productIds).filter(productId => !productIdSet.has(productId))
-            ));
+    if (newPackageList.length) {
+      // 중복 확인을 위한 Set 생성 (O(1) 조회)
+      const categoryIdSet = new Set(categories.map((category) => category.id));
+      const productIdSet = new Set(buyerProducts.map((product) => product.id));
 
-            // API 호출 (누락된 ID가 있을 경우에만 실행)
-            if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
+      // 누락된 category 가져오기 (중복 제거)
+      const missingCategoryIds = Array.from(
+        new Set(
+          newPackageList
+            .flatMap((pkg) => pkg.categoryIds)
+            .filter((categoryId) => !categoryIdSet.has(categoryId))
+        )
+      );
 
-            if (missingProductIds.length) {
-                await Promise.all(missingProductIds.map(getBuyerProduct));
-            }
+      // 누락된 product 가져오기 (중복 제거)
+      const missingProductIds = Array.from(
+        new Set(
+          newPackageList
+            .flatMap((pkg) => pkg.productIds)
+            .filter((productId) => !productIdSet.has(productId))
+        )
+      );
 
-            // 상태 업데이트
-            setPackages(newPackageList);
-        }
+      // API 호출 (누락된 ID가 있을 경우에만 실행)
+      if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
 
-        return newPackageList;
-    };
+      if (missingProductIds.length) {
+        await Promise.all(missingProductIds.map(getBuyerProduct));
+      }
 
-    // Create
-    const createPackage = async (packageData: PackageModel): Promise<PackageModel | null> => {
-        if (useDummyData) {
-            const newPackage = PackageModel.fromJson({ ...packageData, id: packages.length + 1 }); // 임시 ID 생성
-            setPackages(prevPackages => [...prevPackages, newPackage]);
-            return newPackage;
-        }
+      // 상태 업데이트
+      setPackages((prevPackages) => [...prevPackages, ...newPackageList]);
+      setPage((prevPage) => prevPage + 1);
 
-        const newPackage = await createPackageInService(packageData);
-        if (newPackage) setPackages(prevPackages => [...prevPackages, newPackage]);
-        return newPackage;
-    };
+      if (!response.next) {
+        setHasMore(false);
+      }
+    } else {
+      setHasMore(false); // 데이터가 없으면 hasMore = false 설정
+    }
 
-    // Read
-    const getPackage = async (packageId: number): Promise<PackageModel | null> => {
-        const targetPackage = packages.find(pkg => pkg.id === packageId);
-        if (targetPackage) return targetPackage;
+    return newPackageList;
+  };
 
-        // 새 패키지 데이터 가져오기
-        const foundPackage = useDummyData
-            ? packageDummyData.find(pkg => pkg.id === packageId)
-            : await getPackageInService(packageId);
+  // Create
+  const createPackage = async (
+    packageData: PackageModel
+  ): Promise<PackageModel | null> => {
+    if (useDummyData) {
+      const newPackage = PackageModel.fromJson({
+        ...packageData,
+        id: packages.length + 1,
+      }); // 임시 ID 생성
+      setPackages((prevPackages) => [...prevPackages, newPackage]);
+      return newPackage;
+    }
 
-        const newPackage = foundPackage ? PackageModel.fromJson(foundPackage) : null;
-        if (!newPackage) return null;
+    const newPackage = await createPackageInService(packageData);
+    if (newPackage)
+      setPackages((prevPackages) => [...prevPackages, newPackage]);
+    return newPackage;
+  };
 
-        // 중복 확인을 위한 Set 생성
-        const categoryIdSet = new Set(categories.map(category => category.id));
-        const productIdSet = new Set(buyerProducts.map(product => product.id));
+  // Read
+  const getPackage = async (
+    packageId: number
+  ): Promise<PackageModel | null> => {
+    const targetPackage = packages.find((pkg) => pkg.id === packageId);
+    if (targetPackage) return targetPackage;
 
-        // 누락된 category 및 product 가져오기
-        const missingCategoryIds = newPackage.categoryIds.filter(categoryId => !categoryIdSet.has(categoryId));
-        const missingProductIds = newPackage.productIds.filter(productId => !productIdSet.has(productId));
+    // 새 패키지 데이터 가져오기
+    const foundPackage = useDummyData
+      ? packageDummyData.find((pkg) => pkg.id === packageId)
+      : await getPackageInService(packageId);
 
-        // API 호출 (누락된 경우에만 실행)
-        if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
-        if (missingProductIds.length) {
-            for (const productId of missingProductIds) {
-                await getBuyerProduct(productId);
-            }
-        }
+    const newPackage = foundPackage
+      ? PackageModel.fromJson(foundPackage)
+      : null;
+    if (!newPackage) return null;
 
-        // 패키지 상태 업데이트
-        setPackages(prevPackages => [...prevPackages, newPackage]);
-        return newPackage;
-    };
+    // 중복 확인을 위한 Set 생성
+    const categoryIdSet = new Set(categories.map((category) => category.id));
+    const productIdSet = new Set(buyerProducts.map((product) => product.id));
 
-    // Update
-    const updatePackage = async (packageId: number, updatedData: Partial<PackageModel>): Promise<PackageModel | null> => {
-        if (useDummyData) {
-            const updatedPackages = packages.map(pkg =>
-                PackageModel.fromJson(pkg.id === packageId ? { ...pkg, ...updatedData } : pkg)
-            );
-            setPackages(updatedPackages);
-            return updatedPackages.find(pkg => pkg.id === packageId) || null;
-        }
+    // 누락된 category 및 product 가져오기
+    const missingCategoryIds = newPackage.categoryIds.filter(
+      (categoryId) => !categoryIdSet.has(categoryId)
+    );
+    const missingProductIds = newPackage.productIds.filter(
+      (productId) => !productIdSet.has(productId)
+    );
 
-        const newPackage = await updatePackageInService(packageId, updatedData);
-        if (newPackage) setPackages(prevPackages =>
-            prevPackages.map(pkg => pkg.id === packageId ? newPackage : pkg)
-        );
-        return newPackage;
-    };
+    // API 호출 (누락된 경우에만 실행)
+    if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
+    if (missingProductIds.length) {
+      for (const productId of missingProductIds) {
+        await getBuyerProduct(productId);
+      }
+    }
 
-    // Delete
-    const deletePackage = async (packageId: number): Promise<boolean> => {
-        if (useDummyData) {
-            setPackages(prevPackages => prevPackages.filter(pkg => pkg.id !== packageId));
-            return true;
-        }
+    // 패키지 상태 업데이트
+    setPackages((prevPackages) => [...prevPackages, newPackage]);
+    return newPackage;
+  };
 
-        const isSuccess = await deletePackageInService(packageId);
-        if (isSuccess) setPackages(prevPackages => prevPackages.filter(pkg => pkg.id !== packageId));
-        return isSuccess;
-    };
+  // Update
+  const updatePackage = async (
+    packageId: number,
+    updatedData: Partial<PackageModel>
+  ): Promise<PackageModel | null> => {
+    if (useDummyData) {
+      const updatedPackages = packages.map((pkg) =>
+        PackageModel.fromJson(
+          pkg.id === packageId ? { ...pkg, ...updatedData } : pkg
+        )
+      );
+      setPackages(updatedPackages);
+      return updatedPackages.find((pkg) => pkg.id === packageId) || null;
+    }
 
-    return { packages, getPackageList, createPackage, getPackage, updatePackage, deletePackage };
+    const newPackage = await updatePackageInService(packageId, updatedData);
+    if (newPackage)
+      setPackages((prevPackages) =>
+        prevPackages.map((pkg) => (pkg.id === packageId ? newPackage : pkg))
+      );
+    return newPackage;
+  };
+
+  // Delete
+  const deletePackage = async (packageId: number): Promise<boolean> => {
+    if (useDummyData) {
+      setPackages((prevPackages) =>
+        prevPackages.filter((pkg) => pkg.id !== packageId)
+      );
+      return true;
+    }
+
+    const isSuccess = await deletePackageInService(packageId);
+    if (isSuccess)
+      setPackages((prevPackages) =>
+        prevPackages.filter((pkg) => pkg.id !== packageId)
+      );
+    return isSuccess;
+  };
+
+  return {
+    packages,
+    getPackageList,
+    createPackage,
+    getPackage,
+    updatePackage,
+    deletePackage,
+    hasMore,
+  };
 };
