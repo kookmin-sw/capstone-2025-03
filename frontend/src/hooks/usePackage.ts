@@ -19,21 +19,19 @@ export const usePackage = () => {
   const [packages, setPackages] = useRecoilState(packageState);
   const { categories, getCategory } = useCategory();
   const { buyerProducts, getBuyerProduct } = useBuyerProduct();
-  const [page, setPage] = useState<number>(1);
+  const [nextPage, setNextPage] = useState<string | undefined>(undefined)
   const [hasMore, setHasMore] = useState<boolean>(true);
   const pageSize = 5;
 
   // List Read
   const getPackageList = async (): Promise<PackageModel[]> => {
-    // if (!hasMore) return packages;
+    if (!hasMore) return packages;
 
     const response = useDummyData
-      ? packageDummyData.map((pkg) => PackageModel.fromJson(pkg))
-      : await getPackageListInService(page, pageSize);
+      ? {results: packageDummyData.map((pkg) => PackageModel.fromJson(pkg)), next: null}
+      : await getPackageListInService(nextPage, !nextPage ? 1 : undefined, pageSize);
 
-    const newPackageList = Array.isArray(response)
-      ? response
-      : response?.results ?? [];
+    const newPackageList = response?.results ?? [];
 
     if (newPackageList.length) {
       // 중복 확인을 위한 Set 생성 (O(1) 조회)
@@ -67,17 +65,17 @@ export const usePackage = () => {
 
       // 상태 업데이트
       setPackages((prevPackages) => [...prevPackages, ...newPackageList]);
-      setPage((prevPage) => prevPage + 1);
-      console.log(hasMore);
-      if (response && "next" in response && !response.next) {
+      setNextPage(response?.next ?? undefined)
+
+      if (!response?.next) {
         setHasMore(false);
       }
     } else {
-      setHasMore(false); // 데이터가 없으면 hasMore = false 설정
+      setHasMore(false);
     }
-
+    
     return newPackageList;
-  };
+  }; 
 
   // Create
   const createPackage = async (
@@ -188,5 +186,6 @@ export const usePackage = () => {
     updatePackage,
     deletePackage,
     hasMore,
+    nextPage
   };
 };

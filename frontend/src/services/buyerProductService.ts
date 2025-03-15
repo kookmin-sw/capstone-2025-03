@@ -11,7 +11,7 @@ export const getBuyerProductListInService = async (
   url?: string
 ): Promise<{ results: BuyerProductModel[]; next: string | null } | null> => {
   try {
-    const requestUrl = url ?? `${API_BASE_URL}/products/`
+    const requestUrl = url ?? `${API_BASE_URL}/`
     const response = await axios.get(requestUrl);
     return response.data.map((product: any) =>
       BuyerProductModel.fromJson(product)

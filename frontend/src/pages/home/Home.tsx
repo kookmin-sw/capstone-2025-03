@@ -12,9 +12,9 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const currentMenuIndex = 0;
-  const { packages, getPackageList, hasMore } = usePackage();
+  const { packages, getPackageList, hasMore, nextPage } = usePackage();
 
-  const loadMoreRef = useRef(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   // useEffect
   useEffect(() => {
@@ -30,8 +30,8 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // if (!hasMore) return;
-    console.log(loadMoreRef);
+    if (!hasMore || !nextPage || !loadMoreRef.current) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -40,12 +40,11 @@ export default function Home() {
       },
       { threshold: 1.0 }
     );
-    setTimeout(() => {
-      if (loadMoreRef.current) observer.observe(loadMoreRef.current);
-    }, 100);
+
+    observer.observe(loadMoreRef.current);
 
     return () => observer.disconnect();
-  }, [hasMore]);
+  }, [hasMore, nextPage]);
 
   // Function
   const handleClickFindPackageButton = () => {
@@ -89,7 +88,7 @@ export default function Home() {
         {(
           <div
             ref={loadMoreRef}
-            style={{ height: "100px", backgroundColor: "white" }}
+            style={{ height: "10px", backgroundColor: "white" }}
           />
         )}
       </div>

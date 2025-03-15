@@ -8,8 +8,9 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
  * @returns {Promise<PackageModel[] | null>}
  */
 export const getPackageListInService = async (
-  page: number,
-  pageSize: number
+  url?: string,
+  page?: number,
+  pageSize?: number
 ): Promise<{
   results: PackageModel[];
   next: string | null;
@@ -17,9 +18,18 @@ export const getPackageListInService = async (
   count: number;
 } | null> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/`, {params: {page, page_size: pageSize}});
+    const requestUrl = url ?? `${API_BASE_URL}/`;
+    const params = !url ? { page, page_size: pageSize } : {};
+    
+    console.log(requestUrl)
+    const response = await axios.get(requestUrl, { params: params });
     const packages = response.data.results ?? []; // 'results'가 없을 경우 빈 배열 사용
-    return packages.map((pkg: any) => PackageModel.fromJson(pkg));
+    return {
+      results: packages.map((pkg: any) => PackageModel.fromJson(pkg)),
+      next: response.data.next,
+      previous: response.data.previous,
+      count: response.data.count
+    };
   } catch (error) {
     console.error("Error fetching packages:", error);
     return null;
