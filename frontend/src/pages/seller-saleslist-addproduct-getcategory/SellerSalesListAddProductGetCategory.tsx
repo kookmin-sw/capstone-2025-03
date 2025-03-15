@@ -3,15 +3,15 @@ import defaultImg from "@/src/assets/images/page/seller-saleslist-addproduct-get
 import BackButtonForGetCategory from "./components/BackButtonForGetCategory";
 import LoadingSection from "@/src/components/layout/LoadingSection";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useCategory } from "@/src/contexts/CategoryContext";
 import { useEffect, useState } from "react";
 import { LuSearch } from "react-icons/lu";
+import { useCategory } from "@/src/hooks/useCategory";
 
 export default function SellerSalesListAddProductGetCategory() {
   const navigate = useNavigate();
   const location = useLocation()
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { categories, getAllCategory } = useCategory();
+  const { categories, getCategoryList } = useCategory();
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
   const [selectedCategoryName, setSelectedCategoryName] = useState<string>("");
   const [searchCategory, setSearchCategory] = useState<string>("");
@@ -20,7 +20,7 @@ export default function SellerSalesListAddProductGetCategory() {
     const fetchCatogories = async () => {
       try {
         setIsLoading(true);
-        await getAllCategory();
+        await getCategoryList();
       } catch (error) {
         console.error(error);
       } finally {

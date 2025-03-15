@@ -35,14 +35,14 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          getPackageList(); // 다음 페이지 불러오기
+          getPackageList();
         }
       },
       { threshold: 1.0 }
     );
     setTimeout(() => {
       if (loadMoreRef.current) observer.observe(loadMoreRef.current);
-    }, 100); // ❗ 약간의 지연을 주어 DOM이 렌더링될 시간을 확보
+    }, 100);
 
     return () => observer.disconnect();
   }, [hasMore]);
