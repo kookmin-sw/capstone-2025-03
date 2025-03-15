@@ -1,8 +1,8 @@
 import axios from "axios";
 import ProductModel from "../models/ProductModel";
 
-const API_BASE_URL = "https://django-uxvt.onrender.com";
-const IMAGE_BASE_URL = "https://image-535482967924.asia-northeast1.run.app";
+const API_BASE_URL = import.meta.env.VITE_BASE_URL;
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
 
 /**
  * 상품을 생성하고 서버에 저장합니다.

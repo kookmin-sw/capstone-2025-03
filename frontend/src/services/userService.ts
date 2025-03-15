@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UserModel } from "../models/UserModel";
 
-const API_BASE_URL = "https://django-uxvt.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_BASE_URL;
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const REDIRECT_URI = `${window.location.origin}/name-and-birth-day-input`;
 

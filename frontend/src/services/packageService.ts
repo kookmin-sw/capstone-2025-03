@@ -1,7 +1,7 @@
 import axios from "axios";
 import PackageModel from "../models/PackageModel";
 
-const API_BASE_URL = "https://django-uxvt.onrender.com/packages";
+const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
 
 /**
  * 서버에서 모든 패키지 데이터를 가져옵니다.

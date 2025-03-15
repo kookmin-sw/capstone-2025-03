@@ -1,7 +1,7 @@
 import axios from "axios";
 import OrderModel from "../models/OrderModel";
 
-const API_BASE_URL = "https://django-uxvt.onrender.com/orders";
+const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/orders`;
 
 /**
  * 전체 주문 리스트를 가져옵니다.

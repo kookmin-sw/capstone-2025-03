@@ -1,9 +1,9 @@
 import axios from "axios";
 import SellerProductModel from "../models/SellerProductModel";
 
-const API_BASE_URL = "https://django-uxvt.onrender.com";
-const IMAGE_BASE_URL = "https://image-535482967924.asia-northeast1.run.app";
-// const AI_BASE_URL = "https://fastapi-lokg.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_BASE_URL;
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
+// const AI_BASE_URL = import.meta.env.VITE_AI_BASE_URL;
 /**
  * 상품을 생성하고 서버에 저장합니다.
  * @param {ProductModel} product - 생성할 상품 객체
@@ -45,17 +45,19 @@ export const uploadProductImageInService = async (
 };
 
 // 특정 사용자의 판매 상품들 가져오기
-export const getUserProductListInService = async (id: number): Promise<SellerProductModel[]> => {
+export const getUserProductListInService = async (
+  id: number
+): Promise<SellerProductModel[]> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/products/`, {params: {seller: id}})
+    const response = await axios.get(`${API_BASE_URL}/products/`, {
+      params: { seller: id },
+    });
     return response.data.results;
   } catch (error) {
-    console.error("Error getting selling products: ", error)
-    throw error
+    console.error("Error getting selling products: ", error);
+    throw error;
   }
-}
-
-
+};
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 가져옵니다.
