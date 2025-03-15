@@ -13,7 +13,7 @@ import { useCategory } from "./useCategory";
 import { useBuyerProduct } from "./useBuyerProduct";
 import { useState } from "react";
 
-const useDummyData = true;
+const useDummyData = false;
 
 export const usePackage = () => {
   const [packages, setPackages] = useRecoilState(packageState);
@@ -68,8 +68,8 @@ export const usePackage = () => {
       // 상태 업데이트
       setPackages((prevPackages) => [...prevPackages, ...newPackageList]);
       setPage((prevPage) => prevPage + 1);
-
-      if (!response.next) {
+      console.log(hasMore);
+      if (response && "next" in response && !response.next) {
         setHasMore(false);
       }
     } else {

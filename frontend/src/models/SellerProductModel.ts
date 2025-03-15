@@ -1,17 +1,17 @@
 export default class SellerProductModel {
     id: number | null;
     categoryId: number | null;
-    seller: number | null;
-    buyer: number | null;
     images: string[];
     name: string | null;
     description: string | null;
     grade: string | null;
     quantity: number;
     price: number | null;
+    sellerId: number | null;
     uploadDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
-    saleStatus: string | null;
+    buyerId: number | null;
     purchaseDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
+    saleStatus: string | null;
 
     constructor({
         id = null,
@@ -22,10 +22,10 @@ export default class SellerProductModel {
         grade = null,
         quantity = 0,
         price = 0,
-        seller = null,
+        sellerId = null,
         uploadDate = null,
         saleStatus = null,
-        buyer = null,
+        buyerId = null,
         purchaseDate = null,
     }: {
         id?: number | null;
@@ -36,10 +36,10 @@ export default class SellerProductModel {
         grade?: string | null;
         quantity?: number;
         price?: number | null;
-        seller?: number | null;
+        sellerId?: number | null;
         uploadDate?: string | null;
         saleStatus?: string | null;
-        buyer?: number | null;
+        buyerId?: number | null;
         purchaseDate?: string | null;
     }) {
         this.id = id;
@@ -50,10 +50,10 @@ export default class SellerProductModel {
         this.grade = grade;
         this.quantity = quantity;
         this.price = price;
-        this.seller = seller;
+        this.sellerId = sellerId;
         this.uploadDate = uploadDate;
         this.saleStatus = saleStatus;
-        this.buyer = buyer;
+        this.buyerId = buyerId;
         this.purchaseDate = purchaseDate;
     }
 
@@ -67,10 +67,10 @@ export default class SellerProductModel {
             grade: jsonData.grade,
             quantity: jsonData.quantity,
             price: jsonData.price,
-            seller: jsonData.seller,
+            sellerId: jsonData.seller,
             uploadDate: jsonData.upload_date,
             saleStatus: jsonData.sales_status,
-            buyer: jsonData.buyer,
+            buyerId: jsonData.buyer,
             purchaseDate: jsonData.purchase_date,
         });
     }
@@ -84,10 +84,10 @@ export default class SellerProductModel {
             grade: this.grade,
             quantity: this.quantity,
             price: this.price,
-            seller: this.seller,
+            seller: this.sellerId,
             upload_date: this.uploadDate,
             sales_status: this.saleStatus,
-            buyer: this.buyer,
+            buyer: this.buyerId,
             purchase_date: this.purchaseDate,
         };
     }

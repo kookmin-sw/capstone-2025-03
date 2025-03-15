@@ -52,7 +52,8 @@ export default function SellerSalesListProductDetail() {
       (prev) =>
         new SellerProductModel({
           ...prev,
-          seller: sellerId,
+          sellerId: sellerId,
+          saleStatus: "available",
           description: null,
           uploadDate: new Date().toISOString(),
           price: product.price,
