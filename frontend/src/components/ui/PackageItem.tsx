@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
-import WidgetImage from "../../assets/images/page/home/widget.png";
-import { useNavigate } from "react-router-dom";
-import PackageModel from "@/src/models/PackageModel";
-import { useCategory } from "@/src/hooks/useCategory";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { editingPackageState } from "@/src/recoil/packageState";
+import styled from '@emotion/styled';
+import WidgetImage from '../../assets/images/page/home/widget.png';
+import { useNavigate } from 'react-router-dom';
+import PackageModel from '@/src/models/PackageModel';
+import { useCategory } from '@/src/hooks/useCategory';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { editingPackageState } from '@/src/recoil/packageState';
 
 const Item = styled.div`
   display: flex;
@@ -32,8 +32,8 @@ const Title = styled.p`
 `;
 
 const Description = styled.p`
-  font-size:1.4rem;
-  color: #7F7F89;
+  font-size: 1.4rem;
+  color: #7f7f89;
   margin-bottom: 0.5rem;
 `;
 
@@ -58,16 +58,16 @@ const CategoryIcon = styled.img`
 
 const CategoryText = styled.p`
   font-size: 1.4rem;
-  color: #7F7F89;
+  color: #7f7f89;
 `;
 
 type PackageProps = {
   pkg: PackageModel;
-}
+};
 
 export default function PackageItem({ pkg }: PackageProps) {
   const { categories } = useCategory();
-  const [categoryPreview, setCategoryPreview] = useState("");
+  const [categoryPreview, setCategoryPreview] = useState('');
   const [, setEditingPackage] = useRecoilState(editingPackageState);
   const navigate = useNavigate();
 
@@ -78,35 +78,29 @@ export default function PackageItem({ pkg }: PackageProps) {
       if (categoryNames.length >= 2) count += 1;
       categoryNames.push(categories.find((category) => category.id === pkg.categoryIds[i])?.name);
     }
-    setCategoryPreview(`${categoryNames.join(", ")} ${count > 0 ? `외 ${count}가지로 구성` : "로 구성"}`);
-  }, [])
+    setCategoryPreview(
+      `${categoryNames.join(', ')} ${count > 0 ? `외 ${count}가지로 구성` : '로 구성'}`,
+    );
+  }, []);
 
   // Function: 패키지 아이템 클릭
   const handlePackageItemClick = () => {
     setEditingPackage(null);
     navigate('/package-detail', { state: { pkg: pkg.toJson() } });
-  }
+  };
 
   return (
     <Item onClick={handlePackageItemClick}>
       <Thumbnail src={pkg.thumbnail ?? undefined} />
       <ContentContainer>
-        <Title>
-          {pkg.name}
-        </Title>
-        <Description>
-          {pkg.description}
-        </Description>
-        <Price>
-          {pkg.price}원
-        </Price>
+        <Title>{pkg.name}</Title>
+        <Description>{pkg.description}</Description>
+        <Price>{pkg.price}원</Price>
         <CategoryContainer>
           <CategoryIcon src={WidgetImage} />
-          <CategoryText>
-            {categoryPreview}
-          </CategoryText>
+          <CategoryText>{categoryPreview}</CategoryText>
         </CategoryContainer>
       </ContentContainer>
     </Item>
-  )
+  );
 }

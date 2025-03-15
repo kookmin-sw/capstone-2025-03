@@ -1,9 +1,8 @@
-import { Button, Image, Text, Box } from "@chakra-ui/react";
-import styles from "./Main.module.css";
+import { Button, Image, Text, Box } from '@chakra-ui/react';
+import styles from './Main.module.css';
 
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const REDIRECT_URI = `${window.location.origin}/name-and-birth-day-input`;
-
 
 export default function Main() {
   console.log(REDIRECT_URI);
@@ -13,12 +12,10 @@ export default function Main() {
     window.location.href = kakoLoginUrl;
   };
 
-
   return (
     <div className={styles.mainContainer}>
       <Text className={styles.mainText}>
-        <span className={styles.highlightText}>리스타트</span>에서 <br />{" "}
-        창업부터 폐업까지
+        <span className={styles.highlightText}>리스타트</span>에서 <br /> 창업부터 폐업까지
       </Text>
 
       <Text className={styles.subText}>

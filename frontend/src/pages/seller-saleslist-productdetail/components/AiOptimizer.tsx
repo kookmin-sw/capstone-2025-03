@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { Box } from "@chakra-ui/react";
+import styled from '@emotion/styled';
+import { Box } from '@chakra-ui/react';
 
 const Card = styled.div`
   background-color: #202028;
@@ -88,15 +88,18 @@ export default function AiOptimizer() {
         <Box>
           <Title>AI 판매 최적화 기능</Title>
           <Description>
-            유사한 제품을 분석하여 최상의 이익을 확보하면서도 시장에서
-            합리적으로 판매될 수 있는 가격대를 추천해 드려요
+            유사한 제품을 분석하여 최상의 이익을 확보하면서도 시장에서 합리적으로 판매될 수 있는
+            가격대를 추천해 드려요
           </Description>
         </Box>
       </Header>
       <Divider />
       <StatsContainer>
         <Stat>
-          <StatTitle>업로드한 제품과 함께 많이 찾는 에스프레소 머신은 중고로 아래 가격대에서 잘 판매될 것으로 예상됩니다.</StatTitle>
+          <StatTitle>
+            업로드한 제품과 함께 많이 찾는 에스프레소 머신은 중고로 아래 가격대에서 잘 판매될 것으로
+            예상됩니다.
+          </StatTitle>
           <StatValue>48,000원</StatValue>
         </Stat>
       </StatsContainer>

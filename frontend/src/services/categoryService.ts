@@ -1,5 +1,5 @@
-import axios from "axios";
-import CategoryModel from "../models/CategoryModel";
+import axios from 'axios';
+import CategoryModel from '../models/CategoryModel';
 
 const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/categories`;
 
@@ -12,7 +12,7 @@ export const getCategoryListInService = async (): Promise<CategoryModel[] | null
     const response = await axios.get(`${API_BASE_URL}/`);
     return response.data.map((category: any) => CategoryModel.fromJson(category));
   } catch (error) {
-    console.error("Error fetching categories:", error);
+    console.error('Error fetching categories:', error);
     return null;
   }
 };
@@ -22,12 +22,14 @@ export const getCategoryListInService = async (): Promise<CategoryModel[] | null
  * @param {CategoryModel} category - 생성할 카테고리 객체
  * @returns {Promise<CategoryModel | null>}
  */
-export const createCategoryInService = async (category: CategoryModel): Promise<CategoryModel | null> => {
+export const createCategoryInService = async (
+  category: CategoryModel,
+): Promise<CategoryModel | null> => {
   try {
     const response = await axios.post(`${API_BASE_URL}/`, category.toJsonWithoutId()); // `id` 제외
     return CategoryModel.fromJson(response.data); // 서버에서 생성된 id 포함된 객체 반환
   } catch (error) {
-    console.error("Error creating category:", error);
+    console.error('Error creating category:', error);
     return null;
   }
 };
@@ -42,7 +44,7 @@ export const getCategoryInService = async (categoryId: number): Promise<Category
     const response = await axios.get(`${API_BASE_URL}/${categoryId}/`);
     return CategoryModel.fromJson(response.data);
   } catch (error) {
-    console.error("Error fetching category:", error);
+    console.error('Error fetching category:', error);
     return null;
   }
 };
@@ -55,13 +57,13 @@ export const getCategoryInService = async (categoryId: number): Promise<Category
  */
 export const updateCategoryInService = async (
   categoryId: number,
-  updatedData: Partial<CategoryModel>
+  updatedData: Partial<CategoryModel>,
 ): Promise<CategoryModel | null> => {
   try {
     const response = await axios.put(`${API_BASE_URL}/${categoryId}/`, updatedData);
     return CategoryModel.fromJson(response.data); // 업데이트된 카테고리 반환
   } catch (error) {
-    console.error("Error updating category:", error);
+    console.error('Error updating category:', error);
     return null;
   }
 };
@@ -76,7 +78,7 @@ export const deleteCategoryInService = async (categoryId: number): Promise<boole
     await axios.delete(`${API_BASE_URL}/${categoryId}/`);
     return true;
   } catch (error) {
-    console.error("Error deleting category:", error);
+    console.error('Error deleting category:', error);
     return false;
   }
 };
@@ -85,12 +87,10 @@ export const deleteCategoryInService = async (categoryId: number): Promise<boole
 export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
   try {
     const response = await axios.get(`${API_BASE_URL}`);
-    console.log("response")
-    return response.data.map((category: any) =>
-      CategoryModel.fromJson(category)
-    );
+    console.log('response');
+    return response.data.map((category: any) => CategoryModel.fromJson(category));
   } catch (error) {
-    console.error("Error fetching all categories:", error);
+    console.error('Error fetching all categories:', error);
     throw error;
   }
 };

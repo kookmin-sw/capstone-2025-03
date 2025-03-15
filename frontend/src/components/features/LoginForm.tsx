@@ -1,4 +1,4 @@
-import { Button, Input, VStack } from "@chakra-ui/react"
+import { Button, Input, VStack } from '@chakra-ui/react';
 
 export function LoginForm() {
   return (
@@ -7,5 +7,5 @@ export function LoginForm() {
       <Input placeholder="Password" type="password" />
       <Button colorScheme="blue">Login</Button>
     </VStack>
-  )
+  );
 }

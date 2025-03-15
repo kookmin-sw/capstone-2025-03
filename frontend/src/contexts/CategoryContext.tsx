@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-import CategoryModel from "../models/CategoryModel";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import CategoryModel from '../models/CategoryModel';
 import {
   createCategoryInService,
   getCategoryInService,
   updateCategoryInService,
   deleteCategoryInService,
-  getAllCategoryInService
-} from "../services/categoryService";
+  getAllCategoryInService,
+} from '../services/categoryService';
 
 // Context에서 사용할 타입 정의
 interface CategoryContextType {
@@ -20,9 +20,7 @@ interface CategoryContextType {
 }
 
 // Context 생성
-const CategoryContext = createContext<CategoryContextType | undefined>(
-  undefined
-);
+const CategoryContext = createContext<CategoryContextType | undefined>(undefined);
 
 // Provider 컴포넌트
 export const CategoryProvider = ({ children }: { children: ReactNode }) => {
@@ -34,29 +32,25 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
       await createCategoryInService(newCategory);
       setCategories((prev) => [...prev, newCategory]);
     } catch (error) {
-      console.error("Error creating category in context:", error);
+      console.error('Error creating category in context:', error);
       throw error;
     }
   };
 
   // 모든 카테고리 가져오기
-  const getAllCategory = async() => {
+  const getAllCategory = async () => {
     try {
       const allCategories = await getAllCategoryInService();
       setCategories(allCategories);
     } catch (error) {
-      console.error("Error fetching all categories:", error);
+      console.error('Error fetching all categories:', error);
     }
-  }
+  };
 
   // 특정 카테고리 가져오기
-  const fetchCategory = async (
-    categoryId: number
-  ): Promise<CategoryModel | null> => {
+  const fetchCategory = async (categoryId: number): Promise<CategoryModel | null> => {
     try {
-      const existingCategory = categories.find(
-        (category) => category.id === Number(categoryId)
-      );
+      const existingCategory = categories.find((category) => category.id === Number(categoryId));
       if (existingCategory) return existingCategory;
 
       const fetchedCategory = await getCategoryInService(Number(categoryId));
@@ -65,7 +59,7 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
       }
       return fetchedCategory;
     } catch (error) {
-      console.error("Error fetching category in context:", error);
+      console.error('Error fetching category in context:', error);
       return null;
     }
   };
@@ -78,11 +72,11 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
         prev.map((category) =>
           category.id === Number(categoryId)
             ? new CategoryModel({ ...category, ...updatedData })
-            : category
-        )
+            : category,
+        ),
       );
     } catch (error) {
-      console.error("Error updating category in context:", error);
+      console.error('Error updating category in context:', error);
       throw error;
     }
   };
@@ -91,11 +85,9 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   const deleteCategory = async (categoryId: number) => {
     try {
       await deleteCategoryInService(categoryId);
-      setCategories((prev) =>
-        prev.filter((category) => category.id !== Number(categoryId))
-      );
+      setCategories((prev) => prev.filter((category) => category.id !== Number(categoryId)));
     } catch (error) {
-      console.error("Error deleting category in context:", error);
+      console.error('Error deleting category in context:', error);
       throw error;
     }
   };
@@ -121,7 +113,7 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
 export const useCategory = (): CategoryContextType => {
   const context = useContext(CategoryContext);
   if (!context) {
-    throw new Error("useCategory must be used within a CategoryProvider");
+    throw new Error('useCategory must be used within a CategoryProvider');
   }
   return context;
 };

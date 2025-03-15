@@ -35,32 +35,32 @@
 }
 
 .submitButton {
-    position: fixed;
-    width: calc(100% - 4rem);
-    height: 6rem;
-    background-color: #01a26c;
-    color: white;
-    border-radius: 1rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
-  }
-  
-  .submitButton:disabled {
-    background-color: #12332d;
-  }
-  
-  /* ✅ 크롬, 엣지, 사파리에서 스핀 버튼 숨기기 */
-  .input::-webkit-outer-spin-button,
-  .input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  /* ✅ 파이어폭스에서 스핀 버튼 숨기기 */
-  .input[type="number"] {
-    -moz-appearance: textfield;
-  }
+  position: fixed;
+  width: calc(100% - 4rem);
+  height: 6rem;
+  background-color: #01a26c;
+  color: white;
+  border-radius: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: #12332d;
+}
+
+/* ✅ 크롬, 엣지, 사파리에서 스핀 버튼 숨기기 */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ✅ 파이어폭스에서 스핀 버튼 숨기기 */
+.input[type='number'] {
+  -moz-appearance: textfield;
+}

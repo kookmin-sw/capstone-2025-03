@@ -1,37 +1,35 @@
-import styles from "./AddressInput.module.css";
-import LoadingSection from "@/src/components/layout/LoadingSection";
-import RegisterCompleteSection from "./components/RegisterCompleteSection";
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useUser } from "@/src/contexts/UserContext";
-import { UserModel } from "@/src/models/UserModel";
+import styles from './AddressInput.module.css';
+import LoadingSection from '@/src/components/layout/LoadingSection';
+import RegisterCompleteSection from './components/RegisterCompleteSection';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useUser } from '@/src/contexts/UserContext';
+import { UserModel } from '@/src/models/UserModel';
 
 export default function AddressInput() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, setUser, createUser, loginUser } = useUser();
 
-  const [address] = useState(location.state?.address || "");
-  const [addressDetail, setaddressDetail] = useState<string>("");
-  const [visibleHeight, setVisibleHeight] = useState<number>(
-    window.innerHeight
-  );
+  const [address] = useState(location.state?.address || '');
+  const [addressDetail, setaddressDetail] = useState<string>('');
+  const [visibleHeight, setVisibleHeight] = useState<number>(window.innerHeight);
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // name 불러오기
-  const name = sessionStorage.getItem("name") || "";
+  const name = sessionStorage.getItem('name') || '';
 
   const handleOpenSearch = () => {
-    navigate("/address-search");
+    navigate('/address-search');
   };
-  
+
   const tryLogin = async (kakaoId: number) => {
     const responseData = await loginUser(kakaoId);
     // if (responseData)
     // console.log("로그인 시도 : ", responseData);
-    console.log("회원가입 여부", responseData);
-    if (responseData) navigate("/");
+    console.log('회원가입 여부', responseData);
+    if (responseData) navigate('/');
   };
 
   const handleConfirmButtonClick = async () => {
@@ -44,7 +42,7 @@ export default function AddressInput() {
         tryLogin(user.kakaoId);
       }
       setTimeout(() => {
-        navigate("/");
+        navigate('/');
       }, 3000);
     } catch (error) {
       alert(`회원가입 실패 : ${error}`);
@@ -63,7 +61,7 @@ export default function AddressInput() {
             ...prevUser,
             fullAddress: address,
             addressDetail: addressDetail,
-          })
+          }),
       );
     }
 
@@ -72,9 +70,9 @@ export default function AddressInput() {
         setVisibleHeight(window.visualViewport.height);
       }
     };
-    window.visualViewport?.addEventListener("resize", handleResize);
+    window.visualViewport?.addEventListener('resize', handleResize);
     return () => {
-      window.visualViewport?.addEventListener("resize", handleResize);
+      window.visualViewport?.addEventListener('resize', handleResize);
     };
   }, [address, addressDetail]);
 
@@ -107,7 +105,7 @@ export default function AddressInput() {
       {/* 주소 입력 */}
       <div className={styles.inputWrapper}>
         {address && <p className={styles.label}>주소</p>}
-        <input  
+        <input
           className={styles.inputField}
           placeholder="주소"
           readOnly

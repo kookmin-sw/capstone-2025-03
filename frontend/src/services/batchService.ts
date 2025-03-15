@@ -1,6 +1,6 @@
-import axios from "axios";
-import CategoryModel from "../models/CategoryModel";
-import ProductModel from "../models/ProductModel";
+import axios from 'axios';
+import CategoryModel from '../models/CategoryModel';
+import ProductModel from '../models/ProductModel';
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -12,7 +12,7 @@ const API_BASE_URL = import.meta.env.VITE_BASE_URL;
  */
 export const getCategoriesAndProductsInBatch = async (
   categoryIds: number[],
-  productIds: number[]
+  productIds: number[],
 ): Promise<{ categories: CategoryModel[]; products: ProductModel[] }> => {
   try {
     const response = await axios.post(`${API_BASE_URL}`, {
@@ -25,7 +25,7 @@ export const getCategoriesAndProductsInBatch = async (
       products: response.data.products.map((p: any) => ProductModel.fromJson(p)),
     };
   } catch (error) {
-    console.error("Error fetching batch categories and products:", error);
+    console.error('Error fetching batch categories and products:', error);
     throw error;
   }
 };

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Item = styled.div`
   flex-grow: 1;
@@ -59,9 +59,7 @@ export default function ProductItem({ product }: ProductItemProps) {
           {product.grade} ∙ {product.amount}개
         </GradeAndAmount>
         <Price>
-          {product.price !== null
-            ? `${product.price.toLocaleString()}원`
-            : "가격 미정"}
+          {product.price !== null ? `${product.price.toLocaleString()}원` : '가격 미정'}
         </Price>
       </ContentContainer>
     </Item>

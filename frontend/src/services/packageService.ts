@@ -1,5 +1,5 @@
-import axios from "axios";
-import PackageModel from "../models/PackageModel";
+import axios from 'axios';
+import PackageModel from '../models/PackageModel';
 
 const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
 
@@ -10,7 +10,7 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
 export const getPackageListInService = async (
   url?: string,
   page?: number,
-  pageSize?: number
+  pageSize?: number,
 ): Promise<{
   results: PackageModel[];
   next: string | null;
@@ -20,18 +20,20 @@ export const getPackageListInService = async (
   try {
     const requestUrl = url ?? `${API_BASE_URL}/`;
     const params = !url ? { page, page_size: pageSize } : {};
-    
-    console.log(requestUrl)
+
+    console.log(requestUrl);
+
     const response = await axios.get(requestUrl, { params: params });
-    const packages = response.data.results ?? []; // 'results'가 없을 경우 빈 배열 사용
+    const packages = response.data.results ?? [];
+
     return {
       results: packages.map((pkg: any) => PackageModel.fromJson(pkg)),
       next: response.data.next,
       previous: response.data.previous,
-      count: response.data.count
+      count: response.data.count,
     };
   } catch (error) {
-    console.error("Error fetching packages:", error);
+    console.error('Error fetching packages:', error);
     return null;
   }
 };
@@ -42,16 +44,13 @@ export const getPackageListInService = async (
  * @returns {Promise<PackageModel | null>}
  */
 export const createPackageInService = async (
-  packageData: PackageModel
+  packageData: PackageModel,
 ): Promise<PackageModel | null> => {
   try {
-    const response = await axios.post(
-      `${API_BASE_URL}/`,
-      packageData.toJsonWithoutId()
-    );
+    const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutId());
     return PackageModel.fromJson(response.data);
   } catch (error) {
-    console.error("Error creating package:", error);
+    console.error('Error creating package:', error);
     return null;
   }
 };
@@ -61,14 +60,12 @@ export const createPackageInService = async (
  * @param {number} packageId - 가져올 패키지의 ID
  * @returns {Promise<PackageModel | null>}
  */
-export const getPackageInService = async (
-  packageId: number
-): Promise<PackageModel | null> => {
+export const getPackageInService = async (packageId: number): Promise<PackageModel | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/${packageId}/`);
     return PackageModel.fromJson(response.data);
   } catch (error) {
-    console.error("Error fetching package:", error);
+    console.error('Error fetching package:', error);
     return null;
   }
 };
@@ -81,16 +78,13 @@ export const getPackageInService = async (
  */
 export const updatePackageInService = async (
   packageId: number,
-  updatedData: Partial<PackageModel>
+  updatedData: Partial<PackageModel>,
 ): Promise<PackageModel | null> => {
   try {
-    const response = await axios.put(
-      `${API_BASE_URL}/${packageId}/`,
-      updatedData
-    );
+    const response = await axios.put(`${API_BASE_URL}/${packageId}/`, updatedData);
     return PackageModel.fromJson(response.data);
   } catch (error) {
-    console.error("Error updating package:", error);
+    console.error('Error updating package:', error);
     return null;
   }
 };
@@ -100,14 +94,12 @@ export const updatePackageInService = async (
  * @param {number} packageId - 삭제할 패키지의 ID
  * @returns {Promise<boolean>}
  */
-export const deletePackageInService = async (
-  packageId: number
-): Promise<boolean> => {
+export const deletePackageInService = async (packageId: number): Promise<boolean> => {
   try {
     await axios.delete(`${API_BASE_URL}/${packageId}/`);
     return true;
   } catch (error) {
-    console.error("Error deleting package:", error);
+    console.error('Error deleting package:', error);
     return false;
   }
 };

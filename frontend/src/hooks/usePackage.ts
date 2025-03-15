@@ -1,17 +1,17 @@
-import { useRecoilState } from "recoil";
-import { packageState } from "../recoil/packageState";
+import { useRecoilState } from 'recoil';
+import { packageState } from '../recoil/packageState';
 import {
   getPackageListInService,
   createPackageInService,
   getPackageInService,
   updatePackageInService,
   deletePackageInService,
-} from "../services/packageService";
-import PackageModel from "../models/PackageModel";
-import packageDummyData from "@/src/data/packageDummyData.json";
-import { useCategory } from "./useCategory";
-import { useBuyerProduct } from "./useBuyerProduct";
-import { useState } from "react";
+} from '../services/packageService';
+import PackageModel from '../models/PackageModel';
+import packageDummyData from '@/src/data/packageDummyData.json';
+import { useCategory } from './useCategory';
+import { useBuyerProduct } from './useBuyerProduct';
+import { useState } from 'react';
 
 const useDummyData = false;
 
@@ -19,7 +19,7 @@ export const usePackage = () => {
   const [packages, setPackages] = useRecoilState(packageState);
   const { categories, getCategory } = useCategory();
   const { buyerProducts, getBuyerProduct } = useBuyerProduct();
-  const [nextPage, setNextPage] = useState<string | undefined>(undefined)
+  const [nextPage, setNextPage] = useState<string | undefined>(undefined);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const pageSize = 5;
 
@@ -28,7 +28,7 @@ export const usePackage = () => {
     if (!hasMore) return packages;
 
     const response = useDummyData
-      ? {results: packageDummyData.map((pkg) => PackageModel.fromJson(pkg)), next: null}
+      ? { results: packageDummyData.map((pkg) => PackageModel.fromJson(pkg)), next: null }
       : await getPackageListInService(nextPage, !nextPage ? 1 : undefined, pageSize);
 
     const newPackageList = response?.results ?? [];
@@ -43,8 +43,8 @@ export const usePackage = () => {
         new Set(
           newPackageList
             .flatMap((pkg) => pkg.categoryIds)
-            .filter((categoryId) => !categoryIdSet.has(categoryId))
-        )
+            .filter((categoryId) => !categoryIdSet.has(categoryId)),
+        ),
       );
 
       // 누락된 product 가져오기 (중복 제거)
@@ -52,8 +52,8 @@ export const usePackage = () => {
         new Set(
           newPackageList
             .flatMap((pkg) => pkg.productIds)
-            .filter((productId) => !productIdSet.has(productId))
-        )
+            .filter((productId) => !productIdSet.has(productId)),
+        ),
       );
 
       // API 호출 (누락된 ID가 있을 경우에만 실행)
@@ -65,7 +65,7 @@ export const usePackage = () => {
 
       // 상태 업데이트
       setPackages((prevPackages) => [...prevPackages, ...newPackageList]);
-      setNextPage(response?.next ?? undefined)
+      setNextPage(response?.next ?? undefined);
 
       if (!response?.next) {
         setHasMore(false);
@@ -73,14 +73,12 @@ export const usePackage = () => {
     } else {
       setHasMore(false);
     }
-    
+
     return newPackageList;
-  }; 
+  };
 
   // Create
-  const createPackage = async (
-    packageData: PackageModel
-  ): Promise<PackageModel | null> => {
+  const createPackage = async (packageData: PackageModel): Promise<PackageModel | null> => {
     if (useDummyData) {
       const newPackage = PackageModel.fromJson({
         ...packageData,
@@ -91,15 +89,12 @@ export const usePackage = () => {
     }
 
     const newPackage = await createPackageInService(packageData);
-    if (newPackage)
-      setPackages((prevPackages) => [...prevPackages, newPackage]);
+    if (newPackage) setPackages((prevPackages) => [...prevPackages, newPackage]);
     return newPackage;
   };
 
   // Read
-  const getPackage = async (
-    packageId: number
-  ): Promise<PackageModel | null> => {
+  const getPackage = async (packageId: number): Promise<PackageModel | null> => {
     const targetPackage = packages.find((pkg) => pkg.id === packageId);
     if (targetPackage) return targetPackage;
 
@@ -108,9 +103,7 @@ export const usePackage = () => {
       ? packageDummyData.find((pkg) => pkg.id === packageId)
       : await getPackageInService(packageId);
 
-    const newPackage = foundPackage
-      ? PackageModel.fromJson(foundPackage)
-      : null;
+    const newPackage = foundPackage ? PackageModel.fromJson(foundPackage) : null;
     if (!newPackage) return null;
 
     // 중복 확인을 위한 Set 생성
@@ -119,10 +112,10 @@ export const usePackage = () => {
 
     // 누락된 category 및 product 가져오기
     const missingCategoryIds = newPackage.categoryIds.filter(
-      (categoryId) => !categoryIdSet.has(categoryId)
+      (categoryId) => !categoryIdSet.has(categoryId),
     );
     const missingProductIds = newPackage.productIds.filter(
-      (productId) => !productIdSet.has(productId)
+      (productId) => !productIdSet.has(productId),
     );
 
     // API 호출 (누락된 경우에만 실행)
@@ -141,13 +134,11 @@ export const usePackage = () => {
   // Update
   const updatePackage = async (
     packageId: number,
-    updatedData: Partial<PackageModel>
+    updatedData: Partial<PackageModel>,
   ): Promise<PackageModel | null> => {
     if (useDummyData) {
       const updatedPackages = packages.map((pkg) =>
-        PackageModel.fromJson(
-          pkg.id === packageId ? { ...pkg, ...updatedData } : pkg
-        )
+        PackageModel.fromJson(pkg.id === packageId ? { ...pkg, ...updatedData } : pkg),
       );
       setPackages(updatedPackages);
       return updatedPackages.find((pkg) => pkg.id === packageId) || null;
@@ -156,7 +147,7 @@ export const usePackage = () => {
     const newPackage = await updatePackageInService(packageId, updatedData);
     if (newPackage)
       setPackages((prevPackages) =>
-        prevPackages.map((pkg) => (pkg.id === packageId ? newPackage : pkg))
+        prevPackages.map((pkg) => (pkg.id === packageId ? newPackage : pkg)),
       );
     return newPackage;
   };
@@ -164,17 +155,13 @@ export const usePackage = () => {
   // Delete
   const deletePackage = async (packageId: number): Promise<boolean> => {
     if (useDummyData) {
-      setPackages((prevPackages) =>
-        prevPackages.filter((pkg) => pkg.id !== packageId)
-      );
+      setPackages((prevPackages) => prevPackages.filter((pkg) => pkg.id !== packageId));
       return true;
     }
 
     const isSuccess = await deletePackageInService(packageId);
     if (isSuccess)
-      setPackages((prevPackages) =>
-        prevPackages.filter((pkg) => pkg.id !== packageId)
-      );
+      setPackages((prevPackages) => prevPackages.filter((pkg) => pkg.id !== packageId));
     return isSuccess;
   };
 
@@ -186,6 +173,6 @@ export const usePackage = () => {
     updatePackage,
     deletePackage,
     hasMore,
-    nextPage
+    nextPage,
   };
 };

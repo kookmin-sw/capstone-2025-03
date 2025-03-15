@@ -1,6 +1,6 @@
 // 판매자 페이지의 판매 중인 물품들 페이지입니다.
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Item = styled.div`
   flex-grow: 1;
@@ -47,9 +47,8 @@ const StatusTag = styled.span<{ status: string }>`
   font-size: 1.2rem;
   font-weight: bold;
   color: white;
-  background-color: ${(props) =>
-    props.status === "판매 중" ? "#0d2d24" : "#7F7F89"};
-  color: ${(props) => (props.status === "판매 중" ? "#01a26c" : "white")};
+  background-color: ${(props) => (props.status === '판매 중' ? '#0d2d24' : '#7F7F89')};
+  color: ${(props) => (props.status === '판매 중' ? '#01a26c' : 'white')};
   padding: 0.5rem 1rem;
   border-radius: 1rem;
 `;
@@ -72,7 +71,7 @@ type ProductItemProps = {
 };
 
 export default function SellerProductItem({ product }: ProductItemProps) {
-  const status = product.saleStatus === "available" ? "판매 중" : "판매 완료";
+  const status = product.saleStatus === 'available' ? '판매 중' : '판매 완료';
 
   return (
     <Item>

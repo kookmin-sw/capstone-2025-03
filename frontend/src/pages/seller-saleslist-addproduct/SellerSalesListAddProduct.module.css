@@ -95,6 +95,6 @@
 }
 
 /* ✅ 파이어폭스에서 스핀 버튼 숨기기 */
-.input[type="number"] {
+.input[type='number'] {
   -moz-appearance: textfield;
 }

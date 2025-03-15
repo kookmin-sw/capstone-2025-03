@@ -16,7 +16,7 @@ export class UserModel {
     kakaoId = null,
     profileImage = null,
     kakaoEmail = null,
-    phoneNumber = "",
+    phoneNumber = '',
     birthDate = null,
     fullAddress = null,
     addressDetail = null,

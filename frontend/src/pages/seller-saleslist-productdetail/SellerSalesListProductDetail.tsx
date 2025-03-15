@@ -1,14 +1,14 @@
-import styles from "./SellerSalesListProductDetail.module.css";
-import BackHeader from "@/src/components/layout/BackHeader";
-import ProductItem from "@/src/components/ui/ProductItem";
-import AiOptimizer from "./components/AiOptimizer";
-import PriceInput from "./components/PriceInput";
-import CompleteSection from "@/src/components/layout/CompleteSection";
-import LoadingSection from "@/src/components/layout/LoadingSection";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useSellerProduct } from "@/src/contexts/SellerProductContext";
-import SellerProductModel from "@/src/models/SellerProductModel";
+import styles from './SellerSalesListProductDetail.module.css';
+import BackHeader from '@/src/components/layout/BackHeader';
+import ProductItem from '@/src/components/ui/ProductItem';
+import AiOptimizer from './components/AiOptimizer';
+import PriceInput from './components/PriceInput';
+import CompleteSection from '@/src/components/layout/CompleteSection';
+import LoadingSection from '@/src/components/layout/LoadingSection';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSellerProduct } from '@/src/contexts/SellerProductContext';
+import SellerProductModel from '@/src/models/SellerProductModel';
 
 type Product = {
   id: string;
@@ -22,14 +22,12 @@ type Product = {
 
 export default function SellerSalesListProductDetail() {
   const navigate = useNavigate();
-  const { sellerProduct, createSellerProduct, setSellerProduct } =
-    useSellerProduct();
+  const { sellerProduct, createSellerProduct, setSellerProduct } = useSellerProduct();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [sellerId, setSellerId] = useState<number>();
   const location = useLocation();
-  const { selectedCategoryName, selectedCategoryId, name, grade, number } =
-    location.state;
+  const { selectedCategoryName, selectedCategoryId, name, grade, number } = location.state;
 
   const [product, setProduct] = useState<Product>({
     id: selectedCategoryId,
@@ -42,7 +40,7 @@ export default function SellerSalesListProductDetail() {
   });
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const userData = JSON.parse(storedUser);
       setSellerId(userData.id);
@@ -53,11 +51,11 @@ export default function SellerSalesListProductDetail() {
         new SellerProductModel({
           ...prev,
           sellerId: sellerId,
-          saleStatus: "available",
+          saleStatus: 'available',
           description: null,
           uploadDate: new Date().toISOString(),
           price: product.price,
-        })
+        }),
     );
   }, [sellerId, product.price]);
 
@@ -78,7 +76,7 @@ export default function SellerSalesListProductDetail() {
     try {
       await createSellerProduct(sellerProduct);
       setIsComplete(true);
-      navigate("/seller-saleslist");
+      navigate('/seller-saleslist');
       setSellerProduct(new SellerProductModel({}));
     } catch (error) {
       alert(`물건 등록 실패 : ${error}`);

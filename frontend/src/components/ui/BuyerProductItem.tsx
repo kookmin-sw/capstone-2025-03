@@ -1,5 +1,5 @@
-import BuyerProductModel from "@/src/models/BuyerProductModel";
-import styled from "@emotion/styled";
+import BuyerProductModel from '@/src/models/BuyerProductModel';
+import styled from '@emotion/styled';
 
 const Item = styled.div`
   flex-grow: 1;
@@ -31,7 +31,7 @@ const Title = styled.p`
 
 const GradeAndAmount = styled.p`
   font-size: 1.4rem;
-  color: #7F7F89;
+  color: #7f7f89;
 `;
 
 const Price = styled.p`
@@ -40,20 +40,16 @@ const Price = styled.p`
 `;
 
 export default function ProductItem({ product }: { product: BuyerProductModel }) {
-    return (
-        <Item>
-        <Thumbnail src= { product.images[0] } />
-        <ContentContainer>
-        <Title>
-        { product.name }
-        </Title>
+  return (
+    <Item>
+      <Thumbnail src={product.images[0]} />
+      <ContentContainer>
+        <Title>{product.name}</Title>
         <GradeAndAmount>
-    { product.grade } 등급 ∙ { product.quantity } 개
+          {product.grade} 등급 ∙ {product.quantity} 개
         </GradeAndAmount>
-        <Price>
-    { product.price } 원
-        </Price>
-        </ContentContainer>
-        </Item>
-  )
+        <Price>{product.price} 원</Price>
+      </ContentContainer>
+    </Item>
+  );
 }

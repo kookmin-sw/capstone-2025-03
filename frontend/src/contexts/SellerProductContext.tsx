@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-import SellerProductModel from "../models/SellerProductModel";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import SellerProductModel from '../models/SellerProductModel';
 import {
   createProductInService,
   uploadProductImageInService,
   getUserProductListInService,
-} from "../services/sellerProductService";
+} from '../services/sellerProductService';
 
 // Context에서 사용할 타입 정의
 interface SellerProductContextType {
@@ -16,26 +16,18 @@ interface SellerProductContextType {
 }
 
 // Context 생성
-const SellerProductContext = createContext<
-  SellerProductContextType | undefined
->(undefined);
+const SellerProductContext = createContext<SellerProductContextType | undefined>(undefined);
 
 // Provider 컴포넌트
-export const SellerProductProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
-  const [sellerProduct, setSellerProduct] = useState<SellerProductModel>(
-    {} as SellerProductModel
-  );
+export const SellerProductProvider = ({ children }: { children: ReactNode }) => {
+  const [sellerProduct, setSellerProduct] = useState<SellerProductModel>({} as SellerProductModel);
 
   // 상품 생성
   const createSellerProduct = async (newProduct: SellerProductModel) => {
     try {
       await createProductInService(newProduct);
     } catch (error) {
-      console.error("Error creating product in context:", error);
+      console.error('Error creating product in context:', error);
       throw error;
     }
   };
@@ -45,7 +37,7 @@ export const SellerProductProvider = ({
       const imageUrl = await uploadProductImageInService(file);
       return imageUrl;
     } catch (error) {
-      console.error("Error uploading image in product", error);
+      console.error('Error uploading image in product', error);
       return null;
     }
   };
@@ -53,10 +45,10 @@ export const SellerProductProvider = ({
   const getProductList = async (id: number): Promise<SellerProductModel[] | null> => {
     try {
       const productList = await getUserProductListInService(id);
-      console.log(productList)
+      console.log(productList);
       return productList;
     } catch (error) {
-      console.error("Error getting productlist", error);
+      console.error('Error getting productlist', error);
       return null;
     }
   };
@@ -68,7 +60,7 @@ export const SellerProductProvider = ({
         createSellerProduct,
         setSellerProduct,
         uploadProductImage,
-        getProductList
+        getProductList,
       }}
     >
       {children}
@@ -80,7 +72,7 @@ export const SellerProductProvider = ({
 export const useSellerProduct = (): SellerProductContextType => {
   const context = useContext(SellerProductContext);
   if (!context) {
-    throw new Error("useProduct must be used within a ProductProvider");
+    throw new Error('useProduct must be used within a ProductProvider');
   }
   return context;
 };

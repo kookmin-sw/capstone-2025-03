@@ -1,33 +1,27 @@
-import styles from "./SellerSalesListAddProduct.module.css";
-import BackButtonForAddProduct from "./components/BackButtonForAddProduct";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useSellerProduct } from "@/src/contexts/SellerProductContext";
-import SellerProductModel from "@/src/models/SellerProductModel";
+import styles from './SellerSalesListAddProduct.module.css';
+import BackButtonForAddProduct from './components/BackButtonForAddProduct';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSellerProduct } from '@/src/contexts/SellerProductContext';
+import SellerProductModel from '@/src/models/SellerProductModel';
 
 export default function SellerSalesListAddProduct() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { sellerProduct, uploadProductImage, setSellerProduct } =
-    useSellerProduct();
-  const { selectedCategoryId, selectedCategoryName, prevPath } =
-    location.state || {};
+  const { sellerProduct, uploadProductImage, setSellerProduct } = useSellerProduct();
+  const { selectedCategoryId, selectedCategoryName, prevPath } = location.state || {};
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [images, setImages] = useState<string[]>([]);
-  const [name, setName] = useState<string>("");
-  const [grade, setGrade] = useState<string>("");
+  const [name, setName] = useState<string>('');
+  const [grade, setGrade] = useState<string>('');
   const [number, setNumber] = useState<number>();
-  const [defaultImageSrc, setDefaultImageSrc] = useState<string>("");
+  const [defaultImageSrc, setDefaultImageSrc] = useState<string>('');
   const isButtonValid =
-    sellerProduct?.images?.[0] !== null &&
-    selectedCategoryId &&
-    name &&
-    grade &&
-    number;
+    sellerProduct?.images?.[0] !== null && selectedCategoryId && name && grade && number;
 
   useEffect(() => {
-    if (prevPath === "/seller-saleslist") {
+    if (prevPath === '/seller-saleslist') {
       setSellerProduct(new SellerProductModel({}));
     }
   }, []);
@@ -35,7 +29,7 @@ export default function SellerSalesListAddProduct() {
   useEffect(() => {
     setDefaultImageSrc(
       sellerProduct?.images?.[0] ||
-        "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+        '/src/assets/images/page/seller-saleslist-addproduct/empty_image.png',
     );
   }, [sellerProduct.images]);
 
@@ -45,9 +39,7 @@ export default function SellerSalesListAddProduct() {
     }
   };
 
-  const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
@@ -85,9 +77,9 @@ export default function SellerSalesListAddProduct() {
           name: name,
           grade: grade,
           quantity: number,
-        })
+        }),
     );
-    navigate("/seller-saleslist-productdetail", {
+    navigate('/seller-saleslist-productdetail', {
       state: {
         selectedCategoryName,
         selectedCategoryId,
@@ -108,40 +100,37 @@ export default function SellerSalesListAddProduct() {
             type="file"
             ref={fileInputRef}
             accept="image/*"
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             onChange={handleFileChange}
           />
           <img
             className={
               defaultImageSrc !==
-              "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
+              '/src/assets/images/page/seller-saleslist-addproduct/empty_image.png'
                 ? styles.uploadedImage
                 : styles.defaultImage
             }
             src={defaultImageSrc}
             width={
               defaultImageSrc !==
-              "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png"
-                ? "100%"
-                : "30px"
+              '/src/assets/images/page/seller-saleslist-addproduct/empty_image.png'
+                ? '100%'
+                : '30px'
             }
           />
           {defaultImageSrc ===
-          "/src/assets/images/page/seller-saleslist-addproduct/empty_image.png" ? (
+          '/src/assets/images/page/seller-saleslist-addproduct/empty_image.png' ? (
             <span>물품 이미지를 업로드해주세요</span>
           ) : null}
         </button>
         <p className={styles.subtitle}>물품 정보</p>
-        <form
-          className={styles.formContainer}
-          onSubmit={(e) => e.preventDefault()}
-        >
+        <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
           <input
             value={selectedCategoryName}
             className={styles.input}
             placeholder="카테고리"
             readOnly
-            onClick={() => navigate("/seller-saleslist-addproduct-getcategory")}
+            onClick={() => navigate('/seller-saleslist-addproduct-getcategory')}
           />
           <input
             value={name}
@@ -156,7 +145,7 @@ export default function SellerSalesListAddProduct() {
             onChange={(e) => setGrade(e.target.value)}
           />
           <input
-            value={number ?? ""}
+            value={number ?? ''}
             type="number"
             className={styles.input}
             placeholder="개수"

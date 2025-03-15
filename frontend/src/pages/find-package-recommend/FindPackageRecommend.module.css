@@ -1,81 +1,80 @@
 .page {
-    padding-top: 8rem;
-    min-height: 100vh;
-    background-color: #18171D;
-    display: flex;
-    flex-direction: column;
+  padding-top: 8rem;
+  min-height: 100vh;
+  background-color: #18171d;
+  display: flex;
+  flex-direction: column;
 }
 
 .section {
-    flex-grow: 1;
-    padding: 0 2rem;
-    overflow: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  flex-grow: 1;
+  padding: 0 2rem;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .section::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .title {
-    margin-top: 2rem;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 5rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5rem;
 }
 
 .contentContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .contentTextContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .contentTitle {
-    font-size: 2rem;
-    font-weight: bold;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .description {
-    font-size: 1.6rem;
-    color: #7F7F89;
+  font-size: 1.6rem;
+  color: #7f7f89;
 }
 
-.blank{
-    flex-grow: 1;
+.blank {
+  flex-grow: 1;
 }
 
 .contentIcon {
-    width: 6.4rem;
-    height: 6.4rem;
+  width: 6.4rem;
+  height: 6.4rem;
 }
 
-.packageLitView{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 10rem;
+.packageLitView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 10rem;
 }
 
-.iconContainer{
-    padding: 1.5rem;
-    border-radius: 100rem;
-    background-color: rgb(0, 163, 108, 0.5)
-    ;
+.iconContainer {
+  padding: 1.5rem;
+  border-radius: 100rem;
+  background-color: rgb(0, 163, 108, 0.5);
 }
 
-.icon{
-    width: 5.4rem;
+.icon {
+  width: 5.4rem;
 }

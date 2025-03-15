@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { Flex } from "@chakra-ui/react";
+import styled from '@emotion/styled';
+import { Flex } from '@chakra-ui/react';
 
 const Price = styled.div`
   margin-top: 3rem;
@@ -40,16 +40,16 @@ interface PriceInputProps {
 export default function PriceInput({ price, setPrice }: PriceInputProps) {
   return (
     <Price>
-      <Flex direction={"column"}>
+      <Flex direction={'column'}>
         {price !== null && <TextPrice>가격</TextPrice>}
         <InputContainer>
           <StyledInput
             type="number"
-            value={price === null ? "" : price}
+            value={price === null ? '' : price}
             placeholder="가격"
             onChange={(e) => {
               const value = e.target.value;
-              setPrice(value === "" ? null : Number(value));
+              setPrice(value === '' ? null : Number(value));
             }}
           />
           <CurrencyText>원</CurrencyText>

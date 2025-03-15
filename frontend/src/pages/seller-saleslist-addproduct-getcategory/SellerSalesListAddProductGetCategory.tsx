@@ -1,20 +1,20 @@
-import styles from "./SellerSalesListAddProductGetCategory.module.css";
-import defaultImg from "@/src/assets/images/page/seller-saleslist-addproduct-getcategory/defaultimg.jpg";
-import BackButtonForGetCategory from "./components/BackButtonForGetCategory";
-import LoadingSection from "@/src/components/layout/LoadingSection";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { LuSearch } from "react-icons/lu";
-import { useCategory } from "@/src/hooks/useCategory";
+import styles from './SellerSalesListAddProductGetCategory.module.css';
+import defaultImg from '@/src/assets/images/page/seller-saleslist-addproduct-getcategory/defaultimg.jpg';
+import BackButtonForGetCategory from './components/BackButtonForGetCategory';
+import LoadingSection from '@/src/components/layout/LoadingSection';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { LuSearch } from 'react-icons/lu';
+import { useCategory } from '@/src/hooks/useCategory';
 
 export default function SellerSalesListAddProductGetCategory() {
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { categories, getCategoryList } = useCategory();
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
-  const [selectedCategoryName, setSelectedCategoryName] = useState<string>("");
-  const [searchCategory, setSearchCategory] = useState<string>("");
+  const [selectedCategoryName, setSelectedCategoryName] = useState<string>('');
+  const [searchCategory, setSearchCategory] = useState<string>('');
 
   useEffect(() => {
     const fetchCatogories = async () => {
@@ -31,7 +31,7 @@ export default function SellerSalesListAddProductGetCategory() {
     fetchCatogories();
 
     if (selectedCategoryId && selectedCategoryName) {
-      navigate("/seller-saleslist-addproduct", {
+      navigate('/seller-saleslist-addproduct', {
         state: {
           selectedCategoryId,
           selectedCategoryName,
@@ -47,7 +47,7 @@ export default function SellerSalesListAddProductGetCategory() {
   };
 
   const filteredCategories = categories.filter((category) =>
-    category.name?.toLowerCase().includes(searchCategory.toLowerCase())
+    category.name?.toLowerCase().includes(searchCategory.toLowerCase()),
   );
 
   return isLoading ? (
@@ -80,7 +80,7 @@ export default function SellerSalesListAddProductGetCategory() {
             <div key={category.id} className={styles.categoryItem}>
               <img
                 src={category.thumbnail || defaultImg}
-                alt={category.name || ""}
+                alt={category.name || ''}
                 className={styles.thumbnail}
               />
               <span className={styles.name}>{category.name}</span>

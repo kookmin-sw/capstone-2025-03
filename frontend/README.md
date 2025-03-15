@@ -1,9 +1,11 @@
 # Front-end
+
 언어: Typescript
 
 라이브러리: React
 
 # Git commit 규칙
+
 [feat]: 새로운 기능 추가 (예: [feat] 사용자 로그인 기능 추가)
 
 [fix]: 버그 수정 (예: [fix] 잘못된 비밀번호 처리 수정)
@@ -21,6 +23,7 @@
 [chore]: 기타 작업 (패키지 업데이트, 설정 변경 등) (예: [chore] eslint 설정 업데이트)
 
 # Git branch 규칙
+
 feature/: 기능 개발
 
 fix/: 버그 수정
@@ -30,6 +33,7 @@ hotfix/: 긴급 수정
 release/: 출시 준비
 
 # 배포
+
 기본: Vercel
 
 확장 필요: AWS

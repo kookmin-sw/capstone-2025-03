@@ -1,13 +1,13 @@
 // UserContext.ts
-import React, { createContext, useContext, useState, ReactNode } from "react";
-import { UserModel } from "../models/UserModel";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { UserModel } from '../models/UserModel';
 import {
   createUserInService,
   getUserInService,
   updateUserInService,
   deleteUserInService,
   loginUserInService,
-} from "../services/userService";
+} from '../services/userService';
 
 // Context에서 사용할 타입 정의
 interface UserContextType {
@@ -15,10 +15,7 @@ interface UserContextType {
   createUser: (newUser: UserModel) => Promise<void>;
   fetchMyInfo: () => Promise<void>;
   fetchUser: (userId: string) => Promise<void>;
-  updateUser: (
-    userId: string,
-    updatedData: Partial<UserModel>
-  ) => Promise<void>;
+  updateUser: (userId: string, updatedData: Partial<UserModel>) => Promise<void>;
   deleteUser: (userId: string) => Promise<void>;
   loginUser: (kakaoId: number) => Promise<boolean>;
   setUser: React.Dispatch<React.SetStateAction<UserModel | null>>;
@@ -38,7 +35,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       // 생성 후 바로 local state에 저장 (이미 UserModel의 인스턴스이므로 문제 없음)
       setUser(newUser);
     } catch (error) {
-      console.error("Error creating user in context:", error);
+      console.error('Error creating user in context:', error);
       throw error;
     }
   };
@@ -49,7 +46,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       // const responseData = await getMyInfoInService();
       // console.log(responseData);
     } catch (error) {
-      console.log("Error getting my info in context", error);
+      console.log('Error getting my info in context', error);
       throw error;
     }
   };
@@ -60,16 +57,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const fetchedUser = await getUserInService(userId);
       setUser(fetchedUser);
     } catch (error) {
-      console.error("Error fetching user in context:", error);
+      console.error('Error fetching user in context:', error);
       throw error;
     }
   };
 
   // 사용자 데이터 업데이트
-  const updateUser = async (
-    userId: string,
-    updatedData: Partial<UserModel>
-  ) => {
+  const updateUser = async (userId: string, updatedData: Partial<UserModel>) => {
     try {
       await updateUserInService(userId, updatedData);
       // local state 업데이트: 단순 병합 객체 대신 새로운 UserModel 인스턴스로 생성
@@ -77,7 +71,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser(new UserModel({ ...user, ...updatedData }));
       }
     } catch (error) {
-      console.error("Error updating user in context:", error);
+      console.error('Error updating user in context:', error);
       throw error;
     }
   };
@@ -90,7 +84,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser(null);
       }
     } catch (error) {
-      console.error("Error deleting user in context:", error);
+      console.error('Error deleting user in context:', error);
       throw error;
     }
   };
@@ -102,14 +96,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       // console.log(result.user, "결과 유저")
       if (result.user && result.user?.userId !== null) {
         setUser(result.user);
-        console.log("로그인유저정보", result.user)
-        localStorage.setItem("user", JSON.stringify(result.user.toJson()));
+        console.log('로그인유저정보', result.user);
+        localStorage.setItem('user', JSON.stringify(result.user.toJson()));
         return true;
       } else {
         return false;
       }
     } catch (error) {
-      console.error("Error logging in user in context:", error);
+      console.error('Error logging in user in context:', error);
       throw error;
     }
   };
@@ -136,7 +130,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 export const useUser = (): UserContextType => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useUser must be used within a UserProvider");
+    throw new Error('useUser must be used within a UserProvider');
   }
   return context;
 };

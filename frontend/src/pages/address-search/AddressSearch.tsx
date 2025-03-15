@@ -1,6 +1,6 @@
-import styles from "./AddressSearch.module.css";
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import styles from './AddressSearch.module.css';
+import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -17,9 +17,8 @@ export default function AddressSearch() {
     if (isScriptLoaded.current) return;
     isScriptLoaded.current = true;
 
-    const script = document.createElement("script");
-    script.src =
-      "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+    const script = document.createElement('script');
+    script.src = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
     script.async = true;
     document.body.appendChild(script);
 
@@ -27,10 +26,10 @@ export default function AddressSearch() {
       if (postcodeRef.current) {
         const postcode = new window.daum.Postcode({
           oncomplete: (data: { address: string }) => {
-            navigate("/address-input", { state: { address: data.address } });
+            navigate('/address-input', { state: { address: data.address } });
           },
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
         });
 
         postcode.embed(postcodeRef.current);
@@ -42,11 +41,7 @@ export default function AddressSearch() {
     <div className={styles.page}>
       <div className={styles.header}>
         <button className={styles.backButton} onClick={() => navigate(-1)}>
-          <img
-            src="src/assets/images/chevron-left.svg"
-            alt="뒤로가기"
-            width="30"
-          />
+          <img src="src/assets/images/chevron-left.svg" alt="뒤로가기" width="30" />
         </button>
         <p className={styles.title}>주소 검색</p>
         <div className={styles.emptyBox} />
