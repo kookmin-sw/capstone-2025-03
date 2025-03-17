@@ -98,7 +98,7 @@ export default function SellerSalesListProductDetail() {
         <p className={styles.title}>가격을 입력해주세요</p>
 
         <ProductItem product={product} />
-        <AiOptimizer />
+        <AiOptimizer name={product.name} grade={product.grade} amount={product.amount} />
         <PriceInput price={product.price} setPrice={handlePriceChange} />
         <button
           className={styles.submitButton}
