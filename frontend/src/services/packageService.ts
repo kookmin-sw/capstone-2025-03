@@ -8,34 +8,34 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
  * @returns {Promise<PackageModel[] | null>}
  */
 export const getPackageListInService = async (
-  url?: string,
-  page?: number,
-  pageSize?: number,
+    url?: string,
+    page?: number,
+    pageSize?: number,
 ): Promise<{
-  results: PackageModel[];
-  next: string | null;
-  previous: string | null;
-  count: number;
+    results: PackageModel[];
+    next: string | null;
+    previous: string | null;
+    count: number;
 } | null> => {
-  try {
-    const requestUrl = url ?? `${API_BASE_URL}/`;
-    const params = !url ? { page, page_size: pageSize } : {};
+    try {
+        const requestUrl = url ?? `${API_BASE_URL}/`;
+        const params = !url ? { page, page_size: pageSize } : {};
 
-    console.log(requestUrl);
+        console.log(requestUrl);
 
-    const response = await axios.get(requestUrl, { params: params });
-    const packages = response.data.results ?? [];
+        const response = await axios.get(requestUrl, { params: params });
+        const packages = response.data.results ?? [];
 
-    return {
-      results: packages.map((pkg: any) => PackageModel.fromJson(pkg)),
-      next: response.data.next,
-      previous: response.data.previous,
-      count: response.data.count,
-    };
-  } catch (error) {
-    console.error('Error fetching packages:', error);
-    return null;
-  }
+        return {
+            results: packages.map((pkg: any) => PackageModel.fromJson(pkg)),
+            next: response.data.next,
+            previous: response.data.previous,
+            count: response.data.count,
+        };
+    } catch (error) {
+        console.error('Error fetching packages:', error);
+        return null;
+    }
 };
 
 /**
@@ -44,15 +44,15 @@ export const getPackageListInService = async (
  * @returns {Promise<PackageModel | null>}
  */
 export const createPackageInService = async (
-  packageData: PackageModel,
+    packageData: PackageModel,
 ): Promise<PackageModel | null> => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutId());
-    return PackageModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error creating package:', error);
-    return null;
-  }
+    try {
+        const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutId());
+        return PackageModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error creating package:', error);
+        return null;
+    }
 };
 
 /**
@@ -61,13 +61,13 @@ export const createPackageInService = async (
  * @returns {Promise<PackageModel | null>}
  */
 export const getPackageInService = async (packageId: number): Promise<PackageModel | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/${packageId}/`);
-    return PackageModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error fetching package:', error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/${packageId}/`);
+        return PackageModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error fetching package:', error);
+        return null;
+    }
 };
 
 /**
@@ -77,16 +77,16 @@ export const getPackageInService = async (packageId: number): Promise<PackageMod
  * @returns {Promise<PackageModel | null>}
  */
 export const updatePackageInService = async (
-  packageId: number,
-  updatedData: Partial<PackageModel>,
+    packageId: number,
+    updatedData: Partial<PackageModel>,
 ): Promise<PackageModel | null> => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}/${packageId}/`, updatedData);
-    return PackageModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error updating package:', error);
-    return null;
-  }
+    try {
+        const response = await axios.put(`${API_BASE_URL}/${packageId}/`, updatedData);
+        return PackageModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error updating package:', error);
+        return null;
+    }
 };
 
 /**
@@ -95,11 +95,11 @@ export const updatePackageInService = async (
  * @returns {Promise<boolean>}
  */
 export const deletePackageInService = async (packageId: number): Promise<boolean> => {
-  try {
-    await axios.delete(`${API_BASE_URL}/${packageId}/`);
-    return true;
-  } catch (error) {
-    console.error('Error deleting package:', error);
-    return false;
-  }
+    try {
+        await axios.delete(`${API_BASE_URL}/${packageId}/`);
+        return true;
+    } catch (error) {
+        console.error('Error deleting package:', error);
+        return false;
+    }
 };

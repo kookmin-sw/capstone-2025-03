@@ -3,16 +3,16 @@ import ArrowBack from '@/src/assets/images/page/seller-saleslist-addproduct-getc
 import { useNavigate } from 'react-router-dom';
 
 const Button = styled.img`
-  height: 2.4rem;
-  cursor: pointer;
+    height: 2.4rem;
+    cursor: pointer;
 `;
 
 export default function BackButtonForAddProduct() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/seller-saleslist');
-  };
+    const handleClick = () => {
+        navigate('/seller-saleslist');
+    };
 
-  return <Button src={ArrowBack} onClick={handleClick} />;
+    return <Button src={ArrowBack} onClick={handleClick} />;
 }

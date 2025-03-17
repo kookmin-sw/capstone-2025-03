@@ -1,46 +1,46 @@
 .page {
-  min-height: 100vh;
-  padding-top: 8rem;
-  background-color: #18171d;
-  display: flex;
-  flex-direction: column;
+    min-height: 100vh;
+    padding-top: 8rem;
+    background-color: #18171d;
+    display: flex;
+    flex-direction: column;
 }
 
 .section {
-  flex-grow: 1;
-  padding: 0 2rem;
-  overflow: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+    flex-grow: 1;
+    padding: 0 2rem;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .listView {
-  margin-top: 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  gap: 2rem;
-  margin-bottom: 4rem;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 2rem;
+    margin-bottom: 4rem;
 }
 
 .checkableProductItem {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .checkButtonIcon {
-  width: 2.4rem;
-  height: 2.4rem;
+    width: 2.4rem;
+    height: 2.4rem;
 }
 
 .buttonContainer {
-  padding: 2rem;
+    padding: 2rem;
 }
 
 .checkIcon {
-  width: 2.4rem;
-  height: 2.4rem;
+    width: 2.4rem;
+    height: 2.4rem;
 }

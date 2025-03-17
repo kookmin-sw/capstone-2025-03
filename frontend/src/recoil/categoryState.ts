@@ -3,6 +3,6 @@ import CategoryModel from '../models/CategoryModel';
 
 // Category Atom
 export const categoryState = atom<CategoryModel[]>({
-  key: 'categoryState',
-  default: [],
+    key: 'categoryState',
+    default: [],
 });

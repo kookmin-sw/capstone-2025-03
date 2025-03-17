@@ -8,13 +8,13 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/categories`;
  * @returns {Promise<CategoryModel[] | null>}
  */
 export const getCategoryListInService = async (): Promise<CategoryModel[] | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/`);
-    return response.data.results.map((category: any) => CategoryModel.fromJson(category));
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/`);
+        return response.data.results.map((category: any) => CategoryModel.fromJson(category));
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        return null;
+    }
 };
 
 /**
@@ -23,15 +23,15 @@ export const getCategoryListInService = async (): Promise<CategoryModel[] | null
  * @returns {Promise<CategoryModel | null>}
  */
 export const createCategoryInService = async (
-  category: CategoryModel,
+    category: CategoryModel,
 ): Promise<CategoryModel | null> => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/`, category.toJsonWithoutId()); // `id` 제외
-    return CategoryModel.fromJson(response.data); // 서버에서 생성된 id 포함된 객체 반환
-  } catch (error) {
-    console.error('Error creating category:', error);
-    return null;
-  }
+    try {
+        const response = await axios.post(`${API_BASE_URL}/`, category.toJsonWithoutId()); // `id` 제외
+        return CategoryModel.fromJson(response.data); // 서버에서 생성된 id 포함된 객체 반환
+    } catch (error) {
+        console.error('Error creating category:', error);
+        return null;
+    }
 };
 
 /**
@@ -40,13 +40,13 @@ export const createCategoryInService = async (
  * @returns {Promise<CategoryModel | null>}
  */
 export const getCategoryInService = async (categoryId: number): Promise<CategoryModel | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/${categoryId}/`);
-    return CategoryModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error fetching category:', error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/${categoryId}/`);
+        return CategoryModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error fetching category:', error);
+        return null;
+    }
 };
 
 /**
@@ -56,16 +56,16 @@ export const getCategoryInService = async (categoryId: number): Promise<Category
  * @returns {Promise<CategoryModel | null>}
  */
 export const updateCategoryInService = async (
-  categoryId: number,
-  updatedData: Partial<CategoryModel>,
+    categoryId: number,
+    updatedData: Partial<CategoryModel>,
 ): Promise<CategoryModel | null> => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}/${categoryId}/`, updatedData);
-    return CategoryModel.fromJson(response.data); // 업데이트된 카테고리 반환
-  } catch (error) {
-    console.error('Error updating category:', error);
-    return null;
-  }
+    try {
+        const response = await axios.put(`${API_BASE_URL}/${categoryId}/`, updatedData);
+        return CategoryModel.fromJson(response.data); // 업데이트된 카테고리 반환
+    } catch (error) {
+        console.error('Error updating category:', error);
+        return null;
+    }
 };
 
 /**
@@ -74,23 +74,23 @@ export const updateCategoryInService = async (
  * @returns {Promise<boolean>}
  */
 export const deleteCategoryInService = async (categoryId: number): Promise<boolean> => {
-  try {
-    await axios.delete(`${API_BASE_URL}/${categoryId}/`);
-    return true;
-  } catch (error) {
-    console.error('Error deleting category:', error);
-    return false;
-  }
+    try {
+        await axios.delete(`${API_BASE_URL}/${categoryId}/`);
+        return true;
+    } catch (error) {
+        console.error('Error deleting category:', error);
+        return false;
+    }
 };
 
 // 모든 카테고리 불러오기
 export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}`);
-    console.log('response');
-    return response.data.map((category: any) => CategoryModel.fromJson(category));
-  } catch (error) {
-    console.error('Error fetching all categories:', error);
-    throw error;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}`);
+        console.log('response');
+        return response.data.map((category: any) => CategoryModel.fromJson(category));
+    } catch (error) {
+        console.error('Error fetching all categories:', error);
+        throw error;
+    }
 };

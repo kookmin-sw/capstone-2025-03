@@ -1,50 +1,50 @@
 .page {
-  padding-top: 8rem;
-  min-height: 100vh;
-  background-color: #18171d;
-  display: flex;
-  flex-direction: column;
+    padding-top: 8rem;
+    min-height: 100vh;
+    background-color: #18171d;
+    display: flex;
+    flex-direction: column;
 }
 
 .section {
-  flex-grow: 1;
-  overflow: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+    flex-grow: 1;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .thumbnail {
-  width: 100%;
-  height: auto;
-  margin-bottom: 3rem;
+    width: 100%;
+    height: auto;
+    margin-bottom: 3rem;
 }
 
 .category {
-  margin-left: 2rem;
-  font-size: 1.4rem;
-  color: #7f7f89;
-  margin-bottom: 1rem;
+    margin-left: 2rem;
+    font-size: 1.4rem;
+    color: #7f7f89;
+    margin-bottom: 1rem;
 }
 
 .product {
-  margin-left: 2rem;
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
+    margin-left: 2rem;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
 }
 
 .gradeAndAmount {
-  margin-left: 2rem;
-  font-size: 1.4rem;
-  color: #7f7f89;
-  margin-bottom: 3rem;
+    margin-left: 2rem;
+    font-size: 1.4rem;
+    color: #7f7f89;
+    margin-bottom: 3rem;
 }
 
 .price {
-  margin-left: 2rem;
-  font-size: 2.4rem;
-  font-weight: bold;
+    margin-left: 2rem;
+    font-size: 2.4rem;
+    font-weight: bold;
 }
 
 .buttonContainer {
-  padding: 2rem;
+    padding: 2rem;
 }

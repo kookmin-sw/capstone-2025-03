@@ -47,14 +47,14 @@ export default function SellerSalesListAddProduct() {
                 const uploadedImageUrl = await uploadProductImage(file);
 
                 if (uploadedImageUrl) {
-                  setSellerProduct((prev) => {
-                    if (!prev) return new SellerProductModel({ images: [uploadedImageUrl] });
+                    setSellerProduct((prev) => {
+                        if (!prev) return new SellerProductModel({ images: [uploadedImageUrl] });
 
-                    return new SellerProductModel({
-                        ...prev,
-                        images: [...prev.images, uploadedImageUrl],
+                        return new SellerProductModel({
+                            ...prev,
+                            images: [...prev.images, uploadedImageUrl],
+                        });
                     });
-                });
                 }
             } catch (error) {
                 alert(`상품 이미지 업로드에 실패했습니다 : ${error}`);

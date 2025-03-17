@@ -3,6 +3,6 @@ import OrderModel from '../models/OrderModel';
 
 // Order Atom
 export const orderState = atom<OrderModel[]>({
-  key: 'orderState',
-  default: [],
+    key: 'orderState',
+    default: [],
 });

@@ -10,12 +10,12 @@ const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
  * @returns {Promise<void>}
  */
 export const createProductInService = async (product: ProductModel): Promise<void> => {
-  try {
-    await axios.post(`${API_BASE_URL}`, product.toJson());
-  } catch (error) {
-    console.error('Error creating product:', error);
-    throw error;
-  }
+    try {
+        await axios.post(`${API_BASE_URL}`, product.toJson());
+    } catch (error) {
+        console.error('Error creating product:', error);
+        throw error;
+    }
 };
 
 /**
@@ -24,19 +24,19 @@ export const createProductInService = async (product: ProductModel): Promise<voi
  * @returns {Promise<string>}
  */
 export const uploadProductImageInService = async (file: File): Promise<string | null> => {
-  const formData = new FormData();
-  formData.append('image', file);
-  try {
-    const response = await axios.post(`${IMAGE_BASE_URL}/upload/`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data.image_url;
-  } catch (error) {
-    console.error('Error uploading product image:', error);
-    throw error;
-  }
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+        const response = await axios.post(`${IMAGE_BASE_URL}/upload/`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data.image_url;
+    } catch (error) {
+        console.error('Error uploading product image:', error);
+        throw error;
+    }
 };
 
 /**
@@ -45,13 +45,13 @@ export const uploadProductImageInService = async (file: File): Promise<string | 
  * @returns {Promise<ProductModel | null>}
  */
 export const getProductInService = async (productId: number): Promise<ProductModel | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/${productId}`);
-    return ProductModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error fetching product:', error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/${productId}`);
+        return ProductModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        return null;
+    }
 };
 
 /**
@@ -61,15 +61,15 @@ export const getProductInService = async (productId: number): Promise<ProductMod
  * @returns {Promise<void>}
  */
 export const updateProductInService = async (
-  productId: number,
-  updatedData: Partial<ProductModel>,
+    productId: number,
+    updatedData: Partial<ProductModel>,
 ): Promise<void> => {
-  try {
-    await axios.put(`${API_BASE_URL}/${productId}`, updatedData);
-  } catch (error) {
-    console.error('Error updating product:', error);
-    throw error;
-  }
+    try {
+        await axios.put(`${API_BASE_URL}/${productId}`, updatedData);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        throw error;
+    }
 };
 
 /**
@@ -78,10 +78,10 @@ export const updateProductInService = async (
  * @returns {Promise<void>}
  */
 export const deleteProductInService = async (productId: number): Promise<void> => {
-  try {
-    await axios.delete(`${API_BASE_URL}/${productId}`);
-  } catch (error) {
-    console.error('Error deleting product:', error);
-    throw error;
-  }
+    try {
+        await axios.delete(`${API_BASE_URL}/${productId}`);
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        throw error;
+    }
 };

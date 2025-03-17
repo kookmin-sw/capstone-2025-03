@@ -11,103 +11,103 @@ import { useSellerProduct } from '@/src/contexts/SellerProductContext';
 import SellerProductModel from '@/src/models/SellerProductModel';
 
 type Product = {
-  id: string;
-  category: string;
-  name: string;
-  grade: string;
-  amount: number;
-  price: number | null;
-  thumbnail: string;
+    id: string;
+    category: string;
+    name: string;
+    grade: string;
+    amount: number;
+    price: number | null;
+    thumbnail: string;
 };
 
 export default function SellerSalesListProductDetail() {
-  const navigate = useNavigate();
-  const { sellerProduct, createSellerProduct, setSellerProduct } = useSellerProduct();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isComplete, setIsComplete] = useState<boolean>(false);
-  const [sellerId, setSellerId] = useState<number>();
-  const location = useLocation();
-  const { selectedCategoryName, selectedCategoryId, name, grade, number } = location.state;
+    const navigate = useNavigate();
+    const { sellerProduct, createSellerProduct, setSellerProduct } = useSellerProduct();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isComplete, setIsComplete] = useState<boolean>(false);
+    const [sellerId, setSellerId] = useState<number>();
+    const location = useLocation();
+    const { selectedCategoryName, selectedCategoryId, name, grade, number } = location.state;
 
-  const [product, setProduct] = useState<Product>({
-    id: selectedCategoryId,
-    category: selectedCategoryName,
-    name: name,
-    grade: grade,
-    amount: number,
-    price: null,
-    thumbnail: sellerProduct.images[0],
-  });
+    const [product, setProduct] = useState<Product>({
+        id: selectedCategoryId,
+        category: selectedCategoryName,
+        name: name,
+        grade: grade,
+        amount: number,
+        price: null,
+        thumbnail: sellerProduct.images[0],
+    });
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      setSellerId(userData.id);
-    }
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const userData = JSON.parse(storedUser);
+            setSellerId(userData.id);
+        }
 
-    setSellerProduct(
-      (prev) =>
-        new SellerProductModel({
-          ...prev,
-          sellerId: sellerId,
-          saleStatus: 'available',
-          description: null,
-          uploadDate: new Date().toISOString(),
-          price: product.price,
-        }),
-    );
-  }, [sellerId, product.price]);
+        setSellerProduct(
+            (prev) =>
+                new SellerProductModel({
+                    ...prev,
+                    sellerId: sellerId,
+                    saleStatus: 'available',
+                    description: null,
+                    uploadDate: new Date().toISOString(),
+                    price: product.price,
+                }),
+        );
+    }, [sellerId, product.price]);
 
-  console.log(sellerProduct);
+    console.log(sellerProduct);
 
-  const isButtonValid = product.price;
+    const isButtonValid = product.price;
 
-  const handlePriceChange = (newPrice: number | null) => {
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      price: newPrice,
-    }));
-  };
+    const handlePriceChange = (newPrice: number | null) => {
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            price: newPrice,
+        }));
+    };
 
-  const hanldeSellButtonClick = async () => {
-    setIsLoading(true);
+    const hanldeSellButtonClick = async () => {
+        setIsLoading(true);
 
-    try {
-      await createSellerProduct(sellerProduct);
-      setIsComplete(true);
-      navigate('/seller-saleslist');
-      setSellerProduct(new SellerProductModel({}));
-    } catch (error) {
-      alert(`물건 등록 실패 : ${error}`);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+        try {
+            await createSellerProduct(sellerProduct);
+            setIsComplete(true);
+            navigate('/seller-saleslist');
+            setSellerProduct(new SellerProductModel({}));
+        } catch (error) {
+            alert(`물건 등록 실패 : ${error}`);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-  return isLoading ? (
-    isComplete ? (
-      <CompleteSection text="판매 물품 업로드 완료!" />
+    return isLoading ? (
+        isComplete ? (
+            <CompleteSection text="판매 물품 업로드 완료!" />
+        ) : (
+            <LoadingSection text="잠시만 기다려주세요" />
+        )
     ) : (
-      <LoadingSection text="잠시만 기다려주세요" />
-    )
-  ) : (
-    <div className={styles.page}>
-      <BackHeader />
-      <div className={styles.section}>
-        <p className={styles.title}>가격을 입력해주세요</p>
+        <div className={styles.page}>
+            <BackHeader />
+            <div className={styles.section}>
+                <p className={styles.title}>가격을 입력해주세요</p>
 
-        <ProductItem product={product} />
-        <AiOptimizer name={product.name} grade={product.grade} amount={product.amount} />
-        <PriceInput price={product.price} setPrice={handlePriceChange} />
-        <button
-          className={styles.submitButton}
-          disabled={!isButtonValid}
-          onClick={hanldeSellButtonClick}
-        >
-          판매하기
-        </button>
-      </div>
-    </div>
-  );
+                <ProductItem product={product} />
+                <AiOptimizer name={product.name} grade={product.grade} amount={product.amount} />
+                <PriceInput price={product.price} setPrice={handlePriceChange} />
+                <button
+                    className={styles.submitButton}
+                    disabled={!isButtonValid}
+                    onClick={hanldeSellButtonClick}
+                >
+                    판매하기
+                </button>
+            </div>
+        </div>
+    );
 }
