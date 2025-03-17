@@ -1,7 +1,7 @@
 // 시간까지 가져오는 함수 (YYYY-MM-DDTHH:MM:SS)
 export function getCurrentTimeISO(): string {
     const kstTime = new Date();
-    return kstTime.toISOString().split(".")[0]; // "YYYY-MM-DDTHH:MM:SS"
+    return kstTime.toISOString().split('.')[0]; // "YYYY-MM-DDTHH:MM:SS"
 }
 
 // 밀리초까지 가져오는 함수 (YYYY-MM-DDTHH:MM:SS.sss)

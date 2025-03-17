@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import LogoImage from "../../assets/images/header/logo.png";
-import NotificationIconImage from "../../assets/images/header/notification_icon.png";
+import styled from '@emotion/styled';
+import LogoImage from '../../assets/images/header/logo.png';
+import NotificationIconImage from '../../assets/images/header/notification_icon.png';
 
 const Header = styled.div`
     background-color: #101012;
@@ -20,7 +20,6 @@ const Logo = styled.img`
 
 const Blank = styled.div`
     flex-grow: 1;
-
 `;
 
 const Icon = styled.img`
@@ -34,5 +33,5 @@ export default function MainHeader() {
             <Blank />
             <Icon src={NotificationIconImage} />
         </Header>
-    )
+    );
 }

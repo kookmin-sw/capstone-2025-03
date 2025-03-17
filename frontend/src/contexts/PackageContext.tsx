@@ -1,16 +1,16 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-import PackageModel from "../models/PackageModel";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import PackageModel from '../models/PackageModel';
 import {
     createPackageInService,
     getPackageInService,
     updatePackageInService,
     deletePackageInService,
-} from "../services/packageService";
-import { getCategoriesAndProductsInBatch } from "../services/batchService";
-import CategoryModel from "../models/CategoryModel";
-import ProductModel from "../models/ProductModel";
-import { useCategory } from "../contexts/CategoryContext";
-import { useProduct } from "../contexts/ProductContext";
+} from '../services/packageService';
+import { getCategoriesAndProductsInBatch } from '../services/batchService';
+import CategoryModel from '../models/CategoryModel';
+import ProductModel from '../models/ProductModel';
+import { useCategory } from '../contexts/CategoryContext';
+import { useProduct } from '../contexts/ProductContext';
 
 // Context에서 사용할 타입 정의
 interface PackageContextType {
@@ -35,9 +35,9 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
     const createPackage = async (newPackage: PackageModel) => {
         try {
             await createPackageInService(newPackage);
-            setPackages(prev => [...prev, newPackage]);
+            setPackages((prev) => [...prev, newPackage]);
         } catch (error) {
-            console.error("Error creating package in context:", error);
+            console.error('Error creating package in context:', error);
             throw error;
         }
     };
@@ -45,30 +45,41 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
     // 특정 패키지 가져오기 및 관련 데이터 불러오기
     const fetchPackage = async (packageId: number): Promise<PackageModel | null> => {
         try {
-            const existingPackage = packages.find(pkg => pkg.id === packageId);
+            const existingPackage = packages.find((pkg) => pkg.id === packageId);
             if (existingPackage) return existingPackage;
 
             const fetchedPackage = await getPackageInService(packageId);
             if (fetchedPackage) {
                 // 이미 있는 데이터 필터링하여 요청할 목록 결정
-                const missingCategoryIds = fetchedPackage.categories.filter(id => !categories.some(c => c.id === id));
-                const missingProductIds = fetchedPackage.products.filter(id => !products.some(p => p.id === id));
+                const missingCategoryIds = fetchedPackage.categories.filter(
+                    (id) => !categories.some((c) => c.id === id),
+                );
+                const missingProductIds = fetchedPackage.products.filter(
+                    (id) => !products.some((p) => p.id === id),
+                );
 
                 if (missingCategoryIds.length > 0 || missingProductIds.length > 0) {
-                    const { categories: newCategories, products: newProducts } = await getCategoriesAndProductsInBatch(
-                        missingCategoryIds,
-                        missingProductIds
-                    );
+                    const { categories: newCategories, products: newProducts } =
+                        await getCategoriesAndProductsInBatch(
+                            missingCategoryIds,
+                            missingProductIds,
+                        );
 
-                    setCategories(prev => [...prev, ...newCategories.map(c => new CategoryModel(c))]);
-                    setProducts(prev => [...prev, ...newProducts.map(p => new ProductModel(p))]);
+                    setCategories((prev) => [
+                        ...prev,
+                        ...newCategories.map((c) => new CategoryModel(c)),
+                    ]);
+                    setProducts((prev) => [
+                        ...prev,
+                        ...newProducts.map((p) => new ProductModel(p)),
+                    ]);
                 }
 
-                setPackages(prev => [...prev, fetchedPackage]);
+                setPackages((prev) => [...prev, fetchedPackage]);
             }
             return fetchedPackage;
         } catch (error) {
-            console.error("Error fetching package in context:", error);
+            console.error('Error fetching package in context:', error);
             return null;
         }
     };
@@ -77,11 +88,13 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
     const updatePackage = async (packageId: number, updatedData: Partial<PackageModel>) => {
         try {
             await updatePackageInService(packageId, updatedData);
-            setPackages(prev => prev.map(pkg =>
-                pkg.id === packageId ? new PackageModel({ ...pkg, ...updatedData }) : pkg
-            ));
+            setPackages((prev) =>
+                prev.map((pkg) =>
+                    pkg.id === packageId ? new PackageModel({ ...pkg, ...updatedData }) : pkg,
+                ),
+            );
         } catch (error) {
-            console.error("Error updating package in context:", error);
+            console.error('Error updating package in context:', error);
             throw error;
         }
     };
@@ -90,16 +103,23 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
     const deletePackage = async (packageId: number) => {
         try {
             await deletePackageInService(packageId);
-            setPackages(prev => prev.filter(pkg => pkg.id !== packageId));
+            setPackages((prev) => prev.filter((pkg) => pkg.id !== packageId));
         } catch (error) {
-            console.error("Error deleting package in context:", error);
+            console.error('Error deleting package in context:', error);
             throw error;
         }
     };
 
     return (
         <PackageContext.Provider
-            value={{ packages, fetchPackage, createPackage, updatePackage, deletePackage, setPackages }}
+            value={{
+                packages,
+                fetchPackage,
+                createPackage,
+                updatePackage,
+                deletePackage,
+                setPackages,
+            }}
         >
             {children}
         </PackageContext.Provider>
@@ -110,7 +130,7 @@ export const PackageProvider = ({ children }: { children: ReactNode }) => {
 export const usePackage = (): PackageContextType => {
     const context = useContext(PackageContext);
     if (!context) {
-        throw new Error("usePackage must be used within a PackageProvider");
+        throw new Error('usePackage must be used within a PackageProvider');
     }
     return context;
 };

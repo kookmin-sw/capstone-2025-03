@@ -1,13 +1,13 @@
-import styled from "@emotion/styled";
-import ArrowBack from "../../assets/images/header/arrow_back.png";
-import { useNavigate } from "react-router-dom";
-import SearchIconImage from "../../assets/images/header/search.png";
+import styled from '@emotion/styled';
+import ArrowBack from '../../assets/images/header/arrow_back.png';
+import { useNavigate } from 'react-router-dom';
+import SearchIconImage from '../../assets/images/header/search.png';
 
 const Header = styled.div`
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #18171D;
+    background-color: #18171d;
     padding: 2rem;
     display: flex;
     flex-direction: row;
@@ -20,7 +20,7 @@ const BackButton = styled.img`
 `;
 
 const SearchContainer = styled.div`
-    background-color: #2C2C36;
+    background-color: #2c2c36;
     flex-grow: 1;
     padding: 0.8rem 1.2rem;
     border-radius: 1.2rem;
@@ -45,17 +45,15 @@ export default function SearchHeader({ text }: { text: string }) {
 
     const handleClick = () => {
         navigate(-1);
-    }
+    };
 
     return (
         <Header>
             <BackButton src={ArrowBack} onClick={handleClick} />
             <SearchContainer>
                 <SearchIcon src={SearchIconImage} />
-                <SearchText>
-                    {text}
-                </SearchText>
+                <SearchText>{text}</SearchText>
             </SearchContainer>
         </Header>
-    )
+    );
 }

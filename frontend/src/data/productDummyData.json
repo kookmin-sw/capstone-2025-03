@@ -2,9 +2,7 @@
     {
         "id": 101,
         "category": 2,
-        "images": [
-            "https://qi-o.qoo10cdn.com/goods_image_big/9/4/8/5/9912309485_l.jpg"
-        ],
+        "images": ["https://qi-o.qoo10cdn.com/goods_image_big/9/4/8/5/9912309485_l.jpg"],
         "name": "전기오븐 PRO",
         "description": "고출력 전기오븐으로 베이킹 및 요리에 최적화된 모델입니다.",
         "grade": "A",
@@ -121,9 +119,7 @@
     {
         "id": 108,
         "category": 9,
-        "images": [
-            "https://m.ncrcomall.com/web/product/big/201510/31_shop1_603680.jpg"
-        ],
+        "images": ["https://m.ncrcomall.com/web/product/big/201510/31_shop1_603680.jpg"],
         "name": "테프론 시트",
         "description": "반복 사용이 가능한 테프론 코팅 시트, 청소가 쉬움.",
         "grade": "B",
@@ -138,9 +134,7 @@
     {
         "id": 109,
         "category": 10,
-        "images": [
-            "https://www.jubangbank.co.kr/data/base/goods/big/1(6399).jpg"
-        ],
+        "images": ["https://www.jubangbank.co.kr/data/base/goods/big/1(6399).jpg"],
         "name": "업소용 냉장고 500L",
         "description": "대용량 스테인리스 냉장고로 업소에서 사용하기 적합.",
         "grade": "A",

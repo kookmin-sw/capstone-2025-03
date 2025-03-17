@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import { Spinner } from "@chakra-ui/react";
+import styled from '@emotion/styled';
+import { Spinner } from '@chakra-ui/react';
 
 const Section = styled.div`
-    background-color: #18171D;
+    background-color: #18171d;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -13,24 +13,24 @@ const Section = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 1.8rem;
-  color: #a3a2a5;
+    font-size: 1.8rem;
+    color: #a3a2a5;
 `;
 
 interface LoadingSectionProps {
-  text: string;
+    text: string;
 }
 
 export default function LoadingSection({ text }: LoadingSectionProps) {
-  return (
-    <Section>
-      <Spinner
-        color="#00A36C"
-        borderWidth="0.6rem"
-        animationDuration="0.8s"
-        style={{ width: "6rem", height: "6rem" }}
-      />
-      <Text>{text}</Text>
-    </Section>
-  );
+    return (
+        <Section>
+            <Spinner
+                color="#00A36C"
+                borderWidth="0.6rem"
+                animationDuration="0.8s"
+                style={{ width: '6rem', height: '6rem' }}
+            />
+            <Text>{text}</Text>
+        </Section>
+    );
 }

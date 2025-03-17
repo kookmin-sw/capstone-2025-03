@@ -1,94 +1,93 @@
 export default class SellerProductModel {
     id: number | null;
-    category: number | null;
-    seller: number | null;
-    buyer: number | null;
+    categoryId: number | null;
     images: string[];
     name: string | null;
     description: string | null;
     grade: string | null;
     quantity: number;
     price: number | null;
+    sellerId: number | null;
     uploadDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
-    saleStatus: string | null;
+    buyerId: number | null;
     purchaseDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
+    saleStatus: string | null;
 
     constructor({
         id = null,
         images = [],
-        category = null,
+        categoryId = null,
         name = null,
         description = null,
         grade = null,
         quantity = 0,
-        price = null,
-        seller = null,
+        price = 0,
+        sellerId = null,
         uploadDate = null,
         saleStatus = null,
-        buyer = null,
+        buyerId = null,
         purchaseDate = null,
     }: {
         id?: number | null;
         images?: string[];
-        category?: number | null;
+        categoryId?: number | null;
         name?: string | null;
         description?: string | null;
         grade?: string | null;
         quantity?: number;
         price?: number | null;
-        seller?: number | null;
+        sellerId?: number | null;
         uploadDate?: string | null;
         saleStatus?: string | null;
-        buyer?: number | null;
+        buyerId?: number | null;
         purchaseDate?: string | null;
     }) {
         this.id = id;
         this.images = images;
-        this.category = category;
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.grade = grade;
         this.quantity = quantity;
         this.price = price;
-        this.seller = seller;
+        this.sellerId = sellerId;
         this.uploadDate = uploadDate;
         this.saleStatus = saleStatus;
-        this.buyer = buyer;
+        this.buyerId = buyerId;
         this.purchaseDate = purchaseDate;
     }
 
     static fromJson(jsonData: any): SellerProductModel {
         return new SellerProductModel({
-            id: jsonData.id ?? null,
-            images: jsonData.images ?? [],
-            category: jsonData.category ?? null,
-            name: jsonData.name ?? null,
-            description: jsonData.description ?? null,
-            grade: jsonData.grade ?? null,
-            quantity: jsonData.quantity ?? 0,
-            price: jsonData.price ?? null,
-            seller: jsonData.seller ?? null,
-            uploadDate: jsonData.upload_date ?? null,
-            saleStatus: jsonData.sales_status ?? null,
-            buyer: jsonData.buyer ?? null,
-            purchaseDate: jsonData.purchase_date ?? null,
+            id: jsonData.id,
+            images: jsonData.images || [],
+            categoryId: jsonData.category,
+            name: jsonData.name,
+            description: jsonData.description,
+            grade: jsonData.grade,
+            quantity: jsonData.quantity,
+            price: jsonData.price,
+            sellerId: jsonData.seller,
+            uploadDate: jsonData.upload_date,
+            saleStatus: jsonData.sales_status,
+            buyerId: jsonData.buyer,
+            purchaseDate: jsonData.purchase_date,
         });
     }
 
     toJson(): any {
         return {
-            id: this.id,
             images: this.images,
-            category: this.category,
+            category: this.categoryId,
             name: this.name,
             description: this.description,
             grade: this.grade,
             quantity: this.quantity,
             price: this.price,
-            seller: this.seller,
+            seller: this.sellerId,
             upload_date: this.uploadDate,
             sales_status: this.saleStatus,
-            buyer: this.buyer,
+            buyer: this.buyerId,
             purchase_date: this.purchaseDate,
         };
     }

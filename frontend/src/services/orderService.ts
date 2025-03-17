@@ -1,20 +1,20 @@
-import axios from "axios";
-import OrderModel from "../models/OrderModel";
+import axios from 'axios';
+import OrderModel from '../models/OrderModel';
 
-const API_BASE_URL = "https://django-uxvt.onrender.com/orders";
+const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/orders`;
 
 /**
  * 전체 주문 리스트를 가져옵니다.
  * @returns {Promise<OrderModel[] | null>}
  */
 export const getOrderListInService = async (): Promise<OrderModel[] | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/`);
-    return response.data.results.map((order: any) => OrderModel.fromJson(order));
-  } catch (error) {
-    console.error("Error fetching orders:", error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/`);
+        return response.data.results.map((order: any) => OrderModel.fromJson(order));
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        return null;
+    }
 };
 
 /**
@@ -23,13 +23,13 @@ export const getOrderListInService = async (): Promise<OrderModel[] | null> => {
  * @returns {Promise<OrderModel | null>}
  */
 export const createOrderInService = async (order: OrderModel): Promise<OrderModel | null> => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/`, order.toJsonWithoutId());
-    return OrderModel.fromJson(response.data);
-  } catch (error) {
-    console.error("Error creating order:", error);
-    return null;
-  }
+    try {
+        const response = await axios.post(`${API_BASE_URL}/`, order.toJsonWithoutId());
+        return OrderModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error creating order:', error);
+        return null;
+    }
 };
 
 /**
@@ -38,13 +38,13 @@ export const createOrderInService = async (order: OrderModel): Promise<OrderMode
  * @returns {Promise<OrderModel | null>}
  */
 export const getOrderInService = async (orderId: number): Promise<OrderModel | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/${orderId}/`);
-    return OrderModel.fromJson(response.data);
-  } catch (error) {
-    console.error("Error fetching order:", error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/${orderId}/`);
+        return OrderModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error fetching order:', error);
+        return null;
+    }
 };
 
 /**
@@ -54,16 +54,16 @@ export const getOrderInService = async (orderId: number): Promise<OrderModel | n
  * @returns {Promise<OrderModel | null>}
  */
 export const updateOrderInService = async (
-  orderId: number,
-  updatedData: Partial<OrderModel>
+    orderId: number,
+    updatedData: Partial<OrderModel>,
 ): Promise<OrderModel | null> => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}/${orderId}/`, updatedData);
-    return OrderModel.fromJson(response.data);
-  } catch (error) {
-    console.error("Error updating order:", error);
-    return null;
-  }
+    try {
+        const response = await axios.put(`${API_BASE_URL}/${orderId}/`, updatedData);
+        return OrderModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error updating order:', error);
+        return null;
+    }
 };
 
 /**
@@ -72,11 +72,11 @@ export const updateOrderInService = async (
  * @returns {Promise<boolean>}
  */
 export const deleteOrderInService = async (orderId: number): Promise<boolean> => {
-  try {
-    await axios.delete(`${API_BASE_URL}/${orderId}/`);
-    return true;
-  } catch (error) {
-    console.error("Error deleting order:", error);
-    return false;
-  }
+    try {
+        await axios.delete(`${API_BASE_URL}/${orderId}/`);
+        return true;
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        return false;
+    }
 };
