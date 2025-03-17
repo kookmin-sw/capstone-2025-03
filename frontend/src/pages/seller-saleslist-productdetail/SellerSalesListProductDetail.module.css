@@ -1,4 +1,5 @@
 .page {
+  margin-top: 6rem;
   height: 100vh;
   background-color: #18171d;
   display: flex;
