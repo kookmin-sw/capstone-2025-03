@@ -12,7 +12,7 @@ export default function SellerSalesListAddProduct() {
     const { sellerProduct, uploadProductImage, setSellerProduct } = useSellerProduct();
     const { selectedCategoryId, selectedCategoryName, prevPath } = location.state || {};
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [images, setImages] = useState<string[]>([]);
+    // const [images, setImages] = useState<string[]>([]);
     const [name, setName] = useState<string>('');
     const [grade, setGrade] = useState<string>('');
     const [number, setNumber] = useState<number>();
@@ -47,20 +47,14 @@ export default function SellerSalesListAddProduct() {
                 const uploadedImageUrl = await uploadProductImage(file);
 
                 if (uploadedImageUrl) {
-                    setImages((prevImages) => {
-                        const images = [...prevImages, uploadedImageUrl];
+                  setSellerProduct((prev) => {
+                    if (!prev) return new SellerProductModel({ images: [uploadedImageUrl] });
 
-                        setSellerProduct((prev) => {
-                            if (!prev) return new SellerProductModel({ images: images });
-
-                            return new SellerProductModel({
-                                ...prev,
-                                images: images,
-                            });
-                        });
-
-                        return images;
+                    return new SellerProductModel({
+                        ...prev,
+                        images: [...prev.images, uploadedImageUrl],
                     });
+                });
                 }
             } catch (error) {
                 alert(`상품 이미지 업로드에 실패했습니다 : ${error}`);

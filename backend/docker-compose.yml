@@ -1,0 +1,136 @@
+# version: "3.8"
+
+# services:
+#   django:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: django
+#     depends_on:
+#       - postgres
+#     env_file:
+#       - .env
+#     volumes:
+#       - .:/app
+#     expose:
+#       - "8000"
+
+#   fastapi:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.fastapi
+#     container_name: fastapi
+#     depends_on:
+#       - postgres
+#     volumes:
+#       - .:/app
+#     expose:
+#       - "8001"
+
+#   fastapi-image-upload:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.imageupload
+#     container_name: fastapi-image-upload
+#     volumes:
+#       - .:/app
+#     expose:
+#       - "8002"
+
+#   postgres:
+#     image: postgres:13
+#     container_name: postgres
+#     env_file:
+#       # - .env
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     ports:
+#       - "5432:5432"
+
+#   nginx:
+#     image: nginx:latest
+#     container_name: nginx
+#     depends_on:
+#       - django
+#       - fastapi
+#       - fastapi-image-upload
+#     volumes:
+#       - ./nginx.conf:/etc/nginx/nginx.conf
+#       - ./static:/app/static
+#     ports:
+#       - "8080:80"
+
+# volumes:
+#   postgres_data:
+
+version: "3.8"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django
+    depends_on:
+      - postgres
+    # env_file:
+    #   - .env
+    volumes:
+      - ./backend:/app  # backend 폴더만 마운트
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    container_name: fastapi
+    depends_on:
+      - postgres
+    volumes:
+      - ./fastapi:/app  # fastapi 폴더만 마운트
+    ports:
+      - "8001:8001"
+    expose:
+      - "8001"
+
+  fastapi-image-upload:
+    build:
+      context: .
+      dockerfile: Dockerfile.imageupload
+    container_name: fastapi-image-upload
+    volumes:
+      - ./fastapi-image-upload:/app  # fastapi-image-upload 폴더만 마운트
+    ports:
+      - "8002:8002"
+    expose:
+      - "8002"
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    # env_file:
+    #   - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    depends_on:
+      - django
+      - fastapi
+      - fastapi-image-upload
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./backend/static:/app/static  # Django static 파일 마운트
+      - ./backend/media:/app/media    # Django media 파일 마운트 (필요 시)
+    ports:
+      - "8080:80"
+
+volumes:
+  postgres_data:

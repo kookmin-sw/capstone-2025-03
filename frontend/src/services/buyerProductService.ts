@@ -8,16 +8,16 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/products`;
  * @returns {Promise<BuyerProductModel[] | null>}
  */
 export const getBuyerProductListInService = async (
-  url?: string,
+    url?: string,
 ): Promise<{ results: BuyerProductModel[]; next: string | null } | null> => {
-  try {
-    const requestUrl = url ?? `${API_BASE_URL}/`;
-    const response = await axios.get(requestUrl);
-    return response.data.map((product: any) => BuyerProductModel.fromJson(product));
-  } catch (error) {
-    console.error('Error fetching buyer products:', error);
-    return null;
-  }
+    try {
+        const requestUrl = url ?? `${API_BASE_URL}/`;
+        const response = await axios.get(requestUrl);
+        return response.data.map((product: any) => BuyerProductModel.fromJson(product));
+    } catch (error) {
+        console.error('Error fetching buyer products:', error);
+        return null;
+    }
 };
 
 /**
@@ -26,15 +26,15 @@ export const getBuyerProductListInService = async (
  * @returns {Promise<BuyerProductModel | null>}
  */
 export const createBuyerProductInService = async (
-  product: BuyerProductModel,
+    product: BuyerProductModel,
 ): Promise<BuyerProductModel | null> => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/`, product.toJsonWithoutId());
-    return BuyerProductModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error creating buyer product:', error);
-    return null;
-  }
+    try {
+        const response = await axios.post(`${API_BASE_URL}/`, product.toJsonWithoutId());
+        return BuyerProductModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error creating buyer product:', error);
+        return null;
+    }
 };
 
 /**
@@ -43,15 +43,15 @@ export const createBuyerProductInService = async (
  * @returns {Promise<BuyerProductModel | null>}
  */
 export const getBuyerProductInService = async (
-  productId: number,
+    productId: number,
 ): Promise<BuyerProductModel | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/${productId}/`);
-    return BuyerProductModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error fetching buyer product:', error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/${productId}/`);
+        return BuyerProductModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error fetching buyer product:', error);
+        return null;
+    }
 };
 
 /**
@@ -61,16 +61,16 @@ export const getBuyerProductInService = async (
  * @returns {Promise<BuyerProductModel | null>}
  */
 export const updateBuyerProductInService = async (
-  productId: number,
-  updatedData: Partial<BuyerProductModel>,
+    productId: number,
+    updatedData: Partial<BuyerProductModel>,
 ): Promise<BuyerProductModel | null> => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}/${productId}/`, updatedData);
-    return BuyerProductModel.fromJson(response.data);
-  } catch (error) {
-    console.error('Error updating buyer product:', error);
-    return null;
-  }
+    try {
+        const response = await axios.put(`${API_BASE_URL}/${productId}/`, updatedData);
+        return BuyerProductModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error updating buyer product:', error);
+        return null;
+    }
 };
 
 /**
@@ -79,11 +79,11 @@ export const updateBuyerProductInService = async (
  * @returns {Promise<boolean>}
  */
 export const deleteBuyerProductInService = async (productId: number): Promise<boolean> => {
-  try {
-    await axios.delete(`${API_BASE_URL}/${productId}/`);
-    return true;
-  } catch (error) {
-    console.error('Error deleting buyer product:', error);
-    return false;
-  }
+    try {
+        await axios.delete(`${API_BASE_URL}/${productId}/`);
+        return true;
+    } catch (error) {
+        console.error('Error deleting buyer product:', error);
+        return false;
+    }
 };
