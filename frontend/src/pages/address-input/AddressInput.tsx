@@ -26,24 +26,28 @@ export default function AddressInput() {
 
     const tryLogin = async (kakaoId: number) => {
         const responseData = await loginUser(kakaoId);
-        // if (responseData)
-        // console.log("로그인 시도 : ", responseData);
+      
         console.log('회원가입 여부', responseData);
-        if (responseData) navigate('/');
+
+        if (responseData) {
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
+        }
     };
 
     const handleConfirmButtonClick = async () => {
+
         if (!user) return;
         setIsLoading(true);
+
         try {
             await createUser(user);
             setIsComplete(true);
+            
             if (user.kakaoId !== null) {
                 tryLogin(user.kakaoId);
             }
-            setTimeout(() => {
-                navigate('/');
-            }, 3000);
         } catch (error) {
             alert(`회원가입 실패 : ${error}`);
             setIsLoading(false);
@@ -75,6 +79,8 @@ export default function AddressInput() {
             window.visualViewport?.addEventListener('resize', handleResize);
         };
     }, [address, addressDetail]);
+
+    // console.log(user)
 
     return isLoading ? (
         isComplete ? (

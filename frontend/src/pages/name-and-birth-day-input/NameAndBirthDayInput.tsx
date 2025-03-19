@@ -52,7 +52,7 @@ export default function NameAndBirthDayInput() {
         if (isComplete) {
             const timer = setTimeout(() => {
                 navigate('/');
-            }, 1500);
+            }, 2000);
 
             return () => clearTimeout(timer);
         }
@@ -109,7 +109,7 @@ export default function NameAndBirthDayInput() {
     };
 
     const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        
+
         const rawValue = e.target.value.replace(/[^0-9]/g, '');
         let formattedValue = '';
 
@@ -144,7 +144,7 @@ export default function NameAndBirthDayInput() {
                 {step === 3 && (
                     <InputField
                         label="생년월일"
-                        placeholder="생년월일"
+                        placeholder="YYYY-MM-DD"
                         value={user?.birthDate || ''}
                         onChange={handleBirthChange}
                         maxLength={10}
