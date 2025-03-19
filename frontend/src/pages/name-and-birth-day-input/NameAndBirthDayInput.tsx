@@ -109,15 +109,23 @@ export default function NameAndBirthDayInput() {
     };
 
     const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newValue = e.target.value.replace(/[^0-9]/g, '');
+        
+        const rawValue = e.target.value.replace(/[^0-9]/g, '');
+        let formattedValue = '';
 
-        if (newValue.length >= 7) {
-            newValue = `${newValue.slice(0, 3)}-${newValue.slice(3, 7)}-${newValue.slice(7)}`;
-        } else if (newValue.length >= 4) {
-            newValue = `${newValue.slice(0, 3)}-${newValue.slice(3)}`;
+        if (rawValue.length < 4) {
+            formattedValue = rawValue;
+        } else if (rawValue.length < 8) {
+            formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3)}`;
+        } else if (rawValue.length < 11) {
+            formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3, 7)}-${rawValue.slice(7)}`;
+        } else {
+            formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3, 7)}-${rawValue.slice(7, 11)}`;
         }
-        setUser((prevUser) => new UserModel({ ...prevUser, phoneNumber: newValue }));
-        if (newValue.length === 13) setStep(3);
+
+        setUser((prevUser) => new UserModel({ ...prevUser, phoneNumber: formattedValue }));
+        console.log(formattedValue.length)
+        if (formattedValue.length === 13) setStep(3);
     };
 
     return isLoading ? (
