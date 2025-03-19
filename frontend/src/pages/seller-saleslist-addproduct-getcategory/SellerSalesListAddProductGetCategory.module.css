@@ -1,15 +1,18 @@
 .page {
     height: 100%;
+    min-height: 100vh;
     background-color: #101012;
     display: flex;
     flex-direction: column;
 }
 
 .inputContainer {
-    position: relative;
+    position: fixed;
     display: flex;
     align-items: center;
-    margin-top: 1.1rem;
+    background-color: #101012;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
     width: 100%;
 }
 
@@ -24,6 +27,8 @@
 }
 
 .icon {
+    position: sticky;
+    top: 0px;
     margin-left: 1.5rem;
     font-size: 1.75rem;
 }
@@ -58,6 +63,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    margin-top: 6rem;
     padding: 1rem;
 }
 
@@ -81,10 +87,6 @@
     color: white;
     font-size: 16px;
     font-weight: bold;
-}
-
-.button {
-    /* transition: background-color 0.3s ease; */
 }
 
 .button:hover {
