@@ -77,7 +77,7 @@
     justify-content: center;
     align-items: start;
     gap: 3rem;
-    margin-bottom: 10rem;
+    margin-bottom: 5rem;
     overflow: visible;
 }
 
@@ -87,5 +87,8 @@
     margin-bottom: 2rem;
 }
 
-Footer {
+.spinnerContainer{
+    display: flex;
+    justify-content: center;
+    align-items: start;
 }

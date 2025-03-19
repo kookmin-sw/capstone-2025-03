@@ -7,9 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { usePackage } from '@/src/hooks/usePackage';
 import { useEffect, useState, useRef } from 'react';
 import LoadingSection from '@/src/components/layout/LoadingSection';
+import { Spinner } from '@chakra-ui/react';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     const navigate = useNavigate();
     const currentMenuIndex = 0;
     const { packages, getPackageList, hasMore, nextPage } = usePackage();
@@ -35,7 +37,8 @@ export default function Home() {
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting) {
-                    getPackageList();
+                    setIsLoadMoreLoading(true);
+                    getPackageList().finally(() => setIsLoadMoreLoading(false));
                 }
             },
             { threshold: 1.0 },
@@ -85,7 +88,15 @@ export default function Home() {
                         return <PackageItem key={index} pkg={pkg} />;
                     })}
                 </div>
-                {<div ref={loadMoreRef} style={{ height: '10px', backgroundColor: 'white' }} />}
+                <div ref={loadMoreRef} style={{ "height": "20px" }} />
+                {isLoadMoreLoading ? <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
+                    <Spinner
+                        color="#00A36C"
+                        borderWidth="0.6rem"
+                        animationDuration="0.8s"
+                        style={{ width: '6rem', height: '6rem' }}
+                    />
+                </div> : null}
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
