@@ -78,7 +78,11 @@ export default function SellerSalesListAddProductGetCategory() {
                     >
                         <div key={category.id} className={styles.categoryItem}>
                             <img
-                                src={category.thumbnail || "/images/seller/defaultimg.jpg"}
+                                src={
+                                    category.thumbnail !== 'NULL' && category.thumbnail
+                                        ? category.thumbnail
+                                        : '/images/seller/defaultimg.jpg'
+                                }
                                 alt={category.name || ''}
                                 className={styles.thumbnail}
                             />
