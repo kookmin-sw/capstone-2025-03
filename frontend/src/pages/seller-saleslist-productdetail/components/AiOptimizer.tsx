@@ -102,10 +102,7 @@ export default function AiOptimizer({ name, grade, amount }: AiOptimizerProps) {
         <Card>
             <Header>
                 <IconContainer>
-                    <img
-                        src="/src/assets/images/page/seller-saleslist-product-detail/ai_icon.png"
-                        alt="AI Icon"
-                    />
+                    <img src="/images/seller/ai_icon.png" alt="AI Icon" />
                 </IconContainer>
                 <Box>
                     <Title>AI 판매 최적화 기능</Title>
