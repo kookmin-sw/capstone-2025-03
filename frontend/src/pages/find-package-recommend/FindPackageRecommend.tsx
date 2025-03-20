@@ -52,15 +52,14 @@ export default function FindPackageRecommend() {
     // usePackage 안쓰고 독립적으로 fetch
     useEffect(() => {
         const fetchPackages = async () => {
-
             setIsLoading(true);
             const response = await getPackageListInService();
-            
+
             const filteredPackages = response?.results.filter(
                 (pkg) => pkg.industry === industry.id,
             );
 
-            console.log(filteredPackages)
+            console.log(filteredPackages);
 
             setMyPackages(filteredPackages || []);
             setIsLoading(false);
@@ -90,15 +89,16 @@ export default function FindPackageRecommend() {
                         <img className={styles.icon} src={industry.icon!} />
                     </div>
                 </div>
-                <div className={styles.packageLitView}>
+                <div className={styles.packageListView}>
                     {isLoading ? (
-                        <Spinner
-                            marginTop="18rem"
-                            color="#00A36C"
-                            borderWidth="0.6rem"
-                            animationDuration="0.8s"
-                            style={{ width: '6rem', height: '6rem' }}
-                        />
+                        <div className={styles.spinnerContainer} style={{ height: '20rem' }}>
+                            <Spinner
+                                color="#00A36C"
+                                borderWidth="0.6rem"
+                                animationDuration="0.8s"
+                                style={{ width: '6rem', height: '6rem' }}
+                            />
+                        </div>
                     ) : (
                         myPackages.map((pkg: PackageModel, index: number) => {
                             return <PackageItem key={index} pkg={pkg} />;

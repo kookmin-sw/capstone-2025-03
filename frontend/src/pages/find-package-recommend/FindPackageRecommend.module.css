@@ -79,3 +79,11 @@
 .icon {
     width: 5.4rem;
 }
+
+.spinnerContainer{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15rem;
+}
