@@ -1,5 +1,4 @@
 import styles from './SellerSalesListAddProductGetCategory.module.css';
-import defaultImg from '@/src/assets/images/page/seller-saleslist-addproduct-getcategory/defaultimg.jpg';
 import BackButtonForGetCategory from './components/BackButtonForGetCategory';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -79,7 +78,11 @@ export default function SellerSalesListAddProductGetCategory() {
                     >
                         <div key={category.id} className={styles.categoryItem}>
                             <img
-                                src={category.thumbnail || defaultImg}
+                                src={
+                                    category.thumbnail !== 'NULL' && category.thumbnail
+                                        ? category.thumbnail
+                                        : '/images/seller/defaultimg.jpg'
+                                }
                                 alt={category.name || ''}
                                 className={styles.thumbnail}
                             />

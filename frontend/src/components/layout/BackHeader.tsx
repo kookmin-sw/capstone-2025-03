@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import ArrowBack from '../../assets/images/header/arrow_back.png';
 import { useNavigate } from 'react-router-dom';
 
 const Header = styled.div`
@@ -27,7 +26,7 @@ export default function BackHeader() {
 
     return (
         <Header>
-            <BackButton src={ArrowBack} onClick={handleClick} />
+            <BackButton src="/images/seller/arrow_back.png" onClick={handleClick} />
         </Header>
     );
 }

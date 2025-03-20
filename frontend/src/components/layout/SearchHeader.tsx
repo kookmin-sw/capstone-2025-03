@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import ArrowBack from '../../assets/images/header/arrow_back.png';
 import { useNavigate } from 'react-router-dom';
 import SearchIconImage from '../../assets/images/header/search.png';
 
@@ -49,7 +48,7 @@ export default function SearchHeader({ text }: { text: string }) {
 
     return (
         <Header>
-            <BackButton src={ArrowBack} onClick={handleClick} />
+            <BackButton src="/images/seller/arrow_back.png" onClick={handleClick} />
             <SearchContainer>
                 <SearchIcon src={SearchIconImage} />
                 <SearchText>{text}</SearchText>

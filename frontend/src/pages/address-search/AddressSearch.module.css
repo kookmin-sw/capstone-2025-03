@@ -31,6 +31,7 @@
 .title {
     font-weight: bold;
     font-size: 24px;
+    color: black;
     white-space: nowrap;
     padding-left: 11rem;
     padding-right: 11rem;

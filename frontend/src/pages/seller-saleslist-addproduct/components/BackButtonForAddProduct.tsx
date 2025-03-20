@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import ArrowBack from '@/src/assets/images/page/seller-saleslist-addproduct-getcategory/arrow_back.png';
 import { useNavigate } from 'react-router-dom';
 
 const Button = styled.img`
@@ -14,5 +13,5 @@ export default function BackButtonForAddProduct() {
         navigate('/seller-saleslist');
     };
 
-    return <Button src={ArrowBack} onClick={handleClick} />;
+    return <Button src="/images/seller/arrow_back.png" onClick={handleClick} />;
 }

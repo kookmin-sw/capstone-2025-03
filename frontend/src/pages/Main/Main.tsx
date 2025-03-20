@@ -23,7 +23,7 @@ export default function Main() {
             </Text>
 
             <Image
-                src="/src/assets/images/page/Main/iPhone 12 Pro Max.png"
+                src="/images/login/iPhone 12 Pro Max.png"
                 alt="휴대폰 이미지"
                 className={styles.imageContainer}
             />
@@ -32,7 +32,7 @@ export default function Main() {
 
             <Button className={styles.kakaoLoginButton} onClick={handleKakaoLogin}>
                 <Image
-                    src="/src/assets/images/page/Main/kakaoIcon.png"
+                    src="/images/login/kakaoIcon.png"
                     alt="카카오 아이콘"
                     className={styles.kakaoIcon}
                 />
