@@ -62,11 +62,13 @@ export default function PackageDetail() {
             .filter(Boolean) as CategoryModel[];
         console.log(newMyCategories, '뉴카테고리');
         setMyCategories(newMyCategories);
+        
+        console.log(buyerProducts)
         const newMyProducts: BuyerProductModel[] = targetPackage.products
             .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
             .filter(Boolean) as BuyerProductModel[];
-        console.log(targetPackage.products);
-        setMyProducts(newMyProducts);
+            console.log(targetPackage.products); // productId 배열
+            setMyProducts(newMyProducts); 
     }, []);
 
     // Function
