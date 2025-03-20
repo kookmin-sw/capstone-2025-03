@@ -24,6 +24,7 @@ export default function Home() {
             if (packages.length < 1) {
                 const newPackages = await getPackageList();
                 if (newPackages) setIsLoading(false);
+                // console.log(newPackages)
             } else {
                 setIsLoading(false);
             }

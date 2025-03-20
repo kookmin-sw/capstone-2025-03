@@ -97,7 +97,7 @@ export default function PackageItem({ pkg }: PackageProps) {
             <ContentContainer>
                 <Title>{pkg.name}</Title>
                 <Description>{pkg.description}</Description>
-                <Price>{pkg.price}원</Price>
+                <Price>{pkg.price.toLocaleString()}원</Price>
                 <CategoryContainer>
                     <CategoryIcon src={WidgetImage} />
                     <CategoryText>{categoryPreview}</CategoryText>
