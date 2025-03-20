@@ -60,13 +60,14 @@
     height: 6.4rem;
 }
 
-.packageLitView {
+.packageListView {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 10rem;
+    align-items: start;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    overflow: visible;
 }
 
 .iconContainer {
