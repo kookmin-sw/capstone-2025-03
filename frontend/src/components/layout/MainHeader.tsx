@@ -26,12 +26,16 @@ const Icon = styled.img`
     width: 3.2rem;
 `;
 
+const handleClickNotificationButton = () => {
+    window.alert('준비 중입니다!');
+}
+
 export default function MainHeader() {
     return (
         <Header>
             <Logo src={LogoImage} />
             <Blank />
-            <Icon src={NotificationIconImage} />
+            <Icon src={NotificationIconImage} onClick={handleClickNotificationButton}/>
         </Header>
     );
 }

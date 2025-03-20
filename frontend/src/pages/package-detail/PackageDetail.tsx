@@ -81,19 +81,27 @@ export default function PackageDetail() {
     };
     const handleBuyConfirmButtonClick = async () => {
         setIsLoading(true);
+
+        if (!user) {
+            window.alert('유저 정보가 없습니다. 새로고침 해주세요!');
+            localStorage.removeItem('user');
+            setIsLoading(false);
+            return;
+        }
         if (!editingPackage) {
             setIsLoading(false);
             return;
         }
+        console.log(JSON.stringify(editingPackage));
         const newPackage: PackageModel | null = await createPackage(editingPackage);
         if (newPackage) {
-            await createOrder(
-                OrderModel.fromJson({
-                    userId: user?.userId,
-                    packageId: newPackage.id,
-                    createdAt: getCurrentTimeISO(),
-                }),
-            );
+            const newOrder = OrderModel.fromJson({
+                "user": 1,
+                "package": newPackage.id,
+                "created_at": getCurrentTimeISO(),
+            });
+            console.log(JSON.stringify(newOrder));
+            await createOrder(newOrder);
             setIsComplete(true);
         } else {
             setIsLoading(false);

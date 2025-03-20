@@ -1,5 +1,5 @@
 // UserContext.ts
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { UserModel } from '../models/UserModel';
 import {
     createUserInService,
@@ -27,6 +27,13 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 // Provider 컴포넌트
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<UserModel | null>(null);
+
+    useEffect(()=>{
+        const userDataInLocalStorage = localStorage.getItem('user');
+        if(userDataInLocalStorage){
+            setUser(UserModel.fromJson(JSON.parse(userDataInLocalStorage)));
+        }
+    }, []);
 
     // 사용자 생성 (회원가입 등)
     const createUser = async (newUser: UserModel) => {
