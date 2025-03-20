@@ -3,12 +3,14 @@ import styles from './FindPackageRecommend.module.css';
 import PackageItem from '@/src/components/ui/PackageItem';
 import { useLocation } from 'react-router-dom';
 import IndustryModel from '@/src/models/IndustryModel';
-import { usePackage } from '@/src/hooks/usePackage';
 import { useUser } from '@/src/contexts/UserContext';
+import { getPackageListInService } from '@/src/services/packageService';
+import { useEffect, useState } from 'react';
+import PackageModel from '@/src/models/PackageModel';
+import { Spinner } from '@chakra-ui/react';
 
 export default function FindPackageRecommend() {
     const { user } = useUser();
-    const { packages } = usePackage();
     const location = useLocation();
     const industry: IndustryModel = IndustryModel.fromJson(
         location.state?.selectedIndustry || { id: '', icon: '', name: '' },
@@ -43,7 +45,28 @@ export default function FindPackageRecommend() {
         { id: 27, comment: '레저 사업으로 여가를 즐기는 고객을 만족시켜보세요!' },
         { id: 28, comment: '스크린 스포츠 및 게임으로 색다른 재미를 제공하세요.' },
     ];
-    const myPackages = packages.filter((pkg) => pkg.industry === industry.id);
+
+    const [myPackages, setMyPackages] = useState<PackageModel[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    // usePackage 안쓰고 독립적으로 fetch
+    useEffect(() => {
+        const fetchPackages = async () => {
+
+            setIsLoading(true);
+            const response = await getPackageListInService();
+            
+            const filteredPackages = response?.results.filter(
+                (pkg) => pkg.industry === industry.id,
+            );
+
+            console.log(filteredPackages)
+
+            setMyPackages(filteredPackages || []);
+            setIsLoading(false);
+        };
+        fetchPackages();
+    }, [industry.id]);
 
     // return
     return (
@@ -68,9 +91,19 @@ export default function FindPackageRecommend() {
                     </div>
                 </div>
                 <div className={styles.packageLitView}>
-                    {myPackages.map((pkg, index) => {
-                        return <PackageItem key={index} pkg={pkg} />;
-                    })}
+                    {isLoading ? (
+                        <Spinner
+                            marginTop="18rem"
+                            color="#00A36C"
+                            borderWidth="0.6rem"
+                            animationDuration="0.8s"
+                            style={{ width: '6rem', height: '6rem' }}
+                        />
+                    ) : (
+                        myPackages.map((pkg: PackageModel, index: number) => {
+                            return <PackageItem key={index} pkg={pkg} />;
+                        })
+                    )}
                 </div>
                 <div style={{ height: '10rem' }} />
             </div>

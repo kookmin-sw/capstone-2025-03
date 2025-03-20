@@ -90,7 +90,7 @@ export default function PackageItem({ pkg }: PackageProps) {
         setEditingPackage(null);
         navigate('/package-detail', { state: { pkg: pkg.toJson() } });
     };
-
+    
     return (
         <Item onClick={handlePackageItemClick}>
             <Thumbnail src={pkg.thumbnail ?? undefined} />
