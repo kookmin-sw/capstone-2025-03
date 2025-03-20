@@ -144,7 +144,7 @@ export default function PackageDetail() {
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    {editingPackage && <PackageItem pkg={editingPackage} />}
+                    {editingPackage && <PackageItem  pkg={editingPackage} />}
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>구성상품</p>
