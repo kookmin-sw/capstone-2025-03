@@ -45,6 +45,8 @@ export default function PackageDetail() {
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    // console.log(myPackage)
+    // console.log(categories)
 
     // UseEffect
     useEffect(() => {
@@ -58,10 +60,12 @@ export default function PackageDetail() {
         const newMyCategories: CategoryModel[] = targetPackage.categories
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
+        console.log(newMyCategories, '뉴카테고리');
         setMyCategories(newMyCategories);
         const newMyProducts: BuyerProductModel[] = targetPackage.products
             .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
             .filter(Boolean) as BuyerProductModel[];
+        console.log(targetPackage.products);
         setMyProducts(newMyProducts);
     }, []);
 
@@ -96,9 +100,9 @@ export default function PackageDetail() {
         const newPackage: PackageModel | null = await createPackage(editingPackage);
         if (newPackage) {
             const newOrder = OrderModel.fromJson({
-                "user": 1,
-                "package": newPackage.id,
-                "created_at": getCurrentTimeISO(),
+                user: 1,
+                package: newPackage.id,
+                created_at: getCurrentTimeISO(),
             });
             console.log(JSON.stringify(newOrder));
             await createOrder(newOrder);
@@ -217,7 +221,17 @@ export default function PackageDetail() {
                 </div>
                 <div style={{ height: '20rem' }} />
             </div>
-            <DefaultButton event={handleBuyButtonClick} isActive={true} text="한번에 구매하기" />
+            <DefaultButton
+                event={() => {
+                    if (isEdit) {
+                        setIsEdit(false);
+                    } else {
+                        handleBuyButtonClick();
+                    }
+                }}
+                isActive={true}
+                text={isEdit ? '완료' : '한번에 구매하기'}
+            />
 
             {/* Modal */}
             {isModalOpen && (
