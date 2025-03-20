@@ -46,6 +46,16 @@
     padding: 2rem;
 }
 
+.industryItem:active {
+    background-color: #4a4a4a;
+    transform: scale(0.98);
+}
+
+.industryItem:hover {
+    background-color: #4a4a4a;
+    transform: scale(0.98);
+}
+
 .industryItemIcon {
     width: 70%;
 }

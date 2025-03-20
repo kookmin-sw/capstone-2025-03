@@ -90,14 +90,14 @@ export default function PackageItem({ pkg }: PackageProps) {
         setEditingPackage(null);
         navigate('/package-detail', { state: { pkg: pkg.toJson() } });
     };
-
+    
     return (
         <Item onClick={handlePackageItemClick}>
             <Thumbnail src={pkg.thumbnail ?? undefined} />
             <ContentContainer>
                 <Title>{pkg.name}</Title>
                 <Description>{pkg.description}</Description>
-                <Price>{pkg.price}원</Price>
+                <Price>{pkg.price.toLocaleString()}원</Price>
                 <CategoryContainer>
                     <CategoryIcon src={WidgetImage} />
                     <CategoryText>{categoryPreview}</CategoryText>

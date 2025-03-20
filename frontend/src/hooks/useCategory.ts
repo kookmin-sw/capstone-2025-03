@@ -20,7 +20,6 @@ export const useCategory = () => {
         const newCategoryList = useLocalData
             ? categoryData.map((category) => CategoryModel.fromJson(category))
             : ((await getCategoryListInService()) ?? []);
-
         setCategories(newCategoryList);
         return newCategoryList;
     };

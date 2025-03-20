@@ -24,6 +24,7 @@ export default function Home() {
             if (packages.length < 1) {
                 const newPackages = await getPackageList();
                 if (newPackages) setIsLoading(false);
+                // console.log(newPackages)
             } else {
                 setIsLoading(false);
             }
@@ -32,7 +33,7 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        if (!hasMore || !nextPage || !loadMoreRef.current) return;
+        if (!hasMore || !nextPage || !loadMoreRef.current || isLoadMoreLoading) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -47,7 +48,7 @@ export default function Home() {
         observer.observe(loadMoreRef.current);
 
         return () => observer.disconnect();
-    }, [hasMore, nextPage]);
+    }, [hasMore, nextPage, isLoadMoreLoading]);
 
     // Function
     const handleClickFindPackageButton = () => {
