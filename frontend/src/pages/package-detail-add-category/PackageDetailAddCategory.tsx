@@ -25,7 +25,7 @@ export default function PackageDetailAddCategory() {
     const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(
         editingPackage?.categories || [],
     );
-
+    console.log(categories);
     // useEffect
     useEffect(() => {
         setMyCategories(
@@ -68,8 +68,10 @@ export default function PackageDetailAddCategory() {
                                     <img
                                         className={styles.thumbnail}
                                         src={
-                                            category.thumbnail ||
-                                            'https://static.cdn.kmong.com/gigs/F1zfb1718452618.jpg'
+                                            category.thumbnail === 'NULL' ||
+                                            category.thumbnail === null
+                                                ? 'https://static.cdn.kmong.com/gigs/F1zfb1718452618.jpg'
+                                                : category.thumbnail
                                         }
                                     />
                                     <p className={styles.name}>{category.name}</p>

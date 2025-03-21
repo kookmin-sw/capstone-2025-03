@@ -1,6 +1,5 @@
 import BackHeader from '@/src/components/layout/BackHeader';
 import styles from './FindPackageSelectIndustry.module.css';
-import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import IndustryModel from '@/src/models/IndustryModel';
@@ -19,9 +18,11 @@ export default function FindPackageSelectIndustry() {
     };
 
     // Function: 확인 버튼 클릭
-    const handleConfirmButtonClick = () => {
-        if (currentId === null) return;
-        const selectedIndustry = industries.find((item) => item.id === currentId);
+    const handleConfirmButtonClick = (id: number | null) => {
+
+        const selectedIndustry = industries.find((item) => item.id === (id ??currentId));
+        if (!selectedIndustry) return;
+
         navigate('/find-package-recommend', {
             state: { selectedIndustry: selectedIndustry?.toJson() },
         });
@@ -42,6 +43,7 @@ export default function FindPackageSelectIndustry() {
                                 className={styles.industryItem}
                                 onClick={() => {
                                     handleItemClick(industry.id);
+                                    handleConfirmButtonClick(industry.id)
                                 }}
                                 style={{
                                     border: `solid 1px ${industry.id === currentId ? '#00A36C' : '#7F7F89'}`,
@@ -62,11 +64,6 @@ export default function FindPackageSelectIndustry() {
                 </div>
                 <div style={{ height: '30rem' }} />
             </div>
-            <DefaultButton
-                event={handleConfirmButtonClick}
-                isActive={currentId !== 0}
-                text="확인"
-            />
         </div>
     );
 }
