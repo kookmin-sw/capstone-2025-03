@@ -1,11 +1,8 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
-  "compilerOptions": {
-    "noUnusedLocals": false,  // ❌ 사용하지 않는 변수 무시
-    "noUnusedParameters": false // ❌ 사용되지 않는 함수 매개변수 무시
-  }
+    "files": [],
+    "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+    "compilerOptions": {
+        "noUnusedLocals": false, // ❌ 사용하지 않는 변수 무시
+        "noUnusedParameters": false // ❌ 사용되지 않는 함수 매개변수 무시
+    }
 }

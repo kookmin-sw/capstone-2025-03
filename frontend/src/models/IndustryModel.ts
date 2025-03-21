@@ -19,17 +19,17 @@ export default class IndustryModel {
 
     static fromJson(jsonData: any): IndustryModel {
         return new IndustryModel({
-            id: jsonData["id"],
-            icon: jsonData["icon"],
-            name: jsonData["name"],
+            id: jsonData['id'],
+            icon: jsonData['icon'],
+            name: jsonData['name'],
         });
     }
 
     toJson(): any {
         return {
-            "id": this.id,
-            "icon": this.icon,
-            "name": this.name,
+            id: this.id,
+            icon: this.icon,
+            name: this.name,
         };
     }
 }

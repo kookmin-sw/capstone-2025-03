@@ -1,0 +1,22 @@
+.selectedButton {
+    background-color: #ffb978; /* 선택된 버튼 색상 */
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin: 5px
+}
+
+.defaultButton {
+    background-color: #ffedd5; /* 연한 주황색 */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px; /* 둥근 모양 */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin: 10px; /* 버튼 간 간격 */
+}

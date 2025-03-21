@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
-import MenuHomeIconImage from "../../assets/images/footer/menu_home_icon.png";
-import MenuHomeIconSelectedImage from "../../assets/images/footer/menu_home_icon_selected.png";
-import MenuSellIconImage from "../../assets/images/footer/menu_sell_icon.png";
-import MenuSellIconSelectedImage from "../../assets/images/footer/menu_sell_icon_selected.png";
-import { useNavigate } from "react-router-dom";
+import styled from '@emotion/styled';
+import MenuHomeIconImage from '../../assets/images/footer/menu_home_icon.png';
+import MenuHomeIconSelectedImage from '../../assets/images/footer/menu_home_icon_selected.png';
+import MenuSellIconImage from '../../assets/images/footer/menu_sell_icon.png';
+import MenuSellIconSelectedImage from '../../assets/images/footer/menu_sell_icon_selected.png';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = styled.div`
     position: fixed;
@@ -14,10 +14,10 @@ const Footer = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #18171D;
+    background-color: #18171d;
     border-radius: 0.8rem 0.8rem 0 0;
     border-top: 1px solid #646464;
-    padding: 0.8rem 2rem
+    padding: 0.8rem 2rem;
 `;
 
 const Menu = styled.div`
@@ -38,14 +38,14 @@ const Text = styled.p`
 `;
 
 type MenuFooterProps = {
-    currentMenuIndex: number
-}
+    currentMenuIndex: number;
+};
 
 type MenuItem = {
-    text: string,
-    icon: string,
-    iconSelected: string
-}
+    text: string;
+    icon: string;
+    iconSelected: string;
+};
 
 export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
     const navigate = useNavigate();
@@ -53,24 +53,24 @@ export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
         {
             text: '홈',
             icon: MenuHomeIconImage,
-            iconSelected: MenuHomeIconSelectedImage
+            iconSelected: MenuHomeIconSelectedImage,
         },
         {
             text: '판매',
             icon: MenuSellIconImage,
-            iconSelected: MenuSellIconSelectedImage
-        }
-    ]
+            iconSelected: MenuSellIconSelectedImage,
+        },
+    ];
 
-    const handleClick =  (currentIndex: number) => {
+    const handleClick = (currentIndex: number) => {
         let path = '';
-        if(currentIndex === 0){
+        if (currentIndex === 0) {
             path = '/home';
-        }else if(currentIndex === 1){
-            path = '/seller-saleslist'
+        } else if (currentIndex === 1) {
+            path = '/seller-saleslist';
         }
         navigate(path);
-    }
+    };
 
     return (
         <Footer>
@@ -78,12 +78,10 @@ export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
                 return (
                     <Menu key={index} onClick={() => handleClick(index)}>
                         <Icon src={index == currentMenuIndex ? menu.iconSelected : menu.icon} />
-                        <Text>
-                            {menu.text}
-                        </Text>
+                        <Text>{menu.text}</Text>
                     </Menu>
-                )
+                );
             })}
         </Footer>
-    )
+    );
 }

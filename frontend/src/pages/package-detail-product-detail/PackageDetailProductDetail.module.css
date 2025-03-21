@@ -1,7 +1,7 @@
 .page {
     padding-top: 8rem;
     min-height: 100vh;
-    background-color: #18171D;
+    background-color: #18171d;
     display: flex;
     flex-direction: column;
 }
@@ -13,33 +13,33 @@
     -ms-overflow-style: none;
 }
 
-.thumbnail{
+.thumbnail {
     width: 100%;
     height: auto;
     margin-bottom: 3rem;
 }
 
-.category{
+.category {
     margin-left: 2rem;
     font-size: 1.4rem;
-    color: #7F7F89;
+    color: #7f7f89;
     margin-bottom: 1rem;
 }
 
-.product{
+.product {
     margin-left: 2rem;
     font-size: 1.6rem;
     margin-bottom: 1rem;
 }
 
-.gradeAndAmount{
+.gradeAndAmount {
     margin-left: 2rem;
     font-size: 1.4rem;
-    color: #7F7F89;
+    color: #7f7f89;
     margin-bottom: 3rem;
 }
 
-.price{
+.price {
     margin-left: 2rem;
     font-size: 2.4rem;
     font-weight: bold;

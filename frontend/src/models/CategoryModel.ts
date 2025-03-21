@@ -23,27 +23,27 @@ export default class CategoryModel {
 
     static fromJson(jsonData: any): CategoryModel {
         return new CategoryModel({
-            id: jsonData["id"],
-            industries: jsonData["industries"] || [],
-            thumbnail: jsonData["thumbnail"],
-            name: jsonData["name"],
+            id: jsonData['id'],
+            industries: jsonData['industries'] || [],
+            thumbnail: jsonData['thumbnail'],
+            name: jsonData['name'],
         });
     }
 
     toJson(): any {
         return {
-            "id": this.id,
-            "industries": this.industries,
-            "thumbnail": this.thumbnail,
-            "name": this.name,
+            id: this.id,
+            industries: this.industries,
+            thumbnail: this.thumbnail,
+            name: this.name,
         };
     }
 
     toJsonWithoutId(): any {
         return {
-            "industries": this.industries,
-            "thumbnail": this.thumbnail,
-            "name": this.name,
+            industries: this.industries,
+            thumbnail: this.thumbnail,
+            name: this.name,
         };
     }
 }

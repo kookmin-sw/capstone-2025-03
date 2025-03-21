@@ -1,12 +1,11 @@
-import styled from "@emotion/styled";
-import ArrowBack from "../../assets/images/header/arrow_back.png";
-import { useNavigate } from "react-router-dom";
+import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 const Header = styled.div`
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #18171D;
+    background-color: #18171d;
     padding: 2rem;
     display: flex;
     flex-direction: row;
@@ -23,9 +22,11 @@ export default function BackHeader() {
 
     const handleClick = () => {
         navigate(-1);
-    }
+    };
 
-    return (<Header>
-        <BackButton src={ArrowBack} onClick={handleClick} />
-    </Header>)
+    return (
+        <Header>
+            <BackButton src="/images/seller/arrow_back.png" onClick={handleClick} />
+        </Header>
+    );
 }

@@ -16,7 +16,7 @@ export default class PackageModel {
         name = null,
         thumbnail = null,
         description = null,
-        price = 0
+        price = 0,
     }: {
         id?: number | null;
         industry?: number | null;
@@ -39,39 +39,39 @@ export default class PackageModel {
 
     static fromJson(jsonData: any): PackageModel {
         return new PackageModel({
-            id: jsonData["id"],
-            industry: jsonData["industry"],
-            categories: jsonData["categories"] || [],
-            products: jsonData["products"] || [],
-            name: jsonData["name"],
-            thumbnail: jsonData["thumbnail"],
-            description: jsonData["description"],
-            price: jsonData["price"]
+            id: jsonData['id'],
+            industry: jsonData['industry'],
+            categories: jsonData['categories'] || [],
+            products: jsonData['products'] || [],
+            name: jsonData['name'],
+            thumbnail: jsonData['thumbnail'],
+            description: jsonData['description'],
+            price: jsonData['price'],
         });
     }
 
     toJson(): any {
         return {
-            "id": this.id,
-            "industry": this.industry,
-            "categories": this.categories,
-            "products": this.products,
-            "name": this.name,
-            "thumbnail": this.thumbnail,
-            "description": this.description,
-            "price": this.price
+            id: this.id,
+            industry: this.industry,
+            categories: this.categories,
+            products: this.products,
+            name: this.name,
+            thumbnail: this.thumbnail,
+            description: this.description,
+            price: this.price,
         };
     }
 
     toJsonWithoutId(): any {
         return {
-            "industry": this.industry,
-            "categories": this.categories,
-            "products": this.products,
-            "name": this.name,
-            "thumbnail": this.thumbnail,
-            "description": this.description,
-            "price": this.price
+            industry: this.industry,
+            categories: this.categories,
+            products: this.products,
+            name: this.name,
+            thumbnail: this.thumbnail,
+            description: this.description,
+            price: this.price,
         };
     }
 }
