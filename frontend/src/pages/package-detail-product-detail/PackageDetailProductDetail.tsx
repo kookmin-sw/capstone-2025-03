@@ -1,9 +1,9 @@
-import BackHeader from "@/src/components/layout/BackHeader";
-import styles from "./PackageDetailProductDetail.module.css";
-import DefaultButton from "@/src/components/ui/DefaultButton";
-import { useLocation, useNavigate } from "react-router-dom";
-import BuyerProductModel from "@/src/models/BuyerProductModel";
-import { useCategory } from "@/src/hooks/useCategory";
+import BackHeader from '@/src/components/layout/BackHeader';
+import styles from './PackageDetailProductDetail.module.css';
+import DefaultButton from '@/src/components/ui/DefaultButton';
+import { useLocation, useNavigate } from 'react-router-dom';
+import BuyerProductModel from '@/src/models/BuyerProductModel';
+import { useCategory } from '@/src/hooks/useCategory';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -15,8 +15,8 @@ export default function PackageDetailProductDetail() {
 
     // Function
     const handleButtonClick = () => {
-        navitgate(-1)
-    }
+        navitgate(-1);
+    };
 
     return (
         <div className={styles.page}>
@@ -26,18 +26,14 @@ export default function PackageDetailProductDetail() {
                 <p className={styles.category}>
                     {categories.find((category) => category.id === product.category)?.name}
                 </p>
-                <p className={styles.product}>
-                    {product.name}
-                </p>
+                <p className={styles.product}>{product.name}</p>
                 <p className={styles.gradeAndAmount}>
                     {product.grade}등급 ∙ {product.quantity}개
                 </p>
-                <p className={styles.price}>
-                    {product.price}원
-                </p>
-                <div style={{'height': '20rem'}}/>
+                <p className={styles.price}>{product.price}원</p>
+                <div style={{ height: '20rem' }} />
             </div>
-            <DefaultButton event={handleButtonClick} isActive={true} text="확인"/>
+            <DefaultButton event={handleButtonClick} isActive={true} text="확인" />
         </div>
-    )
+    );
 }

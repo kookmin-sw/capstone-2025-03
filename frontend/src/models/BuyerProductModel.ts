@@ -26,7 +26,7 @@ export default class BuyerProductModel {
         buyer = null,
         purchaseDate = null,
         description = null,
-        salesStatus = null
+        salesStatus = null,
     }: {
         id?: number | null;
         images?: string[];
@@ -59,54 +59,54 @@ export default class BuyerProductModel {
 
     static fromJson(jsonData: any): BuyerProductModel {
         return new BuyerProductModel({
-            id: jsonData["id"],
-            images: jsonData["images"] || [],
-            category: jsonData["category"],
-            name: jsonData["name"],
-            grade: jsonData["grade"],
-            quantity: jsonData["quantity"],
-            price: jsonData["price"],
-            seller: jsonData["seller"],
-            uploadDate: jsonData["upload_date"],
-            buyer: jsonData["buyer"],
-            purchaseDate: jsonData["purchase_date"],
-            description: jsonData["description"],
-            salesStatus: jsonData["sales_status"]
+            id: jsonData['id'],
+            images: jsonData['images'] || [],
+            category: jsonData['category'],
+            name: jsonData['name'],
+            grade: jsonData['grade'],
+            quantity: jsonData['quantity'],
+            price: jsonData['price'],
+            seller: jsonData['seller'],
+            uploadDate: jsonData['upload_date'],
+            buyer: jsonData['buyer'],
+            purchaseDate: jsonData['purchase_date'],
+            description: jsonData['description'],
+            salesStatus: jsonData['sales_status'],
         });
     }
 
     toJson(): any {
         return {
-            "id": this.id,
-            "images": this.images,
-            "category": this.category,
-            "name": this.name,
-            "grade": this.grade,
-            "quantity": this.quantity,
-            "price": this.price,
-            "seller": this.seller,
-            "upload_date": this.uploadDate,
-            "buyer": this.buyer,
-            "purchase_date": this.purchaseDate,
-            "description": this.description,
-            "sales_status": this.salesStatus
+            id: this.id,
+            images: this.images,
+            category: this.category,
+            name: this.name,
+            grade: this.grade,
+            quantity: this.quantity,
+            price: this.price,
+            seller: this.seller,
+            upload_date: this.uploadDate,
+            buyer: this.buyer,
+            purchase_date: this.purchaseDate,
+            description: this.description,
+            sales_status: this.salesStatus,
         };
     }
 
     toJsonWithoutId(): any {
         return {
-            "images": this.images,
-            "category": this.category,
-            "name": this.name,
-            "grade": this.grade,
-            "quantity": this.quantity,
-            "price": this.price,
-            "seller": this.seller,
-            "upload_date": this.uploadDate,
-            "buyer": this.buyer,
-            "purchase_date": this.purchaseDate,
-            "description": this.description,
-            "sales_status": this.salesStatus
+            images: this.images,
+            category: this.category,
+            name: this.name,
+            grade: this.grade,
+            quantity: this.quantity,
+            price: this.price,
+            seller: this.seller,
+            upload_date: this.uploadDate,
+            buyer: this.buyer,
+            purchase_date: this.purchaseDate,
+            description: this.description,
+            sales_status: this.salesStatus,
         };
     }
 }

@@ -1,8 +1,8 @@
-import axios from "axios";
-import CategoryModel from "../models/CategoryModel";
-import ProductModel from "../models/ProductModel";
+import axios from 'axios';
+import CategoryModel from '../models/CategoryModel';
+import ProductModel from '../models/ProductModel';
 
-const API_BASE_URL = "https://restart-s4b8.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_BASE_URL;
 
 /**
  * 배치 API: categoryIds와 productIds를 기반으로 카테고리 및 상품 데이터를 가져옴.
@@ -11,21 +11,21 @@ const API_BASE_URL = "https://restart-s4b8.onrender.com";
  * @returns {Promise<{ categories: CategoryModel[]; products: ProductModel[] }>}
  */
 export const getCategoriesAndProductsInBatch = async (
-  categoryIds: number[],
-  productIds: number[]
+    categoryIds: number[],
+    productIds: number[],
 ): Promise<{ categories: CategoryModel[]; products: ProductModel[] }> => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}`, {
-      categoryIds,
-      productIds,
-    });
+    try {
+        const response = await axios.post(`${API_BASE_URL}`, {
+            categoryIds,
+            productIds,
+        });
 
-    return {
-      categories: response.data.categories.map((c: any) => CategoryModel.fromJson(c)),
-      products: response.data.products.map((p: any) => ProductModel.fromJson(p)),
-    };
-  } catch (error) {
-    console.error("Error fetching batch categories and products:", error);
-    throw error;
-  }
+        return {
+            categories: response.data.categories.map((c: any) => CategoryModel.fromJson(c)),
+            products: response.data.products.map((p: any) => ProductModel.fromJson(p)),
+        };
+    } catch (error) {
+        console.error('Error fetching batch categories and products:', error);
+        throw error;
+    }
 };

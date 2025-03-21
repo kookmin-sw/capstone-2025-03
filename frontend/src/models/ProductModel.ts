@@ -26,7 +26,7 @@ export default class ProductModel {
         buyerId = null,
         purchaseDate = null,
         description = null,
-        salesStatus = null
+        salesStatus = null,
     }: {
         id?: number | null;
         images?: string[];
@@ -71,7 +71,7 @@ export default class ProductModel {
             buyerId: jsonData.buyerId,
             purchaseDate: jsonData.purchaseDate,
             description: jsonData.description,
-            salesStatus: jsonData.salesStatus
+            salesStatus: jsonData.salesStatus,
         });
     }
 
@@ -89,7 +89,7 @@ export default class ProductModel {
             buyerId: this.buyerId,
             purchaseDate: this.purchaseDate,
             description: this.description,
-            salesStatus: this.salesStatus
+            salesStatus: this.salesStatus,
         };
     }
 }

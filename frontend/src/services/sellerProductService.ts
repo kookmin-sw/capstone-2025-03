@@ -1,24 +1,22 @@
-import axios from "axios";
-import SellerProductModel from "../models/SellerProductModel";
+import axios from 'axios';
+import SellerProductModel from '../models/SellerProductModel';
 
-const API_BASE_URL = "https://django-uxvt.onrender.com";
-const IMAGE_BASE_URL = "https://image-535482967924.asia-northeast1.run.app";
-// const AI_BASE_URL = "https://fastapi-lokg.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_BASE_URL;
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
+// const AI_BASE_URL = import.meta.env.VITE_AI_BASE_URL;
 /**
  * 상품을 생성하고 서버에 저장합니다.
  * @param {ProductModel} product - 생성할 상품 객체
  * @returns {Promise<void>}
  */
 
-export const createProductInService = async (
-  product: SellerProductModel
-): Promise<void> => {
-  try {
-    await axios.post(`${API_BASE_URL}/products/`, product.toJson());
-  } catch (error) {
-    console.error("Error creating product:", error);
-    throw error;
-  }
+export const createProductInService = async (product: SellerProductModel): Promise<void> => {
+    try {
+        await axios.post(`${API_BASE_URL}/products/`, product.toJson());
+    } catch (error) {
+        console.error('Error creating product:', error);
+        throw error;
+    }
 };
 
 /**
@@ -26,36 +24,34 @@ export const createProductInService = async (
  * @param {File} file
  * @returns {Promise<string>}
  */
-export const uploadProductImageInService = async (
-  file: File
-): Promise<string | null> => {
-  const formData = new FormData();
-  formData.append("image", file);
-  try {
-    const response = await axios.post(`${IMAGE_BASE_URL}/upload/`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data.image_url;
-  } catch (error) {
-    console.error("Error uploading product image:", error);
-    throw error;
-  }
+export const uploadProductImageInService = async (file: File): Promise<string | null> => {
+    const formData = new FormData();
+    formData.append('image', file);
+    try {
+        const response = await axios.post(`${IMAGE_BASE_URL}/upload/`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data.image_url;
+    } catch (error) {
+        console.error('Error uploading product image:', error);
+        throw error;
+    }
 };
 
 // 특정 사용자의 판매 상품들 가져오기
 export const getUserProductListInService = async (id: number): Promise<SellerProductModel[]> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/products/`, {params: {seller: id}})
-    return response.data.results;
-  } catch (error) {
-    console.error("Error getting selling products: ", error)
-    throw error
-  }
-}
-
-
+    try {
+        const response = await axios.get(`${API_BASE_URL}/products/`, {
+            params: { seller: id },
+        });
+        return response.data.results;
+    } catch (error) {
+        console.error('Error getting selling products: ', error);
+        throw error;
+    }
+};
 
 /**
  * 특정 productId로 서버에서 상품 데이터를 가져옵니다.
@@ -63,15 +59,15 @@ export const getUserProductListInService = async (id: number): Promise<SellerPro
  * @returns {Promise<ProductModel | null>}
  */
 export const getProductInService = async (
-  productId: string
+    productId: string,
 ): Promise<SellerProductModel | null> => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/${productId}`);
-    return SellerProductModel.fromJson(response.data);
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return null;
-  }
+    try {
+        const response = await axios.get(`${API_BASE_URL}/${productId}`);
+        return SellerProductModel.fromJson(response.data);
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        return null;
+    }
 };
 
 /**
@@ -81,15 +77,15 @@ export const getProductInService = async (
  * @returns {Promise<void>}
  */
 export const updateProductInService = async (
-  productId: string,
-  updatedData: Partial<SellerProductModel>
+    productId: string,
+    updatedData: Partial<SellerProductModel>,
 ): Promise<void> => {
-  try {
-    await axios.put(`${API_BASE_URL}/${productId}`, updatedData);
-  } catch (error) {
-    console.error("Error updating product:", error);
-    throw error;
-  }
+    try {
+        await axios.put(`${API_BASE_URL}/${productId}`, updatedData);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        throw error;
+    }
 };
 
 /**
@@ -97,15 +93,13 @@ export const updateProductInService = async (
  * @param {string} productId - 삭제할 상품의 ID
  * @returns {Promise<void>}
  */
-export const deleteProductInService = async (
-  productId: string
-): Promise<void> => {
-  try {
-    await axios.delete(`${API_BASE_URL}/${productId}`);
-  } catch (error) {
-    console.error("Error deleting product:", error);
-    throw error;
-  }
+export const deleteProductInService = async (productId: string): Promise<void> => {
+    try {
+        await axios.delete(`${API_BASE_URL}/${productId}`);
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        throw error;
+    }
 };
 
 // AI 가 예측한 적정 판매가격을 반환

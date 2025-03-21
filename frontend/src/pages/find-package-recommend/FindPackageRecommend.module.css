@@ -1,7 +1,7 @@
 .page {
     padding-top: 8rem;
     min-height: 100vh;
-    background-color: #18171D;
+    background-color: #18171d;
     display: flex;
     flex-direction: column;
 }
@@ -48,10 +48,10 @@
 
 .description {
     font-size: 1.6rem;
-    color: #7F7F89;
+    color: #7f7f89;
 }
 
-.blank{
+.blank {
     flex-grow: 1;
 }
 
@@ -60,22 +60,30 @@
     height: 6.4rem;
 }
 
-.packageLitView{
+.packageListView {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 10rem;
+    align-items: start;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    overflow: visible;
 }
 
-.iconContainer{
+.iconContainer {
     padding: 1.5rem;
     border-radius: 100rem;
-    background-color: rgb(0, 163, 108, 0.5)
-    ;
+    background-color: rgb(0, 163, 108, 0.5);
 }
 
-.icon{
+.icon {
     width: 5.4rem;
+}
+
+.spinnerContainer{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15rem;
 }
