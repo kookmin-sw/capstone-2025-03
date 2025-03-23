@@ -38,6 +38,13 @@
     cursor: pointer;
 }
 
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
 .footerBar {
     position: fixed;
     width: 100vw;
