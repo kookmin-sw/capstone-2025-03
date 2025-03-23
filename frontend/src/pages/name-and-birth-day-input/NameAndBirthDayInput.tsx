@@ -4,20 +4,20 @@ import LoadingSection from '@/src/components/layout/LoadingSection';
 import RegisterCompleteSection from '../address-input/components/RegisterCompleteSection';
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getKakaoAccessToken, getKakaoUserInfo } from '@/src/services/userService';
+import { useNavigate } from 'react-router-dom';
 import { UserModel } from '@/src/models/UserModel';
 import { useUser } from '@/src/contexts/UserContext';
+import { useKakaoLogin } from '@/src/hooks/useKakaoLogin';
 
 export default function NameAndBirthDayInput() {
     const navigate = useNavigate();
-    const { user, setUser, loginUser } = useUser();
-    const [searchParams] = useSearchParams();
-    const code = searchParams.get('code');
+
+    const { user, setUser } = useUser();
+    const {isLoading, isComplete} = useKakaoLogin(() => navigate("/"))
+
     const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
     const [visibleHeight, setVisibleHeight] = useState<number>(window.innerHeight);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isComplete, setIsComplete] = useState<boolean>(false);
+
 
     // 버튼 비활성화 조건
     const whenNameisNull = !user?.name;
@@ -29,59 +29,14 @@ export default function NameAndBirthDayInput() {
         3: '생년월일을 입력해주세요',
     }[step];
 
-    // 이미 회원일 시 홈으로 이동
-    const tryLogin = async (kakaoId: number) => {
-        try {
-            const responseData = await loginUser(kakaoId);
-            if (responseData) {
-                setIsComplete(true);
-            } else {
-                setIsLoading(false);
-            }
-        } catch (error) {
-            console.log('회원가입 안 되어 있음', error);
-        }
-    };
-
     // 액세스 토큰으로 사용자 정보 가져옴
     useEffect(() => {
-        if (!code) return;
-
-        let isMounted = true;
-
-        if (isComplete) {
-            const timer = setTimeout(() => {
-                navigate('/');
-            }, 2000);
-
-            return () => clearTimeout(timer);
-        }
-
-        getKakaoAccessToken(code)
-            .then(async (accessToken) => {
-                console.log('액세스 토큰: ', accessToken);
-                const response = await getKakaoUserInfo(accessToken);
-
-                await tryLogin(response.kakaoId);
-
-                if (isMounted) {
-                    setUser(
-                        new UserModel({
-                            name: response.nickname,
-                            kakaoId: response.kakaoId,
-                            profileImage: response.profileImage,
-                            kakaoEmail: response.email,
-                            createDate: new Date().toISOString(),
-                        }),
-                    );
-                }
-            })
-            .catch((error) => console.error('카카오 로그인 오류:', error));
 
         // 세션스토리지에 이름 저장
         if (user?.name) {
             sessionStorage.setItem('name', user.name);
         }
+
         const handleResize = () => {
             if (window.visualViewport) {
                 setVisibleHeight(window.visualViewport.height);
@@ -90,10 +45,11 @@ export default function NameAndBirthDayInput() {
         window.visualViewport?.addEventListener('resize', handleResize);
         return () => {
             window.visualViewport?.addEventListener('resize', handleResize);
-            isMounted = false;
         };
-    }, [code, isComplete]);
 
+    }, [user?.name]);
+
+    // 생년월일 양식
     const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[^0-9]/g, '');
         let formattedValue = '';
@@ -108,8 +64,8 @@ export default function NameAndBirthDayInput() {
         setUser((prevUser) => new UserModel({ ...prevUser, birthDate: formattedValue }));
     };
 
+    // 전화번호 양식
     const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         const rawValue = e.target.value.replace(/[^0-9]/g, '');
         let formattedValue = '';
 
