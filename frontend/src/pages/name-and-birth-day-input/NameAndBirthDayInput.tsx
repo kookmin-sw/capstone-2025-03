@@ -3,17 +3,20 @@ import InputField from './components/InputField';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import RegisterCompleteSection from '../address-input/components/RegisterCompleteSection';
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserModel } from '@/src/models/UserModel';
 import { useUser } from '@/src/contexts/UserContext';
 import { useKakaoLogin } from '@/src/hooks/useKakaoLogin';
+import { useUserInputHandlers } from '@/src/hooks/useInputFormat';
 
 export default function NameAndBirthDayInput() {
     const navigate = useNavigate();
 
     const { user, setUser } = useUser();
     const {isLoading, isComplete} = useKakaoLogin(() => navigate("/"))
+
+    const {handleBirthChange, handlePhoneNumberChange} = useUserInputHandlers();
 
     const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
     const [visibleHeight, setVisibleHeight] = useState<number>(window.innerHeight);
@@ -49,41 +52,6 @@ export default function NameAndBirthDayInput() {
 
     }, [user?.name]);
 
-    // 생년월일 양식
-    const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '');
-        let formattedValue = '';
-
-        if (value.length <= 4) {
-            formattedValue = value;
-        } else if (value.length <= 6) {
-            formattedValue = `${value.slice(0, 4)}-${value.slice(4, 6)}`;
-        } else {
-            formattedValue = `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}`;
-        }
-        setUser((prevUser) => new UserModel({ ...prevUser, birthDate: formattedValue }));
-    };
-
-    // 전화번호 양식
-    const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const rawValue = e.target.value.replace(/[^0-9]/g, '');
-        let formattedValue = '';
-
-        if (rawValue.length < 4) {
-            formattedValue = rawValue;
-        } else if (rawValue.length < 8) {
-            formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3)}`;
-        } else if (rawValue.length < 11) {
-            formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3, 7)}-${rawValue.slice(7)}`;
-        } else {
-            formattedValue = `${rawValue.slice(0, 3)}-${rawValue.slice(3, 7)}-${rawValue.slice(7, 11)}`;
-        }
-
-        setUser((prevUser) => new UserModel({ ...prevUser, phoneNumber: formattedValue }));
-        console.log(formattedValue.length)
-        if (formattedValue.length === 13) setStep(3);
-    };
-
     return isLoading ? (
         isComplete ? (
             <RegisterCompleteSection text={user?.name || 'unknown'} />
@@ -111,7 +79,7 @@ export default function NameAndBirthDayInput() {
                         label="휴대폰 번호"
                         placeholder="휴대폰 번호"
                         value={user?.phoneNumber || ''}
-                        onChange={handlePhoneNumberChange}
+                        onChange={(e) => handlePhoneNumberChange(e, setStep)}
                         maxLength={13}
                     />
                 )}
