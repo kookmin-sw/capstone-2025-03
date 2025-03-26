@@ -23,6 +23,7 @@ import OrderModel from '@/src/models/OrderModel';
 import { useUser } from '@/src/contexts/UserContext';
 import { usePackage } from '@/src/hooks/usePackage';
 import { getCurrentTimeISO } from '@/src/utils/dateUtil';
+import ProductAlternativeImage from '../../assets/images/alternative/product.png';
 
 export default function PackageDetail() {
     // page connection
@@ -62,13 +63,13 @@ export default function PackageDetail() {
             .filter(Boolean) as CategoryModel[];
         console.log(newMyCategories, '뉴카테고리');
         setMyCategories(newMyCategories);
-        
+
         console.log(buyerProducts)
         const newMyProducts: BuyerProductModel[] = targetPackage.products
             .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
             .filter(Boolean) as BuyerProductModel[];
-            console.log(targetPackage.products); // productId 배열
-            setMyProducts(newMyProducts); 
+        console.log(targetPackage.products); // productId 배열
+        setMyProducts(newMyProducts);
     }, []);
 
     // Function
@@ -144,7 +145,7 @@ export default function PackageDetail() {
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    {editingPackage && <PackageItem  pkg={editingPackage} />}
+                    {editingPackage && <PackageItem pkg={editingPackage} />}
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>구성상품</p>
@@ -179,23 +180,25 @@ export default function PackageDetail() {
                             >
                                 <img
                                     className={styles.productThumbnail}
+                                    // TODO:
                                     src={
-                                        myProduct?.images[0] ||
-                                        'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg'
+                                        myProduct == null ? 'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg' :
+                                            ProductAlternativeImage //myProduct?.images[0]
                                     }
                                 />
-                                <div className={styles.productInfoContainer}>
-                                    <p className={styles.productName}>{myProduct?.name}</p>
-                                    <p className={styles.categoryAndAmount}>
-                                        {myProduct
-                                            ? `${category.name} ${myProduct?.quantity}개`
-                                            : '제품을 골라주세요!'}
+                                <div className={styles.productDetailContainer}>
+                                    <div className={styles.productInfoContainer}>
+                                        <p className={styles.productName}>{myProduct?.name}</p>
+                                        <p className={styles.categoryAndAmount}>
+                                            {myProduct
+                                                ? `${category.name} ${myProduct?.quantity}개`
+                                                : `${category.name} 제품을 골라주세요!`}
+                                        </p>
+                                    </div>
+                                    <p className={styles.price}>
+                                        {myProduct && `${myProduct?.price}원`}
                                     </p>
                                 </div>
-                                <div className={styles.blank} />
-                                <p className={styles.price}>
-                                    {myProduct && `${myProduct?.price}원`}
-                                </p>
                                 {isEdit ? (
                                     <button
                                         className={styles.deleteProductButton}

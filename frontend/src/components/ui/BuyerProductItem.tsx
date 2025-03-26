@@ -1,5 +1,6 @@
 import BuyerProductModel from '@/src/models/BuyerProductModel';
 import styled from '@emotion/styled';
+import ProductAlternativeImage from '../../assets/images/alternative/product.png';
 
 const Item = styled.div`
     flex-grow: 1;
@@ -42,7 +43,9 @@ const Price = styled.p`
 export default function ProductItem({ product }: { product: BuyerProductModel }) {
     return (
         <Item>
-            <Thumbnail src={product.images[0]} />
+            {/* TODO: 삭제 */}
+            {/* <Thumbnail src={product.images[0]} /> */}
+            <Thumbnail src={ProductAlternativeImage} />
             <ContentContainer>
                 <Title>{product.name}</Title>
                 <GradeAndAmount>
