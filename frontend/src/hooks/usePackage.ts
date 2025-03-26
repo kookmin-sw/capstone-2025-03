@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { packageState } from '../recoil/packageState';
+import { packageState, packageNextPageUrlState, packageHasRequestOnceState } from '../recoil/packageState';
 import {
     getPackageListInService,
     createPackageInService,
@@ -11,7 +11,6 @@ import PackageModel from '../models/PackageModel';
 import packageDummyData from '@/src/data/packageDummyData.json';
 import { useCategory } from './useCategory';
 import { useBuyerProduct } from './useBuyerProduct';
-import { useState } from 'react';
 
 const useDummyData = false;
 
@@ -19,21 +18,34 @@ export const usePackage = () => {
     const [packages, setPackages] = useRecoilState(packageState);
     const { categories, getCategory } = useCategory();
     const { buyerProducts, getBuyerProduct } = useBuyerProduct();
-    const [nextPage, setNextPage] = useState<string | undefined>(undefined);
-    const [hasMore, setHasMore] = useState<boolean>(true);
-    const pageSize = 5;
+    const [nextPageUrl, setNextPageUrl] = useRecoilState(packageNextPageUrlState);
+    const [hasRequestOnce, setHasRequestOnce] = useRecoilState(packageHasRequestOnceState);
+    const PAGE_SIZE = 1;
 
     // List Read
-    const getPackageList = async (): Promise<PackageModel[]> => {
-        if (!hasMore) return packages;
+    const getPackageList = async (industry: number | null): Promise<PackageModel[]> => {
+        if (!nextPageUrl && hasRequestOnce) return packages;
 
-        const response = useDummyData
-            ? { results: packageDummyData.map((pkg) => PackageModel.fromJson(pkg)), next: null }
-            : await getPackageListInService(nextPage, !nextPage ? 1 : undefined, pageSize);
+        // TODO: 임시 이슈 해결
+        if(industry){
+            setNextPageUrl(null);
+            setHasRequestOnce(false);
+        }
 
-        const newPackageList = response?.results ?? [];
+        const response: { results: PackageModel[], next: string | null } | null = useDummyData
+            ? {
+                results: packageDummyData.map((pkg) => PackageModel.fromJson(pkg)),
+                next: null
+            }
+            : await getPackageListInService(nextPageUrl, PAGE_SIZE, industry);
 
-        if (newPackageList.length) {
+        let newPackages: PackageModel[] = [];
+        if (response) {
+            newPackages = response.results;
+            setPackages((prev) => [...prev, ...newPackages]);
+            setNextPageUrl(response.next);
+            setHasRequestOnce(true);
+
             // 중복 확인을 위한 Set 생성 (O(1) 조회)
             const categoryIdSet = new Set(categories.map((category) => category.id));
             const productIdSet = new Set(buyerProducts.map((product) => product.id));
@@ -41,7 +53,7 @@ export const usePackage = () => {
             // 누락된 category 가져오기 (중복 제거)
             const missingCategoryIds = Array.from(
                 new Set(
-                    newPackageList
+                    newPackages
                         .flatMap((pkg) => pkg.categories)
                         .filter((categoryId) => !categoryIdSet.has(categoryId)),
                 ),
@@ -50,7 +62,7 @@ export const usePackage = () => {
             // 누락된 product 가져오기 (중복 제거)
             const missingProductIds = Array.from(
                 new Set(
-                    newPackageList
+                    newPackages
                         .flatMap((pkg) => pkg.products)
                         .filter((productId) => !productIdSet.has(productId)),
                 ),
@@ -58,23 +70,12 @@ export const usePackage = () => {
 
             // API 호출 (누락된 ID가 있을 경우에만 실행)
             if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
-
             if (missingProductIds.length) {
                 await Promise.all(missingProductIds.map(getBuyerProduct));
             }
-
-            // 상태 업데이트
-            setPackages((prevPackages) => [...prevPackages, ...newPackageList]);
-            setNextPage(response?.next ?? undefined);
-
-            if (!response?.next) {
-                setHasMore(false);
-            }
-        } else {
-            setHasMore(false);
         }
 
-        return newPackageList;
+        return newPackages;
     };
 
     // Create
@@ -172,7 +173,5 @@ export const usePackage = () => {
         getPackage,
         updatePackage,
         deletePackage,
-        hasMore,
-        nextPage,
     };
 };

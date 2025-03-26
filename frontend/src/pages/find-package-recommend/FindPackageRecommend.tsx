@@ -8,12 +8,13 @@ import { getPackageListInService } from '@/src/services/packageService';
 import { useEffect, useState } from 'react';
 import PackageModel from '@/src/models/PackageModel';
 import { Spinner } from '@chakra-ui/react';
+import { usePackage } from '@/src/hooks/usePackage';
 
 export default function FindPackageRecommend() {
     const { user } = useUser();
     const location = useLocation();
     const industry: IndustryModel = IndustryModel.fromJson(
-        location.state?.selectedIndustry || { id: '', icon: '', name: '' },
+        location.state?.selectedIndustry || { id: null, icon: '', name: '' },
     );
     const comments: { id: number; comment: string }[] = [
         { id: 1, comment: '맛있는 음식으로 고객의 입맛을 사로잡아보세요!' },
@@ -48,20 +49,15 @@ export default function FindPackageRecommend() {
 
     const [myPackages, setMyPackages] = useState<PackageModel[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { getPackageList } = usePackage();
 
     // usePackage 안쓰고 독립적으로 fetch
     useEffect(() => {
         const fetchPackages = async () => {
             setIsLoading(true);
-            const response = await getPackageListInService();
+            const newPackages = await getPackageList(industry.id);
 
-            const filteredPackages = response?.results.filter(
-                (pkg) => pkg.industry === industry.id,
-            );
-
-            console.log(filteredPackages);
-
-            setMyPackages(filteredPackages || []);
+            setMyPackages(newPackages);
             setIsLoading(false);
         };
         fetchPackages();

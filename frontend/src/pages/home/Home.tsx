@@ -14,7 +14,7 @@ export default function Home() {
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     const navigate = useNavigate();
     const currentMenuIndex = 0;
-    const { packages, getPackageList, hasMore, nextPage } = usePackage();
+    const { packages, getPackageList} = usePackage();
 
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
@@ -22,7 +22,7 @@ export default function Home() {
     useEffect(() => {
         const fetchPackages = async () => {
             if (packages.length < 1) {
-                const newPackages = await getPackageList();
+                const newPackages = await getPackageList(null);
                 if (newPackages) setIsLoading(false);
                 // console.log(newPackages)
             } else {
@@ -33,13 +33,13 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        if (!hasMore || !nextPage || !loadMoreRef.current || isLoadMoreLoading) return;
+        if (!loadMoreRef.current || isLoadMoreLoading) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting) {
                     setIsLoadMoreLoading(true);
-                    getPackageList().finally(() => setIsLoadMoreLoading(false));
+                    getPackageList(null).finally(() => setIsLoadMoreLoading(false));
                 }
             },
             { threshold: 1.0 },
@@ -48,7 +48,7 @@ export default function Home() {
         observer.observe(loadMoreRef.current);
 
         return () => observer.disconnect();
-    }, [hasMore, nextPage, isLoadMoreLoading]);
+    }, [isLoadMoreLoading]);
 
     // Function
     const handleClickFindPackageButton = () => {

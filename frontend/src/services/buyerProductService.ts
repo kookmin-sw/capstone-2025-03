@@ -13,7 +13,10 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/products`;
 export const getBuyerProductListInService = async (
     nextPageUrl: string | null,
     pageSize: number
-): Promise<{ results: BuyerProductModel[]; next: string | null } | null> => {
+): Promise<{
+    results: BuyerProductModel[];
+    next: string | null;
+} | null> => {
     try {
         const params = { page_size: pageSize };
         const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
