@@ -16,6 +16,7 @@ export const useBuyerProduct = () => {
     const [buyerProducts, setBuyerProducts] = useRecoilState(buyerProductState);
     const [nextPageUrl, setNextPageUrl] = useRecoilState(buyerProductNextPageUrlState);
     const [hasRequestOnce, setHasRequestOnce] = useRecoilState(buyerProductHasRequestOnceState);
+    const PAGE_SIZE = 10;
 
     // List Read
     const getBuyerProductList = async (): Promise<BuyerProductModel[]> => {
@@ -26,7 +27,7 @@ export const useBuyerProduct = () => {
                 results: productDummyData.map((product) => BuyerProductModel.fromJson(product)),
                 next: null,
             }
-            : await getBuyerProductListInService(nextPageUrl);
+            : await getBuyerProductListInService(nextPageUrl, PAGE_SIZE);
 
         let newBuyerProducts: BuyerProductModel[] = [];
         if (response) {
