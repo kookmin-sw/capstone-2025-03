@@ -4,21 +4,28 @@ import BuyerProductModel from '../models/BuyerProductModel';
 const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/products`;
 
 /**
- * 전체 구매자 상품 리스트를 가져옵니다.
- * @returns {Promise<BuyerProductModel[] | null>}
+ * 구매자 상품 리스트를 서버에서 요청하여 가져옵니다.
+ * 페이지네이션을 지원하며, nextPageUrl이 없으면 기본 URL에서 시작합니다.
+ * @param {string | null} nextPageUrl - 다음 페이지 URL (null이면 첫 페이지 요청)
+ * @returns {Promise<{ results: BuyerProductModel[]; next: string | null } | null>}
  */
 export const getBuyerProductListInService = async (
-    url?: string,
+    nextPageUrl: string | null,
 ): Promise<{ results: BuyerProductModel[]; next: string | null } | null> => {
     try {
-        const requestUrl = url ?? `${API_BASE_URL}/`;
+        const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
         const response = await axios.get(requestUrl);
-        return response.data.map((product: any) => BuyerProductModel.fromJson(product));
+        const data = response.data;
+        return {
+            results: data.results.map((product: any) => BuyerProductModel.fromJson(product)),
+            next: data.next
+        };
     } catch (error) {
         console.error('Error fetching buyer products:', error);
         return null;
     }
 };
+
 
 /**
  * 구매자 상품을 생성하고 서버에 저장합니다.
