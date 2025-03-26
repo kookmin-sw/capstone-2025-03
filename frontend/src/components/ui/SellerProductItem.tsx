@@ -81,7 +81,7 @@ export default function SellerProductItem({ product }: ProductItemProps) {
                 <GradeAndAmount>
                     {product.grade} ∙ {product.quantity}개
                 </GradeAndAmount>
-                <Price>{product.price}원</Price>
+                <Price>{product.price?.toLocaleString()}원</Price>
                 <StatusTag status={status}>{status}</StatusTag>
             </ContentContainer>
         </Item>

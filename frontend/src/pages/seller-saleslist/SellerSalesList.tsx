@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useSellerProduct } from '@/src/contexts/SellerProductContext';
 import SellerProductModel from '@/src/models/SellerProductModel';
 import LoadingSection from '@/src/components/layout/LoadingSection';
-
+import { Spinner } from '@chakra-ui/react';
 export default function SellerSalesList() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -18,12 +18,18 @@ export default function SellerSalesList() {
 
     const currentMenuIndex = 1;
 
+    console.log(isLoading);
+
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             const userData = JSON.parse(storedUser);
             setSellerId(userData.id);
         }
+    }, []);
+
+    useEffect(() => {
+        if (!sellerId) return;
 
         const fetchProducts = async () => {
             if (sellerId) {
@@ -54,17 +60,26 @@ export default function SellerSalesList() {
         });
     };
 
-    return isLoading ? (
-        <LoadingSection text="로딩 중" />
-    ) : (
+    return (
         <div className={styles.page}>
             <MainHeader />
             <div className={styles.section}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
                 <div>
-                    {sellerProducts.map((product, index) => {
-                        return <SellerProductItem key={index} product={product} />;
-                    })}
+                    {isLoading ? (
+                        <div className={styles.spinnerContainer}>
+                            <Spinner
+                                color="#00A36C"
+                                borderWidth="0.6rem"
+                                animationDuration="0.8s"
+                                style={{ width: '6rem', height: '6rem' }}
+                            />
+                        </div>
+                    ) : (
+                        sellerProducts.map((product: SellerProductModel, index: number) => {
+                            return <SellerProductItem key={index} product={product} />;
+                        })
+                    )}
                 </div>
             </div>
             <button className={styles.addProductButton} onClick={handleClickAddProductButton}>

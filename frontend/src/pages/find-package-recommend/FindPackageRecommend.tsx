@@ -1,5 +1,5 @@
-import BackHeader from '@/src/components/layout/BackHeader';
 import styles from './FindPackageRecommend.module.css';
+import BackHeader from '@/src/components/layout/BackHeader';
 import PackageItem from '@/src/components/ui/PackageItem';
 import { useLocation } from 'react-router-dom';
 import IndustryModel from '@/src/models/IndustryModel';
