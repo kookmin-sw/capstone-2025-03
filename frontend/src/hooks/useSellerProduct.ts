@@ -27,14 +27,13 @@ export const useSellerProduct = (sellerId: number) => {
     // 추가 로딩 (페이지네이션)
     const loadMore = async () => {
         if (!pagination.hasMore || !pagination.next) return;
-
+        console.log(pagination.next);
         try {
             const response = await axios.get(pagination.next);
-            const nextProducts = response.data.results.map((p: SellerProductModel) =>
-                SellerProductModel.fromJson(p),
-            );
 
-            setProducts((prev) => [...prev, nextProducts]);
+            const nextProducts = response.data.results.map((p) => SellerProductModel.fromJson(p));
+
+            setProducts((prev) => [...prev, ...nextProducts]);
             setPagination({ next: response.data.next, hasMore: Boolean(response.data.next) });
         } catch (error) {
             console.error('다음 상품 불러오기 실패: ', error);

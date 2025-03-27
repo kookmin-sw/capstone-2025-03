@@ -45,6 +45,12 @@
     height: 70vh;
 }
 
+.moreLoadSpinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
 .footerBar {
     position: fixed;
     width: 100vw;
