@@ -14,13 +14,12 @@ export default function NameAndBirthDayInput() {
     const navigate = useNavigate();
 
     const { user, setUser } = useUser();
-    const {isLoading, isComplete} = useKakaoLogin(() => navigate("/"))
+    const { isLoading, isComplete } = useKakaoLogin(() => navigate('/'));
 
-    const {handleBirthChange, handlePhoneNumberChange} = useUserInputHandlers();
+    const { handleBirthChange, handlePhoneNumberChange } = useUserInputHandlers();
 
     const [step, setStep] = useState<number>(1); // 단계: ( 1: 이름 입력, 2: 번호 입력 )
     const [visibleHeight, setVisibleHeight] = useState<number>(window.innerHeight);
-
 
     // 버튼 비활성화 조건
     const whenNameisNull = !user?.name;
@@ -34,7 +33,6 @@ export default function NameAndBirthDayInput() {
 
     // 액세스 토큰으로 사용자 정보 가져옴
     useEffect(() => {
-
         // 세션스토리지에 이름 저장
         if (user?.name) {
             sessionStorage.setItem('name', user.name);
@@ -49,7 +47,6 @@ export default function NameAndBirthDayInput() {
         return () => {
             window.visualViewport?.addEventListener('resize', handleResize);
         };
-
     }, [user?.name]);
 
     return isLoading ? (

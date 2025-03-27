@@ -4,15 +4,19 @@ import Footer from '@/src/components/layout/MenuFooter';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSellerProduct } from '@/src/contexts/SellerProductContext';
+import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import SellerProductModel from '@/src/models/SellerProductModel';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import { Spinner } from '@chakra-ui/react';
+
 export default function SellerSalesList() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { getProductList } = useSellerProduct();
+
+    
     const [sellerId, setSellerId] = useState<number>();
+    const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
+    
     const [sellerProducts, setSellerProducts] = useState<SellerProductModel[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -34,13 +38,8 @@ export default function SellerSalesList() {
         const fetchProducts = async () => {
             if (sellerId) {
                 try {
-                    const response = await getProductList(sellerId);
-                    if (response) {
-                        const formattedProducts = response.map((item: any) =>
-                            SellerProductModel.fromJson(item),
-                        );
-                        setSellerProducts(formattedProducts);
-                    }
+                    await loadProduct();
+                    
                 } catch (error) {
                     console.error('Error fetching products:', error);
                 } finally {
@@ -59,7 +58,7 @@ export default function SellerSalesList() {
             state: { prevPath: location.pathname },
         });
     };
-
+    // console.log(products)
     return (
         <div className={styles.page}>
             <MainHeader />
@@ -76,8 +75,8 @@ export default function SellerSalesList() {
                             />
                         </div>
                     ) : (
-                        sellerProducts.map((product: SellerProductModel, index: number) => {
-                            return <SellerProductItem key={index} product={product} />;
+                        products.map((products: SellerProductModel, index: number) => {
+                            return <SellerProductItem key={index} product={products} />;
                         })
                     )}
                 </div>
