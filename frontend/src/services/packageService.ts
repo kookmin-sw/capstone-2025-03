@@ -4,33 +4,39 @@ import PackageModel from '../models/PackageModel';
 const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
 
 /**
- * 서버에서 모든 패키지 데이터를 가져옵니다.
- * @returns {Promise<PackageModel[] | null>}
- */
+ * 서버에서 패키지 리스트를 요청하여 가져옵니다.
+ * 페이지네이션을 지원하며, nextPageUrl이 없을 경우 기본 URL에서 pageSize 만큼 데이터를 요청합니다.
+ *
+ * @param {string | null} nextPageUrl - 다음 페이지 URL (null이면 첫 페이지 요청)
+ * @param {number} pageSize - 한 페이지에 불러올 패키지 개수
+ * @returns {Promise<{
+*   results: PackageModel[];       // 파싱된 패키지 모델 리스트
+*   next: string | null;           // 다음 페이지 URL (더 이상 없으면 null)
+* } | null>} - 요청 실패 시 null 반환
+*/
 export const getPackageListInService = async (
-    url?: string,
-    page?: number,
-    pageSize?: number,
+    nextPageUrl: string | null,
+    pageSize: number,
+    industry: number | null,
 ): Promise<{
     results: PackageModel[];
     next: string | null;
-    previous: string | null;
-    count: number;
 } | null> => {
     try {
-        const requestUrl = url ?? `${API_BASE_URL}/`;
-        const params = !url ? { page, page_size: pageSize } : {};
+        // industry가 있을 때만 params에 포함
+        const params: Record<string, any> = {
+            page_size: pageSize,
+            ...(industry !== null && { industry }),
+        };
 
-        console.log(requestUrl);
+        const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
+        const response = await axios.get(requestUrl, { params });
 
-        const response = await axios.get(requestUrl, { params: params });
-        const packages = response.data.results ?? [];
+        const data = response.data;
 
         return {
-            results: packages.map((pkg: any) => PackageModel.fromJson(pkg)),
-            next: response.data.next,
-            previous: response.data.previous,
-            count: response.data.count,
+            results: data.results.map((pkg: any) => PackageModel.fromJson(pkg)),
+            next: data.next,
         };
     } catch (error) {
         console.error('Error fetching packages:', error);

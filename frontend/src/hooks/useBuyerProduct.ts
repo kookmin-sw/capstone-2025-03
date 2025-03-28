@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { buyerProductState } from '../recoil/buyerProductState';
+import { buyerProductState, buyerProductNextPageUrlState, buyerProductHasRequestOnceState } from '../recoil/buyerProductState';
 import {
     getBuyerProductListInService,
     createBuyerProductInService,
@@ -9,37 +9,35 @@ import {
 } from '../services/buyerProductService';
 import BuyerProductModel from '../models/BuyerProductModel';
 import productDummyData from '@/src/data/productDummyData.json';
-import { useState } from 'react';
 
 const useDummyData = false;
 
 export const useBuyerProduct = () => {
     const [buyerProducts, setBuyerProducts] = useRecoilState(buyerProductState);
-    const [nextPage, setNextPage] = useState<string | null>(null);
-    const [hasMore, setHasMore] = useState<boolean>(true);
+    const [nextPageUrl, setNextPageUrl] = useRecoilState(buyerProductNextPageUrlState);
+    const [hasRequestOnce, setHasRequestOnce] = useRecoilState(buyerProductHasRequestOnceState);
+    const PAGE_SIZE = 10;
 
     // List Read
-    const getBuyerProductList = async (url?: string): Promise<BuyerProductModel[]> => {
-        if (!hasMore) return buyerProducts;
+    const getBuyerProductList = async (): Promise<BuyerProductModel[]> => {
+        if (!nextPageUrl && hasRequestOnce) return [];
 
-        const response = useDummyData
+        const response: { results: BuyerProductModel[], next: string | null } | null = useDummyData
             ? {
-                  results: productDummyData.map((product) => BuyerProductModel.fromJson(product)),
-                  next: null,
-              }
-            : await getBuyerProductListInService(url ?? '/products/');
+                results: productDummyData.map((product) => BuyerProductModel.fromJson(product)),
+                next: null,
+            }
+            : await getBuyerProductListInService(nextPageUrl, PAGE_SIZE);
 
-        const newBuyerProductList = response?.results ?? [];
-
-        if (newBuyerProductList.length) {
-            setBuyerProducts((prevBuyerProducts) => [...prevBuyerProducts, ...newBuyerProductList]); // 기존 데이터에 추가
-            setNextPage(response?.next ?? null);
-        } else {
-            setHasMore(false);
+        let newBuyerProducts: BuyerProductModel[] = [];
+        if (response) {
+            newBuyerProducts = response.results;
+            setBuyerProducts((prev) => [...prev, ...newBuyerProducts]);
+            setNextPageUrl(response.next);
+            setHasRequestOnce(true);
         }
 
-        setBuyerProducts(newBuyerProductList);
-        return newBuyerProductList;
+        return newBuyerProducts;
     };
 
     // Create
@@ -127,6 +125,5 @@ export const useBuyerProduct = () => {
         getBuyerProduct,
         updateBuyerProduct,
         deleteBuyerProduct,
-        nextPage,
     };
 };
