@@ -43,9 +43,7 @@ const Price = styled.p`
 export default function ProductItem({ product }: { product: BuyerProductModel }) {
     return (
         <Item>
-            {/* TODO: 삭제 */}
-            {/* <Thumbnail src={product.images[0]} /> */}
-            <Thumbnail src={ProductAlternativeImage} />
+            <Thumbnail src={product.images[0]} />
             <ContentContainer>
                 <Title>{product.name}</Title>
                 <GradeAndAmount>

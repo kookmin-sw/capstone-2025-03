@@ -20,7 +20,7 @@ export const usePackage = () => {
     const { buyerProducts, getBuyerProduct } = useBuyerProduct();
     const [nextPageUrl, setNextPageUrl] = useRecoilState(packageNextPageUrlState);
     const [hasRequestOnce, setHasRequestOnce] = useRecoilState(packageHasRequestOnceState);
-    const PAGE_SIZE = 1;
+    const PAGE_SIZE = 10;
 
     // List Read
     const getPackageList = async (industry: number | null): Promise<PackageModel[]> => {

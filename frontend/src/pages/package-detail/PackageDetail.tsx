@@ -23,7 +23,6 @@ import OrderModel from '@/src/models/OrderModel';
 import { useUser } from '@/src/contexts/UserContext';
 import { usePackage } from '@/src/hooks/usePackage';
 import { getCurrentTimeISO } from '@/src/utils/dateUtil';
-import ProductAlternativeImage from '../../assets/images/alternative/product.png';
 
 export default function PackageDetail() {
     // page connection
@@ -180,10 +179,9 @@ export default function PackageDetail() {
                             >
                                 <img
                                     className={styles.productThumbnail}
-                                    // TODO:
                                     src={
                                         myProduct == null ? 'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg' :
-                                            ProductAlternativeImage //myProduct?.images[0]
+                                            myProduct?.images[0]
                                     }
                                 />
                                 <div className={styles.productDetailContainer}>
