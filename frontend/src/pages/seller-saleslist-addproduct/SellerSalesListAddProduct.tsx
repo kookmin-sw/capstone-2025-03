@@ -162,12 +162,6 @@ export default function SellerSalesListAddProduct() {
                         placeholder="제품명"
                         onChange={(e) => setName(e.target.value)}
                     />
-                    {/* <input
-                        value={grade}
-                        className={styles.input}
-                        placeholder="등급 (중고 또는 새상품)"
-                        onChange={(e) => setGrade(e.target.value)}
-                    /> */}
                     <input
                         value={number ?? ''}
                         type="number"
@@ -175,7 +169,14 @@ export default function SellerSalesListAddProduct() {
                         placeholder="개수"
                         onChange={(e) => {
                             const value = e.target.value;
-                            setNumber(value === "" ? undefined : Number(value));
+                            setNumber(value === '' ? undefined : Number(value));
+                        }}
+                        onWheel={(e) => e.currentTarget.blur()}
+                        min={1}
+                        onKeyDown={(e) => {
+                            if (['e', 'E', '+', '-', '.'].includes(e.key)) {
+                                e.preventDefault();
+                            }
                         }}
                     />
                     <div className={styles.buttonContainer}>
