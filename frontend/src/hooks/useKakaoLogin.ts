@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useUser } from '../contexts/UserContext';
 import { UserModel } from '../models/UserModel';
 import { getKakaoAccessToken, getKakaoUserInfo } from '../services/userService';
@@ -18,7 +18,7 @@ interface useKakaoLoginResult {
 export function useKakaoLogin(onComplete: () => void): useKakaoLoginResult {
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
-    const { user, setUser, loginUser } = useUser();
+    const { setUser, loginUser } = useUser();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isComplete, setIsComplete] = useState<boolean>(false);
 

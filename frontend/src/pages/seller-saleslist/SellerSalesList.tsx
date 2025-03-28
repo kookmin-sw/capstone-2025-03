@@ -6,7 +6,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import SellerProductModel from '@/src/models/SellerProductModel';
-import LoadingSection from '@/src/components/layout/LoadingSection';
 import { Spinner } from '@chakra-ui/react';
 
 export default function SellerSalesList() {

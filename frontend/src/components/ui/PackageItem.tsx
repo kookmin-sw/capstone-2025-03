@@ -6,6 +6,8 @@ import { useCategory } from '@/src/hooks/useCategory';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
+import PackageAlternativeImage from '../../assets/images/alternative/package.png';
+
 
 const Item = styled.div`
     display: flex;
@@ -19,6 +21,7 @@ const Thumbnail = styled.img`
     height: 12rem;
     border-radius: 1.2rem;
     margin-right: 1rem;
+    object-fit: cover;
 `;
 
 const ContentContainer = styled.div`
@@ -93,7 +96,7 @@ export default function PackageItem({ pkg }: PackageProps) {
     
     return (
         <Item onClick={handlePackageItemClick}>
-            <Thumbnail src={pkg.thumbnail ?? undefined} />
+            <Thumbnail src={pkg.thumbnail ?? PackageAlternativeImage} />
             <ContentContainer>
                 <Title>{pkg.name}</Title>
                 <Description>{pkg.description}</Description>

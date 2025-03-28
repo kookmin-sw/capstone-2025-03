@@ -72,6 +72,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .productThumbnail {
@@ -81,12 +82,21 @@
     margin-right: 1rem;
 }
 
+.productDetailContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    gap: 1rem;
+}
+
 .productInfoContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: start;
+    flex: 1;
 }
 
 .productName {
