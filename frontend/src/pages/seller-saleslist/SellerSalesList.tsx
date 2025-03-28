@@ -3,21 +3,24 @@ import MainHeader from '@/src/components/layout/MainHeader';
 import Footer from '@/src/components/layout/MenuFooter';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useSellerProduct } from '@/src/contexts/SellerProductContext';
+import { useEffect, useState, useRef } from 'react';
+import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import SellerProductModel from '@/src/models/SellerProductModel';
 import { Spinner } from '@chakra-ui/react';
+
 export default function SellerSalesList() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { getProductList } = useSellerProduct();
+
     const [sellerId, setSellerId] = useState<number>();
-    const [sellerProducts, setSellerProducts] = useState<SellerProductModel[]>([]);
+    const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
+
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    const currentMenuIndex = 1;
+    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+    const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
 
-    console.log(isLoading);
+    const currentMenuIndex = 1;
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -33,13 +36,7 @@ export default function SellerSalesList() {
         const fetchProducts = async () => {
             if (sellerId) {
                 try {
-                    const response = await getProductList(sellerId);
-                    if (response) {
-                        const formattedProducts = response.map((item: any) =>
-                            SellerProductModel.fromJson(item),
-                        );
-                        setSellerProducts(formattedProducts);
-                    }
+                    await loadProduct();
                 } catch (error) {
                     console.error('Error fetching products:', error);
                 } finally {
@@ -52,6 +49,24 @@ export default function SellerSalesList() {
 
         fetchProducts();
     }, [sellerId]);
+
+    useEffect(() => {
+        if (!loadMoreRef.current || isLoadMoreLoading) return;
+        console.log(isLoadMoreLoading);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setIsLoadMoreLoading(true);
+                    loadMore().finally(() => setIsLoadMoreLoading(false));
+                }
+            },
+            { threshold: 0 }
+        );
+
+        observer.observe(loadMoreRef.current);
+
+        return () => observer.disconnect();
+    }, [loadMore, isLoadMoreLoading]);
 
     const handleClickAddProductButton = () => {
         navigate('/seller-saleslist-addproduct', {
@@ -75,11 +90,22 @@ export default function SellerSalesList() {
                             />
                         </div>
                     ) : (
-                        sellerProducts.map((product: SellerProductModel, index: number) => {
-                            return <SellerProductItem key={index} product={product} />;
+                        products.map((products: SellerProductModel, index: number) => {
+                            return <SellerProductItem key={index} product={products} />;
                         })
                     )}
                 </div>
+                {!isLoading && <div ref={loadMoreRef} style={{ height: '20px' }} />}
+                {isLoadMoreLoading && (
+                    <div className={styles.moreLoadSpinnerContainer}>
+                        <Spinner
+                            color="#00A36C"
+                            borderWidth="0.4rem"
+                            animationDuration="0.8s"
+                            style={{ width: '4rem', height: '4rem' }}
+                        />
+                    </div>
+                )}
             </div>
             <button className={styles.addProductButton} onClick={handleClickAddProductButton}>
                 +

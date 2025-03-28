@@ -3,6 +3,14 @@ import SellerProductModel from '../models/SellerProductModel';
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URL;
 const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
+
+interface ProductListResponse {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: SellerProductModel[];
+}
+
 // const AI_BASE_URL = import.meta.env.VITE_AI_BASE_URL;
 /**
  * 상품을 생성하고 서버에 저장합니다.
@@ -41,12 +49,12 @@ export const uploadProductImageInService = async (file: File): Promise<string | 
 };
 
 // 특정 사용자의 판매 상품들 가져오기
-export const getUserProductListInService = async (id: number): Promise<SellerProductModel[]> => {
+export const getUserProductListInService = async (id: number): Promise<ProductListResponse> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/products/`, {
             params: { seller: id },
         });
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error('Error getting selling products: ', error);
         throw error;

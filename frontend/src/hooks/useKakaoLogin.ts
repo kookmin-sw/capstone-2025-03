@@ -7,7 +7,7 @@ import { getKakaoAccessToken, getKakaoUserInfo } from '../services/userService';
 interface useKakaoLoginResult {
     isLoading: boolean;
     isComplete: boolean;
-    code: string |null;
+    code: string | null;
 }
 
 /**
