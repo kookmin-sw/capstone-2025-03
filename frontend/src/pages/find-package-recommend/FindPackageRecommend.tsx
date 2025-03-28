@@ -4,7 +4,6 @@ import PackageItem from '@/src/components/ui/PackageItem';
 import { useLocation } from 'react-router-dom';
 import IndustryModel from '@/src/models/IndustryModel';
 import { useUser } from '@/src/contexts/UserContext';
-import { getPackageListInService } from '@/src/services/packageService';
 import { useEffect, useState } from 'react';
 import PackageModel from '@/src/models/PackageModel';
 import { Spinner } from '@chakra-ui/react';

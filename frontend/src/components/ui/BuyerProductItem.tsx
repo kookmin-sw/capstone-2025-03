@@ -1,6 +1,5 @@
 import BuyerProductModel from '@/src/models/BuyerProductModel';
 import styled from '@emotion/styled';
-import ProductAlternativeImage from '../../assets/images/alternative/product.png';
 
 const Item = styled.div`
     flex-grow: 1;
