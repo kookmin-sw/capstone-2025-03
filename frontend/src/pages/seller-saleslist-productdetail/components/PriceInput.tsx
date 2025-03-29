@@ -58,6 +58,11 @@ export default function PriceInput({ price, setPrice }: PriceInputProps) {
                                 e.preventDefault();
                             }
                         }}
+                        onFocus={(e) => {
+                            if (e.target.value === '0') {
+                                e.target.value = '';
+                            }
+                        }}
                     />
                     <CurrencyText>원</CurrencyText>
                 </InputContainer>

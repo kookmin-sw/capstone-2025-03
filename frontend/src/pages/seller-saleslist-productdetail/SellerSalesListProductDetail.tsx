@@ -5,11 +5,10 @@ import AiOptimizer from './components/AiOptimizer';
 import PriceInput from './components/PriceInput';
 import CompleteSection from '@/src/components/layout/CompleteSection';
 import LoadingSection from '@/src/components/layout/LoadingSection';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { sellerProductState } from '@/src/recoil/sellerProductState';
 import { useRecoilState } from 'recoil';
-import { useSellerProduct } from '@/src/contexts/SellerProductContext';
 import { createProductInService } from '@/src/services/sellerProductService';
 import SellerProductModel from '@/src/models/SellerProductModel';
 
@@ -18,12 +17,9 @@ export default function SellerSalesListProductDetail() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const [sellerId, setSellerId] = useState<number>();
-    const [price, setPrice] = useState<number>();
-    const location = useLocation();
-    const { selectedCategoryName } = location.state;
 
     const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
-    console.log(sellerProduct);
+    console.log(sellerId);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -41,6 +37,10 @@ export default function SellerSalesListProductDetail() {
             new SellerProductModel({
                 ...prev,
                 price: newPrice,
+                sellerId: sellerId,
+                    saleStatus: 'available',
+                    description: null,
+                    uploadDate: new Date().toISOString(),
             })
         );
     };
@@ -48,24 +48,11 @@ export default function SellerSalesListProductDetail() {
     const hanldeSellButtonClick = async () => {
         setIsLoading(true);
 
-        setSellerProduct(
-            (prev) =>
-                new SellerProductModel({
-                    ...prev,
-                    sellerId: sellerId,
-                    saleStatus: 'available',
-                    description: null,
-                    uploadDate: new Date().toISOString(),
-                    price: price,
-                }),
-        );
-
-
         try {
             await createProductInService(sellerProduct);
             setIsComplete(true);
             navigate('/seller-saleslist');
-            setSellerProduct(new SellerProductModel({}));
+            // setSellerProduct(new SellerProductModel({}));
         } catch (error) {
             alert(`물건 등록 실패 : ${error}`);
         } finally {

@@ -1,7 +1,7 @@
 import styles from './SellerSalesListAddProductGetCategory.module.css';
 import BackButtonForGetCategory from './components/BackButtonForGetCategory';
 import LoadingSection from '@/src/components/layout/LoadingSection';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LuSearch } from 'react-icons/lu';
 import { useCategory } from '@/src/hooks/useCategory';

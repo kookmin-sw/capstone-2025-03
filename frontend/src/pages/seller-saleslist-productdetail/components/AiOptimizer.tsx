@@ -105,7 +105,7 @@ export default function AiOptimizer() {
             <Header>
                 <IconContainer>
                     <img src="/images/seller/ai_icon.png" alt="AI Icon" />
-                </IconContainer>sellerProduct
+                </IconContainer>
                 <Box>
                     <Title>AI 판매 최적화 기능</Title>
                     <Description>
