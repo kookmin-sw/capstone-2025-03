@@ -22,6 +22,31 @@ export default function SellerSalesList() {
 
     const currentMenuIndex = 1;
 
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+                // 아래로 스크롤 중 && 일정 이상 스크롤했을 때
+                setIsHeaderVisible(false);
+            } else {
+                // 위로 스크롤 중
+                setIsHeaderVisible(true);
+            }
+
+            lastScrollY.current = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -60,7 +85,7 @@ export default function SellerSalesList() {
                     loadMore().finally(() => setIsLoadMoreLoading(false));
                 }
             },
-            { threshold: 0 }
+            { threshold: 0 },
         );
 
         observer.observe(loadMoreRef.current);
@@ -76,7 +101,7 @@ export default function SellerSalesList() {
 
     return (
         <div className={styles.page}>
-            <MainHeader />
+            {isHeaderVisible && <MainHeader />}
             <div className={styles.section}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
                 <div>
