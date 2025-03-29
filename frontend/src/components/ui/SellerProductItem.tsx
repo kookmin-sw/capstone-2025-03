@@ -63,7 +63,7 @@ type ProductItemProps = {
         name: string | null;
         price: number | null;
         purchaseDate: string | null;
-        quantity: number;
+        amount: number;
         saleStatus: string | null;
         sellerId: number | null;
         uploadDate: string | null;
@@ -79,7 +79,7 @@ export default function SellerProductItem({ product }: ProductItemProps) {
             <ContentContainer>
                 <Title>{product.name}</Title>
                 <GradeAndAmount>
-                    {product.grade} ∙ {product.quantity}개
+                    {product.grade} ∙ {product.amount}개
                 </GradeAndAmount>
                 <Price>{product.price?.toLocaleString()}원</Price>
                 <StatusTag status={status}>{status}</StatusTag>

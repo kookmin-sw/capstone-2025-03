@@ -5,14 +5,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LuSearch } from 'react-icons/lu';
 import { useCategory } from '@/src/hooks/useCategory';
+import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { useRecoilState } from 'recoil';
+import SellerProductModel from '@/src/models/SellerProductModel';
 
 export default function SellerSalesListAddProductGetCategory() {
+    const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
+
     const navigate = useNavigate();
-    const location = useLocation();
+
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { categories, getCategoryList } = useCategory();
-    const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
-    const [selectedCategoryName, setSelectedCategoryName] = useState<string>('');
     const [searchCategory, setSearchCategory] = useState<string>('');
 
     useEffect(() => {
@@ -29,20 +32,13 @@ export default function SellerSalesListAddProductGetCategory() {
 
         fetchCatogories();
 
-        if (selectedCategoryId && selectedCategoryName) {
-            navigate('/seller-saleslist-addproduct', {
-                state: {
-                    selectedCategoryId,
-                    selectedCategoryName,
-                    prevPath: location.pathname,
-                },
-            });
-        }
-    }, [selectedCategoryId, selectedCategoryName]);
+    }, []);
 
     const handleCategoryClick = (id: number, name: string) => {
-        setSelectedCategoryId(id);
-        setSelectedCategoryName(name);
+        setSellerProduct(
+            (prev) => new SellerProductModel({ ...prev, categoryId: id, categoryName: name }),
+        );
+        navigate('/seller-saleslist-addproduct');
     };
 
     const filteredCategories = categories.filter((category) =>

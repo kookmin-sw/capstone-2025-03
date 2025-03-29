@@ -5,13 +5,14 @@ export default class SellerProductModel {
     name: string | null;
     description: string | null;
     grade: string | null;
-    quantity: number;
+    amount: number;
     price: number | null;
     sellerId: number | null;
     uploadDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
     buyerId: number | null;
     purchaseDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
     saleStatus: string | null;
+    categoryName: string | null;
 
     constructor({
         id = null,
@@ -20,13 +21,14 @@ export default class SellerProductModel {
         name = null,
         description = null,
         grade = null,
-        quantity = 0,
+        amount = 0,
         price = 0,
         sellerId = null,
         uploadDate = null,
         saleStatus = null,
         buyerId = null,
         purchaseDate = null,
+        categoryName = null,
     }: {
         id?: number | null;
         images?: string[];
@@ -34,13 +36,14 @@ export default class SellerProductModel {
         name?: string | null;
         description?: string | null;
         grade?: string | null;
-        quantity?: number;
+        amount?: number;
         price?: number | null;
         sellerId?: number | null;
         uploadDate?: string | null;
         saleStatus?: string | null;
         buyerId?: number | null;
         purchaseDate?: string | null;
+        categoryName?: string | null;
     }) {
         this.id = id;
         this.images = images;
@@ -48,13 +51,14 @@ export default class SellerProductModel {
         this.name = name;
         this.description = description;
         this.grade = grade;
-        this.quantity = quantity;
+        this.amount = amount;
         this.price = price;
         this.sellerId = sellerId;
         this.uploadDate = uploadDate;
         this.saleStatus = saleStatus;
         this.buyerId = buyerId;
         this.purchaseDate = purchaseDate;
+        this.categoryName = categoryName
     }
 
     static fromJson(jsonData: any): SellerProductModel {
@@ -65,7 +69,7 @@ export default class SellerProductModel {
             name: jsonData.name,
             description: jsonData.description,
             grade: jsonData.grade,
-            quantity: jsonData.quantity,
+            amount: jsonData.amount,
             price: jsonData.price,
             sellerId: jsonData.seller,
             uploadDate: jsonData.upload_date,
@@ -82,7 +86,7 @@ export default class SellerProductModel {
             name: this.name,
             description: this.description,
             grade: this.grade,
-            quantity: this.quantity,
+            amount: this.amount,
             price: this.price,
             seller: this.sellerId,
             upload_date: this.uploadDate,

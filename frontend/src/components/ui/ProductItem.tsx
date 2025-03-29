@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Item = styled.div`
     flex-grow: 1;
@@ -49,17 +51,20 @@ type ProductItemProps = {
     };
 };
 
-export default function ProductItem({ product }: ProductItemProps) {
+export default function ProductItem() {
+
+    const sellerProduct = useRecoilValue(sellerProductState)
+
     return (
         <Item>
-            <Thumbnail src={product.thumbnail} />
+            <Thumbnail src={sellerProduct.images[0]} />
             <ContentContainer>
-                <Title>{product.name}</Title>
+                <Title>{sellerProduct.name}</Title>
                 <GradeAndAmount>
-                    {product.grade} ∙ {product.amount}개
+                    {sellerProduct.grade} ∙ {sellerProduct.amount}개
                 </GradeAndAmount>
                 <Price>
-                    {product.price !== null ? `${product.price.toLocaleString()}원` : '가격 미정'}
+                    {sellerProduct.price !== null ? `${sellerProduct.price.toLocaleString()}원` : '가격 미정'}
                 </Price>
             </ContentContainer>
         </Item>

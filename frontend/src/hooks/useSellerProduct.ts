@@ -1,13 +1,13 @@
-// sellerProductState 에 대한 커스텀 훅
+// sellerProductListState 에 대한 커스텀 훅
 import { useRecoilState } from 'recoil';
-import { sellerProductState } from '../recoil/sellerProductState';
+import { sellerProductListState } from '../recoil/sellerProductState';
 import { getUserProductListInService } from '../services/sellerProductService';
 import { sellerProductPaginationSate } from '../recoil/sellerProductPaginationState';
 import SellerProductModel from '../models/SellerProductModel';
 import axios from 'axios';
 
 export const useSellerProduct = (sellerId: number) => {
-    const [products, setProducts] = useRecoilState(sellerProductState);
+    const [products, setProducts] = useRecoilState(sellerProductListState);
     const [pagination, setPagination] = useRecoilState(sellerProductPaginationSate);
 
     // 최초 물품 로딩

@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/react';
 import { optimizePriceInService } from '@/src/services/aiService';
 import { useState, useEffect } from 'react';
+import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Card = styled.div`
     background-color: #202028;
@@ -77,20 +79,20 @@ const StatValue = styled.p`
     color: #00a36c;
 `;
 
-interface AiOptimizerProps {
-    name: string;
-    grade: string;
-    amount: number;
-}
+export default function AiOptimizer() {
+    const sellerProduct = useRecoilValue(sellerProductState);
 
-export default function AiOptimizer({ name, grade, amount }: AiOptimizerProps) {
     const [predictedPrice, setPredictedPrice] = useState<number | null>(null);
     useEffect(() => {
         const getOptimizedPrice = async () => {
             try {
-                const responseData = await optimizePriceInService(name, grade, amount);
+                const responseData = await optimizePriceInService(
+                    sellerProduct.name ?? '',
+                    sellerProduct.grade ?? '',
+                    sellerProduct.amount,
+                );
                 console.log(responseData);
-                setPredictedPrice(responseData.total_predicted_price);
+                setPredictedPrice(responseData.predicted_price);
             } catch (error) {
                 console.log('Error Optimizing price: ', error);
             }
@@ -103,7 +105,7 @@ export default function AiOptimizer({ name, grade, amount }: AiOptimizerProps) {
             <Header>
                 <IconContainer>
                     <img src="/images/seller/ai_icon.png" alt="AI Icon" />
-                </IconContainer>
+                </IconContainer>sellerProduct
                 <Box>
                     <Title>AI 판매 최적화 기능</Title>
                     <Description>
