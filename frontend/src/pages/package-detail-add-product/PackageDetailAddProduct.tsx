@@ -1,13 +1,13 @@
 import SearchHeader from '@/src/components/layout/SearchHeader';
 import styles from './PackageDetailAddProduct.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
-import ProductItem from '@/src/components/ui/BuyerProductItem';
+import ProductItem from '@/src/components/ui/ProductItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CheckIconImage from '@/src/assets/images/section/check.png';
 import CategoryModel from '@/src/models/CategoryModel';
-import { useBuyerProduct } from '@/src/hooks/useBuyerProduct';
+import { useProduct } from '@/src/hooks/useProduct';
 import { useEffect, useState } from 'react';
-import BuyerProductModel from '@/src/models/BuyerProductModel';
+import ProductModel from '@/src/models/ProductModel';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 import PackageModel from '@/src/models/PackageModel';
@@ -18,35 +18,35 @@ export default function PackageDetailAddProduct() {
     const location = useLocation();
     const category: CategoryModel = CategoryModel.fromJson(location.state?.category || {});
     // hook
-    const { buyerProducts, getBuyerProductList } = useBuyerProduct();
+    const { products, getProductList } = useProduct();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
-    const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([]);
+    const [myProducts, setMyProducts] = useState<ProductModel[]>([]);
     const [checkedProductIds, setCheckedProductIds] = useState<number[]>([]);
 
     // useEffect
     useEffect(() => {
         setMyProducts(
-            buyerProducts.filter((buyerProduct) => buyerProduct.category === category.id),
+            products.filter((product) => product.category === category.id),
         );
         setCheckedProductIds(
-            buyerProducts
-                .filter((buyerProduct) =>
-                    (editingPackage?.products || []).includes(buyerProduct.id!),
+            products
+                .filter((product) =>
+                    (editingPackage?.products || []).includes(product.id!),
                 )
-                .map((buyerProduct) => buyerProduct.id!),
+                .map((product) => product.id!),
         );
-        getBuyerProductList();
+        getProductList();
     }, []);
     useEffect(() => {
         setMyProducts(
-            buyerProducts.filter((buyerProduct) => buyerProduct.category === category.id),
+            products.filter((product) => product.category === category.id),
         );
-    }, [buyerProducts]);
+    }, [products]);
 
     // Function
-    const handleProductItemClick = (product: BuyerProductModel) => {
+    const handleProductItemClick = (product: ProductModel) => {
         navigate('/package-detail-product-detail', {
             state: { product: product.toJson() },
         });

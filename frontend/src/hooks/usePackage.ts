@@ -10,14 +10,14 @@ import {
 import PackageModel from '../models/PackageModel';
 import packageDummyData from '@/src/data/packageDummyData.json';
 import { useCategory } from './useCategory';
-import { useBuyerProduct } from './useBuyerProduct';
+import { useProduct } from './useProduct';
 
 const useDummyData = false;
 
 export const usePackage = () => {
     const [packages, setPackages] = useRecoilState(packageState);
     const { categories, getCategory } = useCategory();
-    const { buyerProducts, getBuyerProduct } = useBuyerProduct();
+    const { products, getProduct } = useProduct();
     const [nextPageUrl, setNextPageUrl] = useRecoilState(packageNextPageUrlState);
     const [hasRequestOnce, setHasRequestOnce] = useRecoilState(packageHasRequestOnceState);
     const PAGE_SIZE = 10;
@@ -48,7 +48,7 @@ export const usePackage = () => {
 
             // 중복 확인을 위한 Set 생성 (O(1) 조회)
             const categoryIdSet = new Set(categories.map((category) => category.id));
-            const productIdSet = new Set(buyerProducts.map((product) => product.id));
+            const productIdSet = new Set(products.map((product) => product.id));
 
             // 누락된 category 가져오기 (중복 제거)
             const missingCategoryIds = Array.from(
@@ -71,7 +71,7 @@ export const usePackage = () => {
             // API 호출 (누락된 ID가 있을 경우에만 실행)
             if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
             if (missingProductIds.length) {
-                await Promise.all(missingProductIds.map(getBuyerProduct));
+                await Promise.all(missingProductIds.map(getProduct));
             }
         }
 
@@ -109,7 +109,7 @@ export const usePackage = () => {
 
         // 중복 확인을 위한 Set 생성
         const categoryIdSet = new Set(categories.map((category) => category.id));
-        const productIdSet = new Set(buyerProducts.map((product) => product.id));
+        const productIdSet = new Set(products.map((product) => product.id));
 
         // 누락된 category 및 product 가져오기
         const missingCategoryIds = newPackage.categories.filter(
@@ -123,7 +123,7 @@ export const usePackage = () => {
         if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
         if (missingProductIds.length) {
             for (const productId of missingProductIds) {
-                await getBuyerProduct(productId);
+                await getProduct(productId);
             }
         }
 

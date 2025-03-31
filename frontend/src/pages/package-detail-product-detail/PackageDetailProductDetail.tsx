@@ -2,7 +2,7 @@ import BackHeader from '@/src/components/layout/BackHeader';
 import styles from './PackageDetailProductDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
-import BuyerProductModel from '@/src/models/BuyerProductModel';
+import BuyerProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
 
 export default function PackageDetailProductDetail() {

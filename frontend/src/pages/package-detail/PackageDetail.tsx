@@ -14,9 +14,9 @@ import PackageModel from '@/src/models/PackageModel';
 import CategoryModel from '@/src/models/CategoryModel';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
-import BuyerProductModel from '@/src/models/BuyerProductModel';
+import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
-import { useBuyerProduct } from '@/src/hooks/useBuyerProduct';
+import { useProduct } from '@/src/hooks/useProduct';
 import industryData from '@/src/data/industryData.json';
 import { useOrder } from '@/src/hooks/useOrder';
 import OrderModel from '@/src/models/OrderModel';
@@ -34,19 +34,17 @@ export default function PackageDetail() {
     // hook
     const { createPackage } = usePackage();
     const { categories } = useCategory();
-    const { buyerProducts } = useBuyerProduct();
+    const { products } = useProduct();
     const { createOrder } = useOrder();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
-    const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([]);
+    const [myProducts, setMyProducts] = useState<ProductModel[]>([]);
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // console.log(myPackage)
-    // console.log(categories)
 
     // UseEffect
     useEffect(() => {
@@ -60,14 +58,11 @@ export default function PackageDetail() {
         const newMyCategories: CategoryModel[] = targetPackage.categories
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
-        console.log(newMyCategories, '뉴카테고리');
         setMyCategories(newMyCategories);
 
-        console.log(buyerProducts)
-        const newMyProducts: BuyerProductModel[] = targetPackage.products
-            .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
-            .filter(Boolean) as BuyerProductModel[];
-        console.log(targetPackage.products); // productId 배열
+        const newMyProducts: ProductModel[] = targetPackage.products
+            .map((productId) => products.find((product) => product.id === productId))
+            .filter(Boolean) as ProductModel[];
         setMyProducts(newMyProducts);
     }, []);
 
@@ -98,7 +93,6 @@ export default function PackageDetail() {
             setIsLoading(false);
             return;
         }
-        console.log(JSON.stringify(editingPackage));
         const newPackage: PackageModel | null = await createPackage(editingPackage);
         if (newPackage) {
             const newOrder = OrderModel.fromJson({
@@ -106,7 +100,6 @@ export default function PackageDetail() {
                 package: newPackage.id,
                 created_at: getCurrentTimeISO(),
             });
-            console.log(JSON.stringify(newOrder));
             await createOrder(newOrder);
             setIsComplete(true);
         } else {
