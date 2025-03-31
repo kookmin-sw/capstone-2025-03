@@ -8,20 +8,22 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/products`;
  * 페이지네이션을 지원하며, nextPageUrl이 없으면 기본 URL에서 시작합니다.
  * @param {string | null} nextPageUrl - 다음 페이지 URL (null이면 첫 페이지 요청)
  * @param {number} pageSize - 페이지 크기
- * @param {number} category - 카테고리
+ * @param {string} category - 카테고리
  * @returns {Promise<{ results: ProductModel[]; next: string | null } | null>}
  */
 export const getProductListInService = async (
     nextPageUrl: string | null,
     pageSize: number,
-    category: number | null
+    category: string
 ): Promise<{
     results: ProductModel[];
     next: string | null;
 } | null> => {
     try {
-        // api문서에서 필터가 categories로 되어있음
-        const params = { page_size: pageSize, categories: category };
+        const params: any = { page_size: pageSize };
+        if (category != 'all') {
+            params.category = category
+        }
         const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
         const response = await axios.get(requestUrl, { params });
         const data = response.data;

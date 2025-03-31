@@ -31,7 +31,7 @@ export const useSellerProduct = (sellerId: number) => {
         try {
             const response = await axios.get(pagination.next);
 
-            const nextProducts = response.data.results.map((p) => SellerProductModel.fromJson(p));
+            const nextProducts = response.data.results.map((p: any) => SellerProductModel.fromJson(p));
 
             setProducts((prev) => [...prev, ...nextProducts]);
             setPagination({ next: response.data.next, hasMore: Boolean(response.data.next) });

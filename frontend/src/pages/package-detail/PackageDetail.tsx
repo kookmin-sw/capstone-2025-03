@@ -34,7 +34,7 @@ export default function PackageDetail() {
     // hook
     const { createPackage } = usePackage();
     const { categories } = useCategory();
-    const { products } = useProduct();
+    const { productList } = useProduct();
     const { createOrder } = useOrder();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
@@ -61,7 +61,7 @@ export default function PackageDetail() {
         setMyCategories(newMyCategories);
 
         const newMyProducts: ProductModel[] = targetPackage.products
-            .map((productId) => products.find((product) => product.id === productId))
+            .map((productId) => productList.find((product) => product.id === productId))
             .filter(Boolean) as ProductModel[];
         setMyProducts(newMyProducts);
     }, []);

@@ -18,7 +18,7 @@ export default function PackageDetailAddProduct() {
     const location = useLocation();
     const category: CategoryModel = CategoryModel.fromJson(location.state?.category || {});
     // hook
-    const { products, getProductList } = useProduct();
+    const { productList, getProductList } = useProduct();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
@@ -28,22 +28,22 @@ export default function PackageDetailAddProduct() {
     // useEffect
     useEffect(() => {
         setMyProducts(
-            products.filter((product) => product.category === category.id),
+            productList.filter((product) => product.category === category.id),
         );
         setCheckedProductIds(
-            products
+            productList
                 .filter((product) =>
                     (editingPackage?.products || []).includes(product.id!),
                 )
                 .map((product) => product.id!),
         );
-        getProductList();
+        getProductList(category.id);
     }, []);
     useEffect(() => {
         setMyProducts(
-            products.filter((product) => product.category === category.id),
+            productList.filter((product) => product.category === category.id),
         );
-    }, [products]);
+    }, [productList]);
 
     // Function
     const handleProductItemClick = (product: ProductModel) => {

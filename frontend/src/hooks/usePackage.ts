@@ -17,10 +17,10 @@ const useDummyData = false;
 export const usePackage = () => {
     const [packages, setPackages] = useRecoilState(packageState);
     const { categories, getCategory } = useCategory();
-    const { products, getProduct } = useProduct();
+    const { productList, getProduct } = useProduct();
     const [nextPageUrl, setNextPageUrl] = useRecoilState(packageNextPageUrlState);
     const [hasRequestOnce, setHasRequestOnce] = useRecoilState(packageHasRequestOnceState);
-    const PAGE_SIZE = 10;
+    const PAGE_SIZE = 3;
 
     // List Read
     const getPackageList = async (industry: number | null): Promise<PackageModel[]> => {
@@ -48,7 +48,7 @@ export const usePackage = () => {
 
             // 중복 확인을 위한 Set 생성 (O(1) 조회)
             const categoryIdSet = new Set(categories.map((category) => category.id));
-            const productIdSet = new Set(products.map((product) => product.id));
+            const productIdSet = new Set(productList.map((product) => product.id));
 
             // 누락된 category 가져오기 (중복 제거)
             const missingCategoryIds = Array.from(
@@ -109,7 +109,7 @@ export const usePackage = () => {
 
         // 중복 확인을 위한 Set 생성
         const categoryIdSet = new Set(categories.map((category) => category.id));
-        const productIdSet = new Set(products.map((product) => product.id));
+        const productIdSet = new Set(productList.map((product) => product.id));
 
         // 누락된 category 및 product 가져오기
         const missingCategoryIds = newPackage.categories.filter(
