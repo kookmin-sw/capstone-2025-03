@@ -1,7 +1,7 @@
 import BackHeader from '@/src/components/layout/BackHeader';
 import styles from './PackageDetailProductDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
 
