@@ -2,20 +2,20 @@ import BackHeader from '@/src/components/layout/BackHeader';
 import styles from './PackageDetailProductDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
-import BuyerProductModel from '@/src/models/ProductModel';
+import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
 
 export default function PackageDetailProductDetail() {
     // page connection
     const navitgate = useNavigate();
     const location = useLocation();
-    const product: BuyerProductModel = BuyerProductModel.fromJson(location.state?.product || {});
+    const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
     // hook
     const { categories } = useCategory();
 
     // Function
     const handleButtonClick = () => {
-        navitgate(-1);
+        window.location.href = product.originUrl ?? 'https://naver.com';
     };
 
     return (
@@ -33,7 +33,7 @@ export default function PackageDetailProductDetail() {
                 <p className={styles.price}>{product.price}원</p>
                 <div style={{ height: '20rem' }} />
             </div>
-            <DefaultButton event={handleButtonClick} isActive={true} text="확인" />
+            <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" />
         </div>
     );
 }

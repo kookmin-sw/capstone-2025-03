@@ -20,11 +20,10 @@ export const usePackage = () => {
     const [packagePagination, setPackagePagination] = useRecoilState(packagePaginationState);
     const { categories, getCategory } = useCategory();
     const { productList, getProduct } = useProduct();
-    const PAGE_SIZE = 3;
+    const PAGE_SIZE = 5;
 
     // List Read
     const getPackageList = async (industry: number | null): Promise<PackageModel[]> => {
-        console.log(packagePagination);
         // industry string으로 변경 (전체 읽기인 경우, null로 전달 받음)
         const myIndustry: string = industry?.toString() ?? 'all';
         const { next: myNext = null, hasMore: myHasMore = true } = packagePagination[myIndustry] || {};
