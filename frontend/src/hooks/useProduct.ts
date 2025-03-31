@@ -16,7 +16,7 @@ const useDummyData = false;
 export const useProduct = () => {
     const [productList, setProductList] = useRecoilState(productListState);
     const [productPagination, setProductPagination] = useRecoilState(productPaginationState);
-    const PAGE_SIZE = 3;
+    const PAGE_SIZE = 10;
 
     // List Read
     const getProductList = async (category: number | null): Promise<ProductModel[]> => {

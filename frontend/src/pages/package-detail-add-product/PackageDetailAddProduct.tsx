@@ -6,11 +6,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import CheckIconImage from '@/src/assets/images/section/check.png';
 import CategoryModel from '@/src/models/CategoryModel';
 import { useProduct } from '@/src/hooks/useProduct';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ProductModel from '@/src/models/ProductModel';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 import PackageModel from '@/src/models/PackageModel';
+import { Spinner } from '@chakra-ui/react';
+
 
 export default function PackageDetailAddProduct() {
     // page connection
@@ -22,28 +24,49 @@ export default function PackageDetailAddProduct() {
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
-    const [myProducts, setMyProducts] = useState<ProductModel[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLoadMoreLoading, setIsLoadMoreLoading] = useState<boolean>(false);
     const [checkedProductIds, setCheckedProductIds] = useState<number[]>([]);
+    // useRef
+    const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     // useEffect
     useEffect(() => {
-        setMyProducts(
-            productList.filter((product) => product.category === category.id),
-        );
-        setCheckedProductIds(
-            productList
-                .filter((product) =>
-                    (editingPackage?.products || []).includes(product.id!),
-                )
-                .map((product) => product.id!),
-        );
-        getProductList(category.id);
+        const fetchProducts = async () => {
+            const filteredProductList = productList.filter((product) => product.category === category.id);
+            if (filteredProductList.length < 5) {
+                const newProducts = await getProductList(category.id);
+                if (newProducts) setIsLoading(false);
+            } else {
+                setIsLoading(false);
+            }
+            setCheckedProductIds(
+                productList
+                    .filter((product) =>
+                        (editingPackage?.products || []).includes(product.id!),
+                    )
+                    .map((product) => product.id!),
+            );
+        }
+        fetchProducts();
     }, []);
     useEffect(() => {
-        setMyProducts(
-            productList.filter((product) => product.category === category.id),
+        if (!loadMoreRef.current || isLoadMoreLoading) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setIsLoadMoreLoading(true);
+                    getProductList(category.id).finally(() => setIsLoadMoreLoading(false));
+                }
+            },
+            { threshold: 0 },
         );
-    }, [productList]);
+
+        observer.observe(loadMoreRef.current);
+
+        return () => observer.disconnect();
+    }, [isLoadMoreLoading, isLoading]);
 
     // Function
     const handleProductItemClick = (product: ProductModel) => {
@@ -73,7 +96,7 @@ export default function PackageDetailAddProduct() {
             <SearchHeader text={category.name || ''} />
             <div className={styles.section}>
                 <div className={styles.listView}>
-                    {myProducts.map((product, index) => {
+                    {(productList.filter((product) => product.category === category.id)).map((product, index) => {
                         return (
                             <div
                                 key={index}
@@ -99,7 +122,16 @@ export default function PackageDetailAddProduct() {
                         );
                     })}
                 </div>
-                <div style={{ height: '20rem' }} />
+                <div ref={loadMoreRef} style={{ "height": "20px" }} />
+                {(isLoadMoreLoading && !isLoading) && <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
+                    <Spinner
+                        color="#00A36C"
+                        borderWidth="0.6rem"
+                        animationDuration="0.8s"
+                        style={{ width: '6rem', height: '6rem' }}
+                    />
+                </div>}
+                <div style={{ height: '100px' }} />
             </div>
             <DefaultButton
                 event={handleConfirmButtonClick}

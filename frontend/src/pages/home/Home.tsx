@@ -14,8 +14,7 @@ export default function Home() {
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     const navigate = useNavigate();
     const currentMenuIndex = 0;
-    const { packageList, getPackageList} = usePackage();
-
+    const { packageList, getPackageList } = usePackage();
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     // useEffect
@@ -24,16 +23,14 @@ export default function Home() {
             if (packageList.length < 1) {
                 const newPackages = await getPackageList(null);
                 if (newPackages) setIsLoading(false);
-                // console.log(newPackages)
             } else {
                 setIsLoading(false);
             }
         };
         fetchPackages();
     }, []);
-
     useEffect(() => {
-        if (!loadMoreRef.current || isLoadMoreLoading) return;
+        if(!loadMoreRef.current || isLoadMoreLoading) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -42,13 +39,13 @@ export default function Home() {
                     getPackageList(null).finally(() => setIsLoadMoreLoading(false));
                 }
             },
-            { threshold: 1.0 },
+            { threshold: 0 },
         );
 
         observer.observe(loadMoreRef.current);
 
         return () => observer.disconnect();
-    }, [isLoadMoreLoading]);
+    }, [isLoading, isLoadMoreLoading]);
 
     // Function
     const handleClickFindPackageButton = () => {
@@ -90,14 +87,14 @@ export default function Home() {
                     })}
                 </div>
                 <div ref={loadMoreRef} style={{ "height": "20px" }} />
-                {isLoadMoreLoading ? <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
+                {isLoadMoreLoading && <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
                     <Spinner
                         color="#00A36C"
                         borderWidth="0.6rem"
                         animationDuration="0.8s"
                         style={{ width: '6rem', height: '6rem' }}
                     />
-                </div> : null}
+                </div>}
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
