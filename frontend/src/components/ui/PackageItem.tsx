@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 import PackageAlternativeImage from '../../assets/images/alternative/package.png';
+import ProductModel from '@/src/models/ProductModel';
+import { useProduct } from '@/src/hooks/useProduct';
 
 
 const Item = styled.div`
@@ -69,10 +71,12 @@ type PackageProps = {
 };
 
 export default function PackageItem({ pkg }: PackageProps) {
+    const [price, setPrice] = useState(0);
     const { categories } = useCategory();
     const [categoryPreview, setCategoryPreview] = useState('');
     const [, setEditingPackage] = useRecoilState(editingPackageState);
     const navigate = useNavigate();
+    const { productList } = useProduct();
 
     useEffect(() => {
         const categoryNames = [];
@@ -86,6 +90,14 @@ export default function PackageItem({ pkg }: PackageProps) {
         setCategoryPreview(
             `${categoryNames.join(', ')} ${count > 0 ? `외 ${count}가지로 구성` : '로 구성'}`,
         );
+        let myPrice = 0;
+        const myProducts: ProductModel[] = pkg.products
+            .map((productId) => productList.find((product) => product.id === productId))
+            .filter(Boolean) as ProductModel[];
+        myProducts.forEach((product) => {
+            myPrice += product.price;
+        });
+        setPrice(myPrice);
     }, []);
 
     // Function: 패키지 아이템 클릭
@@ -93,14 +105,14 @@ export default function PackageItem({ pkg }: PackageProps) {
         setEditingPackage(null);
         navigate('/package-detail', { state: { pkg: pkg.toJson() } });
     };
-    
+
     return (
         <Item onClick={handlePackageItemClick}>
             <Thumbnail src={pkg.thumbnail ?? PackageAlternativeImage} />
             <ContentContainer>
                 <Title>{pkg.name}</Title>
                 <Description>{pkg.description}</Description>
-                <Price>{pkg.price.toLocaleString()}원</Price>
+                <Price>{price.toLocaleString()}원</Price>
                 <CategoryContainer>
                     <CategoryIcon src={WidgetImage} />
                     <CategoryText>{categoryPreview}</CategoryText>

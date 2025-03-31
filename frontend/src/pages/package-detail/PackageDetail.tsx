@@ -39,6 +39,7 @@ export default function PackageDetail() {
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
+    const [price, setPrice] = useState(0);
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
     const [myProducts, setMyProducts] = useState<ProductModel[]>([]);
     const [isComplete, setIsComplete] = useState(false);
