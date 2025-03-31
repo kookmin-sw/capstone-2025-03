@@ -14,14 +14,14 @@ export default function Home() {
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     const navigate = useNavigate();
     const currentMenuIndex = 0;
-    const { packages, getPackageList} = usePackage();
+    const { packageList, getPackageList} = usePackage();
 
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     // useEffect
     useEffect(() => {
         const fetchPackages = async () => {
-            if (packages.length < 1) {
+            if (packageList.length < 1) {
                 const newPackages = await getPackageList(null);
                 if (newPackages) setIsLoading(false);
                 // console.log(newPackages)
@@ -85,7 +85,7 @@ export default function Home() {
                 </div>
                 <p className={styles.listViewTitle}>전체보기</p>
                 <div className={styles.packageListView}>
-                    {packages.map((pkg, index) => {
+                    {packageList.map((pkg, index) => {
                         return <PackageItem key={index} pkg={pkg} />;
                     })}
                 </div>
