@@ -7,7 +7,6 @@ import { useCategory } from '@/src/hooks/useCategory';
 
 export default function PackageDetailProductDetail() {
     // page connection
-    const navitgate = useNavigate();
     const location = useLocation();
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
     // hook
