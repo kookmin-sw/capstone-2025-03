@@ -159,43 +159,41 @@ export default function PackageDetail() {
                     </div>
                 </div>
                 <div className={styles.listView}>
-                    {myCategories.map((category, index) => {
-                        const myProduct =
-                            myProducts.find((product) => product.category === category.id) || null;
-                        return (
+                    {/* 1. 카테고리 순서대로 정렬된 products */}
+                    {myCategories.map((category) => {
+                        const categoryProducts = myProducts.filter(
+                            (product) => product.category === category.id
+                        );
+
+                        return categoryProducts.map((product) => (
                             <div
-                                key={index}
+                                key={`product-${product.id}`}
                                 className={styles.productItem}
-                                onClick={() => {
-                                    handleAddProductButtonClick(category);
-                                }}
+                                onClick={() => handleAddProductButtonClick(category)}
                             >
                                 <img
                                     className={styles.productThumbnail}
                                     src={
-                                        myProduct == null ? 'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg' :
-                                            myProduct?.images[0]
+                                        product.images.length > 0
+                                            ? product.images[0]
+                                            : 'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg'
                                     }
                                 />
                                 <div className={styles.productDetailContainer}>
                                     <div className={styles.productInfoContainer}>
-                                        <p className={styles.productName}>{myProduct?.name}</p>
+                                        <p className={styles.productName}>{product.name}</p>
                                         <p className={styles.categoryAndAmount}>
-                                            {myProduct
-                                                ? `${category.name} ${myProduct?.quantity}개`
-                                                : `${category.name} 제품을 골라주세요!`}
+                                            {category.name} {product.quantity}개
                                         </p>
                                     </div>
-                                    <p className={styles.price}>
-                                        {myProduct && `${myProduct?.price}원`}
-                                    </p>
+                                    <p className={styles.price}>{product.price}원</p>
                                 </div>
                                 {isEdit ? (
                                     <button
                                         className={styles.deleteProductButton}
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            handleDeleteButtonClick(category.id!);
+                                            handleDeleteButtonClick(product.category!);
                                         }}
                                     >
                                         <img
@@ -212,8 +210,38 @@ export default function PackageDetail() {
                                     </button>
                                 )}
                             </div>
-                        );
+                        ));
                     })}
+
+                    {/* 2. 제품이 아예 없는 카테고리 */}
+                    {myCategories
+                        .filter((category) => !myProducts.some((product) => product.category === category.id))
+                        .map((category) => (
+                            <div
+                                key={`category-${category.id}`}
+                                className={styles.productItem}
+                                onClick={() => handleAddProductButtonClick(category)}
+                            >
+                                <img
+                                    className={styles.productThumbnail}
+                                    src="https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg"
+                                />
+                                <div className={styles.productDetailContainer}>
+                                    <div className={styles.productInfoContainer}>
+                                        <p className={styles.productName}></p>
+                                        <p className={styles.categoryAndAmount}>
+                                            {category.name} 제품을 골라주세요!
+                                        </p>
+                                    </div>
+                                </div>
+                                <button className={styles.searchOtherProductsButton}>
+                                    <img
+                                        className={styles.searchOtherProductsButtonIcon}
+                                        src={ArrowRightIconImage}
+                                    />
+                                </button>
+                            </div>
+                        ))}
                 </div>
                 <div style={{ height: '20rem' }} />
             </div>
