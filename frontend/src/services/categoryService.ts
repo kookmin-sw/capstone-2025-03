@@ -87,7 +87,6 @@ export const deleteCategoryInService = async (categoryId: number): Promise<boole
 export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
     try {
         const response = await axios.get(`${API_BASE_URL}`);
-        console.log('response');
         return response.data.map((category: any) => CategoryModel.fromJson(category));
     } catch (error) {
         console.error('Error fetching all categories:', error);
