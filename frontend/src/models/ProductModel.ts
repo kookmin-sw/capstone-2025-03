@@ -22,7 +22,7 @@ export default class ProductModel {
         categoryName = null,
         name = null,
         grade = null,
-        quantity = 0,
+        quantity = undefined,
         price = 0,
         seller = null,
         uploadDate = null,
