@@ -15,7 +15,7 @@ export default function SellerSalesListAddProduct() {
 
     const navigate = useNavigate();
 
-    const {state} = useLocation();
+    const { state } = useLocation();
     const selectedCategoryId = sellerProduct.category;
     const selectedCategoryName = sellerProduct.categoryName;
     const prevPath = state?.prevPath;
@@ -217,13 +217,15 @@ export default function SellerSalesListAddProduct() {
                         })}
                     </div>
                 </form>
-                <button
-                    className={styles.submitButton}
-                    disabled={!isButtonValid}
-                    onClick={handleClickConfirmButton}
-                >
-                    확인
-                </button>
+                <div className={styles.submitButtonSection}>
+                    <button
+                        className={styles.submitButton}
+                        disabled={!isButtonValid}
+                        onClick={handleClickConfirmButton}
+                    >
+                        확인
+                    </button>
+                </div>
             </div>
         </div>
     );

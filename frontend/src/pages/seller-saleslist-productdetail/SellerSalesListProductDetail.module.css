@@ -51,6 +51,17 @@
     cursor: pointer;
 }
 
+.submitButtonSection {
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .submitButton:disabled {
     background-color: #12332d;
 }

@@ -78,14 +78,15 @@ export default function SellerSalesListProductDetail() {
                 <ProductItem product={sellerProduct} />
                 <AiOptimizer />
                 <PriceInput price={sellerProduct.price ?? null} setPrice={handlePriceChange} />
-
-                <button
-                    className={styles.submitButton}
-                    disabled={!isButtonValid}
-                    onClick={hanldeSellButtonClick}
-                >
-                    판매하기
-                </button>
+                <div className={styles.submitButtonSection}>
+                    <button
+                        className={styles.submitButton}
+                        disabled={!isButtonValid}
+                        onClick={hanldeSellButtonClick}
+                    >
+                        판매하기
+                    </button>
+                </div>
             </div>
         </div>
     );
