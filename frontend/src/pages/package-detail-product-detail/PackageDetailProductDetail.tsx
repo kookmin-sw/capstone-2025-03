@@ -30,7 +30,7 @@ export default function PackageDetailProductDetail() {
                 <p className={styles.gradeAndAmount}>
                     {product.grade}등급 ∙ {product.quantity}개
                 </p>
-                <p className={styles.price}>{product.price}원</p>
+                <p className={styles.price}>{product.price?.toLocaleString()}원</p>
                 <div style={{ height: '20rem' }} />
             </div>
             <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" />

@@ -12,13 +12,6 @@ import { useRecoilState } from 'recoil';
 import { useProduct } from '@/src/hooks/useProduct';
 import ProductModel from '@/src/models/ProductModel';
 
-// =====================================
-// TODO:
-//      - @김용희
-//      - PrevProductItem -> ProductItem
-//      - PrevProductItem 삭제
-// =====================================
-
 export default function SellerSalesListProductDetail() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
