@@ -5,7 +5,7 @@ import SellerProductItem from '@/src/components/ui/SellerProductItem';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
-import SellerProductModel from '@/src/models/SellerProductModel';
+import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
 
 export default function SellerSalesList() {
@@ -115,7 +115,7 @@ export default function SellerSalesList() {
                             />
                         </div>
                     ) : (
-                        products.map((products: SellerProductModel, index: number) => {
+                        products.map((products: ProductModel, index: number) => {
                             return <SellerProductItem key={index} product={products} />;
                         })
                     )}

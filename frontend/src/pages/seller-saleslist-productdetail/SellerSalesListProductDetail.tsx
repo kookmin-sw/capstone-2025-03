@@ -19,16 +19,6 @@ import ProductModel from '@/src/models/ProductModel';
 //      - PrevProductItem 삭제
 // =====================================
 
-type Product = {
-    id: string;
-    category: string;
-    name: string;
-    grade: string;
-    amount: number;
-    price: number | null;
-    thumbnail: string;
-};
-
 export default function SellerSalesListProductDetail() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -89,7 +79,7 @@ export default function SellerSalesListProductDetail() {
             <div className={styles.section}>
                 <p className={styles.title}>가격을 입력해주세요</p>
 
-                <ProductItem />
+                <ProductItem product={sellerProduct} />
                 <AiOptimizer />
                 <PriceInput price={sellerProduct.price ?? null} setPrice={handlePriceChange} />
 
