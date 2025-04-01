@@ -52,7 +52,7 @@ export const uploadProductImageInService = async (file: File): Promise<string | 
 export const getUserProductListInService = async (id: number): Promise<ProductListResponse> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/products/`, {
-            params: { seller: id },
+            params: { seller: id, ordering: "-upload_date" },
         });
         return response.data;
     } catch (error) {
