@@ -1,6 +1,6 @@
 import styles from './SellerSalesListProductDetail.module.css';
 import BackHeader from '@/src/components/layout/BackHeader';
-import ProductItem from '@/src/components/ui/ProductItem';
+import PrevProductItem from '@/src/components/ui/PrevProductItem';
 import AiOptimizer from './components/AiOptimizer';
 import PriceInput from './components/PriceInput';
 import CompleteSection from '@/src/components/layout/CompleteSection';
@@ -11,6 +11,23 @@ import { sellerProductState } from '@/src/recoil/sellerProductState';
 import { useRecoilState } from 'recoil';
 import { createProductInService } from '@/src/services/sellerProductService';
 import SellerProductModel from '@/src/models/SellerProductModel';
+
+// =====================================
+// TODO:
+//      - @김용희
+//      - PrevProductItem -> ProductItem
+//      - PrevProductItem 삭제
+// =====================================
+
+type Product = {
+    id: string;
+    category: string;
+    name: string;
+    grade: string;
+    amount: number;
+    price: number | null;
+    thumbnail: string;
+};
 
 export default function SellerSalesListProductDetail() {
     const navigate = useNavigate();
@@ -29,19 +46,19 @@ export default function SellerSalesListProductDetail() {
         }
     }, [sellerId, sellerProduct.price]);
 
-
     const isButtonValid = sellerProduct.price;
 
     const handlePriceChange = (newPrice: number | null) => {
-        setSellerProduct((prev) => 
-            new SellerProductModel({
-                ...prev,
-                price: newPrice,
-                sellerId: sellerId,
+        setSellerProduct(
+            (prev) =>
+                new SellerProductModel({
+                    ...prev,
+                    price: newPrice,
+                    sellerId: sellerId,
                     saleStatus: 'available',
                     description: null,
                     uploadDate: new Date().toISOString(),
-            })
+                }),
         );
     };
 
@@ -72,9 +89,10 @@ export default function SellerSalesListProductDetail() {
             <div className={styles.section}>
                 <p className={styles.title}>가격을 입력해주세요</p>
 
-                <ProductItem />
+                <PrevProductItem />
                 <AiOptimizer />
                 <PriceInput price={sellerProduct.price} setPrice={handlePriceChange} />
+
                 <button
                     className={styles.submitButton}
                     disabled={!isButtonValid}

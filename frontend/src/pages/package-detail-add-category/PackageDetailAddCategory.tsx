@@ -25,7 +25,6 @@ export default function PackageDetailAddCategory() {
     const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(
         editingPackage?.categories || [],
     );
-    console.log(categories);
     // useEffect
     useEffect(() => {
         setMyCategories(

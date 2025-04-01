@@ -3,10 +3,8 @@ import { Suspense, useEffect } from 'react';
 import './styles/global.css';
 import routes from './routes';
 import { UserProvider } from './contexts/UserContext';
-import { ProductProvider } from './contexts/ProductContext';
 import { CategoryProvider } from './contexts/CategoryContext';
 import { SellerProductProvider } from './contexts/SellerProductContext';
-import { PackageProvider } from './contexts/PackageContext';
 
 export default function App() {
     return (
@@ -31,8 +29,6 @@ export function MainLayout() {
         <UserProvider>
             <CategoryProvider>
                 <SellerProductProvider>
-                    <ProductProvider>
-                        <PackageProvider>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Routes>
                                     {routes.map(({ path, Component }) => (
@@ -41,8 +37,6 @@ export function MainLayout() {
                                     <Route path="*" element={<Navigate to="/" />} />
                                 </Routes>
                             </Suspense>
-                        </PackageProvider>
-                    </ProductProvider>
                 </SellerProductProvider>
             </CategoryProvider>
         </UserProvider>

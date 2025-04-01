@@ -1,5 +1,6 @@
-import BuyerProductModel from '@/src/models/BuyerProductModel';
 import styled from '@emotion/styled';
+import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Item = styled.div`
     flex-grow: 1;
@@ -39,16 +40,33 @@ const Price = styled.p`
     font-weight: bold;
 `;
 
-export default function ProductItem({ product }: { product: BuyerProductModel }) {
+type ProductItemProps = {
+    product: {
+        id: string;
+        name: string;
+        grade: string;
+        amount: number;
+        price: number | null;
+        thumbnail: string;
+    };
+};
+
+export default function ProductItem() {
+    const sellerProduct = useRecoilValue(sellerProductState);
+
     return (
         <Item>
-            <Thumbnail src={product.images[0]} />
+            <Thumbnail src={sellerProduct.images[0]} />
             <ContentContainer>
-                <Title>{product.name}</Title>
+                <Title>{sellerProduct.name}</Title>
                 <GradeAndAmount>
-                    {product.grade} 등급 ∙ {product.quantity} 개
+                    {sellerProduct.grade} ∙ {sellerProduct.amount}개
                 </GradeAndAmount>
-                <Price>{product.price} 원</Price>
+                <Price>
+                    {sellerProduct.price !== null
+                        ? `${sellerProduct.price.toLocaleString()}원`
+                        : '가격 미정'}
+                </Price>
             </ContentContainer>
         </Item>
     );
