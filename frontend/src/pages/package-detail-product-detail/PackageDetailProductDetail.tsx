@@ -35,5 +35,5 @@ export default function PackageDetailProductDetail() {
             </div>
             <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" />
         </div>
-    );
+    );  
 }

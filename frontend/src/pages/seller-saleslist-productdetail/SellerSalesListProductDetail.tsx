@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
-import { createProductInService } from '@/src/services/productService';
+import { useProduct } from '@/src/hooks/useProduct';
 import ProductModel from '@/src/models/ProductModel';
 
 // =====================================
@@ -26,7 +26,8 @@ export default function SellerSalesListProductDetail() {
     const [sellerId, setSellerId] = useState<number>();
 
     const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
-    console.log(sellerId);
+
+    const { createProduct } = useProduct();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -56,10 +57,9 @@ export default function SellerSalesListProductDetail() {
         setIsLoading(true);
 
         try {
-            await createProductInService(sellerProduct);
+            await createProduct(sellerProduct);
             setIsComplete(true);
             navigate('/seller-saleslist');
-            // setSellerProduct(new SellerProductModel({}));
         } catch (error) {
             alert(`물건 등록 실패 : ${error}`);
         } finally {

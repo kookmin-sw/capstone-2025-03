@@ -9,21 +9,22 @@ import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
 
 export default function SellerSalesList() {
+    // page connection
     const navigate = useNavigate();
     const location = useLocation();
-
+    // hook
     const [sellerId, setSellerId] = useState<number>();
     const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
-
+    // useState
     const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
+    // useRef
+    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+    const lastScrollY = useRef(0);
 
     const currentMenuIndex = 1;
 
-    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-    const lastScrollY = useRef(0);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -99,6 +100,12 @@ export default function SellerSalesList() {
         });
     };
 
+    const handleProductItemClick = (product: ProductModel) => {
+        navigate('/package-detail-product-detail', {
+            state: { product: product.toJson() },
+        });
+    };
+
     return (
         <div className={styles.page}>
             {isHeaderVisible && <MainHeader />}
@@ -116,7 +123,11 @@ export default function SellerSalesList() {
                         </div>
                     ) : (
                         products.map((products: ProductModel, index: number) => {
-                            return <SellerProductItem key={index} product={products} />;
+                            return (
+                                <div onClick={() => handleProductItemClick(products)}>
+                                    <SellerProductItem key={index} product={products} />
+                                </div>
+                            );
                         })
                     )}
                 </div>
