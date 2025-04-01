@@ -31,7 +31,7 @@ export default function SellerSalesListProductDetail() {
             setSellerId(userData.id);
         }
     }, [sellerId, sellerProduct.price]);
-
+    console.log(sellerProduct)
     const isButtonValid = sellerProduct.price;
 
     const handlePriceChange = (newPrice: number | null) => {

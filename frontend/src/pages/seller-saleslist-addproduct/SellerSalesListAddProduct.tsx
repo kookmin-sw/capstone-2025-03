@@ -18,12 +18,10 @@ export default function SellerSalesListAddProduct() {
     const navigate = useNavigate();
     const { state } = useLocation();
 
-    const selectedCategoryId = sellerProduct.category;
     const selectedCategoryName = sellerProduct.categoryName;
     const prevPath = state?.prevPath;
 
     // useState
-    const [defaultImageSrc, setDefaultImageSrc] = useState<string>('');
     const [isUploading, setIsUploading] = useState<boolean>(false);
 
     // useRef
@@ -86,16 +84,9 @@ export default function SellerSalesListAddProduct() {
     };
 
     const handleClickConfirmButton = () => {
-        setSellerProduct(
-            (prev) =>
-                new ProductModel({
-                    ...prev,
-                    category: selectedCategoryId,
-                }),
-        );
         navigate('/seller-saleslist-productdetail');
     };
-    console.log(sellerProduct);
+
     return (
         <div className={styles.page}>
             <div className={styles.section}>
