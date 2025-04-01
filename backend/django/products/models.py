@@ -35,6 +35,8 @@ class Product(models.Model):
     # available: 판매 중
     # sold: 판매 완료
     # pending: 예약 중
+    origin_url = models.URLField(max_length=255, blank=True, null=True)
+    
 
     def __str__(self):
         """제품명과 가격, 판매 상태를 함께 출력"""
