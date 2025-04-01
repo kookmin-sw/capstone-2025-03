@@ -1,16 +1,16 @@
 import styles from './SellerSalesListProductDetail.module.css';
 import BackHeader from '@/src/components/layout/BackHeader';
-import PrevProductItem from '@/src/components/ui/PrevProductItem';
+import ProductItem from '@/src/components/ui/ProductItem';
 import AiOptimizer from './components/AiOptimizer';
 import PriceInput from './components/PriceInput';
 import CompleteSection from '@/src/components/layout/CompleteSection';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
-import { createProductInService } from '@/src/services/sellerProductService';
-import SellerProductModel from '@/src/models/SellerProductModel';
+import { createProductInService } from '@/src/services/productService';
+import ProductModel from '@/src/models/ProductModel';
 
 // =====================================
 // TODO:
@@ -51,11 +51,11 @@ export default function SellerSalesListProductDetail() {
     const handlePriceChange = (newPrice: number | null) => {
         setSellerProduct(
             (prev) =>
-                new SellerProductModel({
+                new ProductModel({
                     ...prev,
                     price: newPrice,
-                    sellerId: sellerId,
-                    saleStatus: 'available',
+                    seller: sellerId,
+                    salesStatus: 'available',
                     description: null,
                     uploadDate: new Date().toISOString(),
                 }),
@@ -89,9 +89,9 @@ export default function SellerSalesListProductDetail() {
             <div className={styles.section}>
                 <p className={styles.title}>가격을 입력해주세요</p>
 
-                <PrevProductItem />
+                <ProductItem />
                 <AiOptimizer />
-                <PriceInput price={sellerProduct.price} setPrice={handlePriceChange} />
+                <PriceInput price={sellerProduct.price ?? null} setPrice={handlePriceChange} />
 
                 <button
                     className={styles.submitButton}

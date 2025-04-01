@@ -5,7 +5,7 @@ export default class SellerProductModel {
     name: string | null;
     description: string | null;
     grade: string | null;
-    amount: number;
+    quantity: number;
     price: number | null;
     sellerId: number | null;
     uploadDate: string | null; // ISO 8601: YYYY-MM-DDTHH:MM:SS.sssZ
@@ -21,7 +21,7 @@ export default class SellerProductModel {
         name = null,
         description = null,
         grade = null,
-        amount = 0,
+        quantity = 0,
         price = 0,
         sellerId = null,
         uploadDate = null,
@@ -36,7 +36,7 @@ export default class SellerProductModel {
         name?: string | null;
         description?: string | null;
         grade?: string | null;
-        amount?: number;
+        quantity?: number;
         price?: number | null;
         sellerId?: number | null;
         uploadDate?: string | null;
@@ -51,7 +51,7 @@ export default class SellerProductModel {
         this.name = name;
         this.description = description;
         this.grade = grade;
-        this.amount = amount;
+        this.quantity = quantity;
         this.price = price;
         this.sellerId = sellerId;
         this.uploadDate = uploadDate;
@@ -69,7 +69,7 @@ export default class SellerProductModel {
             name: jsonData.name,
             description: jsonData.description,
             grade: jsonData.grade,
-            amount: jsonData.amount,
+            quantity: jsonData.quantity,
             price: jsonData.price,
             sellerId: jsonData.seller,
             uploadDate: jsonData.upload_date,
@@ -86,7 +86,7 @@ export default class SellerProductModel {
             name: this.name,
             description: this.description,
             grade: this.grade,
-            amount: this.amount,
+            quantity: this.quantity,
             price: this.price,
             seller: this.sellerId,
             upload_date: this.uploadDate,

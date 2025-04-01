@@ -7,8 +7,8 @@ export const sellerProductListState = atom<SellerProductModel[]>({
     default: [],
 });
 
-// sellerProduct 생성 상태
-export const sellerProductState = atom<SellerProductModel>({
-    key: 'sellerProductState',
-    default: new SellerProductModel({}),
-});
+// // sellerProduct 생성 상태
+// export const sellerProductState = atom<SellerProductModel>({
+//     key: 'sellerProductState',
+//     default: new SellerProductModel({}),
+// });

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/react';
 import { optimizePriceInService } from '@/src/services/aiService';
 import { useState, useEffect } from 'react';
-import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Card = styled.div`
@@ -89,7 +89,7 @@ export default function AiOptimizer() {
                 const responseData = await optimizePriceInService(
                     sellerProduct.name ?? '',
                     sellerProduct.grade ?? '',
-                    sellerProduct.amount,
+                    sellerProduct.quantity,
                 );
                 console.log(responseData);
                 setPredictedPrice(responseData.predicted_price);

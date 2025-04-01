@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LuSearch } from 'react-icons/lu';
 import { useCategory } from '@/src/hooks/useCategory';
-import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
-import SellerProductModel from '@/src/models/SellerProductModel';
+import ProductModel from '@/src/models/ProductModel';
 
 export default function SellerSalesListAddProductGetCategory() {
     const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
@@ -36,7 +36,7 @@ export default function SellerSalesListAddProductGetCategory() {
 
     const handleCategoryClick = (id: number, name: string) => {
         setSellerProduct(
-            (prev) => new SellerProductModel({ ...prev, categoryId: id, categoryName: name }),
+            (prev) => new ProductModel({ ...prev, category: id, categoryName: name }),
         );
         navigate('/seller-saleslist-addproduct');
     };

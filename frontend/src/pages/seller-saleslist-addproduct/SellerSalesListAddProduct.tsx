@@ -1,13 +1,13 @@
 import styles from './SellerSalesListAddProduct.module.css';
 import BackButtonForAddProduct from './components/BackButtonForAddProduct';
-import { sellerProductState } from '@/src/recoil/sellerProductState';
+import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
-import { uploadProductImageInService } from '@/src/services/productService';
+import ProductModel from '@/src/models/ProductModel';
+import { uploadProductImageInService } from '@/src/services/sellerProductService';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
-import SellerProductModel from '@/src/models/SellerProductModel';
 import BasicButton from './components/BasicButton';
 
 export default function SellerSalesListAddProduct() {
@@ -16,7 +16,7 @@ export default function SellerSalesListAddProduct() {
     const navigate = useNavigate();
 
     const {state} = useLocation();
-    const selectedCategoryId = sellerProduct.categoryId;
+    const selectedCategoryId = sellerProduct.category;
     const selectedCategoryName = sellerProduct.categoryName;
     const prevPath = state?.prevPath;
 
@@ -33,7 +33,7 @@ export default function SellerSalesListAddProduct() {
 
     useEffect(() => {
         if (prevPath === '/seller-saleslist') {
-            setSellerProduct(new SellerProductModel({}));
+            setSellerProduct(new ProductModel({}));
         }
     }, []);
 
@@ -41,7 +41,7 @@ export default function SellerSalesListAddProduct() {
         if (sellerProduct) {
             setName(sellerProduct.name || '');
             setGrade(sellerProduct.grade || '');
-            setNumber(sellerProduct.amount || undefined);
+            setNumber(sellerProduct.quantity || undefined);
 
             // 등급 버튼 상태도 동기화
             const index = gradeArr.indexOf(sellerProduct.grade ?? '');
@@ -76,9 +76,9 @@ export default function SellerSalesListAddProduct() {
 
                 if (uploadedImageUrl) {
                     setSellerProduct((prev) => {
-                        if (!prev) return new SellerProductModel({ images: [uploadedImageUrl] });
+                        if (!prev) return new ProductModel({ images: [uploadedImageUrl] });
 
-                        return new SellerProductModel({
+                        return new ProductModel({
                             ...prev,
                             images: [...(prev.images || []), uploadedImageUrl],
                         });
@@ -107,7 +107,7 @@ export default function SellerSalesListAddProduct() {
 
     const handleClickCategoryButton = () => {
         setSellerProduct(
-            (prev) => new SellerProductModel({ ...prev, name: name, grade: grade, amount: number }),
+            (prev) => new ProductModel({ ...prev, name: name, grade: grade, quantity: number }),
         );
         navigate('/seller-saleslist-addproduct-getcategory');
     };
@@ -115,12 +115,12 @@ export default function SellerSalesListAddProduct() {
     const handleClickConfirmButton = () => {
         setSellerProduct(
             (prev) =>
-                new SellerProductModel({
+                new ProductModel({
                     ...prev,
-                    categoryId: selectedCategoryId,
+                    category: selectedCategoryId,
                     name: name,
                     grade: grade,
-                    amount: number,
+                    quantity: number,
                 }),
         );
         navigate('/seller-saleslist-productdetail', {
