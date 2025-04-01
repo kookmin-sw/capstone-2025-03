@@ -1,3 +1,4 @@
+import ProductModel from '@/src/models/ProductModel';
 import styled from '@emotion/styled';
 
 const Item = styled.div`
@@ -38,29 +39,16 @@ const Price = styled.p`
     font-weight: bold;
 `;
 
-type ProductItemProps = {
-    product: {
-        id: string;
-        name: string;
-        grade: string;
-        amount: number;
-        price: number | null;
-        thumbnail: string;
-    };
-};
-
-export default function ProductItem({ product }: ProductItemProps) {
+export default function ProductItem({ product }: { product: ProductModel }) {
     return (
         <Item>
-            <Thumbnail src={product.thumbnail} />
+            <Thumbnail src={product.images[0]} />
             <ContentContainer>
                 <Title>{product.name}</Title>
                 <GradeAndAmount>
-                    {product.grade} ∙ {product.amount}개
+                    {product.grade} 등급 ∙ {product.quantity} 개
                 </GradeAndAmount>
-                <Price>
-                    {product.price !== null ? `${product.price.toLocaleString()}원` : '가격 미정'}
-                </Price>
+                <Price>{product.price} 원</Price>
             </ContentContainer>
         </Item>
     );

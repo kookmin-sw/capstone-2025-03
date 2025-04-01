@@ -9,6 +9,7 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
  *
  * @param {string | null} nextPageUrl - 다음 페이지 URL (null이면 첫 페이지 요청)
  * @param {number} pageSize - 한 페이지에 불러올 패키지 개수
+ * @param {string} industry - 업종
  * @returns {Promise<{
 *   results: PackageModel[];       // 파싱된 패키지 모델 리스트
 *   next: string | null;           // 다음 페이지 URL (더 이상 없으면 null)
@@ -17,21 +18,19 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
 export const getPackageListInService = async (
     nextPageUrl: string | null,
     pageSize: number,
-    industry: number | null,
+    industry: string,
 ): Promise<{
     results: PackageModel[];
     next: string | null;
 } | null> => {
     try {
         // industry가 있을 때만 params에 포함
-        const params: Record<string, any> = {
-            page_size: pageSize,
-            ...(industry !== null && { industry }),
-        };
-
+        const params: any = {page_size: pageSize};
+        if(industry!='all'){
+            params.industry = industry
+        }
         const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
         const response = await axios.get(requestUrl, { params });
-
         const data = response.data;
 
         return {

@@ -1,6 +1,6 @@
 import styles from './SellerSalesListProductDetail.module.css';
 import BackHeader from '@/src/components/layout/BackHeader';
-import ProductItem from '@/src/components/ui/ProductItem';
+import PrevProductItem from '@/src/components/ui/PrevProductItem';
 import AiOptimizer from './components/AiOptimizer';
 import PriceInput from './components/PriceInput';
 import CompleteSection from '@/src/components/layout/CompleteSection';
@@ -9,6 +9,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSellerProduct } from '@/src/contexts/SellerProductContext';
 import SellerProductModel from '@/src/models/SellerProductModel';
+
+
+// =====================================
+// TODO:
+//      - @김용희
+//      - PrevProductItem -> ProductItem
+//      - PrevProductItem 삭제
+// =====================================
 
 type Product = {
     id: string;
@@ -97,7 +105,7 @@ export default function SellerSalesListProductDetail() {
             <div className={styles.section}>
                 <p className={styles.title}>가격을 입력해주세요</p>
 
-                <ProductItem product={product} />
+                <PrevProductItem product={product} />
                 <AiOptimizer name={product.name} grade={product.grade} amount={product.amount} />
                 <PriceInput price={product.price} setPrice={handlePriceChange} />
                 <button

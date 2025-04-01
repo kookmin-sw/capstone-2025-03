@@ -48,7 +48,7 @@ export const SellerProductProvider = ({ children }: { children: ReactNode }) => 
         try {
             const productList = await getUserProductListInService(id);
             console.log(productList);
-            return productList;
+            return productList.results;
         } catch (error) {
             console.error('Error getting productlist', error);
             return null;

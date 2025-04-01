@@ -4,6 +4,7 @@ import SearchIconImage from '../../assets/images/header/search.png';
 
 const Header = styled.div`
     position: fixed;
+    z-index: 999;
     top: 0;
     width: 100%;
     background-color: #18171d;
