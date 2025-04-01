@@ -25,7 +25,6 @@ export default function SellerSalesList() {
 
     const currentMenuIndex = 1;
 
-
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
@@ -57,7 +56,7 @@ export default function SellerSalesList() {
     }, []);
 
     useEffect(() => {
-        if (!sellerId) return;
+        if (!sellerId || products.length > 0) return;
 
         const fetchProducts = async () => {
             if (sellerId) {

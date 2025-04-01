@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
 import { useProduct } from '@/src/hooks/useProduct';
+import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import ProductModel from '@/src/models/ProductModel';
 
 export default function SellerSalesListProductDetail() {
@@ -21,6 +22,7 @@ export default function SellerSalesListProductDetail() {
     const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
 
     const { createProduct } = useProduct();
+    const { loadProduct } = useSellerProduct(Number(sellerId));
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -51,6 +53,7 @@ export default function SellerSalesListProductDetail() {
 
         try {
             await createProduct(sellerProduct);
+            await loadProduct();
             setIsComplete(true);
             navigate('/seller-saleslist');
         } catch (error) {
