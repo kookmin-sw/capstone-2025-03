@@ -53,11 +53,6 @@ export default function SellerSalesList() {
             const userData = JSON.parse(storedUser);
             setSellerId(userData.id);
         }
-    }, []);
-
-    useEffect(() => {
-        if (!sellerId || products.length > 0) return;
-
         const fetchProducts = async () => {
             if (sellerId) {
                 try {
@@ -104,7 +99,7 @@ export default function SellerSalesList() {
             state: { product: product.toJson() },
         });
     };
-
+    console.log(isLoading)
     return (
         <div className={styles.page}>
             {isHeaderVisible && <MainHeader />}
