@@ -31,13 +31,10 @@ export default function SellerSalesListAddProductGetCategory() {
         };
 
         fetchCatogories();
-
     }, []);
 
     const handleCategoryClick = (id: number, name: string) => {
-        setSellerProduct(
-            (prev) => new ProductModel({ ...prev, category: id, categoryName: name }),
-        );
+        setSellerProduct((prev) => new ProductModel({ ...prev, category: id, categoryName: name }));
         navigate('/seller-saleslist-addproduct');
     };
 
@@ -67,11 +64,11 @@ export default function SellerSalesListAddProductGetCategory() {
                     <button
                         key={category.id}
                         className={styles.button}
-                        onClick={() =>
-                            category.id !== null &&
-                            category.name !== null &&
-                            handleCategoryClick(category.id, category.name)
-                        }
+                        onClick={() => {
+                            if (category.id !== null && category.name !== null) {
+                                handleCategoryClick(category.id, category.name);
+                            }
+                        }}
                     >
                         <div className={styles.categoryItem}>
                             <img
