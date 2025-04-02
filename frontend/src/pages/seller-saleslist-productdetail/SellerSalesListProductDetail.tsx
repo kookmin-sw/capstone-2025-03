@@ -7,7 +7,7 @@ import CompleteSection from '@/src/components/layout/CompleteSection';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { sellerProductState } from '@/src/recoil/productState';
+import { sellerProductState, shouldReloadSellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
 import { useProduct } from '@/src/hooks/useProduct';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
@@ -20,7 +20,7 @@ export default function SellerSalesListProductDetail() {
     const [sellerId, setSellerId] = useState<number>();
 
     const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
-
+    const [, setShouldReload] = useRecoilState(shouldReloadSellerProductState)
     const { createProduct } = useProduct();
     const { loadProduct } = useSellerProduct(Number(sellerId));
 
@@ -53,7 +53,7 @@ export default function SellerSalesListProductDetail() {
 
         try {
             await createProduct(sellerProduct);
-            await loadProduct();
+            setShouldReload(true)
             setIsComplete(true);
             navigate('/seller-saleslist');
         } catch (error) {

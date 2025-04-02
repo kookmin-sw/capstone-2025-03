@@ -18,3 +18,8 @@ export const sellerProductState = atom<ProductModel>({
     key: 'sellerProductState',
     default: new ProductModel({}),
 });
+
+export const shouldReloadSellerProductState = atom<boolean>({
+    key: 'shouldReloadSellerProductState',
+    default: false,
+});

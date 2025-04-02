@@ -53,6 +53,12 @@ export default function SellerSalesList() {
             const userData = JSON.parse(storedUser);
             setSellerId(userData.id);
         }
+    }, [])
+    
+    console.log(products.length)
+    useEffect(() => {
+        if (!sellerId) return;
+
         const fetchProducts = async () => {
             if (sellerId) {
                 try {
