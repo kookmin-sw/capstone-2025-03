@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import { optimizePriceInService } from '@/src/services/aiService';
 import { useState, useEffect } from 'react';
 import { sellerProductState } from '@/src/recoil/productState';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 const Card = styled.div`
     background-color: #202028;
@@ -118,7 +118,7 @@ export default function AiOptimizer() {
             <StatsContainer>
                 <Stat>
                     <StatTitle>
-                        업로드한 제품과 함께 많이 찾는 에스프레소 머신은 중고로 아래 가격대에서 잘
+                        업로드한 제품과 함께 많이 찾는 {sellerProduct.name}은 중고로 아래 가격대에서 잘
                         판매될 것으로 예상됩니다.
                     </StatTitle>
                     <StatValue>{predictedPrice?.toLocaleString()}원</StatValue>

@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil';
 import ProductModel from '@/src/models/ProductModel';
 
 export default function SellerSalesListAddProductGetCategory() {
-    const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
+    const [, setSellerProduct] = useRecoilState(sellerProductState);
 
     const navigate = useNavigate();
 
