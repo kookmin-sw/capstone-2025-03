@@ -53,9 +53,8 @@ export default function SellerSalesList() {
             const userData = JSON.parse(storedUser);
             setSellerId(userData.id);
         }
-    }, [])
-    
-    console.log(products.length)
+    }, []);
+
     useEffect(() => {
         if (!sellerId) return;
 
@@ -78,7 +77,7 @@ export default function SellerSalesList() {
 
     useEffect(() => {
         if (!loadMoreRef.current || isLoadMoreLoading) return;
-        console.log(isLoadMoreLoading);
+
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting) {
@@ -105,7 +104,7 @@ export default function SellerSalesList() {
             state: { product: product.toJson() },
         });
     };
-    console.log(isLoading)
+
     return (
         <div className={styles.page}>
             {isHeaderVisible && <MainHeader />}
@@ -124,7 +123,10 @@ export default function SellerSalesList() {
                     ) : (
                         products.map((products: ProductModel, index: number) => {
                             return (
-                                <div onClick={() => handleProductItemClick(products)}>
+                                <div
+                                    key={products.id}
+                                    onClick={() => handleProductItemClick(products)}
+                                >
                                     <SellerProductItem key={index} product={products} />
                                 </div>
                             );

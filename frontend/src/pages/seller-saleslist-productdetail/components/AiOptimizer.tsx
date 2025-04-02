@@ -91,7 +91,6 @@ export default function AiOptimizer() {
                     sellerProduct.grade ?? '',
                     sellerProduct.quantity,
                 );
-                console.log(responseData);
                 setPredictedPrice(responseData.predicted_price);
             } catch (error) {
                 console.log('Error Optimizing price: ', error);
@@ -118,7 +117,7 @@ export default function AiOptimizer() {
             <StatsContainer>
                 <Stat>
                     <StatTitle>
-                        업로드한 제품과 함께 많이 찾는 {sellerProduct.name}은 중고로 아래 가격대에서 잘
+                        업로드한 제품과 함께 많이 찾는 {sellerProduct.categoryName}은(는) 중고로 아래 가격대에서 잘
                         판매될 것으로 예상됩니다.
                     </StatTitle>
                     <StatValue>{predictedPrice?.toLocaleString()}원</StatValue>
