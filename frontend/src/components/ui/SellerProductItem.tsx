@@ -55,23 +55,23 @@ const StatusTag = styled.span<{ status: string }>`
 
 type ProductItemProps = {
     product: {
-        buyer: number | null;
-        category: number | null;
+        buyerId: number | null;
+        categoryId: number | null;
         description: string | null;
         grade: string | null;
         images: string[];
         name: string | null;
-        price?: number | null;
+        price: number | null;
         purchaseDate: string | null;
         quantity: number;
-        salesStatus: string | null;
-        seller: number | null;
+        saleStatus: string | null;
+        sellerId: number | null;
         uploadDate: string | null;
     };
 };
 
 export default function SellerProductItem({ product }: ProductItemProps) {
-    const status = product.salesStatus === 'available' ? '판매 중' : '판매 완료';
+    const status = product.saleStatus === 'available' ? '판매 중' : '판매 완료';
     // console.log(product.saleStatus)
     return (
         <Item>

@@ -1,30 +1,26 @@
-// sellerProductListState 에 대한 커스텀 훅
+// sellerProductState 에 대한 커스텀 훅
 import { useRecoilState } from 'recoil';
-import { sellerProductListState, shouldReloadSellerProductState } from '../recoil/productState';
+import { sellerProductState } from '../recoil/sellerProductState';
 import { getUserProductListInService } from '../services/sellerProductService';
 import { sellerProductPaginationSate } from '../recoil/sellerProductPaginationState';
-import ProductModel from '../models/ProductModel';
+import SellerProductModel from '../models/SellerProductModel';
 import axios from 'axios';
 
 export const useSellerProduct = (sellerId: number) => {
-    const [products, setProducts] = useRecoilState(sellerProductListState);
+    const [products, setProducts] = useRecoilState(sellerProductState);
     const [pagination, setPagination] = useRecoilState(sellerProductPaginationSate);
-    const [shouldReload, setShouldReload] = useRecoilState(shouldReloadSellerProductState);
+
     // 최초 물품 로딩
     const loadProduct = async () => {
-        if (products.length > 0 && !shouldReload) return;
-
         try {
             const response = await getUserProductListInService(sellerId);
 
-            const convertedProducts = response.results.map((p) => ProductModel.fromJson(p));
+            const convertedProducts = response.results.map((p) => SellerProductModel.fromJson(p));
 
             setProducts(convertedProducts);
             setPagination({ next: response.next, hasMore: Boolean(response.next) });
         } catch (error) {
             console.error('상품 불러오기 실패: ', error);
-        } finally {
-            setShouldReload(false)
         }
     };
 
@@ -35,9 +31,7 @@ export const useSellerProduct = (sellerId: number) => {
         try {
             const response = await axios.get(pagination.next);
 
-            const nextProducts = response.data.results.map((p: ProductModel) =>
-                ProductModel.fromJson(p),
-            );
+            const nextProducts = response.data.results.map((p: any) => SellerProductModel.fromJson(p));
 
             setProducts((prev) => [...prev, ...nextProducts]);
             setPagination({ next: response.data.next, hasMore: Boolean(response.data.next) });

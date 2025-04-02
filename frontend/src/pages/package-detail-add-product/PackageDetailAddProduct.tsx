@@ -90,7 +90,7 @@ export default function PackageDetailAddProduct() {
         );
         navigate(-1);
     };
-    
+
     return (
         <div className={styles.page}>
             <SearchHeader text={category.name || ''} />

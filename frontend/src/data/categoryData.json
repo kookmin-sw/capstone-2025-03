@@ -1,673 +1,8 @@
 [
     {
-        "id": 51,
-        "name": "업소용 청소기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/21/1099709337/1742526603992_001_aUlvV.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5,
-            25
-        ]
-    },
-    {
-        "id": 68,
-        "name": "방향제",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100750052/1743350448320_002_PNaDD.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5,
-            9,
-            10,
-            11,
-            15,
-            25
-        ]
-    },
-    {
-        "id": 70,
-        "name": "레이저 커터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/09/28/1078900989/1727514987359_004_KsCL5.jpg",
-        "industries": [
-            22,
-            28
-        ]
-    },
-    {
-        "id": 71,
-        "name": "CNC 조각기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100598916/1743228311921_003_Qg2MJ.jpg",
-        "industries": [
-            22,
-            28
-        ]
-    },
-    {
-        "id": 77,
-        "name": "가스레인지",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100732457/1743335936646_004_722Xe.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5
-        ]
-    },
-    {
-        "id": 103,
-        "name": "싱크대",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100627857/1743247297422_001_RJ9sL.jpg",
-        "industries": [
-            1,
-            2,
-            3,
-            4,
-            9
-        ]
-    },
-    {
-        "id": 113,
-        "name": "수저통 테이블",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/11/1095476518/1739248531858_003_Swcgq.jpg",
-        "industries": [
-            1
-        ]
-    },
-    {
-        "id": 114,
-        "name": "숯불 테이블",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100461460/1743123811369_000_padPF.jpg",
-        "industries": [
-            1
-        ]
-    },
-    {
-        "id": 119,
-        "name": "포크",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100750761/1743351679532_002_5vu8t.jpg",
-        "industries": [
-            1
-        ]
-    },
-    {
-        "id": 122,
-        "name": "카트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100753900/1743364455710_005_Obnis.jpg",
-        "industries": [
-            1,
-            2
-        ]
-    },
-    {
-        "id": 155,
-        "name": "골프클럽 거치대",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/05/1094838571/1738738597559_001_8v8HH.jpg",
-        "industries": [
-            20
-        ]
-    },
-    {
-        "id": 161,
-        "name": "휴대용 POS기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/07/1098177136/1741334617013_002_UOswh.jpg",
-        "industries": [
-            2,
-            8,
-            23
-        ]
-    },
-    {
-        "id": 163,
-        "name": "전기 튀김기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/22/1099806001/1742607519359_002_jiVnh.jpg",
-        "industries": [
-            1,
-            8,
-            23,
-            24
-        ]
-    },
-    {
-        "id": 164,
-        "name": "보온통",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/26/1100230366/1742945625656_002_1PR6N.jpg",
-        "industries": [
-            1,
-            2,
-            23,
-            27
-        ]
-    },
-    {
-        "id": 171,
-        "name": "뽑기 기계",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100496554/1743141372579_001_ZyHFe.jpg",
-        "industries": [
-            17
-        ]
-    },
-    {
-        "id": 177,
-        "name": "라면 기계",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/25/1100178002/1742891133808_001_V37Cj.jpeg",
-        "industries": [
-            12,
-            1,
-            8
-        ]
-    },
-    {
-        "id": 180,
-        "name": "업소용 튀김기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/24/1100048684/1742796306980_001_Ag7ZV.jpg",
-        "industries": [
-            1,
-            2
-        ]
-    },
-    {
-        "id": 182,
-        "name": "빔 프로젝터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100752173/1743355788290_004_Ge0Ae.jpg",
-        "industries": [
-            13,
-            25
-        ]
-    },
-    {
-        "id": 198,
-        "name": "회의용 테이블",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100588862/1743222512452_001_3dDbr.jpg",
-        "industries": [
-            13,
-            22,
-            25,
-            27,
-            28
-        ]
-    },
-    {
-        "id": 211,
-        "name": "러그",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100756609/1743372812841_008_Bi7UT.jpg",
-        "industries": [
-            13,
-            17,
-            20,
-            22,
-            27
-        ]
-    },
-    {
-        "id": 223,
-        "name": "테이프 디스펜서",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/20/1099582883/1742432948033_003_ZyOzz.jpg",
-        "industries": [
-            6,
-            7,
-            21,
-            26
-        ]
-    },
-    {
-        "id": 236,
-        "name": "애견 드라이기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/09/12/1076357012/1726117298529_001_9tPVm.jpg",
-        "industries": [
-            6,
-            14,
-            21
-        ]
-    },
-    {
-        "id": 238,
-        "name": "장난감",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100750348/1743350953608_001_tvhBs.jpg",
-        "industries": [
-            6,
-            14,
-            21
-        ]
-    },
-    {
-        "id": 246,
-        "name": "파워랙",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100500328/1743143345822_003_q15M8.jpeg",
-        "industries": [
-            19
-        ]
-    },
-    {
-        "id": 258,
-        "name": "부츠 건조기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/25/1100212621/1742913065246_001_BzYtE.jpg",
-        "industries": [
-            16
-        ]
-    },
-    {
-        "id": 260,
-        "name": "음료 자판기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100618899/1743240823569_008_6p2tM.jpg",
-        "industries": [
-            7,
-            8,
-            13,
-            15,
-            16,
-            18,
-            19
-        ]
-    },
-    {
-        "id": 282,
-        "name": "이동식 컨베이어 벨트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/04/08/1049872702/1712568568426_003_uTsma.jpg",
-        "industries": [
-            21
-        ]
-    },
-    {
-        "id": 283,
-        "name": "저온저장고",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100702981/1743317459665_001_7OeFY.jpg",
-        "industries": [
-            6,
-            21
-        ]
-    },
-    {
-        "id": 285,
-        "name": "완충재",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/05/07/1054833472/1715066267260_001_6FMTy.jpg",
-        "industries": [
-            6,
-            21
-        ]
-    },
-    {
-        "id": 287,
-        "name": "래핑기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/09/22/1077782917/1726961312748_003_wOZud.jpg",
-        "industries": [
-            21
-        ]
-    },
-    {
-        "id": 297,
-        "name": "네일 드릴",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/19/1099451619/1742323876190_002_eBa08.jpg",
-        "industries": [
-            9,
-            10,
-            11
-        ]
-    },
-    {
-        "id": 307,
-        "name": "전자 저울",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/26/1100255911/1742958493864_003_5jooA.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            6,
-            21
-        ]
-    },
-    {
-        "id": 308,
-        "name": "도난 방지 태그",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/05/18/1056692499/1716013027007_002_vWRHb.jpg",
-        "industries": [
-            6,
-            21
-        ]
-    },
-    {
-        "id": 134,
-        "name": "피부 기초 스킨 케어",
-        "thumbnail": "https://www.cncnews.co.kr/data/photos/20220623/art_16545873519557_fee205.jpg",
-        "industries": [
-            9,
-            10
-        ]
-    },
-    {
-        "id": 28,
-        "name": "머리카락 털이용 스펀지",
-        "thumbnail": "https://media.bunjang.co.kr/product/272809301_1_1718716408_w360.jpg",
-        "industries": [
-            9,
-            10,
-            11
-        ]
-    },
-    {
-        "id": 52,
-        "name": "다기능 청소카트",
-        "thumbnail": "https://qi-o.qoo10cdn.com/goods_image_big/8/3/2/0/11858948320_l.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5,
-            25
-        ]
-    },
-    {
-        "id": 62,
-        "name": "전자출입문 시스템",
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4AjQkN246koxfmyhCeYBHIkfAR1OH8BGAkw&s",
-        "industries": [
-            12,
-            1,
-            3,
-            4,
-            5,
-            6,
-            8,
-            9,
-            10,
-            11,
-            13,
-            15,
-            25
-        ]
-    },
-    {
-        "id": 64,
-        "name": "보안용 금고",
-        "thumbnail": "https://thumbnail7.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/adbe/0244d1b385666e66bf8fcf74489a74cef6d1a89b74bd0ff5a95a21a5ef5a.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5,
-            6,
-            8,
-            25
-        ]
-    },
-    {
-        "id": 67,
-        "name": "대형 유리창 청소 도구",
-        "thumbnail": "https://contents.lotteon.com/itemimage/20250110153014/LO/24/22/97/79/33/_2/42/29/77/93/5/LO2422977933_2422977935_4.jpg/dims/optimize/dims/resizemc/400x400",
-        "industries": [
-            1,
-            3,
-            4,
-            5,
-            15,
-            25
-        ]
-    },
-    {
-        "id": 72,
-        "name": "전자 회로 제작 장비",
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa_VEsBLt2shc1qJPsm_zJKqwbUUcXptRfxA&s",
-        "industries": [
-            22,
-            28
-        ]
-    },
-    {
-        "id": 73,
-        "name": "테스트 및 측정 기기",
-        "thumbnail": "https://shinhosys.mycafe24.com/wp-content/uploads/2021/10/Sub_%EB%9D%BC%EC%9D%B8%EA%B2%80%EC%82%AC%EC%9E%A5%EB%B9%84_%EC%86%8C%EA%B0%9C.jpg",
-        "industries": [
-            22,
-            27,
-            28
-        ]
-    },
-    {
-        "id": 140,
-        "name": "메이크업 조명 도구",
-        "thumbnail": "https://thumbnail7.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/c316/8485aa4aa121442beb3fe94a53255f8c0970130600e963d167f35f9f6327.jpg",
-        "industries": [
-            9,
-            10
-        ]
-    },
-    {
-        "id": 145,
-        "name": "화물용 래핑기",
-        "thumbnail": "https://thumbnail10.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/4dd0/bd3a4d560703542599bfbb1d6cc8f713df68c9bfba55fe61d5869734b673.jpg",
-        "industries": [
-            21,
-            26
-        ]
-    },
-    {
-        "id": 147,
-        "name": "수출입 서류 보관함",
-        "thumbnail": "https://sitem.ssgcdn.com/08/02/50/item/1000526500208_i1_750.jpg",
-        "industries": [
-            21,
-            26
-        ]
-    },
-    {
-        "id": 149,
-        "name": "무선 송장 프린터",
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPNrECXSDoKu_d8Ipt0g3IrqSBONfM7fDMw&s",
-        "industries": [
-            21,
-            26
-        ]
-    },
-    {
-        "id": 295,
-        "name": "네일 샵 책상",
-        "thumbnail": "https://thumbnail9.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/80bb/ea69c7ec532dfc71d5fe7db13fe92f5af77574bd1a611ddbea8e5a94616f.jpg",
-        "industries": [
-            9,
-            10,
-            11
-        ]
-    },
-    {
-        "id": 290,
-        "name": "무인 계산대",
-        "thumbnail": "https://shopping-phinf.pstatic.net/main_8574597/85745972656.jpg?type=f300",
-        "industries": [
-            6,
-            7,
-            21
-        ]
-    },
-    {
-        "id": 291,
-        "name": "무인 매장 출입 관리 시스템",
-        "thumbnail": "https://www.cobosys.co.kr/data/editor/2111/20211126183133_425dd35a2fa7946e2124a0ae47f22064_yby4.jpg",
-        "industries": [
-            6,
-            7,
-            21
-        ]
-    },
-    {
-        "id": 292,
-        "name": "안면인식 출입기",
-        "thumbnail": "https://kopasinc.co.kr/web/product/medium/1000000908.jpg",
-        "industries": [
-            6,
-            7,
-            21
-        ]
-    },
-    {
-        "id": 289,
-        "name": "물류용 트롤리",
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRN9V4aviR1wOl7keWcIXYaimH3rvMcDnLA&s",
-        "industries": [
-            21
-        ]
-    },
-    {
-        "id": 286,
-        "name": "박스 접착기",
-        "thumbnail": "https://s.alicdn.com/@sc04/kf/H3b0168fb6a6e4257bdcd88639abae3c7N.jpg_720x720q50.jpg",
-        "industries": [
-            6,
-            21
-        ]
-    },
-    {
-        "id": 261,
-        "name": "개인 락카 시설",
-        "thumbnail": "https://phoenixhnr.co.kr/mobile/images/ko/snowpark/facilities/photo-facilities4-4.jpg\\",
-        "industries": [
-            15,
-            16,
-            18,
-            19
-        ]
-    },
-    {
-        "id": 259,
-        "name": "비전플러스 소프트웨어",
-        "thumbnail": "https://visionpluspms.co.uk/wp-content/uploads/2019/11/76505-copy-scaled.jpg",
-        "industries": [
-            18,
-            22,
-            25,
-            27,
-            28
-        ]
-    },
-    {
-        "id": 250,
-        "name": "탈의실 락카 시설",
-        "thumbnail": "https://m.온디자인가구.com/web/product/big/202209/06530540f54ac03ecde924f1e1bc1a1b.jpg",
-        "industries": [
-            19
-        ]
-    },
-    {
-        "id": 192,
-        "name": "상품 정리용 바구니",
-        "thumbnail": "https://image.auction.co.kr/itemimage/9e/8d/a5/9e8da5073.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5,
-            6,
-            8
-        ]
-    },
-    {
-        "id": 152,
-        "name": "컨테이너 개폐 도구",
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW0LlKrBlYgSjaNkLAgnqO_Kor85hchlPUsw&s",
-        "industries": [
-            21,
-            26
-        ]
-    },
-    {
-        "id": 154,
-        "name": "트랙맨 스튜디오",
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSms_CBC1eO4rq9SrrUDGMxm-2F3fBWcj16bw&s",
-        "industries": [
-            20
-        ]
-    },
-    {
-        "id": 185,
-        "name": "프린터 및 출력 용품",
-        "thumbnail": "https://mediaserver.goepson.com/ImConvServlet/imconv/e5fe21703d951fa64f1598f97f1244aa13654a4a/1200Wx1200H?use=banner&hybrisId=B2C&assetDescr=EKL_L1210_690_460_normal",
-        "industries": [
-            12,
-            13,
-            25
-        ]
-    },
-    {
-        "id": 3,
-        "name": "아이스크림 머신",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/07/1095092613/1738930761002_001_BubCh.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5
-        ]
-    },
-    {
-        "id": 7,
-        "name": "베이킹 팬",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/22/1093402523/1737474286441_001_a5Rhb.jpg",
-        "industries": [
-            1,
-            3,
-            4,
-            5
-        ]
-    },
-    {
-        "id": 14,
-        "name": "스티커",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100751991/1743355189722_009_F4Sv2.jpg",
-        "industries": [
-            3,
-            4,
-            5,
-            6
-        ]
-    },
-    {
-        "id": 33,
-        "name": "화이트보드",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/27/1100392005/1743057944044_003_8QhA8.jpg",
-        "industries": [
-            12,
-            13
-        ]
-    },
-    {
-        "id": 35,
-        "name": "침대 프레임",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100725953/1743331652842_003_bDsig.jpg",
-        "industries": [
-            15
-        ]
-    },
-    {
-        "id": 300,
-        "name": "네일 폴리시 도구",
-        "thumbnail": "https://image.made-in-china.com/202f0j00zqTrGPILFguk/Nail-Care-Machine-DC5V-Portable-Electric-Nail-Drill-Nail-Polish-Tool.webp",
-        "industries": [
-            9,
-            10,
-            11
-        ]
-    },
-    {
-        "id": 302,
-        "name": "가스통 거치대",
-        "thumbnail": "https://safe.onoffmarket.com/data/item/201611/1478499230_l1",
-        "industries": [
-            24
-        ]
-    },
-    {
-        "id": 304,
-        "name": "이동식 네온사인",
-        "thumbnail": "https://contents.lotteon.com/itemimage/20240811130734/LO/23/50/24/13/92/_2/35/02/41/39/3/LO2350241392_2350241393_1.jpg/dims/optimize/dims/resizemc/400x400",
-        "industries": [
-            24
-        ]
-    },
-    {
         "id": 1,
         "name": "컨벤션 오븐",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/19/1096414258/1739965268432_002_qsxFI.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -678,7 +13,18 @@
     {
         "id": 2,
         "name": "전기오븐",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/06/24/1719233560507Sqv_jQH3O.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 3,
+        "name": "아이스크림 머신",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -689,7 +35,7 @@
     {
         "id": 4,
         "name": "초콜릿 템퍼링",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/02/1740890267745Prx_1xbwz.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -700,7 +46,7 @@
     {
         "id": 5,
         "name": "디저트 몰드",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/06/1091738418/1736170018072_000_USO1c_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -711,7 +57,18 @@
     {
         "id": 6,
         "name": "아이스크림 스쿱",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/21/1732192187583Nu7_BdYgH.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5
+        ]
+    },
+    {
+        "id": 7,
+        "name": "베이킹 팬",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -722,7 +79,7 @@
     {
         "id": 8,
         "name": "유산지",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/11/26/1086993400/1732556833715_000_04iLO_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -733,7 +90,7 @@
     {
         "id": 9,
         "name": "테프론 시트",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/12/1731417806178RsS_yammt.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -744,7 +101,7 @@
     {
         "id": 10,
         "name": "업소용 냉장고",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100661377/1743293719047_002_wajkF.PNG",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -755,7 +112,7 @@
     {
         "id": 11,
         "name": "냉동고",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/28/1743170016944S8H_xRMv8.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -766,7 +123,7 @@
     {
         "id": 12,
         "name": "쇼케이스 냉장고",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100695171/1743312962331_004_xOGOF.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -778,7 +135,18 @@
     {
         "id": 13,
         "name": "포장 리본",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/05/1097955753/1741165467038_001_VO3nS.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            4,
+            5,
+            6
+        ]
+    },
+    {
+        "id": 14,
+        "name": "스티커",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -789,7 +157,7 @@
     {
         "id": 15,
         "name": "미용 의자",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/28/1743145632489f0x_pmgtR.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -799,7 +167,7 @@
     {
         "id": 16,
         "name": "미용 거울",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/05/23/1057536690/1716439595156_000_i7VcE_main.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -809,7 +177,7 @@
     {
         "id": 17,
         "name": "컷트 가위",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/10/24/1082786751/1729760357586_001_VeUKK.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -819,7 +187,7 @@
     {
         "id": 18,
         "name": "드라이기",
-        "thumbnail": "https://img2.joongna.com/media/original/2021/04/11/1618116582137qed_J0R9l.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -829,7 +197,7 @@
     {
         "id": 19,
         "name": "매직기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/16/1742111670551Zph_R0uSO.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -839,7 +207,7 @@
     {
         "id": 20,
         "name": "고데기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100749986/1743350320848_000_2A2iZ_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -849,7 +217,7 @@
     {
         "id": 21,
         "name": "미용 타올",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/28/1097396599/1740723801881_000_Ljlii_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -859,7 +227,7 @@
     {
         "id": 22,
         "name": "염색 도구 세트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100688068/1743309003444_000_0ymrL_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -869,7 +237,7 @@
     {
         "id": 23,
         "name": "헤어 제품",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/29/1743236988303OOX_yWBTo.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -879,7 +247,7 @@
     {
         "id": 24,
         "name": "커트 연습용 가발",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/05/08/1715166559401mSG_k8q18.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -889,7 +257,7 @@
     {
         "id": 25,
         "name": "열펌기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/12/14/1734154696608aa4_4oUoY.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -899,7 +267,7 @@
     {
         "id": 26,
         "name": "가운",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100694853/1743312780850_001_2RYaV.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -909,7 +277,7 @@
     {
         "id": 27,
         "name": "앞치마",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100520170/1743155274116_000_7aNqH_main.JPG",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -921,9 +289,19 @@
         ]
     },
     {
+        "id": 28,
+        "name": "머리카락 털이용 스펀지",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
         "id": 29,
         "name": "태블릿",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/31/1743360459690Z0o_Q079N.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13
@@ -932,7 +310,7 @@
     {
         "id": 30,
         "name": "스터디책상 / 의자",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/11/09/1084877560/1731129330550_000_69KUs_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13
@@ -941,7 +319,7 @@
     {
         "id": 31,
         "name": "스탠드 조명",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/29/1743242827633yaf_QFZl4.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13
@@ -950,21 +328,30 @@
     {
         "id": 32,
         "name": "타이머",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/11/17416820448142BH_BCIkN.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
             5,
+            12,
             13,
             19
+        ]
+    },
+    {
+        "id": 33,
+        "name": "화이트보드",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            13
         ]
     },
     {
         "id": 34,
         "name": "귀마개",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/06/1738829022575iH1_cFw3l.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -972,9 +359,17 @@
         ]
     },
     {
+        "id": 35,
+        "name": "침대 프레임",
+        "thumbnail": "NULL",
+        "industries": [
+            15
+        ]
+    },
+    {
         "id": 36,
         "name": "매트리스",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/30/174333123386240x_PVNkg.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -982,7 +377,7 @@
     {
         "id": 37,
         "name": "배개",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100562529/1743207921479_001_AYxrw.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -990,7 +385,7 @@
     {
         "id": 38,
         "name": "이불",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100725700/1743331479361_001_RPCtS.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -998,7 +393,7 @@
     {
         "id": 39,
         "name": "침대커버",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/19/1742372930050WmQ_HYKD0.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -1006,7 +401,7 @@
     {
         "id": 40,
         "name": "커튼",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100749371/1743349375672_000_eymLH_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -1014,7 +409,7 @@
     {
         "id": 41,
         "name": "블라인드",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/30/1743318109020eWj_iwWXd.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -1022,7 +417,7 @@
     {
         "id": 42,
         "name": "옷장",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100686711/1743308229999_005_TVzki.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -1030,7 +425,7 @@
     {
         "id": 43,
         "name": "책상",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/12/1739349029523jEF_iX9s0.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -1040,13 +435,13 @@
     {
         "id": 44,
         "name": "의자",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/27/1743037157453q0R_ORgbd.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
             5,
+            12,
             13,
             25
         ]
@@ -1054,7 +449,7 @@
     {
         "id": 45,
         "name": "소파",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100665194/1743296260498_003_JYk5f.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -1065,7 +460,7 @@
     {
         "id": 46,
         "name": "독서등",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/18/1099398630/1742281399182_003_FJc4z.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -1075,7 +470,7 @@
     {
         "id": 47,
         "name": "무드등",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/08/1741417543997TcH_V6CL0.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15,
             25
@@ -1084,7 +479,7 @@
     {
         "id": 48,
         "name": "TV",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100754408/1743367136734_001_ymqXW.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             15,
             25
@@ -1093,13 +488,13 @@
     {
         "id": 49,
         "name": "에어컨",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/26/17429602336361iJ_sN5PM.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
             5,
+            12,
             13,
             15,
             25
@@ -1108,22 +503,46 @@
     {
         "id": 50,
         "name": "공기청정기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100747121/1743347164473_002_OoW0B.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
             5,
+            12,
             13,
             15,
             25
         ]
     },
     {
+        "id": 51,
+        "name": "업소용 청소기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            25
+        ]
+    },
+    {
+        "id": 52,
+        "name": "다기능 청소카트",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            25
+        ]
+    },
+    {
         "id": 53,
         "name": "흔들의자",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/28/1740699431604rQG_SX0eT.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15,
             16
@@ -1132,7 +551,7 @@
     {
         "id": 54,
         "name": "해먹",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/10/17415850436169tB_FMyY9.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15,
             16
@@ -1141,7 +560,7 @@
     {
         "id": 55,
         "name": "바베큐 그릴",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/08/1728391177851lKx_tgQG4.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             16
@@ -1150,7 +569,7 @@
     {
         "id": 56,
         "name": "조리대",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/19/1742314386819Otu_vpRJY.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1161,7 +580,7 @@
     {
         "id": 57,
         "name": "세탁기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/29/1743243412535Hos_QKNHF.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -1169,7 +588,7 @@
     {
         "id": 58,
         "name": "건조기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/25/17429035869258KB_IMjxN.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15
         ]
@@ -1177,7 +596,7 @@
     {
         "id": 59,
         "name": "매장 조명",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/09/19/1726746950916pzl_00QuM.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1193,7 +612,7 @@
     {
         "id": 60,
         "name": "대형 거울",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/01/04/1735974637840P91_7RMXx.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -1204,7 +623,7 @@
     {
         "id": 61,
         "name": "진열대",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100687336/1743308570835_000_F3O0q_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1216,9 +635,43 @@
         ]
     },
     {
+        "id": 62,
+        "name": "전자출입문 시스템",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            15,
+            25
+        ]
+    },
+    {
         "id": 63,
         "name": "현금 보관함",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/12/11/1733890922101IEc_Da3Gf.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            8,
+            25
+        ]
+    },
+    {
+        "id": 64,
+        "name": "보안용 금고",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1232,13 +685,13 @@
     {
         "id": 65,
         "name": "고객 대기 의자",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/18/1099335712/1742225238473_000_nXZwv_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
             5,
+            12,
             13,
             25
         ]
@@ -1246,7 +699,7 @@
     {
         "id": 66,
         "name": "상업용 청소기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/20/1099610548/1742446781263_000_Kc3z3_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1256,18 +709,84 @@
         ]
     },
     {
+        "id": 67,
+        "name": "대형 유리창 청소 도구",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            15,
+            25
+        ]
+    },
+    {
+        "id": 68,
+        "name": "방향제",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            9,
+            10,
+            11,
+            15,
+            25
+        ]
+    },
+    {
         "id": 69,
         "name": "3D 프린터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100626800/1743246522630_000_E5jVN_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             22,
             28
         ]
     },
     {
+        "id": 70,
+        "name": "레이저 커터",
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            28
+        ]
+    },
+    {
+        "id": 71,
+        "name": "CNC 조각기",
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            28
+        ]
+    },
+    {
+        "id": 72,
+        "name": "전자 회로 제작 장비",
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            28
+        ]
+    },
+    {
+        "id": 73,
+        "name": "테스트 및 측정 기기",
+        "thumbnail": "NULL",
+        "industries": [
+            22,
+            27,
+            28
+        ]
+    },
+    {
         "id": 74,
         "name": "작업대",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/09/1728474260617XEs_N6MXt.jpg",
+        "thumbnail": "NULL",
         "industries": [
             22,
             28
@@ -1276,7 +795,7 @@
     {
         "id": 75,
         "name": "공업용 환풍기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/31/1094256572/1738291639789_000_qgJQz_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             22,
             28
@@ -1285,7 +804,7 @@
     {
         "id": 76,
         "name": "정밀공구",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/09/27/1078711358/1727417775267_001_huuMo.jpg",
+        "thumbnail": "NULL",
         "industries": [
             22,
             27,
@@ -1293,9 +812,20 @@
         ]
     },
     {
+        "id": 77,
+        "name": "가스레인지",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5
+        ]
+    },
+    {
         "id": 78,
         "name": "화구",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100495434/1743140769640_004_RnCZj.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1306,7 +836,7 @@
     {
         "id": 79,
         "name": "튀김기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/27/174306463241705e_BXeCu.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1317,7 +847,7 @@
     {
         "id": 80,
         "name": "냄비",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100724688/1743330847090_002_V40pu.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1328,7 +858,7 @@
     {
         "id": 81,
         "name": "프라이팬",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100704161/1743318152933_002_0TefJ.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1339,7 +869,7 @@
     {
         "id": 82,
         "name": "칼",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/25/1742908656733Rij_uJNjZ.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1350,7 +880,7 @@
     {
         "id": 83,
         "name": "가위",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100695277/1743313032046_001_fLMXF.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1361,7 +891,7 @@
     {
         "id": 84,
         "name": "도마",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/17/1742188017615zra_XZ0MM.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1372,7 +902,7 @@
     {
         "id": 85,
         "name": "계량저울",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/12/1095649857/1739368642558_000_RBLdV_main.JPG",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1383,7 +913,7 @@
     {
         "id": 86,
         "name": "믹서기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100736672/1743338669938_008_Palzn.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1394,7 +924,7 @@
     {
         "id": 87,
         "name": "주류 냉장고",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/27/1100403630/1743064773233_000_NU1xQ_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1404,7 +934,7 @@
     {
         "id": 88,
         "name": "보관용기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/03/1738513395372c01_hKGng.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1415,43 +945,43 @@
     {
         "id": 89,
         "name": "에스프레소 머신",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/06/1741271280278rYJ_1UkKp.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
+            12,
             25
         ]
     },
     {
         "id": 90,
         "name": "그라인더",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/20/17424424313218Ot_4T8jb.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
+            12,
             25
         ]
     },
     {
         "id": 91,
         "name": "제빙기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/20/17424304781368uL_MpbKe.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             2,
             3,
-            4
+            4,
+            12
         ]
     },
     {
         "id": 92,
         "name": "커피원두",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100673535/1743300932936_001_SDC3E.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4
@@ -1460,7 +990,7 @@
     {
         "id": 93,
         "name": "시럽",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/28/1743168581877tGW_cuQst.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -1470,7 +1000,7 @@
     {
         "id": 94,
         "name": "티백",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100740893/1743341667241_000_R7lVp_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -1480,7 +1010,7 @@
     {
         "id": 95,
         "name": "캐리어",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/05/1741163504763izD_xtV1l.jpg",
+        "thumbnail": "NULL",
         "industries": [
             2,
             3,
@@ -1490,7 +1020,7 @@
     {
         "id": 96,
         "name": "케잌 쇼케이스",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/17/1742171779239Lbc_lcBhd.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -1500,18 +1030,18 @@
     {
         "id": 97,
         "name": "쇼파",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100730655/1743334788272_000_b99UR_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
+            12,
             25
         ]
     },
     {
         "id": 98,
         "name": "CCTV",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100682332/1743305743916_003_OeR7g.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1526,7 +1056,7 @@
     {
         "id": 99,
         "name": "블렌더",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/26/1742957290284eD4_eMPEM.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -1536,7 +1066,7 @@
     {
         "id": 100,
         "name": "냉장 쇼케이스",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/17/1742171709217VV5_XLd6c.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -1546,7 +1076,7 @@
     {
         "id": 101,
         "name": "진열장",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100666226/1743296926113_008_osFLA.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             6,
@@ -1557,7 +1087,7 @@
     {
         "id": 102,
         "name": "선반",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100756884/1743373277559_001_mtFls.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             8,
@@ -1566,9 +1096,21 @@
         ]
     },
     {
+        "id": 103,
+        "name": "싱크대",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            3,
+            4,
+            9
+        ]
+    },
+    {
         "id": 104,
         "name": "포스기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100486700/1743136311931_000_1N99V_main.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -1580,7 +1122,7 @@
     {
         "id": 105,
         "name": "음식물 처리기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100700618/1743316115511_000_60PxY_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1588,7 +1130,7 @@
     {
         "id": 106,
         "name": "고무장갑",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/03/16/1710546675918Yc1_Zxi9D.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1596,7 +1138,7 @@
     {
         "id": 107,
         "name": "행주",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/28/1743154514303s3e_m5Gpo.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1604,7 +1146,7 @@
     {
         "id": 108,
         "name": "수건",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/19/1742336504826Wl0_lqPXt.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             15
@@ -1613,7 +1155,7 @@
     {
         "id": 109,
         "name": "대걸레",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/09/13/1726153487827m5E_70o85.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1621,7 +1163,7 @@
     {
         "id": 110,
         "name": "빗자루",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/26/1742960922911vII_x5Opa.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1629,7 +1171,7 @@
     {
         "id": 111,
         "name": "쓰레받이",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/12/23/1734946797980Jo0_zJ59x.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1637,7 +1179,23 @@
     {
         "id": 112,
         "name": "세제",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/22/1742628593879dyD_TI1e2.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            1
+        ]
+    },
+    {
+        "id": 113,
+        "name": "수저통 테이블",
+        "thumbnail": "NULL",
+        "industries": [
+            1
+        ]
+    },
+    {
+        "id": 114,
+        "name": "숯불 테이블",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1645,7 +1203,7 @@
     {
         "id": 115,
         "name": "불판 테이블",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/12/30/1090936348/1735535813841_004_rlFrF_main.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1653,7 +1211,7 @@
     {
         "id": 116,
         "name": "인덕션 테이블",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/25/1742867621451ngp_qPtuu.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1661,7 +1219,7 @@
     {
         "id": 117,
         "name": "숟가락",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/27/1743041162270VC1_IAwUG.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1669,7 +1227,15 @@
     {
         "id": 118,
         "name": "젓가락",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/23/1742732694298VDJ_c5QKj.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            1
+        ]
+    },
+    {
+        "id": 119,
+        "name": "포크",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1677,7 +1243,7 @@
     {
         "id": 120,
         "name": "나이프",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/10/1741600195841BWu_hznVv.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1685,15 +1251,24 @@
     {
         "id": 121,
         "name": "트레이",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100519961/1743155119614_000_iwkeg_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
     },
     {
+        "id": 122,
+        "name": "카트",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2
+        ]
+    },
+    {
         "id": 123,
         "name": "앞접시",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/28/1740704887793pyg_NxmO3.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1701,7 +1276,7 @@
     {
         "id": 124,
         "name": "뚝배기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/06/25/1719309683511Ar3_jZbh7.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1709,7 +1284,7 @@
     {
         "id": 125,
         "name": "냅킨",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100695250/1743313015997_000_KDyGw_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1717,7 +1292,7 @@
     {
         "id": 126,
         "name": "물병",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/30/174334378121604P_bSnol.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1725,7 +1300,7 @@
     {
         "id": 127,
         "name": "물컵",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/18/1099440683/1742306458095_001_pCcG7.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1733,7 +1308,7 @@
     {
         "id": 128,
         "name": "쓰레기통",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/21/1742566713688OhU_KJVJV.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1741,7 +1316,7 @@
     {
         "id": 129,
         "name": "카드 결제기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/06/28/1719561442601xOW_Bkh6J.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1749,7 +1324,7 @@
     {
         "id": 130,
         "name": "영수증 프린터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/24/1100019432/1742781990927_000_uey8J_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1757,7 +1332,7 @@
     {
         "id": 131,
         "name": "음악 스피커",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/12/1092389660/1736684089516_001_uCEB2.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             17
@@ -1766,7 +1341,7 @@
     {
         "id": 132,
         "name": "현금함",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/17/1096150309/1739774398627_002_HDqTY.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
@@ -1774,15 +1349,24 @@
     {
         "id": 133,
         "name": "이쑤시개",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/06/24/1062952759/1719206604068_000_yaxzp_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1
         ]
     },
     {
+        "id": 134,
+        "name": "피부 기초 스킨 케어",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10
+        ]
+    },
+    {
         "id": 135,
         "name": "립스틱",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/20/1093282546/1737381274300_001_bIyrS.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
@@ -1791,7 +1375,7 @@
     {
         "id": 136,
         "name": "틴트",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/12/22/17348104594593Fk_Jgn1k.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
@@ -1800,7 +1384,7 @@
     {
         "id": 137,
         "name": "파운데이션",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100737184/1743339023786_000_Y8DDa_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
@@ -1809,7 +1393,7 @@
     {
         "id": 138,
         "name": "컨실러",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100662665/1743294626528_002_RKtOl.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
@@ -1818,7 +1402,16 @@
     {
         "id": 139,
         "name": "메이크업 도구",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/29/1732876161459Rku_cvkgY.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10
+        ]
+    },
+    {
+        "id": 140,
+        "name": "메이크업 조명 도구",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
@@ -1827,7 +1420,7 @@
     {
         "id": 141,
         "name": "메이크업 의자",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/09/06/1075377601/1725606433902_000_YAYcz_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
@@ -1836,7 +1429,7 @@
     {
         "id": 142,
         "name": "화장대",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/24/1742822619735r8P_eAKdR.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
@@ -1845,16 +1438,61 @@
     {
         "id": 143,
         "name": "거울",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100739424/1743340629784_003_D8AEX.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10
         ]
     },
     {
+        "id": 144,
+        "name": "대형 컨테이너 박스",
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            26
+        ]
+    },
+    {
+        "id": 145,
+        "name": "화물용 래핑기",
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            26
+        ]
+    },
+    {
         "id": 146,
         "name": "진공 포장기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/19/1739929992696Qms_oJhqG.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            26
+        ]
+    },
+    {
+        "id": 147,
+        "name": "수출입 서류 보관함",
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            26
+        ]
+    },
+    {
+        "id": 148,
+        "name": "GPS 추적기",
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            26
+        ]
+    },
+    {
+        "id": 149,
+        "name": "무선 송장 프린터",
+        "thumbnail": "NULL",
         "industries": [
             21,
             26
@@ -1863,7 +1501,7 @@
     {
         "id": 150,
         "name": "스캐너",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/14/1741927026061hYC_dyqnP.jpg",
+        "thumbnail": "NULL",
         "industries": [
             21,
             26
@@ -1872,7 +1510,16 @@
     {
         "id": 151,
         "name": "핸드카트",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/25/174048451858276w_1nvkA.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            21,
+            26
+        ]
+    },
+    {
+        "id": 152,
+        "name": "컨테이너 개폐 도구",
+        "thumbnail": "NULL",
         "industries": [
             21,
             26
@@ -1881,7 +1528,23 @@
     {
         "id": 153,
         "name": "골프공 공급기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/17/1099298866/1742200325195_000_O9POP_main.JPG",
+        "thumbnail": "NULL",
+        "industries": [
+            20
+        ]
+    },
+    {
+        "id": 154,
+        "name": "트랙맨 스튜디오",
+        "thumbnail": "NULL",
+        "industries": [
+            20
+        ]
+    },
+    {
+        "id": 155,
+        "name": "골프클럽 거치대",
+        "thumbnail": "NULL",
         "industries": [
             20
         ]
@@ -1889,7 +1552,7 @@
     {
         "id": 156,
         "name": "골프채",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/21/1742531264379ZKX_U5LrM.jpg",
+        "thumbnail": "NULL",
         "industries": [
             20
         ]
@@ -1897,7 +1560,7 @@
     {
         "id": 157,
         "name": "이동식 접이식 테이블",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/12/05/1733328643901V8j_5iiER.png",
+        "thumbnail": "NULL",
         "industries": [
             23,
             24
@@ -1906,7 +1569,7 @@
     {
         "id": 158,
         "name": "대형 파라솔",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/08/29/1724921353102Lof_LBLY7.jpg",
+        "thumbnail": "NULL",
         "industries": [
             23,
             24
@@ -1915,7 +1578,7 @@
     {
         "id": 159,
         "name": "캐노피 텐트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/11/1098615990/1741676535448_000_aNgVJ_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16,
             23
@@ -1924,7 +1587,7 @@
     {
         "id": 160,
         "name": "아이스박스",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/11/1741664297265FlI_VLOze.jpg",
+        "thumbnail": "NULL",
         "industries": [
             2,
             16,
@@ -1933,9 +1596,19 @@
         ]
     },
     {
+        "id": 161,
+        "name": "휴대용 POS기",
+        "thumbnail": "NULL",
+        "industries": [
+            2,
+            8,
+            23
+        ]
+    },
+    {
         "id": 162,
         "name": "이동식 버너",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/04/1728002432543zvk_pURGk.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16,
             23,
@@ -1943,9 +1616,31 @@
         ]
     },
     {
+        "id": 163,
+        "name": "전기 튀김기",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            8,
+            23,
+            24
+        ]
+    },
+    {
+        "id": 164,
+        "name": "보온통",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            23,
+            27
+        ]
+    },
+    {
         "id": 165,
         "name": "온장고",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/24/1742795873574SDn_Fwbua.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -1957,7 +1652,7 @@
     {
         "id": 166,
         "name": "일회용 용기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/07/24/1721806907912mCl_dYImH.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -1968,7 +1663,7 @@
     {
         "id": 167,
         "name": "쓰레기통(대형)",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/04/25/1052735217/1713999544861_000_hPG37_main.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             8,
@@ -1978,7 +1673,7 @@
     {
         "id": 168,
         "name": "손 소독제",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/01/1738392363816jkr_8tUAu.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             8,
@@ -1989,7 +1684,7 @@
     {
         "id": 169,
         "name": "식기 세척제",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/05/1094884234/1738765914283_007_XlG8t.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2000,7 +1695,7 @@
     {
         "id": 170,
         "name": "위생 앞치마",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/09/16/1076892762/1726453796356_000_0vKOO_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2010,9 +1705,17 @@
         ]
     },
     {
+        "id": 171,
+        "name": "뽑기 기계",
+        "thumbnail": "NULL",
+        "industries": [
+            17
+        ]
+    },
+    {
         "id": 172,
         "name": "지폐 교환기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/17/1096160536/1739779769913_001_WRpkW.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             17,
@@ -2022,7 +1725,7 @@
     {
         "id": 173,
         "name": "PC방 모니터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/27/1100431712/1743082664468_000_CrUw2_main.png",
+        "thumbnail": "NULL",
         "industries": [
             12,
             25
@@ -2031,7 +1734,7 @@
     {
         "id": 174,
         "name": "게이밍 의자",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/27/1743077446651iYZ_6OaOj.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             25
@@ -2040,7 +1743,7 @@
     {
         "id": 175,
         "name": "컴퓨터 데스크",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/22/1742634493732pgu_puBlH.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -2050,7 +1753,7 @@
     {
         "id": 176,
         "name": "헤드셋",
-        "thumbnail": "https://img2.joongna.com/media/original/2022/05/30/1653912125712n5U_ZDF0j.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -2058,50 +1761,60 @@
         ]
     },
     {
+        "id": 177,
+        "name": "라면 기계",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            8,
+            12
+        ]
+    },
+    {
         "id": 178,
         "name": "음료 냉장고",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100578528/1743216604923_008_vnzjB.jpeg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             8,
+            12,
             17
         ]
     },
     {
         "id": 179,
         "name": "식기세척기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100734076/1743336913269_000_nv9Lo_main.JPG",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
-            4
+            4,
+            12
         ]
     },
     {
-        "id": 144,
-        "name": "대형 컨테이너 박스",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/04/27/1053116988/1714187592362_002_cOZc7.jpg",
+        "id": 180,
+        "name": "업소용 튀김기",
+        "thumbnail": "NULL",
         "industries": [
-            21,
-            26
-        ]
-    },
-    {
-        "id": 148,
-        "name": "GPS 추적기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100447521/1743113362435_001_eKrs4.jpg",
-        "industries": [
-            21,
-            26
+            1,
+            2
         ]
     },
     {
         "id": 181,
         "name": "칠판",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100666827/1743297263784_001_IgatZ.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            25
+        ]
+    },
+    {
+        "id": 182,
+        "name": "빔 프로젝터",
+        "thumbnail": "NULL",
         "industries": [
             13,
             25
@@ -2110,7 +1823,7 @@
     {
         "id": 183,
         "name": "마이크",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100754614/1743367924830_000_5gw8j_main.png",
+        "thumbnail": "NULL",
         "industries": [
             13,
             27
@@ -2119,19 +1832,29 @@
     {
         "id": 184,
         "name": "스피커",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/10/1728571971601yHv_aQqsI.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             1,
             3,
             4,
+            12,
             13
+        ]
+    },
+    {
+        "id": 185,
+        "name": "프린터 및 출력 용품",
+        "thumbnail": "NULL",
+        "industries": [
+            12,
+            13,
+            25
         ]
     },
     {
         "id": 186,
         "name": "노트북",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100757608/1743374280217_000_49yQN_main.png",
+        "thumbnail": "NULL",
         "industries": [
             13,
             25
@@ -2140,7 +1863,7 @@
     {
         "id": 187,
         "name": "무소음 마우스",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/01/20/1737360103363h4M_6nGKh.jpg",
+        "thumbnail": "NULL",
         "industries": [
             13,
             25
@@ -2149,7 +1872,7 @@
     {
         "id": 188,
         "name": "키보드",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/20/17424543883204Mt_VJYw8.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -2159,7 +1882,7 @@
     {
         "id": 189,
         "name": "바코드 스캐너",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/19/1099494857/1742358486754_000_iuJV5_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             12,
             13,
@@ -2169,7 +1892,7 @@
     {
         "id": 190,
         "name": "편의점 진열대",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/06/19/1062051077/1718750216976_000_zYN8p.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             5,
             8,
@@ -2179,7 +1902,7 @@
     {
         "id": 191,
         "name": "계산대",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/20/1742446109842Xyk_e3LtB.jpg",
+        "thumbnail": "NULL",
         "industries": [
             5,
             6,
@@ -2188,9 +1911,22 @@
         ]
     },
     {
+        "id": 192,
+        "name": "상품 정리용 바구니",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            8
+        ]
+    },
+    {
         "id": 193,
         "name": "배달 용기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/14/1098946327/1741928110029_001_COTmL.jpg",
+        "thumbnail": "NULL",
         "industries": [
             2,
             5,
@@ -2199,9 +1935,19 @@
         ]
     },
     {
+        "id": 194,
+        "name": "포장 기계",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            2,
+            23
+        ]
+    },
+    {
         "id": 195,
         "name": "뚜껑",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/19/1742394009555iz3_DOoIz.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2
@@ -2210,7 +1956,7 @@
     {
         "id": 196,
         "name": "실링칼",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2023/12/18/1030350584/1702867842777_000_OxN8c_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2220,11 +1966,11 @@
     {
         "id": 197,
         "name": "개인용 책상",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/10/24/1082714125/1729727605861_002_XAD6z.jpg",
+        "thumbnail": "NULL",
         "industries": [
-            12,
             6,
             10,
+            12,
             13,
             14,
             15,
@@ -2239,9 +1985,21 @@
         ]
     },
     {
+        "id": 198,
+        "name": "회의용 테이블",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            22,
+            25,
+            27,
+            28
+        ]
+    },
+    {
         "id": 199,
         "name": "사무용 의자",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/25/1742899436359iXF_yvD5I.jpg",
+        "thumbnail": "NULL",
         "industries": [
             13,
             22,
@@ -2253,7 +2011,7 @@
     {
         "id": 200,
         "name": "수납함",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/18/1742301853039xS4_FUjGL.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             8,
@@ -2268,7 +2026,7 @@
     {
         "id": 201,
         "name": "복합기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/07/1741317944407ZiR_o1Goe.jpg",
+        "thumbnail": "NULL",
         "industries": [
             13,
             22,
@@ -2280,7 +2038,7 @@
     {
         "id": 202,
         "name": "문서 세단기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/24/1100015958/1742780324217_002_6W4GR.jpg",
+        "thumbnail": "NULL",
         "industries": [
             22,
             25,
@@ -2291,7 +2049,7 @@
     {
         "id": 203,
         "name": "네트워크 공유기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/25/1100152537/1742877798763_000_gECFY_main.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             13,
@@ -2304,7 +2062,7 @@
     {
         "id": 204,
         "name": "랜 케이블",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/27/1100414277/1743071384838_000_egCbx_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             13,
             22,
@@ -2316,7 +2074,7 @@
     {
         "id": 205,
         "name": "PC 주변 기기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/09/18/1726666742584Rf6_6MCSP.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             13,
@@ -2329,7 +2087,7 @@
     {
         "id": 206,
         "name": "커피 머신",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100740991/1743341750769_000_eQI1c_main.png",
+        "thumbnail": "NULL",
         "industries": [
             3,
             15,
@@ -2342,7 +2100,7 @@
     {
         "id": 207,
         "name": "정수기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/06/06/1717677275735CTZ_jl838.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             13,
@@ -2357,7 +2115,7 @@
     {
         "id": 208,
         "name": "가습기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/24/1732458869217duT_6CMcd.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             13,
@@ -2370,7 +2128,7 @@
     {
         "id": 209,
         "name": "웹캠",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100757544/1743374196169_000_TNzmM_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             13,
             20,
@@ -2381,7 +2139,7 @@
     {
         "id": 210,
         "name": "USB마이크",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/14/1098984966/1741950216846_001_yjXPL.jpg",
+        "thumbnail": "NULL",
         "industries": [
             13,
             20,
@@ -2390,9 +2148,21 @@
         ]
     },
     {
+        "id": 211,
+        "name": "러그",
+        "thumbnail": "NULL",
+        "industries": [
+            13,
+            17,
+            20,
+            22,
+            27
+        ]
+    },
+    {
         "id": 212,
         "name": "미니 화분",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/14/1092555482/1736823964095_000_mOkK7_main.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             15,
@@ -2405,7 +2175,7 @@
     {
         "id": 213,
         "name": "컴퓨터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/20/1099579744/1742431359784_001_xhCtg.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             9,
@@ -2420,7 +2190,7 @@
     {
         "id": 214,
         "name": "DSLR 카메라",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/30/1743336659458MdF_tUQYB.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             13,
@@ -2433,7 +2203,7 @@
     {
         "id": 215,
         "name": "촬영용 조명",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100551402/1743189003880_000_E1V48_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             9,
@@ -2445,7 +2215,7 @@
     {
         "id": 216,
         "name": "촬영 배경지",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/10/1095362483/1739161548600_009_VYvsV.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             9,
@@ -2457,7 +2227,7 @@
     {
         "id": 217,
         "name": "무게 저울",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/12/15/1734232147723Etm_BlwGZ.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             9,
@@ -2469,7 +2239,7 @@
     {
         "id": 218,
         "name": "수납 선반",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100640791/1743256781403_000_bJnsp_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             4,
             6,
@@ -2482,7 +2252,7 @@
     {
         "id": 219,
         "name": "창고 정리함",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/09/15/1076796511/1726383216232_009_an0sS.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             6,
@@ -2497,7 +2267,7 @@
     {
         "id": 220,
         "name": "폴리백",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/04/1741017084561dJ2_d9PIG.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             8,
@@ -2510,7 +2280,7 @@
     {
         "id": 221,
         "name": "비닐백",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/04/1097768665/1741018535431_006_odyqb.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -2521,7 +2291,7 @@
     {
         "id": 222,
         "name": "테이프",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/23/1742682256028eU3_20kUk.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -2532,9 +2302,20 @@
         ]
     },
     {
+        "id": 223,
+        "name": "테이프 디스펜서",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21,
+            26
+        ]
+    },
+    {
         "id": 224,
         "name": "송장 프린터기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/08/02/1722602825824l5C_5JbvL.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -2545,7 +2326,7 @@
     {
         "id": 225,
         "name": "포장용 비닐",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/11/22/1086575727/1732247606960_000_SOBkJ_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             21,
@@ -2555,7 +2336,7 @@
     {
         "id": 226,
         "name": "택배 박스",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100682754/1743305969122_000_xSXcb_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -2568,7 +2349,7 @@
     {
         "id": 227,
         "name": "뽁뽁이",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/12/25/1735099715096WKz_bMmKR.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -2579,7 +2360,7 @@
     {
         "id": 228,
         "name": "에어캡",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/22/1732251716357hVb_IOnOc.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             21,
@@ -2589,7 +2370,7 @@
     {
         "id": 229,
         "name": "포장재",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/03/1091401851/1735901536818_000_v5uxV_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             21,
@@ -2599,7 +2380,7 @@
     {
         "id": 230,
         "name": "애견 미용 테이블",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/29/173018357527281p_ZIXi6.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -2610,7 +2391,7 @@
     {
         "id": 231,
         "name": "바리깡",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100732852/1743336183538_002_wubjo.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             14
@@ -2619,7 +2400,7 @@
     {
         "id": 232,
         "name": "강아지 샴푸",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/27/1743078200918pff_i9Svh.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             14
@@ -2628,7 +2409,7 @@
     {
         "id": 233,
         "name": "강아지 간식",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100755977/1743371775065_000_QFKJY_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             14
         ]
@@ -2636,7 +2417,7 @@
     {
         "id": 234,
         "name": "사료",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100734352/1743337090423_000_RjQin_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             14,
@@ -2646,7 +2427,17 @@
     {
         "id": 235,
         "name": "강아지 용품",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/13/1741846257223oN2_fV8E6.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
+        "id": 236,
+        "name": "애견 드라이기",
+        "thumbnail": "NULL",
         "industries": [
             6,
             14,
@@ -2656,16 +2447,26 @@
     {
         "id": 237,
         "name": "케이지",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100743904/1743344269131_002_FZVQa.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             14
         ]
     },
     {
+        "id": 238,
+        "name": "장난감",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            14,
+            21
+        ]
+    },
+    {
         "id": 239,
         "name": "배변 패드",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/27/1100434691/1743084960865_007_PZEqJ.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             14,
@@ -2675,7 +2476,7 @@
     {
         "id": 240,
         "name": "빗",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100745333/1743345628506_000_VrUwU_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             14,
@@ -2683,19 +2484,9 @@
         ]
     },
     {
-        "id": 194,
-        "name": "포장 기계",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100654620/1743286264843_001_HJ8rp.jpg",
-        "industries": [
-            1,
-            2,
-            23
-        ]
-    },
-    {
         "id": 241,
         "name": "쿠션",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100751737/1743354444673_002_SRuNJ.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             14
@@ -2704,7 +2495,7 @@
     {
         "id": 242,
         "name": "런닝머신",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/12/05/1088130877/1733383558356_000_WLRJ7_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             14,
@@ -2716,7 +2507,7 @@
     {
         "id": 243,
         "name": "천국의계단",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/26/1100240709/1742951415628_000_I82y6_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16,
             19
@@ -2725,7 +2516,7 @@
     {
         "id": 244,
         "name": "사이클",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/29/1743249817613LcT_9IZWj.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16,
             19
@@ -2734,16 +2525,24 @@
     {
         "id": 245,
         "name": "웨이트 머신",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/04/1738674833667yHq_mebfW.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16,
             19
         ]
     },
     {
+        "id": 246,
+        "name": "파워랙",
+        "thumbnail": "NULL",
+        "industries": [
+            19
+        ]
+    },
+    {
         "id": 247,
         "name": "바벨",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100745067/1743345384430_004_zNfgQ.jpg",
+        "thumbnail": "NULL",
         "industries": [
             19
         ]
@@ -2751,7 +2550,7 @@
     {
         "id": 248,
         "name": "덤벨",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100731875/1743335557242_000_fKTVT_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             19
         ]
@@ -2759,7 +2558,15 @@
     {
         "id": 249,
         "name": "원판",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100663947/1743295489566_000_o7dmf_main.png",
+        "thumbnail": "NULL",
+        "industries": [
+            19
+        ]
+    },
+    {
+        "id": 250,
+        "name": "탈의실 락카 시설",
+        "thumbnail": "NULL",
         "industries": [
             19
         ]
@@ -2767,7 +2574,7 @@
     {
         "id": 251,
         "name": "스키 부츠",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/25/17428852410516S5_B94Wy.jpg",
+        "thumbnail": "NULL",
         "industries": [
             15,
             16,
@@ -2777,7 +2584,7 @@
     {
         "id": 252,
         "name": "스키 플레이트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/24/1096923692/1740372679791_000_U569g_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16
         ]
@@ -2785,7 +2592,7 @@
     {
         "id": 253,
         "name": "보드 부츠",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/01/174080555995678R_D9TUK.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16
         ]
@@ -2793,7 +2600,7 @@
     {
         "id": 254,
         "name": "보드",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100754895/1743368959709_001_rBG0n.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16
         ]
@@ -2801,7 +2608,7 @@
     {
         "id": 255,
         "name": "헬멧",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/16/1731765457706VfZ_eLGQ3.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16
         ]
@@ -2809,7 +2616,7 @@
     {
         "id": 256,
         "name": "고글",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/20/17320940728717Q0_PnJZh.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16
         ]
@@ -2817,15 +2624,60 @@
     {
         "id": 257,
         "name": "스키복",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/01/31/1738326752096gZL_sT8X2.jpg",
+        "thumbnail": "NULL",
         "industries": [
             16
         ]
     },
     {
+        "id": 258,
+        "name": "부츠 건조기",
+        "thumbnail": "NULL",
+        "industries": [
+            16
+        ]
+    },
+    {
+        "id": 259,
+        "name": "비전플러스 소프트웨어",
+        "thumbnail": "NULL",
+        "industries": [
+            18,
+            22,
+            25,
+            27,
+            28
+        ]
+    },
+    {
+        "id": 260,
+        "name": "음료 자판기",
+        "thumbnail": "NULL",
+        "industries": [
+            7,
+            8,
+            13,
+            15,
+            16,
+            18,
+            19
+        ]
+    },
+    {
+        "id": 261,
+        "name": "개인 락카 시설",
+        "thumbnail": "NULL",
+        "industries": [
+            15,
+            16,
+            18,
+            19
+        ]
+    },
+    {
         "id": 262,
         "name": "산업용 청소기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/20/1742433387549BVF_ev2Jp.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             15,
@@ -2839,7 +2691,7 @@
     {
         "id": 263,
         "name": "발효기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100445181/1743106204557_000_280Gu_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2849,7 +2701,7 @@
     {
         "id": 264,
         "name": "반죽기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/24/1742801058761q53_8ZJMC.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2860,7 +2712,7 @@
     {
         "id": 265,
         "name": "롤러",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100747059/1743347092498_000_pZ96B_main.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -2870,7 +2722,7 @@
     {
         "id": 266,
         "name": "밀대",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/10/1739141289953xJL_Muz1X.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -2880,7 +2732,7 @@
     {
         "id": 267,
         "name": "식힘망",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/19/1096410782/1739963198333_000_GrR5Y_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -2890,7 +2742,7 @@
     {
         "id": 268,
         "name": "핸드믹서",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/22/1099804121/1742606556629_000_nHuRw_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2901,7 +2753,7 @@
     {
         "id": 269,
         "name": "거품기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/24/1100003212/1742773553103_000_I8Q28_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -2911,7 +2763,7 @@
     {
         "id": 270,
         "name": "채",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100732991/1743336266240_002_t49Xe.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2922,7 +2774,7 @@
     {
         "id": 271,
         "name": "실리콘 주걱",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/03/1730612267438ijs_O0WYL.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2933,7 +2785,7 @@
     {
         "id": 272,
         "name": "베이킹 시트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/10/06/1080267428/1728211546001_000_SIfB9_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -2943,7 +2795,7 @@
     {
         "id": 273,
         "name": "케이크 틀",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100694109/1743312332140_000_ueqwW_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -2953,7 +2805,7 @@
     {
         "id": 274,
         "name": "쿠키 커터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/31/1094262795/1738295050948_000_HmteX_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -2963,7 +2815,7 @@
     {
         "id": 275,
         "name": "짤주머니",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/12/1728722803000Abq_p29Wo.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -2973,7 +2825,7 @@
     {
         "id": 276,
         "name": "제빵용 냉동고",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/10/1731241070233lKy_62Y7D.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -2984,7 +2836,7 @@
     {
         "id": 277,
         "name": "제빵용 쇼케이스",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/30/17432916077558St_UaVEs.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3,
             4,
@@ -2994,7 +2846,7 @@
     {
         "id": 278,
         "name": "케이크 박스",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/05/14/1055945146/1715640324717_000_C6FwH_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             2,
             3,
@@ -3005,7 +2857,7 @@
     {
         "id": 279,
         "name": "쿠키 포장",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/08/22/1072781558/1724309752638_000_OquDS_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             2,
             3,
@@ -3016,7 +2868,7 @@
     {
         "id": 280,
         "name": "빵 봉투",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/11/1728625615290I28_VHcor.jpg",
+        "thumbnail": "NULL",
         "industries": [
             2,
             3,
@@ -3026,7 +2878,24 @@
     {
         "id": 281,
         "name": "적재 랙",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100549871/1743182484658_013_VtqQZ_main.png",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 282,
+        "name": "이동식 컨베이어 벨트",
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
+    },
+    {
+        "id": 283,
+        "name": "저온저장고",
+        "thumbnail": "NULL",
         "industries": [
             6,
             21
@@ -3035,24 +2904,88 @@
     {
         "id": 284,
         "name": "PDA",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/26/1100307142/1742987255709_000_3SVeQ_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             21
         ]
     },
     {
+        "id": 285,
+        "name": "완충재",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 286,
+        "name": "박스 접착기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
+        "id": 287,
+        "name": "래핑기",
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
+    },
+    {
         "id": 288,
         "name": "물류카트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/01/15/1092731182/1736943737777_000_bsUjJ_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
+            21
+        ]
+    },
+    {
+        "id": 289,
+        "name": "물류용 트롤리",
+        "thumbnail": "NULL",
+        "industries": [
+            21
+        ]
+    },
+    {
+        "id": 290,
+        "name": "무인 계산대",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21
+        ]
+    },
+    {
+        "id": 291,
+        "name": "무인 매장 출입 관리 시스템",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
+            21
+        ]
+    },
+    {
+        "id": 292,
+        "name": "안면인식 출입기",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            7,
             21
         ]
     },
     {
         "id": 293,
         "name": "UV 램프",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/26/1740573906066cgc_ze1Oh.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -3062,7 +2995,17 @@
     {
         "id": 294,
         "name": "네일 샵 의자",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100551794/1743191208911_000_Q17Vx_main.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 295,
+        "name": "네일 샵 책상",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -3072,7 +3015,17 @@
     {
         "id": 296,
         "name": "손톱깎이",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/10/1741570683360Pp1_4vbC8.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 297,
+        "name": "네일 드릴",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -3082,7 +3035,7 @@
     {
         "id": 298,
         "name": "큐티클 제거제",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/02/04/1094718848/1738650219468_000_pvxx4_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -3092,7 +3045,17 @@
     {
         "id": 299,
         "name": "네일 니퍼",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/10/05/1728119988497xyH_tAD4F.jpg",
+        "thumbnail": "NULL",
+        "industries": [
+            9,
+            10,
+            11
+        ]
+    },
+    {
+        "id": 300,
+        "name": "네일 폴리시 도구",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -3102,17 +3065,25 @@
     {
         "id": 301,
         "name": "대형 철판",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/06/23/1062801379/1719127889900_002_Ngy3z_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
+            24
+        ]
+    },
+    {
+        "id": 302,
+        "name": "가스통 거치대",
+        "thumbnail": "NULL",
+        "industries": [
             24
         ]
     },
     {
         "id": 303,
         "name": "배기 시스템",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/09/02/172526764431399E_s0ULr.JPG",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -3120,9 +3091,17 @@
         ]
     },
     {
+        "id": 304,
+        "name": "이동식 네온사인",
+        "thumbnail": "NULL",
+        "industries": [
+            24
+        ]
+    },
+    {
         "id": 305,
         "name": "스마트 도어락",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/11/1741649237239ecV_3HqAz.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -3132,7 +3111,7 @@
     {
         "id": 306,
         "name": "동전 교환기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/17/1099322457/1742215171660_000_jF1mw_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             7,
@@ -3140,9 +3119,30 @@
         ]
     },
     {
+        "id": 307,
+        "name": "전자 저울",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            3,
+            4,
+            6,
+            21
+        ]
+    },
+    {
+        "id": 308,
+        "name": "도난 방지 태그",
+        "thumbnail": "NULL",
+        "industries": [
+            6,
+            21
+        ]
+    },
+    {
         "id": 309,
         "name": "키오스크",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100708472/1743320733259_003_VampY.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             3,
@@ -3154,7 +3154,7 @@
     {
         "id": 310,
         "name": "자동커피머신",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/08/1741426557008GEE_GkNiL.jpg",
+        "thumbnail": "NULL",
         "industries": [
             3
         ]
@@ -3162,7 +3162,7 @@
     {
         "id": 311,
         "name": "LED 램프",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/30/17432748301189pW_6BqyL.jpg",
+        "thumbnail": "NULL",
         "industries": [
             9,
             10,
@@ -3170,9 +3170,23 @@
         ]
     },
     {
+        "id": 312,
+        "name": "쇼파, 테이블",
+        "thumbnail": "NULL",
+        "industries": [
+            3,
+            12,
+            15,
+            16,
+            17,
+            19,
+            20
+        ]
+    },
+    {
         "id": 313,
         "name": "냉동 쇼케이스",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/30/1743292411592FYy_wH4TE.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -3187,7 +3201,7 @@
     {
         "id": 314,
         "name": "냉장고",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/27/1743051761006hlg_9AGut.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             2,
@@ -3202,7 +3216,7 @@
     {
         "id": 315,
         "name": "오븐",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/23/1742725881594Bcb_5mK5P.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
@@ -3214,7 +3228,7 @@
     {
         "id": 316,
         "name": "전자레인지",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/28/17431394550755Ig_en6oF.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
@@ -3226,7 +3240,7 @@
     {
         "id": 317,
         "name": "온도계",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/26/1100248662/1742955102872_001_zTGXI.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
@@ -3238,7 +3252,7 @@
     {
         "id": 318,
         "name": "빨대",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/29/1100635332/1743252409612_000_UHZZL_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
@@ -3250,7 +3264,7 @@
     {
         "id": 319,
         "name": "마우스",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/31/1100753309/1743361034805_001_3NPTe.jpeg",
+        "thumbnail": "NULL",
         "industries": [
             6,
             22
@@ -3259,7 +3273,7 @@
     {
         "id": 320,
         "name": "팔레트",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100466118/1743126126510_000_goMyA_main.PNG",
+        "thumbnail": "NULL",
         "industries": [
             21
         ]
@@ -3267,7 +3281,7 @@
     {
         "id": 321,
         "name": "지게차",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100735583/1743337950320_000_Pg6wh_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             21
         ]
@@ -3275,16 +3289,25 @@
     {
         "id": 322,
         "name": "라벨 프린터",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100535555/1743166457447_002_rUYfc.jpg",
+        "thumbnail": "NULL",
         "industries": [
             21,
             22
         ]
     },
     {
+        "id": 323,
+        "name": "푸드트럭",
+        "thumbnail": "NULL",
+        "industries": [
+            1,
+            24
+        ]
+    },
+    {
         "id": 324,
         "name": "인덕션",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100701942/1743316891961_000_WcL8l_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
@@ -3295,7 +3318,7 @@
     {
         "id": 325,
         "name": "전기그릴",
-        "thumbnail": "https://img2.joongna.com/media/original/2021/08/19/16293368827010t8_Om85w.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
@@ -3306,7 +3329,7 @@
     {
         "id": 326,
         "name": "장갑",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/01/07/1736217456496tCT_yQGZS.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
@@ -3318,7 +3341,7 @@
     {
         "id": 327,
         "name": "발전기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/02/13/1739406600337bOi_U6GJX.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             16,
@@ -3329,7 +3352,7 @@
     {
         "id": 328,
         "name": "환풍기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/28/1100488778/1743137395454_000_vLV5B_main.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             16,
@@ -3340,7 +3363,7 @@
     {
         "id": 329,
         "name": "공기 정화기",
-        "thumbnail": "https://img2.joongna.com/media/original/2024/11/04/1730727746122Zua_0qAjs.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             16,
@@ -3351,53 +3374,30 @@
     {
         "id": 330,
         "name": "휘핑기",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/23/1099952309/1742718664874_003_Pykpl.png",
+        "thumbnail": "NULL",
         "industries": [
             4,
             5
-        ]
-    },
-    {
-        "id": 332,
-        "name": "반죽 용기",
-        "thumbnail": "https://img2.joongna.com/media/original/2025/03/26/1742979450815NtX_7rwJL.jpg",
-        "industries": [
-            4,
-            5
-        ]
-    },
-    {
-        "id": 312,
-        "name": "쇼파, 테이블",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/30/1100654125/1743285165267_001_wJj0o.jpg",
-        "industries": [
-            12,
-            3,
-            15,
-            16,
-            17,
-            19,
-            20
-        ]
-    },
-    {
-        "id": 323,
-        "name": "푸드트럭",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2025/03/24/1100092132/1742821612542_005_rsPHU.jpg",
-        "industries": [
-            1,
-            24
         ]
     },
     {
         "id": 331,
         "name": "일회용 수저",
-        "thumbnail": "https://img2.joongna.com/cafe-article-data/live/2024/07/20/1067286940/1721450373696_001_An0ei.jpg",
+        "thumbnail": "NULL",
         "industries": [
             1,
             4,
             5,
             8
+        ]
+    },
+    {
+        "id": 332,
+        "name": "반죽 용기",
+        "thumbnail": "NULL",
+        "industries": [
+            4,
+            5
         ]
     }
 ]

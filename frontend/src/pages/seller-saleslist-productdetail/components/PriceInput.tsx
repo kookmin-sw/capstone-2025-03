@@ -51,18 +51,6 @@ export default function PriceInput({ price, setPrice }: PriceInputProps) {
                             const value = e.target.value;
                             setPrice(value === '' ? null : Number(value));
                         }}
-                        onWheel={(e) => e.currentTarget.blur()}
-                        min={1}
-                        onKeyDown={(e) => {
-                            if (['e', 'E', '+', '-', '.'].includes(e.key)) {
-                                e.preventDefault();
-                            }
-                        }}
-                        onFocus={(e) => {
-                            if (e.target.value === '0') {
-                                e.target.value = '';
-                            }
-                        }}
                     />
                     <CurrencyText>원</CurrencyText>
                 </InputContainer>

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-const StyledButton = styled.button<{ isSelected: boolean }>`
-    background-color: ${(props) => (props.isSelected ? '#00a26c' : '#12332d')};
+const SelectedButton = styled.button`
+    background-color: #00a26c;
     border: none;
     padding: 1rem 5rem;
     border-radius: 20px;
@@ -9,16 +9,35 @@ const StyledButton = styled.button<{ isSelected: boolean }>`
     cursor: pointer;
 `;
 
+const DefaultButton = styled.button`
+    background-color: #12332d;
+    border: none;
+    padding: 1rem 5rem;
+    border-radius: 20px; /* 둥근 모양 */
+    font-size: 16px;
+    cursor: pointer;
+`;
+
 interface BasicButtonProps {
     isSelected: boolean;
-    onClick: () => void;
-    children: React.ReactNode;
+    handleClick: (index: number) => void;
+    elementIndex: number;
+    content: string;
 }
 
-export default function BasicButton({ isSelected, onClick, children }: BasicButtonProps) {
+export default function BasicButton({
+    isSelected,
+    handleClick,
+    elementIndex,
+    content,
+}: BasicButtonProps) {
     return (
-        <StyledButton isSelected={isSelected} onClick={onClick}>
-            {children}
-        </StyledButton>
+        <>
+            {isSelected ? (
+                <SelectedButton onClick={() => handleClick(elementIndex)}>{content}</SelectedButton>
+            ) : (
+                <DefaultButton onClick={() => handleClick(elementIndex)}>{content}</DefaultButton>
+            )}
+        </>
     );
 }

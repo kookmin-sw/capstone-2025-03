@@ -5,7 +5,7 @@ const Header = styled.div`
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #101012;
+    background-color: #18171d;
     padding: 2rem;
     display: flex;
     flex-direction: row;
