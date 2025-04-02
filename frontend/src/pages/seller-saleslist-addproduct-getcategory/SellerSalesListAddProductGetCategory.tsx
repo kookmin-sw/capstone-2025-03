@@ -65,6 +65,7 @@ export default function SellerSalesListAddProductGetCategory() {
             <div className={styles.container}>
                 {filteredCategories.map((category) => (
                     <button
+                        key={category.id}
                         className={styles.button}
                         onClick={() =>
                             category.id !== null &&
@@ -72,7 +73,7 @@ export default function SellerSalesListAddProductGetCategory() {
                             handleCategoryClick(category.id, category.name)
                         }
                     >
-                        <div key={category.id} className={styles.categoryItem}>
+                        <div className={styles.categoryItem}>
                             <img
                                 src={
                                     category.thumbnail !== 'NULL' && category.thumbnail
