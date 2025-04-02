@@ -1,18 +1,21 @@
 import styles from './SellerSalesListAddProductGetCategory.module.css';
 import BackButtonForGetCategory from './components/BackButtonForGetCategory';
 import LoadingSection from '@/src/components/layout/LoadingSection';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LuSearch } from 'react-icons/lu';
 import { useCategory } from '@/src/hooks/useCategory';
+import { sellerProductState } from '@/src/recoil/productState';
+import { useRecoilState } from 'recoil';
+import ProductModel from '@/src/models/ProductModel';
 
 export default function SellerSalesListAddProductGetCategory() {
+    const [, setSellerProduct] = useRecoilState(sellerProductState);
+
     const navigate = useNavigate();
-    const location = useLocation();
+
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { categories, getCategoryList } = useCategory();
-    const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
-    const [selectedCategoryName, setSelectedCategoryName] = useState<string>('');
     const [searchCategory, setSearchCategory] = useState<string>('');
 
     useEffect(() => {
@@ -28,21 +31,11 @@ export default function SellerSalesListAddProductGetCategory() {
         };
 
         fetchCatogories();
-
-        if (selectedCategoryId && selectedCategoryName) {
-            navigate('/seller-saleslist-addproduct', {
-                state: {
-                    selectedCategoryId,
-                    selectedCategoryName,
-                    prevPath: location.pathname,
-                },
-            });
-        }
-    }, [selectedCategoryId, selectedCategoryName]);
+    }, []);
 
     const handleCategoryClick = (id: number, name: string) => {
-        setSelectedCategoryId(id);
-        setSelectedCategoryName(name);
+        setSellerProduct((prev) => new ProductModel({ ...prev, category: id, categoryName: name }));
+        navigate('/seller-saleslist-addproduct');
     };
 
     const filteredCategories = categories.filter((category) =>
@@ -69,14 +62,15 @@ export default function SellerSalesListAddProductGetCategory() {
             <div className={styles.container}>
                 {filteredCategories.map((category) => (
                     <button
+                        key={category.id}
                         className={styles.button}
-                        onClick={() =>
-                            category.id !== null &&
-                            category.name !== null &&
-                            handleCategoryClick(category.id, category.name)
-                        }
+                        onClick={() => {
+                            if (category.id !== null && category.name !== null) {
+                                handleCategoryClick(category.id, category.name);
+                            }
+                        }}
                     >
-                        <div key={category.id} className={styles.categoryItem}>
+                        <div className={styles.categoryItem}>
                             <img
                                 src={
                                     category.thumbnail !== 'NULL' && category.thumbnail

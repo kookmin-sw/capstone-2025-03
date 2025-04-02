@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/react';
 import { optimizePriceInService } from '@/src/services/aiService';
 import { useState, useEffect } from 'react';
+import { sellerProductState } from '@/src/recoil/productState';
+import { useRecoilValue } from 'recoil';
 
 const Card = styled.div`
     background-color: #202028;
@@ -77,20 +79,19 @@ const StatValue = styled.p`
     color: #00a36c;
 `;
 
-interface AiOptimizerProps {
-    name: string;
-    grade: string;
-    amount: number;
-}
+export default function AiOptimizer() {
+    const sellerProduct = useRecoilValue(sellerProductState);
 
-export default function AiOptimizer({ name, grade, amount }: AiOptimizerProps) {
     const [predictedPrice, setPredictedPrice] = useState<number | null>(null);
     useEffect(() => {
         const getOptimizedPrice = async () => {
             try {
-                const responseData = await optimizePriceInService(name, grade, amount);
-                console.log(responseData);
-                setPredictedPrice(responseData.total_predicted_price);
+                const responseData = await optimizePriceInService(
+                    sellerProduct.name ?? '',
+                    sellerProduct.grade ?? '',
+                    sellerProduct.quantity,
+                );
+                setPredictedPrice(responseData.predicted_price);
             } catch (error) {
                 console.log('Error Optimizing price: ', error);
             }
@@ -116,7 +117,7 @@ export default function AiOptimizer({ name, grade, amount }: AiOptimizerProps) {
             <StatsContainer>
                 <Stat>
                     <StatTitle>
-                        업로드한 제품과 함께 많이 찾는 에스프레소 머신은 중고로 아래 가격대에서 잘
+                        업로드한 제품과 함께 많이 찾는 {sellerProduct.categoryName}은(는) 중고로 아래 가격대에서 잘
                         판매될 것으로 예상됩니다.
                     </StatTitle>
                     <StatValue>{predictedPrice?.toLocaleString()}원</StatValue>

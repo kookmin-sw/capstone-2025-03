@@ -1,37 +1,50 @@
 import styles from './SellerSalesListAddProduct.module.css';
 import BackButtonForAddProduct from './components/BackButtonForAddProduct';
+import { sellerProductState } from '@/src/recoil/productState';
+import { useRecoilState } from 'recoil';
+import ProductModel from '@/src/models/ProductModel';
+import { uploadProductImageInService } from '@/src/services/sellerProductService';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useSellerProduct } from '@/src/contexts/SellerProductContext';
 import { Spinner } from '@chakra-ui/react';
-import SellerProductModel from '@/src/models/SellerProductModel';
 import BasicButton from './components/BasicButton';
 
 export default function SellerSalesListAddProduct() {
+    // hooks
+    const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
+
+    // route
     const navigate = useNavigate();
-    const location = useLocation();
-    const { sellerProduct, uploadProductImage, setSellerProduct } = useSellerProduct();
-    const { selectedCategoryId, selectedCategoryName, prevPath } = location.state || {};
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [name, setName] = useState<string>('');
-    const [grade, setGrade] = useState<string>('');
-    const [number, setNumber] = useState<number>();
-    const [defaultImageSrc, setDefaultImageSrc] = useState<string>('');
+    const { state } = useLocation();
+
+    const selectedCategoryName = sellerProduct.categoryName;
+    const prevPath = state?.prevPath;
+
+    // useState
     const [isUploading, setIsUploading] = useState<boolean>(false);
 
+    // useRef
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+    // 버튼으로 grade 설정
+    const gradeArr = ['중고', '새상품'];
+
+    // 확인 버튼 활성화 조건
     const isButtonValid =
-        sellerProduct?.images?.[0] !== null && selectedCategoryId && name && grade && number;
+        !!sellerProduct?.images?.[0] &&
+        !!sellerProduct.category &&
+        !!sellerProduct.name &&
+        !!sellerProduct.grade &&
+        !!sellerProduct.quantity;
+
+    const imageSrc = sellerProduct.images?.[0] || '/images/seller/empty_image.png';
 
     useEffect(() => {
         if (prevPath === '/seller-saleslist') {
-            setSellerProduct(new SellerProductModel({}));
+            setSellerProduct(new ProductModel({}));
         }
     }, []);
-
-    useEffect(() => {
-        setDefaultImageSrc(sellerProduct?.images?.[0] || '/images/seller/empty_image.png');
-    }, [sellerProduct.images]);
 
     const handleAddImage = () => {
         if (fileInputRef.current) {
@@ -46,13 +59,13 @@ export default function SellerSalesListAddProduct() {
             setIsUploading(true);
 
             try {
-                const uploadedImageUrl = await uploadProductImage(file);
+                const uploadedImageUrl = await uploadProductImageInService(file);
 
                 if (uploadedImageUrl) {
                     setSellerProduct((prev) => {
-                        if (!prev) return new SellerProductModel({ images: [uploadedImageUrl] });
+                        if (!prev) return new ProductModel({ images: [uploadedImageUrl] });
 
-                        return new SellerProductModel({
+                        return new ProductModel({
                             ...prev,
                             images: [...(prev.images || []), uploadedImageUrl],
                         });
@@ -66,44 +79,12 @@ export default function SellerSalesListAddProduct() {
         }
     };
 
-    // 버튼으로 grade 설정
-    const gradeArr = ['중고', '새상품'];
-    const [isCategorySelected, setIsCategorySelected] = useState<boolean[]>(
-        Array(gradeArr.length).fill(false),
-    );
-
-    const handleClick = (index: number) => {
-        const newArr = Array(gradeArr.length).fill(false);
-        newArr[index] = true;
-        setIsCategorySelected(newArr);
-        setGrade(gradeArr[index]);
+    const handleClickCategoryButton = () => {
+        navigate('/seller-saleslist-addproduct-getcategory');
     };
 
     const handleClickConfirmButton = () => {
-        // if (grade !== '중고' && grade !== '새상품') {
-        //     alert('등급은 중고 또는 새상품 만 가능합니다');
-        //     return;
-        // }
-
-        setSellerProduct(
-            (prev) =>
-                new SellerProductModel({
-                    ...prev,
-                    categoryId: selectedCategoryId,
-                    name: name,
-                    grade: grade,
-                    quantity: number,
-                }),
-        );
-        navigate('/seller-saleslist-productdetail', {
-            state: {
-                name,
-                selectedCategoryName,
-                selectedCategoryId,
-                grade,
-                number,
-            },
-        });
+        navigate('/seller-saleslist-productdetail');
     };
 
     return (
@@ -130,18 +111,16 @@ export default function SellerSalesListAddProduct() {
                         <>
                             <img
                                 className={
-                                    defaultImageSrc !== '/images/seller/empty_image.png'
+                                    imageSrc !== '/images/seller/empty_image.png'
                                         ? styles.uploadedImage
                                         : styles.defaultImage
                                 }
-                                src={defaultImageSrc}
+                                src={imageSrc}
                                 width={
-                                    defaultImageSrc !== '/images/seller/empty_image.png'
-                                        ? '100%'
-                                        : '30px'
+                                    imageSrc !== '/images/seller/empty_image.png' ? '100%' : '30px'
                                 }
                             />
-                            {defaultImageSrc === '/images/seller/empty_image.png' ? (
+                            {imageSrc === '/images/seller/empty_image.png' ? (
                                 <span>물품 이미지를 업로드해주세요</span>
                             ) : null}
                         </>
@@ -150,55 +129,68 @@ export default function SellerSalesListAddProduct() {
                 <p className={styles.subtitle}>물품 정보</p>
                 <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
                     <input
-                        value={selectedCategoryName}
+                        value={selectedCategoryName ?? ''}
                         className={styles.input}
                         placeholder="카테고리"
                         readOnly
-                        onClick={() => navigate('/seller-saleslist-addproduct-getcategory')}
+                        onClick={handleClickCategoryButton}
                     />
                     <input
-                        value={name}
+                        value={sellerProduct.name ?? ''}
                         className={styles.input}
                         placeholder="제품명"
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) =>
+                            setSellerProduct(
+                                (prev) => new ProductModel({ ...prev, name: e.target.value }),
+                            )
+                        }
                     />
-                    {/* <input
-                        value={grade}
-                        className={styles.input}
-                        placeholder="등급 (중고 또는 새상품)"
-                        onChange={(e) => setGrade(e.target.value)}
-                    /> */}
                     <input
-                        value={number ?? ''}
+                        value={sellerProduct.quantity ?? ''}
                         type="number"
                         className={styles.input}
                         placeholder="개수"
                         onChange={(e) => {
                             const value = e.target.value;
-                            setNumber(value === "" ? undefined : Number(value));
+                            setSellerProduct(
+                                (prev) => new ProductModel({ ...prev, quantity: Number(value) }),
+                            );
+                        }}
+                        onWheel={(e) => e.currentTarget.blur()}
+                        min={1}
+                        onKeyDown={(e) => {
+                            if (['e', 'E', '+', '-', '.'].includes(e.key)) {
+                                e.preventDefault();
+                            }
                         }}
                     />
                     <div className={styles.buttonContainer}>
-                        {gradeArr.map((element, index) => {
+                        {gradeArr.map((element) => {
                             return (
                                 <BasicButton
-                                    key={index}
-                                    isSelected={isCategorySelected[index]}
-                                    handleClick={handleClick}
-                                    elementIndex={index}
-                                    content={element}
-                                />
+                                    key={element}
+                                    isSelected={sellerProduct.grade === element}
+                                    onClick={() =>
+                                        setSellerProduct(
+                                            (prev) => new ProductModel({ ...prev, grade: element }),
+                                        )
+                                    }
+                                >
+                                    {element}
+                                </BasicButton>
                             );
                         })}
                     </div>
                 </form>
-                <button
-                    className={styles.submitButton}
-                    disabled={!isButtonValid}
-                    onClick={handleClickConfirmButton}
-                >
-                    확인
-                </button>
+                <div className={styles.submitButtonSection}>
+                    <button
+                        className={styles.submitButton}
+                        disabled={!isButtonValid}
+                        onClick={handleClickConfirmButton}
+                    >
+                        확인
+                    </button>
+                </div>
             </div>
         </div>
     );

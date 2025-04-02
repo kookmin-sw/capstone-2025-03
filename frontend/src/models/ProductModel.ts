@@ -1,26 +1,28 @@
 export default class ProductModel {
     id: number | null;
     category: number | null;
+    categoryName: string | null;
     images: string[];
     name: string | null;
     description: string | null;
     grade: string | null;
     quantity: number;
-    price: number;
+    price?: number | null;
     seller: number | null;
     uploadDate: string | null;
     buyer: number | null;
     purchaseDate: string | null;
     salesStatus: string | null;
     originUrl: string | null;
-
+    
     constructor({
         id = null,
         images = [],
         category = null,
+        categoryName = null,
         name = null,
         grade = null,
-        quantity = 0,
+        quantity = undefined,
         price = 0,
         seller = null,
         uploadDate = null,
@@ -33,10 +35,11 @@ export default class ProductModel {
         id?: number | null;
         images?: string[];
         category?: number | null;
+        categoryName?: string | null;
         name?: string | null;
         grade?: string | null;
         quantity?: number;
-        price?: number;
+        price?: number | null;
         seller?: number | null;
         uploadDate?: string | null;
         buyer?: number | null;
@@ -48,6 +51,7 @@ export default class ProductModel {
         this.id = id;
         this.images = images;
         this.category = category;
+        this.categoryName = categoryName
         this.name = name;
         this.grade = grade;
         this.quantity = quantity;
