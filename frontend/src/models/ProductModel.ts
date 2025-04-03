@@ -6,7 +6,7 @@ export default class ProductModel {
     name: string | null;
     description: string | null;
     grade: string | null;
-    quantity: number;
+    quantity: number | undefined;
     price?: number | null;
     seller: number | null;
     uploadDate: string | null;
@@ -126,6 +126,12 @@ export default class ProductModel {
     }
 
     addImage(imageUrl: string): ProductModel {
-        return this.copyWith({ images: [...(this.images ?? []), imageUrl] });
+        if (!imageUrl.trim()) return this;
+        return this.copyWith({ images: [...this.images, imageUrl] });
+    }
+
+    deleteImage(imageUrl: string): ProductModel {
+        const updatedImages = this.images.filter((img) => img !== imageUrl)
+        return this.copyWith({ images: updatedImages });
     }
 }
