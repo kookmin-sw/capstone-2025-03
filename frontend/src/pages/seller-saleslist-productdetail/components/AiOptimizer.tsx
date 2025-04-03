@@ -89,7 +89,7 @@ export default function AiOptimizer() {
                 const responseData = await optimizePriceInService(
                     sellerProduct.name ?? '',
                     sellerProduct.grade ?? '',
-                    sellerProduct.quantity,
+                    sellerProduct.quantity || 0,
                 );
                 setPredictedPrice(responseData.predicted_price);
             } catch (error) {

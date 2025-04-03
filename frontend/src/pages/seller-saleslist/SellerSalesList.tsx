@@ -2,7 +2,7 @@ import styles from './SellerSalesList.module.css';
 import MainHeader from '@/src/components/layout/MainHeader';
 import Footer from '@/src/components/layout/MenuFooter';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import ProductModel from '@/src/models/ProductModel';
@@ -11,7 +11,6 @@ import { Spinner } from '@chakra-ui/react';
 export default function SellerSalesList() {
     // page connection
     const navigate = useNavigate();
-    const location = useLocation();
     // hook
     const [sellerId, setSellerId] = useState<number>();
     const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
