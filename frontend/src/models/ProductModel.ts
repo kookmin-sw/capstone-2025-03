@@ -14,7 +14,7 @@ export default class ProductModel {
     purchaseDate: string | null;
     salesStatus: string | null;
     originUrl: string | null;
-    
+
     constructor({
         id = null,
         images = [],
@@ -51,7 +51,7 @@ export default class ProductModel {
         this.id = id;
         this.images = images;
         this.category = category;
-        this.categoryName = categoryName
+        this.categoryName = categoryName;
         this.name = name;
         this.grade = grade;
         this.quantity = quantity;
@@ -119,5 +119,13 @@ export default class ProductModel {
             sales_status: this.salesStatus,
             origin_url: this.originUrl,
         };
+    }
+
+    copyWith(update: Partial<ProductModel>): ProductModel {
+        return new ProductModel({ ...this, ...update });
+    }
+
+    addImage(imageUrl: string): ProductModel {
+        return this.copyWith({ images: [...(this.images ?? []), imageUrl] });
     }
 }

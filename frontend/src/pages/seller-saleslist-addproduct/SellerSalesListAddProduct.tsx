@@ -19,7 +19,7 @@ export default function SellerSalesListAddProduct() {
     const { state } = useLocation();
 
     const selectedCategoryName = sellerProduct.categoryName;
-    const prevPath = state?.prevPath;
+    const reset = state?.reset;
 
     // useState
     const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -41,10 +41,10 @@ export default function SellerSalesListAddProduct() {
     const imageSrc = sellerProduct.images?.[0] || '/images/seller/empty_image.png';
 
     useEffect(() => {
-        if (prevPath === '/seller-saleslist') {
+        if (reset) {
             setSellerProduct(new ProductModel({}));
         }
-    }, []);
+    }, [reset, setSellerProduct]);
 
     const handleAddImage = () => {
         if (fileInputRef.current) {
@@ -62,14 +62,7 @@ export default function SellerSalesListAddProduct() {
                 const uploadedImageUrl = await uploadProductImageInService(file);
 
                 if (uploadedImageUrl) {
-                    setSellerProduct((prev) => {
-                        if (!prev) return new ProductModel({ images: [uploadedImageUrl] });
-
-                        return new ProductModel({
-                            ...prev,
-                            images: [...(prev.images || []), uploadedImageUrl],
-                        });
-                    });
+                    setSellerProduct((prev) => prev.addImage(uploadedImageUrl));
                 }
             } catch (error) {
                 alert(`상품 이미지 업로드에 실패했습니다 : ${error}`);
@@ -140,9 +133,7 @@ export default function SellerSalesListAddProduct() {
                         className={styles.input}
                         placeholder="제품명"
                         onChange={(e) =>
-                            setSellerProduct(
-                                (prev) => new ProductModel({ ...prev, name: e.target.value }),
-                            )
+                            setSellerProduct((prev) => prev.copyWith({ name: e.target.value }))
                         }
                     />
                     <input
@@ -152,9 +143,7 @@ export default function SellerSalesListAddProduct() {
                         placeholder="개수"
                         onChange={(e) => {
                             const value = e.target.value;
-                            setSellerProduct(
-                                (prev) => new ProductModel({ ...prev, quantity: Number(value) }),
-                            );
+                            setSellerProduct((prev) => prev.copyWith({ quantity: Number(value) }));
                         }}
                         onWheel={(e) => e.currentTarget.blur()}
                         min={1}
@@ -171,8 +160,8 @@ export default function SellerSalesListAddProduct() {
                                     key={element}
                                     isSelected={sellerProduct.grade === element}
                                     onClick={() =>
-                                        setSellerProduct(
-                                            (prev) => new ProductModel({ ...prev, grade: element }),
+                                        setSellerProduct((prev) =>
+                                            prev.copyWith({ grade: element }),
                                         )
                                     }
                                 >

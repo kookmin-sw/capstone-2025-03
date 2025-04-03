@@ -73,7 +73,7 @@ export default function SellerSalesList() {
         };
 
         fetchProducts();
-    }, [sellerId]);
+    }, [sellerId, loadProduct]);
 
     useEffect(() => {
         if (!loadMoreRef.current || isLoadMoreLoading) return;
@@ -95,7 +95,7 @@ export default function SellerSalesList() {
 
     const handleClickAddProductButton = () => {
         navigate('/seller-saleslist-addproduct', {
-            state: { prevPath: location.pathname },
+            state: { reset: true },
         });
     };
 
