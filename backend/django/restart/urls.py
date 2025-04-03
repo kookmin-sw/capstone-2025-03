@@ -14,7 +14,6 @@ schema_view = get_schema_view(
         description="restart api document",  # 설명
         terms_of_service="https://www.kookmin.ac.kr",  # 이용 약관 링크 (옵션)
         contact=openapi.Contact(email="habindohwan@google.com"),  # 연락처 (옵션)
-        # license=openapi.License(name="MIT License"),  # 라이선스 (옵션)
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),  # 누구나 접근 가능
