@@ -4,7 +4,6 @@ import './styles/global.css';
 import routes from './routes';
 import { UserProvider } from './contexts/UserContext';
 import { CategoryProvider } from './contexts/CategoryContext';
-import { SellerProductProvider } from './contexts/SellerProductContext';
 
 export default function App() {
     return (
@@ -28,16 +27,14 @@ export function MainLayout() {
     return (
         <UserProvider>
             <CategoryProvider>
-                <SellerProductProvider>
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <Routes>
-                                    {routes.map(({ path, Component }) => (
-                                        <Route key={path} path={path} element={<Component />} />
-                                    ))}
-                                    <Route path="*" element={<Navigate to="/" />} />
-                                </Routes>
-                            </Suspense>
-                </SellerProductProvider>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Routes>
+                        {routes.map(({ path, Component }) => (
+                            <Route key={path} path={path} element={<Component />} />
+                        ))}
+                        <Route path="*" element={<Navigate to="/" />} />
+                    </Routes>
+                </Suspense>
             </CategoryProvider>
         </UserProvider>
     );
