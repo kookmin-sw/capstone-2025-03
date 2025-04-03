@@ -6,7 +6,7 @@ export default class ProductModel {
     name: string | null;
     description: string | null;
     grade: string | null;
-    quantity: number;
+    quantity: number | null;
     price?: number | null;
     seller: number | null;
     uploadDate: string | null;
@@ -14,7 +14,7 @@ export default class ProductModel {
     purchaseDate: string | null;
     salesStatus: string | null;
     originUrl: string | null;
-    
+
     constructor({
         id = null,
         images = [],
@@ -22,8 +22,8 @@ export default class ProductModel {
         categoryName = null,
         name = null,
         grade = null,
-        quantity = undefined,
-        price = 0,
+        quantity = null,
+        price = null,
         seller = null,
         uploadDate = null,
         buyer = null,
@@ -38,7 +38,7 @@ export default class ProductModel {
         categoryName?: string | null;
         name?: string | null;
         grade?: string | null;
-        quantity?: number;
+        quantity?: number | null;
         price?: number | null;
         seller?: number | null;
         uploadDate?: string | null;
@@ -51,7 +51,7 @@ export default class ProductModel {
         this.id = id;
         this.images = images;
         this.category = category;
-        this.categoryName = categoryName
+        this.categoryName = categoryName;
         this.name = name;
         this.grade = grade;
         this.quantity = quantity;
@@ -119,5 +119,19 @@ export default class ProductModel {
             sales_status: this.salesStatus,
             origin_url: this.originUrl,
         };
+    }
+
+    copyWith(update: Partial<ProductModel>): ProductModel {
+        return new ProductModel({ ...this, ...update });
+    }
+
+    addImage(imageUrl: string): ProductModel {
+        if (!imageUrl.trim()) return this;
+        return this.copyWith({ images: [...this.images, imageUrl] });
+    }
+
+    deleteImage(imageUrl: string): ProductModel {
+        const updatedImages = this.images.filter((img) => img !== imageUrl)
+        return this.copyWith({ images: updatedImages });
     }
 }

@@ -7,7 +7,6 @@ import { LuSearch } from 'react-icons/lu';
 import { useCategory } from '@/src/hooks/useCategory';
 import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
-import ProductModel from '@/src/models/ProductModel';
 
 export default function SellerSalesListAddProductGetCategory() {
     const [, setSellerProduct] = useRecoilState(sellerProductState);
@@ -34,12 +33,12 @@ export default function SellerSalesListAddProductGetCategory() {
     }, []);
 
     const handleCategoryClick = (id: number, name: string) => {
-        setSellerProduct((prev) => new ProductModel({ ...prev, category: id, categoryName: name }));
+        setSellerProduct((prev) => prev.copyWith({ ...prev, category: id, categoryName: name }));
         navigate('/seller-saleslist-addproduct');
     };
 
     const filteredCategories = categories.filter((category) =>
-        category.name?.toLowerCase().includes(searchCategory.toLowerCase()),
+        category.name?.includes(searchCategory),
     );
 
     return isLoading ? (
@@ -73,7 +72,7 @@ export default function SellerSalesListAddProductGetCategory() {
                         <div className={styles.categoryItem}>
                             <img
                                 src={
-                                    category.thumbnail !== 'NULL' && category.thumbnail
+                                    category.thumbnail
                                         ? category.thumbnail
                                         : '/images/seller/defaultimg.jpg'
                                 }
