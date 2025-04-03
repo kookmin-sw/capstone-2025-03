@@ -1,23 +1,27 @@
 export default class OrderModel {
     id: number | null; // 유지
     user: number | null;
-    package: number | null;
+    products: number[] | null;
+    totalPrice: number | null;
     createdAt: string | null;
 
     constructor({
         id = null,
         user = null,
-        package: _package = null, // package는 예약어라 _package로 받아서 처리
+        products = null,
+        totalPrice = null,
         createdAt = null,
     }: {
         id?: number | null;
         user?: number | null;
-        package?: number | null;
+        products?: number[] | null;
+        totalPrice?: number | null;
         createdAt?: string | null;
     }) {
         this.id = id;
         this.user = user;
-        this.package = _package;
+        this.products = products;
+        this.totalPrice = totalPrice;
         this.createdAt = createdAt;
     }
 
@@ -25,7 +29,8 @@ export default class OrderModel {
         return new OrderModel({
             id: jsonData['id'],
             user: jsonData['user'],
-            package: jsonData['package'],
+            products: jsonData['products'],
+            totalPrice: jsonData['total_price'],
             createdAt: jsonData['created_at'],
         });
     }
@@ -34,16 +39,16 @@ export default class OrderModel {
         return {
             id: this.id,
             user: this.user,
-            package: this.package,
+            products: this.products,
+            total_price: this.totalPrice,
             created_at: this.createdAt,
         };
     }
 
-    toJsonWithoutId(): any {
+    toJsonWithoutIdTotalPriceCreatedAt(): any {
         return {
             user: this.user,
-            package: this.package,
-            created_at: this.createdAt,
+            products: this.products,
         };
     }
 }

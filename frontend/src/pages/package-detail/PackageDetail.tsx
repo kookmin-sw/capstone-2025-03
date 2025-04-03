@@ -21,8 +21,6 @@ import industryData from '@/src/data/industryData.json';
 import { useOrder } from '@/src/hooks/useOrder';
 import OrderModel from '@/src/models/OrderModel';
 import { useUser } from '@/src/contexts/UserContext';
-import { usePackage } from '@/src/hooks/usePackage';
-import { getCurrentTimeISO } from '@/src/utils/dateUtil';
 
 export default function PackageDetail() {
     // page connection
@@ -32,14 +30,12 @@ export default function PackageDetail() {
     // context
     const { user } = useUser();
     // hook
-    const { createPackage } = usePackage();
     const { categories } = useCategory();
     const { productList } = useProduct();
     const { createOrder } = useOrder();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
-    const [price, setPrice] = useState(0);
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
     const [myProducts, setMyProducts] = useState<ProductModel[]>([]);
     const [isComplete, setIsComplete] = useState(false);
@@ -94,19 +90,15 @@ export default function PackageDetail() {
             setIsLoading(false);
             return;
         }
-        const newPackage: PackageModel | null = await createPackage(editingPackage);
-        if (newPackage) {
-            const newOrder = OrderModel.fromJson({
-                user: 1,
-                package: newPackage.id,
-                created_at: getCurrentTimeISO(),
-            });
-            await createOrder(newOrder);
-            setIsComplete(true);
-        } else {
-            setIsLoading(false);
-            window.alert('주문에 오류가 발생하였습니다. 다시 시도해주세요.');
+        const newOrder: OrderModel = OrderModel.fromJson({
+            user: user.userId,
+            products: editingPackage.products,
+        });
+        const response = await createOrder(newOrder);
+        if(!response){
+            window.alert('주문에 오류가 발생하였습니다');
         }
+        setIsComplete(true);
     };
     const handleAddProductButtonClick = (category: CategoryModel) => {
         navigate('/package-detail-add-product', { state: { category: category.toJson() } });
