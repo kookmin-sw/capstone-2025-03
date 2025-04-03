@@ -6,7 +6,7 @@ export default class ProductModel {
     name: string | null;
     description: string | null;
     grade: string | null;
-    quantity: number | undefined;
+    quantity: number | null;
     price?: number | null;
     seller: number | null;
     uploadDate: string | null;
@@ -22,8 +22,8 @@ export default class ProductModel {
         categoryName = null,
         name = null,
         grade = null,
-        quantity = undefined,
-        price = 0,
+        quantity = null,
+        price = null,
         seller = null,
         uploadDate = null,
         buyer = null,
@@ -38,7 +38,7 @@ export default class ProductModel {
         categoryName?: string | null;
         name?: string | null;
         grade?: string | null;
-        quantity?: number;
+        quantity?: number | null;
         price?: number | null;
         seller?: number | null;
         uploadDate?: string | null;
