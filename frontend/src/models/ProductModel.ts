@@ -1,12 +1,13 @@
 export default class ProductModel {
     id: number | null;
     category: number | null;
+    categoryName: string | null;
     images: string[];
     name: string | null;
     description: string | null;
     grade: string | null;
-    quantity: number;
-    price: number;
+    quantity: number | null;
+    price?: number | null;
     seller: number | null;
     uploadDate: string | null;
     buyer: number | null;
@@ -18,10 +19,11 @@ export default class ProductModel {
         id = null,
         images = [],
         category = null,
+        categoryName = null,
         name = null,
         grade = null,
-        quantity = 0,
-        price = 0,
+        quantity = null,
+        price = null,
         seller = null,
         uploadDate = null,
         buyer = null,
@@ -33,10 +35,11 @@ export default class ProductModel {
         id?: number | null;
         images?: string[];
         category?: number | null;
+        categoryName?: string | null;
         name?: string | null;
         grade?: string | null;
-        quantity?: number;
-        price?: number;
+        quantity?: number | null;
+        price?: number | null;
         seller?: number | null;
         uploadDate?: string | null;
         buyer?: number | null;
@@ -48,6 +51,7 @@ export default class ProductModel {
         this.id = id;
         this.images = images;
         this.category = category;
+        this.categoryName = categoryName;
         this.name = name;
         this.grade = grade;
         this.quantity = quantity;
@@ -115,5 +119,19 @@ export default class ProductModel {
             sales_status: this.salesStatus,
             origin_url: this.originUrl,
         };
+    }
+
+    copyWith(update: Partial<ProductModel>): ProductModel {
+        return new ProductModel({ ...this, ...update });
+    }
+
+    addImage(imageUrl: string): ProductModel {
+        if (!imageUrl.trim()) return this;
+        return this.copyWith({ images: [...this.images, imageUrl] });
+    }
+
+    deleteImage(imageUrl: string): ProductModel {
+        const updatedImages = this.images.filter((img) => img !== imageUrl)
+        return this.copyWith({ images: updatedImages });
     }
 }

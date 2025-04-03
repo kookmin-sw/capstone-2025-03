@@ -24,7 +24,7 @@ export const getOrderListInService = async (): Promise<OrderModel[] | null> => {
  */
 export const createOrderInService = async (order: OrderModel): Promise<OrderModel | null> => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/`, order.toJsonWithoutId());
+        const response = await axios.post(`${API_BASE_URL}/`, order.toJsonWithoutIdTotalPriceCreatedAt());
         return OrderModel.fromJson(response.data);
     } catch (error) {
         console.error('Error creating order:', error);

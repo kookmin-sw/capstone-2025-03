@@ -1,51 +1,25 @@
 import styles from './SellerSalesListProductDetail.module.css';
 import BackHeader from '@/src/components/layout/BackHeader';
-import PrevProductItem from '@/src/components/ui/PrevProductItem';
+import ProductItem from '@/src/components/ui/ProductItem';
 import AiOptimizer from './components/AiOptimizer';
 import PriceInput from './components/PriceInput';
 import CompleteSection from '@/src/components/layout/CompleteSection';
 import LoadingSection from '@/src/components/layout/LoadingSection';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSellerProduct } from '@/src/contexts/SellerProductContext';
-import SellerProductModel from '@/src/models/SellerProductModel';
-
-
-// =====================================
-// TODO:
-//      - @김용희
-//      - PrevProductItem -> ProductItem
-//      - PrevProductItem 삭제
-// =====================================
-
-type Product = {
-    id: string;
-    category: string;
-    name: string;
-    grade: string;
-    amount: number;
-    price: number | null;
-    thumbnail: string;
-};
+import { sellerProductState, shouldReloadSellerProductState } from '@/src/recoil/productState';
+import { useRecoilState } from 'recoil';
+import { useProduct } from '@/src/hooks/useProduct';
 
 export default function SellerSalesListProductDetail() {
     const navigate = useNavigate();
-    const { sellerProduct, createSellerProduct, setSellerProduct } = useSellerProduct();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const [sellerId, setSellerId] = useState<number>();
-    const location = useLocation();
-    const { selectedCategoryName, selectedCategoryId, name, grade, number } = location.state;
 
-    const [product, setProduct] = useState<Product>({
-        id: selectedCategoryId,
-        category: selectedCategoryName,
-        name: name,
-        grade: grade,
-        amount: number,
-        price: null,
-        thumbnail: sellerProduct.images[0],
-    });
+    const [sellerProduct, setSellerProduct] = useRecoilState(sellerProductState);
+    const [, setShouldReload] = useRecoilState(shouldReloadSellerProductState);
+    const { createProduct } = useProduct();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -53,39 +27,33 @@ export default function SellerSalesListProductDetail() {
             const userData = JSON.parse(storedUser);
             setSellerId(userData.id);
         }
+    }, []);
 
-        setSellerProduct(
-            (prev) =>
-                new SellerProductModel({
-                    ...prev,
-                    sellerId: sellerId,
-                    saleStatus: 'available',
-                    description: null,
-                    uploadDate: new Date().toISOString(),
-                    price: product.price,
-                }),
-        );
-    }, [sellerId, product.price]);
-
-    console.log(sellerProduct);
-
-    const isButtonValid = product.price;
+    const isButtonValid = sellerProduct.price;
 
     const handlePriceChange = (newPrice: number | null) => {
-        setProduct((prevProduct) => ({
-            ...prevProduct,
-            price: newPrice,
-        }));
+        setSellerProduct((prev) =>
+            prev.copyWith({
+                ...prev,
+                price: newPrice,
+                seller: sellerId,
+                salesStatus: 'available',
+                description: null,
+                uploadDate: new Date().toISOString(),
+            }),
+        );
     };
 
-    const hanldeSellButtonClick = async () => {
+    const handleSellButtonClick = async () => {
         setIsLoading(true);
 
         try {
-            await createSellerProduct(sellerProduct);
+            await createProduct(sellerProduct);
+            setShouldReload(true);
             setIsComplete(true);
-            navigate('/seller-saleslist');
-            setSellerProduct(new SellerProductModel({}));
+            setTimeout(() => {
+                navigate('/seller-saleslist');
+            }, 2000);
         } catch (error) {
             alert(`물건 등록 실패 : ${error}`);
         } finally {
@@ -93,28 +61,27 @@ export default function SellerSalesListProductDetail() {
         }
     };
 
-    return isLoading ? (
-        isComplete ? (
-            <CompleteSection text="판매 물품 업로드 완료!" />
-        ) : (
-            <LoadingSection text="잠시만 기다려주세요" />
-        )
-    ) : (
+    if (isComplete) return <CompleteSection text="판매 물품 업로드 완료!" />;
+    if (isLoading) return <LoadingSection text="잠시만 기다려주세요" />;
+
+    return (
         <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
                 <p className={styles.title}>가격을 입력해주세요</p>
 
-                <PrevProductItem product={product} />
-                <AiOptimizer name={product.name} grade={product.grade} amount={product.amount} />
-                <PriceInput price={product.price} setPrice={handlePriceChange} />
-                <button
-                    className={styles.submitButton}
-                    disabled={!isButtonValid}
-                    onClick={hanldeSellButtonClick}
-                >
-                    판매하기
-                </button>
+                <ProductItem product={sellerProduct} />
+                <AiOptimizer />
+                <PriceInput price={sellerProduct.price ?? null} setPrice={handlePriceChange} />
+                <div className={styles.submitButtonSection}>
+                    <button
+                        className={styles.submitButton}
+                        disabled={!isButtonValid}
+                        onClick={handleSellButtonClick}
+                    >
+                        판매하기
+                    </button>
+                </div>
             </div>
         </div>
     );

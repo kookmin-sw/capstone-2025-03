@@ -48,7 +48,7 @@ export default function ProductItem({ product }: { product: ProductModel }) {
                 <GradeAndAmount>
                     {product.grade} 등급 ∙ {product.quantity} 개
                 </GradeAndAmount>
-                <Price>{product.price} 원</Price>
+                <Price>{product.price?.toLocaleString()} 원</Price>
             </ContentContainer>
         </Item>
     );

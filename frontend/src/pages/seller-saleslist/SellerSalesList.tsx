@@ -5,22 +5,47 @@ import SellerProductItem from '@/src/components/ui/SellerProductItem';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
-import SellerProductModel from '@/src/models/SellerProductModel';
+import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
 
 export default function SellerSalesList() {
+    // page connection
     const navigate = useNavigate();
     const location = useLocation();
-
+    // hook
     const [sellerId, setSellerId] = useState<number>();
     const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
-
+    // useState
     const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
+    // useRef
+    const loadMoreRef = useRef<HTMLDivElement | null>(null);
+    const lastScrollY = useRef(0);
 
     const currentMenuIndex = 1;
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+                // 아래로 스크롤 중 && 일정 이상 스크롤했을 때
+                setIsHeaderVisible(false);
+            } else {
+                // 위로 스크롤 중
+                setIsHeaderVisible(true);
+            }
+
+            lastScrollY.current = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -48,11 +73,11 @@ export default function SellerSalesList() {
         };
 
         fetchProducts();
-    }, [sellerId]);
+    }, [sellerId, loadProduct]);
 
     useEffect(() => {
         if (!loadMoreRef.current || isLoadMoreLoading) return;
-        console.log(isLoadMoreLoading);
+
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting) {
@@ -60,7 +85,7 @@ export default function SellerSalesList() {
                     loadMore().finally(() => setIsLoadMoreLoading(false));
                 }
             },
-            { threshold: 0 }
+            { threshold: 0 },
         );
 
         observer.observe(loadMoreRef.current);
@@ -70,13 +95,19 @@ export default function SellerSalesList() {
 
     const handleClickAddProductButton = () => {
         navigate('/seller-saleslist-addproduct', {
-            state: { prevPath: location.pathname },
+            state: { reset: true },
+        });
+    };
+
+    const handleProductItemClick = (product: ProductModel) => {
+        navigate('/package-detail-product-detail', {
+            state: { product: product.toJson() },
         });
     };
 
     return (
         <div className={styles.page}>
-            <MainHeader />
+            {isHeaderVisible && <MainHeader />}
             <div className={styles.section}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
                 <div>
@@ -90,8 +121,15 @@ export default function SellerSalesList() {
                             />
                         </div>
                     ) : (
-                        products.map((products: SellerProductModel, index: number) => {
-                            return <SellerProductItem key={index} product={products} />;
+                        products.map((products: ProductModel, index: number) => {
+                            return (
+                                <div
+                                    key={products.id}
+                                    onClick={() => handleProductItemClick(products)}
+                                >
+                                    <SellerProductItem key={index} product={products} />
+                                </div>
+                            );
                         })
                     )}
                 </div>

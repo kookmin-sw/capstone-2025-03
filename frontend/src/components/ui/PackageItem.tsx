@@ -100,6 +100,8 @@ const FourGrid = styled.div`
 `;
 
 const GridImage = styled.img`
+  width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   flex: 1;
   padding: 0.2rem;
@@ -126,7 +128,7 @@ export default function PackageItem({ pkg }: PackageProps) {
         for (let i = 0; i < pkg.categories.length; i++) {
             if (categoryNames.length >= 2) {
                 count += 1;
-            }else{
+            } else {
                 categoryNames.push(
                     categories.find((category) => category.id === pkg.categories[i])?.name
                 );
@@ -141,7 +143,7 @@ export default function PackageItem({ pkg }: PackageProps) {
             .map((productId) => productList.find((product) => product.id === productId))
             .filter(Boolean) as ProductModel[];
         newProductList.forEach((product) => {
-            myPrice += product.price;
+            myPrice += product.price || 0;
         });
         setMyProductList(newProductList);
         setPrice(myPrice);
