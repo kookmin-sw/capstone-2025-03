@@ -14,41 +14,38 @@ export default function Home() {
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     const navigate = useNavigate();
     const currentMenuIndex = 0;
-    const { packages, getPackageList, hasMore, nextPage } = usePackage();
-
+    const { packageList, getPackageList } = usePackage();
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     // useEffect
     useEffect(() => {
         const fetchPackages = async () => {
-            if (packages.length < 1) {
-                const newPackages = await getPackageList();
+            if (packageList.length < 1) {
+                const newPackages = await getPackageList(null);
                 if (newPackages) setIsLoading(false);
-                // console.log(newPackages)
             } else {
                 setIsLoading(false);
             }
         };
         fetchPackages();
     }, []);
-
     useEffect(() => {
-        if (!hasMore || !nextPage || !loadMoreRef.current || isLoadMoreLoading) return;
+        if(!loadMoreRef.current || isLoadMoreLoading) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting) {
                     setIsLoadMoreLoading(true);
-                    getPackageList().finally(() => setIsLoadMoreLoading(false));
+                    getPackageList(null).finally(() => setIsLoadMoreLoading(false));
                 }
             },
-            { threshold: 1.0 },
+            { threshold: 0 },
         );
 
         observer.observe(loadMoreRef.current);
 
         return () => observer.disconnect();
-    }, [hasMore, nextPage, isLoadMoreLoading]);
+    }, [isLoading, isLoadMoreLoading]);
 
     // Function
     const handleClickFindPackageButton = () => {
@@ -85,19 +82,19 @@ export default function Home() {
                 </div>
                 <p className={styles.listViewTitle}>전체보기</p>
                 <div className={styles.packageListView}>
-                    {packages.map((pkg, index) => {
+                    {packageList.map((pkg, index) => {
                         return <PackageItem key={index} pkg={pkg} />;
                     })}
                 </div>
                 <div ref={loadMoreRef} style={{ "height": "20px" }} />
-                {isLoadMoreLoading ? <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
+                {isLoadMoreLoading && <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
                     <Spinner
                         color="#00A36C"
                         borderWidth="0.6rem"
                         animationDuration="0.8s"
                         style={{ width: '6rem', height: '6rem' }}
                     />
-                </div> : null}
+                </div>}
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>

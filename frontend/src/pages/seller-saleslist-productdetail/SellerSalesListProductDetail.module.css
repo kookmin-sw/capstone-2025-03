@@ -1,9 +1,10 @@
 .page {
     padding-top: 6rem;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #101012;
     display: flex;
     flex-direction: column;
+    padding-bottom: calc(15rem + env(safe-area-inset-bottom));
 }
 
 .section {
@@ -50,18 +51,29 @@
     cursor: pointer;
 }
 
+.submitButtonSection {
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .submitButton:disabled {
     background-color: #12332d;
 }
 
-/* ✅ 크롬, 엣지, 사파리에서 스핀 버튼 숨기기 */
+/* 크롬, 엣지, 사파리에서 스핀 버튼 숨기기 */
 .input::-webkit-outer-spin-button,
 .input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-/* ✅ 파이어폭스에서 스핀 버튼 숨기기 */
+/* 파이어폭스에서 스핀 버튼 숨기기 */
 .input[type='number'] {
     -moz-appearance: textfield;
 }

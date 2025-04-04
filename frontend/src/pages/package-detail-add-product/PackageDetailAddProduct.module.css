@@ -7,6 +7,10 @@
 }
 
 .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     flex-grow: 1;
     padding: 0 2rem;
     overflow: auto;
@@ -15,11 +19,10 @@
 }
 
 .listView {
-    margin-top: 4rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: start;
+    justify-content: start;
+    align-items: center;
     gap: 2rem;
     margin-bottom: 4rem;
 }

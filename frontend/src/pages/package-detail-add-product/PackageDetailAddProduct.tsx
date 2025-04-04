@@ -1,16 +1,18 @@
 import SearchHeader from '@/src/components/layout/SearchHeader';
 import styles from './PackageDetailAddProduct.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
-import ProductItem from '@/src/components/ui/BuyerProductItem';
+import ProductItem from '@/src/components/ui/ProductItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CheckIconImage from '@/src/assets/images/section/check.png';
 import CategoryModel from '@/src/models/CategoryModel';
-import { useBuyerProduct } from '@/src/hooks/useBuyerProduct';
-import { useEffect, useState } from 'react';
-import BuyerProductModel from '@/src/models/BuyerProductModel';
+import { useProduct } from '@/src/hooks/useProduct';
+import { useEffect, useState, useRef } from 'react';
+import ProductModel from '@/src/models/ProductModel';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 import PackageModel from '@/src/models/PackageModel';
+import { Spinner } from '@chakra-ui/react';
+
 
 export default function PackageDetailAddProduct() {
     // page connection
@@ -18,35 +20,56 @@ export default function PackageDetailAddProduct() {
     const location = useLocation();
     const category: CategoryModel = CategoryModel.fromJson(location.state?.category || {});
     // hook
-    const { buyerProducts, getBuyerProductList } = useBuyerProduct();
+    const { productList, getProductList } = useProduct();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
-    const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLoadMoreLoading, setIsLoadMoreLoading] = useState<boolean>(false);
     const [checkedProductIds, setCheckedProductIds] = useState<number[]>([]);
+    // useRef
+    const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     // useEffect
     useEffect(() => {
-        setMyProducts(
-            buyerProducts.filter((buyerProduct) => buyerProduct.category === category.id),
-        );
-        setCheckedProductIds(
-            buyerProducts
-                .filter((buyerProduct) =>
-                    (editingPackage?.products || []).includes(buyerProduct.id!),
-                )
-                .map((buyerProduct) => buyerProduct.id!),
-        );
-        getBuyerProductList();
+        const fetchProducts = async () => {
+            const filteredProductList = productList.filter((product) => product.category === category.id);
+            if (filteredProductList.length < 5) {
+                const newProducts = await getProductList(category.id);
+                if (newProducts) setIsLoading(false);
+            } else {
+                setIsLoading(false);
+            }
+            setCheckedProductIds(
+                productList
+                    .filter((product) =>
+                        (editingPackage?.products || []).includes(product.id!),
+                    )
+                    .map((product) => product.id!),
+            );
+        }
+        fetchProducts();
     }, []);
     useEffect(() => {
-        setMyProducts(
-            buyerProducts.filter((buyerProduct) => buyerProduct.category === category.id),
+        if (!loadMoreRef.current || isLoadMoreLoading) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setIsLoadMoreLoading(true);
+                    getProductList(category.id).finally(() => setIsLoadMoreLoading(false));
+                }
+            },
+            { threshold: 0 },
         );
-    }, [buyerProducts]);
+
+        observer.observe(loadMoreRef.current);
+
+        return () => observer.disconnect();
+    }, [isLoadMoreLoading, isLoading]);
 
     // Function
-    const handleProductItemClick = (product: BuyerProductModel) => {
+    const handleProductItemClick = (product: ProductModel) => {
         navigate('/package-detail-product-detail', {
             state: { product: product.toJson() },
         });
@@ -67,13 +90,13 @@ export default function PackageDetailAddProduct() {
         );
         navigate(-1);
     };
-
+    
     return (
         <div className={styles.page}>
             <SearchHeader text={category.name || ''} />
             <div className={styles.section}>
                 <div className={styles.listView}>
-                    {myProducts.map((product, index) => {
+                    {(productList.filter((product) => product.category === category.id)).map((product, index) => {
                         return (
                             <div
                                 key={index}
@@ -99,7 +122,16 @@ export default function PackageDetailAddProduct() {
                         );
                     })}
                 </div>
-                <div style={{ height: '20rem' }} />
+                <div ref={loadMoreRef} style={{ "height": "20px" }} />
+                {(isLoadMoreLoading && !isLoading) && <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
+                    <Spinner
+                        color="#00A36C"
+                        borderWidth="0.6rem"
+                        animationDuration="0.8s"
+                        style={{ width: '6rem', height: '6rem' }}
+                    />
+                </div>}
+                <div style={{ height: '100px' }} />
             </div>
             <DefaultButton
                 event={handleConfirmButtonClick}

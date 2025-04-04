@@ -55,24 +55,24 @@ const StatusTag = styled.span<{ status: string }>`
 
 type ProductItemProps = {
     product: {
-        buyerId: number | null;
-        categoryId: number | null;
+        buyer: number | null;
+        category: number | null;
         description: string | null;
         grade: string | null;
         images: string[];
         name: string | null;
-        price: number | null;
+        price?: number | null;
         purchaseDate: string | null;
         quantity: number;
-        saleStatus: string | null;
-        sellerId: number | null;
+        salesStatus: string | null;
+        seller: number | null;
         uploadDate: string | null;
     };
 };
 
 export default function SellerProductItem({ product }: ProductItemProps) {
-    const status = product.saleStatus === 'available' ? '판매 중' : '판매 완료';
-
+    const status = product.salesStatus === 'available' ? '판매 중' : '판매 완료';
+    // console.log(product.saleStatus)
     return (
         <Item>
             <Thumbnail src={product.images[0]} />
@@ -81,7 +81,7 @@ export default function SellerProductItem({ product }: ProductItemProps) {
                 <GradeAndAmount>
                     {product.grade} ∙ {product.quantity}개
                 </GradeAndAmount>
-                <Price>{product.price}원</Price>
+                <Price>{product.price?.toLocaleString()}원</Price>
                 <StatusTag status={status}>{status}</StatusTag>
             </ContentContainer>
         </Item>

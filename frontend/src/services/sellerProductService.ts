@@ -1,8 +1,16 @@
 import axios from 'axios';
-import SellerProductModel from '../models/SellerProductModel';
+import ProductModel from '../models/ProductModel';
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URL;
 const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
+
+interface ProductListResponse {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: ProductModel[];
+}
+
 // const AI_BASE_URL = import.meta.env.VITE_AI_BASE_URL;
 /**
  * 상품을 생성하고 서버에 저장합니다.
@@ -10,7 +18,7 @@ const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
  * @returns {Promise<void>}
  */
 
-export const createProductInService = async (product: SellerProductModel): Promise<void> => {
+export const createProductInService = async (product: ProductModel): Promise<void> => {
     try {
         await axios.post(`${API_BASE_URL}/products/`, product.toJson());
     } catch (error) {
@@ -41,12 +49,12 @@ export const uploadProductImageInService = async (file: File): Promise<string | 
 };
 
 // 특정 사용자의 판매 상품들 가져오기
-export const getUserProductListInService = async (id: number): Promise<SellerProductModel[]> => {
+export const getUserProductListInService = async (id: number): Promise<ProductListResponse> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/products/`, {
-            params: { seller: id },
+            params: { seller: id, ordering: "-upload_date" },
         });
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error('Error getting selling products: ', error);
         throw error;
@@ -60,10 +68,10 @@ export const getUserProductListInService = async (id: number): Promise<SellerPro
  */
 export const getProductInService = async (
     productId: string,
-): Promise<SellerProductModel | null> => {
+): Promise<ProductModel | null> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/${productId}`);
-        return SellerProductModel.fromJson(response.data);
+        return ProductModel.fromJson(response.data);
     } catch (error) {
         console.error('Error fetching product:', error);
         return null;
@@ -78,7 +86,7 @@ export const getProductInService = async (
  */
 export const updateProductInService = async (
     productId: string,
-    updatedData: Partial<SellerProductModel>,
+    updatedData: Partial<ProductModel>,
 ): Promise<void> => {
     try {
         await axios.put(`${API_BASE_URL}/${productId}`, updatedData);

@@ -2,8 +2,8 @@ import { atom } from 'recoil';
 import PackageModel from '../models/PackageModel';
 
 // Package Atom
-export const packageState = atom<PackageModel[]>({
-    key: 'packageState',
+export const packageListState = atom<PackageModel[]>({
+    key: 'packageListState',
     default: [],
 });
 

@@ -14,15 +14,13 @@ import PackageModel from '@/src/models/PackageModel';
 import CategoryModel from '@/src/models/CategoryModel';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
-import BuyerProductModel from '@/src/models/BuyerProductModel';
+import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
-import { useBuyerProduct } from '@/src/hooks/useBuyerProduct';
+import { useProduct } from '@/src/hooks/useProduct';
 import industryData from '@/src/data/industryData.json';
 import { useOrder } from '@/src/hooks/useOrder';
 import OrderModel from '@/src/models/OrderModel';
 import { useUser } from '@/src/contexts/UserContext';
-import { usePackage } from '@/src/hooks/usePackage';
-import { getCurrentTimeISO } from '@/src/utils/dateUtil';
 
 export default function PackageDetail() {
     // page connection
@@ -32,21 +30,18 @@ export default function PackageDetail() {
     // context
     const { user } = useUser();
     // hook
-    const { createPackage } = usePackage();
     const { categories } = useCategory();
-    const { buyerProducts } = useBuyerProduct();
+    const { productList } = useProduct();
     const { createOrder } = useOrder();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
-    const [myProducts, setMyProducts] = useState<BuyerProductModel[]>([]);
+    const [myProducts, setMyProducts] = useState<ProductModel[]>([]);
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // console.log(myPackage)
-    // console.log(categories)
 
     // UseEffect
     useEffect(() => {
@@ -60,15 +55,12 @@ export default function PackageDetail() {
         const newMyCategories: CategoryModel[] = targetPackage.categories
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
-        console.log(newMyCategories, '뉴카테고리');
         setMyCategories(newMyCategories);
-        
-        console.log(buyerProducts)
-        const newMyProducts: BuyerProductModel[] = targetPackage.products
-            .map((productId) => buyerProducts.find((buyerProduct) => buyerProduct.id === productId))
-            .filter(Boolean) as BuyerProductModel[];
-            console.log(targetPackage.products); // productId 배열
-            setMyProducts(newMyProducts); 
+
+        const newMyProducts: ProductModel[] = targetPackage.products
+            .map((productId) => productList.find((product) => product.id === productId))
+            .filter(Boolean) as ProductModel[];
+        setMyProducts(newMyProducts);
     }, []);
 
     // Function
@@ -98,21 +90,15 @@ export default function PackageDetail() {
             setIsLoading(false);
             return;
         }
-        console.log(JSON.stringify(editingPackage));
-        const newPackage: PackageModel | null = await createPackage(editingPackage);
-        if (newPackage) {
-            const newOrder = OrderModel.fromJson({
-                user: 1,
-                package: newPackage.id,
-                created_at: getCurrentTimeISO(),
-            });
-            console.log(JSON.stringify(newOrder));
-            await createOrder(newOrder);
-            setIsComplete(true);
-        } else {
-            setIsLoading(false);
-            window.alert('주문에 오류가 발생하였습니다. 다시 시도해주세요.');
+        const newOrder: OrderModel = OrderModel.fromJson({
+            user: user.userId,
+            products: editingPackage.products,
+        });
+        const response = await createOrder(newOrder);
+        if(!response){
+            window.alert('주문에 오류가 발생하였습니다');
         }
+        setIsComplete(true);
     };
     const handleAddProductButtonClick = (category: CategoryModel) => {
         navigate('/package-detail-add-product', { state: { category: category.toJson() } });
@@ -144,7 +130,7 @@ export default function PackageDetail() {
             <BackHeader />
             <div className={styles.section}>
                 <div className={styles.packageCard}>
-                    {editingPackage && <PackageItem  pkg={editingPackage} />}
+                    {editingPackage && <PackageItem pkg={editingPackage} />}
                 </div>
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>구성상품</p>
@@ -166,42 +152,41 @@ export default function PackageDetail() {
                     </div>
                 </div>
                 <div className={styles.listView}>
-                    {myCategories.map((category, index) => {
-                        const myProduct =
-                            myProducts.find((product) => product.category === category.id) || null;
-                        return (
+                    {/* 1. 카테고리 순서대로 정렬된 products */}
+                    {myCategories.map((category) => {
+                        const categoryProducts = myProducts.filter(
+                            (product) => product.category === category.id
+                        );
+
+                        return categoryProducts.map((product) => (
                             <div
-                                key={index}
+                                key={`product-${product.id}`}
                                 className={styles.productItem}
-                                onClick={() => {
-                                    handleAddProductButtonClick(category);
-                                }}
+                                onClick={() => handleAddProductButtonClick(category)}
                             >
                                 <img
                                     className={styles.productThumbnail}
                                     src={
-                                        myProduct?.images[0] ||
-                                        'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg'
+                                        product.images.length > 0
+                                            ? product.images[0]
+                                            : 'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg'
                                     }
                                 />
-                                <div className={styles.productInfoContainer}>
-                                    <p className={styles.productName}>{myProduct?.name}</p>
-                                    <p className={styles.categoryAndAmount}>
-                                        {myProduct
-                                            ? `${category.name} ${myProduct?.quantity}개`
-                                            : '제품을 골라주세요!'}
-                                    </p>
+                                <div className={styles.productDetailContainer}>
+                                    <div className={styles.productInfoContainer}>
+                                        <p className={styles.productName}>{product.name}</p>
+                                        <p className={styles.categoryAndAmount}>
+                                            {category.name} {product.quantity}개
+                                        </p>
+                                    </div>
+                                    <p className={styles.price}>{product.price}원</p>
                                 </div>
-                                <div className={styles.blank} />
-                                <p className={styles.price}>
-                                    {myProduct && `${myProduct?.price}원`}
-                                </p>
                                 {isEdit ? (
                                     <button
                                         className={styles.deleteProductButton}
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            handleDeleteButtonClick(category.id!);
+                                            handleDeleteButtonClick(product.category!);
                                         }}
                                     >
                                         <img
@@ -218,8 +203,38 @@ export default function PackageDetail() {
                                     </button>
                                 )}
                             </div>
-                        );
+                        ));
                     })}
+
+                    {/* 2. 제품이 아예 없는 카테고리 */}
+                    {myCategories
+                        .filter((category) => !myProducts.some((product) => product.category === category.id))
+                        .map((category) => (
+                            <div
+                                key={`category-${category.id}`}
+                                className={styles.productItem}
+                                onClick={() => handleAddProductButtonClick(category)}
+                            >
+                                <img
+                                    className={styles.productThumbnail}
+                                    src="https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg"
+                                />
+                                <div className={styles.productDetailContainer}>
+                                    <div className={styles.productInfoContainer}>
+                                        <p className={styles.productName}></p>
+                                        <p className={styles.categoryAndAmount}>
+                                            {category.name} 제품을 골라주세요!
+                                        </p>
+                                    </div>
+                                </div>
+                                <button className={styles.searchOtherProductsButton}>
+                                    <img
+                                        className={styles.searchOtherProductsButtonIcon}
+                                        src={ArrowRightIconImage}
+                                    />
+                                </button>
+                            </div>
+                        ))}
                 </div>
                 <div style={{ height: '20rem' }} />
             </div>
