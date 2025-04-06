@@ -1,0 +1,29 @@
+# node_modules: 필수
+node_modules/
+
+# 빌드 결과물 (나중에 tsc build 시 생기는 파일들)
+dist/
+build/
+
+# 환경 변수 파일
+.env
+.env.*
+
+# 로그 파일
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 운영체제별 불필요 파일
+.DS_Store
+Thumbs.db
+
+# VSCode 설정 파일 (공유 안 할 경우)
+.vscode/
+
+# 타입스크립트 캐시
+*.tsbuildinfo
+
+# IDE 캐시
+.idea/
