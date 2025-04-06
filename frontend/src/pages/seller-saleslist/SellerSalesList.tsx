@@ -2,8 +2,8 @@ import styles from './SellerSalesList.module.css';
 import MainHeader from '@/src/components/layout/MainHeader';
 import Footer from '@/src/components/layout/MenuFooter';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
@@ -11,9 +11,12 @@ import { Spinner } from '@chakra-ui/react';
 export default function SellerSalesList() {
     // page connection
     const navigate = useNavigate();
-    const location = useLocation();
-    // hook
-    const [sellerId, setSellerId] = useState<number>();
+
+    const sellerId = useMemo(() => {
+        const stored = localStorage.getItem('user');
+        return stored ? JSON.parse(stored).id : undefined;
+    }, []);
+
     const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
     // useState
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -45,14 +48,6 @@ export default function SellerSalesList() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            const userData = JSON.parse(storedUser);
-            setSellerId(userData.id);
-        }
     }, []);
 
     useEffect(() => {
@@ -123,11 +118,8 @@ export default function SellerSalesList() {
                     ) : (
                         products.map((products: ProductModel, index: number) => {
                             return (
-                                <div
-                                    key={products.id}
-                                    onClick={() => handleProductItemClick(products)}
-                                >
-                                    <SellerProductItem key={index} product={products} />
+                                <div key={index} onClick={() => handleProductItemClick(products)}>
+                                    <SellerProductItem product={products} />
                                 </div>
                             );
                         })
