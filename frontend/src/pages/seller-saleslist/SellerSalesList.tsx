@@ -7,11 +7,12 @@ import { useEffect, useState, useRef, useMemo } from 'react';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
+import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 
 export default function SellerSalesList() {
     // page connection
     const navigate = useNavigate();
-
+    const isVisible = useHeaderVisibility();
     const sellerId = useMemo(() => {
         const stored = localStorage.getItem('user');
         return stored ? JSON.parse(stored).id : undefined;
@@ -20,35 +21,11 @@ export default function SellerSalesList() {
     const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
     // useState
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     // useRef
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
-    const lastScrollY = useRef(0);
 
     const currentMenuIndex = 1;
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-
-            if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-                // 아래로 스크롤 중 && 일정 이상 스크롤했을 때
-                setIsHeaderVisible(false);
-            } else {
-                // 위로 스크롤 중
-                setIsHeaderVisible(true);
-            }
-
-            lastScrollY.current = currentScrollY;
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
     useEffect(() => {
         if (!sellerId) return;
@@ -102,7 +79,7 @@ export default function SellerSalesList() {
 
     return (
         <div className={styles.page}>
-            {isHeaderVisible && <MainHeader />}
+            {isVisible && <MainHeader />}
             <div className={styles.section}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
                 <div>
