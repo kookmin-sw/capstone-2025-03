@@ -1,8 +1,8 @@
 // 스크롤 방향 감지 후 show, hide 와 같은 플래그 리턴하는 훅
 import { useEffect, useRef, useState } from 'react';
 
-export function useHeaderVisibility(threshold = 13) {
-    const [isVisible, setIsVisible] = useState(true);
+export function useHeaderVisibility(threshold = 10) {
+    const [isVisible, setIsVisible] = useState<boolean>(true);
     const lastScrollY = useRef(window.scrollY);
     const ticking = useRef(false);
 
