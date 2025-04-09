@@ -14,7 +14,9 @@ const Header = styled.div<{ isVisible: boolean }>`
     align-items: center;
     height: ${(props) => (props.isVisible ? '100px' : '0')};
     opacity: ${(props) => (props.isVisible ? '1' : '0')};
-    transition: height 0.3s ease, opacity 0.3s ease;
+    transition:
+        height 0.3s ease,
+        opacity 0.3s ease;
 `;
 
 const Logo = styled.img`
@@ -31,15 +33,15 @@ const Icon = styled.img`
 
 const handleClickNotificationButton = () => {
     window.alert('준비 중입니다!');
-}
+};
 
 export default function MainHeader({ isVisible }: { isVisible: boolean }) {
-    console.log(isVisible)
+    console.log(isVisible);
     return (
         <Header isVisible={isVisible}>
             <Logo src={LogoImage} />
             <Blank />
-            <Icon src={NotificationIconImage} onClick={handleClickNotificationButton}/>
+            <Icon src={NotificationIconImage} onClick={handleClickNotificationButton} />
         </Header>
     );
 }
