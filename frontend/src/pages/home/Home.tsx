@@ -58,7 +58,7 @@ export default function Home() {
         <LoadingSection text="잠시만 기다려주세요" />
     ) : (
         <div className={styles.page}>
-            {isVisible && <MainHeader />}
+            <MainHeader isVisible={isVisible} />
             <div className={styles.section}>
                 <div className={styles.contentContainer}>
                     <div className={styles.topContainer}>

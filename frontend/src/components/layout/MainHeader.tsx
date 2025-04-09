@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import LogoImage from '../../assets/images/header/logo.png';
 import NotificationIconImage from '../../assets/images/header/notification_icon.png';
 
-const Header = styled.div`
+const Header = styled.div<{ isVisible: boolean }>`
     background-color: #101012;
     position: fixed;
     top: 0;
@@ -12,6 +12,9 @@ const Header = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: ${(props) => (props.isVisible ? '100px' : '0')};
+    opacity: ${(props) => (props.isVisible ? '1' : '0')};
+    transition: height 0.3s ease, opacity 0.3s ease;
 `;
 
 const Logo = styled.img`
@@ -30,9 +33,10 @@ const handleClickNotificationButton = () => {
     window.alert('준비 중입니다!');
 }
 
-export default function MainHeader() {
+export default function MainHeader({ isVisible }: { isVisible: boolean }) {
+    console.log(isVisible)
     return (
-        <Header>
+        <Header isVisible={isVisible}>
             <Logo src={LogoImage} />
             <Blank />
             <Icon src={NotificationIconImage} onClick={handleClickNotificationButton}/>

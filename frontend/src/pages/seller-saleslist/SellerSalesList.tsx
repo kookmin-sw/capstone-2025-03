@@ -79,7 +79,7 @@ export default function SellerSalesList() {
 
     return (
         <div className={styles.page}>
-            {isVisible && <MainHeader />}
+            <MainHeader isVisible={isVisible} />
             <div className={styles.section}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
                 <div>
