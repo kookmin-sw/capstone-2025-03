@@ -11,25 +11,28 @@ import {
 import PackageModel from '../models/PackageModel';
 import packageDummyData from '@/src/data/packageDummyData.json';
 import { useCategory } from './useCategory';
-import { useProduct } from './useProduct';
+
 
 const useDummyData = false;
 
 export const usePackage = () => {
     const [packageList, setPackageList] = useRecoilState(packageListState);
     const [packagePagination, setPackagePagination] = useRecoilState(packagePaginationState);
-    const { categories, getCategory } = useCategory();
-    const { productList, getProduct } = useProduct();
     const PAGE_SIZE = 5;
+    const { categories, getCategoryList } = useCategory();
 
     // List Read
     const getPackageList = async (industry: number | null): Promise<PackageModel[]> => {
+        if (categories.length<1) {
+            await getCategoryList();
+        }
+
         // industry string으로 변경 (전체 읽기인 경우, null로 전달 받음)
         const myIndustry: string = industry?.toString() ?? 'all';
         const { next: myNext = null, hasMore: myHasMore = true } = packagePagination[myIndustry] || {};
-        
+
         // 더이상 데이터가 없으면 빈 배열 리턴
-        if(!myHasMore) return [];
+        if (!myHasMore) return [];
 
         // 응답
         const response: { results: PackageModel[], next: string | null } | null = useDummyData
@@ -55,34 +58,6 @@ export const usePackage = () => {
                     hasMore: response.next !== null
                 }
             }));
-
-            // 중복 확인을 위한 Set 생성 (O(1) 조회)
-            const categoryIdSet = new Set(categories.map((category) => category.id));
-            const productIdSet = new Set(productList.map((product) => product.id));
-
-            // 누락된 category 가져오기 (중복 제거)
-            const missingCategoryIds = Array.from(
-                new Set(
-                    newPackages
-                        .flatMap((pkg) => pkg.categories)
-                        .filter((categoryId) => !categoryIdSet.has(categoryId)),
-                ),
-            );
-
-            // 누락된 product 가져오기 (중복 제거)
-            const missingProductIds = Array.from(
-                new Set(
-                    newPackages
-                        .flatMap((pkg) => pkg.products)
-                        .filter((productId) => !productIdSet.has(productId)),
-                ),
-            );
-
-            // API 호출 (누락된 ID가 있을 경우에만 실행)
-            if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
-            if (missingProductIds.length) {
-                await Promise.all(missingProductIds.map(getProduct));
-            }
         }
 
         return newPackages;
@@ -111,31 +86,11 @@ export const usePackage = () => {
 
         // 새 패키지 데이터 가져오기
         const foundPackage = useDummyData
-            ? packageDummyData.find((pkg) => pkg.id === packageId)
+            ? PackageModel.fromJson(packageDummyData.find((pkg) => pkg.id === packageId))
             : await getPackageInService(packageId);
 
-        const newPackage = foundPackage ? PackageModel.fromJson(foundPackage) : null;
+        const newPackage = foundPackage || null;
         if (!newPackage) return null;
-
-        // 중복 확인을 위한 Set 생성
-        const categoryIdSet = new Set(categories.map((category) => category.id));
-        const productIdSet = new Set(productList.map((product) => product.id));
-
-        // 누락된 category 및 product 가져오기
-        const missingCategoryIds = newPackage.categories.filter(
-            (categoryId) => !categoryIdSet.has(categoryId),
-        );
-        const missingProductIds = newPackage.products.filter(
-            (productId) => !productIdSet.has(productId),
-        );
-
-        // API 호출 (누락된 경우에만 실행)
-        if (missingCategoryIds.length) missingCategoryIds.forEach(getCategory);
-        if (missingProductIds.length) {
-            for (const productId of missingProductIds) {
-                await getProduct(productId);
-            }
-        }
 
         // 패키지 상태 업데이트
         setPackageList((prevPackages) => [...prevPackages, newPackage]);
