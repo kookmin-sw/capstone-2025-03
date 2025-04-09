@@ -2,58 +2,30 @@ import styles from './SellerSalesList.module.css';
 import MainHeader from '@/src/components/layout/MainHeader';
 import Footer from '@/src/components/layout/MenuFooter';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
+import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 
 export default function SellerSalesList() {
     // page connection
     const navigate = useNavigate();
-    const location = useLocation();
-    // hook
-    const [sellerId, setSellerId] = useState<number>();
+    const isVisible = useHeaderVisibility();
+    const sellerId = useMemo(() => {
+        const stored = localStorage.getItem('user');
+        return stored ? JSON.parse(stored).id : undefined;
+    }, []);
+
     const { products, loadProduct, loadMore } = useSellerProduct(Number(sellerId));
     // useState
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     // useRef
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
-    const lastScrollY = useRef(0);
 
     const currentMenuIndex = 1;
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-
-            if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-                // 아래로 스크롤 중 && 일정 이상 스크롤했을 때
-                setIsHeaderVisible(false);
-            } else {
-                // 위로 스크롤 중
-                setIsHeaderVisible(true);
-            }
-
-            lastScrollY.current = currentScrollY;
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            const userData = JSON.parse(storedUser);
-            setSellerId(userData.id);
-        }
-    }, []);
 
     useEffect(() => {
         if (!sellerId) return;
@@ -100,14 +72,14 @@ export default function SellerSalesList() {
     };
 
     const handleProductItemClick = (product: ProductModel) => {
-        navigate('/package-detail-product-detail', {
+        navigate('/package-detail-product-detail/${}', {
             state: { product: product.toJson() },
         });
     };
 
     return (
         <div className={styles.page}>
-            {isHeaderVisible && <MainHeader />}
+            <MainHeader isVisible={isVisible} />
             <div className={styles.section}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
                 <div>
@@ -123,11 +95,8 @@ export default function SellerSalesList() {
                     ) : (
                         products.map((products: ProductModel, index: number) => {
                             return (
-                                <div
-                                    key={products.id}
-                                    onClick={() => handleProductItemClick(products)}
-                                >
-                                    <SellerProductItem key={index} product={products} />
+                                <div key={index} onClick={() => handleProductItemClick(products)}>
+                                    <SellerProductItem product={products} />
                                 </div>
                             );
                         })

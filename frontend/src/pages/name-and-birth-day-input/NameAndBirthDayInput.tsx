@@ -2,7 +2,6 @@ import styles from './NameAndBirthDayInput.module.css';
 import InputField from './components/InputField';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import RegisterCompleteSection from '../address-input/components/RegisterCompleteSection';
-import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserModel } from '@/src/models/UserModel';

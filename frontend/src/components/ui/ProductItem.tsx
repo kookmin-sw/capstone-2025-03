@@ -10,6 +10,7 @@ const Item = styled.div`
 `;
 
 const Thumbnail = styled.img`
+    object-fit: contain;
     width: 12rem;
     height: 12rem;
     border-radius: 2rem;
