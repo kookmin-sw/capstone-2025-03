@@ -84,7 +84,7 @@ export default function PackageDetail() {
         }
         const newOrder: OrderModel = OrderModel.fromJson({
             user: user.userId,
-            products: editingPackage.products,
+            products: editingPackage.products.map((product) => product.id),
         });
         const response = await createOrder(newOrder);
         if (!response) {
