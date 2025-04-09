@@ -43,7 +43,7 @@ export default function PackageDetailAddProduct() {
             setCheckedProductIds(
                 productList
                     .filter((product) =>
-                        (editingPackage?.products || []).includes(product.id!),
+                        (editingPackage?.products.map((product) => product.id) || []).includes(product.id!),
                     )
                     .map((product) => product.id!),
             );
@@ -85,12 +85,12 @@ export default function PackageDetailAddProduct() {
         setEditingPackage((prev) =>
             PackageModel.fromJson({
                 ...prev?.toJson(),
-                products: checkedProductIds,
+                products: productList.filter((product) => checkedProductIds.includes(product.id!)),
             }),
         );
         navigate(-1);
     };
-    
+
     return (
         <div className={styles.page}>
             <SearchHeader text={category.name || ''} />
