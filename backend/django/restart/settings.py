@@ -16,6 +16,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "default-secret-key")
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "django-792394016853.asia-northeast1.run.app",
     "localhost",
     "127.0.0.1",
     "django-535482967924.asia-northeast1.run.app",
@@ -76,13 +77,15 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_TRUSTED_ORIGINS = [
     'https://restart-cap.vercel.app',
     'http://localhost:5173',
-    'https://django-535482967924.asia-northeast1.run.app'
+    'https://django-535482967924.asia-northeast1.run.app',
+    'https://django-792394016853.asia-northeast1.run.app',
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "https://restart-cap.vercel.app",
     "http://localhost:5173",
-    'https://django-535482967924.asia-northeast1.run.app'
+    'https://django-535482967924.asia-northeast1.run.app',
+    'https://django-792394016853.asia-northeast1.run.app',
 ]
 
 ROOT_URLCONF = 'restart.urls'
@@ -110,17 +113,6 @@ WSGI_APPLICATION = 'restart.wsgi.application'
 
 
 # Database
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DB_NAME", "postgres"),
-        'USER': os.getenv("DB_USER", "postgres"),
-        'PASSWORD': os.getenv("DB_PASSWORD", ""),
-        'HOST': os.getenv("DB_HOST", "localhost"),
-        'PORT': os.getenv("DB_PORT", "5432"),
-    }
-}
 
 # Password validation
 
@@ -161,4 +153,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
