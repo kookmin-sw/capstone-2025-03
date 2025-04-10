@@ -63,7 +63,7 @@ type ProductItemProps = {
         name: string | null;
         price?: number | null;
         purchaseDate: string | null;
-        quantity: number;
+        quantity: number | null;
         salesStatus: string | null;
         seller: number | null;
         uploadDate: string | null;

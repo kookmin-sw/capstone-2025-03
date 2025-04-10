@@ -1,6 +1,5 @@
 import pandas as pd
 
-# 1) 업종별 카테고리 아이템 매핑
 industry_mapping = {
     "음식": [
         "가스레인지", "화구", "오븐", "튀김기", "전자레인지", "냄비", "프라이팬", "칼", "가위", "도마",
@@ -119,30 +118,22 @@ industry_mapping = {
     ]
 }
 
-# 2) CSV 파일 경로 지정
 CSV_FILE_PATH = "./ai_model/output_with_price_category.csv"
 
-# 3) CSV 읽어오기
 df = pd.read_csv(CSV_FILE_PATH)
 
-# 4) CATEGORY 값을 보고, 어떤 업종(들)에 속하는지 찾는 함수
 def get_industries_by_category(category_item):
     matched_industries = []
     for industry_name, item_list in industry_mapping.items():
-        # 만약 이 industry가 가진 아이템 목록에 category_item(예: '냉장고')이 있다면
         if category_item in item_list:
             matched_industries.append(industry_name)
     return matched_industries
 
-# 5) 각 행의 'CATEGORY'를 보고, 업종 리스트를 구한 뒤
-#    콤마로 합친 문자열(INDUSTRY)과 개수(INDUSTRY_COUNT)를 생성
 def industries_to_string(industries):
-    # 여러 업종을 사전순으로 정렬해 저장하고 싶다면 sorted() 사용 가능
     return ",".join(industries)
 
 df["INDUSTRY"] = df["CATEGORY"].apply(lambda cat: industries_to_string(get_industries_by_category(cat)))
 df["INDUSTRY_COUNT"] = df["INDUSTRY"].apply(lambda x: len(x.split(",")) if x else 0)
 
-# 6) CSV 파일에 덮어쓰기
 df.to_csv(CSV_FILE_PATH, index=False)
 print("CSV 파일에 'INDUSTRY'와 'INDUSTRY_COUNT' 칼럼이 정상적으로 업데이트 되었습니다!")

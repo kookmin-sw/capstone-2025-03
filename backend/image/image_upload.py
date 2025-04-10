@@ -2,73 +2,91 @@ import os
 import uuid
 import io
 from datetime import datetime
-from fastapi import FastAPI, File, UploadFile
+from typing import List
+
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from pydantic import BaseModel
 from google.cloud import storage
 from PIL import Image
 from fastapi.middleware.cors import CORSMiddleware
 
+# GCP 인증 환경 변수 설정
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-# ✅ 환경 변수 설정 (Google Cloud 인증)
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "restart-451418-3c0f7ccad0ee.json"
-
-# ✅ FastAPI 앱 초기화
 app = FastAPI()
 
-# ✅ CORS 설정 추가
+# CORS 허용 설정
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 🔹 모든 도메인 허용 (보안상 특정 도메인만 허용하는 것이 좋음)
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # 🔹 모든 HTTP 메서드 허용 (GET, POST, PUT, DELETE 등)
-    allow_headers=["*"],  # 🔹 모든 HTTP 헤더 허용
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-
-# ✅ Google Cloud Storage 클라이언트 생성
-BUCKET_NAME = "restart-images"  # 🔹 GCS 버킷 이름
+# Google Cloud Storage 클라이언트
+BUCKET_NAME = os.getenv("BUCKET_NAME", "restart-images")
 storage_client = storage.Client()
 bucket = storage_client.bucket(BUCKET_NAME)
 
-# ✅ 이미지 처리 함수 (WebP 변환, 품질 최적화, 크기 조정)
+# ✅ 이미지 처리 함수 (WebP로 변환하고 리사이즈)
 async def process_image(image: UploadFile) -> io.BytesIO:
-    """ 이미지 변환 (WebP 형식, 크기 및 품질 최적화) """
-    
     img = Image.open(image.file)
-    
-    # 🔹 이미지 크기 조정 (최대 720x720)
-    max_size = (720, 720)
-    img.thumbnail(max_size)
-
-    # 🔹 WebP 변환 및 최적화 (품질 95%)
+    img.thumbnail((720, 720))
     image_io = io.BytesIO()
     img.save(image_io, format="WEBP", quality=95)
     image_io.seek(0)
-
     return image_io
 
-# ✅ 이미지 업로드 API
+# ✅ 업로드 API
 @app.post("/upload/")
 async def upload_image(image: UploadFile = File(...)):
-    """ 이미지 업로드 후 최적화된 GCS URL 반환 """
-
-    # ✅ 고유한 파일명 생성 (당근마켓 스타일)
     timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S%f")[:-3]
-    unique_id = uuid.uuid4().hex[:6]  # 짧은 UUID 생성
+    unique_id = uuid.uuid4().hex[:6]
     image_name = f"user-uploads/{timestamp}_{unique_id}.webp"
-
-    # ✅ 이미지 변환
     processed_image = await process_image(image)
-
-    # ✅ GCS에 이미지 저장
     blob = bucket.blob(image_name)
     blob.upload_from_file(processed_image, content_type="image/webp")
-
-    # ✅ GCS 퍼블릭 URL 생성
     optimized_url = f"https://storage.googleapis.com/{BUCKET_NAME}/{image_name}"
-
     return {"image_url": optimized_url}
 
-# ✅ FastAPI 실행 (포트 지정)
+# ✅ 단건 삭제용 요청 모델
+class DeleteImageRequest(BaseModel):
+    file_name: str
+
+# ✅ 다건 삭제용 요청 모델
+class BulkDeleteImageRequest(BaseModel):
+    file_names: List[str]
+
+# ✅ 단건 삭제 API
+@app.post("/delete-image/")
+async def delete_image(req: DeleteImageRequest):
+    blob = bucket.blob(req.file_name)
+    try:
+        blob.delete()
+        return {"status": "deleted", "file_name": req.file_name}
+    except Exception as e:
+        if "NotFound" in str(e):
+            return {"status": "not_found", "file_name": req.file_name}
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ✅ 다건 삭제 API
+@app.post("/delete-images/")
+async def delete_images(req: BulkDeleteImageRequest):
+    results = []
+    for file_name in req.file_names:
+        blob = bucket.blob(file_name)
+        try:
+            blob.delete()
+            results.append({"file_name": file_name, "status": "deleted"})
+        except Exception as e:
+            if "NotFound" in str(e):
+                results.append({"file_name": file_name, "status": "not_found"})
+            else:
+                results.append({"file_name": file_name, "status": "error", "detail": str(e)})
+    return {"results": results}
+
+# ✅ 로컬 실행 (선택)
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8002)  # 🔹 포트 명확히 지정 (8002)
+    uvicorn.run(app, host="0.0.0.0", port=8002)
