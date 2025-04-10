@@ -95,13 +95,20 @@ export default function PackageDetailAddProduct() {
         // 중복되지 않은 새 상품만 필터링
         const uniqueNewProducts = selectedProducts.filter(p => !existingIds.has(p.id));
 
+        // 새로운 프로덕트들
+        const newProducts = [...existingProducts, ...uniqueNewProducts];
+
+        // 같은 카테고리지만 선택되지 않은 product들 삭제
+        const filteredProducts = newProducts.filter(
+            (product) => product.category !== category.id || checkedProductIds.includes(product.id!)
+        );
+
         const updatedPackage = PackageModel.fromJson({
             ...editingPackage.toJson(),
-            products: [...existingProducts, ...uniqueNewProducts],
+            products: filteredProducts,
         });
 
         setEditingPackage(updatedPackage);
-        console.log(updatedPackage.toJson());
         navigate(-1);
     };
 
