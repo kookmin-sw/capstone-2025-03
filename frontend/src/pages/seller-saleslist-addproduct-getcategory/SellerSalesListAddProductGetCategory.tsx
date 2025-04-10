@@ -30,7 +30,7 @@ export default function SellerSalesListAddProductGetCategory() {
         };
 
         fetchCatogories();
-    }, []);
+    }, [getCategoryList]);
 
     const handleCategoryClick = (id: number, name: string) => {
         setSellerProduct((prev) => prev.copyWith({ ...prev, category: id, categoryName: name }));
@@ -38,7 +38,7 @@ export default function SellerSalesListAddProductGetCategory() {
     };
 
     const filteredCategories = categories.filter((category) =>
-        category.name?.includes(searchCategory),
+        category.name?.toLowerCase().includes(searchCategory.toLowerCase()),
     );
 
     return isLoading ? (
@@ -71,11 +71,7 @@ export default function SellerSalesListAddProductGetCategory() {
                     >
                         <div className={styles.categoryItem}>
                             <img
-                                src={
-                                    category.thumbnail
-                                        ? category.thumbnail
-                                        : '/images/seller/defaultimg.jpg'
-                                }
+                                src={category.thumbnail || '/images/seller/defaultimg.jpg'}
                                 alt={category.name || ''}
                                 className={styles.thumbnail}
                             />

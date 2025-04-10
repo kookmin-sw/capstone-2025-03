@@ -9,6 +9,7 @@ import {
 } from '../services/categoryService';
 import CategoryModel from '../models/CategoryModel';
 import categoryData from '@/src/data/categoryData.json';
+import { useCallback } from 'react';
 
 const useLocalData = true;
 
@@ -16,13 +17,13 @@ export const useCategory = () => {
     const [categories, setCategories] = useRecoilState(categoryState);
 
     // List Read
-    const getCategoryList = async (): Promise<CategoryModel[]> => {
+    const getCategoryList = useCallback(async (): Promise<CategoryModel[]> => {
         const newCategoryList = useLocalData
             ? categoryData.map((category) => CategoryModel.fromJson(category))
             : ((await getCategoryListInService()) ?? []);
         setCategories(newCategoryList);
         return newCategoryList;
-    };
+    }, [setCategories]);
 
     // Create
     const createCategory = async (categoryData: CategoryModel): Promise<CategoryModel | null> => {

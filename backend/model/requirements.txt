@@ -6,8 +6,8 @@ h11==0.14.0
 idna==3.10
 joblib==1.4.2
 jpype1==1.5.2
-kiwipiepy==0.20.4
-kiwipiepy_model==0.20.0
+# kiwipiepy==0.20.4
+# kiwipiepy_model==0.20.0
 lxml==5.3.1
 numpy==2.2.3
 packaging==24.2
@@ -29,3 +29,4 @@ tzdata==2025.1
 uvicorn==0.34.0
 wheel==0.45.1
 xgboost==2.1.4
+konlpy==0.6.0

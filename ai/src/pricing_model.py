@@ -41,7 +41,6 @@ def multi_hot_encode_industry(df, industry_col="INDUSTRY", threshold=10):
             return ""
         tokens = [i.strip() for i in x.split(',')]
         processed_tokens = [i if frequency.get(i, 0) >= threshold else "Other" for i in tokens]
-        
         return ",".join(sorted(set(processed_tokens)))
     
     df[industry_col] = df[industry_col].apply(process_industries)

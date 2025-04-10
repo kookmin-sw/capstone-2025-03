@@ -8,6 +8,7 @@ import { usePackage } from '@/src/hooks/usePackage';
 import { useEffect, useState, useRef } from 'react';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import { Spinner } from '@chakra-ui/react';
+import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +17,7 @@ export default function Home() {
     const currentMenuIndex = 0;
     const { packageList, getPackageList } = usePackage();
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
+    const isVisible = useHeaderVisibility();
 
     // useEffect
     useEffect(() => {
@@ -30,7 +32,7 @@ export default function Home() {
         fetchPackages();
     }, []);
     useEffect(() => {
-        if(!loadMoreRef.current || isLoadMoreLoading) return;
+        if (!loadMoreRef.current || isLoadMoreLoading) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -56,7 +58,7 @@ export default function Home() {
         <LoadingSection text="잠시만 기다려주세요" />
     ) : (
         <div className={styles.page}>
-            <MainHeader />
+            <MainHeader isVisible={isVisible} />
             <div className={styles.section}>
                 <div className={styles.contentContainer}>
                     <div className={styles.topContainer}>
@@ -86,15 +88,17 @@ export default function Home() {
                         return <PackageItem key={index} pkg={pkg} />;
                     })}
                 </div>
-                <div ref={loadMoreRef} style={{ "height": "20px" }} />
-                {isLoadMoreLoading && <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
-                    <Spinner
-                        color="#00A36C"
-                        borderWidth="0.6rem"
-                        animationDuration="0.8s"
-                        style={{ width: '6rem', height: '6rem' }}
-                    />
-                </div>}
+                <div ref={loadMoreRef} style={{ height: '20px' }} />
+                {isLoadMoreLoading && (
+                    <div className={styles.spinnerContainer} style={{ height: '20rem' }}>
+                        <Spinner
+                            color="#00A36C"
+                            borderWidth="0.6rem"
+                            animationDuration="0.8s"
+                            style={{ width: '6rem', height: '6rem' }}
+                        />
+                    </div>
+                )}
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>

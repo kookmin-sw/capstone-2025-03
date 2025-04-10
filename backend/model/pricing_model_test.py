@@ -6,8 +6,8 @@ import joblib
 import pandas as pd
 import numpy as np
 from datetime import datetime
-# from konlpy.tag import Okt
-from kiwipiepy import Kiwi
+from konlpy.tag import Okt
+# from kiwipiepy import Kiwi
 from sklearn.preprocessing import StandardScaler
 
 MODEL_DIR = "./ai_model/versions"
@@ -54,14 +54,14 @@ def multi_hot_encode_industry(industry_str, all_inds):
 def preprocess_title(text):
     if pd.isna(text):
         return ""
-    # okt = Okt()
-    kiwi = Kiwi()
-    # tokens = okt.morphs(text)
-    tokens = kiwi.tokenize(text)
+    okt = Okt()
+    # kiwi = Kiwi()
+    tokens = okt.morphs(text)
+    # tokens = kiwi.tokenize(text)
     stopwords = ["의", "가", "이", "은", "들", "는", "좀", "잘", "걍", "과", "도", "를", "으로", "자", "에", "와", "한", "하다"]
     tokens = [token for token in tokens if token not in stopwords]
-    token_strs = [token.form for token in tokens if token.form not in stopwords]
-    return " ".join(token_strs)
+    # token_strs = [token.form for token in tokens if token.form not in stopwords]
+    return " ".join(tokens)
 
 def prepare_input_from_product(product_json: dict) -> pd.DataFrame:
     full_title = str(product_json.get("name", "UNKNOWN")).strip()
