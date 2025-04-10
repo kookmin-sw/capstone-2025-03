@@ -14,9 +14,7 @@ import PackageModel from '@/src/models/PackageModel';
 import CategoryModel from '@/src/models/CategoryModel';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
-import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
-import { useProduct } from '@/src/hooks/useProduct';
 import industryData from '@/src/data/industryData.json';
 import { useOrder } from '@/src/hooks/useOrder';
 import OrderModel from '@/src/models/OrderModel';
@@ -31,13 +29,11 @@ export default function PackageDetail() {
     const { user } = useUser();
     // hook
     const { categories } = useCategory();
-    const { productList } = useProduct();
     const { createOrder } = useOrder();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
     const [myCategories, setMyCategories] = useState<CategoryModel[]>([]);
-    const [myProducts, setMyProducts] = useState<ProductModel[]>([]);
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
@@ -45,6 +41,7 @@ export default function PackageDetail() {
 
     // UseEffect
     useEffect(() => {
+
         let targetPackage = null;
         if (!editingPackage) {
             targetPackage = myPackage;
@@ -56,11 +53,6 @@ export default function PackageDetail() {
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
         setMyCategories(newMyCategories);
-
-        const newMyProducts: ProductModel[] = targetPackage.products
-            .map((productId) => productList.find((product) => product.id === productId))
-            .filter(Boolean) as ProductModel[];
-        setMyProducts(newMyProducts);
     }, []);
 
     // Function
@@ -92,10 +84,10 @@ export default function PackageDetail() {
         }
         const newOrder: OrderModel = OrderModel.fromJson({
             user: user.userId,
-            products: editingPackage.products,
+            products: editingPackage.products.map((product) => product.id),
         });
         const response = await createOrder(newOrder);
-        if(!response){
+        if (!response) {
             window.alert('주문에 오류가 발생하였습니다');
         }
         setIsComplete(true);
@@ -103,17 +95,35 @@ export default function PackageDetail() {
     const handleAddProductButtonClick = (category: CategoryModel) => {
         navigate('/package-detail-add-product', { state: { category: category.toJson() } });
     };
-    const handleDeleteButtonClick = (categoryId: number) => {
-        setMyCategories((prev) => prev.filter((category) => category.id !== categoryId));
-        setMyProducts((prev) => prev.filter((product) => product.category !== categoryId));
+    const handleDeleteButtonClick = (productId: number) => {
+        if (!editingPackage) return;
+
+        const targetProduct = editingPackage.products.find(
+            (product) => product.id === productId
+        );
+        if (!targetProduct) return;
+
+        const numProductsInSameCategory =
+            editingPackage.products.filter(
+                (product) => product.category === targetProduct.category
+            )?.length ?? 0;
+
+        // 안전하게 복사
+        let newCategories = [...(editingPackage.categories ?? [])];
+
+        if (numProductsInSameCategory <= 1) {
+            setMyCategories((prev) =>
+                prev.filter((category) => category.id !== targetProduct.category)
+            );
+            newCategories = newCategories.filter((id) => id !== targetProduct.category);
+        }
+
         setEditingPackage((prev) => {
             if (!prev) return prev;
-            return PackageModel.fromJson({
-                ...prev.toJson(),
-                categories: prev.categories.filter((id) => id !== categoryId),
-                products: prev.products.filter((id) =>
-                    myProducts.some((product) => product.id === id),
-                ),
+            return new PackageModel({
+                ...prev,
+                categories: newCategories,
+                products: prev.products.filter((product) => product.id !== productId),
             });
         });
     };
@@ -154,9 +164,9 @@ export default function PackageDetail() {
                 <div className={styles.listView}>
                     {/* 1. 카테고리 순서대로 정렬된 products */}
                     {myCategories.map((category) => {
-                        const categoryProducts = myProducts.filter(
+                        const categoryProducts = editingPackage?.products.filter(
                             (product) => product.category === category.id
-                        );
+                        ) || [];
 
                         return categoryProducts.map((product) => (
                             <div
@@ -186,7 +196,7 @@ export default function PackageDetail() {
                                         className={styles.deleteProductButton}
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            handleDeleteButtonClick(product.category!);
+                                            handleDeleteButtonClick(product.id!);
                                         }}
                                     >
                                         <img
@@ -208,7 +218,7 @@ export default function PackageDetail() {
 
                     {/* 2. 제품이 아예 없는 카테고리 */}
                     {myCategories
-                        .filter((category) => !myProducts.some((product) => product.category === category.id))
+                        .filter((category) => !editingPackage?.products.some((product) => product.category === category.id))
                         .map((category) => (
                             <div
                                 key={`category-${category.id}`}
