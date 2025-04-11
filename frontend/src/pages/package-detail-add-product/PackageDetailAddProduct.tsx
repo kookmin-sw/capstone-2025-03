@@ -43,7 +43,7 @@ export default function PackageDetailAddProduct() {
             setCheckedProductIds(
                 productList
                     .filter((product) =>
-                        (editingPackage?.products || []).includes(product.id!),
+                        (editingPackage?.products.map((product) => product.id) || []).includes(product.id!),
                     )
                     .map((product) => product.id!),
             );
@@ -82,15 +82,37 @@ export default function PackageDetailAddProduct() {
         );
     };
     const handleConfirmButtonClick = () => {
-        setEditingPackage((prev) =>
-            PackageModel.fromJson({
-                ...prev?.toJson(),
-                products: checkedProductIds,
-            }),
+        if (!editingPackage) return;
+
+        const existingProducts = editingPackage.products;
+        const selectedProducts = productList.filter(product =>
+            checkedProductIds.includes(product.id!)
         );
+
+        // ID 기준 중복 제거: 기존 상품 ID를 Set으로 저장
+        const existingIds = new Set(existingProducts.map(p => p.id));
+
+        // 중복되지 않은 새 상품만 필터링
+        const uniqueNewProducts = selectedProducts.filter(p => !existingIds.has(p.id));
+
+        // 새로운 프로덕트들
+        const newProducts = [...existingProducts, ...uniqueNewProducts];
+
+        // 같은 카테고리지만 선택되지 않은 product들 삭제
+        const filteredProducts = newProducts.filter(
+            (product) => product.category !== category.id || checkedProductIds.includes(product.id!)
+        );
+
+        const updatedPackage = PackageModel.fromJson({
+            ...editingPackage.toJson(),
+            products: filteredProducts,
+        });
+
+        setEditingPackage(updatedPackage);
         navigate(-1);
     };
-    
+
+
     return (
         <div className={styles.page}>
             <SearchHeader text={category.name || ''} />
