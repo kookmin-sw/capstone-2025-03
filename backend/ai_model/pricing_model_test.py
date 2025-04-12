@@ -1,0 +1,198 @@
+import os
+import sys
+import json
+import re
+import joblib
+import pandas as pd
+import numpy as np
+import difflib
+from datetime import datetime
+from konlpy.tag import Okt
+from sklearn.preprocessing import StandardScaler
+
+MODEL_DIR = "./ai_model/versions"
+MAIN_CSV_FILE_PATH = "./ai_model/output_with_price_category.csv"
+PRODUCT_JSON_PATH = "./product.json"
+
+try:
+    with open(os.path.join(MODEL_DIR, 'LATEST'), 'r', encoding='utf-8') as f:
+        latest_version = f.read().strip()
+    latest_dir = os.path.join(MODEL_DIR, f"v{latest_version}")
+except Exception as e:
+    print(f"모델 버전 로딩 실패: {e}")
+    sys.exit(1)
+
+try:
+    price_model = joblib.load(os.path.join(latest_dir, 'price_model.joblib'))
+    cat_encoder = joblib.load(os.path.join(latest_dir, 'category_encoder.joblib'))
+    cond_encoder = joblib.load(os.path.join(latest_dir, 'condition_encoder.joblib'))
+    pricecat_encoder = joblib.load(os.path.join(latest_dir, 'price_cat_encoder.joblib'))
+    all_industries = joblib.load(os.path.join(latest_dir, 'industry_labels.joblib'))
+    title_vectorizer = joblib.load(os.path.join(latest_dir, 'title_vectorizer.joblib'))
+    title_pca = joblib.load(os.path.join(latest_dir, 'title_pca.joblib'))
+    feature_columns = joblib.load(os.path.join(latest_dir, 'feature_columns.joblib'))
+    scaler = joblib.load(os.path.join(latest_dir, 'scaler.joblib'))
+except Exception as e:
+    print(f"모델 로딩 실패: {e}")
+    sys.exit(1)
+
+try:
+    df_main = pd.read_csv(MAIN_CSV_FILE_PATH, encoding='utf-8')
+except Exception as e:
+    print(f"output_with_price_category.csv 로딩 실패: {e}")
+    sys.exit(1)
+
+def extract_tokens(text: str) -> list:
+    return re.findall(r'[\w가-힣]+', text.lower())
+
+def contains_query_tokens(candidate: str, query: str) -> bool:
+    candidate_tokens = extract_tokens(candidate)
+    query_tokens = extract_tokens(query)
+    return all(any(q in ct for ct in candidate_tokens) for q in query_tokens)
+
+def fuzzy_ratio(query: str, title: str) -> float:
+    query_norm = "".join(extract_tokens(query))
+    title_norm = "".join(extract_tokens(title))
+    return difflib.SequenceMatcher(None, query_norm, title_norm).ratio()
+
+def hybrid_title_search(query: str, df: pd.DataFrame, title_col="TITLE") -> pd.DataFrame:
+    candidates = df[df[title_col].apply(lambda x: contains_query_tokens(x, query))]
+    if candidates.empty:
+        return None
+    candidates = candidates.copy()
+    candidates["fuzzy_score"] = candidates[title_col].apply(lambda x: fuzzy_ratio(query, x))
+    candidates.sort_values("fuzzy_score", ascending=False, inplace=True)
+    return candidates
+
+def multi_hot_encode_industry(industry_str, all_inds):
+    row_dict = {}
+    inds = [i.strip() for i in str(industry_str).split(',') if i.strip()]
+    for ind in all_inds:
+        col_name = "IND_" + re.sub(r"\W+", "", ind)
+        row_dict[col_name] = 1 if ind in inds else 0
+    row_dict["INDUSTRY_COUNT"] = len(inds)
+    return row_dict
+
+def preprocess_title(text):
+    if pd.isna(text):
+        return ""
+    okt = Okt()
+    tokens = okt.morphs(text)
+    stopwords = {"의", "가", "이", "은", "들", "는", "좀", "잘", "걍", "과", "도", "를", "으로", "자", "에", "와", "한", "하다"}
+    tokens = [token for token in tokens if token not in stopwords]
+    return " ".join(tokens)
+
+def prepare_input_from_product(product_json: dict) -> pd.DataFrame:
+    full_title = str(product_json.get("name", "UNKNOWN")).strip()
+    
+    candidates = hybrid_title_search(full_title, df_main, title_col="TITLE")
+    if candidates is not None and not candidates.empty:
+        print("검색된 후보 목록:")
+        for idx, row in candidates.iterrows():
+            print(f"  - {row['TITLE']} (유사도: {fuzzy_ratio(full_title, row['TITLE']):.2f})")
+        best_candidate = candidates.iloc[0] 
+    else:
+        best_candidate = None
+        print("일치하는 후보를 찾지 못했습니다. 기본값 사용합니다.")
+
+    if best_candidate is not None:
+        category_str = best_candidate["CATEGORY"]
+        industry_str = str(best_candidate.get("INDUSTRY", "기타"))
+        popularity_score = best_candidate.get("POPULARITY_SCORE", 0)
+        category_pop_score = best_candidate.get("CATEGORY_POPULARITY_SCORE", 0)
+        price_category_val = str(best_candidate.get("PRICE_CATEGORY", "Mid"))
+    else:
+        category_str = full_title  
+        industry_str = "기타"
+        popularity_score = 0
+        category_pop_score = 0
+        price_category_val = "Mid"
+    
+    industry_encoded = multi_hot_encode_industry(industry_str, all_industries)
+    
+    try:
+        cat_enc_val = cat_encoder.transform([category_str])[0]
+    except Exception as e:
+        cat_enc_val = 0
+    try:
+        product_condition_str = str(product_json.get("grade", "중고")).strip()
+        cond_enc_val = cond_encoder.transform([product_condition_str])[0]
+    except Exception as e:
+        cond_enc_val = 0
+    try:
+        pricecat_enc_val = pricecat_encoder.transform([price_category_val])[0]
+    except Exception as e:
+        pricecat_enc_val = 0
+    
+    upload_date_str = product_json.get("upload_date", None)
+    try:
+        dt = pd.to_datetime(upload_date_str)
+        post_month = dt.month
+        post_day_of_week = dt.dayofweek
+        post_quarter = dt.quarter
+    except Exception as e:
+        post_month = 0
+        post_day_of_week = 0
+        post_quarter = 0
+    
+    title_processed = preprocess_title(full_title)
+    tfidf_vec = title_vectorizer.transform([title_processed])
+    title_pca_features = title_pca.transform(tfidf_vec.toarray())[0]
+    title_pca_dict = {f"TITLE_PCA_{i}": title_pca_features[i] for i in range(title_pca.n_components_)}
+    
+    features_dict = {
+        "CATEGORY_enc": cat_enc_val,
+        "PRODUCT_CONDITION_enc": cond_enc_val,
+        "POPULARITY_SCORE": popularity_score,
+        "CATEGORY_POPULARITY_SCORE": category_pop_score,
+        "POST_MONTH": post_month,
+        "POST_DAY_OF_WEEK": post_day_of_week,
+        "POST_QUARTER": post_quarter,
+        "PRICE_CATEGORY_enc": pricecat_enc_val
+    }
+    features_dict.update(industry_encoded)
+    features_dict.update(title_pca_dict)
+    
+    X_df = pd.DataFrame([features_dict])
+    X_df = X_df.reindex(columns=feature_columns, fill_value=0)
+    
+    numeric_cols_to_scale = ['POPULARITY_SCORE', 'CATEGORY_POPULARITY_SCORE', 'INDUSTRY_COUNT'] + \
+                              [col for col in feature_columns if col.startswith("TITLE_PCA_")]
+    for col in numeric_cols_to_scale:
+        if col not in X_df.columns:
+            X_df[col] = 0
+    X_df[numeric_cols_to_scale] = scaler.transform(X_df[numeric_cols_to_scale])
+    
+    return X_df
+
+def predict_price(product_json: dict) -> float:
+    try:
+        X_df = prepare_input_from_product(product_json)
+        y_pred = price_model.predict(X_df)
+        return float(y_pred[0])
+    except Exception as e:
+        print(f"예측 실패: {e}")
+        return None
+
+if __name__ == "__main__":
+    print("제품 예측 실행")
+    try:
+        with open(PRODUCT_JSON_PATH, 'r', encoding='utf-8') as f:
+            product_data = json.load(f)
+    except Exception as e:
+        print(f"product.json 로딩 실패: {e}")
+        sys.exit(1)
+    
+    predicted_unit_price = predict_price(product_data)
+    if predicted_unit_price is not None and predicted_unit_price > 0:
+        quantity = int(product_data.get("quantity", 1))
+        total_price = predicted_unit_price * quantity
+        print("\n--- 예측 결과 ---")
+        print(f"제품명(상세 모델명): {product_data.get('name')}")
+        print(f"상품 상태: {product_data.get('grade')}")
+        print(f"업로드 날짜: {product_data.get('upload_date')}")
+        print(f"예측 단가: {round(predicted_unit_price, 2):,}원")
+        print(f"수량: {quantity}")
+        print(f"총 예상 금액: {round(total_price, 2):,}원")
+    else:
+        print("예측에 실패했습니다.")
