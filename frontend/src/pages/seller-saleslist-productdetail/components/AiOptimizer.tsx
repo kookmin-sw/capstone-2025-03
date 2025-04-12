@@ -4,6 +4,7 @@ import { optimizePriceInService } from '@/src/services/aiService';
 import { useState, useEffect } from 'react';
 import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilValue } from 'recoil';
+import { Spinner } from '@chakra-ui/react';
 
 const Card = styled.div`
     background-color: #202028;
@@ -83,7 +84,10 @@ export default function AiOptimizer() {
     const sellerProduct = useRecoilValue(sellerProductState);
 
     const [predictedPrice, setPredictedPrice] = useState<number | null>(null);
+    const [isUploading, setIsUploading] = useState<boolean>(false);
+
     useEffect(() => {
+        setIsUploading(true);
         const getOptimizedPrice = async () => {
             try {
                 const responseData = await optimizePriceInService(
@@ -94,6 +98,8 @@ export default function AiOptimizer() {
                 setPredictedPrice(responseData.predicted_price);
             } catch (error) {
                 console.log('Error Optimizing price: ', error);
+            } finally {
+                setIsUploading(false);
             }
         };
         getOptimizedPrice();
@@ -117,10 +123,18 @@ export default function AiOptimizer() {
             <StatsContainer>
                 <Stat>
                     <StatTitle>
-                        업로드한 제품과 함께 많이 찾는 {sellerProduct.categoryName}은(는) 중고로 아래 가격대에서 잘
-                        판매될 것으로 예상됩니다.
+                        업로드한 제품과 함께 많이 찾는 {sellerProduct.categoryName}은(는) 중고로
+                        아래 가격대에서 잘 판매될 것으로 예상됩니다.
                     </StatTitle>
-                    <StatValue>{predictedPrice?.toLocaleString()}원</StatValue>
+                    {isUploading ? (
+                        <Spinner
+                            color="#00A36C"
+                            borderWidth="0.3rem"
+                            style={{ width: '3rem', height: '3rem' }}
+                        />
+                    ) : (
+                        <StatValue>{predictedPrice?.toLocaleString()}원</StatValue>
+                    )}
                 </Stat>
             </StatsContainer>
         </Card>
