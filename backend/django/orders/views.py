@@ -11,16 +11,18 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .filters import OrderFilter
 from .pagination import LargeResultsSetPagination
 from django.utils import timezone
-import os
+
 
 # ✅ 1. 전체 주문 조회 및 생성 (ListCreateAPIView) + 개별 물품 sales_status 변경
 class OrderListCreateView(generics.ListCreateAPIView):
-    queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]  # ✅ 필터 백엔드 추가
-    filterset_class = OrderFilter  # ✅ 필터 클래스 적용
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_class = OrderFilter
     ordering_fields = ['created_at', 'payment_status']
     pagination_class = LargeResultsSetPagination
+
+    def get_queryset(self):
+        return Order.objects.all().select_related('user').prefetch_related('products')
 
     @transaction.atomic
     def create(self, request, *args, **kwargs):
@@ -39,7 +41,6 @@ class OrderListCreateView(generics.ListCreateAPIView):
         order.products.set(product_ids)
 
         # 선택된 상품들 판매 완료 처리
-        from products.models import Product
         Product.objects.filter(id__in=product_ids).update(sales_status="sold")
 
         # Slack 메시지 전송
@@ -48,9 +49,8 @@ class OrderListCreateView(generics.ListCreateAPIView):
         serializer = self.get_serializer(order)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
     def send_slack_notification(self, user, product_ids):
-        SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
+        SLACK_WEBHOOK_URL = ''
 
         # 실제 제품 조회
         products = Product.objects.filter(id__in=product_ids)
@@ -75,7 +75,7 @@ class OrderListCreateView(generics.ListCreateAPIView):
 
 # ✅ 2. 특정 주문 조회, 수정(결제 상태 변경), 삭제 (RetrieveUpdateDestroyAPIView)
 class OrderDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Order.objects.all()
+    queryset = Order.objects.all().select_related('user').prefetch_related('products')
     serializer_class = OrderSerializer
 
     def retrieve(self, request, *args, **kwargs):
