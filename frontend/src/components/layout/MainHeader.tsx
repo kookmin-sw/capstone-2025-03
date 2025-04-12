@@ -36,7 +36,6 @@ const handleClickNotificationButton = () => {
 };
 
 export default function MainHeader({ isVisible }: { isVisible: boolean }) {
-    console.log(isVisible);
     return (
         <Header isVisible={isVisible}>
             <Logo src={LogoImage} />
