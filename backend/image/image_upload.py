@@ -11,7 +11,7 @@ from PIL import Image
 from fastapi.middleware.cors import CORSMiddleware
 
 # GCP 인증 환경 변수 설정
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "restart-456108-c38558c2ebbd.json"
 
 app = FastAPI()
 
@@ -25,7 +25,7 @@ app.add_middleware(
 )
 
 # Google Cloud Storage 클라이언트
-BUCKET_NAME = os.getenv("BUCKET_NAME", "restart-images")
+BUCKET_NAME = "restart-image"
 storage_client = storage.Client()
 bucket = storage_client.bucket(BUCKET_NAME)
 
