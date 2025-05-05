@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getRandomCategoriesInService } from '@/src/services/categoryService';
 import { useRecoilState } from 'recoil';
 import { viewedCategoryIdsState } from '@/src/recoil/viewedCategoryIdsState';
-
+import CategorySection from './CategorySection';
 type Item = {
     image: string;
     name: string;
@@ -23,8 +23,8 @@ export default function RandomCategory() {
     const handleGetRandomCategory = async () => {
         try {
             const response = await getRandomCategoriesInService(viewedIds);
-            setResults(response)
-            
+            setResults(response);
+
             const newIds = response.map((response) => response.category_id);
             setViewedIds((prev) => [...prev, ...newIds]);
         } catch (error) {
@@ -34,7 +34,17 @@ export default function RandomCategory() {
 
     useEffect(() => {
         handleGetRandomCategory();
-    },[]);
+    }, []);
 
-    return <div>카테고리 화면</div>;
+    return (
+        <div>
+            {results.map((category) => (
+                <CategorySection
+                    key={category.category_id}
+                    categoryName={category.category_name}
+                    products={category.results}
+                />
+            ))}
+        </div>
+    );
 }
