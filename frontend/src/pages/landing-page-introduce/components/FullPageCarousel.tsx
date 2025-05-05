@@ -6,7 +6,7 @@ import {
     CarouselSlider,
     ProgressBarContainer,
     ProgressBar,
-} from './IntroduceMain';
+} from './Introduce.css';
 
 const FullPageCarousel = Object.assign(BaseCarousel, { Slide: CarouselSlide });
 
