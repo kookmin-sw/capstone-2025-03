@@ -242,7 +242,7 @@ export default function RandomCategory() {
                     grade: '',
                     price: '',
                     type: 'more',
-                },
+                } satisfies Item,
             ],
         }));
 
@@ -250,7 +250,7 @@ export default function RandomCategory() {
     }, []);
     console.log(results);
     return (
-        <div>
+        <div style={{ paddingBottom: '7rem' }}>
             <CategoryContainer>
                 {results.map((category) => (
                     <CategorySection
