@@ -1,5 +1,5 @@
-import CategoryProducts from './components/RandomCategory';
-import MainBanner from './components/MainBanner';
+import CategoryProducts from './category-components/RandomCategory';
+import MainBanner from './banner-components/MainBanner';
 import styled from '@emotion/styled';
 
 const PageContainer = styled.div`
