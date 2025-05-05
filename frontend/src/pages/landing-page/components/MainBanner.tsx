@@ -1,17 +1,17 @@
 import landingImage from '/src/assets/images/landing-page/landing1.jpg';
-import BannerSlider from './bannerSlider';
+import BannerCarousel from './BannerCarousel';
 import styled from '@emotion/styled';
 
 const BANNER_DATA = [
     {
         text: '정리 중인 물건들, 아직 끝나지 않은 이야기들',
         image: landingImage,
-        linkto: "./address"
+        linkTo: "/address"
     },
     {
         text: '당신의 손에서 다시 시작될 그 이야기',
         image: landingImage,
-        linkto: "./address"
+        linkTo: "/address"
     },
 ];
 
@@ -36,7 +36,7 @@ export default function Banner() {
     return (
         <MainContainer>
             <MainName>restart</MainName>
-            <BannerSlider banner={BANNER_DATA} />
+            <BannerCarousel banners={BANNER_DATA} />
         </MainContainer>
     );
 }

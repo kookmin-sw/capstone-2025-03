@@ -1,5 +1,5 @@
 import CategoryProducts from './components/RandomCategory';
-import RestartBanner from './components/Banner';
+import MainBanner from './components/MainBanner';
 import styled from '@emotion/styled';
 
 const PageContainer = styled.div`
@@ -12,7 +12,7 @@ const PageContainer = styled.div`
 export default function LandingPage() {
     return (
         <PageContainer>
-            <RestartBanner />
+            <MainBanner />
             <CategoryProducts />
         </PageContainer>
     );
