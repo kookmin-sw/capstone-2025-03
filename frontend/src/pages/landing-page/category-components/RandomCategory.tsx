@@ -1,9 +1,10 @@
+import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { getRandomCategoriesInService } from '@/src/services/categoryService';
 import { useRecoilState } from 'recoil';
 import { viewedCategoryIdsState } from '@/src/recoil/viewedCategoryIdsState';
 import CategorySection from './CategorySection';
-import styled from '@emotion/styled';
+import Footer from '@/src/components/layout/MenuFooter';
 
 type Item = {
     image: string;
@@ -203,9 +204,14 @@ const MOCK_DATA: CategoryResult[] = [
 
 const CategoryContainer = styled.div`
     background-color: #18171d;
+    padding: 3.2rem 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 `;
 
 export default function RandomCategory() {
+    const currentMenuIndex = 0;
     const [viewedIds, setViewedIds] = useRecoilState(viewedCategoryIdsState);
     const [results, setResults] = useState<CategoryResult[]>([]);
 
@@ -227,6 +233,8 @@ export default function RandomCategory() {
     }, []);
     console.log(results);
     return (
+        <div>
+
         <CategoryContainer>
             {results.map((category) => (
                 <CategorySection
@@ -237,5 +245,8 @@ export default function RandomCategory() {
                 />
             ))}
         </CategoryContainer>
+        <Footer currentMenuIndex={currentMenuIndex} />
+        </div>
+        
     );
 }

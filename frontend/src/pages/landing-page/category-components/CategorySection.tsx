@@ -23,6 +23,12 @@ const CategoryList = styled.ul`
     }
 `;
 
+const CategoryName = styled.div`
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 5.6rem;
+`;
+
 export default function CategorySection({
     categoryId,
     categoryName,
@@ -30,7 +36,7 @@ export default function CategorySection({
 }: CategorySectionProps) {
     return (
         <div>
-            <h2>{categoryName}</h2>
+            <CategoryName>{categoryName}</CategoryName>
             <CategoryList>
                 {products.map((product, idx) => (
                     <ProductCard

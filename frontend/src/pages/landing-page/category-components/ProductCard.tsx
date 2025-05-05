@@ -9,17 +9,17 @@ type ProductCardProps = {
 };
 
 const Card = styled.div`
-    min-width: 15rem;
+    display: flex;
+    min-width: 14rem;
+    flex-direction: column;
     background-color: #18171d;
-    border-radius: 1.2rem;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    padding: 1.2rem;
+    gap: 1.2rem,
 `;
 
 const Image = styled.img`
-    height: 12rem;
-    width: 12rem;
+    height: 14rem;
+    width: 14rem;
     object-fit: cover;
 `;
 
