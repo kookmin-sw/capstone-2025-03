@@ -3,7 +3,7 @@ import MainBanner from './banner-components/MainBanner';
 import styled from '@emotion/styled';
 
 const PageContainer = styled.div`
-    height: 100vh;
+    height: 100%;
     paddingbottom: '8rem';
     background-color: #101012;
 

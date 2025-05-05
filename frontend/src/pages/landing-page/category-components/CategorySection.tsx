@@ -1,4 +1,5 @@
 import ProductCard from './ProductCard';
+import styled from '@emotion/styled';
 
 type Item = {
     image: string;
@@ -13,6 +14,15 @@ type CategorySectionProps = {
     products: Item[];
 };
 
+const CategoryList = styled.ul`
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
 export default function CategorySection({
     categoryId,
     categoryName,
@@ -21,7 +31,7 @@ export default function CategorySection({
     return (
         <div>
             <h2>{categoryName}</h2>
-            <ul>
+            <CategoryList>
                 {products.map((product, idx) => (
                     <ProductCard
                         key={idx}
@@ -31,7 +41,7 @@ export default function CategorySection({
                         price={product.price}
                     />
                 ))}
-            </ul>
+            </CategoryList>
         </div>
     );
 }
