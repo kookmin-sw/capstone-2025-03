@@ -73,7 +73,7 @@ export default function SellerSalesList() {
 
     const handleProductItemClick = (product: ProductModel) => {
         navigate(`/package-detail-product-detail`, {
-            state: { product: product.toJson() },
+            state: { product: product.toJson(), reset: true },
         });
     };
 

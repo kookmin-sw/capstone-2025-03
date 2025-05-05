@@ -10,6 +10,8 @@ export default function PackageDetailProductDetail() {
     // page connection
     const navitgate = useNavigate();
     const location = useLocation();
+    const { state } = useLocation();
+    const reset = state?.reset;
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
     // hook
     const { categories } = useCategory();
@@ -45,7 +47,7 @@ export default function PackageDetailProductDetail() {
                 </div>
                 <div style={{ height: '20rem' }} />
             </div>
-            <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" />
+                {!reset ? <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" /> : null}
         </div>
     );
 }
