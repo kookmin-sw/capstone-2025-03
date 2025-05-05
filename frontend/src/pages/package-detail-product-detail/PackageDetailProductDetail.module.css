@@ -45,6 +45,20 @@
     font-weight: bold;
 }
 
+.descriptionContainer {
+    background-color: #202028;
+    min-height: 5rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 2rem;
+    font-size: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
 .buttonContainer {
     padding: 2rem;
 }

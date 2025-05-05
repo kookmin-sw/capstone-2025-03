@@ -4,6 +4,7 @@ import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
+import React from 'react';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -17,7 +18,7 @@ export default function PackageDetailProductDetail() {
     const handleButtonClick = () => {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
-
+    console.log(product);
     return (
         <div className={styles.page}>
             <BackHeader />
@@ -31,9 +32,20 @@ export default function PackageDetailProductDetail() {
                     {product.grade}등급 ∙ {product.quantity}개
                 </p>
                 <p className={styles.price}>{product.price?.toLocaleString()}원</p>
+                <div className={styles.descriptionContainer}>
+                    {(product.description ?? '')
+                        .replace(/\n+/g, '\n')
+                        .split('\n')
+                        .map((line, idx) => (
+                            <React.Fragment key={idx}>
+                                {line}
+                                <br />
+                            </React.Fragment>
+                        ))}
+                </div>
                 <div style={{ height: '20rem' }} />
             </div>
             <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" />
         </div>
-    );  
+    );
 }
