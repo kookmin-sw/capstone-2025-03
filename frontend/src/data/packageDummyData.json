@@ -1,52 +1,85 @@
 [
     {
         "id": 1,
-        "industry": 1,
-        "categories": [2, 5, 8],
-        "products": [101, 104, 107],
-        "name": "프리미엄 베이킹 패키지",
+        "userId": "1",
+        "industry": 101,
+        "categories": [
+            201,
+            202
+        ],
+        "products": [
+            {
+                "id": 1001,
+                "images": [
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVOlKgH_Iersr7cMfVbdyyLvq2KKpRcnZYg&s"
+                ],
+                "category": 201,
+                "name": "에너지바 세트",
+                "grade": "A",
+                "quantity": 10,
+                "price": 12000,
+                "seller": 501,
+                "upload_date": "2024-05-01T10:00:00Z",
+                "buyer": null,
+                "purchase_date": null,
+                "description": "고단백 에너지바 패키지입니다.",
+                "sales_status": "available",
+                "origin_url": "https://example.com/product1"
+            },
+            {
+                "id": 1002,
+                "images": [
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVOlKgH_Iersr7cMfVbdyyLvq2KKpRcnZYg&s"
+                ],
+                "category": 202,
+                "name": "프로틴 쉐이크 5팩",
+                "grade": "B",
+                "quantity": 5,
+                "price": 25000,
+                "seller": 502,
+                "upload_date": "2024-05-03T09:00:00Z",
+                "buyer": null,
+                "purchase_date": null,
+                "description": "운동 전후에 적합한 단백질 쉐이크.",
+                "sales_status": "available",
+                "origin_url": "https://example.com/product2"
+            }
+        ],
         "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
-        "description": "고급 베이킹 장비와 필수 도구들을 포함한 패키지.",
-        "price": 350000
+        "name": "헬스 입문 패키지",
+        "description": "헬스를 시작하는 분들을 위한 제품 구성입니다.",
+        "price": 35000
     },
     {
         "id": 2,
-        "industry": 1,
-        "categories": [3, 7, 9],
-        "products": [102, 106, 108],
-        "name": "카페 디저트 세트",
+        "userId": "1",
+        "industry": 102,
+        "categories": [
+            203
+        ],
+        "products": [
+            {
+                "id": 1003,
+                "images": [
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVOlKgH_Iersr7cMfVbdyyLvq2KKpRcnZYg&s"
+                ],
+                "category": 203,
+                "name": "다이어트 도시락 7팩",
+                "grade": "A",
+                "quantity": 7,
+                "price": 49000,
+                "seller": 503,
+                "upload_date": "2024-04-28T15:30:00Z",
+                "buyer": null,
+                "purchase_date": null,
+                "description": "일주일 식단 구성용 다이어트 도시락입니다.",
+                "sales_status": "available",
+                "origin_url": "https://example.com/product3"
+            }
+        ],
         "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
-        "description": "카페에서 활용할 수 있는 디저트 제작 도구 모음.",
-        "price": 280000
-    },
-    {
-        "id": 3,
-        "industry": 1,
-        "categories": [4, 6, 10],
-        "products": [103, 105, 109],
-        "name": "초콜릿 전문 패키지",
-        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
-        "description": "초콜릿 템퍼링 기기와 몰드를 포함한 전문가용 패키지.",
-        "price": 420000
-    },
-    {
-        "id": 4,
-        "industry": 1,
-        "categories": [2, 4, 6],
-        "products": [101, 103, 105],
-        "name": "디저트 창업 패키지",
-        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
-        "description": "디저트 가게 창업을 위한 필수 장비 모음.",
-        "price": 500000
-    },
-    {
-        "id": 5,
-        "industry": 1,
-        "categories": [5, 7, 8],
-        "products": [104, 106, 107],
-        "name": "아이스크림 제조 패키지",
-        "thumbnail": "https://i.namu.wiki/i/SBlGdiXLWqqLe8WB7-iq_5D7mgS1ltK3loOuQmURHxA_ZaEUM-qYRw25TQTphYni6w928_uXq6PCD-lTRELvFw.webp",
-        "description": "아이스크림 제조에 필요한 전기오븐과 냉동 장비 패키지.",
-        "price": 380000
+        "name": "식단 관리 패키지",
+        "description": "식단을 관리하는 데 최적화된 구성입니다.",
+        "price": 49000
     }
 ]

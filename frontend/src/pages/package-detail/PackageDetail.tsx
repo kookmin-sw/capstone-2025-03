@@ -86,6 +86,8 @@ export default function PackageDetail() {
             user: user.userId,
             products: editingPackage.products.map((product) => product.id),
         });
+        console.log(newOrder.toJson());
+        console.log(user.toJson());
         const response = await createOrder(newOrder);
         if (!response) {
             window.alert('주문에 오류가 발생하였습니다');

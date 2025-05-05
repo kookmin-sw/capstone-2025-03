@@ -25,8 +25,8 @@ export const getPackageListInService = async (
 } | null> => {
     try {
         // industry가 있을 때만 params에 포함
-        const params: any = {page_size: pageSize};
-        if(industry!='all'){
+        const params: any = { page_size: pageSize };
+        if (industry != 'all') {
             params.industry = industry
         }
         const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
@@ -39,6 +39,26 @@ export const getPackageListInService = async (
         };
     } catch (error) {
         console.error('Error fetching packages:', error);
+        return null;
+    }
+};
+
+/**
+ * 특정 userId에 해당하는 모든 커스텀 패키지를 가져옵니다 (페이지네이션 없음).
+ * @param {string} userId - 사용자 ID
+ * @returns {Promise<PackageModel[] | null>}
+ */
+export const getPackageListByUserInService = async (
+    userId: string
+): Promise<PackageModel[] | null> => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/`, {
+            params: { user_id: userId },
+        });
+        const data = response.data;
+        return data.results.map((pkg: any) => PackageModel.fromJson(pkg));
+    } catch (error) {
+        console.error('Error fetching all packages by user:', error);
         return null;
     }
 };

@@ -1,0 +1,90 @@
+.page {
+    padding-top: 5rem;
+    min-height: 100vh;
+    background-color: #101012;
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    flex-grow: 1;
+    padding: 0 2rem;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: visible;
+}
+
+.title {
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.description {
+    margin-top: 1rem;
+    color: #7F7F89;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.createPackageBtn {
+    margin-top: 3rem;
+    width: 100%;
+    padding: 1.1rem 2rem;
+    background-color: #2C2C36;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.2rem;
+}
+
+.btnText {
+    color: #ffffff;
+    font-size: 1.4rem;
+}
+
+.btnIcon {
+    width: 1.6rem;
+}
+
+.wishlistGridView {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 100%;
+    height: 16rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 1.2rem;
+    position: relative;
+}
+
+.likeButton {
+    position: absolute;
+    width: 2.4rem;
+    height: 2.4rem;
+    right: 1rem;
+    bottom: 1rem;
+    fill: red;
+}
+
+.cardTitle {
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    color: #ffffff;
+    font-weight: 600;
+}
