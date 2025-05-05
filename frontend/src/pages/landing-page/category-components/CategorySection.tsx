@@ -1,11 +1,13 @@
 import ProductCard from './ProductCard';
 import styled from '@emotion/styled';
+import MoreCard from './MoreCard';
 
 type Item = {
     image: string;
     name: string;
     grade: string;
     price: string;
+    type?: 'product' | 'more';
 };
 
 type CategorySectionProps = {
@@ -38,15 +40,25 @@ export default function CategorySection({
         <div>
             <CategoryName>{categoryName}</CategoryName>
             <CategoryList>
-                {products.map((product, idx) => (
-                    <ProductCard
-                        key={idx}
-                        image={product.image}
-                        name={product.name}
-                        grade={product.grade}
-                        price={product.price}
-                    />
-                ))}
+                {products.map((product, idx) =>
+                    product.type === 'more' ? (
+                        <MoreCard
+                            key={idx}
+                            image={product.image}
+                            name={product.name}
+                            grade={product.grade}
+                            price={product.price}
+                        />
+                    ) : (
+                        <ProductCard
+                            key={idx}
+                            image={product.image}
+                            name={product.name}
+                            grade={product.grade}
+                            price={product.price}
+                        />
+                    ),
+                )}
             </CategoryList>
         </div>
     );

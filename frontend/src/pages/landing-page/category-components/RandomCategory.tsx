@@ -5,12 +5,14 @@ import { useRecoilState } from 'recoil';
 import { viewedCategoryIdsState } from '@/src/recoil/viewedCategoryIdsState';
 import CategorySection from './CategorySection';
 import Footer from '@/src/components/layout/MenuFooter';
+import SeeMore from '@/src/assets/images/landing-page/see-more.png';
 
 type Item = {
     image: string;
     name: string;
     grade: string;
     price: string;
+    type?: 'product' | 'more';
 };
 
 type CategoryResult = {
@@ -229,24 +231,37 @@ export default function RandomCategory() {
 
     useEffect(() => {
         // handleGetRandomCategory();
-        setResults(MOCK_DATA);
+
+        const withMoreCard = MOCK_DATA.map((category) => ({
+            ...category,
+            results: [
+                ...category.results,
+                {
+                    image: SeeMore,
+                    name: '더보기',
+                    grade: '',
+                    price: '',
+                    type: 'more',
+                },
+            ],
+        }));
+
+        setResults(withMoreCard);
     }, []);
     console.log(results);
     return (
         <div>
-
-        <CategoryContainer>
-            {results.map((category) => (
-                <CategorySection
-                    key={category.category_id}
-                    categoryId={category.category_id}
-                    categoryName={category.category_name}
-                    products={category.results}
-                />
-            ))}
-        </CategoryContainer>
-        <Footer currentMenuIndex={currentMenuIndex} />
+            <CategoryContainer>
+                {results.map((category) => (
+                    <CategorySection
+                        key={category.category_id}
+                        categoryId={category.category_id}
+                        categoryName={category.category_name}
+                        products={category.results}
+                    />
+                ))}
+            </CategoryContainer>
+            <Footer currentMenuIndex={currentMenuIndex} />
         </div>
-        
     );
 }
