@@ -133,11 +133,8 @@ export const button2 = {
 
 // IntroduceMain
 export const IntroMainContainer = styled.div`
-     background-color: #101012;
-     height: 100%;
-
-`
-
+    background-color: #101012;
+`;
 
 export const IntroMainTitle = styled.h1`
     margin-bottom: 2.1rem;
@@ -173,13 +170,13 @@ export const IntroMainDescription = styled.p`
 
 // Introduce Page
 export const IntroducePage = styled.div`
-    padding: 2.3rem 2rem 8rem 2rem;
+    padding: 2.3rem 2rem 0rem 2rem;
     cursor: pointer;
     background-color: #101012;
 `;
 
 export const ProgressBarContainer = styled.div`
-    background: #BCBCBC;
+    background: #bcbcbc;
 `;
 
 export const ProgressBar = styled.div`
@@ -234,3 +231,50 @@ export const IntroImage = styled.img`
     width: 100%;
     height: auto;
 `;
+
+// IntroduceEnd
+export const IntroEndTitle = styled.h1`
+    margin-bottom: 4.3rem;
+    font-family: ${fontVars.fontFamily.pretendard};
+    font-weight: ${fontVars.fontWeight.bold};
+    font-size: ${fontVars.fontSize.title2};
+    line-height: ${fontVars.lineHeight.title2};
+    letter-spacing: ${fontVars.letterSpacing.normal};
+`;
+
+export const IntroEndImage = styled.img`
+    padding: 0 -2rem;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.6rem;
+`;
+
+export const IntroEndDescription = styled.p`
+    text-align: center;
+    margin-bottom: 1.6rem;
+`;
+
+export const IntroEndSeparator = styled.div`
+    width: 100%;
+    border-top: 1px dashed white;
+    margin: 2.1rem 0;
+`;
+
+export const IntroButton = styled.button`
+    width: 100%;
+    padding: 1.8rem;
+    background-color: white;
+    color: black;
+    border-radius: 0.6rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+`
+
+export const BugButton = styled.button`
+    width: 100%;
+    padding: 1.8rem;
+    background-color: gray;
+    color: black;
+    border-radius: 0.6rem;
+    margin-bottom: 1rem;
+`
