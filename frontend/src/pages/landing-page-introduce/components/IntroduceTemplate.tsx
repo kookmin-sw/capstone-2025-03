@@ -3,7 +3,7 @@ import { IntroDescription, IntroImage, IntroSubTitle, IntroTitle } from './Intro
 
 export interface IntroduceTemplateProps {
     title: React.ReactNode;
-    icon: React.ReactNode;
+    // icon: React.ReactNode;
     subTitle: string;
     description: React.ReactNode;
     image: string;
@@ -11,7 +11,7 @@ export interface IntroduceTemplateProps {
 
 export default function IntroduceTemplate({
     title,
-    icon,
+    // icon,
     subTitle,
     description,
     image,
@@ -20,7 +20,7 @@ export default function IntroduceTemplate({
         <div>
             <IntroTitle>{title}</IntroTitle>
             <IntroSubTitle>
-                {icon} {subTitle}
+                {subTitle}
             </IntroSubTitle>
             <IntroDescription>{description}</IntroDescription>
             <IntroImage width="500" height="500" alt={`${title} 대표 이미지`} src={image} />

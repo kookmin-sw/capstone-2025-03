@@ -2,23 +2,23 @@ import * as React from 'react';
 import FullPageCarousel from './components/FullPageCarousel';
 import IntroduceMain from './components/IntroduceMain';
 import IntroduceTemplate from './components/IntroduceTemplate';
-import { introduceContents } from './components/IntroduceContents';
+import { IntroduceContents } from './components/IntroduceContents';
 import { IntroducePage } from './components/Introduce.css';
 import IntroduceEnd from './components/IntroduceEnd';
 
-export default function Page() {
+export default function LandingPageIntroduce() {
   return (
     <IntroducePage>
-      <FullPageCarousel> 전체 페이지 슬라이더 컨테이너
-        <FullPageCarousel.Slide> 개별 슬라이드 하나하나
+      <FullPageCarousel>
+        <FullPageCarousel.Slide>
           <IntroduceMain />
         </FullPageCarousel.Slide>
-        {introduceContents.map(({ id, title, icon, subTitle, description, image }) => {
+        {IntroduceContents.map(({ id, title, subTitle, description, image }) => {
           return (
             <FullPageCarousel.Slide key={id}>
               <IntroduceTemplate
                 title={title}
-                icon={icon}
+                // icon={icon}
                 subTitle={subTitle}
                 description={description}
                 image={image}

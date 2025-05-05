@@ -131,48 +131,89 @@ export const button2 = {
     letterSpacing: fontVars.letterSpacing.tight,
 };
 
+// IntroduceMain
+export const IntroMainContainer = styled.div`
+     background-color: #101012;
+     height: 100%;
+
+`
+
+
+export const IntroMainTitle = styled.h1`
+    margin-bottom: 2.1rem;
+    font-family: ${fontVars.fontFamily.pretendard};
+    font-weight: ${fontVars.fontWeight.bold};
+    font-size: 2.4rem;
+    line-height: ${fontVars.lineHeight.title2};
+    letter-spacing: ${fontVars.letterSpacing.normal};
+`;
+
+export const IntroMainImage = styled.img`
+    margin-bottom: 2rem;
+    width: 100%;
+    height: auto;
+`;
+
+export const IntroMainSubTitle = styled.p`
+    margin-bottom: 1.3rem;
+    font-family: ${fontVars.fontFamily.pretendard};
+    font-weight: ${fontVars.fontWeight.semibold};
+    font-size: ${fontVars.fontSize.title4};
+    line-height: ${fontVars.lineHeight.title4};
+    letter-spacing: ${fontVars.letterSpacing.loose};
+`;
+
+export const IntroMainDescription = styled.p`
+    font-family: ${body1.fontFamily};
+    font-weight: ${body1.fontWeight};
+    font-size: ${body1.fontSize};
+    line-height: ${body1.lineHeight};
+    letter-spacing: ${body1.letterSpacing};
+`;
+
 // Introduce Page
 export const IntroducePage = styled.div`
-    padding: '2.3rem 2rem 8rem 2rem';
+    padding: 2.3rem 2rem 8rem 2rem;
     cursor: pointer;
+    background-color: #101012;
 `;
 
 export const ProgressBarContainer = styled.div`
-    background: '#BCBCBC';
+    background: #BCBCBC;
 `;
 
 export const ProgressBar = styled.div`
-    background: '#777777';
-    height: '0.4rem';
-    margin-bottom: '1.6rem';
-    transition: 'all ease-out 0.3s';
+    background: #777777;
+    height: 0.4rem;
+    margin-bottom: 1.6rem;
+    transition: all ease-out 0.3s;
 `;
 
 export const CarouselContainer = styled.div`
-    overflow: 'hidden';
+    overflow: hidden;
 `;
 
 export const CarouselWrapper = styled.div`
-    display: 'flex';
-    gap: '2rem';
+    display: flex;
+    gap: 2rem;
 `;
 
 export const CarouselSlider = styled.div`
-    flex: '0 0 100%';
+    flex: 0 0 100%;
     min-width: 0;
-    user-select: 'none';
+    user-select: none;
 `;
 
 // IntroduceTemplate
 export const IntroTitle = styled.h1`
-    margin-bottom: '2.6rem';
+    margin-bottom: 2.6rem;
     font-size: 2.4rem;
 `;
 
 export const IntroSubTitle = styled.div`
-    margin-bottom: '1.3rem';
-    display: 'flex';
-    align-items: 'center';
+    margin-bottom: 1.3rem;
+    display: flex;
+    align-items: center;
     font-family: ${fontVars.fontFamily.pretendard};
     font-weight: ${fontVars.fontWeight.semibold};
     font-size: ${fontVars.fontSize.title4};

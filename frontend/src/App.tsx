@@ -16,14 +16,14 @@ export default function App() {
 
 export function MainLayout() {
     const navigate = useNavigate();
-    const isLogin = localStorage.getItem('user');
+    // const isLogin = localStorage.getItem('user');
 
-    useEffect(() => {
-        const excludePaths = ['/name-and-birth-day-input', '/address-input', '/address-search'];
-        if (!isLogin && !excludePaths.includes(window.location.pathname)) {
-            navigate('/main');
-        }
-    }, []);
+    // useEffect(() => {
+    //     const excludePaths = ['/name-and-birth-day-input', '/address-input', '/address-search'];
+    //     if (!isLogin && !excludePaths.includes(window.location.pathname)) {
+    //         navigate('/main');
+    //     }
+    // }, []);
 
     return (
         <UserProvider>
