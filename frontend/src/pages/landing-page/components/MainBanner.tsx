@@ -6,12 +6,12 @@ const BANNER_DATA = [
     {
         text: '정리 중인 물건들, 아직 끝나지 않은 이야기들',
         image: landingImage,
-        linkTo: "/address"
+        linkTo: "/landing-page-introduce"
     },
     {
         text: '당신의 손에서 다시 시작될 그 이야기',
         image: landingImage,
-        linkTo: "/address"
+        linkTo: "/landing-page-introduce"
     },
 ];
 

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import FullPageCarousel from '@/components/introduce/FullPageCarousel';
-import IntroduceM
-import IntroduceTemplate from './IntroduceTemplate';
-import { introduceContents } from './IntroduceContents';
-import { IntroducePage } from './Introduce.css';
-import IntroduceEnd from './IntroduceEnd';
+import FullPageCarousel from './components/FullPageCarousel';
+import IntroduceMain from './components/IntroduceMain';
+import IntroduceTemplate from './components/IntroduceTemplate';
+import { introduceContents } from './components/IntroduceContents';
+import { IntroducePage } from './components/Introduce.css';
+import IntroduceEnd from './components/IntroduceEnd';
 
 export default function Page() {
   return (

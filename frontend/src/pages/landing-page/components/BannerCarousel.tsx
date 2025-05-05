@@ -20,7 +20,7 @@ export default function BannerCarousel({
         <Carousel>
             {banners.map((banner, index) => (
                 <Carousel.Slide key={`${banner.text}-${index}`}>
-                    <button onClick={() => navigate('/linkTo')}>
+                    <button onClick={() => navigate(banner.linkTo)}>
                         <CarouselSnap>
                             <CarouselImage
                                 src={banner.image}
