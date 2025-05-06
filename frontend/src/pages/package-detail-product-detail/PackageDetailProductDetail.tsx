@@ -58,7 +58,9 @@ export default function PackageDetailProductDetail() {
                             </React.Fragment>
                         ))}
                 </div>
+                <div className={styles.devider}></div>
                 <div style={{ height: '20rem' }} />
+                        
             </div>
             {!reset ? (
                 <DefaultButton
