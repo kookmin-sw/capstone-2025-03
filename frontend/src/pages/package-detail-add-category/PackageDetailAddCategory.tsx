@@ -17,7 +17,7 @@ export default function PackageDetailAddCategory() {
     const location = useLocation();
     const industry: IndustryModel = IndustryModel.fromJson(location.state.industry || {});
     // hook
-    const { categories } = useCategory();
+    const { categories, getCategoryList } = useCategory();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
@@ -27,9 +27,25 @@ export default function PackageDetailAddCategory() {
     );
     // useEffect
     useEffect(() => {
-        setMyCategories(
-            categories.filter((category) => category.industries.includes(industry.id!)),
-        );
+        const fetchCategories = async () => {
+            let newCategories: CategoryModel[] = [];
+
+            if (!industry.id) {
+                if (categories.length < 1) {
+                    newCategories = await getCategoryList();
+                }else{
+                    newCategories = categories;
+                }
+            } else {
+                newCategories = categories.filter((category) =>
+                    category.industries.includes(industry.id!)
+                );
+            }
+
+            setMyCategories(newCategories);
+        };
+
+        fetchCategories();
     }, []);
 
     // Function
@@ -52,7 +68,7 @@ export default function PackageDetailAddCategory() {
     // return
     return (
         <div className={styles.page}>
-            <SearchHeader text={`${industry.name}에 필요한 물품들`} />
+            <SearchHeader text={`${industry.name ?? '패키지'}에 필요한 물품들`} />
             <div className={styles.section}>
                 <div className={styles.listView}>
                     {myCategories.map((category, index) => {
@@ -68,7 +84,7 @@ export default function PackageDetailAddCategory() {
                                         className={styles.thumbnail}
                                         src={
                                             category.thumbnail === 'NULL' ||
-                                            category.thumbnail === null
+                                                category.thumbnail === null
                                                 ? 'https://static.cdn.kmong.com/gigs/F1zfb1718452618.jpg'
                                                 : category.thumbnail
                                         }

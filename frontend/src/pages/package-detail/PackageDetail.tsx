@@ -48,7 +48,6 @@ export default function PackageDetail() {
 
     // UseEffect
     useEffect(() => {
-
         let targetPackage = null;
         if (!editingPackage) {
             targetPackage = myPackage;
