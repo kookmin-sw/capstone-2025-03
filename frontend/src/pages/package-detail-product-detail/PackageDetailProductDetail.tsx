@@ -7,6 +7,7 @@ import { useCategory } from '@/src/hooks/useCategory';
 import React from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
 import { useRef, useEffect } from 'react';
+import ProductRecommend from './components/ProductRecommend';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -23,7 +24,7 @@ export default function PackageDetailProductDetail() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    },[]);
+    }, []);
 
     // Function
     const handleButtonClick = () => {
@@ -59,8 +60,8 @@ export default function PackageDetailProductDetail() {
                         ))}
                 </div>
                 <div className={styles.devider}></div>
+                <ProductRecommend />
                 <div style={{ height: '20rem' }} />
-                        
             </div>
             {!reset ? (
                 <DefaultButton
