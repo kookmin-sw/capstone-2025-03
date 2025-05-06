@@ -1,10 +1,12 @@
-import BackHeader from '@/src/components/layout/BackHeader';
+import BackHeaderForPackageDetail from './components/BackHeaderForPackageDetail';
 import styles from './PackageDetailProductDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
 import React from 'react';
+import CarouselImageViewer from './components/CarouselImageViewer';
+import { useRef } from 'react';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -13,6 +15,9 @@ export default function PackageDetailProductDetail() {
     const { state } = useLocation();
     const reset = state?.reset;
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
+
+    const carouselRef = useRef<HTMLDivElement>(null);
+
     // hook
     const { categories } = useCategory();
 
@@ -23,16 +28,20 @@ export default function PackageDetailProductDetail() {
     console.log(product);
     return (
         <div className={styles.page}>
-            <BackHeader />
+            <BackHeaderForPackageDetail targetRef={carouselRef} />
             <div className={styles.section}>
-                <img className={styles.thumbnail} src={product.images[0]} />
-                <p className={styles.category}>
-                    {categories.find((category) => category.id === product.category)?.name}
-                </p>
+                <div ref={carouselRef}>
+                    <CarouselImageViewer images={product.images} />
+                </div>
                 <p className={styles.product}>{product.name}</p>
-                <p className={styles.gradeAndAmount}>
-                    {product.grade}등급 ∙ {product.quantity}개
-                </p>
+                <div className={styles.categoryAndGradeWrapper}>
+                    <p className={styles.category}>
+                        {categories.find((category) => category.id === product.category)?.name}
+                    </p>
+                    <p className={styles.gradeAndAmount}>
+                        {product.grade} ∙ {product.quantity}개
+                    </p>
+                </div>
                 <p className={styles.price}>{product.price?.toLocaleString()}원</p>
                 <div className={styles.descriptionContainer}>
                     {(product.description ?? '')

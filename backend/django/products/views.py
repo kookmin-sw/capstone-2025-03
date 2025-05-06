@@ -2,9 +2,8 @@ from rest_framework import generics, filters, status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from .models import Category, Product, User
+from .models import Product
 from .serializers import ProductSerializer
-from categories.serializers import CategorySerializer
 from .pagination import LargeResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import ProductFilter
@@ -15,7 +14,6 @@ FASTAPI_DELETE_URL = "https://image-535482967924.asia-northeast1.run.app/delete-
 
 # ✅ 상품 리스트 조회 및 등록
 class ProductListCreateView(generics.ListCreateAPIView):
-    queryset = Product.objects.all().order_by('sales_status', 'price')
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class = ProductFilter
@@ -23,7 +21,8 @@ class ProductListCreateView(generics.ListCreateAPIView):
     pagination_class = LargeResultsSetPagination
 
     def get_queryset(self):
-        queryset = Product.objects.all()
+        queryset = Product.objects.select_related("category", "seller", "buyer").all()
+
         seller = self.request.query_params.get('seller')
         category = self.request.query_params.get('category')
         sales_status = self.request.query_params.get('sales_status')
@@ -35,14 +34,14 @@ class ProductListCreateView(generics.ListCreateAPIView):
         if sales_status:
             queryset = queryset.filter(sales_status=sales_status)
 
-        return queryset
+        return queryset.order_by('sales_status', 'price')
 
     def perform_create(self, serializer):
         return serializer.save()
 
 # ✅ 상품 조회, 수정, 삭제
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.select_related("category", "seller", "buyer").all()
     serializer_class = ProductSerializer
 
     def perform_update(self, serializer):

@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import Package
+from products.serializers import ProductSerializer
 from categories.models import Category
-from products.models import Product
 from industries.models import Industry
+from .models import Package
 
 class PackageSerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
-    products = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=True)
+    products = ProductSerializer(many=True, read_only=True)
     industry = serializers.PrimaryKeyRelatedField(queryset=Industry.objects.all())
 
     class Meta:

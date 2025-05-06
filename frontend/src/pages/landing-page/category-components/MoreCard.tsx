@@ -1,0 +1,42 @@
+import styled from '@emotion/styled';
+
+type MoreCardProps = {
+    image: string;
+    name: string;
+    grade: string;
+    price: string;
+};
+
+const Card = styled.div`
+    min-width: 8rem;
+    height: 14rem;
+    margin-left: 2rem;
+    margin-right: 3rem;
+    background-color: #18171d;
+    color: white;
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+`;
+
+const Text = styled.p`
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+`
+
+export default function MoreCard({ image, name, grade, price }: MoreCardProps) {
+    const handleClick = () => {};
+
+    return (
+        <Card>
+            <img src={image} />
+            <Text>더보기</Text>
+        </Card>
+    );
+    // <Card onClick={handleClick}>전체 보기 →</Card>
+}

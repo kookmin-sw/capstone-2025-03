@@ -1,0 +1,68 @@
+.carouselWrapper {
+    position: relative;
+}
+
+.embla {
+    overflow: hidden;
+}
+
+.emblaContainer {
+    display: flex;
+}
+
+.emblaSlide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.slideImage {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: zoom-in;
+    object-fit: cover;
+}
+
+.dots {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    z-index: 2;
+    padding: 0.4rem 0.6rem;
+    border-radius: 1rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #595959;
+    border-radius: 999px;
+    border: none;
+}
+
+.dot.active {
+    background-color: white;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalImage {
+    max-width: 90vw;
+    max-height: 90vh;
+}
