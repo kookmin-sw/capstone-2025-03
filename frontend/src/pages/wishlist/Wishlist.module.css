@@ -49,6 +49,11 @@
     width: 1.6rem;
 }
 
+.infoText{
+    color: #ffffff;
+    font-size: 1.6rem;;
+}
+
 .wishlistGridView {
     margin-top: 4rem;
     display: grid;

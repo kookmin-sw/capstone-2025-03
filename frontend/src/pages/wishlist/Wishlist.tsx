@@ -35,7 +35,7 @@ export default function Wishlist() {
         createPackage(newPackage);
 
         // navigate
-        navigate('/package-detail', { state: { pkg: newPackage} })
+        navigate('/package-detail', { state: { pkg: newPackage } })
     };
     const handleDeletePackage = (id: number) => {
         if (!userId) return;
@@ -55,16 +55,15 @@ export default function Wishlist() {
                     <div style={{ flexGrow: 1 }}></div>
                     <img src={ArrowFront} alt="패키지 생성 아이콘" className={styles.btnIcon} />
                 </button>
-
-                {isLoading ? (
-                    <p>불러오는 중...</p>
-                ) : isError ? (
-                    <p>에러가 발생했습니다</p>
-                ) : customPackages.length === 0 ? (
-                    <p>찜한 패키지가 없습니다.</p>
-                ) : (
-                    <div className={styles.wishlistGridView}>
-                        {customPackages.map((customPackage) => (
+                <div className={styles.wishlistGridView}>
+                    {isLoading ? (
+                        <p className={styles.infoText}>불러오는 중...</p>
+                    ) : isError ? (
+                        <p className={styles.infoText}>에러가 발생했습니다</p>
+                    ) : customPackages.length === 0 ? (
+                        <p className={styles.infoText}>찜한 패키지가 없습니다.</p>
+                    ) :
+                        customPackages.map((customPackage) => (
                             <div key={customPackage.id} className={styles.card}>
                                 <div className={styles.content} style={{ backgroundImage: `url(${customPackage.thumbnail})` }}>
                                     <button className={styles.likeButton} onClick={() => handleDeletePackage(customPackage.id!)}>
@@ -73,9 +72,9 @@ export default function Wishlist() {
                                 </div>
                                 <p className={styles.cardTitle}>{customPackage.name}</p>
                             </div>
-                        ))}
-                    </div>
-                )}
+                        ))
+                    }
+                </div>
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>

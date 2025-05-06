@@ -48,14 +48,8 @@ export default function PackageDetail() {
 
     // UseEffect
     useEffect(() => {
-        let targetPackage = null;
-        if (!editingPackage) {
-            targetPackage = myPackage;
-            setEditingPackage(myPackage);
-        } else {
-            targetPackage = editingPackage;
-        }
-        const newMyCategories: CategoryModel[] = targetPackage.categories
+        setEditingPackage(myPackage);
+        const newMyCategories: CategoryModel[] = myPackage.categories
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
         setMyCategories(newMyCategories);
