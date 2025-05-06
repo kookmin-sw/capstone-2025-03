@@ -50,7 +50,7 @@ export default function BackHeaderForPackageDetail({
             ([entry]) => {
                 setTransparent(entry.isIntersecting);
             },
-            { threshold: 0.1 },
+            { threshold: 0.1 }
         );
 
         const el = targetRef.current;
