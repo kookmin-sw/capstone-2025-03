@@ -149,8 +149,11 @@ export default function PackageDetail() {
                 description: description,
             })
             updatePackage({ id: editingPackage.id!, updatedData: newPackage });
+            window.alert('변경 사항이 저장되었습니다.')
         } else {
             deletePackage({ id: editingPackage.id!, user: user.userId! });
+            window.alert('패키지가 찜 리스트에서 제외되었습니다');
+            navigate(-1);
         }
     }
 

@@ -8,8 +8,8 @@ import {
 } from '../services/packageService';
 import packageDummyData from '../data/packageDummyData.json';
 
-const PACKAGE_KEY = 'packages';
-const useDummyData = true;
+const PACKAGE_KEY = 'custom-packages';
+const useDummyData = false;
 
 // Query: List Read by User
 export const useCustomPackagesByUser = (user: number | undefined) => {

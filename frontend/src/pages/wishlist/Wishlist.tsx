@@ -12,7 +12,7 @@ export default function Wishlist() {
     // hook
     const navigate = useNavigate();
     const { user } = useUser();
-    const { data: customPackages = [], isLoading, isError } = useCustomPackagesByUser(user?.userId || undefined);
+    const { data: customPackages = [], isLoading, isError } = useCustomPackagesByUser(user?.userId!);
     const { mutate: createPackage } = useCreatePackage();
     const { mutate: deletePackage } = useDeletePackage();
 
@@ -22,6 +22,7 @@ export default function Wishlist() {
 
     // useEffect
     useEffect(() => {
+        console.log(userId);
         console.log(customPackages);
     }, [customPackages]);
 
