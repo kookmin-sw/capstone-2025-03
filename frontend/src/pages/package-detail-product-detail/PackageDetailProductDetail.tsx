@@ -4,6 +4,7 @@ import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
+import React from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
 import { useRef } from 'react';
 
@@ -11,6 +12,8 @@ export default function PackageDetailProductDetail() {
     // page connection
     const navitgate = useNavigate();
     const location = useLocation();
+    const { state } = useLocation();
+    const reset = state?.reset;
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -40,9 +43,20 @@ export default function PackageDetailProductDetail() {
                     </p>
                 </div>
                 <p className={styles.price}>{product.price?.toLocaleString()}원</p>
+                <div className={styles.descriptionContainer}>
+                    {(product.description ?? '')
+                        .replace(/\n+/g, '\n')
+                        .split('\n')
+                        .map((line, idx) => (
+                            <React.Fragment key={idx}>
+                                {line}
+                                <br />
+                            </React.Fragment>
+                        ))}
+                </div>
                 <div style={{ height: '20rem' }} />
             </div>
-            <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" />
+                {!reset ? <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" /> : null}
         </div>
     );
 }
