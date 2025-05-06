@@ -97,7 +97,7 @@ export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
 // 랜덤 카테고리 불러오기
 export const getRandomCategoriesInService = async (excludedIds: number[]) => {
     try {
-        const response = await axios.post(`${url}`, excludedIds);
+        const response = await axios.post(`${API_BASE_URL}/previews/`, excludedIds);
         return response.data;
     } catch (error) {
         console.error('Error getting random categories: ', error);

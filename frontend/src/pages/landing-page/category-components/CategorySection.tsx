@@ -44,6 +44,7 @@ export default function CategorySection({
                     product.type === 'more' ? (
                         <MoreCard
                             key={idx}
+                            categoryId={categoryId}
                             image={product.image}
                             name={product.name}
                             grade={product.grade}
