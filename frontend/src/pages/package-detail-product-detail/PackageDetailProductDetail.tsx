@@ -1,9 +1,10 @@
-import BackHeader from '@/src/components/layout/BackHeader';
+import BackHeaderForPackageDetail from './components/BackHeaderForPackageDetail';
 import styles from './PackageDetailProductDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
+import CarouselImageViewer from './components/CarouselImageViewer';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -17,12 +18,13 @@ export default function PackageDetailProductDetail() {
     const handleButtonClick = () => {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
-
+    console.log(product)
     return (
         <div className={styles.page}>
-            <BackHeader />
+            <BackHeaderForPackageDetail />
             <div className={styles.section}>
-                <img className={styles.thumbnail} src={product.images[0]} />
+                {/* <img className={styles.thumbnail} src={product.images[0]} /> */}
+                <CarouselImageViewer images={product.images} />
                 <p className={styles.category}>
                     {categories.find((category) => category.id === product.category)?.name}
                 </p>

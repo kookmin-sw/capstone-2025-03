@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 const PageContainer = styled.div`
     height: 100%;
-    paddingbottom: '8rem';
+    padding-bottom: 6rem;
     background-color: #101012;
 
 `;

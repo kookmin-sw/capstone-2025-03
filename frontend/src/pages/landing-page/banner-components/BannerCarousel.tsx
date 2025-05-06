@@ -22,12 +22,7 @@ export default function BannerCarousel({
                 <Carousel.Slide key={`${banner.text}-${index}`}>
                     <button onClick={() => navigate(banner.linkTo)}>
                         <CarouselSnap>
-                            <CarouselImage
-                                src={banner.image}
-                                alt={banner.text}
-                                width="316"
-                                height="316"
-                            />
+                            <CarouselImage src={banner.image} alt={banner.text} />
                             <BannerOrder>
                                 {index + 1}
                                 <BannerLength> / {banners.length}</BannerLength>

@@ -250,7 +250,7 @@ export default function RandomCategory() {
     }, []);
     console.log(results);
     return (
-        <div style={{ paddingBottom: '7rem' }}>
+        <div>
             <CategoryContainer>
                 {results.map((category) => (
                     <CategorySection
