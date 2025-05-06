@@ -13,8 +13,8 @@ export default function Wishlist() {
     const navigate = useNavigate();
     const { user } = useUser();
     const { data: customPackages = [], isLoading, isError } = useCustomPackagesByUser(user?.userId!);
-    const { mutate: createPackage } = useCreatePackage();
-    const { mutate: deletePackage } = useDeletePackage();
+    const { mutateAsync: createPackage } = useCreatePackage();
+    const { mutateAsync: deletePackage } = useDeletePackage();
 
     // Variable
     const currentMenuIndex = 2;
@@ -27,19 +27,19 @@ export default function Wishlist() {
     }, [customPackages]);
 
     // Function
-    const handleCreatePackage = () => {
+    const handleCreatePackage = async () => {
         if (!userId) return;
         const newPackage = new PackageModel({
             user: userId,
         })
-        createPackage(newPackage);
+        await createPackage(newPackage);
 
         // navigate
         navigate('/package-detail', { state: { pkg: newPackage } })
     };
-    const handleDeletePackage = (id: number) => {
+    const handleDeletePackage = async (id: number) => {
         if (!userId) return;
-        deletePackage({ id: id, user: userId });
+        await deletePackage({ id: id, user: userId });
     }
 
 
