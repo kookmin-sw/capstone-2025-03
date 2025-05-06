@@ -6,7 +6,7 @@ import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
 import React from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -20,6 +20,10 @@ export default function PackageDetailProductDetail() {
 
     // hook
     const { categories } = useCategory();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    },[]);
 
     // Function
     const handleButtonClick = () => {
@@ -56,7 +60,13 @@ export default function PackageDetailProductDetail() {
                 </div>
                 <div style={{ height: '20rem' }} />
             </div>
-                {!reset ? <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" /> : null}
+            {!reset ? (
+                <DefaultButton
+                    event={handleButtonClick}
+                    isActive={true}
+                    text="원본 링크 이동하기"
+                />
+            ) : null}
         </div>
     );
 }

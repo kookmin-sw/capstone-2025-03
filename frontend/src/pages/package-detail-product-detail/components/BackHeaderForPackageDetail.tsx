@@ -7,8 +7,10 @@ const Header = styled.div<{ isTransparent: boolean }>`
     top: 0;
     width: 100%;
     z-index: 100;
-    background-color: ${({ isTransparent }) => (isTransparent ? 'transparent' : '#101012')};
-    transition: background-color 0.3s ease-in-out;
+    background: ${({ isTransparent }) =>
+        isTransparent
+            ? 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0))'
+            : '#101012'};    transition: background-color 0.3s ease-in-out;
     padding: 2rem;
     display: flex;
     flex-direction: row;
