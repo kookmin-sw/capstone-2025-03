@@ -16,15 +16,27 @@ const ProductContainer = styled.div`
     padding-bottom: 2rem;
 `;
 
+const CategoryName = styled.p`
+    font-weight: 600;
+    font-size: 2rem;
+    padding: 2rem;
+`
+
 export default function Category() {
     const navigate = useNavigate();
     const [products, setProducts] = useState<ProductModel[]>([]);
-
+    const [categoryName, setCategoryName] = useState<string>('');
     const { id } = useParams();
 
     useEffect(() => {
         if (id) {
-            getParticularCategoryInService(Number(id)).then(setProducts);
+            getParticularCategoryInService(Number(id)).then((res) => {
+                setProducts(res);
+                console.log(res[0].categoryName);
+                if (res.length > 0) {
+                    setCategoryName(res[0].categoryName ?? '');
+                }
+            });
         }
     }, []);
 
@@ -34,11 +46,11 @@ export default function Category() {
         });
     };
 
-    console.log(products);
     return (
         <MainContainer>
             <BackHeader />
             <ProductContainer>
+                <CategoryName>{categoryName}</CategoryName>
                 {products.map((product) => (
                     <div onClick={() => handleProductClick(product)}>
                         <SellerProductItem product={product} />
