@@ -19,16 +19,24 @@
     margin-bottom: 3rem;
 }
 
+.categoryAndGradeWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 .category {
     margin-left: 2rem;
     font-size: 1.4rem;
     color: #7f7f89;
     margin-bottom: 1rem;
+    text-decoration: underline;
 }
 
 .product {
     margin-left: 2rem;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 1.8rem;
     margin-bottom: 1rem;
 }
 

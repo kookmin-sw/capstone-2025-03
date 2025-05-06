@@ -27,17 +27,18 @@ export default function PackageDetailProductDetail() {
         <div className={styles.page}>
             <BackHeaderForPackageDetail targetRef={carouselRef} />
             <div className={styles.section}>
-                {/* <img className={styles.thumbnail} src={product.images[0]} /> */}
                 <div ref={carouselRef}>
                     <CarouselImageViewer images={product.images} />
                 </div>
-                <p className={styles.category}>
-                    {categories.find((category) => category.id === product.category)?.name}
-                </p>
                 <p className={styles.product}>{product.name}</p>
-                <p className={styles.gradeAndAmount}>
-                    {product.grade}등급 ∙ {product.quantity}개
-                </p>
+                <div className={styles.categoryAndGradeWrapper}>
+                    <p className={styles.category}>
+                        {categories.find((category) => category.id === product.category)?.name}
+                    </p>
+                    <p className={styles.gradeAndAmount}>
+                        {product.grade} ∙ {product.quantity}개
+                    </p>
+                </div>
                 <p className={styles.price}>{product.price?.toLocaleString()}원</p>
                 <div style={{ height: '20rem' }} />
             </div>
