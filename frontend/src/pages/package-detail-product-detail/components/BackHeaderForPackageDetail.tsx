@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
+import HomeIcon from '@/src/assets/images/page/package-detail/homeicon.png';
 const Header = styled.div<{ isTransparent: boolean }>`
     position: fixed;
     top: 0;
@@ -16,9 +16,12 @@ const Header = styled.div<{ isTransparent: boolean }>`
     align-items: center;
 `;
 
+const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
 const BackButtonWrapper = styled.div`
-    position: relative;
-    display: inline-block;
     cursor: pointer;
 
     &::before {
@@ -34,6 +37,13 @@ const BackButtonWrapper = styled.div`
 const BackButton = styled.img`
     height: 2.4rem;
     position: relative;
+    z-index: 1;
+`;
+
+const HomeButton = styled.img`
+    height: 2.4rem;
+    position: relative;
+    margin-left: 1rem;
     z-index: 1;
 `;
 
@@ -67,9 +77,17 @@ export default function BackHeaderForPackageDetail({
 
     return (
         <Header isTransparent={isTransparent}>
-            <BackButtonWrapper onClick={handleClick}>
-                <BackButton src="/images/seller/arrow_back.png" onClick={handleClick} />
-            </BackButtonWrapper>
+            <ButtonsWrapper>
+                <BackButtonWrapper onClick={handleClick}>
+                    <BackButton src="/images/seller/arrow_back.png" onClick={handleClick} />
+                </BackButtonWrapper>
+                <HomeButton
+                    src={HomeIcon}
+                    onClick={() => {
+                        navigate('/landing-page');
+                    }}
+                />
+            </ButtonsWrapper>
         </Header>
     );
 }
