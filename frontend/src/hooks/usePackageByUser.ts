@@ -38,8 +38,8 @@ export const useCreatePackage = () => {
       return data;
     },
     onSuccess: (data) => {
-      if (data?.userId) {
-        queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, data.userId] });
+      if (data?.user) {
+        queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, data.user] });
       }
     },
   });
@@ -60,8 +60,8 @@ export const useUpdatePackage = () => {
       return data;
     },
     onSuccess: (data) => {
-      if (data?.userId) {
-        queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, data.userId] });
+      if (data?.user) {
+        queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, data.user] });
       }
     },
   });

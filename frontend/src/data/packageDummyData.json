@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "userId": 1,
+        "user": 1,
         "industry": 101,
         "categories": [
             201,
@@ -52,7 +52,7 @@
     },
     {
         "id": 2,
-        "userId": 1,
+        "user": 1,
         "industry": 102,
         "categories": [
             203
