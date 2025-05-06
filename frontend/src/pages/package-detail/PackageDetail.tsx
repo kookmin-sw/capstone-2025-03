@@ -2,6 +2,7 @@ import BackHeader from '@/src/components/layout/BackHeader';
 import styles from './PackageDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
 import PackageItem from '@/src/components/ui/PackageItem';
+import CustomPackageItem from '@/src/components/ui/CustomPackage';
 import AddIconImage from '@/src/assets/images/page/package-detail/add_icon.png';
 import EditIconImage from '@/src/assets/images/page/package-detail/edit_icon.png';
 import ArrowRightIconImage from '@/src/assets/images/page/package-detail/arrow_right.png';
@@ -19,6 +20,7 @@ import industryData from '@/src/data/industryData.json';
 import { useOrder } from '@/src/hooks/useOrder';
 import OrderModel from '@/src/models/OrderModel';
 import { useUser } from '@/src/contexts/UserContext';
+import { useUpdatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
 
 export default function PackageDetail() {
     // page connection
@@ -30,6 +32,8 @@ export default function PackageDetail() {
     // hook
     const { categories } = useCategory();
     const { createOrder } = useOrder();
+    const { mutate: updatePackage } = useUpdatePackage();
+    const { mutate: deletePackage } = useDeletePackage();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
@@ -38,6 +42,9 @@ export default function PackageDetail() {
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [name, setName] = useState<string>(editingPackage?.name ?? '');
+    const [description, setDescription] = useState<string>(editingPackage?.description ?? '');
+    const [isFavorite, setIsFavorite] = useState(true);
 
     // UseEffect
     useEffect(() => {
@@ -129,6 +136,23 @@ export default function PackageDetail() {
             });
         });
     };
+    const save = () => {
+        if (!editingPackage || !user) {
+            window.alert('오류가 발생하였습니다. 다시 한번 저장해주세요');
+            return;
+        }
+
+        if (isFavorite) {
+            const newPackage = PackageModel.fromJson({
+                ...editingPackage.toJson(),
+                name: name,
+                description: description,
+            })
+            updatePackage({ id: editingPackage.id!, updatedData: newPackage });
+        } else {
+            deletePackage({ id: editingPackage.id!, user: user.userId! });
+        }
+    }
 
     // return
     return isLoading ? (
@@ -141,9 +165,10 @@ export default function PackageDetail() {
         <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
-                <div className={styles.packageCard}>
-                    {editingPackage && <PackageItem pkg={editingPackage} />}
-                </div>
+                {editingPackage && <div className={styles.packageCard} style={{ pointerEvents: editingPackage.user === user?.userId ? 'all' : 'none' }}>
+                    {editingPackage.user === user?.userId ? <CustomPackageItem pkg={editingPackage} name={name ?? ''} setName={setName} description={description ?? ''}
+                        setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} />}
+                </div>}
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>구성상품</p>
                     <div className={styles.blank} />
