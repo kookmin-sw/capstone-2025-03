@@ -9,9 +9,10 @@ import SeeMore from '@/src/assets/images/landing-page/see-more.png';
 
 type Item = {
     thumbnail: string;
+    productId: number;
     name: string;
     grade: string;
-    price: string;
+    price: number;
     type?: 'product' | 'more';
 };
 
@@ -43,10 +44,11 @@ export default function RandomCategory() {
                 categoryName: category.name,
                 results: [
                     ...category.items.map((item: any) => ({
+                        productId: item.id,
                         thumbnail: item.thumbnail,
                         name: item.name,
                         grade: item.grade,
-                        price: '', // 가격 정보가 없으니 빈 문자열
+                        price: item.price, // 가격 정보가 없으니 빈 문자열
                         type: 'product',
                     })),
                     {

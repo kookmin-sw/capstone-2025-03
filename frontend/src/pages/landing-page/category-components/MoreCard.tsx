@@ -6,7 +6,7 @@ type MoreCardProps = {
     thumbnail: string;
     name: string;
     grade: string;
-    price: string;
+    price: number;
 };
 
 const Card = styled.div`

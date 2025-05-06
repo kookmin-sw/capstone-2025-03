@@ -3,10 +3,11 @@ import styled from '@emotion/styled';
 import MoreCard from './MoreCard';
 
 type Item = {
+    productId: number;
     thumbnail: string;
     name: string;
     grade: string;
-    price: string;
+    price: number;
     type?: 'product' | 'more';
 };
 
@@ -53,6 +54,7 @@ export default function CategorySection({
                     ) : (
                         <ProductCard
                             key={idx}
+                            productId={product.productId}
                             thumbnail={product.thumbnail}
                             name={product.name}
                             grade={product.grade}
