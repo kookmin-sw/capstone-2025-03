@@ -44,16 +44,16 @@ export const getPackageListInService = async (
 };
 
 /**
- * 특정 userId에 해당하는 모든 커스텀 패키지를 가져옵니다 (페이지네이션 없음).
- * @param {string} userId - 사용자 ID
+ * 특정 user에 해당하는 모든 커스텀 패키지를 가져옵니다 (페이지네이션 없음).
+ * @param {number} userId - 사용자 ID
  * @returns {Promise<PackageModel[] | null>}
  */
 export const getPackageListByUserInService = async (
-    userId: string
+    userId: number
 ): Promise<PackageModel[] | null> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/`, {
-            params: { user_id: userId },
+            params: { user: userId },
         });
         const data = response.data;
         return data.results.map((pkg: any) => PackageModel.fromJson(pkg));

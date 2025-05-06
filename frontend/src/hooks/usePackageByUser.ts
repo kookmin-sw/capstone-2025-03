@@ -12,7 +12,7 @@ const PACKAGE_KEY = 'packages';
 const useDummyData = true;
 
 // Fetch packages by user ID
-export const usePackagesByUser = (userId: string | undefined) => {
+export const usePackagesByUser = (userId: number | undefined) => {
   return useQuery<PackageModel[], Error>({
     queryKey: [PACKAGE_KEY, userId],
     queryFn: async () => {
@@ -70,7 +70,7 @@ export const useUpdatePackage = () => {
 // Delete
 export const useDeletePackage = () => {
   const queryClient = useQueryClient();
-  return useMutation<void, Error, { id: number; userId: string }>({
+  return useMutation<void, Error, { id: number; userId: number }>({
     mutationFn: async ({ id }) => {
       if (useDummyData) {
         // 실제로 제거되진 않지만, 성공 처리된 것처럼 리턴

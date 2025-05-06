@@ -2,7 +2,7 @@ import ProductModel from './ProductModel'; // 실제 경로에 맞게 수정
 
 export default class PackageModel {
   id: number | null;
-  userId: string | null;
+  userId: number | null;
   industry: number | null;
   categories: number[];
   products: ProductModel[]; // ← 수정됨
@@ -23,7 +23,7 @@ export default class PackageModel {
     price = 0,
   }: {
     id?: number | null;
-    userId?: string | null;
+    userId?: number | null;
     industry?: number | null;
     categories?: number[];
     products?: ProductModel[]; // ← 수정됨
