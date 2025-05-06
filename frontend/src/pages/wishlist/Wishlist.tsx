@@ -4,9 +4,9 @@ import ArrowFront from '../../assets/images/page/wishlist/arrow_front.png';
 import FavoriteFill from '../../assets/images/page/wishlist/favorite_fill.png';
 import { useCustomPackagesByUser, useCreatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
 import { useUser } from '@/src/contexts/UserContext';
-import { data, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
-import { useEffect, useId } from 'react';
+import { useEffect } from 'react';
 
 export default function Wishlist() {
     // hook
@@ -33,15 +33,15 @@ export default function Wishlist() {
         })
         createPackage(newPackage);
 
-        // TODO: navigate
-        // navigate('/package-detail')
+        // navigate
+        navigate('/package-detail', { state: { pkg: newPackage} })
     };
     const handleDeletePackage = (id: number) => {
         if (!userId) return;
-        deletePackage({id: id, user: userId});
+        deletePackage({ id: id, user: userId });
     }
 
-    
+
 
     return (
         <div className={styles.page}>
