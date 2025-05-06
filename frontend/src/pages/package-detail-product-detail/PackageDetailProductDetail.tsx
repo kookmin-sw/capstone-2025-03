@@ -5,12 +5,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
 import CarouselImageViewer from './components/CarouselImageViewer';
+import { useRef } from 'react';
 
 export default function PackageDetailProductDetail() {
     // page connection
     const navitgate = useNavigate();
     const location = useLocation();
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
+
+    const carouselRef = useRef<HTMLDivElement>(null);
+
     // hook
     const { categories } = useCategory();
 
@@ -18,13 +22,15 @@ export default function PackageDetailProductDetail() {
     const handleButtonClick = () => {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
-    console.log(product)
+    console.log(product);
     return (
         <div className={styles.page}>
-            <BackHeaderForPackageDetail />
+            <BackHeaderForPackageDetail targetRef={carouselRef} />
             <div className={styles.section}>
                 {/* <img className={styles.thumbnail} src={product.images[0]} /> */}
-                <CarouselImageViewer images={product.images} />
+                <div ref={carouselRef}>
+                    <CarouselImageViewer images={product.images} />
+                </div>
                 <p className={styles.category}>
                     {categories.find((category) => category.id === product.category)?.name}
                 </p>
@@ -37,5 +43,5 @@ export default function PackageDetailProductDetail() {
             </div>
             <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" />
         </div>
-    );  
+    );
 }
