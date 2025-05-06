@@ -29,9 +29,15 @@ const Text = styled.p`
     margin-top: 1rem;
     font-size: 1.5rem;
     margin-left: 1rem;
-`
+`;
 
-export default function MoreCard({ categoryId, thumbnail, name, grade, price }: MoreCardProps) {
+export default function MoreCard({
+    categoryId,
+    thumbnail,
+    name,
+    grade,
+    price,
+}: MoreCardProps) {
     const navigate = useNavigate();
 
     const handleClick = () => {

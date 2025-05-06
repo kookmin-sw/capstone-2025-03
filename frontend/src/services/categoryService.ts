@@ -1,15 +1,15 @@
 import axios from 'axios';
 import CategoryModel from '../models/CategoryModel';
+import ProductModel from '../models/ProductModel';
 
-const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/categories`;
-
+const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 /**
  * 전체 카테고리 리스트를 가져옵니다.
  * @returns {Promise<CategoryModel[] | null>}
  */
 export const getCategoryListInService = async (): Promise<CategoryModel[] | null> => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/`);
+        const response = await axios.get(`${API_BASE_URL}/categories/`);
         return response.data.results.map((category: any) => CategoryModel.fromJson(category));
     } catch (error) {
         console.error('Error fetching categories:', error);
@@ -26,7 +26,7 @@ export const createCategoryInService = async (
     category: CategoryModel,
 ): Promise<CategoryModel | null> => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/`, category.toJsonWithoutId()); // `id` 제외
+        const response = await axios.post(`${API_BASE_URL}/categories/`, category.toJsonWithoutId()); // `id` 제외
         return CategoryModel.fromJson(response.data); // 서버에서 생성된 id 포함된 객체 반환
     } catch (error) {
         console.error('Error creating category:', error);
@@ -41,7 +41,7 @@ export const createCategoryInService = async (
  */
 export const getCategoryInService = async (categoryId: number): Promise<CategoryModel | null> => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/${categoryId}/`);
+        const response = await axios.get(`${API_BASE_URL}/categories/${categoryId}/`);
         return CategoryModel.fromJson(response.data);
     } catch (error) {
         console.error('Error fetching category:', error);
@@ -60,7 +60,7 @@ export const updateCategoryInService = async (
     updatedData: Partial<CategoryModel>,
 ): Promise<CategoryModel | null> => {
     try {
-        const response = await axios.put(`${API_BASE_URL}/${categoryId}/`, updatedData);
+        const response = await axios.put(`${API_BASE_URL}/categories/${categoryId}/`, updatedData);
         return CategoryModel.fromJson(response.data); // 업데이트된 카테고리 반환
     } catch (error) {
         console.error('Error updating category:', error);
@@ -75,7 +75,7 @@ export const updateCategoryInService = async (
  */
 export const deleteCategoryInService = async (categoryId: number): Promise<boolean> => {
     try {
-        await axios.delete(`${API_BASE_URL}/${categoryId}/`);
+        await axios.delete(`${API_BASE_URL}/${categoryId}/categories/`);
         return true;
     } catch (error) {
         console.error('Error deleting category:', error);
@@ -86,7 +86,7 @@ export const deleteCategoryInService = async (categoryId: number): Promise<boole
 // 모든 카테고리 불러오기
 export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
     try {
-        const response = await axios.get(`${API_BASE_URL}`);
+        const response = await axios.get(`${API_BASE_URL}/categories/`);
         return response.data.map((category: any) => CategoryModel.fromJson(category));
     } catch (error) {
         console.error('Error fetching all categories:', error);
@@ -97,9 +97,24 @@ export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
 // 랜덤 카테고리 불러오기
 export const getRandomCategoriesInService = async (exclude_category_ids: number[]) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/preview/`, { exclude_category_ids });
+        const response = await axios.post(`${API_BASE_URL}/categories/preview/`, { exclude_category_ids });
         return response.data;
     } catch (error) {
         console.error('Error getting random categories: ', error);
     }
 };
+
+// 특정 카테고리 불러오기
+export const getParticularCategoryInService = async (categoryId: number): Promise<ProductModel[]> => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/products/`, {
+            params: { category: categoryId },
+        });
+        console.log(response.data.results)
+        return response.data.results.map((item: any) => ProductModel.fromJson(item));
+        // return response.data;
+    } catch (error) {
+        console.error('Error fetching particular category products:', error);
+        return [];
+    }
+}
