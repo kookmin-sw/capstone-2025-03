@@ -8,7 +8,7 @@ import Footer from '@/src/components/layout/MenuFooter';
 import SeeMore from '@/src/assets/images/landing-page/see-more.png';
 
 type Item = {
-    image: string;
+    thumbnail: string;
     name: string;
     grade: string;
     price: string;
@@ -16,193 +16,10 @@ type Item = {
 };
 
 type CategoryResult = {
-    category_id: number;
-    category_name: string;
+    categoryId: number;
+    categoryName: string;
     results: Item[];
 };
-
-const MOCK_DATA: CategoryResult[] = [
-    {
-        category_id: 1,
-        category_name: '문구류',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 2,
-        category_name: '필기도구',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 3,
-        category_name: '가스레인지',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 4,
-        category_name: '청소기',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 5,
-        category_name: '자동차',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-];
 
 const CategoryContainer = styled.div`
     background-color: #18171d;
@@ -217,46 +34,51 @@ export default function RandomCategory() {
     const [viewedIds, setViewedIds] = useRecoilState(viewedCategoryIdsState);
     const [results, setResults] = useState<CategoryResult[]>([]);
 
-    // const handleGetRandomCategory = async () => {
-    //     try {
-    //         const response = await getRandomCategoriesInService(viewedIds);
-    //         setResults(response);
+    const handleGetRandomCategory = async () => {
+        try {
+            const response = await getRandomCategoriesInService(viewedIds);
+            // console.log(response)
+            const withMoreCard = response.map((category: any) => ({
+                categoryId: category.id,
+                categoryName: category.name,
+                results: [
+                    ...category.items.map((item: any) => ({
+                        thumbnail: item.thumbnail,
+                        name: item.name,
+                        grade: item.grade,
+                        price: '', // 가격 정보가 없으니 빈 문자열
+                        type: 'product',
+                    })),
+                    {
+                        thumbnail: SeeMore,
+                        name: '더보기',
+                        grade: '',
+                        price: '',
+                        type: 'more',
+                    },
+                ],
+            }));
+            setResults(withMoreCard);
 
-    //         const newIds = response.map((response) => response.category_id);
-    //         setViewedIds((prev) => [...prev, ...newIds]);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
+            const newIds = response.map((response: any) => response.category_id);
+            setViewedIds((prev) => [...prev, ...newIds]);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
-        // handleGetRandomCategory();
-
-        const withMoreCard = MOCK_DATA.map((category) => ({
-            ...category,
-            results: [
-                ...category.results,
-                {
-                    image: SeeMore,
-                    name: '더보기',
-                    grade: '',
-                    price: '',
-                    type: 'more',
-                } satisfies Item,
-            ],
-        }));
-
-        setResults(withMoreCard);
+        handleGetRandomCategory();
     }, []);
-    console.log(results);
+
     return (
         <div>
             <CategoryContainer>
                 {results.map((category) => (
                     <CategorySection
-                        key={category.category_id}
-                        categoryId={category.category_id}
-                        categoryName={category.category_name}
+                        key={category.categoryId}
+                        categoryId={category.categoryId}
+                        categoryName={category.categoryName}
                         products={category.results}
                     />
                 ))}

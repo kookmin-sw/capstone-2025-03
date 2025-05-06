@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 type MoreCardProps = {
     categoryId: number;
-    image: string;
+    thumbnail: string;
     name: string;
     grade: string;
     price: string;
@@ -31,7 +31,7 @@ const Text = styled.p`
     margin-left: 1rem;
 `
 
-export default function MoreCard({ categoryId, image, name, grade, price }: MoreCardProps) {
+export default function MoreCard({ categoryId, thumbnail, name, grade, price }: MoreCardProps) {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -40,7 +40,7 @@ export default function MoreCard({ categoryId, image, name, grade, price }: More
 
     return (
         <Card onClick={handleClick}>
-            <img src={image} />
+            <img src={thumbnail} />
             <Text>더보기</Text>
         </Card>
     );

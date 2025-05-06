@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 type ProductCardProps = {
-    image: string;
+    thumbnail: string;
     name: string;
     grade: string;
     price: string;
@@ -34,10 +34,10 @@ const Info = styled.p`
     color: #666;
 `;
 
-export default function ProductCard({ image, name, grade, price }: ProductCardProps) {
+export default function ProductCard({ thumbnail, name, grade, price }: ProductCardProps) {
     return (
         <Card>
-            <Image src={image} alt={name} />
+            <Image src={thumbnail} alt={name} />
             <Name>{name}</Name>
             <Info>
                 {grade} / {Number(price).toLocaleString()}원
