@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Header = styled.div`
@@ -43,7 +44,7 @@ export default function BackHeader() {
 
     return (
         <Header>
-            <BackButtonWrapper onClick={handleClick}>
+            <BackButtonWrapper>
                 <BackButton src="/images/seller/arrow_back.png" onClick={handleClick} />
             </BackButtonWrapper>
         </Header>

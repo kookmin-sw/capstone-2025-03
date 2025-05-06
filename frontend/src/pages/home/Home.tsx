@@ -14,7 +14,7 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     const navigate = useNavigate();
-    const currentMenuIndex = 0;
+    const currentMenuIndex = 1;
     const { packageList, getPackageList } = usePackage();
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
     const isVisible = useHeaderVisibility();
