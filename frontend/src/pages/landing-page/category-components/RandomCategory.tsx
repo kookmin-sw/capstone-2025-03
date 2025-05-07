@@ -95,7 +95,7 @@ export default function RandomCategory() {
                 const [entry] = entries;
                 if (!hasMounted.current) {
                     hasMounted.current = true;
-                    return; // 👉 첫 mount 시 감지 무시
+                    return;
                 }
 
                 if (entry.isIntersecting) {
