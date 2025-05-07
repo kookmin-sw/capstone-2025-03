@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = styled.div`
     position: fixed;
+    max-width: 500px;
     top: 0;
     width: 100%;
     background-color: #101012;

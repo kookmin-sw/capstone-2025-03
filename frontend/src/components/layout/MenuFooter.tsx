@@ -15,6 +15,7 @@ const Footer = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
+    max-width: 500px;
     height: 6rem;
     display: flex;
     flex-direction: row;

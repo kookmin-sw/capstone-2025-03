@@ -64,8 +64,9 @@
 /* Body 스타일 */
 body {
     font-family: 'Pretendard', sans-serif;
+    max-width: 500px;
+    margin: auto;
     color: #ffffff;
-    margin: 0;
     user-select: none;
 }
 
