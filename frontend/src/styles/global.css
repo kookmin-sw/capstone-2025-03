@@ -68,6 +68,7 @@ body {
     margin: auto;
     color: #ffffff;
     user-select: none;
+    overflow-y: scroll;
 }
 
 p {
