@@ -128,23 +128,15 @@ export default function RandomCategory() {
                     />
                 ))}
 
+                {/* 로딩 중일 때는 스켈레톤만 보여줌 */}
                 {isFetching && results.length === 0 && (
-                    <Flex
-                        position="absolute"
-                        top="50%"
-                        left="50%"
-                        transform="translate(-50%, -50%)"
-                        justify="center"
-                        align="center"
-                        zIndex="10"
-                    >
-                        <Spinner
-                            color="#00A36C"
-                            borderWidth="0.6rem"
-                            animationDuration="0.8s"
-                            style={{ marginTop: '4rem', width: '6rem', height: '6rem' }}
-                        />
-                    </Flex>
+                    <CategorySection
+                        key="skeleton"
+                        categoryId={-1}
+                        categoryName=""
+                        products={[]}
+                        isLoading={true}
+                    />
                 )}
             </CategoryContainer>
             <div ref={bottomRef}></div>
