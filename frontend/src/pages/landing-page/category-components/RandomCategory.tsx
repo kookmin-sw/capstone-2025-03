@@ -7,6 +7,7 @@ import CategorySection from './CategorySection';
 import Footer from '@/src/components/layout/MenuFooter';
 import SeeMore from '@/src/assets/images/landing-page/see-more.png';
 import { useRef } from 'react';
+import { Spinner, Flex } from '@chakra-ui/react';
 
 type Item = {
     thumbnail: string;
@@ -24,6 +25,8 @@ type CategoryResult = {
 };
 
 const CategoryContainer = styled.div`
+    position: relative;
+    min-height: 30vh;
     background-color: #18171d;
     padding: 3.2rem 0 0 2rem;
     display: flex;
@@ -70,7 +73,9 @@ export default function RandomCategory() {
 
             setResults((prev) => {
                 const existing = new Set(prev.map((p) => p.categoryId));
-                const filtered = withMoreCard.filter((e: CategoryResult) => !existing.has(e.categoryId));
+                const filtered = withMoreCard.filter(
+                    (e: CategoryResult) => !existing.has(e.categoryId),
+                );
                 return [...prev, ...filtered];
             });
 
@@ -122,6 +127,25 @@ export default function RandomCategory() {
                         products={category.results}
                     />
                 ))}
+
+                {isFetching && results.length === 0 && (
+                    <Flex
+                        position="absolute"
+                        top="50%"
+                        left="50%"
+                        transform="translate(-50%, -50%)"
+                        justify="center"
+                        align="center"
+                        zIndex="10"
+                    >
+                        <Spinner
+                            color="#00A36C"
+                            borderWidth="0.6rem"
+                            animationDuration="0.8s"
+                            style={{ marginTop: '4rem', width: '6rem', height: '6rem' }}
+                        />
+                    </Flex>
+                )}
             </CategoryContainer>
             <div ref={bottomRef}></div>
             <Footer currentMenuIndex={currentMenuIndex} />
