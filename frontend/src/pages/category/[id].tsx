@@ -6,7 +6,7 @@ import ProductModel from '@/src/models/ProductModel';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
 import BackHeader from '@/src/components/layout/BackHeader';
 import { useNavigate } from 'react-router-dom';
-import { Spinner } from '@chakra-ui/react';
+import SellerProductItemSkeleton from '@/src/components/ui/SellerProductItemSkeleton';
 
 const MainContainer = styled.div`
     background-color: #18171d;
@@ -36,7 +36,7 @@ export default function Category() {
     const navigate = useNavigate();
     const [products, setProducts] = useState<ProductModel[]>([]);
     const [categoryName, setCategoryName] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const { id } = useParams();
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export default function Category() {
                 if (res.length > 0) {
                     setCategoryName(res[0].categoryName ?? '');
                 }
-                setLoading(false);
+                setIsLoading(false);
             });
         }
     }, []);
@@ -63,22 +63,15 @@ export default function Category() {
             <BackHeader />
             <ProductContainer>
                 <CategoryName>{categoryName}</CategoryName>
-                {loading ? (
-                    <SpinnerWrapper>
-                        <Spinner
-                            color="#00A36C"
-                            borderWidth="0.6rem"
-                            animationDuration="0.8s"
-                            style={{ marginTop: '4rem', width: '6rem', height: '6rem' }}
-                        />
-                    </SpinnerWrapper>
-                ) : (
-                    products.map((product) => (
-                        <div onClick={() => handleProductClick(product)} key={product.id}>
-                            <SellerProductItem product={product} />
-                        </div>
-                    ))
-                )}
+                {isLoading
+                    ? Array.from({ length: 6 }).map((_, idx) => (
+                          <SellerProductItemSkeleton key={idx} />
+                      ))
+                    : products.map((product) => (
+                          <div onClick={() => handleProductClick(product)} key={product.id}>
+                              <SellerProductItem product={product} />
+                          </div>
+                      ))}
             </ProductContainer>
         </MainContainer>
     );

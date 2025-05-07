@@ -1,7 +1,7 @@
 import ProductCard from './ProductCard';
 import styled from '@emotion/styled';
 import MoreCard from './MoreCard';
-import ProductCardSkeleton from './ProductCardSkeleton';
+import ProductCardSkeleton from '../../../components/ui/ProductCardSkeleton';
 
 type Item = {
     productId: number;
