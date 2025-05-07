@@ -30,6 +30,7 @@ export default function PackageDetailProductDetail() {
     const handleButtonClick = () => {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
+
     console.log(product);
     return (
         <div className={styles.page}>

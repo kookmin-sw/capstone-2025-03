@@ -14,7 +14,7 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/products`;
 export const getProductListInService = async (
     nextPageUrl: string | null,
     pageSize: number,
-    category: string
+    category: string,
 ): Promise<{
     results: ProductModel[];
     next: string | null;
@@ -22,7 +22,7 @@ export const getProductListInService = async (
     try {
         const params: any = { page_size: pageSize };
         if (category != 'all') {
-            params.category = category
+            params.category = category;
         }
         const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
         const response = await axios.get(requestUrl, { params });
@@ -59,9 +59,7 @@ export const createProductInService = async (
  * @param {number} productId - 가져올 상품의 ID
  * @returns {Promise<ProductModel | null>}
  */
-export const getProductInService = async (
-    productId: number,
-): Promise<ProductModel | null> => {
+export const getProductInService = async (productId: number): Promise<ProductModel | null> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/${productId}/`);
         return ProductModel.fromJson(response.data);

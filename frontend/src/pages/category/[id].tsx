@@ -20,7 +20,7 @@ const CategoryName = styled.p`
     font-weight: 600;
     font-size: 2rem;
     padding: 2rem;
-`
+`;
 
 export default function Category() {
     const navigate = useNavigate();

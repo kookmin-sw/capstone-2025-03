@@ -22,7 +22,8 @@ export const useProduct = () => {
     const getProductList = async (category: number | null): Promise<ProductModel[]> => {
         // category string으로 변경 (전체 읽기인 경우, null로 전달 받음)
         const myCategory: string = category?.toString() ?? 'all';
-        const { next: myNext = null, hasMore: myHasMore = true } = productPagination[myCategory] || {};
+        const { next: myNext = null, hasMore: myHasMore = true } =
+            productPagination[myCategory] || {};
 
         // 더이상 데이터가 없으면 빈 배열 리턴
         if (!myHasMore) return [];
@@ -30,9 +31,9 @@ export const useProduct = () => {
         // 응답
         const response: { results: ProductModel[]; next: string | null } | null = useDummyData
             ? {
-                results: productDummyData.map((product) => ProductModel.fromJson(product)),
-                next: null,
-            }
+                  results: productDummyData.map((product) => ProductModel.fromJson(product)),
+                  next: null,
+              }
             : await getProductListInService(myNext, PAGE_SIZE, myCategory);
 
         let newProducts: ProductModel[] = [];
@@ -41,15 +42,17 @@ export const useProduct = () => {
             setProductList((prev) => {
                 // 빠른 탐색을 위한 Set
                 const existingIds = new Set(prev.map((product) => product.id));
-                const filteredNewProducts = newProducts.filter((product) => !existingIds.has(product.id));
+                const filteredNewProducts = newProducts.filter(
+                    (product) => !existingIds.has(product.id),
+                );
                 return [...prev, ...filteredNewProducts];
             });
             setProductPagination((prev) => ({
                 ...prev,
                 [myCategory]: {
                     next: response.next,
-                    hasMore: response.next !== null
-                }
+                    hasMore: response.next !== null,
+                },
             }));
         }
 

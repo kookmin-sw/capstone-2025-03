@@ -26,7 +26,10 @@ export const createCategoryInService = async (
     category: CategoryModel,
 ): Promise<CategoryModel | null> => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/categories/`, category.toJsonWithoutId()); // `id` 제외
+        const response = await axios.post(
+            `${API_BASE_URL}/categories/`,
+            category.toJsonWithoutId(),
+        ); // `id` 제외
         return CategoryModel.fromJson(response.data); // 서버에서 생성된 id 포함된 객체 반환
     } catch (error) {
         console.error('Error creating category:', error);
@@ -97,7 +100,9 @@ export const getAllCategoryInService = async (): Promise<CategoryModel[]> => {
 // 랜덤 카테고리 불러오기
 export const getRandomCategoriesInService = async (exclude_category_ids: number[]) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/categories/preview/`, { exclude_category_ids });
+        const response = await axios.post(`${API_BASE_URL}/categories/preview/`, {
+            exclude_category_ids,
+        });
         return response.data;
     } catch (error) {
         console.error('Error getting random categories: ', error);
@@ -105,16 +110,30 @@ export const getRandomCategoriesInService = async (exclude_category_ids: number[
 };
 
 // 특정 카테고리 불러오기
-export const getParticularCategoryInService = async (categoryId: number): Promise<ProductModel[]> => {
+export const getParticularCategoryInService = async (
+    categoryId: number,
+): Promise<ProductModel[]> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/products/`, {
             params: { category: categoryId },
         });
-        console.log(response.data.results)
+        console.log(response.data.results);
         return response.data.results.map((item: any) => ProductModel.fromJson(item));
         // return response.data;
     } catch (error) {
         console.error('Error fetching particular category products:', error);
         return [];
     }
-}
+};
+
+// 랜덤 상품 추천
+export const getRandomProductInService = async (categoryId: number, productId: number[]) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/categories/products-exclude/`, {
+            params: { category_id: categoryId, exclude_product_id: productId },
+        });
+        return response;
+    } catch (error) {
+        console.error('Error getting random products: ', error);
+    }
+};
