@@ -177,15 +177,16 @@ export default function SellerSalesListAddProduct() {
                         })}
                     </div>
                 </form>
-                <div className={styles.submitButtonSection}>
-                    <button
-                        className={styles.submitButton}
-                        disabled={!isButtonValid}
-                        onClick={handleClickConfirmButton}
-                    >
-                        확인
-                    </button>
-                </div>
+
+            </div>
+            <div className={styles.submitButtonSection}>
+                <button
+                    className={styles.submitButton}
+                    disabled={!isButtonValid}
+                    onClick={handleClickConfirmButton}
+                >
+                    확인
+                </button>
             </div>
         </div>
     );
