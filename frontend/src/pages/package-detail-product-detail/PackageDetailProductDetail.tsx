@@ -30,8 +30,7 @@ export default function PackageDetailProductDetail() {
     const handleButtonClick = () => {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
-
-    console.log(product);
+    console.log(product)
     return (
         <div className={styles.page}>
             <BackHeaderForPackageDetail targetRef={carouselRef} />
@@ -43,6 +42,7 @@ export default function PackageDetailProductDetail() {
                 <div className={styles.categoryAndGradeWrapper}>
                     <p className={styles.category}>
                         {categories.find((category) => category.id === product.category)?.name}
+                        {/* {product.categoryName} */}
                     </p>
                     <p className={styles.gradeAndAmount}>
                         {product.grade} ∙ {product.quantity}개
@@ -61,7 +61,7 @@ export default function PackageDetailProductDetail() {
                         ))}
                 </div>
                 <div className={styles.devider}></div>
-                <ProductRecommend />
+                <ProductRecommend categoryId={product.category} productId={product.id ? [product.id] : []} />
                 <div style={{ height: '20rem' }} />
             </div>
             {!reset ? (

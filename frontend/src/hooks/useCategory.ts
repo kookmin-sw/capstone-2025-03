@@ -101,20 +101,24 @@ export const useCategory = () => {
         return isSuccess;
     };
 
-    const randomProduct = async (categoryId: number, productId: number[]): Promise<ProductModel[]> => {
-        const response = await getRandomProductInService(categoryId, productId);
+    const randomProduct = async (
+        categoryId: number,
+        productId: number[],
+    ): Promise<ProductModel[]> => {
+        const response: { products: ProductModel[] } | null = await getRandomProductInService(
+            categoryId,
+            productId,
+        );
 
-        if (!response || !Array.isArray(response)) {
+        if (!response || !Array.isArray(response.products)) {
             return [];
         }
 
-        const productList: ProductModel[] = response
-            .flatMap((category) => category.items || [])
-            .map((item) => new ProductModel(item));
-        console.log(productList) // 테스트 출력
+        const productList: ProductModel[] =
+            response.products.map((item) => new ProductModel(item)) || [];
+
         return productList;
     };
-
 
     return {
         categories,

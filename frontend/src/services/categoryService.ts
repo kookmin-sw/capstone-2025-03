@@ -130,9 +130,10 @@ export const getParticularCategoryInService = async (
 export const getRandomProductInService = async (categoryId: number, productId: number[]) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/categories/products-exclude/`, {
-            params: { category_id: categoryId, exclude_product_id: productId },
+            category_id: categoryId,
+            exclude_product_ids: productId,
         });
-        return response;
+        return response.data;
     } catch (error) {
         console.error('Error getting random products: ', error);
     }
