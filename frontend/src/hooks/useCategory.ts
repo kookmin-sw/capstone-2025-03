@@ -12,6 +12,7 @@ import CategoryModel from '../models/CategoryModel';
 import categoryData from '@/src/data/categoryData.json';
 import { useCallback } from 'react';
 import ProductModel from '../models/ProductModel';
+import ProductCardModel from '../models/ProductCardModel';
 
 const useLocalData = true;
 
@@ -104,8 +105,8 @@ export const useCategory = () => {
     const randomProduct = async (
         categoryId: number,
         productId: number[],
-    ): Promise<ProductModel[]> => {
-        const response: { products: ProductModel[] } | null = await getRandomProductInService(
+    ): Promise<ProductCardModel[]> => {
+        const response: { products: ProductCardModel[] } | null = await getRandomProductInService(
             categoryId,
             productId,
         );
@@ -114,8 +115,8 @@ export const useCategory = () => {
             return [];
         }
 
-        const productList: ProductModel[] =
-            response.products.map((item) => new ProductModel(item)) || [];
+        const productList: ProductCardModel[] =
+            response.products.map((item) => new ProductCardModel(item)) || [];
 
         return productList;
     };

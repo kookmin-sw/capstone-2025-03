@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { useCategory } from '@/src/hooks/useCategory';
 import { useEffect, useState } from 'react';
-import ProductModel from '@/src/models/ProductModel';
+import ProductCard from '../../landing-page/category-components/ProductCard';
+import ProductCardModel from '@/src/models/ProductCardModel';
 
 const RecommendContainer = styled.div`
     padding: 2rem;
@@ -13,31 +14,54 @@ const RecommendText = styled.p`
     color: white;
 `;
 
+const RecommendSubText = styled.p`
+    margin-top: 1rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: white;
+`;
+
 type ProductRecommendProps = {
     categoryId: number | null;
     productId: number[];
+    categoryName: string | null;
 };
 
-export default function ProductRecommend({ categoryId, productId }: ProductRecommendProps) {
+export default function ProductRecommend({
+    categoryId,
+    productId,
+    categoryName,
+}: ProductRecommendProps) {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const name = user.name ?? '손';
-    const [recommend, setRecommend] = useState<ProductModel[]>([]);
+    const [recommend, setRecommend] = useState<ProductCardModel[]>([]);
     const { randomProduct } = useCategory();
 
     useEffect(() => {
         const fetchData = async () => {
             if (categoryId !== null) {
                 const response = await randomProduct(categoryId, productId);
-                setRecommend(response)
+                setRecommend(response);
             }
         };
-        fetchData()
+        fetchData();
     }, []);
-    
-    console.log(recommend)
+
     return (
         <RecommendContainer>
             <RecommendText>{name}님, 이건 어때요?</RecommendText>
+            <RecommendSubText>더 많은 {categoryName} 보기</RecommendSubText>
+            <div>
+                {recommend.map((product, idx) => (
+                    <ProductCard
+                        productId={product.id}
+                        thumbnail={product.thumbnail}
+                        name={product.name}
+                        grade={product.grade}
+                        price={product.price}
+                    />
+                ))}
+            </div>
         </RecommendContainer>
     );
 }
