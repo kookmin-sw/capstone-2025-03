@@ -56,7 +56,7 @@ export default function ProductRecommend({
             }
         };
         fetchData();
-    }, []);
+    }, [productId]);
 
     return (
         <RecommendContainer>

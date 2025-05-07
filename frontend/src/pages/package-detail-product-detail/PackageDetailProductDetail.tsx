@@ -18,13 +18,13 @@ export default function PackageDetailProductDetail() {
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
     const carouselRef = useRef<HTMLDivElement>(null);
-
+    
     // hook
     const { categories } = useCategory();
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []);
+    }, [product.id]);
 
     // Function
     const handleButtonClick = () => {
