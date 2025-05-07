@@ -15,10 +15,21 @@ const RecommendText = styled.p`
 `;
 
 const RecommendSubText = styled.p`
-    margin-top: 1rem;
+    margin-top: 2rem;
     font-size: 1.7rem;
     font-weight: 700;
     color: white;
+`;
+
+const ProductsContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 2rem;
+    & img {
+        width: 16rem !important;
+        height: 16rem !important;
+    }
 `;
 
 type ProductRecommendProps = {
@@ -51,7 +62,7 @@ export default function ProductRecommend({
         <RecommendContainer>
             <RecommendText>{name}님, 이건 어때요?</RecommendText>
             <RecommendSubText>더 많은 {categoryName} 보기</RecommendSubText>
-            <div>
+            <ProductsContainer>
                 {recommend.map((product, idx) => (
                     <ProductCard
                         productId={product.id}
@@ -61,7 +72,7 @@ export default function ProductRecommend({
                         price={product.price}
                     />
                 ))}
-            </div>
+            </ProductsContainer>
         </RecommendContainer>
     );
 }
