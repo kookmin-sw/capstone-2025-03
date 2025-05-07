@@ -18,7 +18,7 @@ export default function PackageDetailProductDetail() {
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
     const carouselRef = useRef<HTMLDivElement>(null);
-    
+
     // hook
     const { categories } = useCategory();
 
@@ -30,7 +30,7 @@ export default function PackageDetailProductDetail() {
     const handleButtonClick = () => {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
-    console.log(product)
+    console.log(product);
     return (
         <div className={styles.page}>
             <BackHeaderForPackageDetail targetRef={carouselRef} />
@@ -40,7 +40,10 @@ export default function PackageDetailProductDetail() {
                 </div>
                 <p className={styles.product}>{product.name}</p>
                 <div className={styles.categoryAndGradeWrapper}>
-                    <p className={styles.category} onClick={() => navitgate(`/category/${product.category}`)}>
+                    <p
+                        className={styles.category}
+                        onClick={() => navitgate(`/category/${product.category}`)}
+                    >
                         {/* {categories.find((category) => category.id === product.category)?.name} */}
                         {product.categoryName}
                     </p>
@@ -61,7 +64,11 @@ export default function PackageDetailProductDetail() {
                         ))}
                 </div>
                 <div className={styles.devider}></div>
-                <ProductRecommend categoryId={product.category} productId={product.id ? [product.id] : []} categoryName={product.categoryName} />
+                <ProductRecommend
+                    categoryId={product.category}
+                    productId={product.id ? [product.id] : []}
+                    categoryName={product.categoryName}
+                />
                 <div style={{ height: '20rem' }} />
             </div>
             {!reset ? (

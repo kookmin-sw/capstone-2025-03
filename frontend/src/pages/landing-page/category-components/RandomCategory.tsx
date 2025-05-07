@@ -6,6 +6,7 @@ import { viewedCategoryIdsState } from '@/src/recoil/viewedCategoryIdsState';
 import CategorySection from './CategorySection';
 import Footer from '@/src/components/layout/MenuFooter';
 import SeeMore from '@/src/assets/images/landing-page/see-more.png';
+import { useRef } from 'react';
 
 type Item = {
     thumbnail: string;
@@ -34,11 +35,17 @@ export default function RandomCategory() {
     const currentMenuIndex = 0;
     const [viewedIds, setViewedIds] = useRecoilState(viewedCategoryIdsState);
     const [results, setResults] = useState<CategoryResult[]>([]);
+    const [isFetching, setIsFetching] = useState<boolean>(false);
+
+    const bottomRef = useRef<HTMLDivElement | null>(null);
+    const hasMounted = useRef(false);
 
     const handleGetRandomCategory = async () => {
+        if (isFetching) return;
+        setIsFetching(true);
         try {
             const response = await getRandomCategoriesInService(viewedIds);
-            // console.log(response)
+            console.log(response);
             const withMoreCard = response.map((category: any) => ({
                 categoryId: category.id,
                 categoryName: category.name,
@@ -60,17 +67,48 @@ export default function RandomCategory() {
                     },
                 ],
             }));
-            setResults(withMoreCard);
 
-            const newIds = response.map((response: any) => response.category_id);
+            setResults((prev) => {
+                const existing = new Set(prev.map((p) => p.categoryId));
+                const filtered = withMoreCard.filter((e: CategoryResult) => !existing.has(e.categoryId));
+                return [...prev, ...filtered];
+            });
+
+            const newIds = response.map((response: any) => response.id);
             setViewedIds((prev) => [...prev, ...newIds]);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsFetching(false);
         }
     };
 
+    // 첫 호출 용
     useEffect(() => {
         handleGetRandomCategory();
+    }, []);
+
+    // 스크롤 하단 감지용
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const [entry] = entries;
+                if (!hasMounted.current) {
+                    hasMounted.current = true;
+                    return; // 👉 첫 mount 시 감지 무시
+                }
+
+                if (entry.isIntersecting) {
+                    handleGetRandomCategory();
+                }
+            },
+            { threshold: 1 },
+        );
+
+        if (bottomRef.current) observer.observe(bottomRef.current);
+        return () => {
+            if (bottomRef.current) observer.unobserve(bottomRef.current);
+        };
     }, []);
 
     return (
@@ -85,6 +123,7 @@ export default function RandomCategory() {
                     />
                 ))}
             </CategoryContainer>
+            <div ref={bottomRef}></div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
     );
