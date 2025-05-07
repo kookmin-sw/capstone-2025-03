@@ -136,6 +136,12 @@ export default function SellerSalesListAddProduct() {
                             setSellerProduct((prev) => prev.copyWith({ name: e.target.value }))
                         }
                     />
+                    <textarea
+                        value={sellerProduct.description ?? ''}
+                        className={styles.input}
+                        placeholder="설명"
+                        onChange={(e) => setSellerProduct((prev) => prev.copyWith({ description: e.target.value }))}
+                    />
                     <input
                         value={sellerProduct.quantity ?? ''}
                         type="number"

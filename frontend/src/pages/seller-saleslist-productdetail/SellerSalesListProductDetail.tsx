@@ -38,7 +38,6 @@ export default function SellerSalesListProductDetail() {
                 price: newPrice,
                 seller: sellerId,
                 salesStatus: 'available',
-                description: null,
                 uploadDate: new Date().toISOString(),
             }),
         );
