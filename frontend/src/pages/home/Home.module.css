@@ -71,6 +71,19 @@
     font-size: 1.2rem;
 }
 
+.bannerContainer{
+    width: 100%;
+}
+
+.bannerImage{
+    width: 100%;
+}
+
+.industrySelectContainer{
+    background-color: #18171D;
+    padding: 2rem;
+}
+
 .packageListView {
     display: flex;
     flex-direction: column;

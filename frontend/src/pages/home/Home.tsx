@@ -2,13 +2,14 @@ import styles from './Home.module.css';
 import MainHeader from '@/src/components/layout/MainHeader';
 import Footer from '@/src/components/layout/MenuFooter';
 import PackageItem from '@/src/components/ui/PackageItem';
-import SandClockImage from '@/src/assets/images/page/home/sand_clock.png';
 import { useNavigate } from 'react-router-dom';
 import { usePackage } from '@/src/hooks/usePackage';
 import { useEffect, useState, useRef } from 'react';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import { Spinner } from '@chakra-ui/react';
 import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
+import RestartBanner from '@/src/assets/images/banner/restart_banner.png';
+import SearchBar from '@/src/components/layout/SearchBar';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -54,33 +55,21 @@ export default function Home() {
         navigate('/find-package-select-industry');
     };
 
+    const handleSearchBarClick = () => {
+        window.alert('click');
+    }
+
     return isLoading ? (
         <LoadingSection text="잠시만 기다려주세요" />
     ) : (
         <div className={styles.page}>
             <MainHeader isVisible={isVisible} />
             <div className={styles.section}>
-                <div className={styles.contentContainer}>
-                    <div className={styles.topContainer}>
-                        <p className={styles.title}>1초만에 패키지 추천받기</p>
-                        <div className={styles.blank} />
-                        <button
-                            className={styles.findPackageButton}
-                            onClick={handleClickFindPackageButton}
-                        >
-                            업종 선택
-                        </button>
-                    </div>
-                    <div className={styles.bottomContainer}>
-                        <img className={styles.icon} src={SandClockImage} />
-                        <p className={styles.description}>
-                            <span className={styles.descriptionSpan}>
-                                패키지 구매로 줄어드는 시간은?
-                            </span>
-                            <br />
-                            창업 물품 구매에 평균 3일 7시간 절약
-                        </p>
-                    </div>
+                <div className={styles.bannerContainer}>
+                    <img className={styles.bannerImage} src={RestartBanner}></img>
+                </div>
+                <div className={styles.industrySelectContainer}>
+                    <SearchBar text='필요한 중고 물품 검색' search={handleSearchBarClick}/>
                 </div>
                 <p className={styles.listViewTitle}>전체보기</p>
                 <div className={styles.packageListView}>
