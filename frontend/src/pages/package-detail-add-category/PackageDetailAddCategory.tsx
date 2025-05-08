@@ -57,10 +57,13 @@ export default function PackageDetailAddCategory() {
         );
     };
     const handleConfirmButtonClick = () => {
+        const newProducts = editingPackage?.products.filter((product) => checkedCategoryIds.includes(product.category!)) ?? [];
         const newEditingPackage = PackageModel.fromJson({
             ...editingPackage?.toJson(),
             categories: checkedCategoryIds,
+            products: newProducts
         });
+
         setEditingPackage(newEditingPackage);
         navigate(-1);
     };
