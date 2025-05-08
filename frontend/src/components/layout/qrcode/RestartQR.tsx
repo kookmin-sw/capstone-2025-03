@@ -19,21 +19,30 @@ const RestartQr = styled.div`
 
 const QrDescription = styled.p`
     margin-top: 16px;
-    width: 200px;   
+    width: 200px;
     font-weight: 600;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.2%;
-    color: black
+    color: black;
+
+    @media (prefers-color-scheme: dark) {
+        color: white;
+    }
 `;
 
 const QrNitofication = styled.p`
     margin-top: 8px;
-    color: gray.400;
+    width: 200px;
+    color: dimgray;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.2%;
+
+    @media (prefers-color-scheme: dark) {
+        color: gray;
+    }
 `;
 
 export default function RestartQR() {
