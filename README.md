@@ -33,7 +33,7 @@
 ## 주요 기능 
 
 ### 메인화면
-![메인화면](https://github.com/user-attachments/assets/ef000101-8526-4e23-af5e-84bfc53af460)
+<img src="https://github.com/user-attachments/assets/ef000101-8526-4e23-af5e-84bfc53af460"  width="70%" height="70%"/>
 
 <br/>
 
