@@ -65,6 +65,7 @@ export default function ProductRecommend({
             <ProductsContainer>
                 {recommend.map((product, idx) => (
                     <ProductCard
+                        key={idx}
                         productId={product.id}
                         thumbnail={product.thumbnail}
                         name={product.name}
