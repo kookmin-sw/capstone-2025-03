@@ -1,39 +1,59 @@
-# 🚀 우리 서비스 소개
+# 🚀 Restart
 
-## 1. 도메인  
+## 프로젝트 소개  
 **창업자와 폐업자**를 연결하는 **중고 창업 물품 패키징 거래 서비스**  
+![1](https://github.com/user-attachments/assets/52624e16-b14d-4bae-b947-4aeb9e7a1a32)
 
----
+### 프로젝트 목표
+창업자와 폐업자를 위한 업종별 창업 물품 패키징 및 AI 기반 판매 가격 추천 시스템을 갖춘 중고 물품 거래 솔루션을 개발한다.
 
-## 2. 문제 (Pain Points)  
-
-### 창업자의 문제
+### 프로젝트 개발 동기
+#### 창업자의 문제
 - 창업에 필요한 **중고 물건들이 여러 사이트에 흩어져 있어** 찾기 어렵습니다.  
 - 원하는 물건을 **직접 검색하고, 연락하고, 거래를 약속하고, 결제하고, 수령까지** 모든 과정을 직접 해야 합니다.  
 - 필요한 모든 물품을 **한 번에 빠르게 구매하기 어렵습니다.**
 
-### 폐업자의 문제
+#### 폐업자의 문제
 - 폐업 후 **많은 중고 물건을 하나하나 판매**해야 하는 부담이 있습니다.  
 - **낱개로 팔면 잘 팔리지 않거나, 오래 남아있는 경우가 많습니다.**  
-- **적절한 중고 가격**을 몰라서 판매 타이밍을 놓치기도 합니다.  
+- **적절한 중고 가격**을 몰라서 판매 타이밍을 놓치기도 합니다.
+
+#### 이러한 창업자와 폐업자의 니즈를 동시에 충족시키기 위한 솔루션으로 '리스타트'를 개발하게 되었습니다.
+
+#### 프로젝트 소개 영상
 
 ---
 
-## 3. 솔루션 (Solution)  
+## 주요 기능 
+
+### 메인화면
+![메인화면](https://github.com/user-attachments/assets/ef000101-8526-4e23-af5e-84bfc53af460)
 
 ### 창업자를 위한 솔루션
 - **창업에 필요한 중고 물품을 업종별로 묶어 패키지로 제공합니다.**  
 - 창업자는 **패키지만 선택해서 한 번에 구매**할 수 있습니다.  
-- 복잡한 중고 거래 과정을 **한 번의 클릭으로 해결**합니다.  
+- 복잡한 중고 거래 과정을 **한 번의 클릭으로 해결**합니다.
+
+| <img src="https://github.com/user-attachments/assets/0791a899-e6cb-4af3-a190-43baae7a0ab1"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/4ef82cf4-210c-4f97-8841-98c9a195fe8f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/af4886a8-9b2c-42dc-b219-2385cc5d1c54"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/22208ab2-dd6a-43dc-aedd-47ce15852b51"  width="200%" height="200%"/> |
+| --- | --- | --- | --- |
+| <div align="center">**업종 선택**</div> | <div align="center">**패키지 선택**</div> | <div align="center">**물품 검색**</div> | <div align="center">**물품 상세정보**</div> |
+| <img src="https://github.com/user-attachments/assets/e406d076-298d-4f33-957a-ec2dba153f6f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/c8dc3985-40d4-4366-bfe6-2a8aa5529113"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/7639f9f7-9bcf-451a-a11f-bf767f90b9d3"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/9b8f39cb-f33b-4215-b411-52b0a4b6304a"  width="200%" height="200%"/> |
+| <div align="center">**패키지 선택**</div> | <div align="center">**패키지 내용 확인**</div> | <div align="center">**직접 패키지 구성**</div> | <div align="center">**나만의 물품 찜목록**</div> |
 
 ### 폐업자를 위한 솔루션
 - **폐업자가 내놓은 중고 물건을 패키징하여** 더 쉽게 판매될 수 있도록 합니다.  
 - **AI 분석**을 통해 **빠르게 팔릴 수 있는 가격을 추천**합니다.  
 - 그동안 낱개로 안 팔리던 물건도 **묶음으로 판매 성공 확률을 높입니다.**  
 
+| <img src="https://github.com/user-attachments/assets/81addafc-98d2-4f66-8799-49536337fdb8"  width="120%" height="120%"/> | <img src="https://github.com/user-attachments/assets/5c1ca845-01f3-4f59-bd90-b4d648c40b4b"  width="120%" height="120%"/> |
+| --- | --- |
+| <div align="center">**물품 판매**</div> | <div align="center">**AI 가격추천**</div> |
+| <img src="https://github.com/user-attachments/assets/2add4fd7-61ee-4a81-a174-17cf4c7435c0"  width="120%" height="120%"/> | <img src="https://github.com/user-attachments/assets/4af175ec-579b-4335-be37-09bd219fd5c0"  width="120%" height="120%"/> |
+| <div align="center">**추천된 가격 확인 및 가격 등록**</div> | <div align="center">**내 판매목록**</div> |
+
 ---
 
-## 4. 핵심 가치 (Key Value)
+## 핵심 가치
 
 | 대상 | 제공 가치 |
 | --- | --- |
@@ -43,13 +63,35 @@
 
 ---
 
-## 5. 소개 영상
+## 실행 방법
 
-(TODO)
+### Link
+
+[리스타트](https://restart-cap.vercel.app/)
 
 ---
 
-## 6. 팀 소개
+## 기술 스택
+
+| <img src="https://github.com/user-attachments/assets/7955cb1a-1ab1-4c93-922f-8366a653f32f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/4047813e-3a5b-4028-8126-e8ba4a5b7497"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/add75ede-d086-480a-9884-3fa1de866f7e"  width="200%" height="200%"/> |
+| --- | --- | --- |
+| <div align="center">**Frontend**</div> | <div align="center">**Backend**</div> | <div align="center">**AI**</div> |
+
+---
+
+## 협업 도구
+
+![협업툴](https://github.com/user-attachments/assets/77b7b877-f2a7-411b-9b08-ccbaebd0d24e)
+
+---
+
+## 개발 기간
+
+2025.01.09 ~ 2025.05.15
+
+---
+
+## 팀 소개
 
 | 프로필 | 이름 | 소개 |
 | --- | --- | --- |
@@ -61,18 +103,4 @@
 
 ---
 
-## 7. 사용법
 
-(TODO)
-
----
-
-## 8. 기타
-
-(TODO)
-
----
-
-## 📑 Markdown을 사용하여 내용 꾸미기
-
-(TODO)
