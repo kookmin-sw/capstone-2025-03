@@ -5,7 +5,6 @@ import PackageItem from '@/src/components/ui/PackageItem';
 import { useNavigate } from 'react-router-dom';
 import { usePackage } from '@/src/hooks/usePackage';
 import { useEffect, useState, useRef } from 'react';
-import { Spinner } from '@chakra-ui/react';
 import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 import RestartBanner from '@/src/assets/images/banner/restart_banner.png';
 import SearchBar from '@/src/components/layout/SearchBar';
