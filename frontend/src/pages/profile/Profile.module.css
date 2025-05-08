@@ -1,0 +1,70 @@
+.page {
+    min-height: 100vh;
+    background-color: #101012;
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    flex-grow: 1;
+    padding: 5rem 2rem;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: visible;
+}
+
+.profileContainer{
+    background-color: #18171D;
+    border-radius: 1.2rem;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileImage{
+    width: 15rem;
+    height: 15rem;
+    border-radius: 15rem;
+}
+
+.title{
+    width: 100%;
+    text-align: left;
+    margin-top: 3rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.itemBox{
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iconBox{
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 0.8rem;
+    background-color: #2C2C36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.text{
+    font-size: 1.6rem;
+    color: #ffffff;
+    font-weight: 400;
+}
