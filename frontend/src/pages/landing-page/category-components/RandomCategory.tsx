@@ -50,7 +50,7 @@ export default function RandomCategory() {
         setIsFetching(true);
         try {
             const response = await getRandomCategoriesInService(viewedIds);
-            console.log(response);
+
             const withMoreCard = response.map((category: any) => ({
                 categoryId: category.id,
                 categoryName: category.name,
