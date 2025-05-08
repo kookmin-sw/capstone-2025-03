@@ -39,6 +39,9 @@ export default function RandomCategory() {
     const [results, setResults] = useState<CategoryResult[]>([]);
     const [isFetching, setIsFetching] = useState<boolean>(false);
 
+    const [isInitialLoading, setIsInitialLoading] = useState(true);
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
+
     const bottomRef = useRef<HTMLDivElement | null>(null);
     const hasMounted = useRef(false);
 
@@ -89,53 +92,66 @@ export default function RandomCategory() {
 
     // 첫 호출 용
     useEffect(() => {
-        handleGetRandomCategory();
+        const fetchInitial = async () => {
+            setIsInitialLoading(true);
+            await handleGetRandomCategory(); // 내부에서 setResults 수행
+            setIsInitialLoading(false);
+        };
+        fetchInitial();
     }, []);
 
     // 스크롤 하단 감지용
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const [entry] = entries;
-                if (!hasMounted.current) {
-                    hasMounted.current = true;
-                    return;
-                }
+        const observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
+            if (!hasMounted.current) {
+                hasMounted.current = true;
+                return;
+            }
 
-                if (entry.isIntersecting) {
-                    handleGetRandomCategory();
-                }
-            },
-            { threshold: 1 },
-        );
+            if (entry.isIntersecting && !isFetchingMore) {
+                setIsFetchingMore(true);
+                handleGetRandomCategory().finally(() => setIsFetchingMore(false));
+            }
+        });
 
         if (bottomRef.current) observer.observe(bottomRef.current);
         return () => {
             if (bottomRef.current) observer.unobserve(bottomRef.current);
         };
-    }, []);
+    }, [isFetchingMore]);
 
     return (
         <div>
             <CategoryContainer>
-                {results.map((category) => (
+                {isInitialLoading ? (
                     <CategorySection
-                        key={category.categoryId}
-                        categoryId={category.categoryId}
-                        categoryName={category.categoryName}
-                        products={category.results}
-                    />
-                ))}
-
-                {/* 로딩 중일 때는 스켈레톤만 보여줌 */}
-                {isFetching && results.length === 0 && (
-                    <CategorySection
-                        key="skeleton"
+                        key="initial-skeleton"
                         categoryId={-1}
                         categoryName=""
                         products={[]}
                         isLoading={true}
                     />
+                ) : (
+                    <>
+                        {results.map((category) => (
+                            <CategorySection
+                                key={category.categoryId}
+                                categoryId={category.categoryId}
+                                categoryName={category.categoryName}
+                                products={category.results}
+                            />
+                        ))}
+                        {isFetching && results.length === 0 && (
+                            <CategorySection
+                                key="skeleton"
+                                categoryId={-1}
+                                categoryName=""
+                                products={[]}
+                                isLoading={true}
+                            />
+                        )}
+                    </>
                 )}
             </CategoryContainer>
             <div ref={bottomRef}></div>
