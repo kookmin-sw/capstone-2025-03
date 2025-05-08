@@ -4,10 +4,12 @@ import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
-import React from 'react';
+import React, { useState } from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
 import { useRef, useEffect } from 'react';
 import ProductRecommend from './components/ProductRecommend';
+import FavoriteNotFillIcon from '../../assets/images/page/wishlist/favorite_not_fill.png';
+import FavoriteIcon from '../../assets/images/page/wishlist/favorite_fill.png';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -17,6 +19,7 @@ export default function PackageDetailProductDetail() {
     const reset = state?.reset;
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const carouselRef = useRef<HTMLDivElement>(null);
 
     // hook
@@ -30,7 +33,12 @@ export default function PackageDetailProductDetail() {
     const handleButtonClick = () => {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
-    console.log(product);
+
+    //TODO: 찜 하면 패키지에 넣는 로직 넣기, 물품에 찜 필드값 추가하기
+    const handleClickFavorite = () => {
+        setIsFavorite(!isFavorite);
+    };
+
     return (
         <div className={styles.page}>
             <BackHeaderForPackageDetail targetRef={carouselRef} />
@@ -38,13 +46,21 @@ export default function PackageDetailProductDetail() {
                 <div ref={carouselRef}>
                     <CarouselImageViewer images={product.images} />
                 </div>
-                <p className={styles.product}>{product.name}</p>
+                <div className={styles.nameAndLikeContainer}>
+                    <p className={styles.product}>{product.name}</p>
+                    <button
+                        className={styles.likeButton}
+                        style={{
+                            backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})`
+                        }}
+                        onClick={handleClickFavorite}
+                    />
+                </div>
                 <div className={styles.categoryAndGradeWrapper}>
                     <p
                         className={styles.category}
                         onClick={() => navitgate(`/category/${product.category}`)}
                     >
-                        {/* {categories.find((category) => category.id === product.category)?.name} */}
                         {product.categoryName}
                     </p>
                     <p className={styles.gradeAndAmount}>
