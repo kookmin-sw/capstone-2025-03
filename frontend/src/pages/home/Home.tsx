@@ -13,6 +13,7 @@ import SearchBar from '@/src/components/layout/SearchBar';
 import ArrowRight from '@/src/assets/images/page/home/arrow_right.png';
 import IndustryModel from '@/src/models/IndustryModel';
 import industryData from '@/src/data/industryData.json';
+import HomeSkeleton from '@/src/components/ui/HomeSkeleton';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -70,7 +71,7 @@ export default function Home() {
     }
 
     return isLoading ? (
-        <LoadingSection text="잠시만 기다려주세요" />
+        <HomeSkeleton />
     ) : (
         <div className={styles.page}>
             <MainHeader isVisible={isVisible} />
