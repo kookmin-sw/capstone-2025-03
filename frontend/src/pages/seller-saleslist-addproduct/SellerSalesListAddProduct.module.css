@@ -72,7 +72,6 @@
 }
 
 .submitButton {
-    position: fixed;
     width: calc(100% - 4rem);
     height: 6rem;
     background-color: #01a26c;
@@ -80,14 +79,11 @@
     border-radius: 1rem;
     font-size: 1.8rem;
     font-weight: bold;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
     cursor: pointer;
 }
 
 .submitButtonSection {
-    left: 0;
+    max-width: 500px;
     position: fixed;
     bottom: 0;
     background-color: black;
@@ -97,6 +93,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .submitButton:disabled {
     background-color: #12332d;
 }

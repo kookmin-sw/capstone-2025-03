@@ -25,7 +25,7 @@ export default function SellerSalesList() {
     // useRef
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-    const currentMenuIndex = 1;
+    const currentMenuIndex = 3;
 
     useEffect(() => {
         if (!sellerId) return;
@@ -114,12 +114,12 @@ export default function SellerSalesList() {
                     </div>
                 )}
             </div>
-            <button className={styles.addProductButton} onClick={handleClickAddProductButton}>
-                +
-            </button>
-            <div className={styles.footerBar}>
-                <Footer currentMenuIndex={currentMenuIndex} />
+            <div className={styles.buttonContainer}>
+                <button className={styles.addProductButton} onClick={handleClickAddProductButton}>
+                    +
+                </button>
             </div>
+            <Footer currentMenuIndex={currentMenuIndex} />
         </div>
     );
 }

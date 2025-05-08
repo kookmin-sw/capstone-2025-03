@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilValue } from 'recoil';
 import { Spinner } from '@chakra-ui/react';
+import Loading1 from '@/src/assets/images/loading/thought_balloon 1.png';
+import Loading2 from '@/src/assets/images/loading/thought_balloon 1-1.png';
+import Loading3 from '@/src/assets/images/loading/thought_balloon 1-2.png';
 
 const Card = styled.div`
     background-color: #202028;
@@ -80,11 +83,39 @@ const StatValue = styled.p`
     color: #00a36c;
 `;
 
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 30rem;
+  background-color: #2C2C36;
+  margin: 7rem auto 0;
+  overflow: hidden;
+`;
+
+const SlideImage = styled.img<{ position: string }>`
+  width: 40%;
+  position: absolute;
+  top: 30%;
+  left: ${({ position }) => position};
+`;
+
 export default function AiOptimizer() {
     const sellerProduct = useRecoilValue(sellerProductState);
-
     const [predictedPrice, setPredictedPrice] = useState<number | null>(null);
-    const [isUploading, setIsUploading] = useState<boolean>(false);
+    const [isUploading, setIsUploading] = useState<boolean>(true);
+    const loadingImages = [Loading1, Loading2, Loading3];
+    const loadingTexts = [
+        '설명으로 감가율을 적용하고 있어요..',
+        '유사한 중고 물품의 시세를 보고 있어요..',
+        '적절한 가격을 책정하고 있어요..'
+    ];
+    const [currentText, setCurrentText] = useState<string>(loadingTexts[0]);
+    const [imageIndex, setImageIndex] = useState(0);
+    const [prevImageIndex, setPrevImageIndex] = useState(2);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [isMinLoading, setIsMinLoading] = useState(false);
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
         setIsUploading(true);
@@ -93,7 +124,7 @@ export default function AiOptimizer() {
                 const responseData = await optimizePriceInService(
                     sellerProduct.name ?? '',
                     sellerProduct.grade ?? '',
-                    sellerProduct.quantity,
+                    sellerProduct.quantity ?? 0,
                 );
                 setPredictedPrice(responseData.predicted_price);
             } catch (error) {
@@ -105,12 +136,64 @@ export default function AiOptimizer() {
         getOptimizedPrice();
     }, []);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsMinLoading(true);
+        }, 4000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        if (!isUploading && isMinLoading) {
+            setIsReady(true);
+        }
+    }, [isUploading, isMinLoading]);
+
+    useEffect(() => {
+        let index = 0;
+        const interval = setInterval(() => {
+            setIsAnimating(true);
+            setTimeout(() => {
+                index = (index + 1) % loadingImages.length;
+                setPrevImageIndex(_ => index === 0 ? loadingImages.length - 1 : index - 1);
+                setImageIndex(index);
+                setCurrentText(loadingTexts[index]);
+                setIsAnimating(false);
+            }, 300); // 애니메이션 타이밍과 일치시킴
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
-        <Card>
+        !isReady ? <div style={{ backgroundColor: '#202028', borderRadius: '1.2rem', padding: '3rem 2rem', marginTop: '3rem' }}>
+            <h3 style={{ color: '#ffffff', fontWeight: '600', fontSize: '1.8rem' }}>AI 판매가 최적화</h3>
+            <p style={{ fontSize: '1.4rem', color: '#7F7F89', width: '100%' }}>
+                유사한 제품을 분석하여 최상의 이익을 확보하면서도 시장에서 합리적으로 판매될 수 있는 가격대를 추천해 드려요
+            </p>
+            <ImageWrapper>
+                {/* 이전 이미지 - 왼쪽으로 사라짐 */}
+                <SlideImage
+                    src={loadingImages[prevImageIndex]}
+                    position={isAnimating ? '-100%' : '30%'} style={{ transition: isAnimating ? 'all 0.4s ease-in-out' : 'none' }}
+                />
+                {/* 현재 이미지 - 오른쪽에서 들어옴 */}
+                <SlideImage
+                    src={loadingImages[imageIndex]}
+                    position={isAnimating ? '30%' : '100%'} style={{ transition: isAnimating ? 'all 0.4s ease-in-out' : 'none' }}
+                />
+            </ImageWrapper>
+            <p style={{ margin: 'auto', marginTop: '3rem', color: '#ffffff', fontSize: '1.6rem', fontWeight: '600', textAlign: 'center' }}>
+                {currentText}
+            </p>
+            <div style={{ height: '2rem' }} />
+        </div> : <Card>
             <Header>
                 <IconContainer>
                     <img src="/images/seller/ai_icon.png" alt="AI Icon" />
                 </IconContainer>
+
                 <Box>
                     <Title>AI 판매 최적화 기능</Title>
                     <Description>

@@ -1,5 +1,5 @@
 export class UserModel {
-    userId: string | null;
+    userId: number | null;
     name: string | null;
     kakaoId: number | null;
     profileImage: string | null;
@@ -22,7 +22,7 @@ export class UserModel {
         addressDetail = null,
         createDate = null,
     }: {
-        userId?: string | null;
+        userId?: number | null;
         name?: string | null;
         kakaoId?: number | null;
         profileImage?: string | null;

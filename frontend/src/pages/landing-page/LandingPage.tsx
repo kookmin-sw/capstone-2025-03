@@ -1,6 +1,7 @@
 import CategoryProducts from './category-components/RandomCategory';
 import MainBanner from './banner-components/MainBanner';
 import styled from '@emotion/styled';
+import Footer from '@/src/components/layout/MenuFooter';
 
 const PageContainer = styled.div`
     min-height: 100vh;
@@ -11,10 +12,13 @@ const PageContainer = styled.div`
 `;
 
 export default function LandingPage() {
+    const currentMenuIndex = 0;
+
     return (
         <PageContainer>
             <MainBanner />
             <CategoryProducts />
+            <Footer currentMenuIndex={currentMenuIndex} />
         </PageContainer>
     );
 }

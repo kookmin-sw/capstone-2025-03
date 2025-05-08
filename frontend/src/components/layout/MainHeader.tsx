@@ -7,6 +7,7 @@ const Header = styled.div<{ isVisible: boolean }>`
     position: fixed;
     top: 0;
     width: 100%;
+    max-width: 500px;
     padding: 2rem;
     display: flex;
     flex-direction: row;

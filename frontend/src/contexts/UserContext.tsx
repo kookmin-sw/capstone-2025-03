@@ -14,9 +14,9 @@ interface UserContextType {
     user: UserModel | null;
     createUser: (newUser: UserModel) => Promise<void>;
     fetchMyInfo: () => Promise<void>;
-    fetchUser: (userId: string) => Promise<void>;
-    updateUser: (userId: string, updatedData: Partial<UserModel>) => Promise<void>;
-    deleteUser: (userId: string) => Promise<void>;
+    fetchUser: (userId: number) => Promise<void>;
+    updateUser: (userId: number, updatedData: Partial<UserModel>) => Promise<void>;
+    deleteUser: (userId: number) => Promise<void>;
     loginUser: (kakaoId: number) => Promise<boolean>;
     setUser: React.Dispatch<React.SetStateAction<UserModel | null>>;
 }
@@ -59,7 +59,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     };
 
     // 사용자 데이터 fetch (특정 userId로 가져오기)
-    const fetchUser = async (userId: string) => {
+    const fetchUser = async (userId: number) => {
         try {
             const fetchedUser = await getUserInService(userId);
             setUser(fetchedUser);
@@ -70,7 +70,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     };
 
     // 사용자 데이터 업데이트
-    const updateUser = async (userId: string, updatedData: Partial<UserModel>) => {
+    const updateUser = async (userId: number, updatedData: Partial<UserModel>) => {
         try {
             await updateUserInService(userId, updatedData);
             // local state 업데이트: 단순 병합 객체 대신 새로운 UserModel 인스턴스로 생성
@@ -84,7 +84,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     };
 
     // 사용자 삭제
-    const deleteUser = async (userId: string) => {
+    const deleteUser = async (userId: number) => {
         try {
             await deleteUserInService(userId);
             if (user && user.userId === userId) {

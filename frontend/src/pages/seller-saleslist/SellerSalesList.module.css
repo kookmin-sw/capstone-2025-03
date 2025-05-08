@@ -10,6 +10,7 @@
     transform: translateY(0);
     transition: all 0.3s ease;
 }
+
 .hidden {
     opacity: 0;
     transform: translateY(-100%);
@@ -38,8 +39,18 @@
     color: white;
 }
 
-.addProductButton {
+.buttonContainer {
+    width: 100%;
+    max-width: 500px;
     position: fixed;
+    bottom: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.addProductButton {
+    /* position: fixed; */
     display: flex;
     background-color: #00a36c;
     color: white;
@@ -67,6 +78,7 @@
     align-items: center;
     height: 20vh;
 }
+
 .footerBar {
     position: fixed;
     width: 100vw;

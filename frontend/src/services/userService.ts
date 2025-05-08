@@ -21,10 +21,10 @@ export const createUserInService = async (user: UserModel): Promise<void> => {
 
 /**
  * 특정 userId로 서버에서 사용자 데이터를 가져옵니다.
- * @param {string} userId - 가져올 사용자의 ID
+ * @param {number} userId - 가져올 사용자의 ID
  * @returns {Promise<UserModel | null>}
  */
-export const getUserInService = async (userId: string): Promise<UserModel | null> => {
+export const getUserInService = async (userId: number): Promise<UserModel | null> => {
     try {
         const response = await axios.get(`${API_BASE_URL}/${userId}`);
         return UserModel.fromJson(response.data);
@@ -36,12 +36,12 @@ export const getUserInService = async (userId: string): Promise<UserModel | null
 
 /**
  * 특정 userId로 서버에서 사용자 데이터를 업데이트합니다.
- * @param {string} userId - 업데이트할 사용자의 ID
+ * @param {number} userId - 업데이트할 사용자의 ID
  * @param {Partial<UserModel>} updatedData - 업데이트할 데이터 객체
  * @returns {Promise<void>}
  */
 export const updateUserInService = async (
-    userId: string,
+    userId: number,
     updatedData: Partial<UserModel>,
 ): Promise<void> => {
     try {
@@ -64,10 +64,10 @@ export const getMyInfoInService = async () => {
 
 /**
  * 특정 userId로 서버에서 사용자 데이터를 삭제합니다.
- * @param {string} userId - 삭제할 사용자의 ID
+ * @param {number} userId - 삭제할 사용자의 ID
  * @returns {Promise<void>}
  */
-export const deleteUserInService = async (userId: string): Promise<void> => {
+export const deleteUserInService = async (userId: number): Promise<void> => {
     try {
         await axios.delete(`${API_BASE_URL}/${userId}`);
     } catch (error) {

@@ -71,6 +71,19 @@
     font-size: 1.2rem;
 }
 
+.bannerContainer{
+    width: 100%;
+}
+
+.bannerImage{
+    width: 100%;
+}
+
+.industrySelectContainer{
+    background-color: #18171D;
+    padding: 2rem;
+}
+
 .packageListView {
     display: flex;
     flex-direction: column;
@@ -81,8 +94,73 @@
     overflow: visible;
 }
 
+.industryTitleContainer{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.industryTitle{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.nextButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.nextButtonText{
+    font-size: 1.5rem;
+    color: #7F7F89;
+}
+
+.nexButtonImage{
+    width: 2rem;
+    height: 2rem;
+}
+
+.industryGrid{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.industryItem{
+    height: 10rem;
+    padding: 1rem;
+    background-color: #2C2C36;
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.industryItemImage{
+    width: 3.6rem;
+    height: 3.6rem;
+}
+
+.industryItemText{
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.listViewContainer{
+    background-color: #18171D;
+    margin-top: 2rem;
+    padding: 2rem;
+}
+
 .listViewTitle {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 2rem;
 }
