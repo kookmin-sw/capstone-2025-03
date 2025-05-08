@@ -136,6 +136,12 @@ export default function SellerSalesListAddProduct() {
                             setSellerProduct((prev) => prev.copyWith({ name: e.target.value }))
                         }
                     />
+                    <textarea
+                        value={sellerProduct.description ?? ''}
+                        className={styles.input}
+                        placeholder="설명"
+                        onChange={(e) => setSellerProduct((prev) => prev.copyWith({ description: e.target.value }))}
+                    />
                     <input
                         value={sellerProduct.quantity ?? ''}
                         type="number"
@@ -171,15 +177,16 @@ export default function SellerSalesListAddProduct() {
                         })}
                     </div>
                 </form>
-                <div className={styles.submitButtonSection}>
-                    <button
-                        className={styles.submitButton}
-                        disabled={!isButtonValid}
-                        onClick={handleClickConfirmButton}
-                    >
-                        확인
-                    </button>
-                </div>
+
+            </div>
+            <div className={styles.submitButtonSection}>
+                <button
+                    className={styles.submitButton}
+                    disabled={!isButtonValid}
+                    onClick={handleClickConfirmButton}
+                >
+                    확인
+                </button>
             </div>
         </div>
     );

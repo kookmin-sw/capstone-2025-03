@@ -7,6 +7,7 @@ const Header = styled.div`
     z-index: 999;
     top: 0;
     width: 100%;
+    max-width: 500px;
     background-color: #18171d;
     padding: 2rem;
     display: flex;

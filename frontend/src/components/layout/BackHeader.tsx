@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = styled.div`
     position: fixed;
+    max-width: 500px;
     top: 0;
     width: 100%;
     background-color: #101012;
@@ -43,7 +44,7 @@ export default function BackHeader() {
 
     return (
         <Header>
-            <BackButtonWrapper onClick={handleClick}>
+            <BackButtonWrapper>
                 <BackButton src="/images/seller/arrow_back.png" onClick={handleClick} />
             </BackButtonWrapper>
         </Header>
