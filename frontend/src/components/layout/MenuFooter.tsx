@@ -88,7 +88,7 @@ export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
     const handleClick = (currentIndex: number) => {
         let path = '';
         if (currentIndex === 0) {
-            path = '/intro';
+            path = '/landing-page';
         } else if (currentIndex === 1) {
             path = '/home';
         } else if (currentIndex === 2) {
