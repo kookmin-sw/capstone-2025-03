@@ -8,6 +8,7 @@ import { useSellerProduct } from '@/src/hooks/useSellerProduct';
 import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
 import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
+import SellerProductItemSkeleton from '@/src/components/ui/SellerProductItemSkeleton';
 
 export default function SellerSalesList() {
     // page connection
@@ -83,24 +84,17 @@ export default function SellerSalesList() {
             <div className={styles.section}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
                 <div>
-                    {isLoading ? (
-                        <div className={styles.spinnerContainer}>
-                            <Spinner
-                                color="#00A36C"
-                                borderWidth="0.6rem"
-                                animationDuration="0.8s"
-                                style={{ width: '6rem', height: '6rem' }}
-                            />
-                        </div>
-                    ) : (
-                        products.map((products: ProductModel, index: number) => {
-                            return (
-                                <div key={index} onClick={() => handleProductItemClick(products)}>
-                                    <SellerProductItem product={products} />
-                                </div>
-                            );
-                        })
-                    )}
+                    {isLoading
+                        ? Array.from({ length: 6 }).map((_, idx) => (
+                              <SellerProductItemSkeleton key={idx} />
+                          ))
+                        : products.map((products: ProductModel, index: number) => {
+                              return (
+                                  <div key={index} onClick={() => handleProductItemClick(products)}>
+                                      <SellerProductItem product={products} />
+                                  </div>
+                              );
+                          })}
                 </div>
                 {!isLoading && <div ref={loadMoreRef} style={{ height: '20px' }} />}
                 {isLoadMoreLoading && (

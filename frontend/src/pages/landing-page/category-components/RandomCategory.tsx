@@ -7,7 +7,6 @@ import CategorySection from './CategorySection';
 import Footer from '@/src/components/layout/MenuFooter';
 import SeeMore from '@/src/assets/images/landing-page/see-more.png';
 import { useRef } from 'react';
-import { Spinner, Flex } from '@chakra-ui/react';
 
 type Item = {
     thumbnail: string;
@@ -40,6 +39,9 @@ export default function RandomCategory() {
     const [results, setResults] = useState<CategoryResult[]>([]);
     const [isFetching, setIsFetching] = useState<boolean>(false);
 
+    const [isInitialLoading, setIsInitialLoading] = useState(true);
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
+
     const bottomRef = useRef<HTMLDivElement | null>(null);
     const hasMounted = useRef(false);
 
@@ -48,7 +50,7 @@ export default function RandomCategory() {
         setIsFetching(true);
         try {
             const response = await getRandomCategoriesInService(viewedIds);
-            console.log(response);
+
             const withMoreCard = response.map((category: any) => ({
                 categoryId: category.id,
                 categoryName: category.name,
@@ -90,61 +92,66 @@ export default function RandomCategory() {
 
     // 첫 호출 용
     useEffect(() => {
-        handleGetRandomCategory();
+        const fetchInitial = async () => {
+            setIsInitialLoading(true);
+            await handleGetRandomCategory(); // 내부에서 setResults 수행
+            setIsInitialLoading(false);
+        };
+        fetchInitial();
     }, []);
 
     // 스크롤 하단 감지용
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const [entry] = entries;
-                if (!hasMounted.current) {
-                    hasMounted.current = true;
-                    return;
-                }
+        const observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
+            if (!hasMounted.current) {
+                hasMounted.current = true;
+                return;
+            }
 
-                if (entry.isIntersecting) {
-                    handleGetRandomCategory();
-                }
-            },
-            { threshold: 1 },
-        );
+            if (entry.isIntersecting && !isFetchingMore) {
+                setIsFetchingMore(true);
+                handleGetRandomCategory().finally(() => setIsFetchingMore(false));
+            }
+        });
 
         if (bottomRef.current) observer.observe(bottomRef.current);
         return () => {
             if (bottomRef.current) observer.unobserve(bottomRef.current);
         };
-    }, []);
+    }, [isFetchingMore]);
 
     return (
         <div>
             <CategoryContainer>
-                {results.map((category) => (
+                {isInitialLoading ? (
                     <CategorySection
-                        key={category.categoryId}
-                        categoryId={category.categoryId}
-                        categoryName={category.categoryName}
-                        products={category.results}
+                        key="initial-skeleton"
+                        categoryId={-1}
+                        categoryName=""
+                        products={[]}
+                        isLoading={true}
                     />
-                ))}
-
-                {isFetching && results.length === 0 && (
-                    <Flex
-                        position="absolute"
-                        top="50%"
-                        left="50%"
-                        transform="translate(-50%, -50%)"
-                        justify="center"
-                        align="center"
-                        zIndex="10"
-                    >
-                        <Spinner
-                            color="#00A36C"
-                            borderWidth="0.6rem"
-                            animationDuration="0.8s"
-                            style={{ marginTop: '4rem', width: '6rem', height: '6rem' }}
-                        />
-                    </Flex>
+                ) : (
+                    <>
+                        {results.map((category) => (
+                            <CategorySection
+                                key={category.categoryId}
+                                categoryId={category.categoryId}
+                                categoryName={category.categoryName}
+                                products={category.results}
+                            />
+                        ))}
+                        {isFetching && results.length === 0 && (
+                            <CategorySection
+                                key="skeleton"
+                                categoryId={-1}
+                                categoryName=""
+                                products={[]}
+                                isLoading={true}
+                            />
+                        )}
+                    </>
                 )}
             </CategoryContainer>
             <div ref={bottomRef}></div>

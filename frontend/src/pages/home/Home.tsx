@@ -5,14 +5,14 @@ import PackageItem from '@/src/components/ui/PackageItem';
 import { useNavigate } from 'react-router-dom';
 import { usePackage } from '@/src/hooks/usePackage';
 import { useEffect, useState, useRef } from 'react';
-import LoadingSection from '@/src/components/layout/LoadingSection';
-import { Spinner } from '@chakra-ui/react';
 import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 import RestartBanner from '@/src/assets/images/banner/restart_banner.png';
 import SearchBar from '@/src/components/layout/SearchBar';
 import ArrowRight from '@/src/assets/images/page/home/arrow_right.png';
 import IndustryModel from '@/src/models/IndustryModel';
 import industryData from '@/src/data/industryData.json';
+import HomeSkeleton from '@/src/components/ui/HomeSkeleton';
+import PackageItemSkeleton from '@/src/components/ui/PackageItemSkeleton';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -22,9 +22,9 @@ export default function Home() {
     const { packageList, getPackageList } = usePackage();
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
     const isVisible = useHeaderVisibility();
-    const industries: IndustryModel[] = industryData.slice(0, 8).map((industry) =>
-        IndustryModel.fromJson(industry),
-    );
+    const industries: IndustryModel[] = industryData
+        .slice(0, 8)
+        .map((industry) => IndustryModel.fromJson(industry));
 
     // useEffect
     useEffect(() => {
@@ -59,18 +59,18 @@ export default function Home() {
     // Function
     const handleSearchBarClick = () => {
         window.alert('물품 검색');
-    }
+    };
 
     const handleNextButton = () => {
         navigate('/find-package-select-industry');
-    }
+    };
 
     const handleIndustryItemClick = (id: number) => {
         window.alert(`industry ${id} click`);
-    }
+    };
 
     return isLoading ? (
-        <LoadingSection text="잠시만 기다려주세요" />
+        <HomeSkeleton />
     ) : (
         <div className={styles.page}>
             <MainHeader isVisible={isVisible} />
@@ -79,11 +79,9 @@ export default function Home() {
                     <img className={styles.bannerImage} src={RestartBanner}></img>
                 </div>
                 <div className={styles.industrySelectContainer}>
-                    <SearchBar text='필요한 중고 물품 검색' search={handleSearchBarClick} />
+                    <SearchBar text="필요한 중고 물품 검색" search={handleSearchBarClick} />
                     <div className={styles.industryTitleContainer}>
-                        <h1 className={styles.industryTitle}>
-                            업종별 패키지 추천
-                        </h1>
+                        <h1 className={styles.industryTitle}>업종별 패키지 추천</h1>
                         <div style={{ flex: '1' }} />
                         <button className={styles.nextButton} onClick={handleNextButton}>
                             <p className={styles.nextButtonText}>더보기</p>
@@ -92,12 +90,21 @@ export default function Home() {
                     </div>
                     <div className={styles.industryGrid}>
                         {industries.map((industry) => {
-                            return <div key={industry.id} className={styles.industryItem} onClick={() => handleIndustryItemClick(industry.id!)}>
-                                <img className={styles.industryItemImage} src={industry.icon!} />
-                                <p className={styles.industryItemText}>
-                                    {industry.id === 6 ? '쇼핑몰' : industry.name}
-                                </p>
-                            </div>
+                            return (
+                                <div
+                                    key={industry.id}
+                                    className={styles.industryItem}
+                                    onClick={() => handleIndustryItemClick(industry.id!)}
+                                >
+                                    <img
+                                        className={styles.industryItemImage}
+                                        src={industry.icon!}
+                                    />
+                                    <p className={styles.industryItemText}>
+                                        {industry.id === 6 ? '쇼핑몰' : industry.name}
+                                    </p>
+                                </div>
+                            );
                         })}
                     </div>
                 </div>
@@ -105,19 +112,18 @@ export default function Home() {
                     <p className={styles.listViewTitle}>전체보기</p>
                     <div className={styles.packageListView}>
                         {packageList.map((pkg, index) => {
-                            return <PackageItem key={index} pkg={pkg} fromDetail={false}/>;
+                            return <PackageItem key={index} pkg={pkg} fromDetail={false} />;
                         })}
                     </div>
                 </div>
                 <div ref={loadMoreRef} style={{ height: '20px' }} />
                 {isLoadMoreLoading && (
-                    <div className={styles.spinnerContainer} style={{ height: '20rem' }}>
-                        <Spinner
-                            color="#00A36C"
-                            borderWidth="0.6rem"
-                            animationDuration="0.8s"
-                            style={{ width: '6rem', height: '6rem' }}
-                        />
+                    <div>
+                        {Array.from({ length: 5 }).map((_, index) => (
+                            <div className={styles.skeletonContainer}>
+                                <PackageItemSkeleton key={index} />
+                            </div>
+                        ))}
                     </div>
                 )}
             </div>

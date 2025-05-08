@@ -12,7 +12,7 @@ import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 import PackageModel from '@/src/models/PackageModel';
 import { Spinner } from '@chakra-ui/react';
-
+import ProductItemSkeleton from '@/src/components/ui/ProductItemSkeleton';
 
 export default function PackageDetailAddProduct() {
     // page connection
@@ -33,7 +33,9 @@ export default function PackageDetailAddProduct() {
     // useEffect
     useEffect(() => {
         const fetchProducts = async () => {
-            const filteredProductList = productList.filter((product) => product.category === category.id);
+            const filteredProductList = productList.filter(
+                (product) => product.category === category.id,
+            );
             if (filteredProductList.length < 5) {
                 const newProducts = await getProductList(category.id);
                 if (newProducts) setIsLoading(false);
@@ -43,11 +45,13 @@ export default function PackageDetailAddProduct() {
             setCheckedProductIds(
                 productList
                     .filter((product) =>
-                        (editingPackage?.products.map((product) => product.id) || []).includes(product.id!),
+                        (editingPackage?.products.map((product) => product.id) || []).includes(
+                            product.id!,
+                        ),
                     )
                     .map((product) => product.id!),
             );
-        }
+        };
         fetchProducts();
     }, []);
     useEffect(() => {
@@ -85,22 +89,23 @@ export default function PackageDetailAddProduct() {
         if (!editingPackage) return;
 
         const existingProducts = editingPackage.products;
-        const selectedProducts = productList.filter(product =>
-            checkedProductIds.includes(product.id!)
+        const selectedProducts = productList.filter((product) =>
+            checkedProductIds.includes(product.id!),
         );
 
         // ID 기준 중복 제거: 기존 상품 ID를 Set으로 저장
-        const existingIds = new Set(existingProducts.map(p => p.id));
+        const existingIds = new Set(existingProducts.map((p) => p.id));
 
         // 중복되지 않은 새 상품만 필터링
-        const uniqueNewProducts = selectedProducts.filter(p => !existingIds.has(p.id));
+        const uniqueNewProducts = selectedProducts.filter((p) => !existingIds.has(p.id));
 
         // 새로운 프로덕트들
         const newProducts = [...existingProducts, ...uniqueNewProducts];
 
         // 같은 카테고리지만 선택되지 않은 product들 삭제
         const filteredProducts = newProducts.filter(
-            (product) => product.category !== category.id || checkedProductIds.includes(product.id!)
+            (product) =>
+                product.category !== category.id || checkedProductIds.includes(product.id!),
         );
 
         const updatedPackage = PackageModel.fromJson({
@@ -112,47 +117,54 @@ export default function PackageDetailAddProduct() {
         navigate(-1);
     };
 
-
     return (
         <div className={styles.page}>
             <SearchHeader text={category.name || ''} />
             <div className={styles.section}>
                 <div className={styles.listView}>
-                    {(productList.filter((product) => product.category === category.id)).map((product, index) => {
-                        return (
-                            <div
-                                key={index}
-                                className={styles.checkableProductItem}
-                                onClick={() => handleProductItemClick(product)}
-                            >
-                                <ProductItem product={product} />
-                                <div className={styles.blank} />
-                                <img
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleCheckButtonClick(product.id!);
-                                    }}
-                                    className={styles.checkIcon}
-                                    src={CheckIconImage}
-                                    style={{
-                                        opacity: checkedProductIds.includes(product.id!)
-                                            ? '1'
-                                            : '0.5',
-                                    }}
-                                />
-                            </div>
-                        );
-                    })}
+                    {isLoading
+                        ? Array.from({ length: 5 }).map((_, idx) => (
+                              <div key={idx} className={styles.checkableProductItem}>
+                                  <ProductItemSkeleton />
+                              </div>
+                          ))
+                        : productList
+                              .filter((product) => product.category === category.id)
+                              .map((product, index) => (
+                                  <div
+                                      key={index}
+                                      className={styles.checkableProductItem}
+                                      onClick={() => handleProductItemClick(product)}
+                                  >
+                                      <ProductItem product={product} />
+                                      <div className={styles.blank} />
+                                      <img
+                                          onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleCheckButtonClick(product.id!);
+                                          }}
+                                          className={styles.checkIcon}
+                                          src={CheckIconImage}
+                                          style={{
+                                              opacity: checkedProductIds.includes(product.id!)
+                                                  ? '1'
+                                                  : '0.5',
+                                          }}
+                                      />
+                                  </div>
+                              ))}
                 </div>
-                <div ref={loadMoreRef} style={{ "height": "20px" }} />
-                {(isLoadMoreLoading && !isLoading) && <div className={styles.spinnerContainer} style={{ "height": "20rem" }}>
-                    <Spinner
-                        color="#00A36C"
-                        borderWidth="0.6rem"
-                        animationDuration="0.8s"
-                        style={{ width: '6rem', height: '6rem' }}
-                    />
-                </div>}
+                <div ref={loadMoreRef} style={{ height: '20px' }} />
+                {isLoadMoreLoading && !isLoading && (
+                    <div className={styles.spinnerContainer} style={{ height: '20rem' }}>
+                        <Spinner
+                            color="#00A36C"
+                            borderWidth="0.6rem"
+                            animationDuration="0.8s"
+                            style={{ width: '6rem', height: '6rem' }}
+                        />
+                    </div>
+                )}
                 <div style={{ height: '100px' }} />
             </div>
             <DefaultButton

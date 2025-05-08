@@ -8,6 +8,7 @@ import { useEffect, useState, useRef } from 'react';
 import PackageModel from '@/src/models/PackageModel';
 import { Spinner } from '@chakra-ui/react';
 import { usePackage } from '@/src/hooks/usePackage';
+import PackageItemSkeleton from '@/src/components/ui/PackageItemSkeleton';
 
 export default function FindPackageRecommend() {
     const { user } = useUser();
@@ -112,14 +113,7 @@ export default function FindPackageRecommend() {
                 </div>
                 <div className={styles.packageListView}>
                     {isLoading ? (
-                        <div className={styles.spinnerContainer} style={{ height: '20rem' }}>
-                            <Spinner
-                                color="#00A36C"
-                                borderWidth="0.6rem"
-                                animationDuration="0.8s"
-                                style={{ width: '6rem', height: '6rem' }}
-                            />
-                        </div>
+                        Array.from({ length: 3 }).map((_, idx) => <PackageItemSkeleton key={idx} />)
                     ) : (
                         myPackages.map((pkg: PackageModel, index: number) => {
                             return <PackageItem key={index} pkg={pkg} />;

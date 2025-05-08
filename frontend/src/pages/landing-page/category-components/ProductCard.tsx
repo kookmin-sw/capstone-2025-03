@@ -3,7 +3,7 @@ import { useProduct } from '@/src/hooks/useProduct';
 import ProductModel from '@/src/models/ProductModel';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import ProductCardSkeleton from '@/src/components/ui/ProductCardSkeleton';
 type ProductCardProps = {
     productId: number;
     thumbnail: string;
@@ -45,7 +45,8 @@ export default function ProductCard({
     grade,
     price,
 }: ProductCardProps) {
-    const navigate= useNavigate();
+    const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const { getProduct } = useProduct();
 
@@ -58,11 +59,20 @@ export default function ProductCard({
 
     return (
         <Card onClick={handleProductCardClicked}>
-            <Image src={thumbnail} alt={name} />
-            <Name>{name}</Name>
-            <Info>
-                {grade} / {price}원
-            </Info>
+            {!isImageLoaded && <ProductCardSkeleton />}            <Image
+                src={thumbnail}
+                alt={name}
+                style={{ display: isImageLoaded ? 'block' : 'none' }}
+                onLoad={() => setIsImageLoaded(true)}
+            />
+            {isImageLoaded && (
+                <>
+                    <Name>{name}</Name>
+                    <Info>
+                        {grade} / {price}원
+                    </Info>
+                </>
+            )}
         </Card>
     );
 }
