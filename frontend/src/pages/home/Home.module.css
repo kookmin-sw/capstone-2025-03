@@ -157,6 +157,7 @@
     background-color: #18171D;
     margin-top: 2rem;
     padding: 2rem;
+    padding-bottom: 0;
 }
 
 .listViewTitle {
@@ -169,4 +170,11 @@
     display: flex;
     justify-content: center;
     align-items: start;
+}
+
+.skeletonContainer {
+    margin-top: 0;
+    margin-bottom: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
