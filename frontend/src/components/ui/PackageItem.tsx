@@ -7,9 +7,14 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 import PackageAlternativeImage from '../../assets/images/alternative/package.png';
+import FavoriteIcon from '../../assets/images/page/wishlist/favorite_fill.png';
+import FavoriteNotFillIcon from '../../assets/images/page/wishlist/favorite_not_fill.png';
+import { useCreatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
+import { useUser } from '@/src/contexts/UserContext';
 
 
 const Item = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -106,17 +111,32 @@ const GridImage = styled.img`
   border-radius: 0.6rem;
 `;
 
+const LikeButton = styled.button`
+    width: 2.4rem;
+    height: 2.4rem;
+    background-size: cover;
+`
+
+
 
 type PackageProps = {
     pkg: PackageModel;
+    fromDetail: boolean;
 };
 
-export default function PackageItem({ pkg }: PackageProps) {
+export default function PackageItem({ pkg, fromDetail }: PackageProps) {
+    const { user } = useUser();
     const [price, setPrice] = useState(0);
+    const [isFavorite, setIsFavorite] = useState(false);
     const { categories } = useCategory();
     const [categoryPreview, setCategoryPreview] = useState('');
     const [, setEditingPackage] = useRecoilState(editingPackageState);
     const navigate = useNavigate();
+    // react-query
+    const { mutateAsync: createPackage } = useCreatePackage();
+    const { mutateAsync: deletePackage } = useDeletePackage();
+    const [isLoading, setIsLoading] = useState(false);
+    const [copiedPackageId, setCopiedPackageId] = useState(0);
 
     useEffect(() => {
         const categoryNames = [];
@@ -143,9 +163,27 @@ export default function PackageItem({ pkg }: PackageProps) {
 
     // Function: 패키지 아이템 클릭
     const handlePackageItemClick = () => {
+        if (fromDetail) return;
         setEditingPackage(null);
         navigate('/package-detail', { state: { pkg: pkg.toJson() } });
     };
+
+    // function
+    const handleClickFavorite = async (pkg: PackageModel) => {
+        console.log(pkg.toJson());
+        if (isLoading) return;
+        setIsLoading(true);
+        setIsFavorite(!isFavorite);
+        if (isFavorite) {
+            // TODO: ff
+            await deletePackage({id: copiedPackageId, user: user?.userId!})
+        } else {
+            const newPackage = await createPackage(pkg);
+            setCopiedPackageId(newPackage.id!);
+        }
+
+        setIsLoading(false);
+    }
 
     const CustomThumbnail = () => {
         return (
@@ -202,6 +240,11 @@ export default function PackageItem({ pkg }: PackageProps) {
                     <CategoryText>{categoryPreview}</CategoryText>
                 </CategoryContainer>
             </ContentContainer>
+            <LikeButton style={{ backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})` }} onClick={(e) => {
+                e.stopPropagation();
+                handleClickFavorite(pkg);
+            }}>
+            </LikeButton>
         </Item>
     );
 }

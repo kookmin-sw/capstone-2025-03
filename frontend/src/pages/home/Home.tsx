@@ -57,16 +57,12 @@ export default function Home() {
     }, [isLoading, isLoadMoreLoading]);
 
     // Function
-    const handleClickFindPackageButton = () => {
-        navigate('/find-package-select-industry');
-    };
-
     const handleSearchBarClick = () => {
         window.alert('물품 검색');
     }
 
     const handleNextButton = () => {
-        window.alert('next');
+        navigate('/find-package-select-industry');
     }
 
     const handleIndustryItemClick = (id: number) => {
@@ -96,7 +92,7 @@ export default function Home() {
                     </div>
                     <div className={styles.industryGrid}>
                         {industries.map((industry) => {
-                            return <div className={styles.industryItem} onClick={() => handleIndustryItemClick(industry.id!)}>
+                            return <div key={industry.id} className={styles.industryItem} onClick={() => handleIndustryItemClick(industry.id!)}>
                                 <img className={styles.industryItemImage} src={industry.icon!} />
                                 <p className={styles.industryItemText}>
                                     {industry.id === 6 ? '쇼핑몰' : industry.name}
@@ -109,7 +105,7 @@ export default function Home() {
                     <p className={styles.listViewTitle}>전체보기</p>
                     <div className={styles.packageListView}>
                         {packageList.map((pkg, index) => {
-                            return <PackageItem key={index} pkg={pkg} />;
+                            return <PackageItem key={index} pkg={pkg} fromDetail={false}/>;
                         })}
                     </div>
                 </div>

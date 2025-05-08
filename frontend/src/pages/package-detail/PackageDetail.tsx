@@ -165,9 +165,9 @@ export default function PackageDetail() {
         <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
-                {editingPackage && <div className={styles.packageCard} style={{ pointerEvents: editingPackage.user === user?.userId ? 'all' : 'none' }}>
+                {editingPackage && <div className={styles.packageCard}>
                     {editingPackage.user === user?.userId ? <CustomPackageItem pkg={editingPackage} name={name} setName={setName} description={description}
-                        setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} />}
+                        setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} fromDetail={true}/>}
                 </div>}
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>구성상품</p>
