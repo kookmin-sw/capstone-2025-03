@@ -1,11 +1,11 @@
 # 🚀 Restart
 
 ## 프로젝트 소개  
-**창업자와 폐업자**를 연결하는 **중고 창업 물품 패키징 거래 서비스**  
+### **창업자와 폐업자**를 연결하는 **중고 창업 물품 패키징 거래 서비스**  
 ![1](https://github.com/user-attachments/assets/52624e16-b14d-4bae-b947-4aeb9e7a1a32)
 
 ### 프로젝트 목표
-창업자와 폐업자를 위한 업종별 창업 물품 패키징 및 AI 기반 판매 가격 추천 시스템을 갖춘 중고 물품 거래 솔루션을 개발한다.
+**창업자와 폐업자**를 위한 **업종별 창업 물품 패키징** 및 **AI 기반 판매 가격 추천 시스템**을 갖춘 중고 **물품 거래 솔루션**을 개발한다.
 
 ### 프로젝트 개발 동기
 #### 창업자의 문제
@@ -20,14 +20,22 @@
 
 #### 이러한 창업자와 폐업자의 니즈를 동시에 충족시키기 위한 솔루션으로 '리스타트'를 개발하게 되었습니다.
 
-#### 프로젝트 소개 영상
+<br/>
+
+### 프로젝트 소개 영상
+
+<br/><br/><br/>
 
 ---
+
+<br/><br/>
 
 ## 주요 기능 
 
 ### 메인화면
 ![메인화면](https://github.com/user-attachments/assets/ef000101-8526-4e23-af5e-84bfc53af460)
+
+<br/>
 
 ### 창업자를 위한 솔루션
 - **창업에 필요한 중고 물품을 업종별로 묶어 패키지로 제공합니다.**  
@@ -39,6 +47,8 @@
 | <div align="center">**업종 선택**</div> | <div align="center">**패키지 선택**</div> | <div align="center">**물품 검색**</div> | <div align="center">**물품 상세정보**</div> |
 | <img src="https://github.com/user-attachments/assets/e406d076-298d-4f33-957a-ec2dba153f6f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/c8dc3985-40d4-4366-bfe6-2a8aa5529113"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/7639f9f7-9bcf-451a-a11f-bf767f90b9d3"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/9b8f39cb-f33b-4215-b411-52b0a4b6304a"  width="200%" height="200%"/> |
 | <div align="center">**패키지 선택**</div> | <div align="center">**패키지 내용 확인**</div> | <div align="center">**직접 패키지 구성**</div> | <div align="center">**나만의 물품 찜목록**</div> |
+
+<br/>
 
 ### 폐업자를 위한 솔루션
 - **폐업자가 내놓은 중고 물건을 패키징하여** 더 쉽게 판매될 수 있도록 합니다.  
@@ -53,6 +63,8 @@
 
 ---
 
+<br/><br/>
+
 ## 핵심 가치
 
 | 대상 | 제공 가치 |
@@ -63,6 +75,8 @@
 
 ---
 
+<br/><br/>
+
 ## 실행 방법
 
 ### Link
@@ -70,6 +84,8 @@
 [리스타트](https://restart-cap.vercel.app/)
 
 ---
+
+<br/><br/>
 
 ## 기술 스택
 
@@ -79,17 +95,23 @@
 
 ---
 
+<br/><br/>
+
 ## 협업 도구
 
 ![협업툴](https://github.com/user-attachments/assets/77b7b877-f2a7-411b-9b08-ccbaebd0d24e)
 
 ---
 
+<br/><br/>
+
 ## 개발 기간
 
 2025.01.09 ~ 2025.05.15
 
 ---
+
+<br/><br/>
 
 ## 팀 소개
 
