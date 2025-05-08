@@ -32,8 +32,8 @@ export default function PackageDetail() {
     // hook
     const { categories } = useCategory();
     const { createOrder } = useOrder();
-    const { mutate: updatePackage } = useUpdatePackage();
-    const { mutate: deletePackage } = useDeletePackage();
+    const { mutateAsync: updatePackage } = useUpdatePackage();
+    const { mutateAsync: deletePackage } = useDeletePackage();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
@@ -42,8 +42,8 @@ export default function PackageDetail() {
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [name, setName] = useState<string>(editingPackage?.name ?? '');
-    const [description, setDescription] = useState<string>(editingPackage?.description ?? '');
+    const [name, setName] = useState<string>(myPackage.name ?? '');
+    const [description, setDescription] = useState<string>(myPackage.description ?? '');
     const [isFavorite, setIsFavorite] = useState(true);
 
     // UseEffect
@@ -86,8 +86,6 @@ export default function PackageDetail() {
             user: user.userId,
             products: editingPackage.products.map((product) => product.id),
         });
-        console.log(newOrder.toJson());
-        console.log(user.toJson());
         const response = await createOrder(newOrder);
         if (!response) {
             window.alert('주문에 오류가 발생하였습니다');
@@ -129,7 +127,7 @@ export default function PackageDetail() {
             });
         });
     };
-    const save = () => {
+    const save = async () => {
         if (!editingPackage || !user) {
             window.alert('오류가 발생하였습니다. 다시 한번 저장해주세요');
             return;
@@ -141,10 +139,10 @@ export default function PackageDetail() {
                 name: name,
                 description: description,
             })
-            updatePackage({ id: editingPackage.id!, updatedData: newPackage });
+            await updatePackage({ id: editingPackage.id!, updatedData: newPackage });
             window.alert('변경 사항이 저장되었습니다.')
         } else {
-            deletePackage({ id: editingPackage.id!, user: user.userId! });
+            await deletePackage({ id: editingPackage.id!, user: user.userId! });
             window.alert('패키지가 찜 리스트에서 제외되었습니다');
             navigate(-1);
         }
@@ -162,7 +160,7 @@ export default function PackageDetail() {
             <BackHeader />
             <div className={styles.section}>
                 {editingPackage && <div className={styles.packageCard} style={{ pointerEvents: editingPackage.user === user?.userId ? 'all' : 'none' }}>
-                    {editingPackage.user === user?.userId ? <CustomPackageItem pkg={editingPackage} name={name ?? ''} setName={setName} description={description ?? ''}
+                    {editingPackage.user === user?.userId ? <CustomPackageItem pkg={editingPackage} name={name} setName={setName} description={description}
                         setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} />}
                 </div>}
                 <div className={styles.titleContainer}>

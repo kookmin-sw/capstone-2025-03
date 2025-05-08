@@ -143,7 +143,7 @@ type PackageProps = {
     save: () => void;
 };
 
-export default function PackageItem({ pkg, name, setName, description, setDescription, isFavorite, setIsFavorite, save }: PackageProps) {
+export default function CustomPackageItem({ pkg, name, setName, description, setDescription, isFavorite, setIsFavorite, save }: PackageProps) {
     const [price, setPrice] = useState(0);
     const { categories } = useCategory();
     const [categoryPreview, setCategoryPreview] = useState('');

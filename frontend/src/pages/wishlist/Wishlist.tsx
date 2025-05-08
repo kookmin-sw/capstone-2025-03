@@ -6,13 +6,16 @@ import { useCustomPackagesByUser, useCreatePackage, useDeletePackage } from '@/s
 import { useUser } from '@/src/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
-import { useEffect } from 'react';
+import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
+import { useState } from 'react';
 
 export default function Wishlist() {
+    // usestate
+    const [isCreating, setIsCreating] = useState<boolean>(false);
     // hook
     const navigate = useNavigate();
     const { user } = useUser();
-    const { data: customPackages = [], isLoading, isError } = useCustomPackagesByUser(user?.userId!);
+    const { data: customPackages = [], isLoading, isError, refetch } = useCustomPackagesByUser(user?.userId!);
     const { mutateAsync: createPackage } = useCreatePackage();
     const { mutateAsync: deletePackage } = useDeletePackage();
 
@@ -20,19 +23,18 @@ export default function Wishlist() {
     const currentMenuIndex = 2;
     const userId = user?.userId;
 
-    // useEffect
-    useEffect(() => {
-        console.log(userId);
-        console.log(customPackages);
-    }, [customPackages]);
-
     // Function
     const handleCreatePackage = async () => {
-        if (!userId) return;
-        const newPackage = new PackageModel({
+        if (!userId || isCreating) return;
+
+        setIsCreating(true);
+        const newPackage = await createPackage(new PackageModel({
+            name: `${user.name}의 새로운 패키지`,
+            description: '',
             user: userId,
-        })
-        await createPackage(newPackage);
+        }));
+
+        await refetch();
 
         // navigate
         navigate('/package-detail', { state: { pkg: newPackage } })
@@ -41,7 +43,9 @@ export default function Wishlist() {
         if (!userId) return;
         await deletePackage({ id: id, user: userId });
     }
-
+    const handleEditPackage = (pkg: PackageModel) => {
+        navigate('/package-detail', { state: { pkg: pkg } })
+    }
 
 
     return (
@@ -64,12 +68,15 @@ export default function Wishlist() {
                         <p className={styles.infoText}>찜한 패키지가 없습니다.</p>
                     ) :
                         customPackages.map((customPackage) => (
-                            <div key={customPackage.id} className={styles.card}>
-                                <div className={styles.content} style={{ backgroundImage: `url(${customPackage.thumbnail})` }}>
-                                    <button className={styles.likeButton} onClick={() => handleDeletePackage(customPackage.id!)}>
+                            <div key={customPackage.id} className={styles.card} onClick={() => handleEditPackage(customPackage)}>
+                                <PackageThumbnail pkg={customPackage}>
+                                    <button className={styles.likeButton} onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeletePackage(customPackage.id!)
+                                    }}>
                                         <img src={FavoriteFill} alt="좋아요 아이콘" />
                                     </button>
-                                </div>
+                                </PackageThumbnail>
                                 <p className={styles.cardTitle}>{customPackage.name}</p>
                             </div>
                         ))
