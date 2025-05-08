@@ -40,29 +40,29 @@
 }
 
 .buttonContainer {
-    width: 100%;
+    width: 100%;;
     max-width: 500px;
     position: fixed;
-    bottom: 10vh;
+    bottom: 8rem;
     display: flex;
     flex-direction: row;
     justify-content: end;
 }
 
 .addProductButton {
-    /* position: fixed; */
     display: flex;
     background-color: #00a36c;
     color: white;
-    bottom: 10vh;
-    right: 2rem;
-    font-size: large;
     align-items: center;
     justify-content: center;
-    width: 4rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
     cursor: pointer;
+    font-size: 4rem;
+    padding-top: 0.3rem;
+    margin-right: 2rem;
+
 }
 
 .spinnerContainer {
