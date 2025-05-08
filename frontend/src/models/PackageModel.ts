@@ -2,6 +2,7 @@ import ProductModel from './ProductModel'; // 실제 경로에 맞게 수정
 
 export default class PackageModel {
   id: number | null;
+  user: number | null;
   industry: number | null;
   categories: number[];
   products: ProductModel[]; // ← 수정됨
@@ -12,6 +13,7 @@ export default class PackageModel {
 
   constructor({
     id = null,
+    user = null,
     industry = null,
     categories = [],
     products = [],
@@ -21,6 +23,7 @@ export default class PackageModel {
     price = 0,
   }: {
     id?: number | null;
+    user?: number | null;
     industry?: number | null;
     categories?: number[];
     products?: ProductModel[]; // ← 수정됨
@@ -30,6 +33,7 @@ export default class PackageModel {
     price?: number;
   }) {
     this.id = id;
+    this.user = user;
     this.industry = industry;
     this.categories = categories;
     this.products = products;
@@ -46,6 +50,7 @@ export default class PackageModel {
 
     return new PackageModel({
       id: jsonData['id'],
+      user: jsonData['user'],
       industry: jsonData['industry'],
       categories: jsonData['categories'] || [],
       products,
@@ -59,9 +64,10 @@ export default class PackageModel {
   toJson(): any {
     return {
       id: this.id,
+      user: this.user,
       industry: this.industry,
       categories: this.categories,
-      products: this.products.map((p) => p.toJson()), // ← 수정됨
+      products: this.products.map((p) => p.toJson()),
       name: this.name,
       thumbnail: this.thumbnail,
       description: this.description,
@@ -71,9 +77,10 @@ export default class PackageModel {
 
   toJsonWithoutId(): any {
     return {
+      user: this.user,
       industry: this.industry,
       categories: this.categories,
-      products: this.products.map((p) => p.toJson()), // ← 수정됨
+      products: this.products.map((p) => p.toJson()),
       name: this.name,
       thumbnail: this.thumbnail,
       description: this.description,

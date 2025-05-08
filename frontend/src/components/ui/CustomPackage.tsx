@@ -1,20 +1,20 @@
 import styled from '@emotion/styled';
 import WidgetImage from '../../assets/images/page/home/widget.png';
-import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import { useCategory } from '@/src/hooks/useCategory';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { editingPackageState } from '@/src/recoil/packageState';
 import PackageAlternativeImage from '../../assets/images/alternative/package.png';
 import FavoriteIcon from '../../assets/images/page/wishlist/favorite_fill.png';
 import FavoriteNotFillIcon from '../../assets/images/page/wishlist/favorite_not_fill.png';
-import { useCreatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
-import { useUser } from '@/src/contexts/UserContext';
 
+const Card = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+`;
 
 const Item = styled.div`
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -25,16 +25,21 @@ const ContentContainer = styled.div`
     flex: 1;
 `;
 
-const Title = styled.p`
+const Title = styled.input`
+    width: 90%;
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    background: transparent;
+    outline: none;
 `;
 
-const Description = styled.p`
+const Description = styled.input`
+    width: 90%;
     font-size: 1.4rem;
-    color: #7f7f89;
     margin-bottom: 0.5rem;
+    background: transparent;
+    outline: none;
 `;
 
 const Price = styled.p`
@@ -117,27 +122,33 @@ const LikeButton = styled.button`
     background-size: cover;
 `
 
+const SaveButton = styled.button`
+    background-color: #03a36d;
+    margin-top: 2rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+`
 
 
 type PackageProps = {
     pkg: PackageModel;
-    fromDetail: boolean;
+    name: string;
+    setName: React.Dispatch<React.SetStateAction<string>>;
+    description: string;
+    setDescription: React.Dispatch<React.SetStateAction<string>>;
+    isFavorite: boolean;
+    setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
+    save: () => void;
 };
 
-export default function PackageItem({ pkg, fromDetail }: PackageProps) {
-    const { user } = useUser();
+export default function CustomPackageItem({ pkg, name, setName, description, setDescription, isFavorite, setIsFavorite, save }: PackageProps) {
     const [price, setPrice] = useState(0);
-    const [isFavorite, setIsFavorite] = useState(false);
     const { categories } = useCategory();
     const [categoryPreview, setCategoryPreview] = useState('');
-    const [, setEditingPackage] = useRecoilState(editingPackageState);
-    const navigate = useNavigate();
-    // react-query
-    const { mutateAsync: createPackage } = useCreatePackage();
-    const { mutateAsync: deletePackage } = useDeletePackage();
-    const [isLoading, setIsLoading] = useState(false);
-    const [copiedPackageId, setCopiedPackageId] = useState(0);
 
+    // useEffect
     useEffect(() => {
         const categoryNames = [];
         let count = 0;
@@ -161,30 +172,12 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
         setPrice(myPrice);
     }, []);
 
-    // Function: 패키지 아이템 클릭
-    const handlePackageItemClick = () => {
-        if (fromDetail) return;
-        setEditingPackage(null);
-        navigate('/package-detail', { state: { pkg: pkg.toJson() } });
-    };
-
     // function
-    const handleClickFavorite = async (pkg: PackageModel) => {
-        console.log(pkg.toJson());
-        if (isLoading) return;
-        setIsLoading(true);
+    const handleClickFavorite = () => {
         setIsFavorite(!isFavorite);
-        if (isFavorite) {
-            // TODO: ff
-            await deletePackage({id: copiedPackageId, user: user?.userId!})
-        } else {
-            const newPackage = await createPackage(pkg);
-            setCopiedPackageId(newPackage.id!);
-        }
-
-        setIsLoading(false);
     }
 
+    // jsx
     const CustomThumbnail = () => {
         return (
             <ThumbnailContainer>
@@ -229,22 +222,22 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
     };
 
     return (
-        <Item onClick={handlePackageItemClick}>
-            <CustomThumbnail />
-            <ContentContainer>
-                <Title>{pkg.name}</Title>
-                <Description>{pkg.description}</Description>
-                <Price>{price.toLocaleString()}원</Price>
-                <CategoryContainer>
-                    <CategoryIcon src={WidgetImage} />
-                    <CategoryText>{categoryPreview}</CategoryText>
-                </CategoryContainer>
-            </ContentContainer>
-            <LikeButton style={{ backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})` }} onClick={(e) => {
-                e.stopPropagation();
-                handleClickFavorite(pkg);
-            }}>
-            </LikeButton>
-        </Item>
+        <Card>
+            <Item>
+                <CustomThumbnail />
+                <ContentContainer>
+                    <Title placeholder='패키지명' value={name ?? ''} onChange={(e) => setName(e.target.value)}></Title>
+                    <Description placeholder='설명' value={description ?? ''} onChange={(e) => setDescription(e.target.value)}></Description>
+                    <Price>{price.toLocaleString()}원</Price>
+                    <CategoryContainer>
+                        <CategoryIcon src={WidgetImage} />
+                        <CategoryText>{categoryPreview}</CategoryText>
+                    </CategoryContainer>
+                </ContentContainer>
+                <LikeButton style={{ backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})` }} onClick={handleClickFavorite}>
+                </LikeButton>
+            </Item>
+            <SaveButton onClick={save}>변경 사항 저장</SaveButton>
+        </Card>
     );
 }

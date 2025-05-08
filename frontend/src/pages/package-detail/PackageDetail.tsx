@@ -2,6 +2,7 @@ import BackHeader from '@/src/components/layout/BackHeader';
 import styles from './PackageDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
 import PackageItem from '@/src/components/ui/PackageItem';
+import CustomPackageItem from '@/src/components/ui/CustomPackage';
 import AddIconImage from '@/src/assets/images/page/package-detail/add_icon.png';
 import EditIconImage from '@/src/assets/images/page/package-detail/edit_icon.png';
 import ArrowRightIconImage from '@/src/assets/images/page/package-detail/arrow_right.png';
@@ -19,6 +20,7 @@ import industryData from '@/src/data/industryData.json';
 import { useOrder } from '@/src/hooks/useOrder';
 import OrderModel from '@/src/models/OrderModel';
 import { useUser } from '@/src/contexts/UserContext';
+import { useUpdatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
 
 export default function PackageDetail() {
     // page connection
@@ -30,6 +32,8 @@ export default function PackageDetail() {
     // hook
     const { categories } = useCategory();
     const { createOrder } = useOrder();
+    const { mutateAsync: updatePackage } = useUpdatePackage();
+    const { mutateAsync: deletePackage } = useDeletePackage();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
@@ -38,18 +42,20 @@ export default function PackageDetail() {
     const [isLoading, setIsLoading] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [name, setName] = useState<string>(myPackage.name ?? '');
+    const [description, setDescription] = useState<string>(myPackage.description ?? '');
+    const [isFavorite, setIsFavorite] = useState(true);
 
     // UseEffect
     useEffect(() => {
-
-        let targetPackage = null;
-        if (!editingPackage) {
-            targetPackage = myPackage;
+        let focusPackage;
+        if (editingPackage?.id !== myPackage.id) {
             setEditingPackage(myPackage);
-        } else {
-            targetPackage = editingPackage;
+            focusPackage = myPackage;
+        }else{
+            focusPackage = editingPackage
         }
-        const newMyCategories: CategoryModel[] = targetPackage.categories
+        const newMyCategories: CategoryModel[] = focusPackage.categories
             .map((categoryId) => categories.find((category) => category.id === categoryId))
             .filter(Boolean) as CategoryModel[];
         setMyCategories(newMyCategories);
@@ -127,6 +133,26 @@ export default function PackageDetail() {
             });
         });
     };
+    const save = async () => {
+        if (!editingPackage || !user) {
+            window.alert('오류가 발생하였습니다. 다시 한번 저장해주세요');
+            return;
+        }
+
+        if (isFavorite) {
+            const newPackage = PackageModel.fromJson({
+                ...editingPackage.toJson(),
+                name: name,
+                description: description,
+            })
+            await updatePackage({ id: editingPackage.id!, updatedData: newPackage });
+            window.alert('변경 사항이 저장되었습니다.')
+        } else {
+            await deletePackage({ id: editingPackage.id!, user: user.userId! });
+            window.alert('패키지가 찜 리스트에서 제외되었습니다');
+            navigate(-1);
+        }
+    }
 
     // return
     return isLoading ? (
@@ -139,9 +165,10 @@ export default function PackageDetail() {
         <div className={styles.page}>
             <BackHeader />
             <div className={styles.section}>
-                <div className={styles.packageCard}>
-                    {editingPackage && <PackageItem pkg={editingPackage} />}
-                </div>
+                {editingPackage && <div className={styles.packageCard}>
+                    {editingPackage.user === user?.userId ? <CustomPackageItem pkg={editingPackage} name={name} setName={setName} description={description}
+                        setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} fromDetail={true}/>}
+                </div>}
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>구성상품</p>
                     <div className={styles.blank} />

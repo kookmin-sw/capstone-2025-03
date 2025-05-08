@@ -3,12 +3,19 @@ import MenuHomeIconImage from '../../assets/images/footer/menu_home_icon.png';
 import MenuHomeIconSelectedImage from '../../assets/images/footer/menu_home_icon_selected.png';
 import MenuSellIconImage from '../../assets/images/footer/menu_sell_icon.png';
 import MenuSellIconSelectedImage from '../../assets/images/footer/menu_sell_icon_selected.png';
+import MenuFavoriteIcon from '../../assets/images/footer/menu_favorite_icon.png';
+import MenuFavoriteIconSelected from '../../assets/images/footer/menu_favorite_icon_selected.png';
+import MenuViewIcon from '../../assets/images/footer/menu_view_icon.png';
+import MenuViewIconSelected from '../../assets/images/footer/menu_view_icon_selected.png';
+import MenuProfileIcon from '../../assets/images/footer/menu_profile_icon.png';
+import MenuProfileIconSelected from '../../assets/images/footer/menu_profile_icon_selected.png';
 import { useNavigate } from 'react-router-dom';
 
 const Footer = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
+    max-width: 500px;
     height: 6rem;
     display: flex;
     flex-direction: row;
@@ -56,18 +63,40 @@ export default function MenuFooter({ currentMenuIndex }: MenuFooterProps) {
             iconSelected: MenuHomeIconSelectedImage,
         },
         {
+            text: '추천',
+            icon: MenuViewIcon,
+            iconSelected: MenuViewIconSelected,
+        },
+        {
+            text: '찜 목록',
+            icon: MenuFavoriteIcon,
+            iconSelected: MenuFavoriteIconSelected,
+        },
+        {
             text: '판매',
             icon: MenuSellIconImage,
             iconSelected: MenuSellIconSelectedImage,
+        },
+        
+        {
+            text: '프로필',
+            icon: MenuProfileIcon,
+            iconSelected: MenuProfileIconSelected,
         },
     ];
 
     const handleClick = (currentIndex: number) => {
         let path = '';
         if (currentIndex === 0) {
-            path = '/home';
+            path = '/intro';
         } else if (currentIndex === 1) {
+            path = '/home';
+        } else if (currentIndex === 2) {
+            path = '/wishlist';
+        } else if (currentIndex === 3) {
             path = '/seller-saleslist';
+        } else if (currentIndex === 4) {
+            path = '/profile';
         }
         navigate(path);
     };

@@ -38,7 +38,6 @@ export default function SellerSalesListProductDetail() {
                 price: newPrice,
                 seller: sellerId,
                 salesStatus: 'available',
-                description: null,
                 uploadDate: new Date().toISOString(),
             }),
         );
@@ -73,15 +72,16 @@ export default function SellerSalesListProductDetail() {
                 <ProductItem product={sellerProduct} />
                 <AiOptimizer />
                 <PriceInput price={sellerProduct.price ?? null} setPrice={handlePriceChange} />
-                <div className={styles.submitButtonSection}>
-                    <button
-                        className={styles.submitButton}
-                        disabled={!isButtonValid}
-                        onClick={handleSellButtonClick}
-                    >
-                        판매하기
-                    </button>
-                </div>
+
+            </div>
+            <div className={styles.submitButtonSection}>
+                <button
+                    className={styles.submitButton}
+                    disabled={!isButtonValid}
+                    onClick={handleSellButtonClick}
+                >
+                    판매하기
+                </button>
             </div>
         </div>
     );
