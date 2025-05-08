@@ -78,6 +78,7 @@ p {
 /* 1280px 기준으로 설정: 1rem = 10px */
 html {
     font-size: 10px;
+    background-color: #101012;
     /* 1rem = 10px */
 }
 

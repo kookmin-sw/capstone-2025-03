@@ -175,10 +175,12 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
         setIsLoading(true);
         setIsFavorite(!isFavorite);
         if (isFavorite) {
-            // TODO: ff
             await deletePackage({id: copiedPackageId, user: user?.userId!})
         } else {
-            const newPackage = await createPackage(pkg);
+            const newPackage = await createPackage(PackageModel.fromJson({
+                ...pkg,
+                user: user?.userId
+            }));
             setCopiedPackageId(newPackage.id!);
         }
 

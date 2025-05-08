@@ -52,7 +52,7 @@ export default function PackageDetail() {
         if (editingPackage?.id !== myPackage.id) {
             setEditingPackage(myPackage);
             focusPackage = myPackage;
-        }else{
+        } else {
             focusPackage = editingPackage
         }
         const newMyCategories: CategoryModel[] = focusPackage.categories
@@ -140,12 +140,14 @@ export default function PackageDetail() {
         }
 
         if (isFavorite) {
-            const newPackage = PackageModel.fromJson({
-                ...editingPackage.toJson(),
-                name: name,
-                description: description,
-            })
-            await updatePackage({ id: editingPackage.id!, updatedData: newPackage });
+            await updatePackage({
+                id: editingPackage.id!, updatedData: {
+                    ...editingPackage.toJson(),
+                    product_ids: editingPackage.products.map((product) => product.id),
+                    name: name,
+                    description: description,
+                }
+            });
             window.alert('변경 사항이 저장되었습니다.')
         } else {
             await deletePackage({ id: editingPackage.id!, user: user.userId! });
@@ -167,7 +169,7 @@ export default function PackageDetail() {
             <div className={styles.section}>
                 {editingPackage && <div className={styles.packageCard}>
                     {editingPackage.user === user?.userId ? <CustomPackageItem pkg={editingPackage} name={name} setName={setName} description={description}
-                        setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} fromDetail={true}/>}
+                        setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} fromDetail={true} />}
                 </div>}
                 <div className={styles.titleContainer}>
                     <p className={styles.listViewTitle}>구성상품</p>
