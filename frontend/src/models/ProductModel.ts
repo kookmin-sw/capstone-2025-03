@@ -137,4 +137,11 @@ export default class ProductModel {
         const updatedImages = this.images.filter((img) => img !== imageUrl);
         return this.copyWith({ images: updatedImages });
     }
+
+    removeImage(url: string) {
+        return new ProductModel({
+            ...this,
+            images: this.images.filter((img) => img !== url),
+        });
+    }
 }
