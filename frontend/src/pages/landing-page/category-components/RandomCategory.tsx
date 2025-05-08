@@ -7,7 +7,6 @@ import CategorySection from './CategorySection';
 import Footer from '@/src/components/layout/MenuFooter';
 import SeeMore from '@/src/assets/images/landing-page/see-more.png';
 import { useRef } from 'react';
-import { Spinner, Flex } from '@chakra-ui/react';
 
 type Item = {
     thumbnail: string;

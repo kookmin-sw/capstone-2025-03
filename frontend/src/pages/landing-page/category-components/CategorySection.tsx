@@ -38,6 +38,7 @@ const SkeletonGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr); // 한 행에 4개
     gap: 1.2rem;
+    margin-top: 4rem;
 `;
 
 export default function CategorySection({
