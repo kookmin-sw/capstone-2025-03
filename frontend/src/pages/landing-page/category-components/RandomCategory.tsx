@@ -6,205 +6,27 @@ import { viewedCategoryIdsState } from '@/src/recoil/viewedCategoryIdsState';
 import CategorySection from './CategorySection';
 import Footer from '@/src/components/layout/MenuFooter';
 import SeeMore from '@/src/assets/images/landing-page/see-more.png';
+import { useRef } from 'react';
+import { Spinner, Flex } from '@chakra-ui/react';
 
 type Item = {
-    image: string;
+    thumbnail: string;
+    productId: number;
     name: string;
     grade: string;
-    price: string;
+    price: number;
     type?: 'product' | 'more';
 };
 
 type CategoryResult = {
-    category_id: number;
-    category_name: string;
+    categoryId: number;
+    categoryName: string;
     results: Item[];
 };
 
-const MOCK_DATA: CategoryResult[] = [
-    {
-        category_id: 1,
-        category_name: '문구류',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 2,
-        category_name: '필기도구',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 3,
-        category_name: '가스레인지',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 4,
-        category_name: '청소기',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-    {
-        category_id: 5,
-        category_name: '자동차',
-        results: [
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '노트북',
-                grade: '중고',
-                price: '3000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '펜 세트',
-                grade: '새상품',
-                price: '1500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367wCl_mQGgg.jpg',
-                name: '파일',
-                grade: '새상품',
-                price: '2000',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/1714096576367Duo_BEIFW.jpg',
-                name: '자',
-                grade: '중고',
-                price: '500',
-            },
-            {
-                image: 'https://img2.joongna.com/media/original/2024/04/26/17140965763674iT_xKfYW.jpg',
-                name: '가위',
-                grade: '중고',
-                price: '1000',
-            },
-        ],
-    },
-];
-
 const CategoryContainer = styled.div`
+    position: relative;
+    min-height: 30vh;
     background-color: #18171d;
     padding: 3.2rem 0 0 2rem;
     display: flex;
@@ -216,51 +38,116 @@ export default function RandomCategory() {
     const currentMenuIndex = 0;
     const [viewedIds, setViewedIds] = useRecoilState(viewedCategoryIdsState);
     const [results, setResults] = useState<CategoryResult[]>([]);
+    const [isFetching, setIsFetching] = useState<boolean>(false);
 
-    // const handleGetRandomCategory = async () => {
-    //     try {
-    //         const response = await getRandomCategoriesInService(viewedIds);
-    //         setResults(response);
+    const bottomRef = useRef<HTMLDivElement | null>(null);
+    const hasMounted = useRef(false);
 
-    //         const newIds = response.map((response) => response.category_id);
-    //         setViewedIds((prev) => [...prev, ...newIds]);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
+    const handleGetRandomCategory = async () => {
+        if (isFetching) return;
+        setIsFetching(true);
+        try {
+            const response = await getRandomCategoriesInService(viewedIds);
+            console.log(response);
+            const withMoreCard = response.map((category: any) => ({
+                categoryId: category.id,
+                categoryName: category.name,
+                results: [
+                    ...category.items.map((item: any) => ({
+                        productId: item.id,
+                        thumbnail: item.thumbnail,
+                        name: item.name,
+                        grade: item.grade,
+                        price: item.price, // 가격 정보가 없으니 빈 문자열
+                        type: 'product',
+                    })),
+                    {
+                        thumbnail: SeeMore,
+                        name: '더보기',
+                        grade: '',
+                        price: '',
+                        type: 'more',
+                    },
+                ],
+            }));
 
+            setResults((prev) => {
+                const existing = new Set(prev.map((p) => p.categoryId));
+                const filtered = withMoreCard.filter(
+                    (e: CategoryResult) => !existing.has(e.categoryId),
+                );
+                return [...prev, ...filtered];
+            });
+
+            const newIds = response.map((response: any) => response.id);
+            setViewedIds((prev) => [...prev, ...newIds]);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsFetching(false);
+        }
+    };
+
+    // 첫 호출 용
     useEffect(() => {
-        // handleGetRandomCategory();
-
-        const withMoreCard = MOCK_DATA.map((category) => ({
-            ...category,
-            results: [
-                ...category.results,
-                {
-                    image: SeeMore,
-                    name: '더보기',
-                    grade: '',
-                    price: '',
-                    type: 'more',
-                } satisfies Item,
-            ],
-        }));
-
-        setResults(withMoreCard);
+        handleGetRandomCategory();
     }, []);
-    console.log(results);
+
+    // 스크롤 하단 감지용
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const [entry] = entries;
+                if (!hasMounted.current) {
+                    hasMounted.current = true;
+                    return;
+                }
+
+                if (entry.isIntersecting) {
+                    handleGetRandomCategory();
+                }
+            },
+            { threshold: 1 },
+        );
+
+        if (bottomRef.current) observer.observe(bottomRef.current);
+        return () => {
+            if (bottomRef.current) observer.unobserve(bottomRef.current);
+        };
+    }, []);
+
     return (
         <div>
             <CategoryContainer>
                 {results.map((category) => (
                     <CategorySection
-                        key={category.category_id}
-                        categoryId={category.category_id}
-                        categoryName={category.category_name}
+                        key={category.categoryId}
+                        categoryId={category.categoryId}
+                        categoryName={category.categoryName}
                         products={category.results}
                     />
                 ))}
+
+                {isFetching && results.length === 0 && (
+                    <Flex
+                        position="absolute"
+                        top="50%"
+                        left="50%"
+                        transform="translate(-50%, -50%)"
+                        justify="center"
+                        align="center"
+                        zIndex="10"
+                    >
+                        <Spinner
+                            color="#00A36C"
+                            borderWidth="0.6rem"
+                            animationDuration="0.8s"
+                            style={{ marginTop: '4rem', width: '6rem', height: '6rem' }}
+                        />
+                    </Flex>
+                )}
             </CategoryContainer>
+            <div ref={bottomRef}></div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
     );

@@ -6,7 +6,8 @@ import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
 import React from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import ProductRecommend from './components/ProductRecommend';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -20,6 +21,10 @@ export default function PackageDetailProductDetail() {
 
     // hook
     const { categories } = useCategory();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [product.id]);
 
     // Function
     const handleButtonClick = () => {
@@ -35,8 +40,12 @@ export default function PackageDetailProductDetail() {
                 </div>
                 <p className={styles.product}>{product.name}</p>
                 <div className={styles.categoryAndGradeWrapper}>
-                    <p className={styles.category}>
-                        {categories.find((category) => category.id === product.category)?.name}
+                    <p
+                        className={styles.category}
+                        onClick={() => navitgate(`/category/${product.category}`)}
+                    >
+                        {/* {categories.find((category) => category.id === product.category)?.name} */}
+                        {product.categoryName}
                     </p>
                     <p className={styles.gradeAndAmount}>
                         {product.grade} ∙ {product.quantity}개
@@ -54,9 +63,21 @@ export default function PackageDetailProductDetail() {
                             </React.Fragment>
                         ))}
                 </div>
+                <div className={styles.devider}></div>
+                <ProductRecommend
+                    categoryId={product.category}
+                    productId={product.id ? [product.id] : []}
+                    categoryName={product.categoryName}
+                />
                 <div style={{ height: '20rem' }} />
             </div>
-                {!reset ? <DefaultButton event={handleButtonClick} isActive={true} text="원본 링크 이동하기" /> : null}
+            {!reset ? (
+                <DefaultButton
+                    event={handleButtonClick}
+                    isActive={true}
+                    text="원본 링크 이동하기"
+                />
+            ) : null}
         </div>
     );
 }

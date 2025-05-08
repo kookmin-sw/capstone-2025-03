@@ -1,11 +1,15 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import { useProduct } from '@/src/hooks/useProduct';
+import ProductModel from '@/src/models/ProductModel';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type ProductCardProps = {
-    image: string;
+    productId: number;
+    thumbnail: string;
     name: string;
     grade: string;
-    price: string;
+    price: number;
 };
 
 const Card = styled.div`
@@ -14,7 +18,7 @@ const Card = styled.div`
     flex-direction: column;
     background-color: #18171d;
     overflow: hidden;
-    gap: 1.2rem,
+    gap: 1.2rem;
 `;
 
 const Image = styled.img`
@@ -34,13 +38,30 @@ const Info = styled.p`
     color: #666;
 `;
 
-export default function ProductCard({ image, name, grade, price }: ProductCardProps) {
+export default function ProductCard({
+    productId,
+    thumbnail,
+    name,
+    grade,
+    price,
+}: ProductCardProps) {
+    const navigate= useNavigate();
+
+    const { getProduct } = useProduct();
+
+    const handleProductCardClicked = async () => {
+        const productInfo = await getProduct(productId);
+        navigate('/package-detail-product-detail', {
+            state: { product: productInfo?.toJson() },
+        });
+    };
+
     return (
-        <Card>
-            <Image src={image} alt={name} />
+        <Card onClick={handleProductCardClicked}>
+            <Image src={thumbnail} alt={name} />
             <Name>{name}</Name>
             <Info>
-                {grade} / {Number(price).toLocaleString()}원
+                {grade} / {price}원
             </Info>
         </Card>
     );

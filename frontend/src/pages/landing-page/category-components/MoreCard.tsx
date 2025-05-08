@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 type MoreCardProps = {
-    image: string;
+    categoryId: number;
+    thumbnail: string;
     name: string;
     grade: string;
-    price: string;
+    price: number;
 };
 
 const Card = styled.div`
@@ -27,14 +29,24 @@ const Text = styled.p`
     margin-top: 1rem;
     font-size: 1.5rem;
     margin-left: 1rem;
-`
+`;
 
-export default function MoreCard({ image, name, grade, price }: MoreCardProps) {
-    const handleClick = () => {};
+export default function MoreCard({
+    categoryId,
+    thumbnail,
+    name,
+    grade,
+    price,
+}: MoreCardProps) {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/category/${categoryId}`);
+    };
 
     return (
-        <Card>
-            <img src={image} />
+        <Card onClick={handleClick}>
+            <img src={thumbnail} />
             <Text>더보기</Text>
         </Card>
     );

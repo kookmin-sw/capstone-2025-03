@@ -70,6 +70,7 @@ export default class ProductModel {
             id: jsonData['id'],
             images: jsonData['images'] || [],
             category: jsonData['category'],
+            categoryName: jsonData['category_name'],
             name: jsonData['name'],
             grade: jsonData['grade'],
             quantity: jsonData['quantity'],
@@ -89,6 +90,7 @@ export default class ProductModel {
             id: this.id,
             images: this.images,
             category: this.category,
+            category_name: this.categoryName,
             name: this.name,
             grade: this.grade,
             quantity: this.quantity,
@@ -107,6 +109,7 @@ export default class ProductModel {
         return {
             images: this.images,
             category: this.category,
+            category_name: this.categoryName,
             name: this.name,
             grade: this.grade,
             quantity: this.quantity,
@@ -131,7 +134,7 @@ export default class ProductModel {
     }
 
     deleteImage(imageUrl: string): ProductModel {
-        const updatedImages = this.images.filter((img) => img !== imageUrl)
+        const updatedImages = this.images.filter((img) => img !== imageUrl);
         return this.copyWith({ images: updatedImages });
     }
 }

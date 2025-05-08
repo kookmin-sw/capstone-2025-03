@@ -54,17 +54,22 @@
 }
 
 .descriptionContainer {
-    background-color: #202028;
+    background-color: #18171d;
+    font-size: 1.7rem;
     min-height: 5rem;
-    margin-top: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
     border-radius: 2rem;
-    font-size: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.devider {
+    width: 90%;
+    height: 0.1rem;
+    background-color: #2e2e2e;
+    margin: 2rem auto;
 }
 
 .buttonContainer {

@@ -6,10 +6,13 @@ import {
     getCategoryInService,
     updateCategoryInService,
     deleteCategoryInService,
+    getRandomProductInService,
 } from '../services/categoryService';
 import CategoryModel from '../models/CategoryModel';
 import categoryData from '@/src/data/categoryData.json';
 import { useCallback } from 'react';
+import ProductModel from '../models/ProductModel';
+import ProductCardModel from '../models/ProductCardModel';
 
 const useLocalData = true;
 
@@ -99,6 +102,25 @@ export const useCategory = () => {
         return isSuccess;
     };
 
+    const randomProduct = async (
+        categoryId: number,
+        productId: number[],
+    ): Promise<ProductCardModel[]> => {
+        const response: { products: ProductCardModel[] } | null = await getRandomProductInService(
+            categoryId,
+            productId,
+        );
+
+        if (!response || !Array.isArray(response.products)) {
+            return [];
+        }
+
+        const productList: ProductCardModel[] =
+            response.products.map((item) => new ProductCardModel(item)) || [];
+
+        return productList;
+    };
+
     return {
         categories,
         getCategoryList,
@@ -106,5 +128,6 @@ export const useCategory = () => {
         getCategory,
         updateCategory,
         deleteCategory,
+        randomProduct,
     };
 };
