@@ -10,6 +10,7 @@ import { useRef, useEffect } from 'react';
 import ProductRecommend from './components/ProductRecommend';
 import FavoriteNotFillIcon from '../../assets/images/page/wishlist/favorite_not_fill.png';
 import FavoriteIcon from '../../assets/images/page/wishlist/favorite_fill.png';
+import PackageSelectSheet from './components/PackageSelectSheet';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -20,6 +21,8 @@ export default function PackageDetailProductDetail() {
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
+    const [isPackageSelectSheetOpen, setIsPackageSelectSheetOpen] = useState<boolean>(false);
+
     const carouselRef = useRef<HTMLDivElement>(null);
 
     // hook
@@ -36,7 +39,8 @@ export default function PackageDetailProductDetail() {
 
     //TODO: 찜 하면 패키지에 넣는 로직 넣기, 물품에 찜 필드값 추가하기
     const handleClickFavorite = () => {
-        setIsFavorite(!isFavorite);
+        // setIsFavorite(!isFavorite);
+        setIsPackageSelectSheetOpen(true);
     };
 
     return (
@@ -51,7 +55,7 @@ export default function PackageDetailProductDetail() {
                     <button
                         className={styles.likeButton}
                         style={{
-                            backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})`
+                            backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})`,
                         }}
                         onClick={handleClickFavorite}
                     />
@@ -94,6 +98,17 @@ export default function PackageDetailProductDetail() {
                     text="원본 링크 이동하기"
                 />
             ) : null}
+            {isPackageSelectSheetOpen && (
+
+                    <PackageSelectSheet onClose={() => setIsPackageSelectSheetOpen(false)}>
+                        <p style={{ fontSize: '2.6rem', fontWeight: 'bold' }}>패키지 선택</p>
+                        <p style={{ fontSize: '1.6rem', color: 'gray' }}>
+                            찜 물품을 넣을 패키지를 선택해주세요
+                        </p>
+                        {/* 여기에 패키지들 넣으면 됨 */}
+                    </PackageSelectSheet>
+
+            )}
         </div>
     );
 }
