@@ -21,7 +21,11 @@ const Backdrop = styled.div`
 
 const Sheet = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
     bottom: 0;
+    height: 60%;
+
     width: 100%;
     max-width: 500px;
     background-color: #2c2c36;
@@ -37,6 +41,28 @@ const Sheet = styled.div`
             transform: translateY(0);
         }
     }
+`;
+
+const Header = styled.div`
+    flex-shrink: 0;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+`;
+
+const ScrollBody = styled.div`
+    flex-grow: 1;
+    overflow-y: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+const Footer = styled.div`
+    flex-shrink: 0;
+    margin-top: 1.6rem;
 `;
 
 const PackageGrid = styled.div`
@@ -66,7 +92,12 @@ type Props = {
     onSubmitSuccess: () => void;
 };
 
-export default function PackageSelectSheet({ onClose, productId, category, onSubmitSuccess }: Props) {
+export default function PackageSelectSheet({
+    onClose,
+    productId,
+    category,
+    onSubmitSuccess,
+}: Props) {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const userId = user.id;
 
@@ -133,7 +164,6 @@ export default function PackageSelectSheet({ onClose, productId, category, onSub
             onSubmitSuccess();
         }
 
-        
         onClose();
     };
 
@@ -141,23 +171,29 @@ export default function PackageSelectSheet({ onClose, productId, category, onSub
         <>
             <Backdrop onClick={onClose}>
                 <Sheet onClick={(e) => e.stopPropagation()}>
-                    <p style={{ fontSize: '2.6rem', fontWeight: 'bold' }}>패키지 선택</p>
-                    <p style={{ fontSize: '1.6rem', color: 'gray' }}>
-                        찜 물품을 넣을 패키지를 선택해주세요
-                    </p>
-                    <PackageGrid>
-                        {data?.map((item, idx) => (
-                            <EachPackage
-                                key={idx}
-                                data={item}
-                                isSelected={
-                                    item.id !== null && selectedPackageIds.includes(item.id)
-                                }
-                                onToggle={() => item.id !== null && handleToggle(item.id)}
-                            />
-                        ))}
-                    </PackageGrid>
-                    <SubmitButton onClick={handleSubmitButtonClicked}>완료</SubmitButton>
+                    <Header>
+                        <p style={{ fontSize: '2.6rem', fontWeight: 'bold' }}>패키지 선택</p>
+                        <p style={{ fontSize: '1.6rem', color: 'gray' }}>
+                            찜 물품을 넣을 패키지를 선택해주세요
+                        </p>
+                    </Header>
+                    <ScrollBody>
+                        <PackageGrid>
+                            {data?.map((item, idx) => (
+                                <EachPackage
+                                    key={idx}
+                                    data={item}
+                                    isSelected={
+                                        item.id !== null && selectedPackageIds.includes(item.id)
+                                    }
+                                    onToggle={() => item.id !== null && handleToggle(item.id)}
+                                />
+                            ))}
+                        </PackageGrid>
+                    </ScrollBody>
+                    <Footer>
+                        <SubmitButton onClick={handleSubmitButtonClicked}>완료</SubmitButton>
+                    </Footer>
                 </Sheet>
             </Backdrop>
         </>
