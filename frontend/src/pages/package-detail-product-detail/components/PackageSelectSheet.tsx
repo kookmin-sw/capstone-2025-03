@@ -42,6 +42,19 @@ const PackageGrid = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+`;
+
+const SubmitButton = styled.button`
+    background-color: #00a36c;
+    height: 6rem;
+    border-radius: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
 `;
 
 type Props = {
@@ -67,10 +80,10 @@ export default function PackageSelectSheet({ onClose }: Props) {
 
     const handleToggle = (id: number) => {
         setSelectedIds((prev) =>
-            prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-          );
+            prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
+        );
     };
-    console.log(selectedIds)
+    console.log(selectedIds);
     return (
         <>
             <Backdrop onClick={onClose}>
@@ -89,6 +102,7 @@ export default function PackageSelectSheet({ onClose }: Props) {
                             />
                         ))}
                     </PackageGrid>
+                    <SubmitButton>완료</SubmitButton>
                 </Sheet>
             </Backdrop>
         </>
