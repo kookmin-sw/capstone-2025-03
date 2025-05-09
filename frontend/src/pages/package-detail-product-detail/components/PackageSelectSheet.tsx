@@ -36,6 +36,13 @@ const Sheet = styled.div`
     }
 `;
 
+const PackageGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+    margin-top: 2rem;
+`;
+
 type Props = {
     onClose: () => void;
 };
@@ -45,7 +52,6 @@ export default function PackageSelectSheet({ onClose }: Props) {
     const userId = user.id;
 
     const { data } = useCustomPackagesByUser(userId);
-    console.log(data)
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -62,9 +68,9 @@ export default function PackageSelectSheet({ onClose }: Props) {
                     <p style={{ fontSize: '1.6rem', color: 'gray' }}>
                         찜 물품을 넣을 패키지를 선택해주세요
                     </p>
-                    {data?.map((item, index) => (
-                        <EachPackage />
-                    ))}
+                    <PackageGrid>
+                        {data?.map((item, idx) => <EachPackage key={idx} data={item} />)}
+                    </PackageGrid>
                 </Sheet>
             </Backdrop>
         </>
