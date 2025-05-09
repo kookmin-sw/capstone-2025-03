@@ -31,6 +31,9 @@ const Name = styled.p`
     font-weight: 600;
     margin: 0.6rem 0 0.4rem;
     font-size: 1.4rem;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
 `;
 
 const Info = styled.p`
