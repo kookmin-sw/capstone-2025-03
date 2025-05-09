@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useCustomPackagesByUser } from '@/src/hooks/useCustomPackage';
 import EachPackage from './EachPackage';
 import { useState } from 'react';
+import { useUpdatePackage } from '@/src/hooks/useCustomPackage';
+import PackageModel from '@/src/models/PackageModel';
 
 const Backdrop = styled.div`
     display: flex;
@@ -59,15 +61,20 @@ const SubmitButton = styled.button`
 
 type Props = {
     onClose: () => void;
+    productId: number | null;
+    category: number | null;
+    onSubmitSuccess: () => void;
 };
 
-export default function PackageSelectSheet({ onClose }: Props) {
+export default function PackageSelectSheet({ onClose, productId, category, onSubmitSuccess }: Props) {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const userId = user.id;
 
     const { data } = useCustomPackagesByUser(userId);
 
-    const [selectedIds, setSelectedIds] = useState<number[]>([]);
+    const [selectedPackageIds, setSelectedPackageIds] = useState<number[]>([]);
+
+    const { mutateAsync: updatePackage } = useUpdatePackage();
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -79,11 +86,57 @@ export default function PackageSelectSheet({ onClose }: Props) {
     console.log(data);
 
     const handleToggle = (id: number) => {
-        setSelectedIds((prev) =>
+        setSelectedPackageIds((prev) =>
             prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
         );
     };
-    console.log(selectedIds);
+
+    // 선택된 패키지 id 값을 사용해 응답구조 -> 요청구조 재구성
+    const handleSubmitButtonClicked = async () => {
+        if (!productId || !category) return;
+
+        const selectedPackages = data?.filter(
+            (pkg) => pkg.id !== null && selectedPackageIds.includes(pkg.id),
+        );
+
+        if (!selectedPackages) return;
+
+        let successCount = 0;
+
+        for (const pkg of selectedPackages) {
+            // 기존 카테고리에 새 카테고리 추가 (중복 제거)
+            const updatedCategories = Array.from(new Set([...pkg.categories, category]));
+
+            // 기존 products에서 id만 추출 + 새 productId 추가 (중복 제거)
+            const updatedProductIds = Array.from(
+                new Set([...pkg.products.map((p) => p.id), productId]),
+            );
+
+            const { products, ...rest } = pkg;
+
+            // 새로운 패키지 모델 객체 구성
+            const updatedData: Partial<PackageModel> & { product_ids: number[] } = {
+                ...rest,
+                categories: updatedCategories,
+                product_ids: updatedProductIds.filter((id): id is number => id !== null),
+            };
+
+            try {
+                await updatePackage({ id: pkg.id!, updatedData });
+                successCount++;
+            } catch (error) {
+                console.error(`패키지 ${pkg.id} 업데이트 실패`, error);
+            }
+        }
+
+        if (successCount === selectedPackages.length) {
+            onSubmitSuccess();
+        }
+
+        
+        onClose();
+    };
+
     return (
         <>
             <Backdrop onClick={onClose}>
@@ -97,12 +150,14 @@ export default function PackageSelectSheet({ onClose }: Props) {
                             <EachPackage
                                 key={idx}
                                 data={item}
-                                isSelected={item.id !== null && selectedIds.includes(item.id)}
+                                isSelected={
+                                    item.id !== null && selectedPackageIds.includes(item.id)
+                                }
                                 onToggle={() => item.id !== null && handleToggle(item.id)}
                             />
                         ))}
                     </PackageGrid>
-                    <SubmitButton>완료</SubmitButton>
+                    <SubmitButton onClick={handleSubmitButtonClicked}>완료</SubmitButton>
                 </Sheet>
             </Backdrop>
         </>

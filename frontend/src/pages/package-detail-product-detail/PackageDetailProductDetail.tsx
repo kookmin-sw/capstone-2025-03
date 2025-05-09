@@ -42,7 +42,7 @@ export default function PackageDetailProductDetail() {
         // setIsFavorite(!isFavorite);
         setIsPackageSelectSheetOpen(true);
     };
-
+    console.log(product);
     return (
         <div className={styles.page}>
             <BackHeaderForPackageDetail targetRef={carouselRef} />
@@ -99,8 +99,15 @@ export default function PackageDetailProductDetail() {
                 />
             ) : null}
             {isPackageSelectSheetOpen && (
-                <PackageSelectSheet onClose={() => setIsPackageSelectSheetOpen(false)} />
-                    
+                <PackageSelectSheet
+                    productId={product.id}
+                    category={product.category}
+                    onClose={() => setIsPackageSelectSheetOpen(false)}
+                    onSubmitSuccess={() => {
+                        setIsFavorite(true);
+                        setIsPackageSelectSheetOpen(false);
+                    }}
+                />
             )}
         </div>
     );
