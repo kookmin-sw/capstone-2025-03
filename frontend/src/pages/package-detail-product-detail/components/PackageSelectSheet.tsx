@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
+import { useCustomPackagesByUser } from '@/src/hooks/useCustomPackage';
+import EachPackage from './EachPackage';
 
 const Backdrop = styled.div`
     display: flex;
@@ -11,15 +13,15 @@ const Backdrop = styled.div`
     top: 0;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
-    align-items: flex-end; 
+    align-items: flex-end;
 `;
 
 const Sheet = styled.div`
     position: absolute;
     bottom: 0;
     width: 100%;
-    max-width: 500px; 
-    background-color: #2C2C36;
+    max-width: 500px;
+    background-color: #2c2c36;
     border-radius: 2rem 2rem 0 0;
     padding: 2rem;
     animation: slideUp 0.3s ease-out;
@@ -35,11 +37,16 @@ const Sheet = styled.div`
 `;
 
 type Props = {
-    children: React.ReactNode;
     onClose: () => void;
 };
 
-export default function PackageSelectSheet({ children, onClose }: Props) {
+export default function PackageSelectSheet({ onClose }: Props) {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const userId = user.id;
+
+    const { data } = useCustomPackagesByUser(userId);
+    console.log(data)
+
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         return () => {
@@ -48,8 +55,18 @@ export default function PackageSelectSheet({ children, onClose }: Props) {
     }, []);
 
     return (
-        <Backdrop onClick={onClose}>
-            <Sheet onClick={(e) => e.stopPropagation()}>{children}</Sheet>
-        </Backdrop>
+        <>
+            <Backdrop onClick={onClose}>
+                <Sheet onClick={(e) => e.stopPropagation()}>
+                    <p style={{ fontSize: '2.6rem', fontWeight: 'bold' }}>패키지 선택</p>
+                    <p style={{ fontSize: '1.6rem', color: 'gray' }}>
+                        찜 물품을 넣을 패키지를 선택해주세요
+                    </p>
+                    {data?.map((item, index) => (
+                        <EachPackage />
+                    ))}
+                </Sheet>
+            </Backdrop>
+        </>
     );
 }
