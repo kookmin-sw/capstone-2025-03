@@ -16,7 +16,9 @@ const Card = styled.div`
     display: flex;
     min-width: 14rem;
     flex-direction: column;
-    background-color: #18171d;
+    background-color: #2c2c36;
+    padding: 1rem;
+    border-radius: 0.6rem;
     overflow: hidden;
     gap: 1.2rem;
 `;
@@ -25,6 +27,7 @@ const Image = styled.img`
     height: 14rem;
     width: 14rem;
     object-fit: cover;
+    border-radius: 0.6rem;
 `;
 
 const Name = styled.p`

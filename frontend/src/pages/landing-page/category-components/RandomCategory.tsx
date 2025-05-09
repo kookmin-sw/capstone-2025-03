@@ -23,14 +23,22 @@ type CategoryResult = {
     results: Item[];
 };
 
-const CategoryContainer = styled.div`
+const CategorySectionContainer = styled.div`
     position: relative;
     min-height: 30vh;
-    background-color: #18171d;
+    background-color: #101012;
     padding: 3.2rem 0 0 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    
+`;
+
+const CategoryContainer = styled.div`
+    background-color: #18171d;
+    border-radius: 1.2rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
 `;
 
 export default function RandomCategory() {
@@ -123,7 +131,7 @@ export default function RandomCategory() {
 
     return (
         <div>
-            <CategoryContainer>
+            <CategorySectionContainer>
                 {isInitialLoading ? (
                     <CategorySection
                         key="initial-skeleton"
@@ -134,14 +142,18 @@ export default function RandomCategory() {
                     />
                 ) : (
                     <>
-                        {results.map((category) => (
-                            <CategorySection
-                                key={category.categoryId}
-                                categoryId={category.categoryId}
-                                categoryName={category.categoryName}
-                                products={category.results}
-                            />
-                        ))}
+                        <CategoryContainer>
+                            {results.map((category) => (
+                                <div>
+                                    <CategorySection
+                                        key={category.categoryId}
+                                        categoryId={category.categoryId}
+                                        categoryName={category.categoryName}
+                                        products={category.results}
+                                    />
+                                </div>
+                            ))}
+                        </CategoryContainer>
                         {isFetching && results.length === 0 && (
                             <CategorySection
                                 key="skeleton"
@@ -153,7 +165,7 @@ export default function RandomCategory() {
                         )}
                     </>
                 )}
-            </CategoryContainer>
+            </CategorySectionContainer>
             <div ref={bottomRef}></div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
