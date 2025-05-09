@@ -59,6 +59,11 @@ export default function PackageSelectSheet({ onClose }: Props) {
             document.body.style.overflow = 'auto';
         };
     }, []);
+    
+    console.log(data)
+    const handlePackageClick = () => {
+
+    }
 
     return (
         <>
@@ -69,7 +74,7 @@ export default function PackageSelectSheet({ onClose }: Props) {
                         찜 물품을 넣을 패키지를 선택해주세요
                     </p>
                     <PackageGrid>
-                        {data?.map((item, idx) => <EachPackage key={idx} data={item} />)}
+                        {data?.map((item, idx) => <EachPackage key={idx} data={item} onClick={handlePackageClick} />)}
                     </PackageGrid>
                 </Sheet>
             </Backdrop>

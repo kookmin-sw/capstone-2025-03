@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import PackageModel from '@/src/models/PackageModel';
 import DefaultPackageImage from '../../../assets/images/page/package-detail/package-default.png';
+import CheckedIcon from '../../../assets/images/section/check.png';
+import { useState } from 'react';
 
 const PackageBox = styled.div`
+    position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -38,7 +41,16 @@ const SingleImage = styled.img`
     height: 100%;
     object-fit: cover;
     aspect-ratio: 1 / 1;
-`
+`;
+
+const CheckIcon = styled.img<{ selected: boolean }>`
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    filter: ${({ selected }) => (selected ? 'saturate(1)' : 'saturate(0)')};
+`;
 
 const PackageName = styled.p`
     font-size: 1.9rem;
@@ -50,10 +62,12 @@ const PackageName = styled.p`
 
 type EachPackageProps = {
     data: PackageModel;
+    onClick: () => void;
 };
 
 export default function EachPackage({ data }: EachPackageProps) {
     const { products, name } = data;
+    const [selected, setSelected] = useState<boolean>(false);
 
     const renderGridImages = () => {
         return (
@@ -67,8 +81,8 @@ export default function EachPackage({ data }: EachPackageProps) {
 
     const renderSingleImage = () => {
         if (products[0]?.images?.[0]) {
-            return <SingleImage src={products[0]?.images?.[0]} />
-        } 
+            return <SingleImage src={products[0]?.images?.[0]} />;
+        }
         return <DefaultImage src={DefaultPackageImage} />;
     };
 
@@ -76,8 +90,16 @@ export default function EachPackage({ data }: EachPackageProps) {
         <div>
             <PackageBox>
                 {products.length >= 4 ? renderGridImages() : renderSingleImage()}
+                <CheckIcon
+                    selected={selected}
+                    src={CheckedIcon}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setSelected(!selected);
+                    }}
+                />
             </PackageBox>
-            <PackageName>{data.name}</PackageName>
+            <PackageName>{name}</PackageName>
         </div>
     );
 }
