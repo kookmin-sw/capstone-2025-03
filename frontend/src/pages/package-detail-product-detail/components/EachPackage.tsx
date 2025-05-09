@@ -62,10 +62,11 @@ const PackageName = styled.p`
 
 type EachPackageProps = {
     data: PackageModel;
-    onClick: () => void;
+    isSelected: boolean;
+    onToggle: () => void;
 };
 
-export default function EachPackage({ data }: EachPackageProps) {
+export default function EachPackage({ data, isSelected, onToggle }: EachPackageProps) {
     const { products, name } = data;
     const [selected, setSelected] = useState<boolean>(false);
 
@@ -94,6 +95,7 @@ export default function EachPackage({ data }: EachPackageProps) {
                     selected={selected}
                     src={CheckedIcon}
                     onClick={(e) => {
+                        onToggle();
                         e.stopPropagation();
                         setSelected(!selected);
                     }}

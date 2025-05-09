@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useCustomPackagesByUser } from '@/src/hooks/useCustomPackage';
 import EachPackage from './EachPackage';
+import { useState } from 'react';
 
 const Backdrop = styled.div`
     display: flex;
@@ -53,18 +54,23 @@ export default function PackageSelectSheet({ onClose }: Props) {
 
     const { data } = useCustomPackagesByUser(userId);
 
+    const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         return () => {
             document.body.style.overflow = 'auto';
         };
     }, []);
-    
-    console.log(data)
-    const handlePackageClick = () => {
 
-    }
+    console.log(data);
 
+    const handleToggle = (id: number) => {
+        setSelectedIds((prev) =>
+            prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+          );
+    };
+    console.log(selectedIds)
     return (
         <>
             <Backdrop onClick={onClose}>
@@ -74,7 +80,14 @@ export default function PackageSelectSheet({ onClose }: Props) {
                         찜 물품을 넣을 패키지를 선택해주세요
                     </p>
                     <PackageGrid>
-                        {data?.map((item, idx) => <EachPackage key={idx} data={item} onClick={handlePackageClick} />)}
+                        {data?.map((item, idx) => (
+                            <EachPackage
+                                key={idx}
+                                data={item}
+                                isSelected={item.id !== null && selectedIds.includes(item.id)}
+                                onToggle={() => item.id !== null && handleToggle(item.id)}
+                            />
+                        ))}
                     </PackageGrid>
                 </Sheet>
             </Backdrop>
