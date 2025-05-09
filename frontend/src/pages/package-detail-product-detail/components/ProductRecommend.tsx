@@ -27,8 +27,9 @@ const ProductsContainer = styled.div`
     gap: 16px;
     margin-top: 2rem;
     & img {
-        width: 16rem !important;
-        height: 16rem !important;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1 / 1;
     }
 `;
 

@@ -99,15 +99,13 @@ export default function PackageDetailProductDetail() {
                 />
             ) : null}
             {isPackageSelectSheetOpen && (
-
-                    <PackageSelectSheet onClose={() => setIsPackageSelectSheetOpen(false)}>
-                        <p style={{ fontSize: '2.6rem', fontWeight: 'bold' }}>패키지 선택</p>
-                        <p style={{ fontSize: '1.6rem', color: 'gray' }}>
-                            찜 물품을 넣을 패키지를 선택해주세요
-                        </p>
-                        {/* 여기에 패키지들 넣으면 됨 */}
-                    </PackageSelectSheet>
-
+                <PackageSelectSheet onClose={() => setIsPackageSelectSheetOpen(false)}>
+                    <p style={{ fontSize: '2.6rem', fontWeight: 'bold' }}>패키지 선택</p>
+                    <p style={{ fontSize: '1.6rem', color: 'gray' }}>
+                        찜 물품을 넣을 패키지를 선택해주세요
+                    </p>
+                    {/* 여기에 패키지들 넣으면 됨 */}
+                </PackageSelectSheet>
             )}
         </div>
     );

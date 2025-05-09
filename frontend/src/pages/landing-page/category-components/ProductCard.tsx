@@ -23,6 +23,10 @@ const Card = styled.div`
     gap: 1.2rem;
 `;
 
+const ImageWrapper = styled.div`
+    align-items: center;
+`;
+
 const Image = styled.img`
     height: 14rem;
     width: 14rem;
@@ -31,11 +35,12 @@ const Image = styled.img`
 `;
 
 const Name = styled.p`
+    width: 100%;
     font-weight: 600;
     margin: 0.6rem 0 0.4rem;
     font-size: 1.4rem;
     overflow: hidden;
-    white-space:nowrap;
+    white-space: nowrap;
     text-overflow: ellipsis;
 `;
 
@@ -65,12 +70,15 @@ export default function ProductCard({
 
     return (
         <Card onClick={handleProductCardClicked}>
-            {!isImageLoaded && <ProductCardSkeleton />}            <Image
-                src={thumbnail}
-                alt={name}
-                style={{ display: isImageLoaded ? 'block' : 'none' }}
-                onLoad={() => setIsImageLoaded(true)}
-            />
+            {!isImageLoaded && <ProductCardSkeleton />}{' '}
+            <ImageWrapper>
+                <Image
+                    src={thumbnail}
+                    alt={name}
+                    style={{ display: isImageLoaded ? 'block' : 'none' }}
+                    onLoad={() => setIsImageLoaded(true)}
+                />
+            </ImageWrapper>
             {isImageLoaded && (
                 <>
                     <Name>{name}</Name>
