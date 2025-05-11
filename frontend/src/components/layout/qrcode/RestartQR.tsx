@@ -24,7 +24,7 @@ const QrDescription = styled.p`
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.2%;
-    color: black;
+    color: white;
 
     @media (prefers-color-scheme: dark) {
         color: white;
@@ -46,7 +46,6 @@ const QrNitofication = styled.p`
 `;
 
 export default function RestartQR() {
-    console.log(QRImage);
     return (
         <RestartQr>
             <img src={QRImage} />

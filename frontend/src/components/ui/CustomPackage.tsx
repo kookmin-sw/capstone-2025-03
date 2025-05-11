@@ -32,6 +32,9 @@ const Title = styled.input`
     margin-bottom: 0.5rem;
     background: transparent;
     outline: none;
+    background-color: #2c2c36;
+    padding: 0.8rem;
+    border-radius: 1.2rem;
 `;
 
 const Description = styled.input`

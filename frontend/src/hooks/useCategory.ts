@@ -11,12 +11,11 @@ import {
 import CategoryModel from '../models/CategoryModel';
 import categoryData from '@/src/data/categoryData.json';
 import { useCallback } from 'react';
-import ProductModel from '../models/ProductModel';
 import ProductCardModel from '../models/ProductCardModel';
 
 const useLocalData = true;
-
 export const useCategory = () => {
+
     const [categories, setCategories] = useRecoilState(categoryState);
 
     // List Read

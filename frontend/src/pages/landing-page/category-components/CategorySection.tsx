@@ -31,7 +31,8 @@ const CategoryList = styled.ul`
 const CategoryName = styled.div`
     font-weight: 700;
     font-size: 2rem;
-    line-height: 5.6rem;
+    line-height: 5rem;
+    margin-top: 2.4rem;
 `;
 
 const SkeletonGrid = styled.div`

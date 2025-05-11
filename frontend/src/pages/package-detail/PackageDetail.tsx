@@ -30,7 +30,7 @@ export default function PackageDetail() {
     // context
     const { user } = useUser();
     // hook
-    const { categories } = useCategory();
+    const { categories, getCategoryList } = useCategory();
     const { createOrder } = useOrder();
     const { mutateAsync: updatePackage } = useUpdatePackage();
     const { mutateAsync: deletePackage } = useDeletePackage();
@@ -48,17 +48,24 @@ export default function PackageDetail() {
 
     // UseEffect
     useEffect(() => {
-        let focusPackage;
-        if (editingPackage?.id !== myPackage.id) {
-            setEditingPackage(myPackage);
-            focusPackage = myPackage;
+        setEditingPackage(myPackage);;
+        // Categories check
+        const setCategoriesToMyCategories = (targetCategories: CategoryModel[]) => {
+            const newMyCategories: CategoryModel[] = myPackage.categories
+                .map((categoryId) => targetCategories.find((category) => category.id === categoryId))
+                .filter(Boolean) as CategoryModel[];
+            setMyCategories(newMyCategories);
+        };
+
+        if (categories.length === 0) {
+            const fetchCategory = async () => {
+                const newCategories = await getCategoryList();
+                setCategoriesToMyCategories(newCategories);
+            };
+            fetchCategory();
         } else {
-            focusPackage = editingPackage
+            setCategoriesToMyCategories(categories);
         }
-        const newMyCategories: CategoryModel[] = focusPackage.categories
-            .map((categoryId) => categories.find((category) => category.id === categoryId))
-            .filter(Boolean) as CategoryModel[];
-        setMyCategories(newMyCategories);
     }, []);
 
     // Function

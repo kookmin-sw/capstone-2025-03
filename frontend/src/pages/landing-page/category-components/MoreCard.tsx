@@ -10,10 +10,10 @@ type MoreCardProps = {
 };
 
 const Card = styled.div`
+    margin-top: 3rem;
     min-width: 8rem;
     height: 14rem;
-    margin-left: 2rem;
-    margin-right: 3rem;
+    margin-right: 4rem;
     background-color: #18171d;
     color: white;
     border-radius: 1.2rem;
@@ -26,9 +26,9 @@ const Card = styled.div`
 `;
 
 const Text = styled.p`
-    margin-top: 1rem;
+    margin-top: 2rem;
     font-size: 1.5rem;
-    margin-left: 1rem;
+    margin-left: 3rem;
 `;
 
 export default function MoreCard({
