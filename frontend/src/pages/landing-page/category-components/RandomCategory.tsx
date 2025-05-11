@@ -1,13 +1,58 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import { getRandomCategoriesInService } from '@/src/services/categoryService';
-import { useRecoilState } from 'recoil';
-import { viewedCategoryIdsState } from '@/src/recoil/viewedCategoryIdsState';
+import { useEffect } from 'react';
 import CategorySection from './CategorySection';
 import Footer from '@/src/components/layout/MenuFooter';
-import SeeMore from '@/src/assets/images/landing-page/see-more.png';
 import { useRef } from 'react';
-import { Spinner, Flex } from '@chakra-ui/react';
+import { useInfiniteProductRecommendation } from '@/src/hooks/useInfiniteProductsRecommendation';
+import RefreshIcon from '../../../assets/images/landing-page/refresh.png';
+import { useQueryClient } from '@tanstack/react-query';
+
+const CategorySectionContainer = styled.div`
+    position: relative;
+    min-height: 30vh;
+    background-color: #101012;
+    padding: 3.2rem 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+`;
+
+const HeadContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const HeadText = styled.p`
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+`;
+
+const ResfreshButton = styled.button`
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 1rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const RefreshImage = styled.img`
+    width: 1.4rem;
+    margin-left: 0.4rem;
+`;
+
+const CategoryContainer = styled.div`
+    background-color: #18171d;
+    border-radius: 1.2rem;
+    padding: 0rem 2rem 0 1rem;
+    margin-bottom: 2rem;
+`;
 
 type Item = {
     thumbnail: string;
@@ -24,129 +69,88 @@ type CategoryResult = {
     results: Item[];
 };
 
-const CategoryContainer = styled.div`
-    position: relative;
-    min-height: 30vh;
-    background-color: #18171d;
-    padding: 3.2rem 0 0 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-`;
+type PageResponse = {
+    data: CategoryResult[];
+    newCategoryIds: number[];
+};
 
 export default function RandomCategory() {
     const currentMenuIndex = 0;
-    const [viewedIds, setViewedIds] = useRecoilState(viewedCategoryIdsState);
-    const [results, setResults] = useState<CategoryResult[]>([]);
-    const [isFetching, setIsFetching] = useState<boolean>(false);
 
     const bottomRef = useRef<HTMLDivElement | null>(null);
-    const hasMounted = useRef(false);
 
-    const handleGetRandomCategory = async () => {
-        if (isFetching) return;
-        setIsFetching(true);
-        try {
-            const response = await getRandomCategoriesInService(viewedIds);
-            console.log(response);
-            const withMoreCard = response.map((category: any) => ({
-                categoryId: category.id,
-                categoryName: category.name,
-                results: [
-                    ...category.items.map((item: any) => ({
-                        productId: item.id,
-                        thumbnail: item.thumbnail,
-                        name: item.name,
-                        grade: item.grade,
-                        price: item.price, // 가격 정보가 없으니 빈 문자열
-                        type: 'product',
-                    })),
-                    {
-                        thumbnail: SeeMore,
-                        name: '더보기',
-                        grade: '',
-                        price: '',
-                        type: 'more',
-                    },
-                ],
-            }));
+    const queryClient = useQueryClient();
 
-            setResults((prev) => {
-                const existing = new Set(prev.map((p) => p.categoryId));
-                const filtered = withMoreCard.filter(
-                    (e: CategoryResult) => !existing.has(e.categoryId),
-                );
-                return [...prev, ...filtered];
-            });
-
-            const newIds = response.map((response: any) => response.id);
-            setViewedIds((prev) => [...prev, ...newIds]);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsFetching(false);
-        }
-    };
-
-    // 첫 호출 용
-    useEffect(() => {
-        handleGetRandomCategory();
-    }, []);
+    const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, refetch } =
+        useInfiniteProductRecommendation();
 
     // 스크롤 하단 감지용
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const [entry] = entries;
-                if (!hasMounted.current) {
-                    hasMounted.current = true;
-                    return;
-                }
+        const observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
 
-                if (entry.isIntersecting) {
-                    handleGetRandomCategory();
-                }
-            },
-            { threshold: 1 },
-        );
+            if (entry.isIntersecting && !isFetchingNextPage && hasNextPage) {
+                fetchNextPage();
+            }
+        });
 
-        if (bottomRef.current) observer.observe(bottomRef.current);
+        const currentRef = bottomRef.current;
+        if (currentRef) observer.observe(currentRef);
         return () => {
-            if (bottomRef.current) observer.unobserve(bottomRef.current);
+            if (currentRef) observer.unobserve(currentRef);
         };
-    }, []);
+    }, [bottomRef, isFetchingNextPage, hasNextPage, fetchNextPage]);
+
+    const handleRefresh = () => {
+        queryClient.removeQueries({ queryKey: ['random-categories'] });
+        refetch();
+    };
 
     return (
         <div>
-            <CategoryContainer>
-                {results.map((category) => (
-                    <CategorySection
-                        key={category.categoryId}
-                        categoryId={category.categoryId}
-                        categoryName={category.categoryName}
-                        products={category.results}
-                    />
-                ))}
+            <CategorySectionContainer>
+                <HeadContainer>
+                    <HeadText>카테고리</HeadText>
+                    <ResfreshButton onClick={handleRefresh}>
+                        새로고침
+                        <RefreshImage src={RefreshIcon} />
+                    </ResfreshButton>
+                </HeadContainer>
 
-                {isFetching && results.length === 0 && (
-                    <Flex
-                        position="absolute"
-                        top="50%"
-                        left="50%"
-                        transform="translate(-50%, -50%)"
-                        justify="center"
-                        align="center"
-                        zIndex="10"
-                    >
-                        <Spinner
-                            color="#00A36C"
-                            borderWidth="0.6rem"
-                            animationDuration="0.8s"
-                            style={{ marginTop: '4rem', width: '6rem', height: '6rem' }}
-                        />
-                    </Flex>
+                {isLoading ? (
+                    <CategorySection
+                        key="initial"
+                        categoryId={-1}
+                        categoryName=""
+                        products={[]}
+                        isLoading
+                    />
+                ) : (
+                    <>
+                        <CategoryContainer>
+                            {(data as any)?.pages.flatMap((page: PageResponse) =>
+                                page.data.map((category) => (
+                                    <CategorySection
+                                        key={category.categoryId}
+                                        categoryId={category.categoryId}
+                                        categoryName={category.categoryName}
+                                        products={category.results}
+                                    />
+                                )),
+                            )}
+                        </CategoryContainer>
+                        {isFetchingNextPage && (
+                            <CategorySection
+                                key="fetching"
+                                categoryId={-2}
+                                categoryName=""
+                                products={[]}
+                                isLoading
+                            />
+                        )}
+                    </>
                 )}
-            </CategoryContainer>
+            </CategorySectionContainer>
             <div ref={bottomRef}></div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>

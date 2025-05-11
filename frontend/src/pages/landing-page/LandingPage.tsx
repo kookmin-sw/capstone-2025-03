@@ -8,7 +8,6 @@ const PageContainer = styled.div`
     height: 100%;
     padding-bottom: 6rem;
     background-color: #101012;
-
 `;
 
 export default function LandingPage() {
