@@ -104,11 +104,13 @@ export default function PackageSelectSheet({
     const { data } = useCustomPackagesByUser(userId);
 
     const initialIncludedPackageIds =
-        data?.filter((pkg) => pkg.products.some((p) => p.id === productId))
+        data
+            ?.filter((pkg) => pkg.products.some((p) => p.id === productId))
             .map((pkg) => pkg.id)
             .filter((id): id is number => id !== null) || [];
 
-    const [selectedPackageIds, setSelectedPackageIds] = useState<number[]>(initialIncludedPackageIds);
+    const [selectedPackageIds, setSelectedPackageIds] =
+        useState<number[]>(initialIncludedPackageIds);
 
     const { mutateAsync: updatePackage } = useUpdatePackage();
 
@@ -124,6 +126,14 @@ export default function PackageSelectSheet({
             prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
         );
     };
+
+    // 새로 선택된 패키지들만 필터링
+    const addedPackages = data?.filter(
+        (pkg) =>
+            pkg.id !== null &&
+            selectedPackageIds.includes(pkg.id) &&
+            !initialIncludedPackageIds.includes(pkg.id),
+    );
 
     // 선택된 패키지 id 값을 사용해 응답구조 -> 요청구조 재구성
     const handleSubmitButtonClicked = async () => {
@@ -144,7 +154,7 @@ export default function PackageSelectSheet({
 
         let successCount = 0;
 
-        for (const pkg of selectedPackages || []) {
+        for (const pkg of addedPackages || []) {
             // 기존 카테고리에 새 카테고리 추가 (중복 제거)
             const updatedCategories = Array.from(new Set([...pkg.categories, category]));
 
