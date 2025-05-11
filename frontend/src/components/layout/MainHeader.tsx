@@ -7,6 +7,7 @@ const Header = styled.div<{ isVisible: boolean }>`
     position: fixed;
     top: 0;
     width: 100%;
+    max-width: 500px;
     padding: 2rem;
     display: flex;
     flex-direction: row;
@@ -36,7 +37,6 @@ const handleClickNotificationButton = () => {
 };
 
 export default function MainHeader({ isVisible }: { isVisible: boolean }) {
-    console.log(isVisible);
     return (
         <Header isVisible={isVisible}>
             <Logo src={LogoImage} />

@@ -26,8 +26,6 @@ export default function AddressInput() {
 
     const tryLogin = async (kakaoId: number) => {
         const responseData = await loginUser(kakaoId);
-      
-        console.log('회원가입 여부', responseData);
 
         if (responseData) {
             setTimeout(() => {
@@ -79,8 +77,6 @@ export default function AddressInput() {
             window.visualViewport?.addEventListener('resize', handleResize);
         };
     }, [address, addressDetail]);
-
-    // console.log(user)
 
     return isLoading ? (
         isComplete ? (

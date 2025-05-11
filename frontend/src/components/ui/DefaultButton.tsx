@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 const ButtonContainer = styled.div`
     position: fixed;
+    max-width: 500px;
     bottom: 0;
     padding: 2rem;
     background-color: #18171d;

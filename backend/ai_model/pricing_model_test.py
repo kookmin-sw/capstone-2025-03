@@ -5,9 +5,9 @@ import re
 import joblib
 import pandas as pd
 import numpy as np
+import difflib
 from datetime import datetime
 from konlpy.tag import Okt
-# from kiwipiepy import Kiwi
 from sklearn.preprocessing import StandardScaler
 
 MODEL_DIR = "./ai_model/versions"
@@ -42,6 +42,28 @@ except Exception as e:
     print(f"output_with_price_category.csv 로딩 실패: {e}")
     sys.exit(1)
 
+def extract_tokens(text: str) -> list:
+    return re.findall(r'[\w가-힣]+', text.lower())
+
+def contains_query_tokens(candidate: str, query: str) -> bool:
+    candidate_tokens = extract_tokens(candidate)
+    query_tokens = extract_tokens(query)
+    return all(any(q in ct for ct in candidate_tokens) for q in query_tokens)
+
+def fuzzy_ratio(query: str, title: str) -> float:
+    query_norm = "".join(extract_tokens(query))
+    title_norm = "".join(extract_tokens(title))
+    return difflib.SequenceMatcher(None, query_norm, title_norm).ratio()
+
+def hybrid_title_search(query: str, df: pd.DataFrame, title_col="TITLE") -> pd.DataFrame:
+    candidates = df[df[title_col].apply(lambda x: contains_query_tokens(x, query))]
+    if candidates.empty:
+        return None
+    candidates = candidates.copy()
+    candidates["fuzzy_score"] = candidates[title_col].apply(lambda x: fuzzy_ratio(query, x))
+    candidates.sort_values("fuzzy_score", ascending=False, inplace=True)
+    return candidates
+
 def multi_hot_encode_industry(industry_str, all_inds):
     row_dict = {}
     inds = [i.strip() for i in str(industry_str).split(',') if i.strip()]
@@ -55,32 +77,36 @@ def preprocess_title(text):
     if pd.isna(text):
         return ""
     okt = Okt()
-    # kiwi = Kiwi()
     tokens = okt.morphs(text)
-    # tokens = kiwi.tokenize(text)
-    stopwords = ["의", "가", "이", "은", "들", "는", "좀", "잘", "걍", "과", "도", "를", "으로", "자", "에", "와", "한", "하다"]
+    stopwords = {"의", "가", "이", "은", "들", "는", "좀", "잘", "걍", "과", "도", "를", "으로", "자", "에", "와", "한", "하다"}
     tokens = [token for token in tokens if token not in stopwords]
-    # token_strs = [token.form for token in tokens if token.form not in stopwords]
     return " ".join(tokens)
 
 def prepare_input_from_product(product_json: dict) -> pd.DataFrame:
     full_title = str(product_json.get("name", "UNKNOWN")).strip()
     
-    matched = df_main[df_main["TITLE"].str.contains(full_title, na=False)]
-    if not matched.empty:
-        category_str = matched.iloc[0]["CATEGORY"]
-        industry_str = str(matched.iloc[0].get("INDUSTRY", "기타"))
-        popularity_score = matched.iloc[0].get("POPULARITY_SCORE", 0)
-        category_pop_score = matched.iloc[0].get("CATEGORY_POPULARITY_SCORE", 0)
-        price_category_val = str(matched.iloc[0].get("PRICE_CATEGORY", "Mid"))
+    candidates = hybrid_title_search(full_title, df_main, title_col="TITLE")
+    if candidates is not None and not candidates.empty:
+        print("검색된 후보 목록:")
+        for idx, row in candidates.iterrows():
+            print(f"  - {row['TITLE']} (유사도: {fuzzy_ratio(full_title, row['TITLE']):.2f})")
+        best_candidate = candidates.iloc[0] 
+    else:
+        best_candidate = None
+        print("일치하는 후보를 찾지 못했습니다. 기본값 사용합니다.")
+
+    if best_candidate is not None:
+        category_str = best_candidate["CATEGORY"]
+        industry_str = str(best_candidate.get("INDUSTRY", "기타"))
+        popularity_score = best_candidate.get("POPULARITY_SCORE", 0)
+        category_pop_score = best_candidate.get("CATEGORY_POPULARITY_SCORE", 0)
+        price_category_val = str(best_candidate.get("PRICE_CATEGORY", "Mid"))
     else:
         category_str = full_title  
         industry_str = "기타"
         popularity_score = 0
         category_pop_score = 0
         price_category_val = "Mid"
-    
-    print(f"검색된 업종: {industry_str}")
     
     industry_encoded = multi_hot_encode_industry(industry_str, all_industries)
     

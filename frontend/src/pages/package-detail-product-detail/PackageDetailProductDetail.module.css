@@ -1,5 +1,5 @@
 .page {
-    padding-top: 8rem;
+    padding-top: 0;
     min-height: 100vh;
     background-color: #18171d;
     display: flex;
@@ -13,10 +13,29 @@
     -ms-overflow-style: none;
 }
 
+.nameAndLikeContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.likeButton {
+    width: 3rem;
+    height: 3rem;
+    background-size: cover;
+    margin-right: 2rem;
+}
+
+
 .thumbnail {
     width: 100%;
     height: auto;
     margin-bottom: 3rem;
+}
+
+.categoryAndGradeWrapper {
+    display: flex;
+    flex-direction: row;
 }
 
 .category {
@@ -24,11 +43,14 @@
     font-size: 1.4rem;
     color: #7f7f89;
     margin-bottom: 1rem;
+    text-decoration: underline;
 }
 
 .product {
     margin-left: 2rem;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 1.8rem;
     margin-bottom: 1rem;
 }
 
@@ -45,6 +67,26 @@
     font-weight: bold;
 }
 
+.descriptionContainer {
+    background-color: #18171d;
+    font-size: 1.7rem;
+    min-height: 5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 2rem;
+}
+
+.devider {
+    width: 90%;
+    height: 0.1rem;
+    background-color: #2e2e2e;
+    margin: 2rem auto;
+}
+
 .buttonContainer {
     padding: 2rem;
 }
+

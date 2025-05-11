@@ -19,7 +19,6 @@
     border-radius: 1.2rem;
     background-color: #202028;
     margin-bottom: 3rem;
-    pointer-events: none;
 }
 
 .titleContainer {
@@ -73,7 +72,9 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-}
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #2a2a2a;
+} 
 
 .productThumbnail {
     width: 6rem;

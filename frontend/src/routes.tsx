@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 const pages = import.meta.glob('./pages/**/[A-Z]*.tsx');
 
-const routes = Object.keys(pages).map((path) => {
+const staticRoutes = Object.keys(pages).map((path) => {
     // 파일 경로에서 라우트 경로 추출
     const routePath = path
         .replace('./pages', '')
@@ -11,9 +11,18 @@ const routes = Object.keys(pages).map((path) => {
         .replace(/\[(.*?)\]/g, ':$1'); // 동적 라우팅 처리
 
     return {
-        path: routePath === '/home' ? '/' : routePath, // /main은 루트(/)로 설정
+        path: routePath === '/landing-page' ? '/' : routePath, // /main은 루트(/)로 설정
         Component: lazy(pages[path] as any), // Lazy loading 적용
     };
 });
+
+export const dynamicRoutes = [
+    {
+      path: '/category/:id',
+      Component: lazy(() => import('./pages/category/[id].tsx')),
+    },
+  ];
+
+const routes = [...staticRoutes, ...dynamicRoutes]
 
 export default routes;

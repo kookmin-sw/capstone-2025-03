@@ -1,9 +1,10 @@
 .page {
-    height: 100%;
+    height: 100vh;
     background-color: #101012;
     display: flex;
     flex-direction: column;
     padding-bottom: calc(12rem + env(safe-area-inset-bottom));
+    overflow-x: hidden;
 }
 
 .section {
@@ -49,6 +50,7 @@
     color: white;
     font-weight: bold;
     margin-bottom: 3rem;
+    margin-top: 3rem;
 }
 
 .formContainer {
@@ -70,7 +72,6 @@
 }
 
 .submitButton {
-    position: fixed;
     width: calc(100% - 4rem);
     height: 6rem;
     background-color: #01a26c;
@@ -78,14 +79,11 @@
     border-radius: 1rem;
     font-size: 1.8rem;
     font-weight: bold;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
     cursor: pointer;
 }
 
 .submitButtonSection {
-    left: 0;
+    max-width: 500px;
     position: fixed;
     bottom: 0;
     background-color: black;
@@ -95,6 +93,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .submitButton:disabled {
     background-color: #12332d;
 }
@@ -113,5 +112,73 @@
 .buttonContainer {
     display: flex;
     justify-content: center;
-    gap:10px;
+    gap: 10px;
+}
+
+.imageUploadWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.thumbnailList {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 100%;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.thumbnailList::-webkit-scrollbar {
+    display: none;
+}
+
+.thumbnailItem {
+    flex-shrink: 0;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.imageButtonImage {
+    pointer-events: none;
+}
+
+.representLabel {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 0.2rem 0;
+    border-bottom-left-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+}
+
+.thumbnailImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.4rem;
+}
+
+.deleteButton {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    cursor: pointer;
 }

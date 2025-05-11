@@ -8,7 +8,6 @@ from .filters import PackageFilter
 
 # ✅ 1. 전체 패키지 조회 및 생성 (ListCreateAPIView)
 class PackageListCreateView(generics.ListCreateAPIView):
-    queryset = Package.objects.all()
     serializer_class = PackageSerializer
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
     filterset_class = PackageFilter
@@ -16,7 +15,8 @@ class PackageListCreateView(generics.ListCreateAPIView):
     pagination_class = LargeResultsSetPagination  
 
     def get_queryset(self):
-        queryset = Package.objects.all()
+
+        queryset = Package.objects.select_related('industry').prefetch_related('categories', 'products')
 
         industry = self.request.query_params.get('industry', None)
 
@@ -27,5 +27,5 @@ class PackageListCreateView(generics.ListCreateAPIView):
 
 # ✅ 2. 특정 패키지 조회, 수정, 삭제 가능 (RetrieveUpdateDestroyAPIView)
 class PackageDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Package.objects.all()
+    queryset = Package.objects.select_related('industry').prefetch_related('categories', 'products')
     serializer_class = PackageSerializer

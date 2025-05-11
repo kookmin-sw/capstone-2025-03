@@ -79,46 +79,46 @@ export default function SellerSalesListAddProduct() {
     const handleClickConfirmButton = () => {
         navigate('/seller-saleslist-productdetail');
     };
-
     return (
         <div className={styles.page}>
             <div className={styles.section}>
                 <BackButtonForAddProduct />
                 <p className={styles.title}>물품 판매하기</p>
-                <button className={styles.imageButton} onClick={handleAddImage}>
+                <div className={styles.imageUploadWrapper}>
                     <input
-                        className={styles.imageInput}
                         type="file"
-                        ref={fileInputRef}
                         accept="image/*"
-                        style={{ display: 'none' }}
+                        ref={fileInputRef}
                         onChange={handleFileChange}
+                        style={{ display: 'none' }}
                     />
-                    {isUploading ? (
-                        <Spinner
-                            color="#00A36C"
-                            borderWidth="0.3rem"
-                            style={{ width: '3rem', height: '3rem' }}
+                    <button className={styles.imageButton} onClick={handleAddImage}>
+                        {/* 대표 이미지 or placeholder */}
+                        <img
+                            src="/images/seller/empty_image.png"
+                            className={styles.imageButtonImage}
                         />
-                    ) : (
-                        <>
-                            <img
-                                className={
-                                    imageSrc !== '/images/seller/empty_image.png'
-                                        ? styles.uploadedImage
-                                        : styles.defaultImage
-                                }
-                                src={imageSrc}
-                                width={
-                                    imageSrc !== '/images/seller/empty_image.png' ? '100%' : '30px'
-                                }
-                            />
-                            {imageSrc === '/images/seller/empty_image.png' ? (
-                                <span>물품 이미지를 업로드해주세요</span>
-                            ) : null}
-                        </>
-                    )}
-                </button>
+                    </button>
+                    <div className={styles.thumbnailList}>
+                        {sellerProduct.images.slice(0).map((img, idx) => (
+                            <div key={idx} className={styles.thumbnailItem}>
+                                <img src={img} className={styles.thumbnailImage} />
+                                <button
+                                    className={styles.deleteButton}
+                                    onClick={() =>
+                                        setSellerProduct((prev) => prev.removeImage(img))
+                                    }
+                                >
+                                    ×
+                                </button>
+                                {idx === 0 && (
+                                    <div className={styles.representLabel}>대표 사진</div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 <p className={styles.subtitle}>물품 정보</p>
                 <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
                     <input
@@ -135,6 +135,12 @@ export default function SellerSalesListAddProduct() {
                         onChange={(e) =>
                             setSellerProduct((prev) => prev.copyWith({ name: e.target.value }))
                         }
+                    />
+                    <textarea
+                        value={sellerProduct.description ?? ''}
+                        className={styles.input}
+                        placeholder="설명"
+                        onChange={(e) => setSellerProduct((prev) => prev.copyWith({ description: e.target.value }))}
                     />
                     <input
                         value={sellerProduct.quantity ?? ''}
@@ -171,15 +177,16 @@ export default function SellerSalesListAddProduct() {
                         })}
                     </div>
                 </form>
-                <div className={styles.submitButtonSection}>
-                    <button
-                        className={styles.submitButton}
-                        disabled={!isButtonValid}
-                        onClick={handleClickConfirmButton}
-                    >
-                        확인
-                    </button>
-                </div>
+
+            </div>
+            <div className={styles.submitButtonSection}>
+                <button
+                    className={styles.submitButton}
+                    disabled={!isButtonValid}
+                    onClick={handleClickConfirmButton}
+                >
+                    확인
+                </button>
             </div>
         </div>
     );

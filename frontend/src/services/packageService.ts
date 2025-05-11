@@ -11,10 +11,10 @@ const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/packages`;
  * @param {number} pageSize - 한 페이지에 불러올 패키지 개수
  * @param {string} industry - 업종
  * @returns {Promise<{
-*   results: PackageModel[];       // 파싱된 패키지 모델 리스트
-*   next: string | null;           // 다음 페이지 URL (더 이상 없으면 null)
-* } | null>} - 요청 실패 시 null 반환
-*/
+ *   results: PackageModel[];       // 파싱된 패키지 모델 리스트
+ *   next: string | null;           // 다음 페이지 URL (더 이상 없으면 null)
+ * } | null>} - 요청 실패 시 null 반환
+ */
 export const getPackageListInService = async (
     nextPageUrl: string | null,
     pageSize: number,
@@ -25,9 +25,9 @@ export const getPackageListInService = async (
 } | null> => {
     try {
         // industry가 있을 때만 params에 포함
-        const params: any = {page_size: pageSize};
-        if(industry!='all'){
-            params.industry = industry
+        const params: any = { page_size: pageSize };
+        if (industry != 'all') {
+            params.industry = industry;
         }
         const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
         const response = await axios.get(requestUrl, { params });
@@ -44,6 +44,26 @@ export const getPackageListInService = async (
 };
 
 /**
+ * 특정 user에 해당하는 모든 커스텀 패키지를 가져옵니다 (페이지네이션 없음).
+ * @param {number} user - 사용자 ID
+ * @returns {Promise<PackageModel[] | null>}
+ */
+export const getPackageListByUserInService = async (
+    user: number,
+): Promise<PackageModel[] | null> => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/`, {
+            params: { user: user },
+        });
+        const data = response.data;
+        return data.results.map((pkg: any) => PackageModel.fromJson(pkg));
+    } catch (error) {
+        console.error('Error fetching all packages by user:', error);
+        return null;
+    }
+};
+
+/**
  * 패키지를 생성하고 서버에 저장합니다.
  * @param {PackageModel} packageData - 생성할 패키지 객체
  * @returns {Promise<PackageModel | null>}
@@ -52,7 +72,7 @@ export const createPackageInService = async (
     packageData: PackageModel,
 ): Promise<PackageModel | null> => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutId());
+        const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutIdForCU());
         return PackageModel.fromJson(response.data);
     } catch (error) {
         console.error('Error creating package:', error);
