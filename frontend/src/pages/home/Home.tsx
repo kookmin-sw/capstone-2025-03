@@ -1,4 +1,5 @@
 import styles from './Home.module.css';
+import styled from '@emotion/styled';
 import MainHeader from '@/src/components/layout/MainHeader';
 import Footer from '@/src/components/layout/MenuFooter';
 import PackageItem from '@/src/components/ui/PackageItem';
@@ -13,6 +14,13 @@ import IndustryModel from '@/src/models/IndustryModel';
 import industryData from '@/src/data/industryData.json';
 import HomeSkeleton from '@/src/components/ui/HomeSkeleton';
 import PackageItemSkeleton from '@/src/components/ui/PackageItemSkeleton';
+
+const Divider = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color: #2e2e2e;
+    margin-top: 1.6rem;
+`;
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -112,7 +120,12 @@ export default function Home() {
                     <p className={styles.listViewTitle}>전체보기</p>
                     <div className={styles.packageListView}>
                         {packageList.map((pkg, index) => {
-                            return <PackageItem key={index} pkg={pkg} fromDetail={false} />;
+                            return (
+                                <div key={pkg.id ?? index}>
+                                    <PackageItem key={index} pkg={pkg} fromDetail={false} />
+                                    {index !== packageList.length - 1 && <Divider />}
+                                </div>
+                            );
                         })}
                     </div>
                 </div>

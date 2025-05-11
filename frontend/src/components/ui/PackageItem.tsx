@@ -40,7 +40,7 @@ const Description = styled.p`
 const Price = styled.p`
     font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 `;
 
 const CategoryContainer = styled.div`
@@ -52,12 +52,12 @@ const CategoryContainer = styled.div`
 `;
 
 const CategoryIcon = styled.img`
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.4rem;
+    height: 1.4rem;
 `;
 
 const CategoryText = styled.p`
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #7f7f89;
 `;
 

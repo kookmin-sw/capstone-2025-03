@@ -89,7 +89,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    gap: 3rem;
+    gap: 1.6rem;
     margin-bottom: 5rem;
     overflow: visible;
 }
