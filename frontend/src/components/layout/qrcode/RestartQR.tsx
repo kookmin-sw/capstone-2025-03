@@ -46,7 +46,6 @@ const QrNitofication = styled.p`
 `;
 
 export default function RestartQR() {
-    console.log(QRImage);
     return (
         <RestartQr>
             <img src={QRImage} />

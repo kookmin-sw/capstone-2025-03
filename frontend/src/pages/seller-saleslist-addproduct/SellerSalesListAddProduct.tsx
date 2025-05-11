@@ -79,7 +79,6 @@ export default function SellerSalesListAddProduct() {
     const handleClickConfirmButton = () => {
         navigate('/seller-saleslist-productdetail');
     };
-    console.log(sellerProduct.images);
     return (
         <div className={styles.page}>
             <div className={styles.section}>

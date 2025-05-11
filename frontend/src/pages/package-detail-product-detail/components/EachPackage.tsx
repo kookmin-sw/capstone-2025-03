@@ -73,8 +73,6 @@ export default function EachPackage({ data, isSelected, onToggle, productId }: E
     const isProductIncluded = productId ? products.some((p) => p.id === productId) : false;
     const [selected, setSelected] = useState<boolean>(isProductIncluded);
 
-    console.log(data);
-
     const renderGridImages = () => {
         return (
             <Grid>

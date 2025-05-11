@@ -73,7 +73,6 @@ type ProductItemProps = {
 
 export default function SellerProductItem({ product }: ProductItemProps) {
     const status = product.salesStatus === 'available' ? '판매 중' : '판매 완료';
-    // console.log(product.saleStatus)
     return (
         <Item>
             <Thumbnail src={product.images[0]} />

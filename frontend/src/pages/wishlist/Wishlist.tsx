@@ -7,7 +7,7 @@ import { useUser } from '@/src/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Wishlist() {
     // usestate
@@ -47,7 +47,6 @@ export default function Wishlist() {
         navigate('/package-detail', { state: { pkg: pkg } })
     }
 
-
     return (
         <div className={styles.page}>
             <div className={styles.section}>
@@ -82,6 +81,7 @@ export default function Wishlist() {
                         ))
                     }
                 </div>
+                <div style={{height: '10rem'}}></div>
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
