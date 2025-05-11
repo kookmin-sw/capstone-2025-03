@@ -103,7 +103,12 @@ export default function PackageSelectSheet({
 
     const { data } = useCustomPackagesByUser(userId);
 
-    const [selectedPackageIds, setSelectedPackageIds] = useState<number[]>([]);
+    const initialIncludedPackageIds =
+        data?.filter((pkg) => pkg.products.some((p) => p.id === productId))
+            .map((pkg) => pkg.id)
+            .filter((id): id is number => id !== null) || [];
+
+    const [selectedPackageIds, setSelectedPackageIds] = useState<number[]>(initialIncludedPackageIds);
 
     const { mutateAsync: updatePackage } = useUpdatePackage();
 
@@ -113,8 +118,6 @@ export default function PackageSelectSheet({
             document.body.style.overflow = 'auto';
         };
     }, []);
-
-    console.log(data);
 
     const handleToggle = (id: number) => {
         setSelectedPackageIds((prev) =>
@@ -126,15 +129,22 @@ export default function PackageSelectSheet({
     const handleSubmitButtonClicked = async () => {
         if (!productId || !category) return;
 
+        // 선택된 패키지들
         const selectedPackages = data?.filter(
             (pkg) => pkg.id !== null && selectedPackageIds.includes(pkg.id),
         );
 
-        if (!selectedPackages) return;
+        // 선택 해제된 패키지들
+        const deselectedPackages = data?.filter(
+            (pkg) =>
+                pkg.id !== null &&
+                initialIncludedPackageIds.includes(pkg.id) &&
+                !selectedPackageIds.includes(pkg.id),
+        );
 
         let successCount = 0;
 
-        for (const pkg of selectedPackages) {
+        for (const pkg of selectedPackages || []) {
             // 기존 카테고리에 새 카테고리 추가 (중복 제거)
             const updatedCategories = Array.from(new Set([...pkg.categories, category]));
 
@@ -143,6 +153,7 @@ export default function PackageSelectSheet({
                 new Set([...pkg.products.map((p) => p.id), productId]),
             );
 
+            // 요청 필드값 이름 바꿔야 해서 products 버림
             const { products, ...rest } = pkg;
 
             // 새로운 패키지 모델 객체 구성
@@ -160,12 +171,33 @@ export default function PackageSelectSheet({
             }
         }
 
-        if (successCount === selectedPackages.length) {
+        for (const pkg of deselectedPackages || []) {
+            const updatedProductIds = pkg.products
+                .filter((p) => p.id !== productId)
+                .map((p) => p.id);
+
+            const { products, ...rest } = pkg;
+
+            const updatedData: Partial<PackageModel> & { product_ids: number[] } = {
+                ...rest,
+                product_ids: updatedProductIds.filter((id): id is number => id !== null),
+            };
+
+            try {
+                await updatePackage({ id: pkg.id!, updatedData });
+            } catch (error) {
+                console.error(`패키지 ${pkg.id} 제거 실패`, error);
+            }
+        }
+
+        if (successCount === selectedPackages?.length) {
             onSubmitSuccess();
         }
 
         onClose();
     };
+
+    console.log(selectedPackageIds);
 
     return (
         <>
@@ -187,6 +219,7 @@ export default function PackageSelectSheet({
                                         item.id !== null && selectedPackageIds.includes(item.id)
                                     }
                                     onToggle={() => item.id !== null && handleToggle(item.id)}
+                                    productId={productId}
                                 />
                             ))}
                         </PackageGrid>

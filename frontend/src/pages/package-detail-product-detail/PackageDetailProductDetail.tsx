@@ -4,13 +4,14 @@ import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import { useCategory } from '@/src/hooks/useCategory';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
 import { useRef, useEffect } from 'react';
 import ProductRecommend from './components/ProductRecommend';
 import FavoriteNotFillIcon from '../../assets/images/page/wishlist/favorite_not_fill.png';
 import FavoriteIcon from '../../assets/images/page/wishlist/favorite_fill.png';
 import PackageSelectSheet from './components/PackageSelectSheet';
+import { useCustomPackagesByUser } from '@/src/hooks/useCustomPackage';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -20,7 +21,6 @@ export default function PackageDetailProductDetail() {
     const reset = state?.reset;
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
-    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const [isPackageSelectSheetOpen, setIsPackageSelectSheetOpen] = useState<boolean>(false);
 
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -28,9 +28,18 @@ export default function PackageDetailProductDetail() {
     // hook
     const { categories } = useCategory();
 
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const userId = user.id;
+    const { data: userPackages } = useCustomPackagesByUser(userId);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [product.id]);
+
+    const isFavorite = useMemo(() => {
+        if (!userPackages || !product?.id) return false;
+        return userPackages.some((pkg) => pkg.products.some((p) => p.id === product.id));
+    }, [userPackages, product]);
 
     // Function
     const handleButtonClick = () => {
@@ -104,7 +113,6 @@ export default function PackageDetailProductDetail() {
                     category={product.category}
                     onClose={() => setIsPackageSelectSheetOpen(false)}
                     onSubmitSuccess={() => {
-                        setIsFavorite(true);
                         setIsPackageSelectSheetOpen(false);
                     }}
                 />

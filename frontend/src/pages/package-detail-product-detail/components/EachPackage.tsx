@@ -64,11 +64,16 @@ type EachPackageProps = {
     data: PackageModel;
     isSelected: boolean;
     onToggle: () => void;
+    productId: number | null;
 };
 
-export default function EachPackage({ data, isSelected, onToggle }: EachPackageProps) {
+export default function EachPackage({ data, isSelected, onToggle, productId }: EachPackageProps) {
     const { products, name } = data;
-    const [selected, setSelected] = useState<boolean>(false);
+
+    const isProductIncluded = productId ? products.some((p) => p.id === productId) : false;
+    const [selected, setSelected] = useState<boolean>(isProductIncluded);
+
+    console.log(data);
 
     const renderGridImages = () => {
         return (
