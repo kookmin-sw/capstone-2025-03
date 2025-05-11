@@ -24,11 +24,11 @@ type PageResponse = {
 
 export const useInfiniteProductRecommendation = () => {
     return useInfiniteQuery<
-        PageResponse, // queryFn return type
-        Error, // error type
-        InfiniteData<PageResponse>, // final type returned
-        string[], // queryKey
-        number[] // pageParam
+        PageResponse,
+        Error,
+        InfiniteData<PageResponse>,
+        string[],
+        number[]
     >({
         queryKey: ['random-categories'],
         queryFn: async ({ pageParam = [] }) => {
