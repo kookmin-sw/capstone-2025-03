@@ -164,6 +164,8 @@ export default function PackageSelectSheet({
             );
 
             // 요청 필드값 이름 바꿔야 해서 products 버림
+            // 요청에서 제외하기 위한 구조분해이므로 Lint 규칙 비활성화
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { products, ...rest } = pkg;
 
             // 새로운 패키지 모델 객체 구성
@@ -186,6 +188,7 @@ export default function PackageSelectSheet({
                 .filter((p) => p.id !== productId)
                 .map((p) => p.id);
 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars   
             const { products, ...rest } = pkg;
 
             const updatedData: Partial<PackageModel> & { product_ids: number[] } = {
