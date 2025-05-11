@@ -3,7 +3,6 @@ import styles from './PackageDetailProductDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
-import { useCategory } from '@/src/hooks/useCategory';
 import React, { useState, useMemo } from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
 import { useRef, useEffect } from 'react';
@@ -25,9 +24,6 @@ export default function PackageDetailProductDetail() {
 
     const carouselRef = useRef<HTMLDivElement>(null);
 
-    // hook
-    const { categories } = useCategory();
-
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const userId = user.id;
     const { data: userPackages } = useCustomPackagesByUser(userId);
@@ -46,12 +42,14 @@ export default function PackageDetailProductDetail() {
         window.location.href = product.originUrl ?? 'https://naver.com';
     };
 
-    //TODO: 찜 하면 패키지에 넣는 로직 넣기, 물품에 찜 필드값 추가하기
     const handleClickFavorite = () => {
-        // setIsFavorite(!isFavorite);
         setIsPackageSelectSheetOpen(true);
     };
-    console.log(product);
+
+    const productIdList = useMemo(() => {
+        return product.id ? [product.id] : [];
+    }, [product.id]);
+
     return (
         <div className={styles.page}>
             <BackHeaderForPackageDetail targetRef={carouselRef} />
@@ -95,7 +93,7 @@ export default function PackageDetailProductDetail() {
                 <div className={styles.devider}></div>
                 <ProductRecommend
                     categoryId={product.category}
-                    productId={product.id ? [product.id] : []}
+                    productId={productIdList}
                     categoryName={product.categoryName}
                 />
                 <div style={{ height: '20rem' }} />
