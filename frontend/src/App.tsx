@@ -8,6 +8,8 @@ import { SellerProductProvider } from './contexts/SellerProductContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RestartQR from './components/layout/qrcode/RestartQR';
 
+const queryClient = new QueryClient();
+
 export default function App() {
     return (
         <Router>
@@ -16,10 +18,10 @@ export default function App() {
     );
 }
 
+
 export function MainLayout() {
     const navigate = useNavigate();
     const isLogin = localStorage.getItem('user');
-    const queryClient = new QueryClient();
 
     useEffect(() => {
         const excludePaths = ['/name-and-birth-day-input', '/address-input', '/address-search'];

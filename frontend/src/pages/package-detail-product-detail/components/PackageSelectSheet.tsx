@@ -210,8 +210,6 @@ export default function PackageSelectSheet({
         onClose();
     };
 
-    console.log(selectedPackageIds);
-
     return (
         <>
             <Backdrop onClick={onClose}>
