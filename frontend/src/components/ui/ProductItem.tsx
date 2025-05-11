@@ -10,11 +10,12 @@ const Item = styled.div`
 `;
 
 const Thumbnail = styled.img`
-    object-fit: contain;
+    object-fit: cover;
     width: 12rem;
     height: 12rem;
     border-radius: 2rem;
     margin-right: 1rem;
+    aspect-ratio: 1 / 1;
 `;
 
 const ContentContainer = styled.div`
@@ -32,7 +33,7 @@ const Title = styled.p`
 
 const GradeAndAmount = styled.p`
     font-size: 1.4rem;
-    color: #7f7f89;
+    color: #a0a0a0;
 `;
 
 const Price = styled.p`
