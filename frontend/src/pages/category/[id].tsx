@@ -25,13 +25,6 @@ const CategoryName = styled.p`
     padding: 2rem;
 `;
 
-const SpinnerWrapper = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`;
-
 export default function Category() {
     const navigate = useNavigate();
     const [products, setProducts] = useState<ProductModel[]>([]);

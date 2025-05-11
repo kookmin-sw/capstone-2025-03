@@ -67,7 +67,7 @@ type EachPackageProps = {
     productId: number | null;
 };
 
-export default function EachPackage({ data, isSelected, onToggle, productId }: EachPackageProps) {
+export default function EachPackage({ data, onToggle, productId }: EachPackageProps) {
     const { products, name } = data;
 
     const isProductIncluded = productId ? products.some((p) => p.id === productId) : false;

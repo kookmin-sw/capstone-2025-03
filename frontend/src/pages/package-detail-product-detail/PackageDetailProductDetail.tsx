@@ -1,7 +1,7 @@
 import BackHeaderForPackageDetail from './components/BackHeaderForPackageDetail';
 import styles from './PackageDetailProductDetail.module.css';
 import DefaultButton from '@/src/components/ui/DefaultButton';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ProductModel from '@/src/models/ProductModel';
 import React, { useState, useMemo } from 'react';
 import CarouselImageViewer from './components/CarouselImageViewer';
@@ -16,6 +16,7 @@ export default function PackageDetailProductDetail() {
     // page connection
     const location = useLocation();
     const { state } = useLocation();
+    const navigate = useNavigate();
     const reset = state?.reset;
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
@@ -69,7 +70,7 @@ export default function PackageDetailProductDetail() {
                 <div className={styles.categoryAndGradeWrapper}>
                     <p
                         className={styles.category}
-                        onClick={() => navitgate(`/category/${product.category}`)}
+                        onClick={() => navigate(`/category/${product.category}`)}
                     >
                         {product.categoryName}
                     </p>

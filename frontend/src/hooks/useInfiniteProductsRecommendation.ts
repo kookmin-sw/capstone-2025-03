@@ -61,7 +61,7 @@ export const useInfiniteProductRecommendation = () => {
             return { data, newCategoryIds };
         },
         initialPageParam: [],
-        getNextPageParam: (lastPage, allPages) => {
+        getNextPageParam: (_, allPages) => {
             const accumulatedIds = allPages.flatMap((page) => page.newCategoryIds);
             return accumulatedIds.length > 0 ? [...new Set(accumulatedIds)] : undefined;
         },

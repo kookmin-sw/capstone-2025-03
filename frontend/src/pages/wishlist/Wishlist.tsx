@@ -7,7 +7,7 @@ import { useUser } from '@/src/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Wishlist() {
     // usestate
