@@ -36,6 +36,10 @@ const ResfreshButton = styled.button`
     font-size: 1.4rem;
     font-weight: 600;
     padding: 1rem;
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 const RefreshImage = styled.img`

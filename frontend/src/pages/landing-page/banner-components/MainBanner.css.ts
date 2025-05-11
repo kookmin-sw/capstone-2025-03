@@ -81,7 +81,7 @@ export const CarouselSlider = styled.li`
     display: flex;
     align-items: center;
     flex-direction: column;
-    cursor: pointer;
+    /* cursor: pointer; */
 `;
 
 export const CarouselImage = styled.img`
@@ -100,6 +100,10 @@ export const CarouselImage = styled.img`
     @media (min-width: 501px) {
         width: 31.6rem;
         height: 31.6rem;
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 `;
 
