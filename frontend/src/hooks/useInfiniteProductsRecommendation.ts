@@ -1,6 +1,6 @@
 import { useInfiniteQuery, InfiniteData } from '@tanstack/react-query';
 import { getRandomCategoriesInService } from '@/src/services/categoryService';
-import SeeMore from '@/src/assets/images/landing-page/see-more.png';
+import ArrowFront from "../assets/images/page/wishlist/arrow_front.png"
 
 type CategoryResult = {
     categoryId: number;
@@ -49,7 +49,7 @@ export const useInfiniteProductRecommendation = () => {
                         type: 'product',
                     })),
                     {
-                        thumbnail: SeeMore,
+                        thumbnail: ArrowFront,
                         name: '더보기',
                         grade: '',
                         price: '',
