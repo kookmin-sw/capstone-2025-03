@@ -3,6 +3,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 500px;
+    margin: auto;
+    color: #ffffff;
 }
 
 .title {
@@ -12,8 +15,8 @@
 
 .mainContainer {
     background-color: #18171d;
-    height: 140vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -40,10 +43,11 @@
 
 .imageContainer {
     object-fit: contain;
-    width: 58rem;
+    width: 100%;
     padding-top: 9.5rem;
     padding-left: 4rem;
     padding-right: 4rem;
+    padding-bottom: 10rem;
 }
 
 .gradientBox {
@@ -63,7 +67,8 @@
 
 .kakaoLoginButton {
     position: fixed;
-    width: calc(100% - 4rem);
+    width: 100%;
+    max-width: 42rem;
     height: 6rem;
     background-color: #fee500;
     color: black;
