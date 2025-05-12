@@ -39,9 +39,13 @@ const Title = styled.input`
 
 const Description = styled.input`
     width: 90%;
+    height: auto;
+    background-color: #2c2c36;
+    padding: 0.8rem;
+    border-radius: 1.2rem;
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
-    background: transparent;
+    /* background: transparent; */
     outline: none;
 `;
 
@@ -86,44 +90,44 @@ const OneThumbnail = styled.img`
 `;
 
 const TwoGrid = styled.div`
-  display: flex;
+    display: flex;
 `;
 
 const ThreeGrid = styled.div`
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `;
 
 const ThreeTop = styled.div`
-  flex: 1;
-  overflow: hidden;
+    flex: 1;
+    overflow: hidden;
 `;
 
 const ThreeBottom = styled.div`
-  display: flex;
-  flex: 1;
+    display: flex;
+    flex: 1;
 `;
 
 const FourGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 `;
 
 const GridImage = styled.img`
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  flex: 1;
-  padding: 0.2rem;
-  border-radius: 0.6rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    flex: 1;
+    padding: 0.2rem;
+    border-radius: 0.6rem;
 `;
 
 const LikeButton = styled.button`
     width: 2.4rem;
     height: 2.4rem;
     background-size: cover;
-`
+`;
 
 const SaveButton = styled.button`
     background-color: #03a36d;
@@ -132,8 +136,7 @@ const SaveButton = styled.button`
     border-radius: 0.8rem;
     font-size: 1.6rem;
     font-weight: 600;
-`
-
+`;
 
 type PackageProps = {
     pkg: PackageModel;
@@ -146,7 +149,16 @@ type PackageProps = {
     save: () => void;
 };
 
-export default function CustomPackageItem({ pkg, name, setName, description, setDescription, isFavorite, setIsFavorite, save }: PackageProps) {
+export default function CustomPackageItem({
+    pkg,
+    name,
+    setName,
+    description,
+    setDescription,
+    isFavorite,
+    setIsFavorite,
+    save,
+}: PackageProps) {
     const [price, setPrice] = useState(0);
     const { categories } = useCategory();
     const [categoryPreview, setCategoryPreview] = useState('');
@@ -160,7 +172,7 @@ export default function CustomPackageItem({ pkg, name, setName, description, set
                 count += 1;
             } else {
                 categoryNames.push(
-                    categories.find((category) => category.id === pkg.categories[i])?.name
+                    categories.find((category) => category.id === pkg.categories[i])?.name,
                 );
             }
         }
@@ -178,19 +190,15 @@ export default function CustomPackageItem({ pkg, name, setName, description, set
     // function
     const handleClickFavorite = () => {
         setIsFavorite(!isFavorite);
-    }
+    };
 
     // jsx
     const CustomThumbnail = () => {
         return (
             <ThumbnailContainer>
-                {pkg.products.length === 0 && (
-                    <OneThumbnail src={PackageAlternativeImage} />
-                )}
+                {pkg.products.length === 0 && <OneThumbnail src={PackageAlternativeImage} />}
 
-                {pkg.products.length === 1 && (
-                    <OneThumbnail src={pkg.products[0].images[0]} />
-                )}
+                {pkg.products.length === 1 && <OneThumbnail src={pkg.products[0].images[0]} />}
 
                 {pkg.products.length === 2 && (
                     <TwoGrid>
@@ -229,16 +237,28 @@ export default function CustomPackageItem({ pkg, name, setName, description, set
             <Item>
                 <CustomThumbnail />
                 <ContentContainer>
-                    <Title placeholder='패키지명' value={name ?? ''} onChange={(e) => setName(e.target.value)}></Title>
-                    <Description placeholder='설명' value={description ?? ''} onChange={(e) => setDescription(e.target.value)}></Description>
+                    <Title
+                        placeholder="패키지명"
+                        value={name ?? ''}
+                        onChange={(e) => setName(e.target.value)}
+                    ></Title>
+                    <Description
+                        placeholder="설명"
+                        value={description ?? ''}
+                        onChange={(e) => setDescription(e.target.value)}
+                    ></Description>
                     <Price>{price.toLocaleString()}원</Price>
                     <CategoryContainer>
                         <CategoryIcon src={WidgetImage} />
                         <CategoryText>{categoryPreview}</CategoryText>
                     </CategoryContainer>
                 </ContentContainer>
-                <LikeButton style={{ backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})` }} onClick={handleClickFavorite}>
-                </LikeButton>
+                <LikeButton
+                    style={{
+                        backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})`,
+                    }}
+                    onClick={handleClickFavorite}
+                ></LikeButton>
             </Item>
             <SaveButton onClick={save}>변경 사항 저장</SaveButton>
         </Card>
