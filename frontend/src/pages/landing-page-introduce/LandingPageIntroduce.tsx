@@ -1,4 +1,3 @@
-import * as React from 'react';
 import FullPageCarousel from './components/FullPageCarousel';
 import IntroduceMain from './components/IntroduceMain';
 import IntroduceTemplate from './components/IntroduceTemplate';

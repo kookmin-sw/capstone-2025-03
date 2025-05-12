@@ -33,10 +33,7 @@ const Text = styled.p`
 
 export default function MoreCard({
     categoryId,
-    thumbnail,
-    name,
-    grade,
-    price,
+    thumbnail
 }: MoreCardProps) {
     const navigate = useNavigate();
 

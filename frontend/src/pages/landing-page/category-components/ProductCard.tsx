@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useProduct } from '@/src/hooks/useProduct';
-import ProductModel from '@/src/models/ProductModel';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductCardSkeleton from '@/src/components/ui/ProductCardSkeleton';

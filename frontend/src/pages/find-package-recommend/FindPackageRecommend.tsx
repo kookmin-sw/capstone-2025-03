@@ -116,7 +116,7 @@ export default function FindPackageRecommend() {
                         Array.from({ length: 3 }).map((_, idx) => <PackageItemSkeleton key={idx} />)
                     ) : (
                         myPackages.map((pkg: PackageModel, index: number) => {
-                            return <PackageItem key={index} pkg={pkg} />;
+                            return <PackageItem key={index} pkg={pkg} fromDetail={false}/>;
                         })
                     )}
                 </div>

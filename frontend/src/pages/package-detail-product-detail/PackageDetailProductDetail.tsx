@@ -14,9 +14,9 @@ import { useCustomPackagesByUser } from '@/src/hooks/useCustomPackage';
 
 export default function PackageDetailProductDetail() {
     // page connection
-    const navitgate = useNavigate();
     const location = useLocation();
     const { state } = useLocation();
+    const navigate = useNavigate();
     const reset = state?.reset;
     const product: ProductModel = ProductModel.fromJson(location.state?.product || {});
 
@@ -70,7 +70,7 @@ export default function PackageDetailProductDetail() {
                 <div className={styles.categoryAndGradeWrapper}>
                     <p
                         className={styles.category}
-                        onClick={() => navitgate(`/category/${product.category}`)}
+                        onClick={() => navigate(`/category/${product.category}`)}
                     >
                         {product.categoryName}
                     </p>

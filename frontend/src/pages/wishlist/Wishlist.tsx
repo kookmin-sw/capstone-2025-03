@@ -47,7 +47,6 @@ export default function Wishlist() {
         navigate('/package-detail', { state: { pkg: pkg } })
     }
 
-
     return (
         <div className={styles.page}>
             <div className={styles.section}>
@@ -82,6 +81,7 @@ export default function Wishlist() {
                         ))
                     }
                 </div>
+                <div style={{height: '10rem'}}></div>
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>

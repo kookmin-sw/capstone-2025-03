@@ -7,7 +7,6 @@ import { uploadProductImageInService } from '@/src/services/sellerProductService
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Spinner } from '@chakra-ui/react';
 import BasicButton from './components/BasicButton';
 
 export default function SellerSalesListAddProduct() {
@@ -22,7 +21,7 @@ export default function SellerSalesListAddProduct() {
     const reset = state?.reset;
 
     // useState
-    const [isUploading, setIsUploading] = useState<boolean>(false);
+    const [, setIsUploading] = useState<boolean>(false);
 
     // useRef
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -37,8 +36,6 @@ export default function SellerSalesListAddProduct() {
         !!sellerProduct.name &&
         !!sellerProduct.grade &&
         !!sellerProduct.quantity;
-
-    const imageSrc = sellerProduct.images?.[0] || '/images/seller/empty_image.png';
 
     useEffect(() => {
         if (reset) {
@@ -79,7 +76,6 @@ export default function SellerSalesListAddProduct() {
     const handleClickConfirmButton = () => {
         navigate('/seller-saleslist-productdetail');
     };
-    console.log(sellerProduct.images);
     return (
         <div className={styles.page}>
             <div className={styles.section}>

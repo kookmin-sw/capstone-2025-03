@@ -170,7 +170,6 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
 
     // function
     const handleClickFavorite = async (pkg: PackageModel) => {
-        console.log(pkg.toJson());
         if (isLoading) return;
         setIsLoading(true);
         setIsFavorite(!isFavorite);

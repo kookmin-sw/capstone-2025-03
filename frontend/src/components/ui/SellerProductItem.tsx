@@ -1,5 +1,6 @@
 // 판매자 페이지의 판매 중인 물품들 페이지입니다.
 
+import ProductModel from '@/src/models/ProductModel';
 import styled from '@emotion/styled';
 
 const Item = styled.div`
@@ -55,25 +56,11 @@ const StatusTag = styled.span<{ status: string }>`
 `;
 
 type ProductItemProps = {
-    product: {
-        buyer: number | null;
-        category: number | null;
-        description: string | null;
-        grade: string | null;
-        images: string[];
-        name: string | null;
-        price?: number | null;
-        purchaseDate: string | null;
-        quantity: number | null;
-        salesStatus: string | null;
-        seller: number | null;
-        uploadDate: string | null;
-    };
+    product: ProductModel;
 };
 
 export default function SellerProductItem({ product }: ProductItemProps) {
     const status = product.salesStatus === 'available' ? '판매 중' : '판매 완료';
-    // console.log(product.saleStatus)
     return (
         <Item>
             <Thumbnail src={product.images[0]} />
