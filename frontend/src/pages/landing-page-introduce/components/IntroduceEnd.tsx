@@ -31,7 +31,7 @@ export default function IntroduceEnd() {
                 RESTART는 그 사이를 연결해, 당신의 출발을 더 가치 있게 만들어주는 플랫폼입니다.<br />
                 지금 RESTART에서 당신에게 꼭 맞는 패키지를 찾아보세요
             </IntroEndDescription>
-            <IntroButton onClick={() => navigate('/')}>
+            <IntroButton onClick={() => navigate('/home')}>
                 패키지 보러가기
             </IntroButton>
             <IntroEndSeparator />
