@@ -12,15 +12,16 @@ const MainContainer = styled.div`
     background-color: #101012;
     min-height: 100vh;
     position: relative;
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
 `;
 
 const ProductWrapper = styled.div`
     background-color: #18171d;
+    min-height: 100vh;
 `;
 
 const ProductContainer = styled.div`
-    padding: 4rem 2rem 2rem 2rem;
+    padding: 4rem 2rem 0 2rem;
 `;
 
 export default function Category() {
@@ -70,10 +71,12 @@ export default function Category() {
                         ? Array.from({ length: 6 }).map((_, idx) => (
                               <SellerProductItemSkeleton key={idx} />
                           ))
-                        : filteredProducts.map((product) => (
+                        : filteredProducts.map((product, idx) => (
                               <div onClick={() => handleProductClick(product)} key={product.id}>
                                   <SellerProductItem product={product} />
-                                  <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
+                                  {idx !== filteredProducts.length - 1 && (
+                                      <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
+                                  )}
                               </div>
                           ))}
                 </ProductContainer>
