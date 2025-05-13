@@ -9,6 +9,8 @@
 .inputContainer {
     position: fixed;
     display: flex;
+    width: 100%;
+    max-width: 500px;
     align-items: center;
     background-color: #101012;
     padding-top: 1.2rem;

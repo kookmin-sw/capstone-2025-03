@@ -4,7 +4,7 @@ const SkeletonCard = styled.div`
     display: flex;
     min-width: 14rem;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 0.5rem;
 `;
 
 const SkeletonBox = styled.div`
