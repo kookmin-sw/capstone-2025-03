@@ -99,6 +99,26 @@
     padding-bottom: 1rem;
 }
 
+.imageUploadWrapper::-webkit-scrollbar {
+  display: none; /* 기본적으로 안 보이게 */
+}
+
+@media (min-width: 500px) {
+  .imageUploadWrapper::-webkit-scrollbar {
+    display: block;
+    height: 6px;
+  }
+
+  .imageUploadWrapper::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+
+  .imageUploadWrapper::-webkit-scrollbar-track {
+    background: #222;
+  }
+}
+
 .thumbnailItem {
     flex-shrink: 0;
     width: 9rem;
