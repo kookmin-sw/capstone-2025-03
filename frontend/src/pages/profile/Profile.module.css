@@ -30,6 +30,14 @@
     border-radius: 15rem;
 }
 
+.InfoAndSettingContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .title{
     width: 100%;
     text-align: left;
@@ -67,4 +75,11 @@
     font-size: 1.6rem;
     color: #ffffff;
     font-weight: 400;
+}
+
+.editingStyle {
+    padding: 0.8rem;
+    background-color: #2C2C36;
+    border-radius: 1.2rem;
+    width: 50%;
 }
