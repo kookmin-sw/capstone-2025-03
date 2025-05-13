@@ -166,7 +166,7 @@ export const autoplayProgress = keyframes`
 `;
 
 export const ProgressBar = styled.div`
-    background: ${color.grayScale.gray400};
+    background: gray;
     width: 100%;
     height: 100%;
     position: absolute;

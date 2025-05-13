@@ -8,7 +8,7 @@ import {
 } from './MainBanner.css';
 import { useCarousel } from '@/src/hooks/useCarousel';
 
-const CAROUSEL_AUTOPLAY_DELAY = 3_000;
+const CAROUSEL_AUTOPLAY_DELAY = 3000;
 
 const Carousel = Object.assign(BaseCarousel, { Slide: CarouselSlide });
 
