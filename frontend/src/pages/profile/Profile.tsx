@@ -6,11 +6,15 @@ import Address from '@/src/assets/images/profile/address.png';
 import House from '@/src/assets/images/profile/house.png';
 import Phone from '@/src/assets/images/profile/phone.png';
 import Setting from '@/src/assets/images/profile/gear.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useUserInputHandlers } from '@/src/hooks/useInputFormat';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Profile() {
     const currentMenuIndex = 4;
     const { user } = useUser();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [editedName, setEditedName] = useState<string>(user?.name ?? '');
@@ -20,9 +24,25 @@ export default function Profile() {
         `${user?.fullAddress ?? ''} ${user?.addressDetail ?? ''}`,
     );
 
+    const { formatPhoneNumber } = useUserInputHandlers();
+
     const handleToggleEdit = () => {
         setIsEditing((prev) => !prev);
     };
+
+    const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const formatted = formatPhoneNumber(e.target.value);
+        setEditedPhone(formatted); // editedPhone은 useState로 관리 중인 값
+    };
+
+    useEffect(() => {
+        const returnedAddress = location.state?.address;
+        if (returnedAddress) {
+            setEditedAddress(returnedAddress);
+            // 히스토리 정리 (옵션)
+            navigate(location.pathname, { replace: true, state: {} });
+        }
+    }, [location.state?.address]);
 
     return (
         <div className={styles.page}>
@@ -72,7 +92,7 @@ export default function Profile() {
                         {isEditing ? (
                             <input
                                 value={editedPhone}
-                                onChange={(e) => setEditedPhone(e.target.value)}
+                                onChange={handlePhoneInput}
                                 className={styles.editingStyle}
                             />
                         ) : (
@@ -86,7 +106,11 @@ export default function Profile() {
                         {isEditing ? (
                             <input
                                 value={editedAddress}
-                                onChange={(e) => setEditedAddress(e.target.value)}
+                                onClick={() =>
+                                    navigate('/address-search', {
+                                        state: { source: 'profile' },
+                                    })
+                                }
                                 className={styles.editingStyle}
                             />
                         ) : (

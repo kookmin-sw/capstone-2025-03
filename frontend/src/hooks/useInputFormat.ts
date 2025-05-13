@@ -47,5 +47,20 @@ export function useUserInputHandlers() {
         [setUser],
     );
 
-    return { handleBirthChange, handlePhoneNumberChange };
+    const formatPhoneNumber = (value: string): string => {
+        const raw = value.replace(/[^0-9]/g, '').slice(0, 11); // 최대 11자리 숫자만 허용
+        let result = '';
+
+        if (raw.length < 4) {
+            result = raw;
+        } else if (raw.length < 8) {
+            result = `${raw.slice(0, 3)}-${raw.slice(3)}`;
+        } else {
+            result = `${raw.slice(0, 3)}-${raw.slice(3, 7)}-${raw.slice(7, 11)}`;
+        }
+
+        return result;
+    };
+
+    return { handleBirthChange, handlePhoneNumberChange, formatPhoneNumber };
 }
