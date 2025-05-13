@@ -17,17 +17,10 @@ const MainContainer = styled.div`
 
 const ProductWrapper = styled.div`
     background-color: #18171d;
-    padding: 2rem;
-`;
-const ProductContainer = styled.div`
-    padding: 7rem 2rem 2rem 2rem;
 `;
 
-const CategoryName = styled.p`
-    position: fixed;
-    font-weight: 600;
-    font-size: 2rem;
-    padding-top: 1rem;
+const ProductContainer = styled.div`
+    padding: 4rem 2rem 2rem 2rem;
 `;
 
 export default function Category() {

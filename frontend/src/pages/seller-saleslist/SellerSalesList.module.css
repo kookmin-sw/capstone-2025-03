@@ -28,15 +28,16 @@
     -ms-overflow-style: none;
 }
 
-/* .section::-webkit-scrollbar {
-    display: none;
-} */
-
 .listViewTitle {
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 2rem;
     color: white;
+}
+
+.productContainer {
+    padding: 2rem;
+    background-color: #18171d;
 }
 
 .buttonContainer {

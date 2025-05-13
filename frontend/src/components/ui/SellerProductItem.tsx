@@ -10,7 +10,6 @@ const Item = styled.div`
     justify-content: start;
     align-items: center;
     padding: 2rem 1rem 2rem 1rem;
-    border-radius: 1.6rem;
     background-color: #18171d;
 `;
 
