@@ -9,8 +9,9 @@ const Item = styled.div`
     flex-direction: row;
     justify-content: start;
     align-items: center;
-    padding: 2rem 0 2rem 0;
-    border-bottom: 1px solid #2a2a2a;
+    padding: 2rem 1rem 2rem 1rem;
+    border-radius: 1.6rem;
+    background-color: #18171d;
 `;
 
 const Thumbnail = styled.img`

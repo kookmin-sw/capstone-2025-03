@@ -4,22 +4,27 @@ import { useParams } from 'react-router-dom';
 import { getParticularCategoryInService } from '@/src/services/categoryService';
 import ProductModel from '@/src/models/ProductModel';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
-import BackHeader from '@/src/components/layout/BackHeader';
+import BackHeaderForCategory from './components/BackHeaderForCategory';
 import { useNavigate } from 'react-router-dom';
 import SellerProductItemSkeleton from '@/src/components/ui/SellerProductItemSkeleton';
 
 const MainContainer = styled.div`
-    background-color: #18171d;
+    background-color: #101012;
     min-height: 100vh;
     position: relative;
+    padding: 2rem;
 `;
 
+const ProductWrapper = styled.div`
+    background-color: #18171d;
+    padding: 2rem;
+`;
 const ProductContainer = styled.div`
     padding: 7rem 2rem 2rem 2rem;
-
 `;
 
 const CategoryName = styled.p`
+    position: fixed;
     font-weight: 600;
     font-size: 2rem;
     padding-top: 1rem;
@@ -53,19 +58,21 @@ export default function Category() {
 
     return (
         <MainContainer>
-            <BackHeader />
-            <ProductContainer>
-                <CategoryName>{categoryName}</CategoryName>
-                {isLoading
-                    ? Array.from({ length: 6 }).map((_, idx) => (
-                          <SellerProductItemSkeleton key={idx} />
-                      ))
-                    : products.map((product) => (
-                          <div onClick={() => handleProductClick(product)} key={product.id}>
-                              <SellerProductItem product={product} />
-                          </div>
-                      ))}
-            </ProductContainer>
+            <BackHeaderForCategory category={categoryName} />
+            <ProductWrapper>
+                <ProductContainer>
+                    {isLoading
+                        ? Array.from({ length: 6 }).map((_, idx) => (
+                              <SellerProductItemSkeleton key={idx} />
+                          ))
+                        : products.map((product) => (
+                              <div onClick={() => handleProductClick(product)} key={product.id}>
+                                  <SellerProductItem product={product} />
+                                  <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
+                              </div>
+                          ))}
+                </ProductContainer>
+            </ProductWrapper>
         </MainContainer>
     );
 }
