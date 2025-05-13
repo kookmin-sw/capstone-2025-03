@@ -2,9 +2,10 @@ import styled from '@emotion/styled';
 
 const StyledButton = styled.button<{ isSelected: boolean }>`
     background-color: ${(props) => (props.isSelected ? '#00a26c' : '#12332d')};
+    flex: 1;
     border: none;
     padding: 1rem 5rem;
-    border-radius: 20px;
+    border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
 `;

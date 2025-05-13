@@ -113,6 +113,9 @@ export default function Home() {
                     <p className={styles.listViewTitle}>전체보기</p>
                     <div className={styles.packageListView}>
                         {packageList.map((pkg, index) => {
+                            if (pkg.user !== null) {
+                                return;
+                            }
                             return (
                                 <div key={pkg.id ?? index}>
                                     <PackageItem key={index} pkg={pkg} fromDetail={false} />
@@ -126,7 +129,7 @@ export default function Home() {
                 {isLoadMoreLoading && (
                     <div>
                         {Array.from({ length: 5 }).map((_, index) => (
-                            <div className={styles.skeletonContainer}>
+                            <div key={index} className={styles.skeletonContainer}>
                                 <PackageItemSkeleton key={index} />
                             </div>
                         ))}

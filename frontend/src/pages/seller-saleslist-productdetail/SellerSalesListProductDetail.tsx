@@ -2,16 +2,19 @@ import styles from './SellerSalesListProductDetail.module.css';
 import BackHeader from '@/src/components/layout/BackHeader';
 import ProductItem from '@/src/components/ui/ProductItem';
 import AiOptimizer from './components/AiOptimizer';
+import NewAiOptimizer from './components/NewAiOptimizer';
 import PriceInput from './components/PriceInput';
 import CompleteSection from '@/src/components/layout/CompleteSection';
 import LoadingSection from '@/src/components/layout/LoadingSection';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { sellerProductState, shouldReloadSellerProductState } from '@/src/recoil/productState';
 import { useRecoilState } from 'recoil';
 import { useProduct } from '@/src/hooks/useProduct';
 
 export default function SellerSalesListProductDetail() {
+    const location = useLocation();
+    const productCondition = location.state.condition;
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
@@ -70,7 +73,7 @@ export default function SellerSalesListProductDetail() {
                 <p className={styles.title}>가격을 입력해주세요</p>
 
                 <ProductItem product={sellerProduct} />
-                <AiOptimizer />
+                {sellerProduct.categoryName === '가스레인지' ? <NewAiOptimizer condition={productCondition} /> : <AiOptimizer />}
                 <PriceInput price={sellerProduct.price ?? null} setPrice={handlePriceChange} />
 
             </div>

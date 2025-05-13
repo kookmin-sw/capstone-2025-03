@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import PackageAlternativeImage from '../../assets/images/alternative/package.png';
 
 const ThumbnailContainer = styled.div`
-    margin-right: 1rem;
     object-fit: cover;
     aspect-ratio: 1 / 1;
     overflow: hidden;

@@ -45,10 +45,13 @@ export const useCreatePackage = () => {
     },
     onSuccess: (data) => {
       if (data?.user) {
-        // Mutation에서는 캐시 무효화 또는 갱신 필요함
-        queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, data.user] });
+        queryClient.setQueryData<PackageModel[]>([PACKAGE_KEY, data.user], (old = []) => [
+          ...old,
+          data,
+        ]);
       }
-    },
+    }
+
   });
 };
 
@@ -66,15 +69,17 @@ export const useUpdatePackage = () => {
 
       // Mutation 적용
       const data = await updatePackageInService(id, updatedData);
+      console.log(data);
       if (!data) throw new Error('Failed to update package');
       return data;
     },
     onSuccess: (data) => {
       if (data?.user) {
-        // Mutation에서는 캐시 무효화 또는 갱신 필요함
-        queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, data.user] });
+        queryClient.setQueryData<PackageModel[]>([PACKAGE_KEY, data.user], (old = []) =>
+          old.map((pkg) => (pkg.id === data.id ? data : pkg))
+        );
       }
-    },
+    }
   });
 };
 
@@ -94,7 +99,9 @@ export const useDeletePackage = () => {
       if (!success) throw new Error('Failed to delete package');
     },
     onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, variables.user] });
+      queryClient.setQueryData<PackageModel[]>([PACKAGE_KEY, variables.user], (old = []) =>
+        old.filter((pkg) => pkg.id !== variables.id)
+      );
     },
   });
 };
