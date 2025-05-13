@@ -15,14 +15,14 @@ const MainContainer = styled.div`
 `;
 
 const ProductContainer = styled.div`
-    padding-top: 7rem;
-    padding-bottom: 2rem;
+    padding: 7rem 2rem 2rem 2rem;
+
 `;
 
 const CategoryName = styled.p`
     font-weight: 600;
     font-size: 2rem;
-    padding: 2rem;
+    padding-top: 1rem;
 `;
 
 export default function Category() {
