@@ -51,3 +51,4 @@ urllib3==2.3.0
 uvicorn==0.34.0
 wheel==0.45.1
 whitenoise==6.9.0
+django-redis==5.4.0

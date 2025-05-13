@@ -50,7 +50,7 @@ class OrderListCreateView(generics.ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def send_slack_notification(self, user, product_ids):
-        SLACK_WEBHOOK_URL = ''
+        SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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'
 
         # 실제 제품 조회
         products = Product.objects.filter(id__in=product_ids)

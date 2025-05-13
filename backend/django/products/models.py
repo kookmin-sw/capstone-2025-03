@@ -24,7 +24,7 @@ class Product(models.Model):
 
     price = models.IntegerField(default=0, null=True)
 
-    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="seller")
+    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="product_seller")
     upload_date = models.DateTimeField(default=timezone.now, null=True)
 
     buyer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="buyer")

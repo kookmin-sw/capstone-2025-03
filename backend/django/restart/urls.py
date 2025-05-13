@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from .views import CacheHealthCheck
 
 # API 문서 정보 설정
 schema_view = get_schema_view(
@@ -30,6 +31,7 @@ urlpatterns = [
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='redoc'),
     path('swagger.json', schema_view.without_ui(cache_timeout=0), name='swagger-json'),
+    path('health/cache/', CacheHealthCheck.as_view(), name='cache-health'),
 ]
 
 
