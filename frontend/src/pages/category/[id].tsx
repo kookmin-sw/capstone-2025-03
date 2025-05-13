@@ -28,6 +28,8 @@ export default function Category() {
     const [products, setProducts] = useState<ProductModel[]>([]);
     const [categoryName, setCategoryName] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [searchVisible, setSearchVisible] = useState<boolean>(false);
+    const [searchText, setSearchText] = useState<string>('');
     const { id } = useParams();
 
     useEffect(() => {
@@ -49,16 +51,26 @@ export default function Category() {
         });
     };
 
+    const filteredProducts = products.filter((product) =>
+        product.name!.toLowerCase().includes(searchText.toLowerCase()),
+    );
+
     return (
         <MainContainer>
-            <BackHeaderForCategory category={categoryName} />
+            <BackHeaderForCategory
+                category={categoryName}
+                searchVisible={searchVisible}
+                setSearchVisible={setSearchVisible}
+                searchText={searchText}
+                setSearchText={setSearchText}
+            />
             <ProductWrapper>
                 <ProductContainer>
                     {isLoading
                         ? Array.from({ length: 6 }).map((_, idx) => (
                               <SellerProductItemSkeleton key={idx} />
                           ))
-                        : products.map((product) => (
+                        : filteredProducts.map((product) => (
                               <div onClick={() => handleProductClick(product)} key={product.id}>
                                   <SellerProductItem product={product} />
                                   <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
