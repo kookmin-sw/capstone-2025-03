@@ -34,6 +34,10 @@ export default function Category() {
     const { id } = useParams();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         if (id) {
             getParticularCategoryInService(Number(id)).then((res) => {
                 setProducts(res);
