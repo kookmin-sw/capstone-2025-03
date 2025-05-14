@@ -89,10 +89,7 @@
 
 ## 기술 스택
 
-| <img src="https://github.com/user-attachments/assets/7955cb1a-1ab1-4c93-922f-8366a653f32f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/4047813e-3a5b-4028-8126-e8ba4a5b7497"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/add75ede-d086-480a-9884-3fa1de866f7e"  width="200%" height="200%"/> |
-| --- | --- | --- |
-| <div align="center">**Frontend**</div> | <div align="center">**Backend**</div> | <div align="center">**AI**</div> |
-
+<img src="https://github.com/user-attachments/assets/87b67c25-8c89-47cb-ae3e-8f1a5b52a13c"  width="90%" height="90%"/>
 ---
 
 <br/><br/>
