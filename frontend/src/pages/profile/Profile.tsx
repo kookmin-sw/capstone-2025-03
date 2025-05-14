@@ -53,11 +53,22 @@ export default function Profile() {
             kakaoEmail: editedEmail,
             fullAddress: editedAddress,
         });
-        setUser(updatedUser)
+        setUser(updatedUser);
         if (user?.userId !== null) {
             updateUser(user!.userId, updatedUser.toJsonWhenRequestPut());
         }
         setIsEditing((prev) => !prev);
+    };
+
+    // 주소 검색창 이동할 때 임시저장
+    const saveUserInfo = (): UserModel => {
+        return new UserModel({
+            ...user,
+            name: editedName,
+            phoneNumber: editedPhone,
+            kakaoEmail: editedEmail,
+            fullAddress: editedAddress,
+        });
     };
 
     return (
@@ -113,12 +124,14 @@ export default function Profile() {
                         </div>
                         {isEditing ? (
                             <input
-                                value={editedPhone}
+                                value={formatPhoneNumber(editedPhone)}
                                 onChange={handlePhoneInput}
                                 className={styles.editingStyle}
                             />
                         ) : (
-                            <p className={styles.text}>{user?.phoneNumber}</p>
+                            <p className={styles.text}>
+                                {formatPhoneNumber(user?.phoneNumber ?? '')}
+                            </p>
                         )}
                     </div>
                     <div className={styles.itemBox}>
@@ -128,11 +141,12 @@ export default function Profile() {
                         {isEditing ? (
                             <input
                                 value={editedAddress}
-                                onClick={() =>
+                                onClick={() => {
+                                    setUser(saveUserInfo());
                                     navigate('/address-search', {
                                         state: { source: 'profile' },
-                                    })
-                                }
+                                    });
+                                }}
                                 className={styles.editingStyle}
                                 readOnly
                             />
