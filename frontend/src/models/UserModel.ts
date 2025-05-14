@@ -60,6 +60,21 @@ export class UserModel {
         });
     }
 
+    toJsonWhenRequestPut(): any {
+        return {
+            // id: this.userId,
+            name: this.name,
+            kakao_id: this.kakaoId,
+            // profile_image: this.profileImage,
+            kakao_email: this.kakaoEmail,
+            phone_number: this.phoneNumber,
+            // birth_date: this.birthDate,
+            full_address: this.fullAddress,
+            address_detail: this.addressDetail,
+            // createDate: this.createDate,
+        };
+    }
+
     toJson(): any {
         return {
             id: this.userId,

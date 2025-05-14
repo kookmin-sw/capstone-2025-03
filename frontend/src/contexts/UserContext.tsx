@@ -12,6 +12,8 @@ import {
 // Context에서 사용할 타입 정의
 interface UserContextType {
     user: UserModel | null;
+    isEditing: boolean;
+    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
     createUser: (newUser: UserModel) => Promise<void>;
     fetchMyInfo: () => Promise<void>;
     fetchUser: (userId: number) => Promise<void>;
@@ -27,10 +29,11 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 // Provider 컴포넌트
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<UserModel | null>(null);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         const userDataInLocalStorage = localStorage.getItem('user');
-        if(userDataInLocalStorage){
+        if (userDataInLocalStorage) {
             setUser(UserModel.fromJson(JSON.parse(userDataInLocalStorage)));
         }
     }, []);
@@ -72,10 +75,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     // 사용자 데이터 업데이트
     const updateUser = async (userId: number, updatedData: Partial<UserModel>) => {
         try {
-            await updateUserInService(userId, updatedData);
-            // local state 업데이트: 단순 병합 객체 대신 새로운 UserModel 인스턴스로 생성
+            const response = await updateUserInService(userId, updatedData);
+
             if (user && user.userId === userId) {
-                setUser(new UserModel({ ...user, ...updatedData }));
+                const updatedUser = UserModel.fromJson(response);
+                setUser(updatedUser);
+
+                localStorage.setItem('user', JSON.stringify(updatedUser.toJson()));
             }
         } catch (error) {
             console.error('Error updating user in context:', error);
@@ -119,6 +125,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         <UserContext.Provider
             value={{
                 user,
+                isEditing,
+                setIsEditing,
                 createUser,
                 fetchMyInfo,
                 fetchUser,

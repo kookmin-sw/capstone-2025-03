@@ -43,9 +43,10 @@ export const getUserInService = async (userId: number): Promise<UserModel | null
 export const updateUserInService = async (
     userId: number,
     updatedData: Partial<UserModel>,
-): Promise<void> => {
+): Promise<any> => {
     try {
-        await axios.put(`${API_BASE_URL}/${userId}`, updatedData);
+        const response = await axios.put(`${API_BASE_URL}/users/${userId}/`, updatedData);
+        return response.data;
     } catch (error) {
         console.error('Error updating user:', error);
         throw error;

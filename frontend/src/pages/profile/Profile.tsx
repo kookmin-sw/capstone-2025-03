@@ -9,14 +9,14 @@ import Setting from '@/src/assets/images/profile/gear.png';
 import { useState, useEffect } from 'react';
 import { useUserInputHandlers } from '@/src/hooks/useInputFormat';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { UserModel } from '@/src/models/UserModel';
 
 export default function Profile() {
     const currentMenuIndex = 4;
-    const { user } = useUser();
+    const { user, updateUser, setUser, isEditing, setIsEditing } = useUser();
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [isEditing, setIsEditing] = useState<boolean>(false);
     const [editedName, setEditedName] = useState<string>(user?.name ?? '');
     const [editedEmail, setEditedEmail] = useState<string>(user?.kakaoEmail ?? '');
     const [editedPhone, setEditedPhone] = useState<string>(user?.phoneNumber ?? '');
@@ -32,17 +32,33 @@ export default function Profile() {
 
     const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const formatted = formatPhoneNumber(e.target.value);
-        setEditedPhone(formatted); // editedPhone은 useState로 관리 중인 값
+        setEditedPhone(formatted);
     };
 
     useEffect(() => {
         const returnedAddress = location.state?.address;
         if (returnedAddress) {
             setEditedAddress(returnedAddress);
-            // 히스토리 정리 (옵션)
             navigate(location.pathname, { replace: true, state: {} });
         }
     }, [location.state?.address]);
+
+    const updateUserInfo = () => {
+        if (!user) return;
+
+        const updatedUser = new UserModel({
+            ...user,
+            name: editedName,
+            phoneNumber: editedPhone.replace(/-/g, ''),
+            kakaoEmail: editedEmail,
+            fullAddress: editedAddress,
+        });
+        setUser(updatedUser)
+        if (user?.userId !== null) {
+            updateUser(user!.userId, updatedUser.toJsonWhenRequestPut());
+        }
+        setIsEditing((prev) => !prev);
+    };
 
     return (
         <div className={styles.page}>
@@ -51,11 +67,17 @@ export default function Profile() {
                     <img className={styles.profileImage} src={user?.profileImage ?? ''}></img>
                     <div className={styles.InfoAndSettingContainer}>
                         <p className={styles.title}>내 정보</p>
-                        <img
-                            src={Setting}
-                            onClick={handleToggleEdit}
-                            style={{ height: '3rem', marginTop: '3rem', cursor: 'pointer' }}
-                        />
+                        {!isEditing ? (
+                            <img
+                                src={Setting}
+                                onClick={handleToggleEdit}
+                                style={{ height: '3rem', marginTop: '3rem', cursor: 'pointer' }}
+                            />
+                        ) : (
+                            <button onClick={updateUserInfo} className={styles.saveButton}>
+                                저장
+                            </button>
+                        )}
                     </div>
                     <div className={styles.itemBox}>
                         <div className={styles.iconBox}>
@@ -112,6 +134,7 @@ export default function Profile() {
                                     })
                                 }
                                 className={styles.editingStyle}
+                                readOnly
                             />
                         ) : (
                             <p className={styles.text}>

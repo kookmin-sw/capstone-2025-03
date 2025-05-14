@@ -14,8 +14,8 @@
     overflow: visible;
 }
 
-.profileContainer{
-    background-color: #18171D;
+.profileContainer {
+    background-color: #18171d;
     border-radius: 1.2rem;
     padding: 4rem 2rem;
     display: flex;
@@ -24,7 +24,7 @@
     align-items: center;
 }
 
-.profileImage{
+.profileImage {
     width: 15rem;
     height: 15rem;
     border-radius: 15rem;
@@ -38,7 +38,7 @@
     justify-content: space-between;
 }
 
-.title{
+.title {
     width: 100%;
     text-align: left;
     margin-top: 3rem;
@@ -47,7 +47,20 @@
     color: #ffffff;
 }
 
-.itemBox{
+.saveButton {
+    background-color: #2c2c36;
+    padding: 1rem;
+    border-radius: 1.4rem;
+    width: 5rem;
+    margin-top: 3rem;
+
+    &:hover {
+        background-color: #42424d;
+        cursor: pointer;
+    }
+}
+
+.itemBox {
     margin-top: 2rem;
     width: 100%;
     display: flex;
@@ -56,22 +69,22 @@
     gap: 1rem;
 }
 
-.iconBox{
+.iconBox {
     width: 3.2rem;
     height: 3.2rem;
     border-radius: 0.8rem;
-    background-color: #2C2C36;
+    background-color: #2c2c36;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.icon{
+.icon {
     width: 1.8rem;
     height: 1.8rem;
 }
 
-.text{
+.text {
     font-size: 1.6rem;
     color: #ffffff;
     font-weight: 400;
@@ -79,7 +92,7 @@
 
 .editingStyle {
     padding: 0.8rem;
-    background-color: #2C2C36;
+    background-color: #2c2c36;
     border-radius: 1.2rem;
     width: 50%;
 }
