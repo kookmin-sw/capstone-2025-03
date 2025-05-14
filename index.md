@@ -44,9 +44,9 @@
 
 | <img src="https://github.com/user-attachments/assets/0791a899-e6cb-4af3-a190-43baae7a0ab1"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/4ef82cf4-210c-4f97-8841-98c9a195fe8f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/af4886a8-9b2c-42dc-b219-2385cc5d1c54"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/22208ab2-dd6a-43dc-aedd-47ce15852b51"  width="200%" height="200%"/> |
 | --- | --- | --- | --- |
-| <div align="center">**업종 선택**</div> | <div align="center">**패키지 선택**</div> | <div align="center">**물품 검색**</div> | <div align="center">**물품 상세정보**</div> |
+| **업종 선택** | **패키지 선택** | **물품 검색** | **물품 상세정보** |
 | <img src="https://github.com/user-attachments/assets/e406d076-298d-4f33-957a-ec2dba153f6f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/c8dc3985-40d4-4366-bfe6-2a8aa5529113"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/7639f9f7-9bcf-451a-a11f-bf767f90b9d3"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/9b8f39cb-f33b-4215-b411-52b0a4b6304a"  width="200%" height="200%"/> |
-| <div align="center">**패키지 선택**</div> | <div align="center">**패키지 내용 확인**</div> | <div align="center">**직접 패키지 구성**</div> | <div align="center">**나만의 물품 찜목록**</div> |
+| **패키지 선택** | **패키지 내용 확인** | **직접 패키지 구성** | **나만의 물품 찜목록** |
 
 <br/>
 
@@ -57,9 +57,9 @@
 
 | <img src="https://github.com/user-attachments/assets/81addafc-98d2-4f66-8799-49536337fdb8"  width="120%" height="120%"/> | <img src="https://github.com/user-attachments/assets/5c1ca845-01f3-4f59-bd90-b4d648c40b4b"  width="120%" height="120%"/> |
 | --- | --- |
-| <div align="center">**물품 판매**</div> | <div align="center">**AI 가격추천**</div> |
+| **물품 판매** | **AI 가격추천** |
 | <img src="https://github.com/user-attachments/assets/2add4fd7-61ee-4a81-a174-17cf4c7435c0"  width="120%" height="120%"/> | <img src="https://github.com/user-attachments/assets/4af175ec-579b-4335-be37-09bd219fd5c0"  width="120%" height="120%"/> |
-| <div align="center">**추천된 가격 확인 및 가격 등록**</div> | <div align="center">**내 판매목록**</div> |
+| **추천된 가격 확인 및 가격 등록** | **내 판매목록** |
 
 ---
 
