@@ -4,25 +4,24 @@ import { useParams } from 'react-router-dom';
 import { getParticularCategoryInService } from '@/src/services/categoryService';
 import ProductModel from '@/src/models/ProductModel';
 import SellerProductItem from '@/src/components/ui/SellerProductItem';
-import BackHeader from '@/src/components/layout/BackHeader';
+import BackHeaderForCategory from './components/BackHeaderForCategory';
 import { useNavigate } from 'react-router-dom';
 import SellerProductItemSkeleton from '@/src/components/ui/SellerProductItemSkeleton';
 
 const MainContainer = styled.div`
-    background-color: #18171d;
+    background-color: #101012;
     min-height: 100vh;
     position: relative;
+    padding: 2rem 2rem 0 2rem;
+`;
+
+const ProductWrapper = styled.div`
+    background-color: #18171d;
+    min-height: 100vh;
 `;
 
 const ProductContainer = styled.div`
-    padding-top: 7rem;
-    padding-bottom: 2rem;
-`;
-
-const CategoryName = styled.p`
-    font-weight: 600;
-    font-size: 2rem;
-    padding: 2rem;
+    padding: 4rem 2rem 0 2rem;
 `;
 
 export default function Category() {
@@ -30,7 +29,13 @@ export default function Category() {
     const [products, setProducts] = useState<ProductModel[]>([]);
     const [categoryName, setCategoryName] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [searchVisible, setSearchVisible] = useState<boolean>(false);
+    const [searchText, setSearchText] = useState<string>('');
     const { id } = useParams();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         if (id) {
@@ -51,21 +56,35 @@ export default function Category() {
         });
     };
 
+    const filteredProducts = products.filter((product) =>
+        product.name!.toLowerCase().includes(searchText.toLowerCase()),
+    );
+
     return (
         <MainContainer>
-            <BackHeader />
-            <ProductContainer>
-                <CategoryName>{categoryName}</CategoryName>
-                {isLoading
-                    ? Array.from({ length: 6 }).map((_, idx) => (
-                          <SellerProductItemSkeleton key={idx} />
-                      ))
-                    : products.map((product) => (
-                          <div onClick={() => handleProductClick(product)} key={product.id}>
-                              <SellerProductItem product={product} />
-                          </div>
-                      ))}
-            </ProductContainer>
+            <BackHeaderForCategory
+                category={categoryName}
+                searchVisible={searchVisible}
+                setSearchVisible={setSearchVisible}
+                searchText={searchText}
+                setSearchText={setSearchText}
+            />
+            <ProductWrapper>
+                <ProductContainer>
+                    {isLoading
+                        ? Array.from({ length: 6 }).map((_, idx) => (
+                              <SellerProductItemSkeleton key={idx} />
+                          ))
+                        : filteredProducts.map((product, idx) => (
+                              <div onClick={() => handleProductClick(product)} key={product.id}>
+                                  <SellerProductItem product={product} />
+                                  {idx !== filteredProducts.length - 1 && (
+                                      <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
+                                  )}
+                              </div>
+                          ))}
+                </ProductContainer>
+            </ProductWrapper>
         </MainContainer>
     );
 }

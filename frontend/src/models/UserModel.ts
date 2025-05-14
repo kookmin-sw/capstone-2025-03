@@ -60,6 +60,22 @@ export class UserModel {
         });
     }
 
+    // 회원정보 수정할 때 사용하는 함수
+    toJsonWhenRequestPut(): any {
+        return {
+            // id: this.userId,
+            name: this.name,
+            kakao_id: this.kakaoId,
+            // profile_image: this.profileImage,
+            kakao_email: this.kakaoEmail,
+            phone_number: this.phoneNumber,
+            // birth_date: this.birthDate,
+            full_address: this.fullAddress,
+            address_detail: this.addressDetail,
+            // createDate: this.createDate,
+        };
+    }
+
     toJson(): any {
         return {
             id: this.userId,

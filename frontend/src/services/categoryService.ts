@@ -117,7 +117,6 @@ export const getParticularCategoryInService = async (
         const response = await axios.get(`${API_BASE_URL}/products/`, {
             params: { category: categoryId },
         });
-        console.log(response.data.results);
         return response.data.results.map((item: any) => ProductModel.fromJson(item));
         // return response.data;
     } catch (error) {

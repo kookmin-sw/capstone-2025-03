@@ -268,13 +268,13 @@ export const IntroButton = styled.button`
     border-radius: 0.6rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
-`
+`;
 
 export const BugButton = styled.button`
     width: 100%;
     padding: 1.8rem;
-    background-color: gray;
+    background-color: white;
     color: black;
     border-radius: 0.6rem;
     margin-bottom: 1rem;
-`
+`;

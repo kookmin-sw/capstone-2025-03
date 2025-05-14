@@ -101,7 +101,9 @@ export default function NameAndBirthDayInput() {
                             setStep(2);
                         } else if (step === 3) {
                             // handleRegister();
-                            navigate('/address-input');
+                            navigate('/address-input', {
+                                state: { source: 'name-and-birthday' },
+                            });
                         }
                     }}
                 >

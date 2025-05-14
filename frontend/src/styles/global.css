@@ -75,8 +75,6 @@ p {
     margin: 0;
 }
 
-
-
 /* 1280px 기준으로 설정: 1rem = 10px */
 html {
     font-size: 10px;
@@ -96,8 +94,14 @@ html {
     }
 }
 
-
-
+@keyframes autoplayProgress {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
 
 /* 더 작은 데스크탑 (~ 1280px) 1rem = 9px  */
 /* @media (min-width: 768px) and (max-width: 1024px) {
