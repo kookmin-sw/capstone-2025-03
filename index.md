@@ -115,10 +115,10 @@
 | 프로필 | 이름 | 소개 |
 | --- | --- | --- |
 |<img src="https://github.com/user-attachments/assets/8d202ff6-ede0-4fe7-b669-9ab7b73c1731" alt="Avatar" style="width: 500px;">| ⭐️ **박길현** (소프트웨어학부 / 20191592) | 500만 사용자 ai 웹사이트 1인 기획/디자인/개발, 인슈어테크 스타트업 PO, Kotlin 활용한 Android 데이팅앱 개발, Flutter 활용한 투자 포트폴리오 공유 플랫폼 개발, 정부 사업 스타트업 여행 플랫폼 개발, 부산관광공사 마케팅 사이트 개발, iM라이프 샌드박스 챗봇 프로젝트 리드/개발, 금융 재무 시뮬레이터 R&D 사업 리드/백엔드/ai 개발, 퀀트 트레이딩 시스템 개발, 기업 NFT 발행, React 활용한 정치 커뮤니티 개발 외 기업 외주 경험 다수 |
-|<img src="https://github.com/user-attachments/assets/50423c29-07ff-40be-b427-2c352bcca64c" alt="Avatar" style="width: 1300px;">| ⭐️ **김용희** (소프트웨어학부 / 20181590) | Next.js 활용 프로젝트 경험 |
-|<img src="https://github.com/user-attachments/assets/65aeb46b-ddf1-4f1b-aaa6-e03181aafb2d" alt="Avatar" style="width: 1300px;">| ⭐️ **성하빈** (경제학과 / 20200832) | 없음 |
-|<img src="https://github.com/user-attachments/assets/c4c630e6-d54c-4da6-a0a1-650e79c85e8b" alt="Avatar" style="width: 1300px;">| ⭐️ **권두환** (소프트웨어학부 / 20195296) | 4dx 기법을 활용한 감정분석 모니터링 및 코칭, 한국 마사회 데이터분석 요청 의뢰, 학습자의 성적 요소를 찾아내기 위한 데이터 분석, 데이터퓨처센터 데이터 분석 요청 의뢰 (대전 세종시), 감정 분석 AI 페르소나 파인더 |
-|<img src="https://github.com/user-attachments/assets/5e2af5f8-a950-4e32-8cf3-1bd98c3a173c" alt="Avatar" style="width: 1300px;">| ⭐️ **김영광** (소프트웨어학부 / 20203042) | 국민대학교 자율주행 경진대회 참여 및 수상, 임베디드 소프트웨어 경진대회 참여 및 수상, 게임개발 프로젝트(다수) |
+|<img src="https://github.com/user-attachments/assets/50423c29-07ff-40be-b427-2c352bcca64c" alt="Avatar" style="width: 500px;">| ⭐️ **김용희** (소프트웨어학부 / 20181590) | Next.js 활용 프로젝트 경험 |
+|<img src="https://github.com/user-attachments/assets/65aeb46b-ddf1-4f1b-aaa6-e03181aafb2d" alt="Avatar" style="width: 500px;">| ⭐️ **성하빈** (경제학과 / 20200832) | 없음 |
+|<img src="https://github.com/user-attachments/assets/c4c630e6-d54c-4da6-a0a1-650e79c85e8b" alt="Avatar" style="width: 500px;">| ⭐️ **권두환** (소프트웨어학부 / 20195296) | 4dx 기법을 활용한 감정분석 모니터링 및 코칭, 한국 마사회 데이터분석 요청 의뢰, 학습자의 성적 요소를 찾아내기 위한 데이터 분석, 데이터퓨처센터 데이터 분석 요청 의뢰 (대전 세종시), 감정 분석 AI 페르소나 파인더 |
+|<img src="https://github.com/user-attachments/assets/5e2af5f8-a950-4e32-8cf3-1bd98c3a173c" alt="Avatar" style="width: 500px;">| ⭐️ **김영광** (소프트웨어학부 / 20203042) | 국민대학교 자율주행 경진대회 참여 및 수상, 임베디드 소프트웨어 경진대회 참여 및 수상, 게임개발 프로젝트(다수) |
 
 ---
 
