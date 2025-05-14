@@ -35,6 +35,8 @@ const BackButton = styled.img`
     height: 2.4rem;
     position: relative;
     z-index: 1;
+    pointer-events: none;
+    
 `;
 
 const HomeButtonWrapper = styled.div`
@@ -56,6 +58,7 @@ export default function BackHeaderForPackageDetail({
 }) {
     const navigate = useNavigate();
     const [isTransparent, setTransparent] = useState<boolean>(true);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -74,7 +77,10 @@ export default function BackHeaderForPackageDetail({
     }, [targetRef]);
 
     const handleClick = () => {
+
         window.history.back();
+   
+        console.log('패키지 백헤더');
     };
 
     return (

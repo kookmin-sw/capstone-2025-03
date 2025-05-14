@@ -26,12 +26,12 @@
     margin-bottom: 6rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    padding: 0 2rem;
+    /* padding: 0 2rem; */
     
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    background-color: #18171d;
+    background-color: #101012;
 }
 
 .listViewTitle {
