@@ -46,7 +46,7 @@ export default function SellerSalesList() {
         };
 
         fetchProducts();
-    }, [sellerId, loadProduct]);
+    }, [sellerId]);
 
     useEffect(() => {
         if (!loadMoreRef.current || isLoadMoreLoading) return;

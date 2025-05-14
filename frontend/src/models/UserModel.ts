@@ -60,6 +60,7 @@ export class UserModel {
         });
     }
 
+    // 회원정보 수정할 때 사용하는 함수
     toJsonWhenRequestPut(): any {
         return {
             // id: this.userId,
