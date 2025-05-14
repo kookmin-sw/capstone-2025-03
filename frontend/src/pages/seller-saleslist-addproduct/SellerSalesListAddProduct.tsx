@@ -40,6 +40,11 @@ export default function SellerSalesListAddProduct() {
         !!sellerProduct.grade &&
         !!sellerProduct.quantity;
 
+    const resizeTextarea = (textarea: HTMLTextAreaElement) => {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    };
+
     useEffect(() => {
         if (reset) {
             setSellerProduct(new ProductModel({}));
@@ -151,11 +156,19 @@ export default function SellerSalesListAddProduct() {
                         value={sellerProduct.description ?? ''}
                         className={styles.input}
                         placeholder="설명"
-                        onChange={(e) =>
+                        rows={1}
+                        onChange={(e) => {
                             setSellerProduct((prev) =>
                                 prev.copyWith({ description: e.target.value }),
-                            )
-                        }
+                            );
+                            resizeTextarea(e.target); // onChange 이벤트에서 함수 호출
+                        }}
+                        // 초기 로드 시에도 높이 조정을 위한 ref 추가
+                        ref={(textareaRef) => {
+                            if (textareaRef) {
+                                resizeTextarea(textareaRef);
+                            }
+                        }}
                     />
                     <input
                         value={sellerProduct.quantity ?? ''}

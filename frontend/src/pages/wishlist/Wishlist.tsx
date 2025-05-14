@@ -34,8 +34,6 @@ export default function Wishlist() {
             user: userId,
         }));
 
-        await refetch();
-
         // navigate
         navigate('/package-detail', { state: { pkg: newPackage } })
     };
