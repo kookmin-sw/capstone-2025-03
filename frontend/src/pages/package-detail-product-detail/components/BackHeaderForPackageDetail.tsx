@@ -74,7 +74,7 @@ export default function BackHeaderForPackageDetail({
     }, [targetRef]);
 
     const handleClick = () => {
-        navigate(-1);
+        window.history.back();
     };
 
     return (
