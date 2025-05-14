@@ -84,10 +84,9 @@ export default function BackHeaderForCategory({
     searchText,
     setSearchText,
 }: BackHeaderForCategoryProps) {
-    const navigate = useNavigate();
-
     const handleClick = () => {
-        navigate(-1);
+        window.history.back();
+        console.log("카테고리 백헤더")
     };
 
     const handleSearchToggle = () => setSearchVisible(true);

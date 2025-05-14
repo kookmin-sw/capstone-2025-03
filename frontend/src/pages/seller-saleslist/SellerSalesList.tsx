@@ -97,7 +97,7 @@ export default function SellerSalesList() {
                               );
                           })}
                 </div>
-                {!isLoading && <div ref={loadMoreRef} style={{ height: '20px' }} />}
+                {!isLoading && <div ref={loadMoreRef} style={{ height: '3px' }} />}
                 {isLoadMoreLoading && (
                     <div className={styles.moreLoadSpinnerContainer}>
                         <Spinner

@@ -3,6 +3,8 @@
     background-color: #101012;
     display: flex;
     flex-direction: column;
+    background-size: cover;
+    overflow: auto;
 }
 
 .visible {
@@ -22,10 +24,14 @@
     flex-grow: 1;
     margin-top: 9.2rem;
     margin-bottom: 6rem;
-    padding: 0 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    /* padding: 0 2rem; */
+    
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    background-color: #101012;
 }
 
 .listViewTitle {
@@ -38,7 +44,7 @@
 .productContainer {
     padding: 2rem;
     background-color: #18171d;
-    min-height: 100vh;
+    overflow: auto;
 }
 
 .buttonContainer {
