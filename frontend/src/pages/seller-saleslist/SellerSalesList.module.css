@@ -38,6 +38,7 @@
 .productContainer {
     padding: 2rem;
     background-color: #18171d;
+    min-height: 100vh;
 }
 
 .buttonContainer {
