@@ -45,7 +45,7 @@
 | <img src="https://github.com/user-attachments/assets/0791a899-e6cb-4af3-a190-43baae7a0ab1"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/4ef82cf4-210c-4f97-8841-98c9a195fe8f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/af4886a8-9b2c-42dc-b219-2385cc5d1c54"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/22208ab2-dd6a-43dc-aedd-47ce15852b51"  width="200%" height="200%"/> |
 | --- | --- | --- | --- |
 | **업종 선택** | **패키지 선택** | **물품 검색** | **물품 상세정보** |
-| <img src="https://github.com/user-attachments/assets/e406d076-298d-4f33-957a-ec2dba153f6f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/c8dc3985-40d4-4366-bfe6-2a8aa5529113"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/7639f9f7-9bcf-451a-a11f-bf767f90b9d3"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/9b8f39cb-f33b-4215-b411-52b0a4b6304a"  width="200%" height="200%"/> |
+| <img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35"  width="200%" height="200%"/> |
 | **패키지 선택** | **패키지 내용 확인** | **직접 패키지 구성** | **나만의 물품 찜목록** |
 
 <br/>
@@ -69,7 +69,8 @@
 
 | 대상 | 제공 가치 |
 | --- | --- |
-| **창업자** | - 창업에 필요한 모든 중고 물품을 **한 번에 구매**<br> - **시간과 비용 절약**, 빠른 창업 준비 |
+| **창업자** | - 창업에 필요한 모든 중고 물품을 **한 번에 구매![Mockup  iPhone X](https://github.com/user-attachments/assets/4b73a358-d3bc-4f94-995a-03c9f341fdf3)
+**<br> - **시간과 비용 절약**, 빠른 창업 준비 |
 | **폐업자** | - **패키징 판매로 판매 확률 상승**<br> - **AI 가격 추천**으로 빠른 거래 가능<br> - **일괄 판매로 손쉬운 정리** |
 | **시장 전체** | - 중고 창업 물품의 **효율적 순환**<br> - **저렴하고 빠른 창업 지원**으로 창업 진입장벽 완화 |
 
