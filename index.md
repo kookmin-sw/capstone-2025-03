@@ -42,10 +42,10 @@
 - 창업자는 **패키지만 선택해서 한 번에 구매**할 수 있습니다.  
 - 복잡한 중고 거래 과정을 **한 번의 클릭으로 해결**합니다.
 
-| <img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35"  width="200%" height="200%"/> |
+| <img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32"/> | <img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e"/> | <img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d"/> | <img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35"/> |
 | --- | --- | --- | --- |
 | **업종 선택** | **패키지 선택** | **물품 검색** | **물품 상세정보** |
-| <img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35"  width="200%" height="200%"/> |
+| <img src="https://github.com/user-attachments/assets/cd5632e6-70b2-462c-98aa-e042287a63e9"/> | <img src="https://github.com/user-attachments/assets/2ce313ea-ac60-4eb6-84ea-11efbe6fe46a"/> | <img src="https://github.com/user-attachments/assets/f5eb1ada-9e40-4ac0-9960-93390b93e66e"/> | <img src="https://github.com/user-attachments/assets/4ec94254-e2ee-4213-96c0-efab7bb97913"/> |
 | **패키지 선택** | **패키지 내용 확인** | **직접 패키지 구성** | **나만의 물품 찜목록** |
 
 <br/>
@@ -55,10 +55,10 @@
 - **AI 분석**을 통해 **빠르게 팔릴 수 있는 가격을 추천**합니다.  
 - 그동안 낱개로 안 팔리던 물건도 **묶음으로 판매 성공 확률을 높입니다.**  
 
-| <img src="https://github.com/user-attachments/assets/81addafc-98d2-4f66-8799-49536337fdb8"  width="120%" height="120%"/> | <img src="https://github.com/user-attachments/assets/5c1ca845-01f3-4f59-bd90-b4d648c40b4b"  width="120%" height="120%"/> |
+| <img src="https://github.com/user-attachments/assets/f5b9ea7b-b6ae-439b-9ba7-1c1d30e90c9d"/> | <img src="https://github.com/user-attachments/assets/79301e38-4659-4401-9ad8-c896b755590d"/> |
 | --- | --- |
 | **물품 판매** | **AI 가격추천** |
-| <img src="https://github.com/user-attachments/assets/2add4fd7-61ee-4a81-a174-17cf4c7435c0"  width="120%" height="120%"/> | <img src="https://github.com/user-attachments/assets/4af175ec-579b-4335-be37-09bd219fd5c0"  width="120%" height="120%"/> |
+| <img src="https://github.com/user-attachments/assets/8f37c77d-a94c-4613-b92b-c05a230add12"/> | <img src="https://github.com/user-attachments/assets/ac03d964-935d-407f-91e7-5d971b9040c9"/> |
 | **추천된 가격 확인 및 가격 등록** | **내 판매목록** |
 
 ---
