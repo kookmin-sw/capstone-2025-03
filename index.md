@@ -42,7 +42,7 @@
 - 창업자는 **패키지만 선택해서 한 번에 구매**할 수 있습니다.  
 - 복잡한 중고 거래 과정을 **한 번의 클릭으로 해결**합니다.
 
-| <img src="https://github.com/user-attachments/assets/0791a899-e6cb-4af3-a190-43baae7a0ab1"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/4ef82cf4-210c-4f97-8841-98c9a195fe8f"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/af4886a8-9b2c-42dc-b219-2385cc5d1c54"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/22208ab2-dd6a-43dc-aedd-47ce15852b51"  width="200%" height="200%"/> |
+| <img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35"  width="200%" height="200%"/> |
 | --- | --- | --- | --- |
 | **업종 선택** | **패키지 선택** | **물품 검색** | **물품 상세정보** |
 | <img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d"  width="200%" height="200%"/> | <img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35"  width="200%" height="200%"/> |
