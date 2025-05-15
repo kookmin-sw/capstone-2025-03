@@ -42,10 +42,10 @@
 - 창업자는 **패키지만 선택해서 한 번에 구매**할 수 있습니다.  
 - 복잡한 중고 거래 과정을 **한 번의 클릭으로 해결**합니다.
 
-<table>
-  <tr><td><img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32"/></td><td><img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e"/></td><td><img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d"/></td><td><img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35"/></td></tr>
+<table style="table-layout: fixed; width: 100%;">
+  <tr><td><img src="https://github.com/user-attachments/assets/0cdaadc7-6606-43c5-b80b-eb8ef002ea32" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/01f54c8a-104e-45c5-a074-b579adf6e56e" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/e4c8d1b3-3691-4545-859f-43e9822d205d" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/d8309929-fd1d-4928-b04c-4c8d18e9be35" style="width: 100%"/></td></tr>
   <tr><td>업종 선택</td><td>패키지 선택</td><td>물품 검색</td><td>물품 상세정보</td></tr>
-  <tr><td><img src="https://github.com/user-attachments/assets/cd5632e6-70b2-462c-98aa-e042287a63e9"/></td><td><img src="https://github.com/user-attachments/assets/2ce313ea-ac60-4eb6-84ea-11efbe6fe46a"/></td><td><img src="https://github.com/user-attachments/assets/f5eb1ada-9e40-4ac0-9960-93390b93e66e"/></td><td><img src="https://github.com/user-attachments/assets/4ec94254-e2ee-4213-96c0-efab7bb97913"/></td></tr>
+  <tr><td><img src="https://github.com/user-attachments/assets/cd5632e6-70b2-462c-98aa-e042287a63e9" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/2ce313ea-ac60-4eb6-84ea-11efbe6fe46a" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/f5eb1ada-9e40-4ac0-9960-93390b93e66e" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/4ec94254-e2ee-4213-96c0-efab7bb97913" style="width: 100%"/></td></tr>
   <tr><td>패키지 선택</td><td>패키지 내용 확인</td><td>직접 패키지 구성</td><td>나만의 물품 찜목록</td></tr>
 </table>
 
@@ -54,11 +54,12 @@
 - **AI 분석**을 통해 **빠르게 팔릴 수 있는 가격을 추천**합니다.  
 - 그동안 낱개로 안 팔리던 물건도 **묶음으로 판매 성공 확률을 높입니다.**  
 
-| <img src="https://github.com/user-attachments/assets/f5b9ea7b-b6ae-439b-9ba7-1c1d30e90c9d"/> | <img src="https://github.com/user-attachments/assets/79301e38-4659-4401-9ad8-c896b755590d"/> |
-| --- | --- |
-| **물품 판매** | **AI 가격추천** |
-| <img src="https://github.com/user-attachments/assets/8f37c77d-a94c-4613-b92b-c05a230add12"/> | <img src="https://github.com/user-attachments/assets/ac03d964-935d-407f-91e7-5d971b9040c9"/> |
-| **추천된 가격 확인 및 가격 등록** | **내 판매목록** |
+<table style="table-layout: fixed; width: 100%;">
+  <tr><td><img src="https://github.com/user-attachments/assets/f5b9ea7b-b6ae-439b-9ba7-1c1d30e90c9d" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/79301e38-4659-4401-9ad8-c896b755590d" style="width: 100%"/></td></tr>
+  <tr><td>물품 판매</td><td>AI 가격 추천</td></tr>
+  <tr><td><img src="https://github.com/user-attachments/assets/8f37c77d-a94c-4613-b92b-c05a230add12" style="width: 100%"/></td><td><img src="https://github.com/user-attachments/assets/ac03d964-935d-407f-91e7-5d971b9040c9" style="width: 100%"/></td></tr>
+  <tr><td>추천된 가격 확인 및 가격 등록</td><td>내 판매목록</td></tr>
+</table>
 
 ---
 
