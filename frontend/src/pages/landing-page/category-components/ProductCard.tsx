@@ -19,7 +19,7 @@ const Card = styled.div`
     padding: 1rem;
     border-radius: 0.6rem;
     overflow: hidden;
-    gap: 1.2rem;
+    gap: 0.2rem;
 `;
 
 const ImageWrapper = styled.div`

@@ -1,6 +1,6 @@
 import styles from './AddressSearch.module.css';
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 declare global {
     interface Window {
@@ -12,6 +12,9 @@ export default function AddressSearch() {
     const navigate = useNavigate();
     const postcodeRef = useRef<HTMLDivElement | null>(null);
     const isScriptLoaded = useRef(false);
+
+    const location = useLocation();
+    const source = location.state?.source;
 
     useEffect(() => {
         if (isScriptLoaded.current) return;
@@ -26,7 +29,12 @@ export default function AddressSearch() {
             if (postcodeRef.current) {
                 const postcode = new window.daum.Postcode({
                     oncomplete: (data: { address: string }) => {
-                        navigate('/address-input', { state: { address: data.address } });
+                        const destination =
+                            source === 'name-and-birthday' ? '/address-input' : '/profile';
+
+                        navigate(destination, {
+                            state: { address: data.address },
+                        });
                     },
                     width: '100%',
                     height: '100%',

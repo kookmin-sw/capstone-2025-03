@@ -27,12 +27,13 @@ const Text = styled.p`
 
 interface CompleteSectionProps {
     text: string;
+    redirectTo: string;
 }
 
-export default function CompleteSection({ text }: CompleteSectionProps) {
+export default function CompleteSection({ text, redirectTo }: CompleteSectionProps) {
     const navigate = useNavigate();
     const handleButtonClick = () => {
-        navigate('/');
+        navigate(redirectTo);
     };
     return (
         <Section>

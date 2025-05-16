@@ -3,6 +3,8 @@
     background-color: #101012;
     display: flex;
     flex-direction: column;
+    background-size: cover;
+    overflow: auto;
 }
 
 .visible {
@@ -22,21 +24,27 @@
     flex-grow: 1;
     margin-top: 9.2rem;
     margin-bottom: 6rem;
-    padding: 0 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    /* padding: 0 2rem; */
+    
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    background-color: #101012;
 }
-
-/* .section::-webkit-scrollbar {
-    display: none;
-} */
 
 .listViewTitle {
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 2rem;
     color: white;
+}
+
+.productContainer {
+    padding: 2rem;
+    background-color: #18171d;
+    overflow: auto;
 }
 
 .buttonContainer {

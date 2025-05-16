@@ -9,8 +9,8 @@ const Item = styled.div`
     flex-direction: row;
     justify-content: start;
     align-items: center;
-    padding: 2rem 0 2rem 0;
-    border-bottom: 1px solid #2a2a2a;
+    padding: 2rem 1rem 2rem 1rem;
+    background-color: #18171d;
 `;
 
 const Thumbnail = styled.img`
@@ -18,6 +18,7 @@ const Thumbnail = styled.img`
     height: 12rem;
     border-radius: 2rem;
     margin-right: 1rem;
+    aspect-ratio: 1 / 1;
 `;
 
 const ContentContainer = styled.div`
@@ -30,6 +31,7 @@ const ContentContainer = styled.div`
 
 const Title = styled.p`
     font-size: 1.6rem;
+    padding-right: 3rem;
     font-weight: bold;
     color: white;
 `;

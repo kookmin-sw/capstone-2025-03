@@ -60,7 +60,7 @@ export default function SellerSalesListProductDetail() {
         }
     };
 
-    if (isComplete) return <CompleteSection text="판매 물품 업로드 완료!" />;
+    if (isComplete) return <CompleteSection text="판매 물품 업로드 완료!" redirectTo='/seller-saleslist' />;
     if (isLoading) return <LoadingSection text="잠시만 기다려주세요" />;
 
     return (

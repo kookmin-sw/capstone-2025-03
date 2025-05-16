@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import BasicButton from './components/BasicButton';
+import CameraGrayIcon from '../../assets/images/page/add-product/camera-gray.png';
+import CameraWhiteIcom from '../../assets/images/page/add-product/camera-white.png';
+import { Spinner } from '@chakra-ui/react';
 
 export default function SellerSalesListAddProduct() {
     // hooks
@@ -21,7 +24,7 @@ export default function SellerSalesListAddProduct() {
     const reset = state?.reset;
 
     // useState
-    const [, setIsUploading] = useState<boolean>(false);
+    const [isUploading, setIsUploading] = useState<boolean>(false);
 
     // useRef
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -89,31 +92,42 @@ export default function SellerSalesListAddProduct() {
                         onChange={handleFileChange}
                         style={{ display: 'none' }}
                     />
-                    <button className={styles.imageButton} onClick={handleAddImage}>
-                        {/* 대표 이미지 or placeholder */}
-                        <img
-                            src="/images/seller/empty_image.png"
-                            className={styles.imageButtonImage}
-                        />
-                    </button>
-                    <div className={styles.thumbnailList}>
-                        {sellerProduct.images.slice(0).map((img, idx) => (
-                            <div key={idx} className={styles.thumbnailItem}>
-                                <img src={img} className={styles.thumbnailImage} />
-                                <button
-                                    className={styles.deleteButton}
-                                    onClick={() =>
-                                        setSellerProduct((prev) => prev.removeImage(img))
-                                    }
-                                >
-                                    ×
-                                </button>
-                                {idx === 0 && (
-                                    <div className={styles.representLabel}>대표 사진</div>
-                                )}
-                            </div>
-                        ))}
+                    <div className={styles.thumbnailItem} onClick={handleAddImage}>
+                        <div className={styles.cameraBox}>
+                            {isUploading ? (
+                                <Spinner size="lg" color="#00a36c" />
+                            ) : (
+                                <>
+                                    <img
+                                        src={
+                                            sellerProduct.images.length === 0
+                                                ? CameraGrayIcon
+                                                : CameraWhiteIcom
+                                        }
+                                        className={styles.cameraIcon}
+                                    />
+                                    <p className={styles.uploadCount}>
+                                        <span className={styles.uploadCurrent}>
+                                            {sellerProduct.images.length}
+                                        </span>
+                                        <span className={styles.uploadTotal}> / 10</span>
+                                    </p>
+                                </>
+                            )}
+                        </div>
                     </div>
+                    {sellerProduct.images.map((img, idx) => (
+                        <div key={idx} className={styles.thumbnailItem}>
+                            <img src={img} className={styles.thumbnailImage} />
+                            <button
+                                className={styles.deleteButton}
+                                onClick={() => setSellerProduct((prev) => prev.removeImage(img))}
+                            >
+                                ×
+                            </button>
+                            {idx === 0 && <div className={styles.representLabel}>대표 사진</div>}
+                        </div>
+                    ))}
                 </div>
 
                 <p className={styles.subtitle}>물품 정보</p>
@@ -137,7 +151,11 @@ export default function SellerSalesListAddProduct() {
                         value={sellerProduct.description ?? ''}
                         className={styles.input}
                         placeholder="설명"
-                        onChange={(e) => setSellerProduct((prev) => prev.copyWith({ description: e.target.value }))}
+                        onChange={(e) =>
+                            setSellerProduct((prev) =>
+                                prev.copyWith({ description: e.target.value }),
+                            )
+                        }
                     />
                     <input
                         value={sellerProduct.quantity ?? ''}
@@ -174,7 +192,6 @@ export default function SellerSalesListAddProduct() {
                         })}
                     </div>
                 </form>
-
             </div>
             <div className={styles.submitButtonSection}>
                 <button

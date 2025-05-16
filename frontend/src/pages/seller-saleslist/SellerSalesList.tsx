@@ -46,7 +46,7 @@ export default function SellerSalesList() {
         };
 
         fetchProducts();
-    }, [sellerId, loadProduct]);
+    }, [sellerId]);
 
     useEffect(() => {
         if (!loadMoreRef.current || isLoadMoreLoading) return;
@@ -82,8 +82,8 @@ export default function SellerSalesList() {
         <div className={styles.page}>
             <MainHeader isVisible={isVisible} />
             <div className={styles.section}>
+                <div className={styles.productContainer}>
                 <p className={styles.listViewTitle}>판매 중인 물품들</p>
-                <div>
                     {isLoading
                         ? Array.from({ length: 6 }).map((_, idx) => (
                               <SellerProductItemSkeleton key={idx} />
@@ -92,11 +92,12 @@ export default function SellerSalesList() {
                               return (
                                   <div key={index} onClick={() => handleProductItemClick(products)}>
                                       <SellerProductItem product={products} />
+                                      <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
                                   </div>
                               );
                           })}
                 </div>
-                {!isLoading && <div ref={loadMoreRef} style={{ height: '20px' }} />}
+                {!isLoading && <div ref={loadMoreRef} style={{ height: '3px' }} />}
                 {isLoadMoreLoading && (
                     <div className={styles.moreLoadSpinnerContainer}>
                         <Spinner

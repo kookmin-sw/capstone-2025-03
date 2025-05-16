@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import LogoImage from '../../assets/images/header/logo.png';
-import NotificationIconImage from '../../assets/images/header/notification_icon.png';
 
 const Header = styled.div<{ isVisible: boolean }>`
     background-color: #101012;
@@ -30,6 +29,7 @@ const Blank = styled.div`
 
 const Icon = styled.img`
     width: 3.2rem;
+    border-radius: 1.6rem;
 `;
 
 const handleClickNotificationButton = () => {
@@ -37,11 +37,14 @@ const handleClickNotificationButton = () => {
 };
 
 export default function MainHeader({ isVisible }: { isVisible: boolean }) {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const profileImage = user?.profile_image;
+
     return (
         <Header isVisible={isVisible}>
             <Logo src={LogoImage} />
             <Blank />
-            <Icon src={NotificationIconImage} onClick={handleClickNotificationButton} />
+            <Icon src={profileImage} onClick={handleClickNotificationButton} />
         </Header>
     );
 }

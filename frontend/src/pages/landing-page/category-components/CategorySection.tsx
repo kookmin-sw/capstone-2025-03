@@ -23,9 +23,27 @@ const CategoryList = styled.ul`
     display: flex;
     gap: 1.2rem;
     overflow-x: auto;
+    padding-bottom: 0.4rem;
+    
     &::-webkit-scrollbar {
         display: none;
     }
+
+    @media (min-width: 768px) {
+    &::-webkit-scrollbar {
+      display: block;
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
 `;
 
 const CategoryName = styled.div`

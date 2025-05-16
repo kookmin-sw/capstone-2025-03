@@ -166,7 +166,7 @@ export default function PackageDetail() {
     // return
     return isLoading ? (
         isComplete ? (
-            <CompleteSection text="패키지 구매 신청 완료!" />
+            <CompleteSection text="패키지 구매 신청 완료!" redirectTo='/' />
         ) : (
             <LoadingSection text="잠시만 기다려주세요" />
         )
