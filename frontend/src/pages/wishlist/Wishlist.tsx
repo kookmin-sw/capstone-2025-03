@@ -7,7 +7,7 @@ import { useUser } from '@/src/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Wishlist() {
     // usestate
@@ -23,18 +23,22 @@ export default function Wishlist() {
     const currentMenuIndex = 2;
     const userId = user?.userId;
 
+    useEffect(() => {
+        console.log(customPackages);
+    }, [customPackages])
+
     // Function
     const handleCreatePackage = async () => {
-        if (!userId || isCreating) return;
+        if (!userId || isCreating){
+            window.alert('로그인 정보가 없거나 패키지를 생성 중입니다');
+        };
 
         setIsCreating(true);
         const newPackage = await createPackage(new PackageModel({
-            name: `${user.name}의 새로운 패키지`,
+            name: `${user!.name}의 새로운 패키지`,
             description: '',
             user: userId,
         }));
-
-        await refetch();
 
         // navigate
         navigate('/package-detail', { state: { pkg: newPackage } })
