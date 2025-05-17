@@ -27,7 +27,7 @@ export default function PackageDetailAddCategory() {
     );
     // useEffect
     useEffect(() => {
-        const newMyCategories = categories.filter((category) => category.industries.includes(industry.id!));
+        const newMyCategories = industry.id === null ? categories : categories.filter((category) => category.industries.includes(industry.id!));
         setMyCategories(newMyCategories);
     }, []);
 
