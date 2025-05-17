@@ -8,8 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { editingPackageState } from '@/src/recoil/packageState';
 
 export default function Wishlist() {
+    // recoil
+    const [, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
     const [isCreating, setIsCreating] = useState<boolean>(false);
     // hook
@@ -44,6 +48,7 @@ export default function Wishlist() {
         await deletePackage({ id: id, user: userId });
     }
     const handleEditPackage = (pkg: PackageModel) => {
+        setEditingPackage(pkg);
         navigate('/package-detail', { state: { pkg: pkg } })
     }
 

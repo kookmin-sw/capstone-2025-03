@@ -164,7 +164,7 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
     // Function: 패키지 아이템 클릭
     const handlePackageItemClick = () => {
         if (fromDetail) return;
-        setEditingPackage(null);
+        setEditingPackage(pkg);
         navigate('/package-detail', { state: { pkg: pkg.toJson() } });
     };
 

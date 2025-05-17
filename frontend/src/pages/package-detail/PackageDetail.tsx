@@ -47,13 +47,6 @@ export default function PackageDetail() {
     const [description, setDescription] = useState<string>(myPackage.description ?? '');
     const [isFavorite, setIsFavorite] = useState(true);
 
-    // UseEffect
-    useEffect(() => {
-        if(myPackage.id !== editingPackage?.id){
-            setEditingPackage(myPackage);
-        }
-    }, []);
-
     // Function
     const handleAddCategoryButtonClick = () => {
         navigate('/package-detail-add-category', {
