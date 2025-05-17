@@ -17,7 +17,7 @@ export const optimizePriceInService = async (name: string, grade: string, quanti
 // 판매 물품 등록 시 가격 예측을 합니다.
 export const optimizePriceInServiceByNewModel = async (modelName: string, description: string) => {
     try {
-        const response = await axios.post(`${NEW_AI_BASE_URL}/predict`, { 'model_name': modelName, description });
+        const response = await axios.post(`${NEW_AI_BASE_URL}/predict/`, { 'model_name': modelName, description });
         return response.data;
     } catch (error) {
         console.error('Error optimizing price: ', error);

@@ -167,9 +167,9 @@ export default function NewAiOptimizer({ condition }: { condition: string }) {
 
     return (
         !isReady ? <div style={{ backgroundColor: '#202028', borderRadius: '1.2rem', padding: '3rem 2rem', marginTop: '3rem' }}>
-            <h3 style={{ color: '#ffffff', fontWeight: '600', fontSize: '1.8rem' }}>AI 판매가 최적화</h3>
+            <h3 style={{ color: '#ffffff', fontWeight: '600', fontSize: '1.8rem' }}>AI Model v2.0 판매가 최적화</h3>
             <p style={{ fontSize: '1.4rem', color: '#7F7F89', width: '100%' }}>
-                dddd유사한 제품을 분석하여 최상의 이익을 확보하면서도 시장에서 합리적으로 판매될 수 있는 가격대를 추천해 드려요
+                유사한 제품을 분석하여 최상의 이익을 확보하면서도 시장에서 합리적으로 판매될 수 있는 가격대를 추천해 드려요
             </p>
             <ImageWrapper>
                 {/* 이전 이미지 - 왼쪽으로 사라짐 */}
