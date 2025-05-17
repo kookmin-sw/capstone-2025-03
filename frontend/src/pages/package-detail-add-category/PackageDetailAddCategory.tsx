@@ -17,7 +17,7 @@ export default function PackageDetailAddCategory() {
     const location = useLocation();
     const industry: IndustryModel = IndustryModel.fromJson(location.state.industry || {});
     // hook
-    const { categories, getCategoryList } = useCategory();
+    const { categories } = useCategory();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
@@ -27,25 +27,8 @@ export default function PackageDetailAddCategory() {
     );
     // useEffect
     useEffect(() => {
-        const fetchCategories = async () => {
-            let newCategories: CategoryModel[] = [];
-
-            if (!industry.id) {
-                if (categories.length < 1) {
-                    newCategories = await getCategoryList();
-                }else{
-                    newCategories = categories;
-                }
-            } else {
-                newCategories = categories.filter((category) =>
-                    category.industries.includes(industry.id!)
-                );
-            }
-
-            setMyCategories(newCategories);
-        };
-
-        fetchCategories();
+        const newMyCategories = categories.filter((category) => category.industries.includes(industry.id!));
+        setMyCategories(newMyCategories);
     }, []);
 
     // Function
