@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/react';
-import { optimizePriceInService, optimizePriceInServiceByNewModel } from '@/src/services/aiService';
+import { optimizePriceInServiceByNewModel } from '@/src/services/aiService';
 import { useState, useEffect } from 'react';
 import { sellerProductState } from '@/src/recoil/productState';
 import { useRecoilValue } from 'recoil';

@@ -58,7 +58,6 @@ export default function BackHeaderForPackageDetail({
 }) {
     const navigate = useNavigate();
     const [isTransparent, setTransparent] = useState<boolean>(true);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(

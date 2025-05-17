@@ -7,7 +7,7 @@ import { useUser } from '@/src/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Wishlist() {
     // usestate
@@ -15,7 +15,7 @@ export default function Wishlist() {
     // hook
     const navigate = useNavigate();
     const { user } = useUser();
-    const { data: customPackages = [], isLoading, isError, refetch } = useCustomPackagesByUser(user?.userId!);
+    const { data: customPackages = [], isLoading, isError } = useCustomPackagesByUser(user?.userId!);
     const { mutateAsync: createPackage } = useCreatePackage();
     const { mutateAsync: deletePackage } = useDeletePackage();
 
