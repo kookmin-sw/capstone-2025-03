@@ -7,7 +7,7 @@ import AddIconImage from '@/src/assets/images/page/package-detail/add_icon.png';
 import EditIconImage from '@/src/assets/images/page/package-detail/edit_icon.png';
 import ArrowRightIconImage from '@/src/assets/images/page/package-detail/arrow_right.png';
 import DeleteIconImage from '@/src/assets/images/page/package-detail/delete.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import CompleteSection from '@/src/components/layout/CompleteSection';
