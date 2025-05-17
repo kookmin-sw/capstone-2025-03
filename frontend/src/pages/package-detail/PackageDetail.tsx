@@ -137,9 +137,7 @@ export default function PackageDetail() {
         ) : (
             <LoadingSection text="잠시만 기다려주세요" />
         )
-    ) : (
-        myPackage.id !== editingPackage?.id ? <LoadingSection text='로딩 중...' />
-            : <div className={styles.page}>
+    ) : (<div className={styles.page}>
                 <BackHeader />
                 <div className={styles.section}>
                     {editingPackage && <div className={styles.packageCard}>
