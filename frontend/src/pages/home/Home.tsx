@@ -66,7 +66,7 @@ export default function Home() {
 
     // Function
     const handleSearchBarClick = () => {
-        window.alert('물품 검색');
+        navigate('/search-category');
     };
 
     const handleNextButton = () => {
