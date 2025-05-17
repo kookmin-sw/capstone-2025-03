@@ -72,7 +72,7 @@ export const createPackageInService = async (
     packageData: PackageModel,
 ): Promise<PackageModel | null> => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutIdForCU());
+        const response = await axios.post(`${API_BASE_URL}/`, packageData.toJsonWithoutId());
         return PackageModel.fromJson(response.data);
     } catch (error) {
         console.error('Error creating package:', error);

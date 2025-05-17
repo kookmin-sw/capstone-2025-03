@@ -87,17 +87,4 @@ export default class PackageModel {
       price: this.price,
     };
   }
-
-  toJsonWithoutIdForCU(): any{
-    return {
-      user: this.user,
-      industry: this.industry,
-      categories: this.categories,
-      product_ids: this.products.map((p) => p.id),
-      name: this.name,
-      thumbnail: this.thumbnail,
-      description: this.description,
-      price: this.price,
-    };
-  }
 }
