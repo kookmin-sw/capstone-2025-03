@@ -69,7 +69,6 @@ export const useUpdatePackage = () => {
 
       // Mutation 적용
       const data = await updatePackageInService(id, updatedData);
-      console.log(data);
       if (!data) throw new Error('Failed to update package');
       return data;
     },

@@ -23,10 +23,6 @@ export default function Wishlist() {
     const currentMenuIndex = 2;
     const userId = user?.userId;
 
-    useEffect(() => {
-        console.log(customPackages);
-    }, [customPackages])
-
     // Function
     const handleCreatePackage = async () => {
         if (!userId || isCreating){
