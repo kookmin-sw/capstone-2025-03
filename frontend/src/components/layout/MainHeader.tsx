@@ -33,7 +33,7 @@ const Icon = styled.img`
 `;
 
 const handleClickNotificationButton = () => {
-    window.alert('준비 중입니다!');
+    // window.alert('준비 중입니다!');
 };
 
 export default function MainHeader({ isVisible }: { isVisible: boolean }) {
