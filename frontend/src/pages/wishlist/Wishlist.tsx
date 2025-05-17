@@ -40,6 +40,8 @@ export default function Wishlist() {
             user: userId,
         }));
 
+        setEditingPackage(newPackage);
+
         // navigate
         navigate('/package-detail', { state: { pkg: newPackage } })
     };
