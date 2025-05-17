@@ -22,6 +22,7 @@ import OrderModel from '@/src/models/OrderModel';
 import { useUser } from '@/src/contexts/UserContext';
 import { useUpdatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
 import ProductModel from '@/src/models/ProductModel';
+import ProductImage from '@/src/assets/images/alternative/product.png';
 
 export default function PackageDetail() {
     // page connection
@@ -189,7 +190,7 @@ export default function PackageDetail() {
                                         src={
                                             product.images.length > 0
                                                 ? product.images[0]
-                                                : 'https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg'
+                                                : ProductImage
                                         }
                                     />
                                     <div className={styles.productDetailContainer}>
@@ -237,7 +238,7 @@ export default function PackageDetail() {
                                 >
                                     <img
                                         className={styles.productThumbnail}
-                                        src="https://www.urbanbrush.net/web/wp-content/uploads/edd/2023/03/urban-20230310112234917676-1024x1024.jpg"
+                                        src={ProductImage}
                                     />
                                     <div className={styles.productDetailContainer}>
                                         <div className={styles.productInfoContainer}>

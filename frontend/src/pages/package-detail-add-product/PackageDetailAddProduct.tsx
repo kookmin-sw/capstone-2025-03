@@ -20,7 +20,7 @@ export default function PackageDetailAddProduct() {
     const location = useLocation();
     const category: CategoryModel = CategoryModel.fromJson(location.state?.category || {});
     // hook
-    const { productList, getProductList } = useProduct();
+    const { productList, setProductList, getProductList } = useProduct();
     // recoil
     const [editingPackage, setEditingPackage] = useRecoilState(editingPackageState);
     // useState
@@ -36,30 +36,47 @@ export default function PackageDetailAddProduct() {
             const filteredProductList = productList.filter(
                 (product) => product.category === category.id,
             );
+            // 패키지에 담긴 것들 productList에 먼저 추가
+            const targetProductIds = editingPackage?.products.filter((product) => product.category === category.id).map((item) => item.id) ?? [];
+            // 현재 로드된 ID 목록
+            const loadedIds = new Set(productList.map((product) => product.id));
+            // 아직 로드되지 않은 ID만 필터링
+            const missingIds = targetProductIds.filter((id) => !loadedIds.has(id));
+            // missingIds만 추가
+            setProductList([
+                ...productList,
+                ...((editingPackage?.products.filter((product) => missingIds.includes(product.id))) ?? [])
+            ]);
+
+            // initial product list read
             if (filteredProductList.length < 5) {
                 const newProducts = await getProductList(category.id);
                 if (newProducts) setIsLoading(false);
             } else {
                 setIsLoading(false);
             }
-            setCheckedProductIds(
-                productList
-                    .filter((product) =>
-                        (editingPackage?.products.map((product) => product.id) || []).includes(
-                            product.id!,
-                        ),
-                    )
-                    .map((product) => product.id!),
-            );
         };
         fetchProducts();
     }, []);
+
+    useEffect(() => {
+        setCheckedProductIds(
+            productList
+                .filter((product) =>
+                    (editingPackage?.products.map((product) => product.id) || []).includes(
+                        product.id!,
+                    ),
+                )
+                .map((product) => product.id!),
+        );
+    }, [productList]);
+
     useEffect(() => {
         if (!loadMoreRef.current || isLoadMoreLoading) return;
 
         const observer = new IntersectionObserver(
             (entries) => {
-                if (entries[0].isIntersecting) {
+                if (entries[0].isIntersecting && productList.length > 0) {
                     setIsLoadMoreLoading(true);
                     getProductList(category.id).finally(() => setIsLoadMoreLoading(false));
                 }
@@ -124,35 +141,38 @@ export default function PackageDetailAddProduct() {
                 <div className={styles.listView}>
                     {isLoading
                         ? Array.from({ length: 5 }).map((_, idx) => (
-                              <div key={idx} className={styles.checkableProductItem}>
-                                  <ProductItemSkeleton />
-                              </div>
-                          ))
+                            <div key={idx} className={styles.checkableProductItem}>
+                                <ProductItemSkeleton />
+                            </div>
+                        ))
                         : productList
-                              .filter((product) => product.category === category.id)
-                              .map((product, index) => (
-                                  <div
-                                      key={index}
-                                      className={styles.checkableProductItem}
-                                      onClick={() => handleProductItemClick(product)}
-                                  >
-                                      <ProductItem product={product} />
-                                      <div className={styles.blank} />
-                                      <img
-                                          onClick={(e) => {
-                                              e.stopPropagation();
-                                              handleCheckButtonClick(product.id!);
-                                          }}
-                                          className={styles.checkIcon}
-                                          src={CheckIconImage}
-                                          style={{
-                                              opacity: checkedProductIds.includes(product.id!)
-                                                  ? '1'
-                                                  : '0.5',
-                                          }}
-                                      />
-                                  </div>
-                              ))}
+                            .filter((product) => product.category === category.id)
+                            .map((item, index) => {
+                                const isActive = checkedProductIds.includes(item.id!);
+
+                                return <div
+                                    key={index}
+                                    className={styles.checkableProductItem}
+                                    onClick={() => handleProductItemClick(item)}
+                                >
+                                    <ProductItem product={item} />
+                                    <div className={styles.blank} />
+                                    <img
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleCheckButtonClick(item.id!);
+                                        }}
+                                        className={styles.checkIcon}
+                                        src={CheckIconImage}
+                                        style={{
+                                            opacity: isActive
+                                                ? '1'
+                                                : '0.5',
+                                        }}
+                                    />
+                                </div>
+                            }
+                            )}
                 </div>
                 <div ref={loadMoreRef} style={{ height: '20px' }} />
                 {isLoadMoreLoading && !isLoading && (
