@@ -16,6 +16,7 @@ import HomeSkeleton from '@/src/components/ui/HomeSkeleton';
 import PackageItemSkeleton from '@/src/components/ui/PackageItemSkeleton';
 import Joyride from 'react-joyride';
 import { recommendPageSteps } from '@/src/components/ui/ToolTipContents';
+
 const Divider = styled.div`
     width: 100%;
     height: 1px;
@@ -118,14 +119,14 @@ export default function Home() {
                     <img className={styles.bannerImage} src={RestartBanner}></img>
                 </div>
                 <div id="packege-recommend" className={styles.industrySelectContainer}>
-                    <SearchBar text="필요한 중고 물품 검색" search={handleSearchBarClick} />
+                    <div id="category">
+                        <SearchBar text="필요한 중고 물품 검색" search={handleSearchBarClick} />
+                    </div>
                     <div className={styles.industryTitleContainer}>
                         <h1 className={styles.industryTitle}>업종별 패키지 추천</h1>
                         <div style={{ flex: '1' }} />
                         <button className={styles.nextButton} onClick={handleNextButton}>
-                            <p id="see-more" className={styles.nextButtonText}>
-                                더보기
-                            </p>
+                            <p className={styles.nextButtonText}>더보기</p>
                             <img src={ArrowRight} className={styles.nexButtonImage} />
                         </button>
                     </div>

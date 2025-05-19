@@ -62,15 +62,15 @@ export const recommendPageSteps: Step[] = [
         disableBeacon: true,
     },
     {
-        target: '#see-more',
+        target: '#category',
         content: (
             <div>
-                <p>더보기 버튼을 통해 모든 업종을 볼 수 있어요</p>
+                <p>카테고리별로 물품들을 볼 수 있어요</p>
             </div>
         ),
         disableBeacon: true,
-        placement: 'left',
     },
+
     {
         target: '#all-package',
         content: (
@@ -148,3 +148,38 @@ export const SellerPageAddProductSteps: Step[] = [
         placement: 'right',
     },
 ];
+
+export const PackageSteps: Step[] = [
+    {
+        target: '#introduce',
+        content: (
+            <div>
+                <p>패키지를 구성하는 기본 구성상품이에요</p>
+                <p>패키지는 편집이 가능해요!</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: "top",
+    },
+    {
+        target: '#product-add',
+        content: (
+            <div>
+                <p>+ 버튼을 통해 물건을 추가할 수 있어요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: "left",
+    },
+    {
+        target: '#delete-product',
+        content: (
+            <div>
+                <p>✏️ 버튼을 통해 물건을 삭제할 수 있어요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: "left"
+
+    },
+]

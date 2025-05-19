@@ -7,7 +7,7 @@ import AddIconImage from '@/src/assets/images/page/package-detail/add_icon.png';
 import EditIconImage from '@/src/assets/images/page/package-detail/edit_icon.png';
 import ArrowRightIconImage from '@/src/assets/images/page/package-detail/arrow_right.png';
 import DeleteIconImage from '@/src/assets/images/page/package-detail/delete.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingSection from '@/src/components/layout/LoadingSection';
 import CompleteSection from '@/src/components/layout/CompleteSection';
@@ -23,6 +23,8 @@ import { useUser } from '@/src/contexts/UserContext';
 import { useUpdatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
 import ProductModel from '@/src/models/ProductModel';
 import ProductImage from '@/src/assets/images/alternative/product.png';
+import Joyride from 'react-joyride';
+import { PackageSteps } from '@/src/components/ui/ToolTipContents';
 
 export default function PackageDetail() {
     // page connection
@@ -46,6 +48,18 @@ export default function PackageDetail() {
     const [name, setName] = useState<string>(myPackage.name ?? '');
     const [description, setDescription] = useState<string>(myPackage.description ?? '');
     const [isFavorite, setIsFavorite] = useState(true);
+    // 툴팁 용도
+    const [run, setRun] = useState<boolean>(false);
+    const [isReady, setIsReady] = useState<boolean>(false);
+
+    // 툴팁 용
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsReady(true);
+            setRun(true);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, []);
 
     // Function
     const handleAddCategoryButtonClick = () => {
@@ -90,19 +104,24 @@ export default function PackageDetail() {
     const handleDeleteButtonClick = (selectedProduct: ProductModel) => {
         const targetCategory = selectedProduct.category;
         let newCategories = [];
-        const newProducts = editingPackage?.products.filter((product) => product.id !== selectedProduct.id)!!;
-        const productsByTargetCategory = newProducts?.filter((product) => product.category === targetCategory);
+        const newProducts = editingPackage?.products.filter(
+            (product) => product.id !== selectedProduct.id,
+        )!!;
+        const productsByTargetCategory = newProducts?.filter(
+            (product) => product.category === targetCategory,
+        );
 
         if (productsByTargetCategory?.length !== 0) {
             newCategories = editingPackage?.categories!;
         } else {
-            newCategories = editingPackage?.categories.filter((category) => category !== targetCategory) ?? [];
+            newCategories =
+                editingPackage?.categories.filter((category) => category !== targetCategory) ?? [];
         }
 
         const newPackage = PackageModel.fromJson({
             ...editingPackage?.toJson(),
             products: newProducts,
-            categories: newCategories
+            categories: newCategories,
         });
 
         setEditingPackage(newPackage);
@@ -115,60 +134,95 @@ export default function PackageDetail() {
 
         if (isFavorite) {
             await updatePackage({
-                id: editingPackage.id!, updatedData: {
+                id: editingPackage.id!,
+                updatedData: {
                     ...editingPackage.toJson(),
                     product_ids: editingPackage.products.map((product) => product.id),
                     name: name,
                     description: description,
-                }
+                },
             });
-            window.alert('변경 사항이 저장되었습니다.')
+            window.alert('변경 사항이 저장되었습니다.');
         } else {
             await deletePackage({ id: editingPackage.id!, user: user.userId! });
             window.alert('패키지가 찜 리스트에서 제외되었습니다');
             navigate(-1);
         }
-    }
+    };
 
     // return
     return isLoading ? (
         isComplete ? (
-            <CompleteSection text="패키지 구매 신청 완료!" redirectTo='/' />
+            <CompleteSection text="패키지 구매 신청 완료!" redirectTo="/" />
         ) : (
             <LoadingSection text="잠시만 기다려주세요" />
         )
-    ) : (<div className={styles.page}>
-                <BackHeader />
-                <div className={styles.section}>
-                    {editingPackage && <div className={styles.packageCard}>
-                        {editingPackage.user === user?.userId ? <CustomPackageItem pkg={editingPackage} name={name} setName={setName} description={description}
-                            setDescription={setDescription} isFavorite={isFavorite} setIsFavorite={setIsFavorite} save={save} /> : <PackageItem pkg={editingPackage} fromDetail={true} />}
-                    </div>}
-                    <div className={styles.titleContainer}>
-                        <p className={styles.listViewTitle}>구성상품</p>
-                        <div className={styles.blank} />
-                        <div className={styles.iconButtonContainer}>
-                            <button
-                                className={styles.iconButton}
-                                onClick={handleAddCategoryButtonClick}
-                            >
-                                <img className={styles.iconButtonImage} src={AddIconImage} />
-                            </button>
-                            <button
-                                className={styles.iconButton}
-                                onClick={handleEditButtonClick}
-                                style={{ backgroundColor: `${!isEdit ? '#00A36C' : '#7F7F89'}` }}
-                            >
-                                <img className={styles.iconButtonImage} src={EditIconImage} />
-                            </button>
-                        </div>
+    ) : (
+        <div className={styles.page}>
+            <Joyride
+                steps={PackageSteps}
+                run={run}
+                continuous
+                // scrollToFirstStep
+                disableScrolling
+                showProgress
+                showSkipButton
+                styles={{
+                    options: {
+                        zIndex: 9999,
+                    },
+                }}
+            />
+            <BackHeader />
+            <div className={styles.section}>
+                {editingPackage && (
+                    <div className={styles.packageCard}>
+                        {editingPackage.user === user?.userId ? (
+                            <CustomPackageItem
+                                pkg={editingPackage}
+                                name={name}
+                                setName={setName}
+                                description={description}
+                                setDescription={setDescription}
+                                isFavorite={isFavorite}
+                                setIsFavorite={setIsFavorite}
+                                save={save}
+                            />
+                        ) : (
+                            <PackageItem pkg={editingPackage} fromDetail={true} />
+                        )}
                     </div>
-                    <div className={styles.listView}>
-                        {/* 1. 카테고리 순서대로 정렬된 products */}
-                        {categories.filter((item) => editingPackage?.categories.includes(item.id!)).map((category) => {
-                            const categoryProducts = editingPackage?.products.filter(
-                                (product) => product.category === category.id
-                            ) || [];
+                )}
+                <div className={styles.titleContainer}>
+                    <p className={styles.listViewTitle}>구성상품</p>
+                    <div className={styles.blank} />
+                    <div className={styles.iconButtonContainer}>
+                        <button
+                            id="product-add"
+                            className={styles.iconButton}
+                            onClick={handleAddCategoryButtonClick}
+                        >
+                            <img className={styles.iconButtonImage} src={AddIconImage} />
+                        </button>
+                        <button
+                            id="delete-product"
+                            className={styles.iconButton}
+                            onClick={handleEditButtonClick}
+                            style={{ backgroundColor: `${!isEdit ? '#00A36C' : '#7F7F89'}` }}
+                        >
+                            <img className={styles.iconButtonImage} src={EditIconImage} />
+                        </button>
+                    </div>
+                </div>
+                <div id="introduce" className={styles.listView}>
+                    {/* 1. 카테고리 순서대로 정렬된 products */}
+                    {categories
+                        .filter((item) => editingPackage?.categories.includes(item.id!))
+                        .map((category) => {
+                            const categoryProducts =
+                                editingPackage?.products.filter(
+                                    (product) => product.category === category.id,
+                                ) || [];
 
                             return categoryProducts.map((product) => (
                                 <div
@@ -218,69 +272,72 @@ export default function PackageDetail() {
                             ));
                         })}
 
-                        {/* 2. 제품이 아예 없는 카테고리 */}
-                        {categories.filter((item) => editingPackage?.categories.includes(item.id!))
-                            .filter((category) => !editingPackage?.products.some((product) => product.category === category.id))
-                            .map((category) => (
-                                <div
-                                    key={`category-${category.id}`}
-                                    className={styles.productItem}
-                                    onClick={() => handleAddProductButtonClick(category)}
-                                >
-                                    <img
-                                        className={styles.productThumbnail}
-                                        src={ProductImage}
-                                    />
-                                    <div className={styles.productDetailContainer}>
-                                        <div className={styles.productInfoContainer}>
-                                            <p className={styles.productName}></p>
-                                            <p className={styles.categoryAndAmount}>
-                                                {category.name} 제품을 골라주세요!
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <button className={styles.searchOtherProductsButton}>
-                                        <img
-                                            className={styles.searchOtherProductsButtonIcon}
-                                            src={ArrowRightIconImage}
-                                        />
-                                    </button>
-                                </div>
-                            ))}
-                    </div>
-                    <div style={{ height: '20rem' }} />
-                </div>
-                <DefaultButton
-                    event={() => {
-                        if (isEdit) {
-                            setIsEdit(false);
-                        } else {
-                            handleBuyButtonClick();
-                        }
-                    }}
-                    isActive={true}
-                    text={isEdit ? '완료' : '한번에 구매하기'}
-                />
-
-                {/* Modal */}
-                {isModalOpen && (
-                    <div className={styles.overlay} onClick={() => setIsModalOpen(false)}>
-                        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                            <p className={styles.modalTitle}>
-                                선택한 물품들을 한번에
-                                <br />
-                                구매하시겠어요?
-                            </p>
-                            <p className={styles.description}>결제와 배송은 카카오톡으로 진행됩니다.</p>
-                            <button
-                                className={styles.buttonInModal}
-                                onClick={handleBuyConfirmButtonClick}
+                    {/* 2. 제품이 아예 없는 카테고리 */}
+                    {categories
+                        .filter((item) => editingPackage?.categories.includes(item.id!))
+                        .filter(
+                            (category) =>
+                                !editingPackage?.products.some(
+                                    (product) => product.category === category.id,
+                                ),
+                        )
+                        .map((category) => (
+                            <div
+                                key={`category-${category.id}`}
+                                className={styles.productItem}
+                                onClick={() => handleAddProductButtonClick(category)}
                             >
-                                <p>한번에 구매할게요</p>
-                            </button>
-                        </div>
-                    </div>
-                )}
+                                <img className={styles.productThumbnail} src={ProductImage} />
+                                <div className={styles.productDetailContainer}>
+                                    <div className={styles.productInfoContainer}>
+                                        <p className={styles.productName}></p>
+                                        <p className={styles.categoryAndAmount}>
+                                            {category.name} 제품을 골라주세요!
+                                        </p>
+                                    </div>
+                                </div>
+                                <button className={styles.searchOtherProductsButton}>
+                                    <img
+                                        className={styles.searchOtherProductsButtonIcon}
+                                        src={ArrowRightIconImage}
+                                    />
+                                </button>
+                            </div>
+                        ))}
+                </div>
+                <div style={{ height: '20rem' }} />
             </div>
+            <DefaultButton
+                event={() => {
+                    if (isEdit) {
+                        setIsEdit(false);
+                    } else {
+                        handleBuyButtonClick();
+                    }
+                }}
+                isActive={true}
+                text={isEdit ? '완료' : '한번에 구매하기'}
+            />
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className={styles.overlay} onClick={() => setIsModalOpen(false)}>
+                    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                        <p className={styles.modalTitle}>
+                            선택한 물품들을 한번에
+                            <br />
+                            구매하시겠어요?
+                        </p>
+                        <p className={styles.description}>결제와 배송은 카카오톡으로 진행됩니다.</p>
+                        <button
+                            className={styles.buttonInModal}
+                            onClick={handleBuyConfirmButtonClick}
+                        >
+                            <p>한번에 구매할게요</p>
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }
