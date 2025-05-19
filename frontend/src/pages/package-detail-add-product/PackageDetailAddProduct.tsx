@@ -39,12 +39,21 @@ export default function PackageDetailAddProduct() {
     // useEffect
 
     // 툴팁 용
+    const LOCAL_STORAGE_KEY = 'packageDetail_addProduct_tooltip_shown';
+
+    // 개발 중일때
+    localStorage.removeItem('packageDetail_addProduct_tooltip_shown');
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsReady(true);
-            setRun(true);
-        }, 300);
-        return () => clearTimeout(timer);
+        const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+        if (!alreadyShown) {
+            const timer = setTimeout(() => {
+                setIsReady(true);
+                setRun(true);
+                localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+            }, 300);
+            return () => clearTimeout(timer);
+        }
     }, []);
 
     useEffect(() => {
@@ -155,7 +164,7 @@ export default function PackageDetailAddProduct() {
     };
 
     return (
-        <div id='introduce' className={styles.page}>
+        <div id="introduce" className={styles.page}>
             <Joyride
                 steps={PackageDetailAddProductSteps}
                 run={run}

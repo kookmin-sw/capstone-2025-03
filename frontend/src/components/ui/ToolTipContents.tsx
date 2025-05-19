@@ -188,17 +188,3 @@ export const PackageDetailAddProductSteps: Step[] = [
         placement: 'center',
     },
 ];
-
-export const CustomPackageSteps: Step[] = [
-    {
-        target: '#save',
-        content: (
-            <div>
-                <p>변경 사항 저장 버튼을 눌러야</p>
-                <p>저장이 완료되어요</p>
-            </div>
-        ),
-        disableBeacon: true,
-        placement: 'center',
-    },
-];

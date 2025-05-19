@@ -43,12 +43,21 @@ export default function Home() {
     // useEffect
 
     // 툴팁 용
+    const LOCAL_STORAGE_KEY = 'home_tooltip_shown';
+
+    // 개발 중일때
+    localStorage.removeItem('home_tooltip_shown');
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsReady(true);
-            setRun(true);
-        }, 300);
-        return () => clearTimeout(timer);
+        const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+        if (!alreadyShown) {
+            const timer = setTimeout(() => {
+                setIsReady(true);
+                setRun(true);
+                localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+            }, 300);
+            return () => clearTimeout(timer);
+        }
     }, []);
 
     useEffect(() => {
@@ -105,11 +114,44 @@ export default function Home() {
                 continuous
                 // scrollToFirstStep
                 disableScrolling
-                showProgress
                 showSkipButton
+                showProgress={false}
+                locale={{
+                    back: '이전',
+                    close: '닫기',
+                    last: '완료',
+                    next: '다음',
+                    skip: '건너뛰기',
+                }}
                 styles={{
                     options: {
                         zIndex: 9999,
+                        backgroundColor: '#f2f2f2',
+                        textColor: '#000000',
+                        primaryColor: '#00a36c',
+                        arrowColor: 'white',
+                        width: '30rem',
+                    },
+                    tooltip: {
+                        padding: '1.2rem 1.6rem',
+                        fontSize: '1.4rem',
+                        lineHeight: '1.6',
+                        fontWeight: 500,
+                    },
+                    buttonNext: {
+                        backgroundColor: '#00a36c',
+                        color: 'white',
+                        fontWeight: 600,
+                        fontSize: '1.4rem',
+                        borderRadius: '6px',
+                    },
+                    buttonBack: {
+                        color: '#00a36c',
+                        fontSize: '1.4rem',
+                    },
+                    buttonSkip: {
+                        color: '#999999',
+                        fontSize: '1.4rem',
                     },
                 }}
             />

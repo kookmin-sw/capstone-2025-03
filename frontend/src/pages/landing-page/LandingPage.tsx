@@ -19,12 +19,21 @@ export default function LandingPage() {
     const [run, setRun] = useState<boolean>(false);
     const [isReady, setIsReady] = useState<boolean>(false);
 
+    const LOCAL_STORAGE_KEY = 'landingpage_tooltip_shown';
+
+    // 개발 중일때
+    localStorage.removeItem('landingpage_tooltip_shown');
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsReady(true);
-            setRun(true);
-        }, 300);
-        return () => clearTimeout(timer);
+        const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+        if (!alreadyShown) {
+            const timer = setTimeout(() => {
+                setIsReady(true);
+                setRun(true);
+                localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+            }, 300);
+            return () => clearTimeout(timer);
+        }
     }, []);
 
     return (

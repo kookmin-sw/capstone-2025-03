@@ -53,12 +53,21 @@ export default function PackageDetail() {
     const [isReady, setIsReady] = useState<boolean>(false);
 
     // 툴팁 용
+    const LOCAL_STORAGE_KEY = 'packageDetail_tooltip_shown';
+
+    // 개발 중일때
+    localStorage.removeItem('packageDetail_tooltip_shown');
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsReady(true);
-            setRun(true);
-        }, 300);
-        return () => clearTimeout(timer);
+        const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+        if (!alreadyShown) {
+            const timer = setTimeout(() => {
+                setIsReady(true);
+                setRun(true);
+                localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+            }, 300);
+            return () => clearTimeout(timer);
+        }
     }, []);
 
     // Function
