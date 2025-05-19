@@ -14,7 +14,8 @@ import IndustryModel from '@/src/models/IndustryModel';
 import industryData from '@/src/data/industryData.json';
 import HomeSkeleton from '@/src/components/ui/HomeSkeleton';
 import PackageItemSkeleton from '@/src/components/ui/PackageItemSkeleton';
-
+import Joyride from 'react-joyride';
+import { recommendPageSteps } from '@/src/components/ui/ToolTipContents';
 const Divider = styled.div`
     width: 100%;
     height: 1px;
@@ -23,6 +24,10 @@ const Divider = styled.div`
 `;
 
 export default function Home() {
+    // 툴팁 용도
+    const [run, setRun] = useState<boolean>(false);
+    const [isReady, setIsReady] = useState<boolean>(false);
+
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
     const navigate = useNavigate();
@@ -35,6 +40,16 @@ export default function Home() {
         .map((industry) => IndustryModel.fromJson(industry));
 
     // useEffect
+
+    // 툴팁 용
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsReady(true);
+            setRun(true);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, []);
+
     useEffect(() => {
         const fetchPackages = async () => {
             if (packageList.length < 1) {
@@ -77,39 +92,64 @@ export default function Home() {
         navigate('/find-package-recommend', {
             state: { selectedIndustry: industry?.toJson() },
         });
-    }
+    };
 
     return isLoading ? (
         <HomeSkeleton />
     ) : (
-        <div className={styles.page}>
+        <div id="introduce" className={styles.page}>
+            <Joyride
+                steps={recommendPageSteps}
+                run={run}
+                continuous
+                // scrollToFirstStep
+                disableScrolling
+                showProgress
+                showSkipButton
+                styles={{
+                    options: {
+                        zIndex: 9999,
+                    },
+                }}
+            />
             <MainHeader isVisible={isVisible} />
             <div className={styles.section}>
                 <div className={styles.bannerContainer}>
                     <img className={styles.bannerImage} src={RestartBanner}></img>
                 </div>
-                <div className={styles.industrySelectContainer}>
+                <div id="packege-recommend" className={styles.industrySelectContainer}>
                     <SearchBar text="필요한 중고 물품 검색" search={handleSearchBarClick} />
                     <div className={styles.industryTitleContainer}>
                         <h1 className={styles.industryTitle}>업종별 패키지 추천</h1>
                         <div style={{ flex: '1' }} />
                         <button className={styles.nextButton} onClick={handleNextButton}>
-                            <p className={styles.nextButtonText}>더보기</p>
+                            <p id="see-more" className={styles.nextButtonText}>
+                                더보기
+                            </p>
                             <img src={ArrowRight} className={styles.nexButtonImage} />
                         </button>
                     </div>
                     <div className={styles.industryGrid}>
                         {industries.map((industry) => {
-                            return <div key={industry.id} className={styles.industryItem} onClick={() => handleIndustryItemClick(industry!)}>
-                                <img className={styles.industryItemImage} src={industry.icon!} />
-                                <p className={styles.industryItemText}>
-                                    {industry.id === 6 ? '쇼핑몰' : industry.name}
-                                </p>
-                            </div>
+                            return (
+                                <div
+                                    key={industry.id}
+                                    className={styles.industryItem}
+                                    onClick={() => handleIndustryItemClick(industry!)}
+                                >
+                                    <img
+                                        className={styles.industryItemImage}
+                                        src={industry.icon!}
+                                    />
+                                    <p className={styles.industryItemText}>
+                                        {industry.id === 6 ? '쇼핑몰' : industry.name}
+                                    </p>
+                                </div>
+                            );
                         })}
                     </div>
                 </div>
-                <div className={styles.listViewContainer}>
+                <div id="all-package" className={styles.listViewContainer}>
                     <p className={styles.listViewTitle}>전체보기</p>
                     <div className={styles.packageListView}>
                         {packageList.map((pkg, index) => {
