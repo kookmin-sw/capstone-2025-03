@@ -2,7 +2,7 @@ import CategoryProducts from './category-components/RandomCategory';
 import MainBanner from './banner-components/MainBanner';
 import styled from '@emotion/styled';
 import Footer from '@/src/components/layout/MenuFooter';
-import Joyride from 'react-joyride';
+import Joyride, { Step } from 'react-joyride';
 import { useEffect, useState } from 'react';
 
 const PageContainer = styled.div`
@@ -18,16 +18,45 @@ export default function LandingPage() {
     const [run, setRun] = useState<boolean>(false); // 투어 실행 여부
     const [isReady, setIsReady] = useState<boolean>(false);
 
-    const steps = [
+    const steps: Step[] = [
         {
             target: '.main-banner-step',
-            content: '여기는 메인 배너입니다!',
+            content: (
+                <div>
+                    <p>메인 배너입니다!</p>
+                    <p>클릭하면 restart 소개를 볼 수 있어요.</p>
+                </div>
+            ),
             disableBeacon: true,
         },
         {
             target: '.category-products-step',
-            content: '이건 랜덤 카테고리 상품 영역이에요!',
+            content: (
+                <div>
+                    restart 의 여러 상품들을 만나보세요!
+                </div>
+            ),
             disableBeacon: true,
+        },
+        {
+            target: '.refresh-new-product',
+            content: (
+                <div>
+                    새로고침을 누르면 
+                    <p>랜덤으로 새로운 상품을 보실 수 있어요!</p>
+                </div>
+            ),
+            disableBeacon: true,
+        },
+        {
+            target: '.last',
+            content: (
+                <div>
+                    그러면 restart 에서 즐거운 구매 하세요🤑
+                </div>
+            ),
+            disableBeacon: true,
+            placement: "center",
         },
     ];
 
@@ -40,12 +69,13 @@ export default function LandingPage() {
     }, []);
 
     return (
-        <PageContainer>
+        <PageContainer className='last'>
             <Joyride
                 steps={steps}
                 run={run}
                 continuous
-                scrollToFirstStep
+                // scrollToFirstStep
+                disableScrolling
                 showProgress
                 showSkipButton
                 styles={{
@@ -54,12 +84,11 @@ export default function LandingPage() {
                     },
                 }}
             />
-
-            <MainBanner />
-
-            <div>
-                <CategoryProducts />
+            <div className="main-banner-step">
+                <MainBanner />
             </div>
+            <CategoryProducts />
+
             <Footer currentMenuIndex={currentMenuIndex} />
         </PageContainer>
     );
