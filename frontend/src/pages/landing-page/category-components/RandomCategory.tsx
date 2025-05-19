@@ -110,7 +110,7 @@ export default function RandomCategory() {
         <div>
             <CategorySectionContainer>
                 <HeadContainer>
-                    <HeadText>카테고리</HeadText>
+                    <HeadText className="category-products-step">카테고리</HeadText>
                     <ResfreshButton onClick={handleRefresh}>
                         새로고침
                         <RefreshImage src={RefreshIcon} />
