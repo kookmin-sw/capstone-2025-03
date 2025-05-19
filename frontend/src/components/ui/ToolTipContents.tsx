@@ -159,7 +159,7 @@ export const PackageSteps: Step[] = [
             </div>
         ),
         disableBeacon: true,
-        placement: "top",
+        placement: 'top',
     },
     {
         target: '#product-add',
@@ -169,7 +169,7 @@ export const PackageSteps: Step[] = [
             </div>
         ),
         disableBeacon: true,
-        placement: "left",
+        placement: 'left',
     },
     {
         target: '#delete-product',
@@ -179,7 +179,20 @@ export const PackageSteps: Step[] = [
             </div>
         ),
         disableBeacon: true,
-        placement: "left"
-
+        placement: 'left',
     },
-]
+];
+
+export const PackageDetailAddCategorySteps: Step[] = [
+    {
+        target: '#introduce',
+        content: (
+            <div>
+                <p>추가하고 싶은 카테고리를 고르고</p>
+                <p>하단의 버튼을 누르세요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: 'center',
+    },
+];

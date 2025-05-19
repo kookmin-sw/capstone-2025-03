@@ -10,6 +10,8 @@ import { editingPackageState } from '@/src/recoil/packageState';
 import PackageModel from '@/src/models/PackageModel';
 import CategoryModel from '@/src/models/CategoryModel';
 import IndustryModel from '@/src/models/IndustryModel';
+import Joyride from 'react-joyride';
+import { PackageDetailAddCategorySteps } from '@/src/components/ui/ToolTipContents';
 
 export default function PackageDetailAddCategory() {
     // page connection
@@ -25,9 +27,27 @@ export default function PackageDetailAddCategory() {
     const [checkedCategoryIds, setCheckedCategoryIds] = useState<number[]>(
         editingPackage?.categories || [],
     );
+
+    // 툴팁 용도
+    const [run, setRun] = useState<boolean>(false);
+    const [isReady, setIsReady] = useState<boolean>(false);
+
     // useEffect
+
+    // 툴팁 용
     useEffect(() => {
-        const newMyCategories = industry.id === null ? categories : categories.filter((category) => category.industries.includes(industry.id!));
+        const timer = setTimeout(() => {
+            setIsReady(true);
+            setRun(true);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        const newMyCategories =
+            industry.id === null
+                ? categories
+                : categories.filter((category) => category.industries.includes(industry.id!));
         setMyCategories(newMyCategories);
     }, []);
 
@@ -40,11 +60,14 @@ export default function PackageDetailAddCategory() {
         );
     };
     const handleConfirmButtonClick = () => {
-        const newProducts = editingPackage?.products.filter((product) => checkedCategoryIds.includes(product.category!)) ?? [];
+        const newProducts =
+            editingPackage?.products.filter((product) =>
+                checkedCategoryIds.includes(product.category!),
+            ) ?? [];
         const newEditingPackage = PackageModel.fromJson({
             ...editingPackage?.toJson(),
             categories: checkedCategoryIds,
-            products: newProducts
+            products: newProducts,
         });
 
         setEditingPackage(newEditingPackage);
@@ -54,8 +77,22 @@ export default function PackageDetailAddCategory() {
     // return
     return (
         <div className={styles.page}>
+            <Joyride
+                steps={PackageDetailAddCategorySteps}
+                run={run}
+                continuous
+                // scrollToFirstStep
+                disableScrolling
+                showProgress
+                showSkipButton
+                styles={{
+                    options: {
+                        zIndex: 9999,
+                    },
+                }}
+            />
             <SearchHeader text={`${industry.name ?? '패키지'}에 필요한 물품들`} />
-            <div className={styles.section}>
+            <div id='introduce' className={styles.section}>
                 <div className={styles.listView}>
                     {myCategories.map((category, index) => {
                         return (
@@ -70,7 +107,7 @@ export default function PackageDetailAddCategory() {
                                         className={styles.thumbnail}
                                         src={
                                             category.thumbnail === 'NULL' ||
-                                                category.thumbnail === null
+                                            category.thumbnail === null
                                                 ? 'https://static.cdn.kmong.com/gigs/F1zfb1718452618.jpg'
                                                 : category.thumbnail
                                         }
