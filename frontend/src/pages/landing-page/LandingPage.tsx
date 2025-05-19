@@ -26,7 +26,7 @@ export default function LandingPage() {
     const LOCAL_STORAGE_KEY = 'landingpage_tooltip_shown';
 
     // 개발 중일때
-    localStorage.removeItem('landingpage_tooltip_shown');
+    // localStorage.removeItem('landingpage_tooltip_shown');
     useEffect(() => {
         const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
 

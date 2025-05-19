@@ -123,7 +123,7 @@ export const SellerPageAddProductSteps: Step[] = [
             </div>
         ),
         disableBeacon: true,
-        placement: 'right',
+        placement: 'top',
     },
 ];
 

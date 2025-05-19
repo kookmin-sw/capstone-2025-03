@@ -15,7 +15,11 @@ import industryData from '@/src/data/industryData.json';
 import HomeSkeleton from '@/src/components/ui/HomeSkeleton';
 import PackageItemSkeleton from '@/src/components/ui/PackageItemSkeleton';
 import Joyride from 'react-joyride';
-import { recommendPageSteps } from '@/src/components/ui/ToolTipContents';
+import {
+    recommendPageSteps,
+    joyrideLocale,
+    joyrideStyles,
+} from '@/src/components/ui/ToolTipContents';
 
 const Divider = styled.div`
     width: 100%;
@@ -46,7 +50,7 @@ export default function Home() {
     const LOCAL_STORAGE_KEY = 'home_tooltip_shown';
 
     // 개발 중일때
-    localStorage.removeItem('home_tooltip_shown');
+    // localStorage.removeItem('home_tooltip_shown');
     useEffect(() => {
         const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
 
@@ -116,44 +120,8 @@ export default function Home() {
                 disableScrolling
                 showSkipButton
                 showProgress={false}
-                locale={{
-                    back: '이전',
-                    close: '닫기',
-                    last: '완료',
-                    next: '다음',
-                    skip: '건너뛰기',
-                }}
-                styles={{
-                    options: {
-                        zIndex: 9999,
-                        backgroundColor: '#f2f2f2',
-                        textColor: '#000000',
-                        primaryColor: '#00a36c',
-                        arrowColor: 'white',
-                        width: '30rem',
-                    },
-                    tooltip: {
-                        padding: '1.2rem 1.6rem',
-                        fontSize: '1.4rem',
-                        lineHeight: '1.6',
-                        fontWeight: 500,
-                    },
-                    buttonNext: {
-                        backgroundColor: '#00a36c',
-                        color: 'white',
-                        fontWeight: 600,
-                        fontSize: '1.4rem',
-                        borderRadius: '6px',
-                    },
-                    buttonBack: {
-                        color: '#00a36c',
-                        fontSize: '1.4rem',
-                    },
-                    buttonSkip: {
-                        color: '#999999',
-                        fontSize: '1.4rem',
-                    },
-                }}
+                locale={joyrideLocale}
+                styles={joyrideStyles}
             />
             <MainHeader isVisible={isVisible} />
             <div className={styles.section}>

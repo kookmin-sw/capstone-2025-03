@@ -56,7 +56,7 @@ export default function PackageDetail() {
     const LOCAL_STORAGE_KEY = 'packageDetail_tooltip_shown';
 
     // 개발 중일때
-    localStorage.removeItem('packageDetail_tooltip_shown');
+    // localStorage.removeItem('packageDetail_tooltip_shown');
     useEffect(() => {
         const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
 

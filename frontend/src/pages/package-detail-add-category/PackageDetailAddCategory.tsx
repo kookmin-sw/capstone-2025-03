@@ -42,7 +42,7 @@ export default function PackageDetailAddCategory() {
     const LOCAL_STORAGE_KEY = 'packageDetail_addCategory_tooltip_shown';
 
     // 개발 중일때
-    localStorage.removeItem('packageDetail_addCategory_tooltip_shown');
+    // localStorage.removeItem('packageDetail_addCategory_tooltip_shown');
     useEffect(() => {
         const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
 
