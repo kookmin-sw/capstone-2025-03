@@ -45,6 +45,10 @@ export default function Wishlist() {
         navigate('/package-detail', { state: { pkg: pkg } })
     }
 
+    const handleLogOut = () => {
+        localStorage.removeItem("user")
+    }
+
     return (
         <div className={styles.page}>
             <div className={styles.section}>
