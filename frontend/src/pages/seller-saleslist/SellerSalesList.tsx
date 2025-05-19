@@ -9,6 +9,7 @@ import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
 import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 import SellerProductItemSkeleton from '@/src/components/ui/SellerProductItemSkeleton';
+import WhenNoProducts from './components/WhenNoProducts';
 
 export default function SellerSalesList() {
     // page connection
@@ -93,8 +94,8 @@ export default function SellerSalesList() {
                 </div>
             ) : products.length === 0 ? (
                 // 물건이 하나도 없으면 텅~
-                <div style={{ fontSize: '100px', textAlign: 'center', marginTop: '10rem' }}>
-                    물건이 없습니다
+                <div className={styles.noProductsSection}>
+                    <WhenNoProducts />
                 </div>
             ) : (
                 // 물건이 있으면 기존 UI 보여줌
