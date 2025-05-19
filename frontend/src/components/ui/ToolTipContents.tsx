@@ -2,6 +2,12 @@ import { Step } from 'react-joyride';
 
 export const landingPageSteps: Step[] = [
     {
+        target: '#introduce',
+        content: <div>restart 에 온 것을 환영합니다!🎉</div>,
+        disableBeacon: true,
+        placement: 'center',
+    },
+    {
         target: '#main-banner-step',
         content: (
             <div>
@@ -43,7 +49,7 @@ export const recommendPageSteps: Step[] = [
             </div>
         ),
         disableBeacon: true,
-        placement: "center"
+        placement: 'center',
     },
     {
         target: '#packege-recommend',
@@ -63,7 +69,7 @@ export const recommendPageSteps: Step[] = [
             </div>
         ),
         disableBeacon: true,
-        placement: "left"
+        placement: 'left',
     },
     {
         target: '#all-package',
@@ -83,6 +89,62 @@ export const recommendPageSteps: Step[] = [
             </div>
         ),
         disableBeacon: true,
-        placement: "left"
+        placement: 'left',
+    },
+];
+
+export const WishListPageSteps: Step[] = [
+    {
+        target: '#introduce',
+        content: (
+            <div>
+                <p>찜 페이지에 온 것을 환영해요!</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: 'center',
+    },
+    {
+        target: '#new-package',
+        content: (
+            <div>
+                <p>나만의 커스텀 패키지를 만들 수 있어요</p>
+            </div>
+        ),
+        disableBeacon: true,
+    },
+];
+
+export const SellerPageAddProductSteps: Step[] = [
+    {
+        target: '#introduce',
+        content: (
+            <div>
+                <p>물품 판매 화면에 오신것을 환영해요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: 'center',
+    },
+    {
+        target: '#camera-button',
+        content: (
+            <div>
+                <p>이미지는 최대 10장 까지만 업로드가 가능해요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: 'right',
+    },
+    {
+        target: '#explanation',
+        content: (
+            <div>
+                <p>물품에 대한 자세한 설명은</p>
+                <p>AI가 가격예측을 하는데 많은 도움이 돼요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: 'right',
     },
 ];

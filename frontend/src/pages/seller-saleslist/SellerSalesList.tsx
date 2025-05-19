@@ -80,7 +80,7 @@ export default function SellerSalesList() {
     };
 
     return (
-        <div className={styles.page}>
+        <div id="introduce" className={styles.page}>
             <MainHeader isVisible={isVisible} />
 
             {isLoading ? (

@@ -28,27 +28,29 @@ export default function LandingPage() {
     }, []);
 
     return (
-        <PageContainer id='last'>
-            <Joyride
-                steps={landingPageSteps}
-                run={run}
-                continuous
-                // scrollToFirstStep
-                disableScrolling
-                showProgress
-                showSkipButton
-                styles={{
-                    options: {
-                        zIndex: 9999,
-                    },
-                }}
-            />
-            <div id="main-banner-step">
-                <MainBanner />
-            </div>
-            <CategoryProducts />
+        <div id="introduce">
+            <PageContainer id="last">
+                <Joyride
+                    steps={landingPageSteps}
+                    run={run}
+                    continuous
+                    // scrollToFirstStep
+                    disableScrolling
+                    showProgress
+                    showSkipButton
+                    styles={{
+                        options: {
+                            zIndex: 9999,
+                        },
+                    }}
+                />
+                <div id="main-banner-step">
+                    <MainBanner />
+                </div>
+                <CategoryProducts />
 
-            <Footer currentMenuIndex={currentMenuIndex} />
-        </PageContainer>
+                <Footer currentMenuIndex={currentMenuIndex} />
+            </PageContainer>
+        </div>
     );
 }
