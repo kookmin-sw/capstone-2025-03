@@ -55,7 +55,7 @@ export const recommendPageSteps: Step[] = [
         target: '#packege-recommend',
         content: (
             <div>
-                <p>업종별로 볼 수 있는 공간이에요</p>
+                <p>업종별로 패키지를 볼 수 있는 공간이에요</p>
                 <p>더보기 버튼을 통해 모든 업종을 볼 수 있어요</p>
             </div>
         ),
@@ -90,28 +90,6 @@ export const recommendPageSteps: Step[] = [
         ),
         disableBeacon: true,
         placement: 'left',
-    },
-];
-
-export const WishListPageSteps: Step[] = [
-    {
-        target: '#introduce',
-        content: (
-            <div>
-                <p>찜 페이지에 온 것을 환영해요!</p>
-            </div>
-        ),
-        disableBeacon: true,
-        placement: 'center',
-    },
-    {
-        target: '#new-package',
-        content: (
-            <div>
-                <p>나만의 커스텀 패키지를 만들 수 있어요</p>
-            </div>
-        ),
-        disableBeacon: true,
     },
 ];
 
@@ -190,6 +168,34 @@ export const PackageDetailAddCategorySteps: Step[] = [
             <div>
                 <p>추가하고 싶은 카테고리를 고르고</p>
                 <p>하단의 버튼을 누르세요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: 'center',
+    },
+];
+
+export const PackageDetailAddProductSteps: Step[] = [
+    {
+        target: '#introduce',
+        content: (
+            <div>
+                <p>추가하고 싶은 물건들을 모두 고르고</p>
+                <p>하단의 버튼을 누르세요</p>
+            </div>
+        ),
+        disableBeacon: true,
+        placement: 'center',
+    },
+];
+
+export const CustomPackageSteps: Step[] = [
+    {
+        target: '#save',
+        content: (
+            <div>
+                <p>변경 사항 저장 버튼을 눌러야</p>
+                <p>저장이 완료되어요</p>
             </div>
         ),
         disableBeacon: true,

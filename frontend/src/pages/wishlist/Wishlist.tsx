@@ -14,13 +14,8 @@ import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
-import Joyride from 'react-joyride';
-import { WishListPageSteps } from '@/src/components/ui/ToolTipContents';
 
 export default function Wishlist() {
-    // 툴팁
-    const [run, setRun] = useState<boolean>(false);
-    const [isReady, setIsReady] = useState<boolean>(false);
 
     // recoil
     const [, setEditingPackage] = useRecoilState(editingPackageState);
@@ -40,15 +35,6 @@ export default function Wishlist() {
     // Variable
     const currentMenuIndex = 2;
     const userId = user?.userId;
-
-    // 툴팁 용
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsReady(true);
-            setRun(true);
-        }, 300);
-        return () => clearTimeout(timer);
-    }, []);
 
     // Function
     const handleCreatePackage = async () => {
@@ -83,21 +69,7 @@ export default function Wishlist() {
     };
 
     return (
-        <div id='introduce' className={styles.page}>
-            <Joyride
-                steps={WishListPageSteps}
-                run={run}
-                continuous
-                // scrollToFirstStep
-                disableScrolling
-                showProgress
-                showSkipButton
-                styles={{
-                    options: {
-                        zIndex: 9999,
-                    },
-                }}
-            />
+        <div className={styles.page}>
             <div className={styles.section}>
                 <h1 className={styles.title}>찜 목록</h1>
                 <p className={styles.description}>나에게 맞는 패키지를 만들어보세요</p>
