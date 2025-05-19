@@ -13,7 +13,11 @@ import CameraWhiteIcom from '../../assets/images/page/add-product/camera-white.p
 import { Spinner } from '@chakra-ui/react';
 import gasRangeData from '../../data/gasRangemodelData.json';
 import Joyride from 'react-joyride';
-import { SellerPageAddProductSteps } from '@/src/components/ui/ToolTipContents';
+import {
+    SellerPageAddProductSteps,
+    joyrideLocale,
+    joyrideStyles,
+} from '@/src/components/ui/ToolTipContents';
 
 export default function SellerSalesListAddProduct() {
     // hooks
@@ -158,13 +162,10 @@ export default function SellerSalesListAddProduct() {
                 run={run}
                 continuous
                 disableScrolling
-                showProgress
                 showSkipButton
-                styles={{
-                    options: {
-                        zIndex: 9999,
-                    },
-                }}
+                showProgress={false}
+                locale={joyrideLocale}
+                styles={joyrideStyles}
             />
             <div className={styles.section}>
                 <BackButtonForAddProduct />
@@ -214,7 +215,7 @@ export default function SellerSalesListAddProduct() {
                         </div>
                     ))}
                 </div>
-                <div id='explanation'>
+                <div id="explanation">
                     <p className={styles.subtitle}>물품 정보</p>
                     <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
                         <input

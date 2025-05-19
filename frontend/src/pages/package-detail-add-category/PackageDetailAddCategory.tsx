@@ -11,7 +11,11 @@ import PackageModel from '@/src/models/PackageModel';
 import CategoryModel from '@/src/models/CategoryModel';
 import IndustryModel from '@/src/models/IndustryModel';
 import Joyride from 'react-joyride';
-import { PackageDetailAddCategorySteps } from '@/src/components/ui/ToolTipContents';
+import {
+    PackageDetailAddCategorySteps,
+    joyrideLocale,
+    joyrideStyles,
+} from '@/src/components/ui/ToolTipContents';
 
 export default function PackageDetailAddCategory() {
     // page connection
@@ -90,18 +94,14 @@ export default function PackageDetailAddCategory() {
                 steps={PackageDetailAddCategorySteps}
                 run={run}
                 continuous
-                // scrollToFirstStep
                 disableScrolling
-                showProgress
                 showSkipButton
-                styles={{
-                    options: {
-                        zIndex: 9999,
-                    },
-                }}
+                showProgress={false}
+                locale={joyrideLocale}
+                styles={joyrideStyles}
             />
             <SearchHeader text={`${industry.name ?? '패키지'}에 필요한 물품들`} />
-            <div id='introduce' className={styles.section}>
+            <div id="introduce" className={styles.section}>
                 <div className={styles.listView}>
                     {myCategories.map((category, index) => {
                         return (

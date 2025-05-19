@@ -4,7 +4,11 @@ import styled from '@emotion/styled';
 import Footer from '@/src/components/layout/MenuFooter';
 import Joyride from 'react-joyride';
 import { useEffect, useState } from 'react';
-import { landingPageSteps } from '@/src/components/ui/ToolTipContents';
+import {
+    landingPageSteps,
+    joyrideLocale,
+    joyrideStyles,
+} from '@/src/components/ui/ToolTipContents';
 
 const PageContainer = styled.div`
     min-height: 100vh;
@@ -45,13 +49,10 @@ export default function LandingPage() {
                     continuous
                     // scrollToFirstStep
                     disableScrolling
-                    showProgress
                     showSkipButton
-                    styles={{
-                        options: {
-                            zIndex: 9999,
-                        },
-                    }}
+                    showProgress={false}
+                    locale={joyrideLocale}
+                    styles={joyrideStyles}
                 />
                 <div id="main-banner-step">
                     <MainBanner />

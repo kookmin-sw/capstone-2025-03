@@ -1,4 +1,4 @@
-import { Step } from 'react-joyride';
+import { CallBackProps, Step, Styles, Locale } from 'react-joyride';
 
 export const landingPageSteps: Step[] = [
     {
@@ -188,3 +188,43 @@ export const PackageDetailAddProductSteps: Step[] = [
         placement: 'center',
     },
 ];
+
+export const joyrideLocale: Locale = {
+    back: '이전',
+    close: '닫기',
+    last: '완료',
+    next: '다음',
+    skip: '건너뛰기',
+};
+
+export const joyrideStyles = {
+    options: {
+        zIndex: 9999,
+        backgroundColor: '#f2f2f2',
+        textColor: '#000000',
+        primaryColor: '#00a36c',
+        arrowColor: 'white',
+        width: '30rem',
+    },
+    tooltip: {
+        padding: '1.2rem 1.6rem',
+        fontSize: '1.4rem',
+        lineHeight: '1.6',
+        fontWeight: 500,
+    },
+    buttonNext: {
+        backgroundColor: '#00a36c',
+        color: 'white',
+        fontWeight: 600,
+        fontSize: '1.4rem',
+        borderRadius: '6px',
+    },
+    buttonBack: {
+        color: '#00a36c',
+        fontSize: '1.4rem',
+    },
+    buttonSkip: {
+        color: '#999999',
+        fontSize: '1.4rem',
+    },
+};

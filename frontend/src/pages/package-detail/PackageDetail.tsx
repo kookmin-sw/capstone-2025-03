@@ -24,7 +24,7 @@ import { useUpdatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage
 import ProductModel from '@/src/models/ProductModel';
 import ProductImage from '@/src/assets/images/alternative/product.png';
 import Joyride from 'react-joyride';
-import { PackageSteps } from '@/src/components/ui/ToolTipContents';
+import { PackageSteps, joyrideLocale, joyrideStyles } from '@/src/components/ui/ToolTipContents';
 
 export default function PackageDetail() {
     // page connection
@@ -174,13 +174,10 @@ export default function PackageDetail() {
                 continuous
                 // scrollToFirstStep
                 disableScrolling
-                showProgress
                 showSkipButton
-                styles={{
-                    options: {
-                        zIndex: 9999,
-                    },
-                }}
+                showProgress={false}
+                locale={joyrideLocale}
+                styles={joyrideStyles}
             />
             <BackHeader />
             <div className={styles.section}>

@@ -14,7 +14,11 @@ import PackageModel from '@/src/models/PackageModel';
 import { Spinner } from '@chakra-ui/react';
 import ProductItemSkeleton from '@/src/components/ui/ProductItemSkeleton';
 import Joyride from 'react-joyride';
-import { PackageDetailAddProductSteps } from '@/src/components/ui/ToolTipContents';
+import {
+    PackageDetailAddProductSteps,
+    joyrideLocale,
+    joyrideStyles,
+} from '@/src/components/ui/ToolTipContents';
 
 export default function PackageDetailAddProduct() {
     // page connection
@@ -169,15 +173,11 @@ export default function PackageDetailAddProduct() {
                 steps={PackageDetailAddProductSteps}
                 run={run}
                 continuous
-                // scrollToFirstStep
                 disableScrolling
-                showProgress
                 showSkipButton
-                styles={{
-                    options: {
-                        zIndex: 9999,
-                    },
-                }}
+                showProgress={false}
+                locale={joyrideLocale}
+                styles={joyrideStyles}
             />
             <SearchHeader text={category.name || ''} />
             <div className={styles.section}>
