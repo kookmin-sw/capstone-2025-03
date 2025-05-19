@@ -27,6 +27,7 @@ export const getProductListInService = async (
         const requestUrl = nextPageUrl ?? `${API_BASE_URL}/`;
         const response = await axios.get(requestUrl, { params });
         const data = response.data;
+
         return {
             results: data.results.map((product: any) => ProductModel.fromJson(product)),
             next: data.next,

@@ -105,23 +105,24 @@
 }
 
 .imageUploadWrapper::-webkit-scrollbar {
-  display: none; /* 기본적으로 안 보이게 */
+    display: none;
+    /* 기본적으로 안 보이게 */
 }
 
 @media (min-width: 500px) {
-  .imageUploadWrapper::-webkit-scrollbar {
-    display: block;
-    height: 6px;
-  }
+    .imageUploadWrapper::-webkit-scrollbar {
+        display: block;
+        height: 6px;
+    }
 
-  .imageUploadWrapper::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 3px;
-  }
+    .imageUploadWrapper::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
 
-  .imageUploadWrapper::-webkit-scrollbar-track {
-    background: #222;
-  }
+    .imageUploadWrapper::-webkit-scrollbar-track {
+        background: #222;
+    }
 }
 
 .thumbnailItem {
@@ -196,4 +197,21 @@
     height: 3rem;
     font-size: 2rem;
     cursor: pointer;
+}
+
+.customSelect {
+    width: 100%;
+    background: none;
+    border-bottom: 1px solid #555;
+    height: 60px;
+    font-size: 2.2rem;
+}
+
+.customSelectCondition{
+    width: 100%;
+    background: none;
+    border-bottom: 1px solid #555;
+    height: 60px;
+    font-size: 2.2rem;
+    margin-bottom: 4rem;
 }

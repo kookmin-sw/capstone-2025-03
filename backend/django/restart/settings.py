@@ -1,29 +1,16 @@
 from pathlib import Path
 import os
-import dj_database_url
 from dotenv import load_dotenv
 
+env_path = Path(__file__).resolve().parent.parent / '.env'
+load_dotenv(env_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# .env 파일 로드
-load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('1', 'true', 'yes')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", "default-secret-key")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    "django-792394016853.asia-northeast1.run.app",
-    "localhost",
-    "127.0.0.1",
-    "restart-cap.vercel.app",
-    "10.224.101.106:5173",
-]
-
-# Application definition
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 INSTALLED_APPS = [
     'corsheaders',
@@ -33,26 +20,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users', # 유저
-    'industries', # 업종
-    'categories', # 카테고리
-    'packages', # 패키지
-    'products', # 물품
-    'orders', # 주문
+    'users',
+    'industries',
+    'categories',
+    'packages',
+    'products',
+    'orders',
     'django_filters',
     'rest_framework',
     'drf_yasg',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-}
-
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,91 +43,66 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # 7일 유지
-SESSION_SAVE_EVERY_REQUEST = True
-
-CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOW_CREDENTIALS = True  
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://restart-cap.vercel.app',
-    'http://localhost:5173',
-    'https://django-792394016853.asia-northeast1.run.app',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "https://restart-cap.vercel.app",
-    "http://localhost:5173",
-    'https://django-792394016853.asia-northeast1.run.app',
-]
-
 ROOT_URLCONF = 'restart.urls'
-
-USE_X_FORWARDED_HOST = True
-SECURE_SSL_REDIRECT = True
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'restart.wsgi.application'
 
+# CORS / CSRF
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+
+# Static & Media
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
+    }
+}
 
-# Password validation
+# Redis Cache
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.getenv('REDIS_URL'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+        'KEY_PREFIX': 'myproject',
+    }
+}
 
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
+# Sessions
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Internationalization
-
 LANGUAGE_CODE = 'en-us'
-USE_I18N = True
-
 TIME_ZONE = 'Asia/Seoul'
+USE_I18N = True
 USE_TZ = True
 
-
-
-# Static files (CSS, JavaScript, Images)
-
-STATIC_URL = 'static/'
-
-# Default primary key field type
+# REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# SSL / Proxy
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True

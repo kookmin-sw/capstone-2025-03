@@ -8,14 +8,18 @@ import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { editingPackageState } from '@/src/recoil/packageState';
 
 export default function Wishlist() {
+    // recoil
+    const [, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
     const [isCreating, setIsCreating] = useState<boolean>(false);
     // hook
     const navigate = useNavigate();
     const { user } = useUser();
-    const { data: customPackages = [], isLoading, isError, refetch } = useCustomPackagesByUser(user?.userId!);
+    const { data: customPackages = [], isLoading, isError } = useCustomPackagesByUser(user?.userId!);
     const { mutateAsync: createPackage } = useCreatePackage();
     const { mutateAsync: deletePackage } = useDeletePackage();
 
@@ -25,14 +29,17 @@ export default function Wishlist() {
 
     // Function
     const handleCreatePackage = async () => {
-        if (!userId || isCreating) return;
+        if (!userId || isCreating){
+            window.alert('로그인 정보가 없거나 패키지를 생성 중입니다');
+        };
 
         setIsCreating(true);
         const newPackage = await createPackage(new PackageModel({
-            name: `${user.name}의 새로운 패키지`,
+            name: `${user!.name}의 새로운 패키지`,
             description: '',
             user: userId,
         }));
+        setEditingPackage(newPackage);
 
         // navigate
         navigate('/package-detail', { state: { pkg: newPackage } })
@@ -42,6 +49,7 @@ export default function Wishlist() {
         await deletePackage({ id: id, user: userId });
     }
     const handleEditPackage = (pkg: PackageModel) => {
+        setEditingPackage(pkg);
         navigate('/package-detail', { state: { pkg: pkg } })
     }
 

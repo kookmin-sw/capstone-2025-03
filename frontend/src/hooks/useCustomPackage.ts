@@ -43,26 +43,21 @@ export const useCreatePackage = () => {
             // Dummy일 때
             if (useDummyData) return newPackage;
 
-            // Mutation 적용
-            const data = await createPackageInService(newPackage);
-            if (!data) throw new Error('Failed to create package');
-            return data;
-        },
-        onSuccess: (data) => {
-            console.log('Mutation successful, data:', data);
-            if (data?.user) {
-                // Mutation에서는 캐시 무효화 또는 갱신 필요함
-                console.log('Invalidating queries with key:', [PACKAGE_KEY, data.user]);
+      // Mutation 적용
+      const data = await createPackageInService(newPackage);
+      if (!data) throw new Error('Failed to create package');
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data?.user) {
+        queryClient.setQueryData<PackageModel[]>([PACKAGE_KEY, data.user], (old = []) => [
+          ...old,
+          data,
+        ]);
+      }
+    }
 
-                queryClient.invalidateQueries({
-                    queryKey: [PACKAGE_KEY, data.user],
-                    refetchType: 'all',
-                    exact: false,
-                });
-                console.log('Invalidation completed');
-            }
-        },
-    });
+  });
 };
 
 // Mutation: Update
@@ -77,33 +72,19 @@ export const useUpdatePackage = () => {
                 return PackageModel.fromJson({ ...existing, ...updatedData });
             }
 
-            // Mutation 적용
-            const data = await updatePackageInService(id, updatedData);
-            if (!data) throw new Error('Failed to update package');
-            return data;
-        },
-        onSuccess: (data) => {
-            console.log('update successful, data:', data);
-            if (data?.user) {
-                // Mutation에서는 캐시 무효화 또는 갱신 필요함
-                console.log('업데이트 성공:', [PACKAGE_KEY, data.user]);
-
-                queryClient.invalidateQueries({
-                    queryKey: [PACKAGE_KEY, data.user],
-                    refetchType: 'all', // 모든 쿼리 리페치
-                    exact: false, // 부분 일치하는 쿼리도 무효화
-                });
-
-                queryClient.refetchQueries({
-                    queryKey: [PACKAGE_KEY, data.user],
-                    exact: false,
-                    type: 'all', // 비활성 쿼리도 리페치
-                });
-
-                console.log('update completed');
-            }
-        },
-    });
+      // Mutation 적용
+      const data = await updatePackageInService(id, updatedData);
+      if (!data) throw new Error('Failed to update package');
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data?.user) {
+        queryClient.setQueryData<PackageModel[]>([PACKAGE_KEY, data.user], (old = []) =>
+          old.map((pkg) => (pkg.id === data.id ? data : pkg))
+        );
+      }
+    }
+  });
 };
 
 // Mutation: Delete
@@ -117,12 +98,14 @@ export const useDeletePackage = () => {
                 return;
             }
 
-            // Mutation 적용
-            const success = await deletePackageInService(id);
-            if (!success) throw new Error('Failed to delete package');
-        },
-        onSuccess: (_data, variables) => {
-            queryClient.invalidateQueries({ queryKey: [PACKAGE_KEY, variables.user] });
-        },
-    });
+      // Mutation 적용
+      const success = await deletePackageInService(id);
+      if (!success) throw new Error('Failed to delete package');
+    },
+    onSuccess: (_data, variables) => {
+      queryClient.setQueryData<PackageModel[]>([PACKAGE_KEY, variables.user], (old = []) =>
+        old.filter((pkg) => pkg.id !== variables.id)
+      );
+    },
+  });
 };

@@ -131,6 +131,7 @@ export const useProduct = () => {
 
     return {
         productList,
+        setProductList,
         getProductList,
         createProduct,
         getProduct,

@@ -88,7 +88,7 @@ export default class PackageModel {
     };
   }
 
-  toJsonWithoutIdForCU(): any{
+  toJsonWithoutIdForCU(): any {
     return {
       user: this.user,
       industry: this.industry,

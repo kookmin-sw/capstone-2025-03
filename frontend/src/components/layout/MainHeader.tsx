@@ -33,6 +33,11 @@ const Icon = styled.img`
     border-radius: 1.6rem;
 `;
 
+
+const handleClickNotificationButton = () => {
+    // window.alert('준비 중입니다!');
+};
+
 export default function MainHeader({ isVisible }: { isVisible: boolean }) {
     const navigate = useNavigate();
 

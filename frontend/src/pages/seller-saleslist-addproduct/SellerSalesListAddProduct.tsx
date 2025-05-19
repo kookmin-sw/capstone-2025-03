@@ -11,6 +11,7 @@ import BasicButton from './components/BasicButton';
 import CameraGrayIcon from '../../assets/images/page/add-product/camera-gray.png';
 import CameraWhiteIcom from '../../assets/images/page/add-product/camera-white.png';
 import { Spinner } from '@chakra-ui/react';
+import gasRangeData from '../../data/gasRangemodelData.json';
 
 export default function SellerSalesListAddProduct() {
     // hooks
@@ -32,9 +33,16 @@ export default function SellerSalesListAddProduct() {
     // 버튼으로 grade 설정
     const gradeArr = ['중고', '새상품'];
 
+    // 가스레인지 AI 모델 적용을 위한 추가 feature
+    const usagePeriodOptions = ['1개월 사용', '6개월 사용', '1년 사용', '2년 사용', '3년 사용', '4년 사용', '5년 사용', '거의 사용하지 않음'];
+    const [usagePeriod, setUsagePeriod] = useState<string>(usagePeriodOptions[0]);
+    const physicalConditionOptions = ['상태 최상', '상태 양호', '상태 보통', '사용감 있음', '생활흔적 있음', '외관 약간 흠집', '외관 심한 흠집'];
+    const [physicalCondition, setPhysicalCondition] = useState<string>(physicalConditionOptions[0]);
+    const operationalStateOptions = ['작동 이상 없음', '점화 불량', '버튼/다이얼 반응 느림', '일부 기능 미작동', '전원 불안정', '기타 전기적 이상'];
+    const [operationalState, setOperationalState] = useState<string>(operationalStateOptions[0]);
+
     // 확인 버튼 활성화 조건
-    const isButtonValid =
-        !!sellerProduct?.images?.[0] &&
+    const isButtonValid = !!sellerProduct?.images?.[0] &&
         !!sellerProduct.category &&
         !!sellerProduct.name &&
         !!sellerProduct.grade &&
@@ -50,6 +58,12 @@ export default function SellerSalesListAddProduct() {
             setSellerProduct(new ProductModel({}));
         }
     }, [reset, setSellerProduct]);
+
+    useEffect(()=>{
+        if(sellerProduct.categoryName === '가스레인지' && !gasRangeData.includes(sellerProduct.name ?? '')){
+            setSellerProduct((prev) => prev.copyWith({ name: gasRangeData[0] }));
+        }
+    }, [])
 
     const handleAddImage = () => {
         if (fileInputRef.current) {
@@ -82,7 +96,7 @@ export default function SellerSalesListAddProduct() {
     };
 
     const handleClickConfirmButton = () => {
-        navigate('/seller-saleslist-productdetail');
+        navigate('/seller-saleslist-productdetail', { state: { condition: `${usagePeriod}, ${physicalCondition}, ${operationalState}` } });
     };
     return (
         <div className={styles.page}>
@@ -144,14 +158,24 @@ export default function SellerSalesListAddProduct() {
                         readOnly
                         onClick={handleClickCategoryButton}
                     />
-                    <input
+                    {sellerProduct.categoryName === '가스레인지' ? <select
+                        className={styles.customSelect}
+                        value={sellerProduct.name ?? ''}
+                        onChange={(e) => setSellerProduct((prev) => prev.copyWith({ name: e.target.value }))}>
+                        {gasRangeData.map((modelName, index) => (
+                            <option key={index} value={modelName}>
+                                {modelName}
+                            </option>
+                        ))}
+                    </select> : <input
                         value={sellerProduct.name ?? ''}
                         className={styles.input}
                         placeholder="제품명"
                         onChange={(e) =>
                             setSellerProduct((prev) => prev.copyWith({ name: e.target.value }))
                         }
-                    />
+                    />}
+
                     <textarea
                         value={sellerProduct.description ?? ''}
                         className={styles.input}
@@ -204,6 +228,40 @@ export default function SellerSalesListAddProduct() {
                             );
                         })}
                     </div>
+                    {sellerProduct.categoryName === '가스레인지' && (
+                        <div className={styles.inputContainerForNewModel}>
+                            <select
+                                className={styles.customSelectCondition}
+                                value={usagePeriod}
+                                onChange={(e) => setUsagePeriod(e.target.value)}>
+                                {usagePeriodOptions.map((option, index) => (
+                                    <option key={index} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                            <select
+                                className={styles.customSelectCondition}
+                                value={physicalCondition}
+                                onChange={(e) => setPhysicalCondition(e.target.value)}>
+                                {physicalConditionOptions.map((option, index) => (
+                                    <option key={index} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                            <select
+                                className={styles.customSelectCondition}
+                                value={operationalState}
+                                onChange={(e) => setOperationalState(e.target.value)}>
+                                {operationalStateOptions.map((option, index) => (
+                                    <option key={index} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
                 </form>
             </div>
             <div className={styles.submitButtonSection}>
