@@ -96,6 +96,14 @@ export default function SellerSalesList() {
                 // 물건이 하나도 없으면 텅~
                 <div className={styles.noProductsSection}>
                     <WhenNoProducts />
+                    <div className={styles.buttonContainer}>
+                        <button
+                            className={styles.addProductButton}
+                            onClick={handleClickAddProductButton}
+                        >
+                            +
+                        </button>
+                    </div>
                 </div>
             ) : (
                 // 물건이 있으면 기존 UI 보여줌
