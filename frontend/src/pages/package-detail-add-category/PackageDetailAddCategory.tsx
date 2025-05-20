@@ -34,7 +34,7 @@ export default function PackageDetailAddCategory() {
 
     // 툴팁 용도
     const [run, setRun] = useState<boolean>(false);
-    const [isReady, setIsReady] = useState<boolean>(false);
+    const [_, setIsReady] = useState<boolean>(false);
 
     // useEffect
 
@@ -116,7 +116,7 @@ export default function PackageDetailAddCategory() {
                                         className={styles.thumbnail}
                                         src={
                                             category.thumbnail === 'NULL' ||
-                                            category.thumbnail === null
+                                                category.thumbnail === null
                                                 ? 'https://static.cdn.kmong.com/gigs/F1zfb1718452618.jpg'
                                                 : category.thumbnail
                                         }
