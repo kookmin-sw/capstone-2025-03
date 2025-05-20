@@ -71,10 +71,33 @@ export default function Profile() {
         });
     };
 
+    // 온보딩 초기화
+    const handleResetTooltips = () => {
+        const keysToRemove = [
+            'home_tooltip_shown',
+            'landingpage_tooltip_shown',
+            'packageDetail_addCategory_tooltip_shown',
+            'packageDetail_addProduct_tooltip_shown',
+            'packageDetail_tooltip_shown',
+            'seller_page_add_product_tooltip_shown',
+        ];
+
+        keysToRemove.forEach((key) => {
+            localStorage.removeItem(key);
+        });
+
+        alert("초기화 완료! 툴팁이 다시 보여요")
+    };
+
     return (
         <div className={styles.page}>
             <div className={styles.section}>
                 <div className={styles.profileContainer}>
+                    <div className={styles.onBoardingReset}>
+                        <button onClick={handleResetTooltips} className={styles.onBoardingButton}>
+                            온보딩 다시보기
+                        </button>
+                    </div>
                     <img className={styles.profileImage} src={user?.profileImage ?? ''}></img>
                     <div className={styles.InfoAndSettingContainer}>
                         <p className={styles.title}>내 정보</p>
