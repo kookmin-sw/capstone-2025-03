@@ -12,6 +12,7 @@
     "dependencies": {
         "@chakra-ui/react": "^3.7.0",
         "@emotion/styled": "^11.14.0",
+        "@mui/material": "^7.1.0",
         "@tanstack/react-query": "^5.75.2",
         "axios": "^1.7.9",
         "embla-carousel-autoplay": "^8.6.0",

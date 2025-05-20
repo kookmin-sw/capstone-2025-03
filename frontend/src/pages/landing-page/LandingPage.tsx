@@ -21,7 +21,6 @@ export default function LandingPage() {
     const currentMenuIndex = 0;
 
     const [run, setRun] = useState<boolean>(false);
-    const [isReady, setIsReady] = useState<boolean>(false);
 
     const LOCAL_STORAGE_KEY = 'landingpage_tooltip_shown';
 
@@ -32,7 +31,6 @@ export default function LandingPage() {
 
         if (!alreadyShown) {
             const timer = setTimeout(() => {
-                setIsReady(true);
                 setRun(true);
                 localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
             }, 300);

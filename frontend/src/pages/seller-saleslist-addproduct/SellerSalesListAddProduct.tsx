@@ -34,7 +34,6 @@ export default function SellerSalesListAddProduct() {
     const [isUploading, setIsUploading] = useState<boolean>(false);
     // 툴팁
     const [run, setRun] = useState<boolean>(false);
-    const [isReady, setIsReady] = useState<boolean>(false);
 
     // useRef
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -97,7 +96,6 @@ export default function SellerSalesListAddProduct() {
 
         if (!alreadyShown) {
             const timer = setTimeout(() => {
-                setIsReady(true);
                 setRun(true);
                 localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
             }, 300);

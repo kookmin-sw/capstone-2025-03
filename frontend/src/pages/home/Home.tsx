@@ -31,7 +31,6 @@ const Divider = styled.div`
 export default function Home() {
     // 툴팁 용도
     const [run, setRun] = useState<boolean>(false);
-    const [isReady, setIsReady] = useState<boolean>(false);
 
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false);
@@ -56,7 +55,6 @@ export default function Home() {
 
         if (!alreadyShown) {
             const timer = setTimeout(() => {
-                setIsReady(true);
                 setRun(true);
                 localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
             }, 300);

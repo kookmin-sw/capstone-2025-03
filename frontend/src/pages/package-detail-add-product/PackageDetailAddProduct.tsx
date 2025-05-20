@@ -35,7 +35,6 @@ export default function PackageDetailAddProduct() {
     const [checkedProductIds, setCheckedProductIds] = useState<number[]>([]);
     // 툴팁 용도
     const [run, setRun] = useState<boolean>(false);
-    const [isReady, setIsReady] = useState<boolean>(false);
 
     // useRef
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -52,7 +51,6 @@ export default function PackageDetailAddProduct() {
 
         if (!alreadyShown) {
             const timer = setTimeout(() => {
-                setIsReady(true);
                 setRun(true);
                 localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
             }, 300);

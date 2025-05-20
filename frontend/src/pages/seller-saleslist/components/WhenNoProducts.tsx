@@ -7,11 +7,6 @@ const Container = styled.div`
     justify-content: center;
 `;
 
-const MainText = styled.p`
-    font-size: 100px;
-    font-weight: 700;
-`;
-
 const MainImage = styled.img`
     width: 24rem;
 `;

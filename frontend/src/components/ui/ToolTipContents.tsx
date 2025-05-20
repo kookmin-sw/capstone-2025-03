@@ -1,4 +1,4 @@
-import { CallBackProps, Step, Styles, Locale } from 'react-joyride';
+import { Step, Locale } from 'react-joyride';
 
 export const landingPageSteps: Step[] = [
     {

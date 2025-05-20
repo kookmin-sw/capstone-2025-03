@@ -1,6 +1,6 @@
 // src/components/onboarding/CustomTooltip.tsx
 import { TooltipRenderProps } from 'react-joyride';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 
 export default function CustomTooltip({
   step,

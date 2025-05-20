@@ -50,7 +50,6 @@ export default function PackageDetail() {
     const [isFavorite, setIsFavorite] = useState(true);
     // 툴팁 용도
     const [run, setRun] = useState<boolean>(false);
-    const [isReady, setIsReady] = useState<boolean>(false);
 
     // 툴팁 용
     const LOCAL_STORAGE_KEY = 'packageDetail_tooltip_shown';
@@ -62,7 +61,6 @@ export default function PackageDetail() {
 
         if (!alreadyShown) {
             const timer = setTimeout(() => {
-                setIsReady(true);
                 setRun(true);
                 localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
             }, 300);

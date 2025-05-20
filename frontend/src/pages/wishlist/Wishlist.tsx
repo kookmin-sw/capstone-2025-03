@@ -11,7 +11,7 @@ import { useUser } from '@/src/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 
@@ -62,10 +62,6 @@ export default function Wishlist() {
     const handleEditPackage = (pkg: PackageModel) => {
         setEditingPackage(pkg);
         navigate('/package-detail', { state: { pkg: pkg } });
-    };
-
-    const handleLogOut = () => {
-        localStorage.removeItem('user');
     };
 
     return (
