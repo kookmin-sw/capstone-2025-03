@@ -15,7 +15,7 @@ export default function AddressSearch() {
 
     const location = useLocation();
     const source = location.state?.source;
-
+    console.log(source)
     useEffect(() => {
         if (isScriptLoaded.current) return;
         isScriptLoaded.current = true;
