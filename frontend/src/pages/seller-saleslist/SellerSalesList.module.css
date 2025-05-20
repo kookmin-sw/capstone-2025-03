@@ -51,6 +51,7 @@
     padding: 2rem;
     background-color: #18171d;
     overflow: auto;
+    min-height: 100vh;
 }
 
 .buttonContainer {
