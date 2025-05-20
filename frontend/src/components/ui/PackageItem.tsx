@@ -245,9 +245,10 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
                     backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})`,
                 }}
                 onClick={(e) => {
-                    loginCheck();
                     e.stopPropagation();
-                    handleClickFavorite(pkg);
+                    loginCheck(() => {
+                        handleClickFavorite(pkg);
+                    });
                 }}
             ></LikeButton>
         </Item>
