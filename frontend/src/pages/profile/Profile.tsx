@@ -23,7 +23,9 @@ export default function Profile() {
     const [editedAddress, setEditedAddress] = useState<string>(
         `${user?.fullAddress ?? ''} ${user?.addressDetail ?? ''}`,
     );
-
+    const [editedAddressDetail, setEditedAddressDetail] = useState<string>(
+        user?.addressDetail ?? '',
+    );
     const { formatPhoneNumber } = useUserInputHandlers();
 
     const handleToggleEdit = () => {
@@ -86,7 +88,7 @@ export default function Profile() {
             localStorage.removeItem(key);
         });
 
-        alert("초기화 완료! 툴팁이 다시 보여요")
+        alert('초기화 완료! 툴팁이 다시 보여요');
     };
 
     return (
@@ -175,8 +177,25 @@ export default function Profile() {
                             />
                         ) : (
                             <p className={styles.text}>
-                                {user?.fullAddress} {user?.addressDetail}
+                                {user?.fullAddress}
                             </p>
+                        )}
+                    </div>
+                    <div className={styles.itemBox}>
+                        <div className={styles.iconBox}>
+                            <img className={styles.icon} src={House}></img>
+                        </div>
+                        {isEditing ? (
+                            <input
+                                value={editedAddressDetail}
+                                onClick={() => {
+                                    setUser(saveUserInfo());
+                                }}
+                                onChange={(e) => setEditedAddressDetail(e.target.value)}
+                                className={styles.editingStyle}
+                            />
+                        ) : (
+                            <p className={styles.text}>{user?.addressDetail}</p>
                         )}
                     </div>
                 </div>

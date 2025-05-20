@@ -1,7 +1,7 @@
 import styles from './AddressSearch.module.css';
 import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import BackButton from '../../assets/images/chevron-left.svg';
+import BackButton from '@/src/assets/images/chevron-left.svg';
 declare global {
     interface Window {
         daum: any;
@@ -15,7 +15,7 @@ export default function AddressSearch() {
 
     const location = useLocation();
     const source = location.state?.source;
-    console.log(source)
+    console.log(source);
     useEffect(() => {
         if (isScriptLoaded.current) return;
         isScriptLoaded.current = true;
