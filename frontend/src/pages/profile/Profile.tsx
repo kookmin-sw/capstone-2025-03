@@ -5,7 +5,7 @@ import Hello from '@/src/assets/images/profile/hello.png';
 import Address from '@/src/assets/images/profile/address.png';
 import House from '@/src/assets/images/profile/house.png';
 import Phone from '@/src/assets/images/profile/phone.png';
-import Setting from '@/src/assets/images/profile/gear.png';
+import Setting from '@/src/assets/images/profile/setting.png';
 import { useState, useEffect } from 'react';
 import { useUserInputHandlers } from '@/src/hooks/useInputFormat';
 import { useNavigate, useLocation } from 'react-router-dom';
