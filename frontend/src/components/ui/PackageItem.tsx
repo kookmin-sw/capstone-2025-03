@@ -241,7 +241,7 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
                     <CategoryText>{categoryPreview}</CategoryText>
                 </CategoryContainer>
             </ContentContainer>
-            <LikeButton style={{ backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})` }} onClick={(e) => {
+            <LikeButton id='heart-button' style={{ backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})` }} onClick={(e) => {
                 e.stopPropagation();
                 handleClickFavorite(pkg);
             }}>

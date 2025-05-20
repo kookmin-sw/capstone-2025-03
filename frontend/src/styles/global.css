@@ -62,13 +62,16 @@
 }
 
 /* Body 스타일 */
+
 body {
     font-family: 'Pretendard', sans-serif;
-    max-width: 500px;
-    margin: auto;
+    margin: 0;
+    padding: 0;
     color: #ffffff;
     user-select: none;
     overflow-y: scroll;
+    width: 100%; /* ← 전체 너비 확보 */
+    background-color: #101012;
 }
 
 p {

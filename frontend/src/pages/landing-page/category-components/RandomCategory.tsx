@@ -111,7 +111,7 @@ export default function RandomCategory() {
             <CategorySectionContainer>
                 <HeadContainer>
                     <HeadText>카테고리</HeadText>
-                    <ResfreshButton onClick={handleRefresh}>
+                    <ResfreshButton id='refresh-new-product' onClick={handleRefresh}>
                         새로고침
                         <RefreshImage src={RefreshIcon} />
                     </ResfreshButton>
@@ -127,7 +127,7 @@ export default function RandomCategory() {
                     />
                 ) : (
                     <>
-                        <CategoryContainer>
+                        <CategoryContainer id="category-products-step">
                             {(data as any)?.pages.flatMap((page: PageResponse) =>
                                 page.data.map((category) => (
                                     <CategorySection

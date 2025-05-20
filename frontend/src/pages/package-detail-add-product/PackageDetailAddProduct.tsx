@@ -13,6 +13,12 @@ import { editingPackageState } from '@/src/recoil/packageState';
 import PackageModel from '@/src/models/PackageModel';
 import { Spinner } from '@chakra-ui/react';
 import ProductItemSkeleton from '@/src/components/ui/ProductItemSkeleton';
+import Joyride from 'react-joyride';
+import {
+    PackageDetailAddProductSteps,
+    joyrideLocale,
+    joyrideStyles,
+} from '@/src/components/ui/ToolTipContents';
 
 export default function PackageDetailAddProduct() {
     // page connection
@@ -27,17 +33,43 @@ export default function PackageDetailAddProduct() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState<boolean>(false);
     const [checkedProductIds, setCheckedProductIds] = useState<number[]>([]);
+    // 툴팁 용도
+    const [run, setRun] = useState<boolean>(false);
+    const [isReady, setIsReady] = useState<boolean>(false);
+
     // useRef
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     // useEffect
+
+    // 툴팁 용
+    const LOCAL_STORAGE_KEY = 'packageDetail_addProduct_tooltip_shown';
+
+    // 개발 중일때
+    // localStorage.removeItem('packageDetail_addProduct_tooltip_shown');
+    useEffect(() => {
+        const alreadyShown = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+        if (!alreadyShown) {
+            const timer = setTimeout(() => {
+                setIsReady(true);
+                setRun(true);
+                localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }, []);
+
     useEffect(() => {
         const fetchProducts = async () => {
             const filteredProductList = productList.filter(
                 (product) => product.category === category.id,
             );
             // 패키지에 담긴 것들 productList에 먼저 추가
-            const targetProductIds = editingPackage?.products.filter((product) => product.category === category.id).map((item) => item.id) ?? [];
+            const targetProductIds =
+                editingPackage?.products
+                    .filter((product) => product.category === category.id)
+                    .map((item) => item.id) ?? [];
             // 현재 로드된 ID 목록
             const loadedIds = new Set(productList.map((product) => product.id));
             // 아직 로드되지 않은 ID만 필터링
@@ -45,7 +77,8 @@ export default function PackageDetailAddProduct() {
             // missingIds만 추가
             setProductList([
                 ...productList,
-                ...((editingPackage?.products.filter((product) => missingIds.includes(product.id))) ?? [])
+                ...(editingPackage?.products.filter((product) => missingIds.includes(product.id)) ??
+                    []),
             ]);
 
             // initial product list read
@@ -135,44 +168,53 @@ export default function PackageDetailAddProduct() {
     };
 
     return (
-        <div className={styles.page}>
+        <div id="introduce" className={styles.page}>
+            <Joyride
+                steps={PackageDetailAddProductSteps}
+                run={run}
+                continuous
+                disableScrolling
+                showSkipButton
+                showProgress={false}
+                locale={joyrideLocale}
+                styles={joyrideStyles}
+            />
             <SearchHeader text={category.name || ''} />
             <div className={styles.section}>
                 <div className={styles.listView}>
                     {isLoading
                         ? Array.from({ length: 5 }).map((_, idx) => (
-                            <div key={idx} className={styles.checkableProductItem}>
-                                <ProductItemSkeleton />
-                            </div>
-                        ))
+                              <div key={idx} className={styles.checkableProductItem}>
+                                  <ProductItemSkeleton />
+                              </div>
+                          ))
                         : productList
-                            .filter((product) => product.category === category.id)
-                            .map((item, index) => {
-                                const isActive = checkedProductIds.includes(item.id!);
+                              .filter((product) => product.category === category.id)
+                              .map((item, index) => {
+                                  const isActive = checkedProductIds.includes(item.id!);
 
-                                return <div
-                                    key={index}
-                                    className={styles.checkableProductItem}
-                                    onClick={() => handleProductItemClick(item)}
-                                >
-                                    <ProductItem product={item} />
-                                    <div className={styles.blank} />
-                                    <img
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleCheckButtonClick(item.id!);
-                                        }}
-                                        className={styles.checkIcon}
-                                        src={CheckIconImage}
-                                        style={{
-                                            opacity: isActive
-                                                ? '1'
-                                                : '0.5',
-                                        }}
-                                    />
-                                </div>
-                            }
-                            )}
+                                  return (
+                                      <div
+                                          key={index}
+                                          className={styles.checkableProductItem}
+                                          onClick={() => handleProductItemClick(item)}
+                                      >
+                                          <ProductItem product={item} />
+                                          <div className={styles.blank} />
+                                          <img
+                                              onClick={(e) => {
+                                                  e.stopPropagation();
+                                                  handleCheckButtonClick(item.id!);
+                                              }}
+                                              className={styles.checkIcon}
+                                              src={CheckIconImage}
+                                              style={{
+                                                  opacity: isActive ? '1' : '0.5',
+                                              }}
+                                          />
+                                      </div>
+                                  );
+                              })}
                 </div>
                 <div ref={loadMoreRef} style={{ height: '20px' }} />
                 {isLoadMoreLoading && !isLoading && (
