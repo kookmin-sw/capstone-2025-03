@@ -9,6 +9,7 @@ import ProductModel from '@/src/models/ProductModel';
 import { Spinner } from '@chakra-ui/react';
 import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 import SellerProductItemSkeleton from '@/src/components/ui/SellerProductItemSkeleton';
+import WhenNoProducts from './components/WhenNoProducts';
 
 export default function SellerSalesList() {
     // page connection
@@ -79,41 +80,67 @@ export default function SellerSalesList() {
     };
 
     return (
-        <div className={styles.page}>
+        <div id="introduce" className={styles.page}>
             <MainHeader isVisible={isVisible} />
-            <div className={styles.section}>
-                <div className={styles.productContainer}>
-                <p className={styles.listViewTitle}>판매 중인 물품들</p>
-                    {isLoading
-                        ? Array.from({ length: 6 }).map((_, idx) => (
-                              <SellerProductItemSkeleton key={idx} />
-                          ))
-                        : products.map((products: ProductModel, index: number) => {
-                              return (
-                                  <div key={index} onClick={() => handleProductItemClick(products)}>
-                                      <SellerProductItem product={products} />
-                                      <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
-                                  </div>
-                              );
-                          })}
-                </div>
-                {!isLoading && <div ref={loadMoreRef} style={{ height: '3px' }} />}
-                {isLoadMoreLoading && (
-                    <div className={styles.moreLoadSpinnerContainer}>
-                        <Spinner
-                            color="#00A36C"
-                            borderWidth="0.4rem"
-                            animationDuration="0.8s"
-                            style={{ width: '4rem', height: '4rem' }}
-                        />
+
+            {isLoading ? (
+                // 스켈레톤 로딩
+                <div className={styles.section}>
+                    <div className={styles.productContainer}>
+                        {Array.from({ length: 6 }).map((_, idx) => (
+                            <SellerProductItemSkeleton key={idx} />
+                        ))}
                     </div>
-                )}
-            </div>
-            <div className={styles.buttonContainer}>
-                <button className={styles.addProductButton} onClick={handleClickAddProductButton}>
-                    +
-                </button>
-            </div>
+                </div>
+            ) : products.length === 0 ? (
+                // 물건이 하나도 없으면 텅~
+                <div className={styles.noProductsSection}>
+                    <WhenNoProducts />
+                    <div className={styles.buttonContainer}>
+                        <button
+                            className={styles.addProductButton}
+                            onClick={handleClickAddProductButton}
+                        >
+                            +
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                // 물건이 있으면 기존 UI 보여줌
+                <>
+                    <div className={styles.section}>
+                        <div className={styles.productContainer}>
+                            <p className={styles.listViewTitle}>판매 중인 물품들</p>
+                            {products.map((product: ProductModel, index: number) => (
+                                <div key={index} onClick={() => handleProductItemClick(product)}>
+                                    <SellerProductItem product={product} />
+                                    <div style={{ borderBottom: '1px solid #2a2a2a' }}></div>
+                                </div>
+                            ))}
+                        </div>
+                        <div ref={loadMoreRef} style={{ height: '3px' }} />
+                        {isLoadMoreLoading && (
+                            <div className={styles.moreLoadSpinnerContainer}>
+                                <Spinner
+                                    color="#00A36C"
+                                    borderWidth="0.4rem"
+                                    animationDuration="0.8s"
+                                    style={{ width: '4rem', height: '4rem' }}
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className={styles.buttonContainer}>
+                        <button
+                            className={styles.addProductButton}
+                            onClick={handleClickAddProductButton}
+                        >
+                            +
+                        </button>
+                    </div>
+                </>
+            )}
+
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
     );

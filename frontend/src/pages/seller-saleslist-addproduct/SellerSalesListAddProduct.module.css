@@ -45,6 +45,11 @@
     font-size: 2.2rem;
     padding-bottom: 0.8rem;
     outline: none;
+    
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .submitButton {

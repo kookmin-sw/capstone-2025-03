@@ -23,6 +23,9 @@
 <br/>
 
 ### 프로젝트 소개 영상
+<br/>
+
+[![Video Label](http://img.youtube.com/vi/CXj022yW1J0/0.jpg)](https://www.youtube.com/watch?v=CXj022yW1J0)
 
 <br/><br/><br/>
 

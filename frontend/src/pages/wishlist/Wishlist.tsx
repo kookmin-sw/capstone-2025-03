@@ -2,16 +2,21 @@ import styles from './Wishlist.module.css';
 import Footer from '../../components/layout/MenuFooter';
 import ArrowFront from '../../assets/images/page/wishlist/arrow_front.png';
 import FavoriteFill from '../../assets/images/page/wishlist/favorite_fill.png';
-import { useCustomPackagesByUser, useCreatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
+import {
+    useCustomPackagesByUser,
+    useCreatePackage,
+    useDeletePackage,
+} from '@/src/hooks/useCustomPackage';
 import { useUser } from '@/src/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import PackageModel from '@/src/models/PackageModel';
 import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
 
 export default function Wishlist() {
+
     // recoil
     const [, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
@@ -19,7 +24,11 @@ export default function Wishlist() {
     // hook
     const navigate = useNavigate();
     const { user } = useUser();
-    const { data: customPackages = [], isLoading, isError } = useCustomPackagesByUser(user?.userId!);
+    const {
+        data: customPackages = [],
+        isLoading,
+        isError,
+    } = useCustomPackagesByUser(user?.userId!);
     const { mutateAsync: createPackage } = useCreatePackage();
     const { mutateAsync: deletePackage } = useDeletePackage();
 
@@ -29,30 +38,35 @@ export default function Wishlist() {
 
     // Function
     const handleCreatePackage = async () => {
-        if (!userId || isCreating){
+        if (!userId || isCreating) {
             window.alert('로그인 정보가 없거나 패키지를 생성 중입니다');
-        };
+        }
 
         setIsCreating(true);
-        const newPackage = await createPackage(new PackageModel({
-            name: `${user!.name}의 새로운 패키지`,
-            description: '',
-            user: userId,
-        }));
-
+        const newPackage = await createPackage(
+            new PackageModel({
+                name: `${user!.name}의 새로운 패키지`,
+                description: '',
+                user: userId,
+            }),
+        );
         setEditingPackage(newPackage);
 
         // navigate
-        navigate('/package-detail', { state: { pkg: newPackage } })
+        navigate('/package-detail', { state: { pkg: newPackage } });
     };
     const handleDeletePackage = async (id: number) => {
         if (!userId) return;
         await deletePackage({ id: id, user: userId });
-    }
+    };
     const handleEditPackage = (pkg: PackageModel) => {
         setEditingPackage(pkg);
-        navigate('/package-detail', { state: { pkg: pkg } })
-    }
+        navigate('/package-detail', { state: { pkg: pkg } });
+    };
+
+    const handleLogOut = () => {
+        localStorage.removeItem('user');
+    };
 
     return (
         <div className={styles.page}>
@@ -60,7 +74,7 @@ export default function Wishlist() {
                 <h1 className={styles.title}>찜 목록</h1>
                 <p className={styles.description}>나에게 맞는 패키지를 만들어보세요</p>
 
-                <button className={styles.createPackageBtn} onClick={handleCreatePackage}>
+                <button id='new-package' className={styles.createPackageBtn} onClick={handleCreatePackage}>
                     <p className={styles.btnText}>새로운 패키지 만들기</p>
                     <div style={{ flexGrow: 1 }}></div>
                     <img src={ArrowFront} alt="패키지 생성 아이콘" className={styles.btnIcon} />
@@ -72,23 +86,30 @@ export default function Wishlist() {
                         <p className={styles.infoText}>에러가 발생했습니다</p>
                     ) : customPackages.length === 0 ? (
                         <p className={styles.infoText}>찜한 패키지가 없습니다.</p>
-                    ) :
+                    ) : (
                         customPackages.map((customPackage) => (
-                            <div key={customPackage.id} className={styles.card} onClick={() => handleEditPackage(customPackage)}>
+                            <div
+                                key={customPackage.id}
+                                className={styles.card}
+                                onClick={() => handleEditPackage(customPackage)}
+                            >
                                 <PackageThumbnail pkg={customPackage}>
-                                    <button className={styles.likeButton} onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleDeletePackage(customPackage.id!)
-                                    }}>
+                                    <button
+                                        className={styles.likeButton}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleDeletePackage(customPackage.id!);
+                                        }}
+                                    >
                                         <img src={FavoriteFill} alt="좋아요 아이콘" />
                                     </button>
                                 </PackageThumbnail>
                                 <p className={styles.cardTitle}>{customPackage.name}</p>
                             </div>
                         ))
-                    }
+                    )}
                 </div>
-                <div style={{height: '10rem'}}></div>
+                <div style={{ height: '10rem' }}></div>
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
         </div>
