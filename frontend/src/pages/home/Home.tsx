@@ -106,17 +106,6 @@ export default function Home() {
             state: { selectedIndustry: industry?.toJson() },
         });
     };
-
-    const handleClick = () => {
-        const isLogin = localStorage.getItem('user');
-        if (!isLogin) {
-            navigate('/main');
-            return;
-        }
-
-        // 로그인된 경우 기능 수행
-        console.log('기능 수행!');
-    };
     
     return isLoading ? (
         <HomeSkeleton />

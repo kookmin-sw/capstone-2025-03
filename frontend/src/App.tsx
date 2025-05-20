@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Suspense } from 'react';
 import './styles/global.css';
 import routes from './routes';
 import { UserProvider } from './contexts/UserContext';
@@ -19,16 +19,6 @@ export default function App() {
 
 
 export function MainLayout() {
-    // const navigate = useNavigate();
-    // const isLogin = localStorage.getItem('user');
-
-    // useEffect(() => {
-    //     const excludePaths = ['/name-and-birth-day-input', '/address-input', '/address-search'];
-    //     if (!isLogin && !excludePaths.includes(window.location.pathname)) {
-    //         navigate('/main');
-    //     }
-    // }, []);
-
     return (
         <QueryClientProvider client={queryClient}>
             <UserProvider>
