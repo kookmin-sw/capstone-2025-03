@@ -1,63 +1,79 @@
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-Thin.woff') format('woff');
-    font-weight: 100; /* Thin */
+    font-weight: 100;
+    /* Thin */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-ExtraLight.woff') format('woff');
-    font-weight: 200; /* ExtraLight */
+    font-weight: 200;
+    /* ExtraLight */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-Light.woff') format('woff');
-    font-weight: 300; /* Light */
+    font-weight: 300;
+    /* Light */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-Regular.woff') format('woff');
-    font-weight: 400; /* Regular */
+    font-weight: 400;
+    /* Regular */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-Medium.woff') format('woff');
-    font-weight: 500; /* Medium */
+    font-weight: 500;
+    /* Medium */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-SemiBold.woff') format('woff');
-    font-weight: 600; /* SemiBold */
+    font-weight: 600;
+    /* SemiBold */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-Bold.woff') format('woff');
-    font-weight: 700; /* Bold */
+    font-weight: 700;
+    /* Bold */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-ExtraBold.woff') format('woff');
-    font-weight: 800; /* ExtraBold */
+    font-weight: 800;
+    /* ExtraBold */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Pretendard';
     src: url('./assets/fonts/pretendard/Pretendard-Black.woff') format('woff');
-    font-weight: 900; /* Black */
+    font-weight: 900;
+    /* Black */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RiaSans-ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/RiaSans-ExtraBold.woff2') format('woff2');
+    font-weight: normal;
     font-style: normal;
 }
 
@@ -70,7 +86,8 @@ body {
     color: #ffffff;
     user-select: none;
     overflow-y: scroll;
-    width: 100%; /* ← 전체 너비 확보 */
+    width: 100%;
+    /* ← 전체 너비 확보 */
     background-color: #101012;
 }
 
@@ -101,6 +118,7 @@ html {
     from {
         transform: translateX(-100%);
     }
+
     to {
         transform: translateX(0%);
     }
