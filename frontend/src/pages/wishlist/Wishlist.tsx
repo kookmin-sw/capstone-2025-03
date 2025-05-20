@@ -14,9 +14,9 @@ import PackageThumbnail from '@/src/components/ui/PackageThumbnail';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { editingPackageState } from '@/src/recoil/packageState';
+import { useRequireLogin } from '@/src/hooks/useRequireLogin';
 
 export default function Wishlist() {
-
     // recoil
     const [, setEditingPackage] = useRecoilState(editingPackageState);
     // usestate
@@ -36,11 +36,15 @@ export default function Wishlist() {
     const currentMenuIndex = 2;
     const userId = user?.userId;
 
+    const loginCheck = useRequireLogin();
+
     // Function
     const handleCreatePackage = async () => {
-        if (!userId || isCreating) {
-            window.alert('로그인 정보가 없거나 패키지를 생성 중입니다');
+        if (isCreating) {
+            window.alert('패키지를 생성 중입니다');
         }
+
+        loginCheck();
 
         setIsCreating(true);
         const newPackage = await createPackage(
@@ -70,7 +74,11 @@ export default function Wishlist() {
                 <h1 className={styles.title}>찜 목록</h1>
                 <p className={styles.description}>나에게 맞는 패키지를 만들어보세요</p>
 
-                <button id='new-package' className={styles.createPackageBtn} onClick={handleCreatePackage}>
+                <button
+                    id="new-package"
+                    className={styles.createPackageBtn}
+                    onClick={handleCreatePackage}
+                >
                     <p className={styles.btnText}>새로운 패키지 만들기</p>
                     <div style={{ flexGrow: 1 }}></div>
                     <img src={ArrowFront} alt="패키지 생성 아이콘" className={styles.btnIcon} />

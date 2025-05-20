@@ -11,7 +11,7 @@ import FavoriteIcon from '../../assets/images/page/wishlist/favorite_fill.png';
 import FavoriteNotFillIcon from '../../assets/images/page/wishlist/favorite_not_fill.png';
 import { useCreatePackage, useDeletePackage } from '@/src/hooks/useCustomPackage';
 import { useUser } from '@/src/contexts/UserContext';
-
+import { useRequireLogin } from '@/src/hooks/useRequireLogin';
 
 const Item = styled.div`
     width: 100%;
@@ -78,46 +78,44 @@ const OneThumbnail = styled.img`
 `;
 
 const TwoGrid = styled.div`
-  display: flex;
+    display: flex;
 `;
 
 const ThreeGrid = styled.div`
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `;
 
 const ThreeTop = styled.div`
-  flex: 1;
-  overflow: hidden;
+    flex: 1;
+    overflow: hidden;
 `;
 
 const ThreeBottom = styled.div`
-  display: flex;
-  flex: 1;
+    display: flex;
+    flex: 1;
 `;
 
 const FourGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 `;
 
 const GridImage = styled.img`
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  flex: 1;
-  padding: 0.2rem;
-  border-radius: 0.6rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    flex: 1;
+    padding: 0.2rem;
+    border-radius: 0.6rem;
 `;
 
 const LikeButton = styled.button`
     width: 2.4rem;
     height: 2.4rem;
     background-size: cover;
-`
-
-
+`;
 
 type PackageProps = {
     pkg: PackageModel;
@@ -137,6 +135,8 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
     const { mutateAsync: deletePackage } = useDeletePackage();
     const [isLoading, setIsLoading] = useState(false);
     const [copiedPackageId, setCopiedPackageId] = useState(0);
+    // 로그인 체크
+    const loginCheck = useRequireLogin();
 
     useEffect(() => {
         const categoryNames = [];
@@ -146,7 +146,7 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
                 count += 1;
             } else {
                 categoryNames.push(
-                    categories.find((category) => category.id === pkg.categories[i])?.name
+                    categories.find((category) => category.id === pkg.categories[i])?.name,
                 );
             }
         }
@@ -174,28 +174,26 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
         setIsLoading(true);
         setIsFavorite(!isFavorite);
         if (isFavorite) {
-            await deletePackage({id: copiedPackageId, user: user?.userId!})
+            await deletePackage({ id: copiedPackageId, user: user?.userId! });
         } else {
-            const newPackage = await createPackage(PackageModel.fromJson({
-                ...pkg,
-                user: user?.userId
-            }));
+            const newPackage = await createPackage(
+                PackageModel.fromJson({
+                    ...pkg,
+                    user: user?.userId,
+                }),
+            );
             setCopiedPackageId(newPackage.id!);
         }
 
         setIsLoading(false);
-    }
+    };
 
     const CustomThumbnail = () => {
         return (
             <ThumbnailContainer>
-                {pkg.products.length === 0 && (
-                    <OneThumbnail src={PackageAlternativeImage} />
-                )}
+                {pkg.products.length === 0 && <OneThumbnail src={PackageAlternativeImage} />}
 
-                {pkg.products.length === 1 && (
-                    <OneThumbnail src={pkg.products[0].images[0]} />
-                )}
+                {pkg.products.length === 1 && <OneThumbnail src={pkg.products[0].images[0]} />}
 
                 {pkg.products.length === 2 && (
                     <TwoGrid>
@@ -241,11 +239,18 @@ export default function PackageItem({ pkg, fromDetail }: PackageProps) {
                     <CategoryText>{categoryPreview}</CategoryText>
                 </CategoryContainer>
             </ContentContainer>
-            <LikeButton id='heart-button' style={{ backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})` }} onClick={(e) => {
-                e.stopPropagation();
-                handleClickFavorite(pkg);
-            }}>
-            </LikeButton>
+            <LikeButton
+                id="heart-button"
+                style={{
+                    backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})`,
+                }}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    loginCheck(() => {
+                        handleClickFavorite(pkg);
+                    });
+                }}
+            ></LikeButton>
         </Item>
     );
 }

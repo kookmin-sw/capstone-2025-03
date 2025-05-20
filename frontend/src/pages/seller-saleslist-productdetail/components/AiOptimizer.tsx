@@ -128,7 +128,7 @@ export default function AiOptimizer() {
                 );
                 setPredictedPrice(responseData.predicted_price);
             } catch (error) {
-                console.log('Error Optimizing price: ', error);
+                console.error('Error Optimizing price: ', error);
             } finally {
                 setIsUploading(false);
             }

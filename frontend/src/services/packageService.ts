@@ -56,7 +56,6 @@ export const getPackageListByUserInService = async (
             params: { user: user },
         });
         const data = response.data;
-        console.log(data)
         return data.results.map((pkg: any) => PackageModel.fromJson(pkg));
     } catch (error) {
         console.error('Error fetching all packages by user:', error);

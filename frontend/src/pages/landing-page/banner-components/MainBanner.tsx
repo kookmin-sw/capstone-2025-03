@@ -23,19 +23,18 @@ const MainContainer = styled.div`
 `
 
 const MainName = styled.h1`
-    font-family: 'Montserrat', sans-serif;
-  font-size: 5rem;
+  font-family: 'RiaSans-ExtraBold';
+  font-size: 3rem;
   font-weight: 100;
-  letter-spacing: 0.3rem;
   color: white;
   transform: scaleX(1.2);
-
+  margin-bottom: 1rem;
 `
 
 export default function Banner() {
     return (
         <MainContainer>
-            <MainName>restart</MainName>
+            <MainName>RESTART</MainName>
             <BannerCarousel banners={BANNER_DATA} />
         </MainContainer>
     );

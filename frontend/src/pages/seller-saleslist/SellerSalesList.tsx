@@ -10,6 +10,7 @@ import { Spinner } from '@chakra-ui/react';
 import { useHeaderVisibility } from '@/src/hooks/useHeaderVisibility';
 import SellerProductItemSkeleton from '@/src/components/ui/SellerProductItemSkeleton';
 import WhenNoProducts from './components/WhenNoProducts';
+import { useRequireLogin } from '@/src/hooks/useRequireLogin';
 
 export default function SellerSalesList() {
     // page connection
@@ -29,8 +30,17 @@ export default function SellerSalesList() {
 
     const currentMenuIndex = 3;
 
+    // 기본 화면 렌더링을 위한 로그인 여부 체크
+    const isLogin = Boolean(localStorage.getItem('user'));
+
+    // 로그인 체크
+    const loginCheck = useRequireLogin();
+
     useEffect(() => {
-        if (!sellerId) return;
+        if (!sellerId) {
+            setIsLoading(false);
+            return;
+        }
 
         const fetchProducts = async () => {
             if (sellerId) {
@@ -68,6 +78,11 @@ export default function SellerSalesList() {
     }, [loadMore, isLoadMoreLoading]);
 
     const handleClickAddProductButton = () => {
+        if (!isLogin) {
+            loginCheck();
+            return;
+        }
+
         navigate('/seller-saleslist-addproduct', {
             state: { reset: true },
         });
@@ -92,8 +107,8 @@ export default function SellerSalesList() {
                         ))}
                     </div>
                 </div>
-            ) : products.length === 0 ? (
-                // 물건이 하나도 없으면 텅~
+            ) : products.length === 0 || !isLogin ? (
+                // 물건이 하나도 없거나 비 로그인 상태이면 텅~
                 <div className={styles.noProductsSection}>
                     <WhenNoProducts />
                     <div className={styles.buttonContainer}>
@@ -133,7 +148,9 @@ export default function SellerSalesList() {
                     <div className={styles.buttonContainer}>
                         <button
                             className={styles.addProductButton}
-                            onClick={handleClickAddProductButton}
+                            onClick={() => {
+                                handleClickAddProductButton();
+                            }}
                         >
                             +
                         </button>

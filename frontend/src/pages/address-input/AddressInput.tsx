@@ -21,7 +21,7 @@ export default function AddressInput() {
     const name = sessionStorage.getItem('name') || '';
 
     const handleOpenSearch = () => {
-        navigate('/address-search');
+        navigate('/address-search', { state: { source: 'name-and-birthday' } });
     };
 
     const tryLogin = async (kakaoId: number) => {
@@ -35,14 +35,13 @@ export default function AddressInput() {
     };
 
     const handleConfirmButtonClick = async () => {
-
         if (!user) return;
         setIsLoading(true);
 
         try {
             await createUser(user);
             setIsComplete(true);
-            
+
             if (user.kakaoId !== null) {
                 tryLogin(user.kakaoId);
             }

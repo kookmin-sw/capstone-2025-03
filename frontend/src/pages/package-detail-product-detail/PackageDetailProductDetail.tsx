@@ -11,6 +11,7 @@ import FavoriteNotFillIcon from '../../assets/images/page/wishlist/favorite_not_
 import FavoriteIcon from '../../assets/images/page/wishlist/favorite_fill.png';
 import PackageSelectSheet from './components/PackageSelectSheet';
 import { useCustomPackagesByUser } from '@/src/hooks/useCustomPackage';
+import { useRequireLogin } from '@/src/hooks/useRequireLogin';
 
 export default function PackageDetailProductDetail() {
     // page connection
@@ -27,6 +28,9 @@ export default function PackageDetailProductDetail() {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const userId = user.id;
     const { data: userPackages } = useCustomPackagesByUser(userId);
+
+    // 로그인 체크
+    const loginCheck = useRequireLogin();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -64,7 +68,10 @@ export default function PackageDetailProductDetail() {
                         style={{
                             backgroundImage: `url(${isFavorite ? FavoriteIcon : FavoriteNotFillIcon})`,
                         }}
-                        onClick={handleClickFavorite}
+                        onClick={() => {
+                            loginCheck();
+                            handleClickFavorite();
+                        }}
                     />
                 </div>
                 <div className={styles.categoryAndGradeWrapper}>

@@ -58,7 +58,7 @@ export const getMyInfoInService = async () => {
     try {
         await axios.get(`${API_BASE_URL}/users/info/`);
     } catch (error) {
-        console.log('Error fetching my data:', error);
+        console.error('Error fetching my data:', error);
         throw error;
     }
 };
@@ -113,7 +113,7 @@ export const getKakaoAccessToken = async (code: string) => {
         });
         return response.data.access_token;
     } catch (error) {
-        console.log('액세스 토큰 요청 오류: ', error);
+        console.error('액세스 토큰 요청 오류: ', error);
         throw error;
     }
 };
