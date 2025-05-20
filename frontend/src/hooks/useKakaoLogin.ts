@@ -36,7 +36,7 @@ export function useKakaoLogin(onComplete: () => void): useKakaoLoginResult {
                     setIsLoading(false);
                 }
             } catch (error) {
-                console.log('회원가입 안 되어 있음', error);
+                console.error('회원가입 안 되어 있음', error);
                 setIsLoading(false);
             }
         };
@@ -60,7 +60,7 @@ export function useKakaoLogin(onComplete: () => void): useKakaoLoginResult {
                     );
                 }
             } catch (error) {
-                console.log('카카오 로그인 오류', error);
+                console.error('카카오 로그인 오류', error);
                 setIsLoading(false);
             }
         };

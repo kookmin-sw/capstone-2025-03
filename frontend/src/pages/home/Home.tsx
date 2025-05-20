@@ -73,6 +73,7 @@ export default function Home() {
         };
         fetchPackages();
     }, []);
+
     useEffect(() => {
         if (!loadMoreRef.current || isLoadMoreLoading) return;
 
@@ -105,7 +106,7 @@ export default function Home() {
             state: { selectedIndustry: industry?.toJson() },
         });
     };
-
+    
     return isLoading ? (
         <HomeSkeleton />
     ) : (

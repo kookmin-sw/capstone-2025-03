@@ -1,7 +1,7 @@
 import styles from './AddressSearch.module.css';
 import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import BackButton from '@/src/assets/images/chevron-left.svg';
 declare global {
     interface Window {
         daum: any;
@@ -49,7 +49,7 @@ export default function AddressSearch() {
         <div className={styles.page}>
             <div className={styles.header}>
                 <button className={styles.backButton} onClick={() => navigate(-1)}>
-                    <img src="src/assets/images/chevron-left.svg" alt="뒤로가기" width="30" />
+                    <img src={BackButton} alt="뒤로가기" width="30" />
                 </button>
                 <p className={styles.title}>주소 검색</p>
                 <div className={styles.emptyBox} />
