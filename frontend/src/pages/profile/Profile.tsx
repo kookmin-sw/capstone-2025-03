@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 import { useUserInputHandlers } from '@/src/hooks/useInputFormat';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { UserModel } from '@/src/models/UserModel';
+import Exclamation from '@/src/assets/images/profile/exclamation.png';
 
 export default function Profile() {
     const currentMenuIndex = 4;
@@ -27,6 +28,9 @@ export default function Profile() {
         user?.addressDetail ?? '',
     );
     const { formatPhoneNumber } = useUserInputHandlers();
+
+    // 기본 화면 렌더링을 위한 로그인 여부 체크
+    const isLogin = Boolean(localStorage.getItem('user'));
 
     const handleToggleEdit = () => {
         setIsEditing((prev) => !prev);
@@ -100,104 +104,124 @@ export default function Profile() {
                             온보딩 다시보기
                         </button>
                     </div>
-                    <img className={styles.profileImage} src={user?.profileImage ?? ''}></img>
-                    <div className={styles.InfoAndSettingContainer}>
-                        <p className={styles.title}>내 정보</p>
-                        {!isEditing ? (
-                            <img
-                                src={Setting}
-                                onClick={handleToggleEdit}
-                                style={{ height: '3rem', marginTop: '3rem', cursor: 'pointer' }}
-                            />
-                        ) : (
-                            <button onClick={updateUserInfo} className={styles.saveButton}>
-                                저장
+                    {!isLogin ? (
+                        <div className={styles.noLogin}>
+                            <img src={Exclamation} />
+                            <p style={{ padding: '1rem', color: 'gray', fontSize: "1.4rem"}}>로그인이 필요합니다.</p>
+                            <button
+                                className={styles.loginButton}
+                                onClick={() => navigate('/main')}
+                            >
+                                로그인하러 가기
                             </button>
-                        )}
-                    </div>
-                    <div className={styles.itemBox}>
-                        <div className={styles.iconBox}>
-                            <img className={styles.icon} src={Hello}></img>
                         </div>
-                        {isEditing ? (
-                            <input
-                                value={editedName}
-                                onChange={(e) => setEditedName(e.target.value)}
-                                className={styles.editingStyle}
-                            />
-                        ) : (
-                            <p className={styles.text}>{editedName}</p>
-                        )}
-                    </div>
-                    <div className={styles.itemBox}>
-                        <div className={styles.iconBox}>
-                            <img className={styles.icon} src={Address}></img>
+                    ) : (
+                        <div>
+                            <img
+                                className={styles.profileImage}
+                                src={user?.profileImage ?? ''}
+                            ></img>
+                            <div className={styles.InfoAndSettingContainer}>
+                                <p className={styles.title}>내 정보</p>
+                                {!isEditing ? (
+                                    <img
+                                        src={Setting}
+                                        onClick={handleToggleEdit}
+                                        style={{
+                                            height: '3rem',
+                                            marginTop: '3rem',
+                                            cursor: 'pointer',
+                                        }}
+                                    />
+                                ) : (
+                                    <button onClick={updateUserInfo} className={styles.saveButton}>
+                                        저장
+                                    </button>
+                                )}
+                            </div>
+                            <div className={styles.itemBox}>
+                                <div className={styles.iconBox}>
+                                    <img className={styles.icon} src={Hello}></img>
+                                </div>
+                                {isEditing ? (
+                                    <input
+                                        value={editedName}
+                                        onChange={(e) => setEditedName(e.target.value)}
+                                        className={styles.editingStyle}
+                                    />
+                                ) : (
+                                    <p className={styles.text}>{editedName}</p>
+                                )}
+                            </div>
+                            <div className={styles.itemBox}>
+                                <div className={styles.iconBox}>
+                                    <img className={styles.icon} src={Address}></img>
+                                </div>
+                                {isEditing ? (
+                                    <input
+                                        value={editedEmail}
+                                        onChange={(e) => setEditedEmail(e.target.value)}
+                                        className={styles.editingStyle}
+                                    />
+                                ) : (
+                                    <p className={styles.text}>{user?.kakaoEmail}</p>
+                                )}
+                            </div>
+                            <div className={styles.itemBox}>
+                                <div className={styles.iconBox}>
+                                    <img className={styles.icon} src={Phone}></img>
+                                </div>
+                                {isEditing ? (
+                                    <input
+                                        value={formatPhoneNumber(editedPhone)}
+                                        onChange={handlePhoneInput}
+                                        className={styles.editingStyle}
+                                    />
+                                ) : (
+                                    <p className={styles.text}>
+                                        {formatPhoneNumber(user?.phoneNumber ?? '')}
+                                    </p>
+                                )}
+                            </div>
+                            <div className={styles.itemBox}>
+                                <div className={styles.iconBox}>
+                                    <img className={styles.icon} src={House}></img>
+                                </div>
+                                {isEditing ? (
+                                    <input
+                                        value={editedAddress}
+                                        onClick={() => {
+                                            setUser(saveUserInfo());
+                                            navigate('/address-search', {
+                                                state: { source: 'profile' },
+                                            });
+                                        }}
+                                        className={styles.editingStyle}
+                                        readOnly
+                                    />
+                                ) : (
+                                    <p className={styles.text}>{user?.fullAddress}</p>
+                                )}
+                            </div>
+                            <div className={styles.itemBox}>
+                                <div className={styles.iconBox}>
+                                    <img className={styles.icon} src={House}></img>
+                                </div>
+                                {isEditing ? (
+                                    <input
+                                        value={editedAddressDetail}
+                                        onClick={() => {
+                                            setUser(saveUserInfo());
+                                        }}
+                                        onChange={(e) => setEditedAddressDetail(e.target.value)}
+                                        className={styles.editingStyle}
+                                    />
+                                ) : (
+                                    <p className={styles.text}>{user?.addressDetail}</p>
+                                )}
+                            </div>
                         </div>
-                        {isEditing ? (
-                            <input
-                                value={editedEmail}
-                                onChange={(e) => setEditedEmail(e.target.value)}
-                                className={styles.editingStyle}
-                            />
-                        ) : (
-                            <p className={styles.text}>{user?.kakaoEmail}</p>
-                        )}
-                    </div>
-                    <div className={styles.itemBox}>
-                        <div className={styles.iconBox}>
-                            <img className={styles.icon} src={Phone}></img>
-                        </div>
-                        {isEditing ? (
-                            <input
-                                value={formatPhoneNumber(editedPhone)}
-                                onChange={handlePhoneInput}
-                                className={styles.editingStyle}
-                            />
-                        ) : (
-                            <p className={styles.text}>
-                                {formatPhoneNumber(user?.phoneNumber ?? '')}
-                            </p>
-                        )}
-                    </div>
-                    <div className={styles.itemBox}>
-                        <div className={styles.iconBox}>
-                            <img className={styles.icon} src={House}></img>
-                        </div>
-                        {isEditing ? (
-                            <input
-                                value={editedAddress}
-                                onClick={() => {
-                                    setUser(saveUserInfo());
-                                    navigate('/address-search', {
-                                        state: { source: 'profile' },
-                                    });
-                                }}
-                                className={styles.editingStyle}
-                                readOnly
-                            />
-                        ) : (
-                            <p className={styles.text}>
-                                {user?.fullAddress}
-                            </p>
-                        )}
-                    </div>
-                    <div className={styles.itemBox}>
-                        <div className={styles.iconBox}>
-                            <img className={styles.icon} src={House}></img>
-                        </div>
-                        {isEditing ? (
-                            <input
-                                value={editedAddressDetail}
-                                onClick={() => {
-                                    setUser(saveUserInfo());
-                                }}
-                                onChange={(e) => setEditedAddressDetail(e.target.value)}
-                                className={styles.editingStyle}
-                            />
-                        ) : (
-                            <p className={styles.text}>{user?.addressDetail}</p>
-                        )}
-                    </div>
+                    )}
                 </div>
             </div>
             <Footer currentMenuIndex={currentMenuIndex} />
