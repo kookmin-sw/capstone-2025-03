@@ -25,6 +25,7 @@ import ProductModel from '@/src/models/ProductModel';
 import ProductImage from '@/src/assets/images/alternative/product.png';
 import Joyride from 'react-joyride';
 import { PackageSteps, joyrideLocale, joyrideStyles } from '@/src/components/ui/ToolTipContents';
+import { useRequireLogin } from '@/src/hooks/useRequireLogin';
 
 export default function PackageDetail() {
     // page connection
@@ -53,6 +54,8 @@ export default function PackageDetail() {
 
     // 툴팁 용
     const LOCAL_STORAGE_KEY = 'packageDetail_tooltip_shown';
+
+    const loginCheck = useRequireLogin();
 
     // 개발 중일때
     // localStorage.removeItem('packageDetail_tooltip_shown');
@@ -311,8 +314,13 @@ export default function PackageDetail() {
                 </div>
                 <div style={{ height: '20rem' }} />
             </div>
+            {/* 편집중이 아닐 때 버튼 눌리면 로그인 유도 */}
             <DefaultButton
                 event={() => {
+                    if (!isEdit) {
+                        loginCheck();
+                        return;
+                    }
                     if (isEdit) {
                         setIsEdit(false);
                     } else {
