@@ -107,7 +107,9 @@ export default function Profile() {
                     {!isLogin ? (
                         <div className={styles.noLogin}>
                             <img src={Exclamation} />
-                            <p style={{ padding: '1rem', color: 'gray', fontSize: "1.4rem"}}>로그인이 필요합니다.</p>
+                            <p style={{ padding: '1rem', color: 'gray', fontSize: '1.4rem' }}>
+                                로그인이 필요합니다.
+                            </p>
                             <button
                                 className={styles.loginButton}
                                 onClick={() => navigate('/main')}
@@ -116,11 +118,13 @@ export default function Profile() {
                             </button>
                         </div>
                     ) : (
-                        <div>
-                            <img
-                                className={styles.profileImage}
-                                src={user?.profileImage ?? ''}
-                            ></img>
+                        <div style={{ width: '100%' }}>
+                            <div style={{ display: "flex", justifyContent: "center"}}>
+                                <img
+                                    className={styles.profileImage}
+                                    src={user?.profileImage ?? ''}
+                                />
+                            </div>
                             <div className={styles.InfoAndSettingContainer}>
                                 <p className={styles.title}>내 정보</p>
                                 {!isEditing ? (

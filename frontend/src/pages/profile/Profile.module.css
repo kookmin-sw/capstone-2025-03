@@ -65,6 +65,7 @@
     width: 15rem;
     height: 15rem;
     border-radius: 15rem;
+    display: flex;
 }
 
 .InfoAndSettingContainer {
