@@ -7,7 +7,7 @@
 
 [상태관리 여정: Context → Recoil → TanStack Query](https://velog.io/@doctorsean/Tanstack-Query-%EB%84%88-%EC%99%9C-%EC%83%9D%EA%B8%B4%EA%B1%B0%EC%95%BC)
 
-[리액트에서 클래스형 도메인 모델의 적용](https://velog.io/@doctorsean/BFF-%EC%84%9C%EB%B2%84%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90)
+[리액트에서 클래스형 도메인 모델의 적용](https://velog.io/@doctorsean/MVVM-패턴을-알아보자)
 
 ## 프로젝트 소개  
 ### **창업자와 폐업자**를 연결하는 **중고 창업 물품 패키징 거래 서비스**  
