@@ -1,13 +1,13 @@
 # 🚀 Restart
 
 ### 기술 회고 및 설계 배경
-[API 병목을 해결하기 위한 BFF 서버 실험기](https://velog.io/@doctorsean/BFF-%EC%84%9C%EB%B2%84%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90)
+[API 병목을 해결하기 위한 BFF 서버 실험기](https://velog.io/@doctorsean/BFF-%EC%84%9C%EB%B2%84%EB%A1%9C-%EC%86%8D%EB%8F%84%EA%B0%9C%EC%84%A0%EC%9D%84)
 
-[ContextAPI, 제대로 이해하고 쓰자](https://velog.io/@doctorsean/ContextAPI-%ED%95%B4%EC%B2%B4%EB%B6%84%EC%84%9D%EA%B8%B0)
+[ContextAPI, 제대로 이해하고 쓰자](https://velog.io/@doctorsean/ContextAPI-%EB%A5%BC-%EC%A0%9C%EB%8C%80%EB%A1%9C-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EC%9E%90)
 
 [상태관리 여정: Context → Recoil → TanStack Query](https://velog.io/@doctorsean/Tanstack-Query-%EB%84%88-%EC%99%9C-%EC%83%9D%EA%B8%B4%EA%B1%B0%EC%95%BC)
 
-[리액트에서 클래스형 도메인 모델의 적용](https://velog.io/@doctorsean/MVVM-패턴을-알아보자)
+[리액트에서 클래스형 도메인 모델의 적용](https://velog.io/@doctorsean/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%ED%81%B4%EB%9E%98%EC%8A%A4%ED%98%95-%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%AA%A8%EB%8D%B8%EC%9D%84-%EC%A0%81%EC%9A%A9%ED%95%B4%EB%8F%84-%EB%90%A0%EA%B9%8C-%EC%82%AC%EC%9A%A9%EA%B3%BC-%ED%9A%8C%EA%B3%A0)
 
 ## 프로젝트 소개  
 ### **창업자와 폐업자**를 연결하는 **중고 창업 물품 패키징 거래 서비스**  
